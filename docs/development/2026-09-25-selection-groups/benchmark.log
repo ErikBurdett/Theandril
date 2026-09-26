@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "sourceRevision": "uncommitted candidate; see retained invocation",
+  "saveVersion": 32,
+  "contentHash": "015468d1",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "smoke": false,
+  "scope": "Authored synthetic metadata saturation. Group read/prune timings are isolated core hot paths. Complete observation measurements are single samples, not statistically compared performance claims. No AI policy changes.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "synthetic": true,
+      "description": "Generated map, 128 authored own land armies per realm; all realms hold 24 overlapping 128-member army groups. No organic campaign-growth or worker/browser timing claim.",
+      "generatorVersion": 8,
+      "layout": "continents",
+      "cells": 51840,
+      "factions": 48,
+      "armies": 6144,
+      "allGroups": 1152,
+      "allMemberReferences": 147456,
+      "observedOwnGroups": 24,
+      "observedOwnMemberReferences": 3072,
+      "observedCells": 61,
+      "ownObservationBytesWithoutGroups": 606587,
+      "ownObservationBytesWithGroups": 643105,
+      "ownObservationAddedBytes": 36518,
+      "ownGroupArrayBytes": 36520,
+      "illustrative100CharacterMemberIdArrayBytes": 319312,
+      "singleFullObservationSamplesMs": {
+        "withoutGroups": 12.685125999999968,
+        "withGroups": 8.649559000000067
+      },
+      "warmups": 3,
+      "timings": {
+        "ownGroupObservation": {
+          "samplesMs": [
+            0.011249999999904503,
+            0.011289000000033411,
+            0.010932000000025255,
+            0.012000000000057298,
+            0.011239000000045962,
+            0.013259999999945649,
+            0.018544000000019878,
+            0.009340999999949418,
+            0.008494000000041524,
+            0.009114999999951579,
+            0.011184999999954925,
+            0.010512000000062471,
+            0.03898100000003524,
+            0.008866000000011809,
+            0.00971700000002329
+          ],
+          "medianMs": 0.011184999999954925,
+          "p95Ms": 0.03898100000003524,
+          "maxMs": 0.03898100000003524
+        },
+        "reconcileRetained": {
+          "samplesMs": [
+            3.180891000000088,
+            3.2508289999999533,
+            3.301770000000033,
+            3.2569520000000693,
+            3.2827270000000226,
+            3.245614000000046,
+            3.2158459999999423,
+            3.1878200000001016,
+            3.5233890000000656,
+            3.234246999999982,
+            3.168851000000018,
+            3.1626939999999877,
+            3.1855620000000044,
+            3.1751690000000963,
+            3.5406750000000784
+          ],
+          "medianMs": 3.234246999999982,
+          "p95Ms": 3.5406750000000784,
+          "maxMs": 3.5406750000000784
+        },
+        "reconcileOneLossPerRealm": {
+          "samplesMs": [
+            4.136026000000015,
+            3.7475259999999935,
+            3.933640000000082,
+            3.2448060000000396,
+            3.891900000000078,
+            3.274277999999981,
+            3.3724500000000717,
+            3.1877809999999727,
+            3.2699190000000726,
+            3.2160649999999578,
+            3.1675650000000815,
+            3.337716999999998,
+            3.2056929999999966,
+            3.340569999999957,
+            3.209982000000082
+          ],
+          "medianMs": 3.274277999999981,
+          "p95Ms": 4.136026000000015,
+          "maxMs": 4.136026000000015
+        }
+      },
+      "removedEntitiesInLossSample": 48,
+      "removedMemberships": 1152,
+      "lossEvents": 1152,
+      "canonicalHash": "5a36097a",
+      "strictRoundtrip": true
+    },
+    {
+      "size": "legendary",
+      "synthetic": true,
+      "description": "Generated map, 128 authored own land armies per realm; all realms hold 24 overlapping 128-member army groups. No organic campaign-growth or worker/browser timing claim.",
+      "generatorVersion": 8,
+      "layout": "continents",
+      "cells": 77440,
+      "factions": 64,
+      "armies": 8192,
+      "allGroups": 1536,
+      "allMemberReferences": 196608,
+      "observedOwnGroups": 24,
+      "observedOwnMemberReferences": 3072,
+      "observedCells": 61,
+      "ownObservationBytesWithoutGroups": 606213,
+      "ownObservationBytesWithGroups": 642803,
+      "ownObservationAddedBytes": 36590,
+      "ownGroupArrayBytes": 36592,
+      "illustrative100CharacterMemberIdArrayBytes": 319312,
+      "singleFullObservationSamplesMs": {
+        "withoutGroups": 8.142478999999867,
+        "withGroups": 10.413787000000184
+      },
+      "warmups": 3,
+      "timings": {
+        "ownGroupObservation": {
+          "samplesMs": [
+            0.01956700000005185,
+            0.022086000000172135,
+            0.021355999999968844,
+            0.023880999999846608,
+            0.020361000000093554,
+            0.020645000000058644,
+            0.046473999999989246,
+            0.012649999999894135,
+            0.01597000000015214,
+            0.013717999999926178,
+            0.010192000000188273,
+            0.012494999999944412,
+            0.01061400000003232,
+            0.01129199999991215,
+            0.010939000000007582
+          ],
+          "medianMs": 0.01597000000015214,
+          "p95Ms": 0.046473999999989246,
+          "maxMs": 0.046473999999989246
+        },
+        "reconcileRetained": {
+          "samplesMs": [
+            4.273527000000058,
+            4.133737999999994,
+            4.325559999999996,
+            4.188980000000129,
+            4.143165999999837,
+            4.192725999999993,
+            4.660497000000078,
+            4.184688000000051,
+            4.271690999999919,
+            4.140846999999894,
+            4.244525000000067,
+            4.211579000000029,
+            4.116798999999901,
+            4.202011000000084,
+            4.436742999999979
+          ],
+          "medianMs": 4.202011000000084,
+          "p95Ms": 4.660497000000078,
+          "maxMs": 4.660497000000078
+        },
+        "reconcileOneLossPerRealm": {
+          "samplesMs": [
+            4.108698000000004,
+            4.205296000000089,
+            4.0871900000001915,
+            4.0625740000000405,
+            4.910487000000103,
+            4.129852000000028,
+            4.196487000000161,
+            4.106463000000076,
+            4.220032000000174,
+            4.593605999999909,
+            4.793388999999934,
+            4.278648999999859,
+            4.247711999999865,
+            4.167954000000009,
+            4.2351699999999255
+          ],
+          "medianMs": 4.205296000000089,
+          "p95Ms": 4.910487000000103,
+          "maxMs": 4.910487000000103
+        }
+      },
+      "removedEntitiesInLossSample": 64,
+      "removedMemberships": 1536,
+      "lossEvents": 1536,
+      "canonicalHash": "2bb50bf5",
+      "strictRoundtrip": true
+    }
+  ]
+}

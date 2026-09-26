@@ -140,6 +140,7 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
 }
 
 async function handle(request: Request): Promise<void> {
+  let selectionGroupApplied = false;
   try {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
@@ -302,6 +303,7 @@ async function handle(request: Request): Promise<void> {
       }
       const result = applyCommand(state, request.command);
       if (!result.ok) throw new Error(result.error ?? 'The command could not be completed.');
+      selectionGroupApplied = request.command.type === 'setSelectionGroup' || request.command.type === 'deleteSelectionGroup';
       const pending = settleDecisions(state);
       metrics.commandMs = performance.now() - started;
       let message = result.events.at(-1)?.message ?? 'Orders received.';
@@ -317,7 +319,11 @@ async function handle(request: Request): Promise<void> {
       send({ id: request.id, type: 'export', bytes: await exportSave(serializeCampaign(state, journal.materialize())) });
     }
   } catch (error) {
-    send({ id: request.id, type: 'error', message: error instanceof Error ? error.message : String(error) });
+    // An accepted edit may fail while publishing its view. Its canonical
+    // mutation must never be mistaken for a refusal or followed by stale orders.
+    if (selectionGroupApplied) recordingFailed = true;
+    const message = error instanceof Error ? error.message : String(error);
+    send({ id: request.id, type: 'error', message: selectionGroupApplied ? `The group changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
   }
 }
 

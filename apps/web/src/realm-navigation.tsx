@@ -3,6 +3,7 @@ import { BUILDINGS, UNITS } from '@theandril/content';
 import { CHARTER_NAMES, type Observation } from '@theandril/sim';
 import { addGroupSelection, groupPostingArmies, GroupPostingOrders, GROUP_POSTING_LIMIT, type GroupPostingIssue } from './group-postings';
 import { groupCharterTowns, GroupCharterOrders, type GroupCharterIssue } from './group-charters';
+import { SelectionGroups, type SelectionGroupIssue } from './selection-groups';
 import './realm-navigation.css';
 
 export type RegistryKind = 'armies' | 'settlements';
@@ -41,14 +42,16 @@ export function RealmNavigation({ registry, armyCount, townCount, characterCount
   </div>;
 }
 
-export function RealmRegistry({ view, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter }: {
+export function RealmRegistry({ view, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onSelectionGroupCommand }: {
   view: Observation; registry: RegistryKind; search: string; force: string; selection: Selection; select: (selection: Selection) => void;
-  busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue;
+  busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onSelectionGroupCommand?: SelectionGroupIssue;
 }) {
   const [sort, setSort] = useState<Sort>('id');
   const [page, setPage] = useState(0);
   const [armyGroupIds, setArmyGroupIds] = useState<ReadonlySet<string>>(() => new Set());
   const [townGroupIds, setTownGroupIds] = useState<ReadonlySet<string>>(() => new Set());
+  const [selectionGroupPending, setSelectionGroupPending] = useState(false);
+  const locked = busy || selectionGroupPending;
   const availableArmyIds = useMemo(() => new Set(groupPostingArmies(view).map(army => army.id)), [view]);
   const availableTownIds = useMemo(() => new Set(groupCharterTowns(view).map(town => town.id)), [view]);
   const groupIds = registry === 'armies' ? armyGroupIds : townGroupIds;
@@ -73,23 +76,24 @@ export function RealmRegistry({ view, registry, search, force, selection, select
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const charters = new Map(view.charters.map(charter => [charter.settlementId, charter]));
-  const groupEnabled = registry === 'armies' ? Boolean(onGroupPosting) : Boolean(onGroupCharter);
+  const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting) : Boolean(onGroupCharter));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
   return <div className="realm-registry-content">
     <div className="registry-tools"><label>Registry order<select value={sort} onChange={event => setSort(event.target.value as Sort)}><option value="id">Stable order</option><option value="name">Name A–Z</option></select></label><span>{entries.length} {registry === 'armies' ? 'forces' : 'towns'}</span></div>
-    {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={busy} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
-    {registry === 'settlements' && onGroupCharter && <GroupCharterOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={busy} issue={onGroupCharter} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
+    {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={busy} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={setSelectionGroupPending}/>}
+    {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
+    {registry === 'settlements' && onGroupCharter && <GroupCharterOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupCharter} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
     <div className="registry" data-testid={registry === 'armies' ? 'army-registry' : 'settlement-registry'}>{visible.map(item => {
       const army = 'formations' in item ? item : undefined;
       const town = 'queue' in item ? item : undefined;
       const route = routes.get(item.id);
       const charter = charters.get(item.id);
       return <div className={`registry-row${groupEnabled ? ' registry-row-group' : ''}`} key={item.id}>
-        {groupEnabled && <label className="registry-group-check">{availableGroupIds.has(item.id) ? <input type="checkbox" aria-label={`Select ${item.name} for group orders`} checked={currentGroupIds.has(item.id)} disabled={busy || (!currentGroupIds.has(item.id) && currentGroupIds.size >= GROUP_POSTING_LIMIT)} onChange={event => {
+        {groupEnabled && <label className="registry-group-check">{availableGroupIds.has(item.id) ? <input type="checkbox" aria-label={`Select ${item.name} for group orders`} checked={currentGroupIds.has(item.id)} disabled={locked || (!currentGroupIds.has(item.id) && currentGroupIds.size >= GROUP_POSTING_LIMIT)} onChange={event => {
           const checked = event.target.checked;
           setGroupIds(previous => { const next = new Set(previous); if (checked && next.size < GROUP_POSTING_LIMIT) next.add(item.id); else if (!checked) next.delete(item.id); return next; });
         }}/> : <span aria-label="Group postings require a land army ashore">—</span>}</label>}
-        <button className={`registry-item ${selectedId === item.id ? 'selected' : ''}`} disabled={busy} aria-current={selectedId === item.id ? 'true' : undefined} onClick={() => select({ ...(army ? { armyId: item.id } : { settlementId: item.id }), cell: item.cell })}>
+        <button className={`registry-item ${selectedId === item.id ? 'selected' : ''}`} disabled={locked} aria-current={selectedId === item.id ? 'true' : undefined} onClick={() => select({ ...(army ? { armyId: item.id } : { settlementId: item.id }), cell: item.cell })}>
         <span className="entity-symbol" aria-hidden="true">{army ? army.domain === 'naval' ? '⚓' : army.carrierId ? '↪' : '△' : '⌂'}</span><span><strong>{item.name}</strong>
           {army && <><small>{army.formations.length} {army.formations.length === 1 ? 'formation' : 'formations'} · {army.movement} movement · {army.strength} strength</small>
             {army.domain === 'naval' && <small>Fleet · {army.transportUsed} / {army.transportCapacity} passengers</small>}

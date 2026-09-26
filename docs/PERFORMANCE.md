@@ -1,5 +1,13 @@
 # Performance measurements
 
+## Saved realm groups — local rules 32
+
+[Saved-group evidence](development/2026-09-25-selection-groups/benchmark.json) uses current generator-8 Huge/Legendary geography (51,840/77,440 cells) with explicitly authored 48/64 realms and 6,144/8,192 land armies. Every realm holds twenty-four overlapping groups of 128 members: 147,456/196,608 membership references globally, 3,072 in the own-faction read model. This is metadata saturation, not organic empire growth or a full turn/frame measurement.
+
+After three warmups, fifteen samples give retained-member reconciliation medians of 3.234/4.202 ms, and one removed entity per realm 3.274/4.205 ms (p95 4.136/4.910 ms). Detached own-group reading is 0.011/0.016 ms median. Reconciliation runs only after successful lifecycle commands; ordinary moves, reads and refusals do not scan memberships. The complete observation timings are single samples and support no speedup claim.
+
+The saved groups add 36,518/36,590 bytes to the raw own-observation JSON (totals 643,105/642,803 bytes); these are not packed-worker timings or a new general transfer-budget claim. A separate illustration using 100-character member identifiers costs 319,312 bytes for the group array alone and is not a valid authored campaign. Strict save/load and hashes pass with saturated metadata. Initial benchmark attempts exposed an unsupported generator-4/64-seat setup and then the existing 48-row arcane-research save limit; the latter is repaired in rules 32 while historical schemas stay frozen. [Failure and scope notes](development/2026-09-25-selection-groups/README.md).
+
 ## Finite fleet stores and observed naval returns — local rules 31
 
 [Fleet supply evidence](development/2026-09-23-fleet-provisions/README.md) separates supply resolution from observation and AI planning. Synthetic resource-free, fully charted island workloads use 128 harbours/64 loaded fleets on Huge 196,608 cells and 256/128 on Legendary 307,200 cells. Twelve samples follow three warmups and alternate explicit rules30/31 supply contexts and no-provisions/provision-aware planner observations; output seals repeat and strict saves roundtrip.

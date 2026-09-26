@@ -10,7 +10,10 @@ const discoveryCost = (state: GameState, definitionId: string, definition: { id:
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 export const personalAptitudesSchema = z.record(id, z.number().int().min(1).max(3));
-export const arcaneResearchSchema = z.array(z.object({ factionId: id, discoveries: z.array(id).max(16) }).strict()).min(1).max(48);
+/** Preserve the exact historical limit; rules32 repairs the live 64-seat save. */
+const arcaneResearchRecords = z.array(z.object({ factionId: id, discoveries: z.array(id).max(16) }).strict()).min(1);
+export const arcaneResearchV31Schema = arcaneResearchRecords.max(48);
+export const arcaneResearchSchema = arcaneResearchRecords.max(64);
 export type ArcaneResearchState = Record<string, string[]>;
 export interface ArcaneResearchOption {
   id: string; name: string; description: string; knowledgeCost: number; researched: boolean;

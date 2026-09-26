@@ -1,0 +1,25 @@
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:390
+      arcaneResearch: arcaneResearchSchema.parse(Object.entries(state.arcaneResearch).sort(([a], [b]) => a < b ? -1 : 1).map(([factionId, discoveries]) => ({ factionId, discoveries: [...discoveries] }))),
+                                           ^
+
+ZodError: [
+  {
+    "origin": "array",
+    "code": "too_big",
+    "maximum": 48,
+    "inclusive": true,
+    "path": [],
+    "message": "Too big: expected array to have <=48 items"
+  }
+]
+    at canonicalPayload (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:390:44)
+    at serializeGameForVersion (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:459:18)
+    at serializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:529:10)
+    at fixture (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:36:26)
+    at measure (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:54:16)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:113:48)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.7.0

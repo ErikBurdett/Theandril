@@ -47,3 +47,6 @@ export { armyDomain, fleetTransportCapacity, fleetCanEnterDeepWater, embarkObjec
 export * from './resources';
 export * from './development';
 export * from './growth-economy';
+
+export { MAX_SELECTION_GROUPS_PER_FACTION, MAX_SELECTION_GROUP_MEMBERS, SELECTION_GROUP_NAME_MAX, SELECTION_GROUP_KINDS } from './selection-groups';
+export type { SelectionGroup, SelectionGroupKind } from './selection-groups';

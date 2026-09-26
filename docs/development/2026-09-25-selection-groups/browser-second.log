@@ -1,0 +1,66 @@
+[WebServer] (node:2653291) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2654459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:2654600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable (45.3s)
+  ✓   2 tests/gameplay/charter-templates.spec.ts:173:3 › a denied template library reports failure without blocking ordinary charter orders or overwriting stored rows (2.5s)
+  ✓   3 tests/gameplay/charter-templates.spec.ts:173:3 › a transient-denial template library reports failure without blocking ordinary charter orders or overwriting stored rows (3.0s)
+  ✓   4 tests/gameplay/charter-templates.spec.ts:173:3 › a malformed template library reports failure without blocking ordinary charter orders or overwriting stored rows (3.0s)
+  ✓   5 tests/gameplay/charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel (4.4s)
+  ✓   6 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign (3.6s)
+  ✓   7 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign (3.2s)
+  ✓   8 tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides (15.2s)
+  ✓   9 tests/gameplay/group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit (6.2s)
+  ✓  10 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (2.7s)
+  ✓  11 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (2.8s)
+  ✓  12 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (13.2s)
+  ✓  13 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (1.8s)
+  ✓  14 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (3.8s)
+  ✓  15 tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders (14.9s)
+  ✓  16 tests/gameplay/realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration (3.1s)
+  ✓  17 tests/gameplay/selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths (24.2s)
+  ✘  18 tests/gameplay/selection-groups.spec.ts:161:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign (6.8s)
+(node:2676430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 tests/gameplay/selection-groups.spec.ts:227:1 › recalling a carried army skips it without rewriting the saved group, while explicit empty replacement is canonical (4.6s)
+  ✓  20 tests/gameplay/selection-groups.spec.ts:259:1 › a damaged saved-group response ends pending work, locks uncertain orders and recovers from a real manual save (3.9s)
+
+
+  1) tests/gameplay/selection-groups.spec.ts:161:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 77
+    Received: 20260905
+
+      215 |   await expect(page.getByRole('button', { name: 'Begin campaign', exact: true })).not.toBeVisible();
+      216 |   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
+    > 217 |   expect((await snapshot(page)).view.seed).toBe(77);
+          |                                            ^
+      218 |   expect((await snapshot(page)).view.selectionGroups).toEqual([]);
+      219 |   await settings(page);
+      220 |   await page.locator('input[type=file]').setInputFiles(downloaded!);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/selection-groups.spec.ts:217:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-campaign--1292a--leak-into-another-campaign/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-campaign--1292a--leak-into-another-campaign/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-campaign--1292a--leak-into-another-campaign/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-campaign--1292a--leak-into-another-campaign/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/selection-groups.spec.ts:161:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign 
+  19 passed (2.9m)

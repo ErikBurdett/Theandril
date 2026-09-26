@@ -13,6 +13,7 @@ const applyLegacy = (state: GameState, command: unknown) => applyCommandForVersi
 interface SaveFixture {
   version: number; gameVersion: string; contentHash: string; stateChecksum: string;
   state: {
+    selectionGroups: GameState['selectionGroups']; nextSelectionGroupId: number;
     resources: GameState['resources']; development: GameState['development'];
     rosterVersion: GameState['rosterVersion'];
     pace: CampaignPace;
@@ -71,7 +72,8 @@ function previousV3State(save: SaveFixture) {
   if (save.state.postings.length || save.state.musters.length) throw new Error('Synthetic historical projection cannot discard standing postings.');
   // Depots exist only from rules 28; a v3 projection holds none.
   if (save.state.depots.length) throw new Error('Synthetic historical projection cannot discard supply depots.');
-  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
+  if (save.state.selectionGroups.length || save.state.nextSelectionGroupId !== 1) throw new Error('Synthetic historical projection cannot discard saved group metadata.');
+  const { selectionGroups: _groups, nextSelectionGroupId: _groupId, progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
   const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));

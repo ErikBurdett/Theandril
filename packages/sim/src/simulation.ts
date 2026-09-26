@@ -1,3 +1,4 @@
+import { assertNoSelectionGroups, deleteSelectionGroup, observeSelectionGroups, pruneSelectionGroups, selectionGroupCommandSchemas, setSelectionGroup } from './selection-groups';
 import { createResources, harvestSettlementResources, resourceObservation, resourceCommandSchema, applyResourceCommand } from './resources';
 import { createDevelopmentState, developmentCommandSchema, chooseDevelopment, getDevelopmentObservation, hearthDevelopmentEffects, factionDevelopmentEffects, advanceDevelopment, pruneDevelopment, formationDevelopmentUpkeep, hearthDevelopmentUpkeep, factionDevelopmentUpkeep } from './development';
 import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, settlementCivicUpkeep, getGrowthObservation } from './growth-economy';
@@ -106,8 +107,9 @@ const version26CommandSchema = z.discriminatedUnion('type', [...version25Command
 /** Rules 28 adds the built depot and rules 29 the order to pull one down;
  * historical rules never accept either. */
 const version28CommandSchema = z.discriminatedUnion('type', [...version26CommandSchema.options, ...depotCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version28CommandSchema.options, ...depotAbandonSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : commandSchema;
+const version31CommandSchema = z.discriminatedUnion('type', [...version28CommandSchema.options, ...depotAbandonSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version31CommandSchema.options, ...selectionGroupCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -120,6 +122,7 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 32) assertNoSelectionGroups(state);
   if (version < 31 && Object.values(state.armies).some(army => army.provisions !== undefined)) throw new Error('Historical rules cannot execute a campaign containing fleet provisions.');
   if (version < 15 && (Object.values(state.armies).some(army => army.formations.some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))) || Object.values(state.settlements).some(town => town.queue.some(item => item.itemId.startsWith('unit.') && !PRE_SPECIALIST_UNIT_IDS.has(item.itemId))) || [...(state.battle ? [state.battle] : []), ...state.battleReports].some(battle => [...battle.combat.attacker, ...battle.combat.defender].some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))))) throw new Error('Historical rules cannot execute formations absent from their frozen pack.');
   if (version < 14 && (Object.values(state.arcaneResearch).some(items => items.length) || Object.values(state.characters).some(item => item.aptitudes || item.definitionId === 'character.waykeeper') || (state.battle?.rulesVersion ?? 0) >= 9 || state.battleReports.some(item => item.rulesVersion >= 9))) throw new Error('Historical rules cannot execute arcane research or modern battle abilities.');
@@ -145,7 +148,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31)]).default(31),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32)]).default(32),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -200,6 +203,7 @@ export function createGame(options: NewGameOptions): GameState {
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
+    selectionGroups: [], nextSelectionGroupId: 1,
     turn: 1, nextId: 1, turnOwnerId: owner.id, world, pace: checked.pace,
     factions: selected.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: 60, knowledge: 0 })),
     armies: {}, transports: {}, characters: {}, routes: {}, settlements: {}, explored: {}, events: [], wars: [], battle: null, battleReports: [],
@@ -409,7 +413,11 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   if (state.pendingCapture) affectedArmies.push(state.pendingCapture.armyId);
   const diagnostics: string[] = [];
   const index = indexes(state);
-  if (command.type === 'found') {
+  if (command.type === 'setSelectionGroup' || command.type === 'deleteSelectionGroup') {
+    const result = command.type === 'setSelectionGroup' ? setSelectionGroup(state, command) : deleteSelectionGroup(state, faction.id, command.groupId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'found') {
     const army = state.armies[command.armyId];
     if (!army || army.factionId !== faction.id) return fail('You do not control that army.');
     if (carriedArmyBlocker(state, army.id)) return fail(carriedArmyBlocker(state, army.id)!);
@@ -588,6 +596,9 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
       catch (error) { diagnostics.push(`Phase observer failed at ${phase}/${edge}: ${error instanceof Error ? error.message : String(error)}`); }
     });
   }
+  // Membership changes only at entity lifecycle boundaries. Historical commands
+  // never touch this register, and moves/queries/rejections never scan it.
+  if (rulesVersion(state) >= 32 && state.selectionGroups.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneSelectionGroups(state, emitted);
   if (command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileSieges(state, emitted);
   if (command.type === 'resolveCapture' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileCharacterMissions(state, emitted);
   if (command.type === 'resolveCapture' || command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileProjects(state, emitted);
@@ -649,6 +660,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
       formationCapacity: Math.max(12, army.formations.length), overCommand: false, commandBlocker: null, capacityReason: 'Foreign command organization is private.', splitFormationLimit: 0, mergeOptions: [], mergeOptionsTruncated: false,
       cargo: [], transportUsed: 0, carrierId: null, canEnterDeepWater: false, embarkOptions: [], disembarkOptions: [], transportOptionsTruncated: false }) })),
     productionOptions: observeProductionOptions(state, factionId),
+    selectionGroups: observeSelectionGroups(state, factionId),
     charters: observeCharters(state, factionId),
     postings: observePostings(state, factionId),
     musters: state.musters.filter(muster => muster.factionId === factionId),

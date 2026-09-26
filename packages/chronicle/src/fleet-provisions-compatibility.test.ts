@@ -31,7 +31,7 @@ describe('rules31 fleet provisions and frozen rules30 evidence', () => {
     const entry = fixture.cases.navalAtSeaTwelveTurns!, game = historical();
     const original = structuredClone(entry.archive), journal = resumeJournal(game, parseArchive(original, game));
     const modernBefore = serializeGame(game);
-    expect(JSON.parse(modernBefore).version).toBe(31);
+    expect(JSON.parse(modernBefore).version).toBe(SAVE_VERSION);
     expect(game.armies['army.2']!.provisions).toBeUndefined();
     expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId })).toMatchObject({ ok: true });
     expect(game.armies['army.2']!.provisions).toBe(7);

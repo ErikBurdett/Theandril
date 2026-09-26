@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/sixty-four-seat-save.test.ts (3 tests | 2 failed) 364ms
+     × roundtrips generated 64 realms and +0 city-states with all per-realm registers 226ms
+     × roundtrips generated 40 realms and 24 city-states with all per-realm registers 121ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/sixty-four-seat-save.test.ts > rules32 saves at the supported 64-seat bound > roundtrips generated 64 realms and +0 city-states with all per-realm registers
+ FAIL  |unit| packages/sim/src/sixty-four-seat-save.test.ts > rules32 saves at the supported 64-seat bound > roundtrips generated 40 realms and 24 city-states with all per-realm registers
+ZodError: [
+  {
+    "origin": "array",
+    "code": "too_big",
+    "maximum": 48,
+    "inclusive": true,
+    "path": [],
+    "message": "Too big: expected array to have <=48 items"
+  }
+]
+ ❯ canonicalPayload packages/sim/src/save.ts:390:44
+
+ ❯ serializeGameForVersion packages/sim/src/save.ts:459:18
+ ❯ serializeGame packages/sim/src/save.ts:529:10
+ ❯ packages/sim/src/sixty-four-seat-save.test.ts:13:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  22:30:09
+   Duration  1.17s (transform 525ms, setup 0ms, import 727ms, tests 364ms, environment 0ms)
+

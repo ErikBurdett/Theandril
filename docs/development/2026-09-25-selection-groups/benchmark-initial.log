@@ -1,0 +1,15 @@
+/home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:473
+    throw new RangeError('Faction count must be an integer within the generator\'s seat limit.');
+          ^
+
+RangeError: Faction count must be an integer within the generator's seat limit.
+    at generateWorld (/home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:473:11)
+    at createGame (/home/telephoneheater/Work/Theandril/packages/sim/src/simulation.ts:197:17)
+    at fixture (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:26:16)
+    at measure (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:54:16)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-selection-groups.ts:112:48)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.7.0

@@ -56,6 +56,16 @@ describe('realm navigation presentation', () => {
     expect(registryEntries(view, 'settlements', 'town.39', 'all', 'id')).toHaveLength(1);
   });
 
+  it('keeps saved group controls reachable with no checked members and separates their labels from charter templates', () => {
+    const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
+    const html = renderToStaticMarkup(<RealmRegistry view={view} registry="settlements" search="" force="all" selection={{}} select={() => {}} onGroupCharter={async () => []} onSelectionGroupCommand={async () => { throw new Error('Rendering cannot save groups.'); }}/>);
+    expect(html).toContain('<summary>Saved hearth groups</summary>');
+    expect(html).toContain('Saved hearth group<select');
+    expect(html).toContain('0 hearths selected');
+    expect(html).toContain('type="checkbox"');
+    expect(html).not.toContain('<summary>Charter templates</summary>');
+  });
+
   it('uses one keyboard tablist and a real character action with a clearly named current selection', () => {
     const html = renderToStaticMarkup(<RealmNavigation registry="settlements" armyCount={100} townCount={40} characterCount={3} choose={() => {}} characters={() => {}} selectionName="Ashen Hearth" selectionKind="Selected settlement" showMap={() => {}} showOrders={() => {}}/>);
     expect(html.match(/role="tablist"/g)).toHaveLength(1);

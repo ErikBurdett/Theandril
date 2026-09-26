@@ -561,3 +561,76 @@ describe('actual worker group-charter boundary', () => {
     expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
   });
 });
+
+
+describe('saved selection groups through the real worker', () => {
+  const start = async () => {
+    const view = await request({ type: 'new', seed: 17, size: 'tiny', factionCount: 2, pace: 'short', mode: 'player' }, 'state');
+    const army = view.observation.armies.find(item => item.factionId === view.observation.factionId)!;
+    const command: Extract<GameCommand, { type: 'setSelectionGroup' }> = { type: 'setSelectionGroup', factionId: view.observation.factionId, kind: 'armies', name: 'Border watch', memberIds: [army.id] };
+    return { view, command };
+  };
+
+  it('journals one ordinary edit, restores it exactly, and rejects wrong-seat/watch writes', async () => {
+    const { view, command } = await start();
+    const before = await exported();
+    const wrong = { ...command, factionId: before.game.factions[1]!.id };
+    expect((await request({ type: 'command', command: wrong }, 'error')).message).toContain('seat');
+    expect((await exported()).text).toBe(before.text);
+    const changed = await request({ type: 'command', command }, 'state');
+    expect(changed.observation.selectionGroups).toMatchObject([{ name: 'Border watch', memberIds: command.memberIds }]);
+    expect(changed.hash).not.toBe(view.hash);
+    expect(changed.observation.postings).toEqual(view.observation.postings);
+    expect(changed.observation.charters).toEqual(view.observation.charters);
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(1);
+    expect(saved.game.nextId).toBe(before.game.nextId);
+    expect(stateHash(replayArchive(saved.archive))).toBe(changed.hash);
+    await request({ type: 'save' }, 'message');
+    expect((await request({ type: 'load' }, 'state')).hash).toBe(changed.hash);
+    expect((await request({ type: 'import', bytes: await exportSave(saved.text) }, 'state')).hash).toBe(changed.hash);
+    const watching = createJournal(saved.game, { mode: 'watch', coverage: 'from-save' });
+    await request({ type: 'import', bytes: await exportSave(serializeCampaign(saved.game, watching.materialize())) }, 'state');
+    const watched = await exported();
+    expect((await request({ type: 'command', command: { ...command, name: 'Another' } }, 'error')).message).toContain('AI watch controls');
+    expect((await exported()).text).toBe(watched.text);
+  });
+
+  it('locks after a recorder fails following mutation and recovers the last real save', async () => {
+    const { view, command } = await start();
+    await request({ type: 'save' }, 'message');
+    const record = CampaignJournal.prototype.record;
+    const interrupted = vi.spyOn(CampaignJournal.prototype, 'record').mockImplementation(function (this: CampaignJournal, ...args: Parameters<typeof record>) {
+      const result = record.apply(this, args);
+      if (args[1].type === 'setSelectionGroup') throw new Error('Authored group recording failure after mutation');
+      return result;
+    });
+    try {
+      const failure = await request({ type: 'command', command }, 'error');
+      expect(failure.recoveryRequired).toBe(true);
+      expect(failure.message).toContain('Recording was interrupted');
+      expect((await request({ type: 'export' }, 'error')).recoveryRequired).toBe(true);
+    } finally { interrupted.mockRestore(); }
+    expect((await request({ type: 'load' }, 'state')).hash).toBe(view.hash);
+    expect((await request({ type: 'command', command }, 'state')).observation.selectionGroups).toHaveLength(1);
+  });
+
+  it('does not report a refusal after an accepted group fails to publish', async () => {
+    const { view, command } = await start();
+    await request({ type: 'save' }, 'message');
+    const publish = host.postMessage;
+    const interrupted = vi.spyOn(host, 'postMessage').mockImplementation((message, options) => {
+      if (message.type === 'state' && message.observation.selectionGroups.length) throw new Error('Authored group transfer failure');
+      publish(message, options);
+    });
+    try {
+      const failure = await request({ type: 'command', command }, 'error');
+      expect(failure.recoveryRequired).toBe(true);
+      expect(failure.message).toContain('group changed');
+      expect((await request({ type: 'save' }, 'error')).recoveryRequired).toBe(true);
+    } finally { interrupted.mockRestore(); }
+    const loaded = await request({ type: 'load' }, 'state');
+    expect(loaded.hash).toBe(view.hash);
+    expect(loaded.observation.selectionGroups).toEqual([]);
+  });
+});

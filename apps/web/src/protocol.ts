@@ -49,7 +49,7 @@ export type Response =
   | { id: number; type: 'chronicles'; documents: ChronicleDocuments }
   | { id: number; type: 'peacePreview'; assessment: PeaceAssessment }
   | { id: number; type: 'progress'; message: string }
-  | { id: number; type: 'error'; message: string }
+  | { id: number; type: 'error'; message: string; recoveryRequired?: boolean }
   | { id: number; type: 'export'; bytes: Uint8Array }
   | { id: number; type: 'message'; message: string }
   | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string };

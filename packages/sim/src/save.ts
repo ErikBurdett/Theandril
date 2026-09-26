@@ -1,3 +1,4 @@
+import { assertNoSelectionGroups, selectionGroupCounterSchema, selectionGroupStateSchema, validateSelectionGroups } from './selection-groups';
 import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
 import { sortedExploredCells } from './canonical-cells';
 import { isCityState, legalFactionColors } from './seats';
@@ -15,7 +16,7 @@ import { emptyLandState, landStateSchema, landStateV15Schema, landStateV10Schema
 import { cellsWithin, rebuildIndexes, claimSightEnabled } from './visibility';
 import type { Army, CampaignBattle, GameCommand, GameState } from './types';
 import { battleStateSchema, schema15BattleStateSchema, legacyBattleStateSchema, schema13BattleStateSchema } from './combat';
-import { arcaneResearchSchema, validateArcaneResearch } from './magic';
+import { arcaneResearchSchema, arcaneResearchV31Schema, validateArcaneResearch } from './magic';
 import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abilities';
 import { MAX_BATTLE_REPORTS } from './warfare';
 import { createDiplomacy, diplomacyStateSchema, historicalDiplomacySchema, validateDiplomacy } from './diplomacy';
@@ -33,7 +34,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 31;
+export const SAVE_VERSION = 32;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -171,7 +172,7 @@ const stateV11Schema = stateV10Schema.extend({ land: landStateV15Schema }).stric
 const modernWorldSchema = worldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7)]), layout: z.enum(['legacy', 'continents', 'islands', 'archipelago']), hydrology: z.array(z.number().int().min(0).max(63)).max(350_000) }).strict();
 const stateV12Schema = stateV11Schema.extend({ world: modernWorldSchema, roads: roadStateSchema }).strict();
 const stateV13Schema = stateV12Schema.extend({ rosterVersion: rosterVersionSchema }).strict();
-const stateV15Schema = stateV13Schema.extend({ characters: z.array(characterSchema).max(4608), battle: schema15CampaignBattleSchema.nullable(), battleReports: z.array(schema15CampaignBattleSchema).max(MAX_BATTLE_REPORTS), arcaneResearch: arcaneResearchSchema }).strict();
+const stateV15Schema = stateV13Schema.extend({ characters: z.array(characterSchema).max(4608), battle: schema15CampaignBattleSchema.nullable(), battleReports: z.array(schema15CampaignBattleSchema).max(MAX_BATTLE_REPORTS), arcaneResearch: arcaneResearchV31Schema }).strict();
 const stateV17Schema = stateV15Schema.extend({
   pendingCapture: captureDecisionSchema.nullable(),
   resources: resourceStateSchema, development: developmentStateSchema, land: landStateSchema,
@@ -206,20 +207,24 @@ const stateV27Schema = stateV25Schema.extend({ postings: postingStateSchema, mus
 /** Rules 28 records built supply depots. */
 const stateV30Schema = stateV27Schema.extend({ depots: depotStateSchema }).strict();
 /** Rules 31 makes a fleet's finite stores canonical; old schemas stay strict. */
-const stateSchema = stateV30Schema.extend({ armies: z.array(armyV31Schema).max(60_000) }).strict();
-const withDepots = <T>(state: T) => ({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
+const stateV31Schema = stateV30Schema.extend({ armies: z.array(armyV31Schema).max(60_000) }).strict();
+/** Rules32 adds organizational groups with an independent ID sequence. */
+const stateSchema = stateV31Schema.extend({ arcaneResearch: arcaneResearchSchema, selectionGroups: selectionGroupStateSchema, nextSelectionGroupId: selectionGroupCounterSchema }).strict();
+const withSelectionGroups = <T>(state: T) => ({ ...state, selectionGroups: [] as z.infer<typeof selectionGroupStateSchema>, nextSelectionGroupId: 1 });
+const withDepots = <T>(state: T) => withSelectionGroups({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
 /** A campaign before these registers is identical to one whose realms hold none. */
-const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
-const emptyOrders = { postings: [] as z.infer<typeof postingStateSchema>, musters: [] as z.infer<typeof musterStateSchema>, depots: [] as z.infer<typeof depotStateSchema> };
-const withOrders = <T>(state: T) => ({ ...state, ...emptyOrders });
+const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders() });
+const emptyOrders = () => ({ selectionGroups: [] as z.infer<typeof selectionGroupStateSchema>, nextSelectionGroupId: 1, postings: [] as z.infer<typeof postingStateSchema>, musters: [] as z.infer<typeof musterStateSchema>, depots: [] as z.infer<typeof depotStateSchema> });
+const withOrders = <T>(state: T) => ({ ...state, ...emptyOrders() });
 /** Older envelopes carry no patronage; their states gain empty registers on load.
  * The original bytes are verified first, then the upgraded state is re-sealed. */
 const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacySchema>; factions: { id: string }[] }>(state: T) =>
-  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
+  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders() });
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
-  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
-const saveSchema = z.object({ version: z.literal(31), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders() });
+const saveSchema = z.object({ version: z.literal(32), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV31Schema = saveSchema.extend({ version: z.literal(31), state: stateV31Schema }).strict();
 const saveV30Schema = saveSchema.extend({ version: z.literal(30), state: stateV30Schema }).strict();
 /** Rules 30 carries harbour supply over water, which is derived from the map:
  * a rules-28 state is already the modern shape and only behaviour differs. */
@@ -389,6 +394,8 @@ function canonicalPayload(state: GameState) {
       postings: postingStateSchema.parse([...state.postings].sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0)),
       musters: musterStateSchema.parse([...state.musters].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
       depots: depotStateSchema.parse([...state.depots].sort((a, b) => a.cell - b.cell)),
+      selectionGroups: selectionGroupStateSchema.parse(state.selectionGroups),
+      nextSelectionGroupId: selectionGroupCounterSchema.parse(state.nextSelectionGroupId),
   };
   return payload;
 }
@@ -438,6 +445,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 32) assertNoSelectionGroups(state);
   if (version < 31) assertNoFleetProvisions(state);
   if (version < 28) assertNoDepots(state);
   if (version < 26) assertNoStandingOrders(state);
@@ -554,6 +562,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 32) assertNoSelectionGroups(state);
   if (version < 31) assertNoFleetProvisions(state);
   if (version < 28) assertNoDepots(state);
   if (version < 26) assertNoStandingOrders(state);
@@ -574,8 +583,13 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 28) return latest;
-  const { depots: _depots, ...beforeDepots } = latest;
+  if (version >= 32) return latest;
+  // Earlier engines could generate 64 seats but their strict research register
+  // could save only 48. Never emit an old envelope its frozen schema cannot load.
+  arcaneResearchV31Schema.parse(latest.arcaneResearch);
+  const { selectionGroups: _groups, nextSelectionGroupId: _groupId, ...beforeGroups } = latest;
+  if (version >= 28) return beforeGroups;
+  const { depots: _depots, ...beforeDepots } = beforeGroups;
   if (version >= 26) return beforeDepots;
   const { postings: _postings, musters: _musters, ...beforeOrders } = beforeDepots;
   if (version >= 25) return beforeOrders;
@@ -817,10 +831,12 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
-  if (version === 30 || version === 29 || version === 28) {
-    const prior = version === 30 ? saveV30Schema.parse(raw) : version === 29 ? saveV29Schema.parse(raw) : saveV28Schema.parse(raw);
+  if (version === 31 || version === 30 || version === 29 || version === 28) {
+    const prior = version === 31 ? saveV31Schema.parse(raw) : version === 30 ? saveV30Schema.parse(raw) : version === 29 ? saveV29Schema.parse(raw) : saveV28Schema.parse(raw);
     assert(prior.contentHash === CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
-    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), `v${version} snapshot checksum does not match its contents`);
+    const state = withSelectionGroups(prior.state);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   }
   if (version === 27 || version === 26) {
     const prior = version === 27 ? saveV27Schema.parse(raw) : saveV26Schema.parse(raw);
@@ -1202,6 +1218,7 @@ export function deserializeGame(text: string): GameState {
     routes: Object.fromEntries(data.routes.map(route => [route.armyId, route])),
     characters: Object.fromEntries(data.characters.map(character => [character.id, character])),
     transports: Object.fromEntries(data.transports.map(item => [item.armyId, item.fleetId])),
+    selectionGroups: data.selectionGroups, nextSelectionGroupId: data.nextSelectionGroupId,
     charters: data.charters, postings: data.postings, musters: data.musters, depots: data.depots,
   };
   assert(Object.keys(state.sieges).length === data.sieges.length && Object.keys(state.ruins).length === data.ruins.length, 'duplicate siege or ruin records');
@@ -1213,6 +1230,7 @@ export function deserializeGame(text: string): GameState {
   assert(data.arcaneResearch.length === state.factions.length && data.arcaneResearch.every((item, i) => i === 0 || item.factionId > data.arcaneResearch[i - 1]!.factionId), 'duplicate or unordered arcane research');
   validateArcaneResearch(state);
   validateArcaneSurveys(state);
+  validateSelectionGroups(state);
   validateCharters(state);
   validatePostings(state);
   validateDepots(state);

@@ -1,3 +1,4 @@
+import type { SelectionGroup, SelectionGroupKind } from './selection-groups';
 import type { ResourceState, ResourceObservation, ResourceCommand } from './resources';
 import type { DevelopmentState, DevelopmentObservation, DevelopmentCommand } from './development';
 import type { GrowthObservation } from './growth-economy';
@@ -191,6 +192,8 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | { type: 'setSelectionGroup'; factionId: string; groupId?: string; kind: SelectionGroupKind; name: string; memberIds: string[] }
+  | { type: 'deleteSelectionGroup'; factionId: string; groupId: string }
   | ResourceCommand
   | DevelopmentCommand
   | { type: 'researchArcane'; factionId: string; discoveryId: string }
@@ -245,6 +248,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  selectionGroups: SelectionGroup[];
+  nextSelectionGroupId: number;
   resources: ResourceState;
   development: DevelopmentState;
   arcaneResearch: ArcaneResearchState;
@@ -287,6 +292,7 @@ export interface GameState {
 }
 
 export interface Observation {
+  selectionGroups: SelectionGroup[];
   resources?: ResourceObservation;
   development?: DevelopmentObservation;
   growth?: GrowthObservation;

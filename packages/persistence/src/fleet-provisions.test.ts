@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { gunzipSync } from 'node:zlib';
 import { expect, test } from 'vitest';
-import { deserializeGame, serializeGame } from '@theandril/sim';
+import { deserializeGame, serializeGame, SAVE_VERSION } from '@theandril/sim';
 import { parseArchive, replayArchive, resumeJournal, type CampaignArchive } from '@theandril/chronicle';
 import { deserializeCampaign, exportSave, importSave, SaveStore, serializeCampaign } from './index';
 import captured from '../../chronicle/src/fixtures/v30-fleet-provisions-baseline.json';
@@ -20,7 +20,7 @@ test('persists and exports a continued rules30 voyage with rules31 stores and ex
     const archive = restored.journal.materialize();
     expect(archive.initialSave).toBe(entry.archive.initialSave);
     expect(archive.records.slice(0, entry.archive.records.length)).toEqual(entry.archive.records);
-    expect(archive.records.at(-1)?.rulesVersion).toBe(31);
+    expect(archive.records.at(-1)?.rulesVersion).toBe(SAVE_VERSION);
     const portable = await importSave(await exportSave(serializeCampaign(restored.game, archive)));
     const imported = deserializeCampaign(portable);
     expect(imported.game.armies['army.2']!.provisions).toBe(7);

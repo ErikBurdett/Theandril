@@ -10,6 +10,8 @@ import type { CampaignMode, ChronicleDocuments } from '@theandril/chronicle';
 import { GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
 import type { GroupPostingIssue } from './group-postings';
 import type { GroupCharterIssue } from './group-charters';
+import type { SelectionGroupIssue, SelectionGroupResult } from './selection-groups';
+import { assertSelectionGroupResponse } from './selection-group-response';
 import { CampaignChronicles } from './chronicles';
 import { CampaignProgression, PublicProjects } from './progression';
 import { BattleHistory } from './warfare';
@@ -90,6 +92,7 @@ function App() {
   const sequence = useRef(0);
   const groupPostingRequests = useRef(new GroupPostingRequests());
   const groupCharterRequests = useRef(new GroupOrderRequests<GroupCharterResult>());
+  const selectionGroupRequests = useRef(new GroupOrderRequests<SelectionGroupResult>());
   const fogRequests = useRef(new WatchFogRequests());
   const [fogEnabled, setFogEnabled] = useState(true);
   const [fogPending, setFogPending] = useState(false);
@@ -335,6 +338,8 @@ function App() {
     if (response.type === 'error') {
       groupPostingRequests.current.finish(response.id, new Error(response.message));
       groupCharterRequests.current.finish(response.id, new Error(response.message));
+      selectionGroupRequests.current.finish(response.id, new Error(response.message));
+      if (response.recoveryRequired) { campaignFault.current = true; setRecoveryRequired(true); }
       if (pendingFound.current?.requestId === response.id) pendingFound.current = undefined;
       pauseWatch();
       if (previousWorker.current) { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; }
@@ -343,24 +348,25 @@ function App() {
     setError(false);
     if (response.type === 'state') {
       try {
+        assertSelectionGroupResponse(response.observation.selectionGroups, response.observation.factionId);
         setNavigationNotice('');
         let cells: Observation['cells'];
         try { cells = unpackCells(response.cells); }
         catch (cause) {
           campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
-          for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The map update could not be read. Restore a saved campaign.');
+          for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) requests.reset('The map update could not be read. Restore a saved campaign.');
           invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
           setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
           return;
         }
-        if (campaignFault.current && !response.reset) { for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('Restore a saved campaign before issuing group orders.'); return; }
+        if (campaignFault.current && !response.reset) { for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) requests.reset('Restore a saved campaign before issuing group orders.'); return; }
         campaignFault.current = false; setRecoveryRequired(false);
         if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
         forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
         hash.current = response.hash; metrics.current = response.metrics;
         campaignRef.current = response.campaign; setCampaign(response.campaign);
         if (response.reset) {
-          for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The loaded campaign changed. Review its group selections.');
+          for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) requests.reset('The loaded campaign changed. Review its group selections.');
           closeMapActions();
           setManagementWindow(undefined);
           setBattleTransfer(undefined); setBattleReview(false);
@@ -420,11 +426,12 @@ function App() {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupCharterRequests.current.finish(response.id, new Error(response.groupCharterError));
         } else if (Array.isArray(response.groupCharterResults) && response.groupCharterResults.every(result => result && typeof result.settlementId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupCharterRequests.current.finish(response.id, response.groupCharterResults);
+        selectionGroupRequests.current.finish(response.id, [{ accepted: true, message: response.message }]);
       } catch (cause) {
         campaignFault.current = true; setRecoveryRequired(true); setError(true); pauseWatch();
         setFeedback(`The campaign view could not be updated: ${cause instanceof Error ? cause.message : String(cause)}. Restore a saved campaign before continuing.`);
       } finally {
-        for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) if (requests.has(response.id)) {
+        for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) if (requests.has(response.id)) {
           const message = 'The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.';
           requests.finish(response.id, new Error(message));
           campaignFault.current = true; setRecoveryRequired(true); setError(true); setFeedback(message);
@@ -443,7 +450,7 @@ function App() {
     const instance = new Worker(new URL('./simulation.worker.ts', import.meta.url), { type: 'module' });
     instance.onmessage = event => { if (worker.current === instance) receive(event); else { landRequestWorkers.current.delete(event.data.id); developmentRequestWorkers.current.delete(event.data.id); } };
     instance.onerror = event => {
-      for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
+      for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
       invalidateDetailQueries('The campaign worker stopped. Restore a saved campaign to review land.', true);
@@ -490,7 +497,7 @@ function App() {
   }, []);
   const issueGroupPosting: GroupPostingIssue = commands => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     const id = ++sequence.current;
     const pending = groupPostingRequests.current.enqueue(id);
     setBusy(true); setError(false);
@@ -503,7 +510,7 @@ function App() {
   };
   const issueGroupCharter: GroupCharterIssue = commands => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     const id = ++sequence.current;
     const pending = groupCharterRequests.current.enqueue(id);
     setBusy(true); setError(false);
@@ -514,8 +521,23 @@ function App() {
     }
     return pending;
   };
+  const issueSelectionGroup: SelectionGroupIssue = async order => {
+    const instance = worker.current;
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing saved groups.');
+    const id = ++sequence.current;
+    const pending = selectionGroupRequests.current.enqueue(id);
+    setBusy(true); setError(false);
+    try { instance.postMessage({ id, type: 'command', command: order } satisfies Request); }
+    catch (cause) {
+      selectionGroupRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
+      setBusy(false);
+    }
+    const [result] = await pending;
+    if (!result) throw new Error('The saved group response is missing. Restore the campaign before continuing.');
+    return result;
+  };
   const command = (order: GameCommand) => {
-    if (groupPostingRequests.current.busy || groupCharterRequests.current.busy) return;
+    if (groupPostingRequests.current.busy || groupCharterRequests.current.busy || selectionGroupRequests.current.busy) return;
     if (campaignRef.current.mode === 'watch' || observationRef.current?.victory) return;
     if (['endTurn', 'move', 'moveTo', 'queueMovement', 'resumeMovement', 'embarkArmy', 'disembarkArmy', 'assault', 'attack', 'resolveBattle'].includes(order.type)) closeMapActions();
     const id = send({ type: 'command', command: order });
@@ -582,7 +604,7 @@ function App() {
   };
   const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
-  useEffect(() => () => { for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
+  useEffect(() => () => { for (const requests of [groupPostingRequests.current, groupCharterRequests.current, selectionGroupRequests.current]) requests.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
   const hasCampaign = Boolean(observation);
   const victoryKey = observation?.victory ? `${observation.seed}:${hash.current}` : '';
   useEffect(() => {
@@ -798,11 +820,11 @@ function App() {
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
     {observation && managementWindow && !showSetup && !battleActive && !observation.pendingCapture && <CampaignWindow key={managementWindow} title={{ registry: 'Realm registry', orders: 'Selected orders', affairs: 'Realm affairs', journal: 'Campaign journal', guide: 'Map guide' }[managementWindow]} subtitle={managementWindow === 'orders' ? army?.name ?? settlement?.name ?? 'Map inspection' : realmName} close={() => setManagementWindow(undefined)} returnFocus={mapHost.current}>
-      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupCharter={issueGroupCharter} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
+      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupCharter={issueGroupCharter} onSelectionGroupCommand={issueSelectionGroup} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
       {managementWindow === 'orders' && <section className="inspector" aria-label="Selected entity orders"><button className="window-map-link" onClick={showMap}>Show on map</button><fieldset className="strategic-orders" disabled={ordersBusy}>{panes?.sidebar}</fieldset></section>}
       {managementWindow === 'affairs' && <section data-testid="realm-affairs"><FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/><PublicProjects view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><SiegeLedger view={observation} locate={cell => { mapFocusAfterWindow.current = true; renderer.current?.focus(cell); setManagementWindow(undefined); }}/></section>}
       {managementWindow === 'journal' && <><RealmJournal view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><BattleHistory view={observation} replayId={battleTransfer?.packet.battleId} replay={() => { pauseWatch(); setManagementWindow(undefined); setBattleReview(true); }}/>{observation.victory && <button onClick={openChronicles}>Read campaign chronicles</button>}</>}
-      {managementWindow === 'guide' && <section className="map-guide"><h3>Rule from the map</h3><p>Select a force, then choose <strong>Move on map</strong> and click a reachable hex or enemy. A distant destination opens a route review before any order is issued. Shift-click adds waypoints. Journeys pause when danger, another faction, or an event blocks them.</p><p>Click a settlement to build or recruit. Click its surrounding land to inspect yields, improve a tile, or grow its borders. All prices and restrictions come from the current campaign.</p><p>The floating buttons open your rosters, research, characters, diplomacy and journal. The bottom tray follows your selected army or town. Full orders provide the same controls in a larger window.</p><h3>Delegate across your realm</h3><p>Open the realm registry and check hearths or land armies to give them standing orders together. Hearth charters keep existing queued work and share the realm’s treasury. Open Charter templates after selecting hearths to save a named focus and coin ceiling in this browser. Recall fills the form; Apply charters issues the orders. Editing a template leaves existing charters unchanged.</p><h3>Navigation &amp; shortcuts</h3><p>Drag to pan; scroll or ± to zoom. World overview fits the entire map. Arrow keys pan when the map is focused. Enter opens local actions. Escape closes the current window before clearing the map selection.</p><p><kbd>{armyKey.toUpperCase()}</kbd> next army · <kbd>{settlementKey.toUpperCase()}</kbd> next idle settlement · Shift + shortcut selects the previous entry. Active journeys, siege duty, embarked troops and stationary missions are skipped; interrupted routes still need review.</p><p>Change text size and key bindings in Campaign &amp; settings. Map click menus can be disabled; full orders and keyboard navigation remain available.</p><p>Supply is drawn as a pale outline over the ground your hearths and depots can feed. A force of three or more companies outside it loses strength every turn and rests badly.</p><button aria-pressed={showSupply} data-testid="toggle-supply" onClick={() => setShowSupply(!showSupply)}>{showSupply ? 'Hide supply overlay' : 'Show supply overlay'}</button><button aria-pressed={mapOnly} onClick={() => setMapOnly(!mapOnly)}>{mapOnly ? 'Show command tray' : 'Hide command tray'}</button></section>}
+      {managementWindow === 'guide' && <section className="map-guide"><h3>Rule from the map</h3><p>Select a force, then choose <strong>Move on map</strong> and click a reachable hex or enemy. A distant destination opens a route review before any order is issued. Shift-click adds waypoints. Journeys pause when danger, another faction, or an event blocks them.</p><p>Click a settlement to build or recruit. Click its surrounding land to inspect yields, improve a tile, or grow its borders. All prices and restrictions come from the current campaign.</p><p>The floating buttons open your rosters, research, characters, diplomacy and journal. The bottom tray follows your selected army or town. Full orders provide the same controls in a larger window.</p><h3>Delegate across your realm</h3><p>Open the realm registry and check hearths or land armies to give them standing orders together. Hearth charters keep existing queued work and share the realm’s treasury. Open Charter templates after selecting hearths to save a named focus and coin ceiling in this browser. Recall fills the form; Apply charters issues the orders. Editing a template leaves existing charters unchanged.</p><p>Use Saved army groups or Saved hearth groups to name a selection and keep it with this campaign’s saves and exports. Choose a group, then Recall group to select its available members. Recall gives no orders; apply postings or charters separately. Updating a group replaces its membership with the current checks. Embarked armies stay in saved groups but cannot receive group postings until ashore.</p><h3>Navigation &amp; shortcuts</h3><p>Drag to pan; scroll or ± to zoom. World overview fits the entire map. Arrow keys pan when the map is focused. Enter opens local actions. Escape closes the current window before clearing the map selection.</p><p><kbd>{armyKey.toUpperCase()}</kbd> next army · <kbd>{settlementKey.toUpperCase()}</kbd> next idle settlement · Shift + shortcut selects the previous entry. Active journeys, siege duty, embarked troops and stationary missions are skipped; interrupted routes still need review.</p><p>Change text size and key bindings in Campaign &amp; settings. Map click menus can be disabled; full orders and keyboard navigation remain available.</p><p>Supply is drawn as a pale outline over the ground your hearths and depots can feed. A force of three or more companies outside it loses strength every turn and rests badly.</p><button aria-pressed={showSupply} data-testid="toggle-supply" onClick={() => setShowSupply(!showSupply)}>{showSupply ? 'Hide supply overlay' : 'Show supply overlay'}</button><button aria-pressed={mapOnly} onClick={() => setMapOnly(!mapOnly)}>{mapOnly ? 'Show command tray' : 'Hide command tray'}</button></section>}
     </CampaignWindow>}
     <footer className={'command-bar' + (battleActive && !showSetup ? ' battle-command-bar' : '')} ref={commandBar}>
       {observation && !showSetup && !battleActive && !mapOnly && <div className="hud-selection" data-testid="current-selection"><FactionArt contentId="ui.banner" definitionId={realm?.definitionId} label="Selected realm banner" compact decorative/><div className="hud-selection-copy"><small>{army ? army.domain === 'naval' ? 'Selected fleet' : army.carrierId ? 'Embarked army' : 'Selected army' : settlement ? 'Selected settlement' : 'Your realm'}</small><strong>{army?.name ?? settlement?.name ?? 'Select a force or hearth'}</strong><span>{army ? `${army.formations.length} / ${army.formationCapacity} formations · ${army.strength} strength · ${army.movement} movement` : settlement ? `${settlement.population} people · ${settlement.queue.length} queued projects` : 'Explore the map or open a roster.'}</span><div className="hud-selection-actions"><button disabled={!army && !settlement && selection.cell === undefined} aria-haspopup="dialog" onClick={manageInPanel}>Show selected orders</button><button disabled={selection.cell === undefined} onClick={showMap}>Show on map</button></div></div></div>}

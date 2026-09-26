@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-09-25",
+  "baselineRevision": "6cb7692c800464d3c5ad66b42df6cf063ffeb0ca",
+  "sourceState": "Uncommitted rules32 implementation after the baseline revision. Source SHA256 values recorded during review after the final browser capture.",
+  "sourceSha256": {
+    "tests/gameplay/selection-groups.spec.ts": "def42725a9c3cde0fa170f6fae9602a7e050096caa2618a0f43c7250d2f00243",
+    "tests/production/selection-groups.spec.ts": "43604487c090b3d7f54ddee32e0a69cf11493e5166b48530d2385b112df0470d",
+    "apps/web/src/selection-groups.tsx": "688236ef23ada9f651f7241feb3d74a1a1127eb9104db8772724ea170fa47e37",
+    "apps/web/src/realm-navigation.tsx": "cfff83019d862f08f7c4f6e4044bb25841d6a12e6d6c5cbd06bdd1c68d97c418",
+    "apps/web/src/realm-navigation.css": "aa9a7c6e2cf8e5c0446c914f303141a30f7e52d0f3f32c305d22469a915909f5",
+    "apps/web/src/main.tsx": "5baa018ff38783fe8700bc6f99f7b95eab6519038535c5438ef0cdf8c49be93e",
+    "apps/web/src/simulation.worker.ts": "1ef2f4b4b418b3bd13ec36d16debf14717caea69813efa540b3e5b112b91d65f",
+    "packages/sim/src/selection-groups.ts": "cc3e30053acc86ee0c13404e63a43bb0c1c3daf7b56b3405da2aa11bfb06548c",
+    "packages/sim/src/save.ts": "e0d912d759ea6d4f57c9da79933fb9e51d73e2de0c2d5d0e17d603bce7d85281",
+    "packages/test-fixtures/src/empire-land-fixture.ts": "444e23982b6f6920899e83b54a7d5029594d78410acf53cf5ced18c2663bbfac",
+    "packages/test-fixtures/src/index.ts": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+  },
+  "captureCommand": "TMPDIR=/home/telephoneheater/Work/Theandril/node_modules/.tmp PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test tests/gameplay/selection-groups.spec.ts tests/gameplay/group-postings.spec.ts tests/gameplay/group-charters.spec.ts tests/gameplay/charter-templates.spec.ts tests/gameplay/realm-navigation.spec.ts tests/gameplay/charters.spec.ts tests/gameplay/postings.spec.ts tests/gameplay/group-posting-recovery.spec.ts tests/gameplay/group-charter-recovery.spec.ts --output=docs/development/2026-09-25-selection-groups/browser-final-output > docs/development/2026-09-25-selection-groups/browser-final.log 2>&1",
+  "scenario": {
+    "kind": "Authored regression fixture, not organic mature-campaign growth",
+    "fixture": "empireLandCampaign(legendary)",
+    "generatorVersion": 4,
+    "seed": 20260905,
+    "ownedHearths": 40,
+    "ownedArmies": 100,
+    "totalArmies": 4000,
+    "setup": "Authored ownership/population and finite funded territory development; renamed registries; one real paid granary queue before import. Saved group creation, replacement, Recall and all subsequent orders use normal browser controls.",
+    "captureStage": "Northern host was replaced/renamed to Watch company with three members selected across pages and search. Watch company was recalled; existing postings remain empty until explicit Post selected armies."
+  },
+  "compactCapture": {
+    "authored": "Legendary/gen4/seed20260905; 40 owned hearths, 100 owned armies, 4000 total armies; paid manual granary queue",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "locator": "[data-testid=\"selection-group-recall\"] > label and Recall group button",
+    "elementBounds": {
+      "label": {
+        "x": 36,
+        "y": 373.609375,
+        "width": 318,
+        "height": 67.859375
+      },
+      "recall": {
+        "x": 36,
+        "y": 449.46875,
+        "width": 318,
+        "height": 44
+      }
+    },
+    "clip": {
+      "x": 36,
+      "y": 373,
+      "width": 318,
+      "height": 121
+    },
+    "bytes": 15348,
+    "stage": "Watch company recalled by keyboard; three armies selected, no postings yet. Capture includes only the saved-group label, dropdown and Recall button; member count and recall status below are outside the clip.",
+    "transformations": "none after capture; direct Playwright page.screenshot PNG using the union of the two actual element bounds, rounded outward to whole pixels"
+  },
+  "review": {
+    "reviewer": "fleet_ui",
+    "independence": "Browser-test author and screenshot reviewer; not an independent rerun. Parent executed the final browser suite.",
+    "imagesViewed": true,
+    "result": "Desktop and narrow group controls remain readable; narrow keyboard focus is visible in the full capture. Compact label/select/Recall-button capture is honest and unchanged after capture.",
+    "productionJourney": "One separate built-production generated-campaign journey passed in 7.8 seconds overall (7.0-second test). Parent executed; reviewer inspected the exact narrow screenshot. No development hooks."
+  },
+  "artifacts": [
+    {
+      "path": "docs/development/2026-09-25-selection-groups/screenshots/selection-groups-desktop.png",
+      "capturedOutputPath": "docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-desktop.png",
+      "sha256": "7f4f86a49eab77f7ab7b768d0e4ea3d78e4e8383275bcb0c96efeff4c720dc62",
+      "bytes": 498923,
+      "capturedAtUtc": "2026-09-26T03:39:21.315089+00:00",
+      "postCaptureTransformations": [],
+      "width": 1440,
+      "height": 1000,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright page.screenshot",
+      "captureClip": null,
+      "description": "Original viewport screenshot of the real realm registry after recalling Watch company, before issuing postings.",
+      "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-desktop.png"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/screenshots/selection-groups-narrow.png",
+      "capturedOutputPath": "docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-narrow.png",
+      "sha256": "270ff5fd33bfcf4bff953fdb007f6f864285b7af4c7451a43933b8b41832232b",
+      "bytes": 129869,
+      "capturedAtUtc": "2026-09-26T03:39:21.575086+00:00",
+      "postCaptureTransformations": [],
+      "width": 390,
+      "height": 844,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright page.screenshot",
+      "captureClip": null,
+      "description": "Original viewport screenshot of the real realm registry after recalling Watch company, before issuing postings.",
+      "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-narrow.png"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/screenshots/selection-groups-recall.png",
+      "capturedOutputPath": "docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-recall.png",
+      "sha256": "28236174d7b432ccf6ed1188b9529fe9a5f41d8b45ca61a7c59358a58f42e2ec",
+      "bytes": 15348,
+      "capturedAtUtc": "2026-09-26T03:39:21.642085+00:00",
+      "postCaptureTransformations": [],
+      "width": 318,
+      "height": 121,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright page.screenshot",
+      "captureClip": {
+        "x": 36,
+        "y": 373,
+        "width": 318,
+        "height": 121
+      },
+      "description": "Saved group selector and Recall button only; exact browser clip from the union of actual element bounds. Member count/status and outer focus-ring pixels beyond those bounds are outside this clip.",
+      "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-groups-recall.png"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/screenshots/selection-group-capture.json",
+      "capturedOutputPath": "docs/development/2026-09-25-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-group-capture.json",
+      "sha256": "693a9596dc69512c11606100016125553f1c4e66ab792e874180b23ec9cd48e8",
+      "bytes": 989,
+      "capturedAtUtc": "2026-09-26T03:39:21.643425+00:00",
+      "postCaptureTransformations": [],
+      "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/browser-final-output/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/selection-group-capture.json"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/screenshots/production-selection-group-restored-narrow.png",
+      "capturedOutputPath": "docs/development/2026-09-25-selection-groups/production-groups-output/production-selection-group-f9132--reload-and-portable-import/production-selection-group-restored-narrow.png",
+      "sha256": "3ce487b0393a8d5fe57e3a3b702e7d3b698258775cb9a142ac9e69ddfe950cfd",
+      "bytes": 145221,
+      "capturedAtUtc": "2026-09-26T04:09:12.965410+00:00",
+      "postCaptureTransformations": [],
+      "width": 390,
+      "height": 844,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright page.screenshot",
+      "captureClip": null,
+      "description": "Exact built-production viewport after portable campaign import and keyboard Recall of Home hearths. Native visible controls; no development hook or authored state mutation.",
+      "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/production-groups-output/production-selection-group-f9132--reload-and-portable-import/production-selection-group-restored-narrow.png"
+    }
+  ],
+  "productionScenario": {
+    "kind": "Generated campaign through ordinary controls, not an imported authored setup",
+    "initialSeed": 20260905,
+    "isolationCampaignSeed": 77,
+    "worldSize": "tiny",
+    "factionCount": 2,
+    "cityStateCount": 0,
+    "buildBasePath": "/Theandril/",
+    "test": "tests/production/selection-groups.spec.ts",
+    "captureStage": "After restoring the original campaign through its real downloaded export and recalling Home hearths by keyboard; before deleting that saved group. Existing Wealth/24 charter remains unchanged.",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1
+  },
+  "rawArtifactArchive": {
+    "path": "node_modules/.cache/theandril-selection-groups",
+    "reason": "Raw run directories moved intact into ignored local cache after retaining the reviewed new images, capture metadata and logs. No raw files deleted; original capturedOutputPath values preserve capture history."
+  }
+}
