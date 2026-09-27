@@ -1,0 +1,131 @@
+[WebServer] (node:1321110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1321576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 34 tests using 1 worker
+
+(node:1321609) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (1.6s)
+  ✓   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (344ms)
+  ✘   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (5.3s)
+(node:1322440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (342ms)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (639ms)
+  ✘   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (5.5s)
+(node:1323748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 tests/gameplay/roadmap.spec.ts:29:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (566ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:50:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (544ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:67:1 › same-document Back and Forward restore filters and linked-item evidence (732ms)
+  ✓  10 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 1440px / 100% text (890ms)
+  ✓  11 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 390px / 130% text (785ms)
+  ✓  12 tests/gameplay/roadmap.spec.ts:125:1 › unknown item links recover honestly and dispatches link to the full roadmap (485ms)
+  ✓  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (2.0s)
+  ✓  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (1.9s)
+  ✓  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (1.8s)
+  ✓  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (2.0s)
+  ✓  17 tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text (276ms)
+  ✓  18 tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works (336ms)
+  ✓  19 tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results (495ms)
+  ✓  20 tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance (311ms)
+  ✓  21 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (262ms)
+  ✓  22 tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch (625ms)
+  ✓  23 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (5.7s)
+  ✓  24 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (6.6s)
+  ✓  25 tests/production/defense-theaters.spec.ts:6:1 › generated production adopts a defensive theater through ordinary controls and restores its exact saved campaign without development hooks (5.0s)
+  ✓  26 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1.5s)
+  ✓  27 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (738ms)
+  ✓  28 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (3.7s)
+  ✓  29 tests/production/group-movement.spec.ts:6:1 › generated production group travel moves ordinary armies and retains postings, replay and portable saved routes without development hooks (5.4s)
+  ✓  30 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (2.3s)
+  ✓  31 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (4.7s)
+  ✓  32 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (7.5s)
+  ✓  33 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (6.6s)
+  ✓  34 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.6s)
+
+
+  1) tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ───────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.dispatch-row')
+    Expected: 11
+    Received: 12
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.dispatch-row') with timeout 5000ms
+      - waiting for locator('.dispatch-row')
+        14 × locator resolved to 12 elements
+           - unexpected value "12"
+
+
+      18 | test('dispatches remain refresh-safe at their new path', async ({ page }) => {
+      19 |   await page.goto('updates/dispatches/');
+    > 20 |   await expect(page.locator('.dispatch-row')).toHaveCount(11);
+         |                                               ^
+      21 |   await page.locator('.dispatch-row a').first().click();
+      22 |   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
+      23 | });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/home.spec.ts:20:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#roadmap-empire-management').getByRole('link', { name: 'Saved groups verification', exact: true })
+    Expected: "https://github.com/ErikBurdett/Theandril/blob/3b0918999a166f36f6f3d51fbcb49413de549163/docs/development/2026-09-25-selection-groups/README.md"
+    Received: "https://github.com/ErikBurdett/Theandril/blob/0ecd2d1767f613942cf9f22315da624164cc4055/docs/development/2026-09-25-selection-groups/README.md"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#roadmap-empire-management').getByRole('link', { name: 'Saved groups verification', exact: true }) with timeout 5000ms
+      - waiting for locator('#roadmap-empire-management').getByRole('link', { name: 'Saved groups verification', exact: true })
+        14 × locator resolved to <a href="https://github.com/ErikBurdett/Theandril/blob/0ecd2d1767f613942cf9f22315da624164cc4055/docs/development/2026-09-25-selection-groups/README.md">Saved groups verification</a>
+           - unexpected value "https://github.com/ErikBurdett/Theandril/blob/0ecd2d1767f613942cf9f22315da624164cc4055/docs/development/2026-09-25-selection-groups/README.md"
+
+
+      21 |   await expect(empire).toContainText('Up to 24 named campaign groups');
+      22 |   await expect(empire).toContainText('reusable army order templates');
+    > 23 |   await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/3b0918999a166f36f6f3d51fbcb49413de549163/docs/development/2026-09-25-selection-groups/README.md');
+         |                                                                                              ^
+      24 |   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
+      25 |   expect(workers).toEqual([]);
+      26 |   expect(errors).toEqual([]);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/roadmap.spec.ts:23:94
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-defense-theaters/publication-captures/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ────────────
+    tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+  32 passed (1.4m)

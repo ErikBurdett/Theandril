@@ -30,12 +30,12 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'Give your armies a shared destination' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Give your hearths a standing watch' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    await page.locator('.illustration-group-travel-results').scrollIntoViewIfNeeded();
-    await page.locator('.illustration-group-travel-results > button > img').evaluate(image => (image as HTMLImageElement).decode());
-    await page.locator('.illustration-group-travel-results').screenshot({ path: testInfo.outputPath('group-travel-results-illustration.png') });
-    await page.getByRole('heading', { name: 'Travel and standing duty' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
+    await page.locator('.illustration-defense-theater-summary').scrollIntoViewIfNeeded();
+    await page.locator('.illustration-defense-theater-summary > button > img').evaluate(image => (image as HTMLImageElement).decode());
+    await page.locator('.illustration-defense-theater-summary').screenshot({ path: testInfo.outputPath('defense-theater-summary-illustration.png') });
+    await page.getByRole('heading', { name: 'Watch the gaps close' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
     const imageFacts = await page.locator('figure > button > img').evaluateAll(elements => elements.map(element => { const image = element as HTMLImageElement; return { src: image.currentSrc, width: image.naturalWidth, complete: image.complete }; }));
@@ -100,8 +100,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('11 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(11);
+  await expect(page.getByRole('status')).toHaveText('12 dispatches');
+  await expect(page.locator('.dispatch-row')).toHaveCount(12);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -112,8 +112,8 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Current / partial', { exact: true }).first()).toBeVisible();
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
-  await expect(ledger).toContainText('Fleet attrition and Standard/Long pacing limits remain separately dated evidence');
-  await expect(ledger).toContainText('2,000 headless tests');
+  await expect(ledger).toContainText('Fleet attrition remains separately dated evidence');
+  await expect(ledger).toContainText('2,075 headless tests');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -140,11 +140,11 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=group-travel$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Give your armies a shared destination' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=defense-theaters$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Give your hearths a standing watch' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'Give your armies a shared destination' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Group travel verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/3b0918999a166f36f6f3d51fbcb49413de549163/docs/development/2026-09-26-group-travel/README.md');
+  await expect(page.getByRole('heading', { level: 1, name: 'Give your hearths a standing watch' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Defensive theater verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/0ecd2d1767f613942cf9f22315da624164cc4055/docs/development/2026-09-27-defense-theaters/README.md');
   await page.getByRole('link', { name: 'A voyage needs stores for the way home', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Factual evidence review' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/b623c2c91d4d852cba710f2d996c28a6b1b5d624/docs/development/2026-09-23-fleet-provisions/factual-review.md');
   await page.getByRole('link', { name: 'A campaign worth keeping', exact: true }).click();

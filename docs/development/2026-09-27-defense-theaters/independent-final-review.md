@@ -58,3 +58,16 @@ One deliberate updater precondition remains: the featured native image must come
 | `pacing-fixed.log` | `8bc4ce5176c9e80e5a489365d74552abb261f04e5a9c61d9a46a72ab42f11d33` |
 
 The final implementation commit, journal/publication verification, fresh final-build production journey, live checks and actual tracker application are not attested by these source-review seals. M3 remains partial; threat response, patrol/escort, invasion strategy, army templates, broader governor decisions and combined mature-realm acceptance remain open.
+
+## Completed quiet AI benchmark readback
+
+Addendum after the measurement finished, 27 September 2026. The reviewer independently compared [the accepted JSON](ai-benchmark-final.json) with its [raw output](ai-benchmark-final.log), recalculated the median/minimum/maximum from each three-sample array, and checked all three measured source-file hashes against the reviewed source. They agree exactly. No benchmark was rerun by this reviewer.
+
+| Case order: reachable / island fallback / all blocked | Planner medians (ms) | Previews per sample | Target-only expanded nodes |
+| --- | --- | --- | --- |
+| Huge | 0.348 / 1.966 / 2.082 | 3 / 8 / 8 | 25 / 4,942 / 6,504 |
+| Legendary | 0.162 / 1.635 / 2.074 | 3 / 8 / 8 | 25 / 4,942 / 6,504 |
+
+All six rows record unchanged canonical hashes and observations and exact repeated plans. The four adopting cases each accept one ordinary configuration and two subsequent automatic routes; the two blocked cases propose neither. The JSON/log and [README](README.md) correctly disclose authored geography, one hundred companies plus one scout, four candidate hearths, 841 observed cells, and one adoption-capable realm. The target-node counters exclude range search; the shared per-preview cap still bounds range plus target expansions at 32,768 across eight calls. No speedup, tail percentile, worst-case saturation, whole-turn, worker or rendering claim follows from these six workloads.
+
+The overlapped first sample remains excluded from timing conclusions, as documented in [the measurement readback](ai-benchmark-review.md). The accepted JSON SHA-256 is `f62cfb5ef0cc13c67168bb033b69cf6abfc3e1079b72b35b9defdac56fe34216`; the accepted raw-log SHA-256 is `dc5117f50607cc89e480d829bfe7265b8b7bf2dd82a9603e3bfdb63b43790211`. This addendum was written after implementation commit `0ecd2d1767f613942cf9f22315da624164cc4055`; the underlying measurements and their authored readback already exist at that pin.
