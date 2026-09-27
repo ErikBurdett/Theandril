@@ -1,0 +1,57 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-queries.test.ts (31 tests | 1 failed) 9295ms
+     × appends paid ordered work across 40 hearths with exact serial archive/hash, one view, unchanged fog and saved continuation 906ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > appends paid ordered work across 40 hearths with exact serial archive/hash, one view, unchanged fog and saved continuation
+AssertionError: expected [ { …(7) }, { …(7) } ] to deeply equal [ { …(7) }, { …(7) } ]
+
+- Expected
++ Received
+
+@@ -1,8 +1,8 @@
+  [
+    {
+-     "blocker": "Nothing this charter builds costs 4 coin or less; raise the ceiling.",
++     "blocker": null,
+      "ceiling": 4,
+      "factionId": "faction.ashen_compact",
+      "focus": "works",
+      "itemId": null,
+      "itemName": null,
+@@ -11,10 +11,10 @@
+    {
+      "blocker": null,
+      "ceiling": 12,
+      "factionId": "faction.ashen_compact",
+      "focus": "wealth",
+-     "itemId": "building.market",
+-     "itemName": "Charter market",
++     "itemId": null,
++     "itemName": null,
+      "settlementId": "settlement.11",
+    },
+  ]
+
+ ❯ apps/web/src/worker-queries.test.ts:681:41
+    679|     expect(stateHash(replayArchive(grouped.archive))).toBe(result.hash…
+    680|     expect(getObservation(grouped.game, factionId).cells).toEqual(getO…
+    681|     expect(result.observation.charters).toEqual(initial.observation.ch…
+       |                                         ^
+    682|     expect(grouped.game.postings).toEqual(game.postings);
+    683|     for (const id of settlementIds) expect(grouped.game.settlements[id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 30 passed (31)
+   Start at  18:55:29
+   Duration  10.07s (transform 594ms, setup 0ms, import 694ms, tests 9.29s, environment 0ms)
+

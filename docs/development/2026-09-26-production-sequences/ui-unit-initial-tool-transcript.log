@@ -1,0 +1,28 @@
+Retained tool-output transcript, copied from the authoring session on 2026-09-26.
+This file is not a new test execution or a redirected raw process log.
+Command: ./node_modules/.bin/vitest run apps/web/src/group-production.test.tsx apps/web/src/production-templates.test.tsx apps/web/src/realm-navigation.test.tsx
+
+Reporter decoration separators omitted; result/error lines retained.
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/group-production.test.tsx (5 tests | 1 failed) 80ms
+     × keeps editor/template bounds aligned while leaving canonical availability to queue commands 3ms
+
+ FAIL  |unit| apps/web/src/group-production.test.tsx > group production editor > keeps editor/template bounds aligned while leaving canonical availability to queue commands
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ apps/web/src/group-production.test.tsx:32:74
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 15 passed (16)
+   Start at  19:07:58
+   Duration  845ms (transform 1.15s, setup 0ms, import 1.71s, tests 248ms, environment 0ms)
+
+Author diagnosis: the test used unknown content ID unit.warship. It was corrected to existing unit.transport; no production code correction was needed for this failure.

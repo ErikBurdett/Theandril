@@ -2,7 +2,7 @@ import { commandSchema, createGame, getDevelopmentEntity, getMovementQuery, getO
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult, type GroupPostingResult, type Request, type Response, type WorkerMetrics } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -25,7 +25,7 @@ const textEncoder = new TextEncoder();
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
 type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' }>;
 type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' }>;
-type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string };
+type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string };
 
 function publish(id: number, message: string, reset = false, replaceMap = false, group?: GroupResponse): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
@@ -48,6 +48,7 @@ function publish(id: number, message: string, reset = false, replaceMap = false,
   const resultBytes = group ? textEncoder.encode(JSON.stringify(group)).byteLength : 0;
   metrics.groupPostingResultBytes = group && 'groupPostingResults' in group ? resultBytes : 0;
   metrics.groupCharterResultBytes = group && 'groupCharterResults' in group ? resultBytes : 0;
+  metrics.groupProductionResultBytes = group && 'groupProductionResults' in group ? resultBytes : 0;
   metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes + resultBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
@@ -93,6 +94,44 @@ function applyGroupCommands(game: GameState, commands: GroupCommand[]) {
     }
   }
   return { results, error };
+}
+
+/** Only transport shape is checked here. Content, ownership, payment, queue
+ * capacity and prerequisites remain ordinary canonical queue decisions. */
+function productionSequence(request: Extract<Request, { type: 'groupProduction' }>, factionId: string) {
+  const identifier = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 100;
+  const list = (value: unknown, limit: number): value is string[] => Array.isArray(value) && value.length > 0 && value.length <= limit
+    && Object.keys(value).length === value.length && Array.from(value).every(identifier);
+  if (!Number.isSafeInteger(request.id) || request.id < 0
+    || Object.keys(request).some(key => !['id', 'type', 'factionId', 'settlementIds', 'itemIds'].includes(key))
+    || !identifier(request.factionId) || !list(request.settlementIds, MAX_GROUP_PRODUCTION_SETTLEMENTS) || !list(request.itemIds, MAX_PRODUCTION_SEQUENCE_ITEMS)
+    || new Set(request.settlementIds).size !== request.settlementIds.length) {
+    throw new Error(`A production sequence requires 1 to ${MAX_GROUP_PRODUCTION_SETTLEMENTS} distinct hearth IDs and 1 to ${MAX_PRODUCTION_SEQUENCE_ITEMS} item IDs in a valid request.`);
+  }
+  if (request.factionId !== factionId) throw new Error('This seat does not control that faction.');
+  return { factionId, settlementIds: [...request.settlementIds].sort(), itemIds: [...request.itemIds] };
+}
+
+function applyProductionSequence(game: GameState, sequence: ReturnType<typeof productionSequence>) {
+  const results: GroupProductionResult[] = [];
+  let attempted = 0;
+  for (const settlementId of sequence.settlementIds) {
+    const row: GroupProductionResult = { settlementId, orders: [] };
+    for (const itemId of sequence.itemIds) {
+      try {
+        const result = applyCommand(game, { type: 'queue', factionId: sequence.factionId, settlementId, itemId });
+        row.orders.push({ itemId, accepted: result.ok, ...(!result.ok ? { message: result.error ?? 'The item could not be queued.' } : {}) });
+        if (row.orders.length === 1) results.push(row);
+        attempted++;
+        if (!result.ok) break;
+      } catch (cause) {
+        // The interrupted command may already have mutated state. Its outcome
+        // is unknown: retain only completed results, stop every later command.
+        return { results, error: `Recording was interrupted after ${attempted} completed production order${attempted === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${cause instanceof Error ? cause.message : String(cause)}` };
+      }
+    }
+  }
+  return { results, error: undefined };
 }
 
 function applyCommand(game: GameState, command: GameCommand) {
@@ -141,6 +180,7 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
 
 async function handle(request: Request): Promise<void> {
   let selectionGroupApplied = false;
+  let groupProductionStarted = false;
   try {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
@@ -255,6 +295,20 @@ async function handle(request: Request): Promise<void> {
       publish(request.id, await autosave(message));
       return;
     }
+    if (request.type === 'groupProduction') {
+      if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
+      if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
+      if (state.battle || state.pendingCapture) throw new Error('Finish the current battle or settlement decision before applying production sequences.');
+      const sequence = productionSequence(request, state.turnOwnerId), started = performance.now();
+      groupProductionStarted = true;
+      const { results, error } = applyProductionSequence(state, sequence);
+      metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
+      const accepted = results.reduce((count, row) => count + row.orders.filter(order => order.accepted).length, 0);
+      const refused = results.reduce((count, row) => count + row.orders.filter(order => !order.accepted).length, 0);
+      publish(request.id, error ?? `${accepted} production order${accepted === 1 ? '' : 's'} accepted; ${refused} hearth sequence${refused === 1 ? '' : 's'} stopped.`, false, false,
+        { groupProductionResults: results, ...(error ? { groupProductionError: error } : {}) });
+      return;
+    }
     if (request.type === 'groupPosting' || request.type === 'groupCharter') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
@@ -321,9 +375,11 @@ async function handle(request: Request): Promise<void> {
   } catch (error) {
     // An accepted edit may fail while publishing its view. Its canonical
     // mutation must never be mistaken for a refusal or followed by stale orders.
-    if (selectionGroupApplied) recordingFailed = true;
+    if (selectionGroupApplied || groupProductionStarted) recordingFailed = true;
     const message = error instanceof Error ? error.message : String(error);
-    send({ id: request.id, type: 'error', message: selectionGroupApplied ? `The group changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
+    send({ id: request.id, type: 'error', message: groupProductionStarted
+      ? `The production result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
+      : selectionGroupApplied ? `The group changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
   }
 }
 

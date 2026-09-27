@@ -5,12 +5,13 @@ import type { MapSelection } from './movement';
 import type { GroupPostingIssue } from './group-postings';
 import type { GroupCharterIssue } from './group-charters';
 import type { SelectionGroupIssue } from './selection-groups';
+import type { GroupProductionIssue } from './group-production';
 
-export function RealmRoster({ view, registry, search, force, selection, choose, setSearch, setForce, select, characters, busy = false, onGroupPosting, onGroupCharter, onSelectionGroupCommand }: {
+export function RealmRoster({ view, registry, search, force, selection, choose, setSearch, setForce, select, characters, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onSelectionGroupCommand }: {
   view: Observation; registry: 'armies' | 'settlements'; search: string; force: string; selection: MapSelection;
   choose: (kind: 'armies' | 'settlements') => void; setSearch: (value: string) => void; setForce: (value: string) => void;
   select: (selection: MapSelection) => void; characters: () => void;
-  busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onSelectionGroupCommand?: SelectionGroupIssue;
+  busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupProduction?: GroupProductionIssue; onSelectionGroupCommand?: SelectionGroupIssue;
 }) {
   const realm = view.factions.find(faction => faction.id === view.factionId);
   return <section className="realm-roster">
@@ -19,7 +20,7 @@ export function RealmRoster({ view, registry, search, force, selection, choose, 
     <label className="search-label">Search your realm<input type="search" value={search} placeholder="Find a name or stable ID" onChange={event => setSearch(event.target.value)}/></label>
     <section id="realm-registry-panel" role="tabpanel" aria-labelledby={`realm-tab-${registry}`}>
       {registry === 'armies' && <label className="force-filter">Force type<select value={force} onChange={event => setForce(event.target.value)}><option value="all">All armies & fleets</option><option value="land">Land armies ashore</option><option value="naval">Fleets</option><option value="embarked">Embarked armies</option></select></label>}
-      <RealmRegistry view={view} registry={registry} search={search} force={force} selection={selection} select={select} busy={busy} onGroupPosting={onGroupPosting} onGroupCharter={onGroupCharter} onSelectionGroupCommand={onSelectionGroupCommand}/>
+      <RealmRegistry view={view} registry={registry} search={search} force={force} selection={selection} select={select} busy={busy} onGroupPosting={onGroupPosting} onGroupCharter={onGroupCharter} onGroupProduction={onGroupProduction} onSelectionGroupCommand={onSelectionGroupCommand}/>
     </section>
     <p className="field-help">Choose an entry to locate it on the map. Use the bottom command tray for its orders.</p>
   </section>;

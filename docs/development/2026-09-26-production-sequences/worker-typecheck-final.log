@@ -1,0 +1,5 @@
+apps/web/src/main.tsx(13,43): error TS2307: Cannot find module './group-production' or its corresponding type declarations.
+apps/web/src/main.tsx(533,54): error TS7006: Parameter 'plan' implicitly has an 'any' type.
+apps/web/src/main.tsx(845,165): error TS2322: Type '{ key: number; view: Observation; onGroupPosting: GroupPostingIssue; onGroupCharter: GroupCharterIssue; onGroupProduction: GroupProductionIssue; onSelectionGroupCommand: SelectionGroupIssue; ... 9 more ...; select: (next: MapSelection) => void; }' is not assignable to type 'IntrinsicAttributes & { view: Observation; registry: "settlements" | "armies"; search: string; force: string; selection: MapSelection; ... 8 more ...; onSelectionGroupCommand?: SelectionGroupIssue | undefined; }'.
+  Property 'onGroupProduction' does not exist on type 'IntrinsicAttributes & { view: Observation; registry: "settlements" | "armies"; search: string; force: string; selection: MapSelection; ... 8 more ...; onSelectionGroupCommand?: SelectionGroupIssue | undefined; }'.
+apps/web/src/worker-production.benchmark.ts(82,128): error TS2339: Property 'observationMs' does not exist on type 'WorkerMetrics'.

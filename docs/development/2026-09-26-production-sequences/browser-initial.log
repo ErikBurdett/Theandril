@@ -1,0 +1,56 @@
+[WebServer] (node:578686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:579180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:579371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with missing-results ends pending work, locks orders and restores the actual manual save (3.3s)
+  ✓   2 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-item ends pending work, locks orders and restores the actual manual save (3.1s)
+  ✓   3 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with map-revision ends pending work, locks orders and restores the actual manual save (3.3s)
+  ✓   4 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-type ends pending work, locks orders and restores the actual manual save (3.9s)
+  ✓   5 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with worker-crash ends pending work, locks orders and restores the actual manual save (3.8s)
+  ✘   6 tests/gameplay/production-sequences.spec.ts:108:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues (30.5s)
+(node:588424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 tests/gameplay/production-sequences.spec.ts:249:1 › shared coin and ordinary duplicate, full-queue and prerequisite refusals retain paid prefixes in stable hearth order (8.4s)
+  ✓   8 tests/gameplay/production-template-recovery.spec.ts:9:3 › a denied production-template library preserves stored rows and keeps explicit paid production usable (2.3s)
+  ✓   9 tests/gameplay/production-template-recovery.spec.ts:9:3 › a transient-denial production-template library preserves stored rows and keeps explicit paid production usable (2.6s)
+  ✓  10 tests/gameplay/production-template-recovery.spec.ts:9:3 › a malformed production-template library preserves stored rows and keeps explicit paid production usable (2.3s)
+
+
+  1) tests/gameplay/production-sequences.spec.ts:108:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      204 |   await expect(page.getByTestId('group-charters')).toContainText('0 hearths selected');
+      205 |   const afterTraffic = await traffic(page), applied = await snapshot(page);
+    > 206 |   expect(afterTraffic.sent - beforeTraffic.sent).toBe(1);
+          |                                                  ^
+      207 |   expect(afterTraffic.received - beforeTraffic.received).toBe(1);
+      208 |   expect(afterTraffic.states - beforeTraffic.states).toBe(1);
+      209 |   expect(afterTraffic.groups - beforeTraffic.groups).toBe(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/production-sequences.spec.ts:206:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/browser-initial-output/production-sequences-forty-c8795-ol-and-restore-saved-queues/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/browser-initial-output/production-sequences-forty-c8795-ol-and-restore-saved-queues/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/browser-initial-output/production-sequences-forty-c8795-ol-and-restore-saved-queues/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/browser-initial-output/production-sequences-forty-c8795-ol-and-restore-saved-queues/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/production-sequences.spec.ts:108:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues 
+  9 passed (1.1m)

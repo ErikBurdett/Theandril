@@ -1,0 +1,59 @@
+{
+  "authored": "Legendary/gen4/seed20260905; 40 owned hearths, 100 owned armies, 4000 total armies; paid initial granary queue; two works charters; saved hearth-group command",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "locator": "[data-testid=\"group-production-results\"] > p:first-child",
+  "boundingBox": {
+    "x": 36,
+    "y": 504.625,
+    "width": 318,
+    "height": 37.78125
+  },
+  "bytes": 4767,
+  "stage": "Explicit three-item list completed for forty hearths:120 paid queue commands, preserving the existing granary and charter policies. Capture shows the actual result summary only.",
+  "transformations": "none; direct Playwright locator PNG",
+  "publishedStates": 1,
+  "transferBytes": 4400231,
+  "cellTransferBytes": 39,
+  "additionalMovementReplyJsonBytes": 923,
+  "transferAccounting": "transferBytes is the existing worker state-payload metric; the separately measured selected-army movement reply is not counted by that metric. Neither value includes browser structured-clone framing.",
+  "transport": {
+    "requests": [
+      {
+        "id": 3,
+        "type": "groupProduction"
+      },
+      {
+        "id": 4,
+        "type": "movementQuery",
+        "armyId": "army.1001"
+      }
+    ],
+    "responses": [
+      {
+        "id": 3,
+        "type": "state",
+        "hash": "fd8bc27b"
+      },
+      {
+        "id": 4,
+        "type": "movementQuery",
+        "hash": "fd8bc27b",
+        "movementJsonBytes": 923
+      }
+    ],
+    "requestTypes": {
+      "movementQuery": 1,
+      "groupProduction": 1
+    },
+    "responseTypes": {
+      "state": 1,
+      "movementQuery": 1
+    }
+  },
+  "commandMs": 5.100000023841858,
+  "beforeHash": "fdfd0520",
+  "afterHash": "fd8bc27b"
+}

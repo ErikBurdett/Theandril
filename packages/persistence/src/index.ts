@@ -8,6 +8,7 @@ import { assertSaveSize, MAX_SAVE_BYTES, MAX_CAMPAIGN_BYTES, MAX_HISTORY_BYTES, 
 import { CAMPAIGN_STORES, CampaignStorage, logicalCampaignBytes, migrateLegacyGenerations, type SaveKind } from './campaign-storage';
 export type { CampaignSaveStats, SaveKind } from './campaign-storage';
 export { CharterTemplateStore, MAX_CHARTER_TEMPLATES, CHARTER_TEMPLATE_NAME_MAX, type CharterTemplate } from './charter-templates';
+export { ProductionTemplateStore, MAX_PRODUCTION_TEMPLATES, PRODUCTION_TEMPLATE_NAME_MAX, MAX_PRODUCTION_TEMPLATE_ITEMS, type ProductionTemplate } from './production-templates';
 
 const PORTABLE_V2 = new Uint8Array([84, 65, 67, 50]); // TAC2, then one gzip member.
 const utf8Bytes = (text: string) => new TextEncoder().encode(text).byteLength;

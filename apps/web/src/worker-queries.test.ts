@@ -1,13 +1,15 @@
 import 'fake-indexeddb/auto';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, isPassable } from '@theandril/mapgen';
-import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementQuery, getObservation, getSettlementLandObservation, serializeGame, stateHash, type GameCommand } from '@theandril/sim';
+import { applyCommand, commandSchema, createArmyFormation, createGame, deserializeGame, getMovementQuery, getObservation, getSettlementLandObservation, serializeGame, stateHash, type GameCommand } from '@theandril/sim';
 import { CampaignJournal, createJournal, replayArchive } from '@theandril/chronicle';
 import { deserializeCampaign, exportSave, importSave, SaveStore, serializeCampaign } from '@theandril/persistence';
 import { prosperityCampaign, unificationCampaign } from '../../../packages/test-fixtures/src/victory-fixture';
 import { rebaseAuthoredLand } from '../../../packages/test-fixtures/src/authored-land';
+import { conquestCampaign, CONQUEST_FIXTURE } from '../../../packages/test-fixtures/src/conquest-fixture';
 import { unpackCells } from './cell-transfer';
-import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_POSTING_COMMANDS, type Request, type Response } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_POSTING_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type Request, type Response } from './protocol';
 
 type WithoutId<T> = T extends { id: number } ? Omit<T, 'id'> : never;
 type RequestBody = WithoutId<Request>;
@@ -374,8 +376,8 @@ describe('actual worker group-posting boundary', () => {
 });
 
 /** Authored separated hearths, not an earned empire; every order under test is canonical. */
-function groupCharterFixture(count = 40) {
-  const game = createGame({ seed: 17, size: count > 4 ? 'small' : 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
+function groupCharterFixture(count = 40, size: 'tiny' | 'small' | 'huge' | 'legendary' = count > 4 ? 'small' : 'tiny') {
+  const game = createGame({ seed: 17, size, factionCount: 2, pace: 'short', generatorVersion: 4 });
   const factionId = game.turnOwnerId;
   for (const faction of game.factions) {
     const caravan = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(formation => formation.unitId === 'unit.colonist'))!;
@@ -632,5 +634,263 @@ describe('saved selection groups through the real worker', () => {
     const loaded = await request({ type: 'load' }, 'state');
     expect(loaded.hash).toBe(view.hash);
     expect(loaded.observation.selectionGroups).toEqual([]);
+  });
+});
+
+function productionFixture(count = 3, size?: 'tiny' | 'small' | 'huge' | 'legendary') {
+  const { game, commands } = groupCharterFixture(count, size);
+  const settlementIds = commands.map(command => command.settlementId);
+  // The setup is authored, like the adjacent registry fixtures. Only commands
+  // exercised after the import are counted as recorded production orders.
+  for (const id of settlementIds) game.settlements[id]!.queue = [];
+  return { game, factionId: game.turnOwnerId, settlementIds };
+}
+const queueCommand = (factionId: string, settlementId: string, itemId: string): Extract<GameCommand, { type: 'queue' }> => ({ type: 'queue', factionId, settlementId, itemId });
+const guardCoin = UNITS.find(item => item.id === 'unit.guard')!.coinCost;
+
+describe('actual worker production-sequence boundary', () => {
+  it('appends paid ordered work across 40 hearths with exact serial archive/hash, one view, unchanged fog and saved continuation', async () => {
+    const { game, commands: charters } = groupCharterFixture();
+    const factionId = game.turnOwnerId, settlementIds = charters.map(command => command.settlementId);
+    for (const charter of charters.slice(0, 2)) expect(applyCommand(game, charter).ok).toBe(true);
+    const itemIds = ['unit.guard', 'building.workshop', 'unit.guard'];
+    const commands = settlementIds.flatMap(id => itemIds.map(itemId => queueCommand(factionId, id, itemId)));
+    const bytes = await exportSave(serializeGame(game));
+    const initial = await request({ type: 'import', bytes }, 'state');
+    const queues = Object.fromEntries(settlementIds.map(id => [id, game.settlements[id]!.queue]));
+    const started = performance.now();
+    const batch = dispatch({ type: 'groupProduction', factionId, settlementIds: [...settlementIds].reverse(), itemIds }, 'state');
+    const result = await batch.response, groupMs = performance.now() - started;
+    expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+    expect(result.groupProductionResults).toEqual(settlementIds.map(settlementId => ({ settlementId, orders: itemIds.map(itemId => ({ itemId, accepted: true })) })));
+    expect(result.groupProductionError).toBeUndefined();
+    expect(result.groupCharterResults).toBeUndefined(); expect(result.groupPostingResults).toBeUndefined();
+    expect(result).toMatchObject({ fogEnabled: true, mapReset: false, reset: false, mapRevision: initial.mapRevision });
+    expect(result.map).toBeUndefined(); expect(unpackCells(result.cells)).toEqual([]);
+    expect(transfers.get(result.id)).toMatchObject({ bufferCount: 3, detached: [true, true, true] });
+    const resultBytes = new TextEncoder().encode(JSON.stringify({ groupProductionResults: result.groupProductionResults })).byteLength;
+    expect(result.metrics.groupProductionResultBytes).toBe(resultBytes);
+    expect(result.metrics.groupCharterResultBytes).toBe(0); expect(result.metrics.groupPostingResultBytes).toBe(0);
+    expect(result.metrics.transferBytes).toBe(new TextEncoder().encode(JSON.stringify(result.observation)).byteLength + result.metrics.cellTransferBytes + resultBytes);
+    expect(result.metrics.totalTransferBytes - initial.metrics.totalTransferBytes).toBe(result.metrics.transferBytes);
+    const grouped = await exported();
+    expect(grouped.archive.records.map(record => record.command)).toEqual(commands);
+    expect(grouped.archive.records.every(record => record.ok)).toBe(true);
+    expect(stateHash(replayArchive(grouped.archive))).toBe(result.hash);
+    expect(getObservation(grouped.game, factionId).cells).toEqual(getObservation(game, factionId).cells);
+    expect(grouped.game.charters).toEqual(game.charters);
+    expect(grouped.game.postings).toEqual(game.postings);
+    for (const id of settlementIds) expect(grouped.game.settlements[id]!.queue).toEqual([...queues[id]!, ...itemIds.map(itemId => ({ itemId, progress: 0 }))]);
+    const cost = 40 * (2 * guardCoin + BUILDINGS.find(item => item.id === 'building.workshop')!.coinCost);
+    expect(result.observation.treasury).toBe(initial.observation.treasury - cost);
+    await request({ type: 'save' }, 'message');
+    const extra = queueCommand(factionId, settlementIds[0]!, 'unit.guard');
+    await request({ type: 'command', command: extra }, 'state');
+    expect((await request({ type: 'load' }, 'state')).hash).toBe(result.hash);
+    expect((await exported()).text).toBe(grouped.text);
+    const imported = await request({ type: 'import', bytes: await exportSave(grouped.text) }, 'state');
+    expect(imported.hash).toBe(result.hash); expect(imported.metrics.groupProductionResultBytes).toBe(0);
+    const resumed = await request({ type: 'command', command: extra }, 'state');
+    expect(applyCommand(grouped.game, extra).ok).toBe(true);
+    expect(resumed.hash).toBe(stateHash(grouped.game));
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(resumed.hash);
+
+    await request({ type: 'import', bytes }, 'state');
+    const serialStart = performance.now(); let serialBytes = 0, serialHash = '';
+    for (const command of commands) {
+      const next = await request({ type: 'command', command }, 'state');
+      serialBytes += next.metrics.transferBytes; serialHash = next.hash;
+      expect(next.groupProductionResults).toBeUndefined(); expect(next.metrics.groupProductionResultBytes).toBe(0);
+    }
+    const serialMs = performance.now() - serialStart, serial = await exported();
+    expect(serialHash).toBe(result.hash); expect(serial.archive).toEqual(grouped.archive);
+    expect(serial.text).toBe(grouped.text);
+    expect(result.metrics.transferBytes).toBeLessThan(serialBytes / 40);
+    console.info(JSON.stringify({ probe: 'actual-worker-40-production-sequences', synthetic: true, authoredOwnedHearths: 40, size: 'small', generatorVersion: 4,
+      itemCount: 3, groupResponses: 1, serialResponses: 120, groupBytes: result.metrics.transferBytes, resultBytes, serialBytes, groupMs, serialMs,
+      hash: result.hash, exactSerialArchive: true, unchangedFog: true, existingQueuesPreserved: true, savedContinuation: true }));
+  });
+
+  it('spends shared coin in sorted hearth order, keeps paid prefixes and journals only attempted items', async () => {
+    const { game, factionId, settlementIds } = productionFixture();
+    game.factions.find(faction => faction.id === factionId)!.treasury = 3 * guardCoin;
+    const bytes = await exportSave(serializeGame(game));
+    await request({ type: 'import', bytes }, 'state');
+    const itemIds = ['unit.guard', 'unit.guard'];
+    const result = await request({ type: 'groupProduction', factionId, settlementIds: [...settlementIds].reverse(), itemIds }, 'state');
+    const accepted = { itemId: 'unit.guard', accepted: true }, refused = { itemId: 'unit.guard', accepted: false, message: 'Not enough coin to fund that order.' };
+    expect(result.groupProductionResults).toEqual([
+      { settlementId: settlementIds[0], orders: [accepted, accepted] },
+      { settlementId: settlementIds[1], orders: [accepted, refused] },
+      { settlementId: settlementIds[2], orders: [refused] },
+    ]);
+    expect(result.observation.treasury).toBe(0);
+    const grouped = await exported();
+    expect(settlementIds.map(id => grouped.game.settlements[id]!.queue.length)).toEqual([2, 1, 0]);
+    expect(grouped.archive.records.map(record => record.ok)).toEqual([true, true, true, false, false]);
+    expect(stateHash(replayArchive(grouped.archive))).toBe(result.hash);
+    await request({ type: 'import', bytes }, 'state');
+    for (const record of grouped.archive.records) await request({ type: 'command', command: commandSchema.parse(record.command) }, record.ok ? 'state' : 'error');
+    expect((await exported()).text).toBe(grouped.text);
+  });
+
+  it('stops each hearth at its first canonical duplicate, unknown, missing or full-queue refusal and continues the next hearth', async () => {
+    const { game, factionId, settlementIds } = productionFixture();
+    const foreign = Object.values(game.settlements).find(town => town.factionId !== factionId)!.id;
+    const ids = [...settlementIds, foreign, 'settlement.missing'].sort();
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const duplicate = await request({ type: 'groupProduction', factionId, settlementIds: [...ids].reverse(), itemIds: ['building.granary', 'building.granary', 'unit.guard'] }, 'state');
+    expect(duplicate.groupProductionResults).toEqual(ids.map(settlementId => ({ settlementId, orders: settlementIds.includes(settlementId)
+      ? [{ itemId: 'building.granary', accepted: true }, { itemId: 'building.granary', accepted: false, message: 'That building is already built or queued.' }]
+      : [{ itemId: 'building.granary', accepted: false, message: 'You do not control that settlement.' }] })));
+    const afterDuplicate = await exported();
+    expect(afterDuplicate.archive.records).toHaveLength(8);
+    for (const record of afterDuplicate.archive.records) expect(record.command).toMatchObject({ type: 'queue', itemId: 'building.granary' });
+    expect(stateHash(replayArchive(afterDuplicate.archive))).toBe(duplicate.hash);
+    const unknown = await request({ type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard', 'unit.missing', 'unit.guard'] }, 'state');
+    expect(unknown.groupProductionResults?.every(row => row.orders.length === 2 && row.orders[0]!.accepted && row.orders[1]!.message === 'Unknown construction or recruitment item.')).toBe(true);
+    const fullId = settlementIds[0]!;
+    for (let index = 0; index < 2; index++) await request({ type: 'command', command: queueCommand(factionId, fullId, 'unit.guard') }, 'state');
+    const full = await request({ type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard', 'unit.guard', 'unit.guard'] }, 'state');
+    expect(full.groupProductionResults?.[0]!.orders).toEqual([{ itemId: 'unit.guard', accepted: true }, { itemId: 'unit.guard', accepted: false, message: 'The production queue is full (five items).' }]);
+    expect(full.groupProductionResults?.slice(1).every(row => row.orders.length === 3 && row.orders.every(order => order.accepted))).toBe(true);
+    const saved = await exported();
+    expect(settlementIds.map(id => saved.game.settlements[id]!.queue.length)).toEqual([5, 5, 5]);
+    expect(stateHash(replayArchive(saved.archive))).toBe(full.hash);
+  });
+
+  it('does not treat a newly queued building as a completed recruitment prerequisite', async () => {
+    const { game, factionId, settlementIds } = productionFixture(2);
+    game.progression[factionId]!.technologies.push('technology.stewardship');
+    // The other hearth has its prerequisite already built; its duplicate first
+    // item must itself be refused, not silently skipped to recruit the unit.
+    game.settlements[settlementIds[1]!]!.buildings.push('building.granary');
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const result = await request({ type: 'groupProduction', factionId, settlementIds, itemIds: ['building.granary', 'unit.skirmisher', 'unit.guard'] }, 'state');
+    expect(result.groupProductionResults).toEqual([
+      { settlementId: settlementIds[0], orders: [{ itemId: 'building.granary', accepted: true }, { itemId: 'unit.skirmisher', accepted: false, message: 'Build Root cellar first.' }] },
+      { settlementId: settlementIds[1], orders: [{ itemId: 'building.granary', accepted: false, message: 'That building is already built or queued.' }] },
+    ]);
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(3);
+    expect(saved.game.settlements[settlementIds[0]!]!.queue).toEqual([{ itemId: 'building.granary', progress: 0 }]);
+    expect(saved.game.settlements[settlementIds[1]!]!.queue).toEqual([]);
+    expect(stateHash(replayArchive(saved.archive))).toBe(result.hash);
+    expect((await request({ type: 'groupProduction', factionId, settlementIds: [settlementIds[1]!], itemIds: ['unit.skirmisher'] }, 'state')).groupProductionResults?.[0]!.orders[0]!.accepted).toBe(true);
+  });
+
+  it('rejects the entire malformed envelope before mutation, including holes, bounds, duplicate towns and wrong seats', async () => {
+    const { game, factionId, settlementIds } = productionFixture(2);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const before = await exported();
+    const body = { type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard'] } satisfies RequestBody;
+    const sparse = Array<string>(2); sparse[1] = settlementIds[0]!;
+    const decorated = ['unit.guard']; Object.assign(decorated, { hidden: true });
+    const invalid: unknown[] = [
+      { ...body, settlementIds: [] }, { ...body, settlementIds: Array.from({ length: MAX_GROUP_PRODUCTION_SETTLEMENTS + 1 }, (_, index) => `settlement.${index}`) },
+      { ...body, settlementIds: [settlementIds[0], settlementIds[0]] }, { ...body, settlementIds: sparse },
+      ...[null, {}, '', [null], [undefined], [''], ['x'.repeat(101)], [1]].map(settlementIds => ({ ...body, settlementIds })),
+      { ...body, itemIds: [] }, { ...body, itemIds: Array(MAX_PRODUCTION_SEQUENCE_ITEMS + 1).fill('unit.guard') }, { ...body, itemIds: sparse }, { ...body, itemIds: decorated },
+      ...[null, {}, [''], [null], [undefined], ['x'.repeat(101)], [42]].map(itemIds => ({ ...body, itemIds })),
+      ...[null, '', 'x'.repeat(101), 1, game.factions[1]!.id].map(factionId => ({ ...body, factionId })),
+      { ...body, silentRetry: true },
+    ];
+    for (const malformed of invalid) {
+      const response = await request(malformed as RequestBody, 'error');
+      expect(response.message.length).toBeGreaterThan(0); expect(response.recoveryRequired).toBeUndefined();
+      expect((await exported()).text).toBe(before.text);
+    }
+    expect((await request({ ...body, itemIds: ['unit.guard'] }, 'state')).groupProductionResults?.every(row => row.orders[0]!.accepted)).toBe(true);
+  });
+
+  it('rejects watch, victory, battle and capture decisions without journaling or changing campaign state', async () => {
+    const { game, factionId, settlementIds } = productionFixture(1);
+    const command = { type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard'] } satisfies RequestBody;
+    const watching = createJournal(game, { mode: 'watch', coverage: 'from-save' });
+    await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, watching.materialize())) }, 'state');
+    const watch = await exported();
+    expect((await request(command, 'error')).message).toContain('AI watch controls');
+    expect((await exported()).text).toBe(watch.text);
+    const won = unificationCampaign();
+    for (let turn = 0; turn < 120 && !won.victory; turn++) expect(applyCommand(won, { type: 'endTurn', factionId: won.turnOwnerId }).ok).toBe(true);
+    expect(won.victory).not.toBeNull();
+    await request({ type: 'import', bytes: await exportSave(serializeGame(won)) }, 'state');
+    const ended = await exported();
+    expect((await request(command, 'error')).message).toContain('campaign has ended');
+    expect((await exported()).text).toBe(ended.text);
+    const combat = conquestCampaign(), attacker = combat.turnOwnerId;
+    const preparation: GameCommand[] = [
+      { type: 'declareWar', factionId: attacker, targetFactionId: CONQUEST_FIXTURE.enemyFactionId },
+      { type: 'besiege', factionId: attacker, armyId: CONQUEST_FIXTURE.playerArmyId, settlementId: CONQUEST_FIXTURE.settlementId },
+      ...Array.from({ length: 3 }, (): GameCommand => ({ type: 'endTurn', factionId: attacker })),
+      { type: 'assault', factionId: attacker, settlementId: CONQUEST_FIXTURE.settlementId },
+    ];
+    for (const order of preparation) expect(applyCommand(combat, order).ok).toBe(true);
+    expect(combat.battle).not.toBeNull();
+    for (const phase of ['battle', 'capture']) {
+      await request({ type: 'import', bytes: await exportSave(serializeGame(combat)) }, 'state');
+      const before = await exported();
+      expect((await request({ ...command, factionId: attacker }, 'error')).message).toContain('current battle or settlement decision');
+      expect((await exported()).text).toBe(before.text);
+      if (phase === 'battle') {
+        expect(applyCommand(combat, { type: 'autoResolveBattle', factionId: attacker }).ok).toBe(true);
+        expect(combat.pendingCapture).not.toBeNull();
+      }
+    }
+  });
+
+  it.each([1, 2, 3])('stops and reports only completed prefixes when recorder attempt %i fails after mutation, then restores a real save', async interruption => {
+    const { game, factionId, settlementIds } = productionFixture(2);
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const record = CampaignJournal.prototype.record; let calls = 0;
+    const interrupted = vi.spyOn(CampaignJournal.prototype, 'record').mockImplementation(function (this: CampaignJournal, ...args: Parameters<typeof record>) {
+      const result = record.apply(this, args);
+      if (args[1].type === 'queue' && ++calls === interruption) throw new Error('Authored production recording failure after mutation');
+      return result;
+    });
+    const body = { type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard', 'unit.guard'] } satisfies RequestBody;
+    try {
+      const partial = await request(body, 'state');
+      expect(partial.groupProductionResults?.flatMap(row => row.orders)).toHaveLength(interruption - 1);
+      expect(partial.groupProductionResults?.every(row => row.orders.length > 0)).toBe(true);
+      expect(partial.groupProductionError).toContain(`after ${interruption - 1} completed production order`);
+      expect(partial.groupProductionError).toContain('Some orders may have applied; restore a saved campaign');
+      const attempted = settlementIds.flatMap(id => body.itemIds.map(itemId => queueCommand(factionId, id, itemId))).slice(0, interruption);
+      for (const command of attempted) expect(applyCommand(game, command).ok).toBe(true);
+      expect(partial.hash).toBe(stateHash(game));
+      expect(partial.observation.treasury).toBe(initial.observation.treasury - interruption * guardCoin);
+      expect((await request(body, 'error')).recoveryRequired).toBe(true);
+      expect((await request({ type: 'export' }, 'error')).recoveryRequired).toBe(true);
+      expect(interrupted).toHaveBeenCalledTimes(interruption);
+    } finally { interrupted.mockRestore(); }
+    expect((await request({ type: 'load' }, 'state')).hash).toBe(initial.hash);
+    const retry = await request(body, 'state');
+    expect(retry.groupProductionError).toBeUndefined();
+    expect(retry.groupProductionResults?.flatMap(row => row.orders).every(order => order.accepted)).toBe(true);
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(retry.hash);
+  });
+
+  it('settles failed publication with recovery required, rejects further mutations and restores the saved queues', async () => {
+    const { game, factionId, settlementIds } = productionFixture(2);
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const publish = host.postMessage;
+    const interrupted = vi.spyOn(host, 'postMessage').mockImplementation((message, options) => {
+      if (message.type === 'state' && message.groupProductionResults) throw new Error('Authored production transfer failure');
+      publish(message, options);
+    });
+    const body = { type: 'groupProduction', factionId, settlementIds, itemIds: ['unit.guard'] } satisfies RequestBody;
+    try {
+      const failure = await request(body, 'error');
+      expect(failure.recoveryRequired).toBe(true);
+      expect(failure.message).toContain('production result could not be displayed');
+      expect(failure.message).toContain('Some orders may have applied');
+      expect((await request({ type: 'save' }, 'error')).recoveryRequired).toBe(true);
+      expect((await request({ type: 'command', command: queueCommand(factionId, settlementIds[0]!, 'unit.guard') }, 'error')).recoveryRequired).toBe(true);
+    } finally { interrupted.mockRestore(); }
+    const loaded = await request({ type: 'load' }, 'state');
+    expect(loaded.hash).toBe(initial.hash);
+    expect((await request(body, 'state')).groupProductionResults?.every(row => row.orders[0]!.accepted)).toBe(true);
   });
 });

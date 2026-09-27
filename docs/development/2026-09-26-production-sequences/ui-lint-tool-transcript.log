@@ -1,0 +1,9 @@
+Retained tool-output transcript, copied from the authoring session on 2026-09-26.
+This file is not a new lint execution or a redirected raw process log.
+Command: ./node_modules/.bin/eslint apps/web/src/group-production.tsx apps/web/src/group-production.test.tsx apps/web/src/production-templates.tsx apps/web/src/production-templates.test.tsx apps/web/src/realm-navigation.tsx apps/web/src/realm-windows.tsx
+Output: empty.
+Tool-reported process exit code: 0.
+
+Command: git diff --check -- apps/web/src/group-production.tsx apps/web/src/group-production.test.tsx apps/web/src/production-templates.tsx apps/web/src/production-templates.test.tsx apps/web/src/realm-navigation.tsx apps/web/src/realm-windows.tsx apps/web/src/realm-navigation.css
+Output: empty.
+Tool-reported process exit code: 0.

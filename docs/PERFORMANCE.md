@@ -1,5 +1,43 @@
 # Performance measurements
 
+## Production sequences — local rules 32 candidate
+
+[Raw worker samples](development/2026-09-26-production-sequences/worker-benchmark.jsonl)
+measure the actual simulation worker module with structured-clone transfer and
+canonical journaling. Each case has **one elapsed sample**, on an i9-13900K with
+Node 26.7.0; setup, import, export and replay are outside the timed batch. Rules/save
+32 and content `015468d1` are unchanged. Full implementation and affected browser checks pass; final publication acceptance
+is recorded separately; these measurements do not imply deployment or gate completion.
+
+The authored generator-4 Huge/Legendary fixtures have 196,608/307,200 cells,
+32/40 realms and 1,500/4,000 armies, including 47/100 owned armies. These old
+generator dimensions are explicit, not the current generator-8 map sizes. The
+representative 32/40 owned hearths retain their authored paid 37-cell borders.
+Ceiling fixtures expand to 128 owned hearths and explicitly rebase land to legal
+starting borders. The representative list is Guard → Workshop → Guard; the
+ceiling list is five Guards.
+
+| Authored case | Hearths × items | Attempts | Batch ms | Command ms | Transfer bytes | Result bytes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huge representative | 32 × 3 | 96 | 104.648 | 1.385 | 1,791,958 | 5,500 |
+| Huge ceiling | 128 × 5 | 640 | 120.915 | 6.499 | 2,271,820 | 31,452 |
+| Legendary representative | 40 × 3 | 120 | 199.278 | 0.784 | 4,399,407 | 6,889 |
+| Legendary ceiling | 128 × 5 | 640 | 245.647 | 3.854 | 4,842,958 | 31,457 |
+
+Each case emits one final state response with 39 cell-transfer bytes. Total
+transfer includes the permitted observation and result payload. Exact recorded
+command order, final replay/hash and unchanged observed fog pass; final hashes
+are `0a5a53bf`, `059cebe5`, `09633fa8` and `7a850cbb` in table order. The maximum
+bounded batch attempts 640 ordinary queue commands and pays 7,680 coin. A separate
+authored Small-map test compares the 40-hearth batch with serial requests and
+saved continuation; it is not the same workload as these large-world timings.
+
+Multi-megabyte observation transfers and the gap between command and complete
+batch time remain visible costs. No median, percentile, speedup, full-turn,
+renderer/frame, sustained-memory, AI or organically earned-campaign claim follows
+from these single samples. No new headline pacing run is claimed for this command
+convenience. [Full scope, failures and remaining verification](development/2026-09-26-production-sequences/README.md).
+
 ## Saved realm groups — local rules 32
 
 [Saved-group evidence](development/2026-09-25-selection-groups/benchmark.json) uses current generator-8 Huge/Legendary geography (51,840/77,440 cells) with explicitly authored 48/64 realms and 6,144/8,192 land armies. Every realm holds twenty-four overlapping groups of 128 members: 147,456/196,608 membership references globally, 3,072 in the own-faction read model. This is metadata saturation, not organic empire growth or a full turn/frame measurement.

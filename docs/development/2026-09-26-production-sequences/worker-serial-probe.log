@@ -1,0 +1,46 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > rejects fog requests in player campaigns, including forged nonboolean input
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > replaces revealed map cells on restore without contaminating ordinary queries or recording a command
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > keeps actual AI orders and saved continuation identical when fog changes between queued rounds
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > publishes summary-only land with fresh transferred cells and preserves later cached movement queries
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > imports a real campaign and leaves its exact snapshot/archive unchanged across own, foreign and missing land queries
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker scoped-query boundary > serializes a same-turn paid command before queued land/export requests and returns fresh authoritative quotes
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > journals 100 ordinary postings with one fog-preserving response, matching serial commands, replay and saved continuation
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > reports and journals individual canonical refusals while applying valid siblings in stable order
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > accepts the full 128-order transport limit without truncation or extra state responses
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > rejects every malformed or wrong-seat envelope before any command or archive record is applied
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > rejects watch and completed campaigns without mutating their archives
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-posting boundary > publishes actual partial state once after a recorder exception, stops remaining orders and requires restore
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > journals 40 charters with one unchanged-map response, exact serial replay and saved continuation without spending or replacing queues
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > records actual missing/foreign and empty-revoke refusals while applying valid siblings
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > accepts all 128 charters without truncation or additional responses
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > validates every charter and the complete bounded envelope before mutation
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > rejects group charters in watch and victorious campaigns without changing the archive
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker group-charter boundary > publishes actual partial charters after recording fails, stops, and recovers from a real save
+ ↓ |unit| apps/web/src/worker-queries.test.ts > saved selection groups through the real worker > journals one ordinary edit, restores it exactly, and rejects wrong-seat/watch writes
+ ↓ |unit| apps/web/src/worker-queries.test.ts > saved selection groups through the real worker > locks after a recorder fails following mutation and recovers the last real save
+ ↓ |unit| apps/web/src/worker-queries.test.ts > saved selection groups through the real worker > does not report a refusal after an accepted group fails to publish
+stdout | apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > appends paid ordered work across 40 hearths with exact serial archive/hash, one view, unchanged fog and saved continuation
+{"probe":"actual-worker-40-production-sequences","synthetic":true,"authoredOwnedHearths":40,"size":"small","generatorVersion":4,"itemCount":3,"groupResponses":1,"serialResponses":120,"groupBytes":210762,"resultBytes":6864,"serialBytes":22970874,"groupMs":15.977256000000125,"serialMs":1331.5698139999995,"hash":"bbbaecff","exactSerialArchive":true,"unchangedFog":true,"existingQueuesPreserved":true,"savedContinuation":true}
+
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ✓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > appends paid ordered work across 40 hearths with exact serial archive/hash, one view, unchanged fog and saved continuation 4353ms
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > spends shared coin in sorted hearth order, keeps paid prefixes and journals only attempted items
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > stops each hearth at its first canonical duplicate, unknown, missing or full-queue refusal and continues the next hearth
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > does not treat a newly queued building as a completed recruitment prerequisite
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > rejects the entire malformed envelope before mutation, including holes, bounds, duplicate towns and wrong seats
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > rejects watch, victory, battle and capture decisions without journaling or changing campaign state
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > stops and reports only completed prefixes when recorder attempt 1 fails after mutation, then restores a real save
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > stops and reports only completed prefixes when recorder attempt 2 fails after mutation, then restores a real save
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > stops and reports only completed prefixes when recorder attempt 3 fails after mutation, then restores a real save
+ ↓ |unit| apps/web/src/worker-queries.test.ts > actual worker production-sequence boundary > settles failed publication with recovery required, rejects further mutations and restores the saved queues
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 30 skipped (31)
+   Start at  19:00:17
+   Duration  5.14s (transform 540ms, setup 0ms, import 627ms, tests 4.44s, environment 0ms)
+
