@@ -1,13 +1,13 @@
 # Production sequences and personal templates
 
-26 September 2026. **Implementation locally verified; publication checks are recorded separately.** This extends ACT-32/M3 within
+26 September 2026. **Implemented, reviewed, deployed and live-verified.** This extends ACT-32/M3 within
 the existing accepted scope. Rules/save **32** and content **`015468d1`** remain
 unchanged. No AI policy, campaign price or campaign-resolution rule changes.
 All fifteen release gates and the broader M3 milestone remain open.
 
 The working candidate follows baseline
 `3a8767b3b881e620510f773695aa209af3ec988d`; that commit does **not** contain this
-implementation. The reviewed implementation is `420219d278ae17f42a04871c6319ecf62a4af216`, pinned by dispatch 10 and the publication record. The initial build contains a draft journal; final journal checks are separate. See [ADR 0043](../../architecture/0043-production-sequences.md)
+implementation. The reviewed implementation is `420219d278ae17f42a04871c6319ecf62a4af216`, pinned by dispatch 10 and the publication record. The final verified deployment is `24cd30e309ca191181482b7525d3eac6aebb4fbf`; [deployment.json](deployment.json) retains its exact workflow and live evidence. The initial build contains a draft journal; final journal checks are separate. See [ADR 0043](../../architecture/0043-production-sequences.md)
 and the [dispatch work packet](work-packet.md).
 
 ## Player workflow and authority
@@ -78,7 +78,8 @@ These scopes overlap and must not be added together.
 | Build and validation | [Pages build](build-initial.log), [lint](lint.log), [content](content-validation.log), [art](art-validation.log) pass; existing large-chunk warning retained |
 | Final journal suite | [1,977 tests / 247 files](publication-tests.log), 58.02 seconds; [typecheck](publication-typecheck.log), [lint](publication-lint.log), [build](publication-build.log) pass |
 | Local Pages | [32/32 pass](publication-pages.log), 1.1 minutes after documented catalogue corrections; exact native journal captures retained under publication-captures/ |
-| Publication/live | Recorded after publication; no deployment claim at this local checkpoint |
+| Publication/live | Both exact-revision GitHub workflows pass; [32/32 live Pages journeys](live-pages.log), 1.7 minutes; [exact commit/source/image readback](live-readback.json) passes |
+| Tracker | [Guarded update](tracker-apply.log) and [readback](tracker-readback.json) advance ACT-32/M3 without closing either; ACT-36 done and DH-020 resolved preserved |
 
 The UI transcripts preserve the actual earlier tool output; they are explicitly
 labelled transcripts, not new executions or redirected raw logs. The
@@ -170,8 +171,9 @@ The forty-hearth journey, 30 affected browsers, full implementation suite and
 generated production journey now pass. [Independent source/factual review](factual-review.md)
 and [visual review](browser-review.md) disclose authorship. The publication
 suite passes 1,977 tests / 247 files in 58.02 seconds after two new editorial boundary
-checks; [log](publication-tests.log). Final Pages/live and rendered-publication
-review are recorded separately. Earlier closing instructions in the pinned
+checks; [log](publication-tests.log). Local and live Pages each pass all 32 journeys;
+[rendered-publication review](publication-review.md) and [live review](live-review.md)
+pass within their disclosed authorship and evidence boundaries. Earlier closing instructions in the pinned
 implementation README were stale; its passing tables/logs remain unchanged.
 
 This implements a bounded part of existing production-sequence/template scope;
@@ -198,9 +200,9 @@ changes no screenshot bytes or factual scope; the final build and 32 journeys fo
 
 Published application `b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7` passes both
 GitHub workflows and exact source/image readback. The first live suite passes
-27 of32; five failures are retained in live-pages-initial.log. Four pass unchanged
-in live-rerun.log, including production sequences (13.5seconds). The crest remains
-loading at the five-second assertion. Trace records show HTTP200 responses with
+27 of 32; five failures are retained in live-pages-initial.log. Four pass unchanged
+in live-rerun.log, including production sequences (13.5 seconds). The crest remains
+loading at the five-second assertion. Trace records show HTTP 200 responses with
 slow arrival and an unfinished foundation body; headers do not prove full input.
 
 The asset smoke previously asserted decoded readiness before awaiting the atlas
@@ -209,6 +211,21 @@ navigation and verifies successful status, completed bytes and the approved hash
 before the unchanged readiness assertion. No prefetch, mock, runtime, cache or
 45-second whole-test/five-second assertion limit changes. Parent review confirms
 all subsequent art, CSS, worker, URL-base and no-debug-hook checks remain. The
-corrected check passes locally in1.6seconds and live in8.9seconds; typecheck and
-scoped lint pass. These are focused passes, not a clean32-case live result. Final
-full live evidence is recorded separately; both earlier runs remain visible.
+corrected check passes locally in 1.6 seconds and live in 8.9 seconds; typecheck and
+scoped lint pass. These focused passes precede the full live run; both earlier
+runs remain visible.
+
+At `24cd30e309ca191181482b7525d3eac6aebb4fbf`, the separate final full live run
+passes **all 32 journeys in 1.7 minutes**. Production sequences takes 10.9 seconds
+and the corrected asset check takes 3.3 seconds. Both GitHub workflows succeed,
+and the live ledger links to the full deployed revision. Dispatch 10 points to the
+unchanged implementation source, and its 4,767-byte image matches exactly.
+[Independent live evidence review](live-review.md) passes. This is a complete run,
+not the sum of earlier partial passes.
+
+The [DHARMA readback](tracker-readback.json) confirms ACT-32 doing, M3 in progress,
+ACT-36 done and DH-020 resolved. The generated Theandril tracker page includes
+production sequences. The existing catalogue records 61 delivered and 49 remaining
+editorial bullets, with 6 of 23 items complete; these are not fixed-scope release
+percentages. The [prompt report](../prompt-reports/2026-09-26-production-sequences.md)
+records the delivered behavior, verification and remaining work.

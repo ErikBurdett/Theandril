@@ -1,5 +1,5 @@
 {
-  "revision": "b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7",
+  "revision": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
   "sourceRevision": "420219d278ae17f42a04871c6319ecf62a4af216",
   "date": "2026-09-26",
   "game": "https://erikburdett.github.io/Theandril/",
@@ -8,20 +8,20 @@
   "contentHash": "015468d1",
   "actions": [
     {
-      "id": 36286356265,
+      "id": 36290255014,
       "name": "Verify build",
       "status": "completed",
       "conclusion": "success",
-      "headSha": "b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7",
-      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36286356265"
+      "headSha": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36290255014"
     },
     {
-      "id": 36286356241,
+      "id": 36290255040,
       "name": "Publish development demo to Pages",
       "status": "completed",
       "conclusion": "success",
-      "headSha": "b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7",
-      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36286356241"
+      "headSha": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36290255040"
     }
   ],
   "local": {
@@ -30,5 +30,24 @@
     "affectedGameplay": 30,
     "pages": 32
   },
-  "live": "Readback and32Pages journeys pending; no completed live claim."
+  "live": {
+    "pages": 32,
+    "passed": 32,
+    "duration": "1.7m",
+    "newProductionJourneySeconds": 10.9,
+    "assetJourneySeconds": 3.3,
+    "initial": {
+      "passed": 27,
+      "failed": 5,
+      "log": "live-pages-initial.log"
+    },
+    "unchangedFocusedRerun": {
+      "passed": 4,
+      "failed": 1,
+      "log": "live-rerun.log"
+    },
+    "correction": "Await and verify actual foundation PNG body/hash before unchanged5s readiness assertion;45s overall limit unchanged. No application change.",
+    "readback": "live-readback.json"
+  },
+  "initialPublicationRevision": "b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7"
 }

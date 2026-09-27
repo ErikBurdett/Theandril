@@ -1,0 +1,427 @@
+{
+  "mode": "dry-run",
+  "revision": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
+  "sourceRevision": "420219d278ae17f42a04871c6319ecf62a4af216",
+  "rulesVersion": 32,
+  "contentHash": "015468d1",
+  "verification": {
+    "headless": 1977,
+    "files": 247,
+    "affected": 30,
+    "localPages": 32,
+    "livePages": {
+      "mode": "clean-final",
+      "cleanRun": true,
+      "passed": 32,
+      "log": "docs/development/2026-09-26-production-sequences/live-pages.log",
+      "retainedPriorAttempts": {
+        "scenarioRevision": "b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7",
+        "initial": {
+          "total": 32,
+          "passed": 27,
+          "failed": 5,
+          "log": "docs/development/2026-09-26-production-sequences/live-pages-initial.log"
+        },
+        "focusedRerun": {
+          "total": 5,
+          "passed": 4,
+          "failed": 1,
+          "log": "docs/development/2026-09-26-production-sequences/live-rerun.log"
+        },
+        "initialIdentities": [
+          {
+            "file": "tests/gameplay/compendium.spec.ts",
+            "line": 4,
+            "column": 1,
+            "title": "compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/home.spec.ts",
+            "line": 3,
+            "column": 1,
+            "title": "home provides the public routes and generated ledger",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/home.spec.ts",
+            "line": 18,
+            "column": 1,
+            "title": "dispatches remain refresh-safe at their new path",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/home.spec.ts",
+            "line": 25,
+            "column": 1,
+            "title": "a permalink to a commit beyond the first page reveals it and scrolls to it",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/lore.spec.ts",
+            "line": 3,
+            "column": 1,
+            "title": "lore shelf, chapter journey, search and narrow layout work without errors",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 4,
+            "column": 1,
+            "title": "the roadmap is discoverable from home and shows bounded completion with every release gate open",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 29,
+            "column": 1,
+            "title": "status and acceptance search survive refresh, reset cleanly and preserve the release check",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 50,
+            "column": 1,
+            "title": "an item permalink opens its evidence, survives refresh and returns to the filtered record",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 67,
+            "column": 1,
+            "title": "same-document Back and Forward restore filters and linked-item evidence",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 98,
+            "column": 3,
+            "title": "roadmap keyboard and layout at 1440px / 100% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 98,
+            "column": 3,
+            "title": "roadmap keyboard and layout at 390px / 130% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/roadmap.spec.ts",
+            "line": 125,
+            "column": 1,
+            "title": "unknown item links recover honestly and dispatches link to the full roadmap",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 5,
+            "column": 3,
+            "title": "readable journal at 1440px and 100% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 5,
+            "column": 3,
+            "title": "readable journal at 1366px and 100% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 5,
+            "column": 3,
+            "title": "readable journal at 390px and 100% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 5,
+            "column": 3,
+            "title": "readable journal at 390px and 130% text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 50,
+            "column": 1,
+            "title": "reading surfaces retain contrast without putting texture over the text",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 81,
+            "column": 1,
+            "title": "unknown dispatch links fail honestly and keyboard skip navigation works",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 92,
+            "column": 1,
+            "title": "archive search combines topic filters, survives refresh and recovers from no results",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 107,
+            "column": 1,
+            "title": "scope ledger links real gates and a contributor can reach authoring guidance",
+            "passed": true
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 123,
+            "column": 1,
+            "title": "a keyboard reader can enlarge a real image and return to the same control",
+            "passed": false
+          },
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 139,
+            "column": 1,
+            "title": "public journal opens a permanent, refresh-safe campaign dispatch",
+            "passed": true
+          },
+          {
+            "file": "tests/production/battlefield.spec.ts",
+            "line": 9,
+            "column": 1,
+            "title": "built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks",
+            "passed": false
+          },
+          {
+            "file": "tests/production/charter-templates.spec.ts",
+            "line": 41,
+            "column": 1,
+            "title": "production charter templates cross campaigns and browser reloads before explicit application and saved restoration",
+            "passed": true
+          },
+          {
+            "file": "tests/production/deployment-assets.spec.ts",
+            "line": 7,
+            "column": 1,
+            "title": "built game loads verified map art, UI materials and its real worker inside the configured deployment base",
+            "passed": false
+          },
+          {
+            "file": "tests/production/developer-navigation.spec.ts",
+            "line": 3,
+            "column": 1,
+            "title": "game exposes the developer journal without discarding campaign setup",
+            "passed": true
+          },
+          {
+            "file": "tests/production/group-charters.spec.ts",
+            "line": 4,
+            "column": 1,
+            "title": "production group charters reach the real worker and survive a narrow revoke and manual save restoration",
+            "passed": true
+          },
+          {
+            "file": "tests/production/group-postings.spec.ts",
+            "line": 4,
+            "column": 1,
+            "title": "production group postings use the real worker and survive manual save restoration",
+            "passed": true
+          },
+          {
+            "file": "tests/production/map-actions.spec.ts",
+            "line": 35,
+            "column": 1,
+            "title": "built map actions preserve paid production, land work and resources through a real save/load without development hooks",
+            "passed": false
+          },
+          {
+            "file": "tests/production/production-sequences.spec.ts",
+            "line": 52,
+            "column": 1,
+            "title": "built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks",
+            "passed": false
+          },
+          {
+            "file": "tests/production/selection-groups.spec.ts",
+            "line": 33,
+            "column": 1,
+            "title": "production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import",
+            "passed": true
+          },
+          {
+            "file": "tests/production/watch-fog.spec.ts",
+            "line": 3,
+            "column": 1,
+            "title": "production exposes the watch-only fog command without development hooks",
+            "passed": true
+          }
+        ],
+        "rerunIdentities": [
+          {
+            "file": "tests/gameplay/updates.spec.ts",
+            "line": 123,
+            "column": 1,
+            "title": "a keyboard reader can enlarge a real image and return to the same control",
+            "passed": true
+          },
+          {
+            "file": "tests/production/battlefield.spec.ts",
+            "line": 9,
+            "column": 1,
+            "title": "built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks",
+            "passed": true
+          },
+          {
+            "file": "tests/production/deployment-assets.spec.ts",
+            "line": 7,
+            "column": 1,
+            "title": "built game loads verified map art, UI materials and its real worker inside the configured deployment base",
+            "passed": false
+          },
+          {
+            "file": "tests/production/map-actions.spec.ts",
+            "line": 35,
+            "column": 1,
+            "title": "built map actions preserve paid production, land work and resources through a real save/load without development hooks",
+            "passed": true
+          },
+          {
+            "file": "tests/production/production-sequences.spec.ts",
+            "line": 52,
+            "column": 1,
+            "title": "built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks",
+            "passed": true
+          }
+        ]
+      },
+      "wording": "32 live Pages journeys passed in one complete final run. Earlier live evidence remains retained: the initial run had 27 passes and five failures; its unchanged five-case focused rerun had four passes and one remaining deployment-assets failure. Neither earlier attempt is described as a clean 32/32 pass."
+    }
+  },
+  "workflowsVerifiedAgainstGitHub": [
+    {
+      "name": "Verify build",
+      "id": 36290255014,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36290255014"
+    },
+    {
+      "name": "Publish development demo to Pages",
+      "id": 36290255040,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "24cd30e309ca191181482b7525d3eac6aebb4fbf",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36290255040"
+    }
+  ],
+  "catalogue": {
+    "done": 61,
+    "total": 110,
+    "items": 23,
+    "completed": 6,
+    "gates": 15,
+    "openGates": 15,
+    "contentHash": "015468d1",
+    "saveVersion": 32
+  },
+  "exactImage": {
+    "path": "apps/web/public/updates/production-sequence-results.png",
+    "assetId": "production-sequence-results",
+    "sourcePath": "docs/development/2026-09-26-production-sequences/screenshots/production-sequence-results.png",
+    "width": 318,
+    "height": 39,
+    "bytes": 4767,
+    "sha256": "44df6255d9dabde13d6a027269e57305290d57f145df0d73be12be48edc54e53"
+  },
+  "uncommittedRequiredPaths": [],
+  "runtimeWorktreeClean": true,
+  "verifiedEvidenceSha256": {
+    "docs/development/2026-09-26-production-sequences/publication-tests.log": "bb0d259f4fa3311744c3343277ad25e4bf068a0f9581f2d8c092aa611881e684",
+    "docs/development/2026-09-26-production-sequences/browser-final.log": "961419407fbfab66369f145689173c00ea5be91d4d1d55ce340cdf321dc491e4",
+    "docs/development/2026-09-26-production-sequences/publication-pages.log": "9fbcbd1b21b0cd16efdf4ab13e68adfbe004361b460d98e2373abf021c49ef6d",
+    "docs/development/2026-09-26-production-sequences/live-pages-initial.log": "488cbd22a62ab1544caf5f5e74a5c041251d785bd84921e3e1b2b7f01a0ad0f2",
+    "docs/development/2026-09-26-production-sequences/live-rerun.log": "6ed9232a8238ed79da0b903583e79b022208e456ae14f79bd9dd19d0740c84a7",
+    "docs/development/2026-09-26-production-sequences/live-pages.log": "61105ce610dc2364be57f7b55251b975f00c2284cf4dc41115243a3106793566",
+    "docs/development/2026-09-26-production-sequences/content-validation.log": "d76b62a14748ed04fc5e2aaa7f278af4685bf95aee2188b10f9b41bc8102f15a",
+    "docs/development/2026-09-26-production-sequences/deployment.json": "c064db71ca77ac6f77bc0f16607868d75b39eeb993605c527b5fdea0ab0531ae",
+    "docs/development/2026-09-26-production-sequences/live-readback.json": "f70857658a33f2d1ebd674aef5a1bb28a01ffe0db011739d084ac293ed84094e",
+    "apps/web/public/updates/production-sequence-results.png": "44df6255d9dabde13d6a027269e57305290d57f145df0d73be12be48edc54e53",
+    "apps/web/src/updates/media.json": "7d9a224480b3cb36706906eb87b8c0006d0dca746f34c094fb599120c668a331",
+    "apps/web/public/updates/provenance.json": "7d9a224480b3cb36706906eb87b8c0006d0dca746f34c094fb599120c668a331",
+    "docs/development/2026-09-26-production-sequences/screenshots/production-sequence-results.png": "44df6255d9dabde13d6a027269e57305290d57f145df0d73be12be48edc54e53",
+    "apps/web/src/updates/production-sequences.ts": "e85fe6890145269e29c7881939d263ef804616d919f91e6a8529cf29627f81c9",
+    "apps/web/src/main.tsx": "fff407e5eda5ad2f72941d76122d6019e1833b605d0f4ede937fee9dd97feae3",
+    "apps/web/src/protocol.ts": "3aba6089fdb568b881a6a39d83c8803603481bc43d44013cbb4e1e34b4825610",
+    "apps/web/src/simulation.worker.ts": "5faadb78d87344f6270ccef5d294502ef6c4037beeac3348a3f4e84daac72f34",
+    "apps/web/src/group-production.tsx": "4700a29ec84f5245f24d123b9fd4caff9231fe7b0ceefb0acab6370684ca3f0c",
+    "apps/web/src/group-production.test.tsx": "e7777db8d5fd98ae09d335d58014d2ce32bedb9a927ca9def1f356d684294848",
+    "apps/web/src/group-production-requests.ts": "932c3cdf9da161ca41610e64422a9257b68441df9ad39be43717843d41c69ec4",
+    "apps/web/src/group-production-requests.test.ts": "01e070fbc11915a4f46f14ab3abaa353ee877f5b6175ddf2d44de06efa385403",
+    "apps/web/src/production-templates.tsx": "9acb0c98627848fa68be689810723a8d480e6889e83719ae681edbc05e8fc9e6",
+    "apps/web/src/production-templates.test.tsx": "46a50a3b85573f3276d9c6bf3f33df517f401ffb34618ed6ac5cc7504f543d50",
+    "apps/web/src/realm-navigation.tsx": "8ef3f02233669924e05e765ec2e3d7220435613a60604ab4810379c3f3306711",
+    "apps/web/src/realm-navigation.css": "5f755ce8580549f7cb80b627d8793573b0d1446d35b27f1667c0ccdbbef1568b",
+    "apps/web/src/realm-windows.tsx": "fb1c7a5bd95211f7f58e87267e905e0a9f86c462005f54372a43849c29ad66d8",
+    "apps/web/src/worker-queries.test.ts": "8626ee1236057116643279b06903970e9d97605f118bfa0a0575fcebe2873216",
+    "apps/web/src/worker-production.benchmark.ts": "cca987dbd7eb9b1309c0edaf697a458966940ddbfd6f17025e09653c41775b36",
+    "packages/persistence/src/production-templates.ts": "ffe3d22c2afc0e292ed67928a4ddf44c2cee21f2494d1dd837d7e04ed2ff6c83",
+    "packages/persistence/src/production-templates.test.ts": "0686dec3fe248bc50fc17147d4f6a23970f8bcba17515f61fd088ec3eddc0f99",
+    "packages/persistence/src/index.ts": "84a2aefd11188807b1b5595739f77681573c253a383eab12cd12bef1916228d4",
+    "packages/sim/src/rules.ts": "83c5351874c9d4f328aff1fcd3be0f08491b70ec881a51f235ec91eacf32eabb",
+    "packages/sim/src/save.ts": "e0d912d759ea6d4f57c9da79933fb9e51d73e2de0c2d5d0e17d603bce7d85281",
+    "packages/content/src/index.ts": "4601297575e5887e82f1e925616c2a5747ef264c4d4e11a0b3c6a07ff21fb542",
+    "apps/web/src/updates/content.ts": "4869eb31818ab643b6caa05024b702f1b3fa22070ccb7072f84c1508734be093",
+    "apps/web/src/updates/library.ts": "668317018954a9701bef45ea57aa132a7f684957384862d5755e66518fab79b7",
+    "tests/gameplay/production-sequences.spec.ts": "70c92481e2f137d525aaba014a17d49aad688b4763eb60dfa4898b1b78cb06e6",
+    "tests/gameplay/production-template-recovery.spec.ts": "f1c7ef3d954f73ca78d1a626765858305f7c6fdd09e44c523cc306dc1a32259c",
+    "tests/gameplay/production-sequence-response-recovery.spec.ts": "6b04c3fdb714311096483b31ca2c203a94c2ee736180e9f4d21078bb737a5a9d",
+    "tests/production/production-sequences.spec.ts": "3f3cc90c5ffc11ad2e2b354c8865c78ac84db2472f1da5e8fad83a9280a5f5d5",
+    "docs/architecture/0043-production-sequences.md": "5208d957c3d9aa669a3aa187d3ea3c4ad51bd34c398b1621e4320cd4236304ae",
+    "docs/IMPLEMENTATION_STATUS.md": "b8c69d4ee9e56a0f953ef16a79acb8137ae937a01b1798306de7d592f1d26210",
+    "docs/development/2026-09-26-production-sequences/README.md": "e76d6ec57203b0f5ea1ea32e69290ddecfb9626642b81edfffe0a2f1ae006000",
+    "docs/development/2026-09-26-production-sequences/storage-main-review.md": "95d9c4e86a99eee23ea8cacec4e210bffb9be3a22e830872f1afa37c0e8f9e3c",
+    "docs/development/2026-09-26-production-sequences/ui-review.md": "0a1e6ca07c28c7c7757ede2d9975ae6113d32cf23ef448a490b3257b729045c8",
+    "docs/development/2026-09-26-production-sequences/browser-review.md": "6350d2823663e6cd763a9935afb9aeae74f4da66ea7a2de69f4b4b37b3d31a1e",
+    "docs/development/2026-09-26-production-sequences/publication-review.md": "834794580a0b0731685115a9453651a8aed882fdd0d679cf00f43e89f3c886f1",
+    "docs/development/2026-09-26-production-sequences/worker-benchmark.jsonl": "743bb11c86c176ed7639992ffd0001e60c51c3565268d5235dff0f2c499eae39"
+  },
+  "ACT-32": {
+    "status": "doing",
+    "updated": "2026-09-26",
+    "fix": "Continue bounded theaters and patrol/escort roles, army-order templates and broader governor decisions over the existing campaign selection groups, standing charters/postings/musters, group orders, personal charter/production templates and paid production sequences. Preserve individual overrides, canonical validation, inspectable refusals, historical replay and bounded worker publication.",
+    "prompt": "Context: ~/Work/Theandril, rules/save 32 and content 015468d1. Read docs/1.0-DEVELOPMENT.md M3, docs/architecture/0043-production-sequences.md and docs/development/2026-09-26-production-sequences/README.md. Saved army/hearth groups, group standing orders and personal charter templates already exist. Production sequences append an ordered list of one to five existing projects to up to 128 owned hearth queues in stable hearth ID order. Every accepted ordinary queue command spends its normal coin immediately from the shared treasury; a refusal stops that hearth while later hearths continue. Paid prefixes and existing queues remain intact. Complete hearths leave the selection; partial/refused hearths remain with exact results for manual review. Up to 24 named production templates persist in a separate browser/origin-local library; choosing and explicit Recall issue no orders, and Apply remains separate. Personal templates are excluded from campaign exports; the applied canonical queues survive save, replay and portable export/import. Storage failure, uncertain worker results and post-payment worker failure are surfaced without automatic retry or false rollback; saved-campaign recovery locks uncertain orders. Final publication verification passes 1,977 headless tests across 247 files, 30 affected Chromium journeys and 32 local production Pages journeys. 32 live Pages journeys passed in one complete final run. Earlier live evidence remains retained: the initial run had 27 passes and five failures; its unchanged five-case focused rerun had four passes and one remaining deployment-assets failure. Neither earlier attempt is described as a clean 32/32 pass. These are separate suite scopes, not additive test totals.\n\nTask: implement the next dependency-ready coordinated military order or broader governor slice; reuse current selections, batches and templates instead of rebuilding them. Keep personal preferences separate from canonical campaign policy and order state.\n\nNext acceptance: use ordinary controls in a saved representative mature realm with 100+ armies and many hearths to delegate a policy and coordinated order, resolve grouped blockers and override one actor without disabling the others. Prove canonical authority, permitted AI knowledge where relevant, deterministic save/replay, narrow/keyboard controls and measured transfers. Measure headline pacing whenever rules or AI can change campaign outcomes. Theaters, patrol/escort roles, army-order templates, broader governor decisions and combined mature-realm acceptance remain open. Standing repeat production, refunds/reordering and automatic retries are not delivered. Publication requires authorization for the new task.",
+    "appendHistory": {
+      "date": "2026-09-26",
+      "status": "doing",
+      "note": "2026-09-26: verified production-sequence progress at published HEAD 24cd30e309ca191181482b7525d3eac6aebb4fbf, implementation source 420219d278ae17f42a04871c6319ecf62a4af216. Production sequences append an ordered list of one to five existing projects to up to 128 owned hearth queues in stable hearth ID order. Every accepted ordinary queue command spends its normal coin immediately from the shared treasury; a refusal stops that hearth while later hearths continue. Paid prefixes and existing queues remain intact. Complete hearths leave the selection; partial/refused hearths remain with exact results for manual review. Up to 24 named production templates persist in a separate browser/origin-local library; choosing and explicit Recall issue no orders, and Apply remains separate. Personal templates are excluded from campaign exports; the applied canonical queues survive save, replay and portable export/import. Storage failure, uncertain worker results and post-payment worker failure are surfaced without automatic retry or false rollback; saved-campaign recovery locks uncertain orders. Final publication verification passes 1,977 headless tests across 247 files, 30 affected Chromium journeys and 32 local production Pages journeys. 32 live Pages journeys passed in one complete final run. Earlier live evidence remains retained: the initial run had 27 passes and five failures; its unchanged five-case focused rerun had four passes and one remaining deployment-assets failure. Neither earlier attempt is described as a clean 32/32 pass. These are separate suite scopes, not additive test totals. Rules/save 32 and content 015468d1 remain unchanged. No simulation rule, AI policy or campaign price changed; no new pacing result is claimed. Evidence: ~/Work/Theandril/docs/development/2026-09-26-production-sequences/. ACT-32 and M3 remain in progress. Theaters, patrol/escort roles, army-order templates, broader governor decisions and combined mature-realm acceptance remain open. Standing repeat production, refunds/reordering and automatic retries are not delivered. All 15 release gates remain open."
+    }
+  },
+  "Theandril.M3": {
+    "status": "in-progress",
+    "detail": "Standing charters, muster points, army postings, cause-grouped alerts, bounded group postings/charters, personal charter templates and persistent canonical army/hearth selections are delivered. The 26 September production-sequence slice adds reusable paid queue plans: Production sequences append an ordered list of one to five existing projects to up to 128 owned hearth queues in stable hearth ID order. Every accepted ordinary queue command spends its normal coin immediately from the shared treasury; a refusal stops that hearth while later hearths continue. Paid prefixes and existing queues remain intact. Complete hearths leave the selection; partial/refused hearths remain with exact results for manual review. Up to 24 named production templates persist in a separate browser/origin-local library; choosing and explicit Recall issue no orders, and Apply remains separate. Personal templates are excluded from campaign exports; the applied canonical queues survive save, replay and portable export/import. Storage failure, uncertain worker results and post-payment worker failure are surfaced without automatic retry or false rollback; saved-campaign recovery locks uncertain orders. Final publication verification passes 1,977 headless tests across 247 files, 30 affected Chromium journeys and 32 local production Pages journeys. 32 live Pages journeys passed in one complete final run. Earlier live evidence remains retained: the initial run had 27 passes and five failures; its unchanged five-case focused rerun had four passes and one remaining deployment-assets failure. Neither earlier attempt is described as a clean 32/32 pass. These are separate suite scopes, not additive test totals. Rules/save 32 and content 015468d1 unchanged. Theaters, patrol/escort roles, army-order templates, broader governor decisions and combined mature-realm acceptance remain open. Standing repeat production, refunds/reordering and automatic retries are not delivered."
+  },
+  "Theandril.roadmap": {
+    "done": 61,
+    "total": 110,
+    "updated": "2026-09-26",
+    "note": "6 of 23 catalogue items are complete; all 15 release gates remain open. Paid group production sequences and personal browser production templates advance the existing empire-management item. Delivered/remaining bullet counts are recomputed from the structured published catalogue; editorial regrouping changes the denominator. These are not a fixed-scope completion percentage or release acceptance. ACT-32/M3 remain in progress."
+  },
+  "unchanged": [
+    "ACT-36 (done) including history",
+    "all issues including DH-020 (resolved)",
+    "all other actions",
+    "all existing histories",
+    "all other projects/milestones",
+    "release gates"
+  ],
+  "writePaths": [
+    "/home/telephoneheater/Projects/DHARMA/dharma-tracker/data/actions.json",
+    "/home/telephoneheater/Projects/DHARMA/dharma-tracker/data/projects.json"
+  ],
+  "buildOnApply": {
+    "command": [
+      "/home/telephoneheater/Projects/PIA/pia-tracker/scripts/run.sh",
+      "build"
+    ],
+    "TRACKER_HOME": "/home/telephoneheater/Projects/DHARMA/dharma-tracker"
+  }
+}

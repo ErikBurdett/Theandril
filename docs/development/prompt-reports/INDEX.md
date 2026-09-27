@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-26 | [Production sequences, personal templates and deployment](2026-09-26-production-sequences.md) | Published `24cd30e`; ACT-32 advanced; 1,977 tests, 30 affected gameplay, 32 local and 32 live Pages journeys pass |
 | 2026-09-26 | [Saved realm groups and verified deployment](2026-09-26-selection-groups.md) | Published `676d564`; ACT-32 advanced; DH-020 live save proof; 31 local and 31 live Pages journeys pass |
 | 2026-09-25 | [Reusable charter templates and deployment](2026-09-25-charter-templates.md) | Published `1d256b0`; ACT-32 advanced; 30 local and 30 live Pages journeys pass |
 | 2026-09-24 | [Group hearth charters and deployment](2026-09-24-group-charters.md) | Published `ee12011`; ACT-32 advanced; live charter/save checks pass; asset check passed on unchanged rerun |
