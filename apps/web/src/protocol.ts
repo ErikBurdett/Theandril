@@ -13,6 +13,11 @@ export const MAX_GROUP_PRODUCTION_SETTLEMENTS = 128;
 export interface GroupPostingResult { armyId: string; accepted: boolean; message?: string }
 export interface GroupCharterResult { settlementId: string; accepted: boolean; message?: string }
 export interface GroupProductionResult { settlementId: string; orders: { itemId: string; accepted: boolean; message?: string }[] }
+export type GroupMovementCommand = Extract<GameCommand, { type: 'queueMovement' | 'resumeMovement' | 'cancelMovement' }>;
+export interface GroupMovementResult { armyId: string; accepted: boolean; message?: string }
+export interface GroupMovementPreviewPlan { factionId: string; armyIds: string[]; target: number; append: boolean }
+export interface GroupMovementPreviewRow { armyId: string; target: number; cost: number; steps: number; canQueue: boolean; blocker: string | null; limited: boolean; expandedNodes: number }
+export interface GroupMovementReview { hash: string; target: number; append: boolean; results: GroupMovementPreviewRow[] }
 
 export type Request =
   | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; cityStateCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
@@ -20,6 +25,8 @@ export type Request =
   | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[] }
   | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[] }
   | { id: number; type: 'groupProduction'; factionId: string; settlementIds: string[]; itemIds: string[] }
+  | ({ id: number; type: 'groupMovementPreview' } & GroupMovementPreviewPlan)
+  | { id: number; type: 'groupMovement'; commands: GroupMovementCommand[]; expectedHash: string }
   | { id: number; type: 'previewPeace'; targetFactionId: string; terms: PeaceTerms }
   | { id: number; type: 'movementQuery'; armyId: string; target?: number; append?: boolean }
   | { id: number; type: 'landQuery'; settlementId: string; window?: import('@theandril/sim').LandCellWindow }
@@ -45,9 +52,15 @@ export interface WorkerMetrics {
   groupPostingResultBytes?: number;
   groupCharterResultBytes?: number;
   groupProductionResultBytes?: number;
+  groupMovementQueryCount?: number;
+  groupMovementQueryBytes?: number;
+  totalGroupMovementQueryBytes?: number;
+  groupMovementQueryMs?: number;
+  groupMovementResultBytes?: number;
 }
 
 export type Response =
+  | ({ id: number; type: 'groupMovementPreview'; metrics: WorkerMetrics } & GroupMovementReview)
   | { id: number; type: 'movementQuery'; query: MovementQuery; hash: string }
   | { id: number; type: 'landQuery'; settlementId: string; town: SettlementLandObservation | null; hash: string; metrics: WorkerMetrics }
   | { id: number; type: 'developmentQuery'; focus: DevelopmentFocus; entity: DevelopmentEntityView | null; hash: string; metrics: WorkerMetrics }
@@ -57,4 +70,4 @@ export type Response =
   | { id: number; type: 'error'; message: string; recoveryRequired?: boolean }
   | { id: number; type: 'export'; bytes: Uint8Array }
   | { id: number; type: 'message'; message: string }
-  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string };
+  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string; groupMovementResults?: GroupMovementResult[]; groupMovementError?: string };

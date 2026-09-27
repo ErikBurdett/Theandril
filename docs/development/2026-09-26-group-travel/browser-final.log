@@ -1,0 +1,32 @@
+[WebServer] (node:1948181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1948284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 1 worker
+
+(node:1949221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel missing-results after real movement locks orders until the actual manual save is restored (4.8s)
+  ✓   2 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel wrong-army after real movement locks orders until the actual manual save is restored (4.9s)
+  ✓   3 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel worker-crash after real movement locks orders until the actual manual save is restored (5.3s)
+  ✓   4 tests/gameplay/group-movement-recovery.spec.ts:58:1 › a superseded route review cannot fault a restored campaign when its late reply claims recovery is required (4.1s)
+  ✓   5 tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch (15.9s)
+  ✓   6 tests/gameplay/group-movement.spec.ts:148:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves (26.8s)
+  ✓   7 tests/gameplay/group-movement.spec.ts:193:1 › canonical destination refusals retain only the unavailable army for correction (4.4s)
+  ✓   8 tests/gameplay/group-movement.spec.ts:222:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting (4.0s)
+  ✓   9 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (12.7s)
+  ✓  10 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (1.7s)
+  ✓  11 tests/gameplay/movement.spec.ts:70:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (4.2s)
+  ✓  12 tests/gameplay/movement.spec.ts:103:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (5.4s)
+  ✓  13 tests/gameplay/movement.spec.ts:130:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (7.1s)
+  ✓  14 tests/gameplay/movement.spec.ts:170:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (3.8s)
+  ✓  15 tests/gameplay/movement.spec.ts:194:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (3.8s)
+  ✓  16 tests/gameplay/movement.spec.ts:217:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (2.6s)
+  ✓  17 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (4.0s)
+  ✓  18 tests/gameplay/selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths (26.1s)
+  ✓  19 tests/gameplay/selection-groups.spec.ts:163:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign (6.8s)
+  ✓  20 tests/gameplay/selection-groups.spec.ts:231:1 › recalling a carried army skips it without rewriting the saved group, while explicit empty replacement is canonical (4.8s)
+  ✓  21 tests/gameplay/selection-groups.spec.ts:263:1 › a damaged saved-group response ends pending work, locks uncertain orders and recovers from a real manual save (2.9s)
+
+  21 passed (2.6m)

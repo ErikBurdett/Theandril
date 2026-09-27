@@ -1,0 +1,12 @@
+Initial focused run; stdout copied from the actual tool result before logfile capture was requested.
+Command: ./node_modules/.bin/vitest run apps/web/src/worker-group-movement.test.ts
+Exit status: 0
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  22:59:55
+   Duration  1.99s (transform 520ms, setup 0ms, import 600ms, tests 1.31s, environment 0ms)
+
+This precedes the accepted-outcome-message enhancement and its added regression.

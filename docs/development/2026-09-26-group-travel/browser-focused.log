@@ -1,0 +1,17 @@
+[WebServer] (node:2071594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2071610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:2072816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch (15.5s)
+  ✓  2 tests/gameplay/group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves (24.6s)
+  ✓  3 tests/gameplay/group-movement.spec.ts:212:1 › canonical destination refusals retain only the unavailable army for correction (4.1s)
+  ✓  4 tests/gameplay/group-movement.spec.ts:241:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting (3.5s)
+  ✓  5 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (2.4s)
+  ✓  6 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (2.5s)
+
+  6 passed (53.6s)

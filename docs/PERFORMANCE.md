@@ -1,5 +1,39 @@
 # Performance measurements
 
+## Coordinated group travel — local rules 32 candidate
+
+[Final actual-worker samples](development/2026-09-26-group-travel/worker-movement-benchmark-final.log)
+measure one explicit group review followed by one batch of ordinary travel
+commands. Each case has **one elapsed sample** on an i9-13900K with Node 26.7.0.
+The authored generator-4 Huge/Legendary worlds have 196,608/307,200 cells,
+32/40 realms and 1,500/4,000 armies, with 47/100 owned armies. Ceiling cases add
+owned guards to reach 128 selected armies, producing 1,581/4,028 global armies.
+These historical fixture dimensions are not current generator-8 map sizes.
+
+| Authored case | Selected armies | Worker review ms | Review bytes | Batch ms | Command ms | State transfer bytes | Result bytes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huge representative | 47 | 2.053 | 8,206 | 464.902 | 6.750 | 246,578 | 3,846 |
+| Huge ceiling | 128 | 2.879 | 22,300 | 459.158 | 16.092 | 649,643 | 11,732 |
+| Legendary representative | 100 | 2.270 | 17,537 | 750.738 | 8.901 | 504,166 | 8,300 |
+| Legendary ceiling | 128 | 2.457 | 22,437 | 831.073 | 11.793 | 635,137 | 11,072 |
+
+Each case emits one compact review and one final state response. Batch wall time
+includes one autosave and final publication; command time covers canonical
+execution/journaling. Setup, import, export, serial comparison and replay are
+outside those timings. The measured destinations have at most four route steps.
+Target-search node totals are 799/2,176/1,900/2,432; they exclude the preceding
+reachable-range search, which shares each army's 4,096-node budget. These are not
+maximum-search or arbitrary-distance routing measurements.
+
+Exact stable command order, serial archive, replay/hash and autosave restoration
+pass for all four cases. The initial packed cells plus movement delta and final
+summary equal the permitted canonical observation; movement legitimately changes
+sight. Cell deltas cost 301/301/520/520 bytes. Final hashes are `5533e108`,
+`2baa14b4`, `6734c8ce` and `d5ff4a22`. The complete state response still costs
+246–650 KB, and autosave/publication dominate these short-route batch samples.
+No percentile, speedup, renderer, full-turn, retained-memory, AI, pacing or
+release-gate claim follows. [Scope and retained initial attempts](development/2026-09-26-group-travel/README.md#actual-worker-measurements).
+
 ## Production sequences — local rules 32 candidate
 
 [Raw worker samples](development/2026-09-26-production-sequences/worker-benchmark.jsonl)

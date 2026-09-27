@@ -1,0 +1,255 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: group-movement.spec.ts >> a hundred saved companies review compact routes, move through one canonical batch and retain manual and saved control
+- Location: tests/gameplay/group-movement.spec.ts:56:1
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - button "Import save file"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - heading "Theandril" [level=1] [ref=e8]
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - generic [ref=e11]: TREASURY
+          - strong [ref=e12]: 251016 coin
+        - generic [ref=e13]:
+          - generic [ref=e14]: KNOWLEDGE
+          - strong [ref=e15]: "0"
+    - navigation "Campaign navigation" [ref=e16]:
+      - generic [ref=e17]:
+        - text: Standard pace ·
+        - generic [ref=e18]: 40 realms
+    - group [ref=e19]:
+      - generic "Campaign & settings" [ref=e20] [cursor=pointer]
+  - main [ref=e21]:
+    - region "Strategic map" [ref=e22]:
+      - generic "World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls." [ref=e23]
+      - navigation "Map management" [ref=e25]:
+        - button "Armies & fleets" [ref=e26] [cursor=pointer]
+        - button "Settlements" [ref=e30] [cursor=pointer]
+        - button "Characters & agents" [ref=e34] [cursor=pointer]:
+          - generic [ref=e37]: Characters
+        - button "Realm progression" [ref=e38] [cursor=pointer]:
+          - generic [ref=e41]: Research
+        - button "Realm affairs" [ref=e42] [cursor=pointer]:
+          - generic [ref=e45]: Diplomacy
+        - button "Campaign journal" [ref=e46] [cursor=pointer]
+        - button "World overview" [ref=e50] [cursor=pointer]
+      - generic [ref=e54]:
+        - button "Zoom in" [ref=e55] [cursor=pointer]: +
+        - button "Zoom out" [ref=e56] [cursor=pointer]: −
+        - button "Focus selection" [ref=e57] [cursor=pointer]
+        - button "Open map actions" [ref=e58] [cursor=pointer]
+        - button "Map guide" [ref=e59] [cursor=pointer]: "?"
+      - group:
+        - generic "World map · Terrain" [ref=e60] [cursor=pointer]
+  - dialog [ref=e61]:
+    - banner [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]: The realm's ledgers
+        - heading "Selected orders" [level=2] [ref=e65]
+        - paragraph [ref=e66]: Travel company 001
+      - button "Close Selected orders" [ref=e67] [cursor=pointer]: ×
+    - region "Selected entity orders" [ref=e69]:
+      - button "Show on map" [ref=e70] [cursor=pointer]
+      - group [ref=e71]:
+        - generic [ref=e72]:
+          - img "Ashen Compact army banner · approved faction artwork" [ref=e73]
+          - heading "Travel company 001" [level=2] [ref=e74]
+        - paragraph [ref=e75]: Oath guard · cell 7707
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - strong [ref=e78]: "0"
+            - generic [ref=e79]: Movement
+          - generic [ref=e80]:
+            - strong [ref=e81]: "60"
+            - generic [ref=e82]: Strength
+        - paragraph [ref=e83]: A force of fewer than 3 companies, or one escorting a caravan, forages for itself.
+        - region "Army commander and agents" [ref=e84]:
+          - paragraph [ref=e85]: "Commander: No marshal assigned"
+          - paragraph [ref=e86]: "Command: 1 / 12 formations. Unled detachment: twelve-formation command capacity."
+          - paragraph [ref=e87]: "Agents: None attached"
+          - button "Manage characters for Travel company 001" [disabled] [ref=e88]: Manage army characters
+        - generic [ref=e89]:
+          - button "Survey for an arcane seam · 24 coin" [disabled] [ref=e90]
+          - paragraph [ref=e91]: This company has already spent its movement this turn.
+        - region "Map movement orders" [ref=e92]:
+          - heading "Paths & marching orders" [level=3] [ref=e93]
+          - region "Queued route" [ref=e94]:
+            - heading "Route active" [level=4] [ref=e95]
+            - generic [ref=e96]:
+              - button "Resume route" [disabled] [ref=e97]
+              - button "Cancel route" [disabled] [ref=e98]
+            - paragraph [ref=e99]: 17 known steps remaining. New hostile sightings or blocked passages can interrupt travel; queued routes never declare war or attack automatically.
+            - list [ref=e100]:
+              - listitem [ref=e101]:
+                - button "Focus waypoint 1 at hex 7718" [disabled] [ref=e102]: Waypoint 1 · hex 7718
+              - listitem [ref=e103]:
+                - button "Focus waypoint 2 at hex 7724" [disabled] [ref=e104]: Waypoint 2 · hex 7724
+          - paragraph [ref=e105]: 0 highlighted destinations within current movement. Click a reachable hex to move, or a reachable hostile army to attack. Dragging only pans.
+          - generic [ref=e106]:
+            - checkbox "Add waypoint mode" [disabled] [ref=e107]
+            - text: Add waypoint mode
+          - paragraph [ref=e108]: Shift-click adds a waypoint. For longer journeys, review a target and queue its route. Escape clears selection.
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - text: Destination hex
+              - spinbutton "Destination hex" [disabled] [ref=e111]
+            - button "Review route" [disabled] [ref=e112]
+          - status [ref=e113]: No movement remains. Queue a future route or end the turn.
+        - group [ref=e114]:
+          - generic "Standing posting Hold · hex 7704" [ref=e115] [cursor=pointer]:
+            - text: Standing posting
+            - generic [ref=e116]: Hold · hex 7704
+          - option "Where it stands · hex 7707" [disabled] [selected]
+          - option "Emberwake Convocation Hold · hex 109924" [disabled]
+          - option "Underhush Exchange Hold · hex 212059" [disabled]
+          - option "Vesper Court Hold · hex 222206" [disabled]
+          - option "Manytrack Moot Hold · hex 94679" [disabled]
+          - option "Margin Observance Hold · hex 100237" [disabled]
+          - option "Free Ashen Compact Hold · hex 143504" [disabled]
+          - option "Free Reedbound Council Hold · hex 191115" [disabled]
+          - option "Free Cinder March Hold · hex 42448" [disabled]
+          - option "Free Glass Tide Hold · hex 152261" [disabled]
+          - option "Free Iron Covenant Hold · hex 55968" [disabled]
+          - option "Free Sepulchral Synod Hold · hex 211124" [disabled]
+          - option "Free Mire Courts Hold · hex 138554" [disabled]
+          - option "Free Saltwind Remnant Hold · hex 190997" [disabled]
+          - option "Free Wardhall Remnant Hold · hex 156379" [disabled]
+          - option "Free Rimehorn Clans Hold · hex 242728" [disabled]
+          - option "Free Sable Steppe Hold · hex 112207" [disabled]
+          - option "Free Morrow Spore Hold · hex 226397" [disabled]
+          - option "Free Cistern Assembly Hold · hex 86557" [disabled]
+          - option "Free Unsealed Companies Hold · hex 243612" [disabled]
+          - option "Free Lantern Hospices Hold · hex 177147" [disabled]
+          - option "Free Cairnwing Concord Hold · hex 264844" [disabled]
+          - option "Ashen Compact Hold · hex 134018" [disabled]
+          - option "Reedbound Council Hold · hex 160643" [disabled]
+          - option "Cinder March Hold · hex 43364" [disabled]
+          - option "Glass Tide Hold · hex 87069" [disabled]
+          - option "Iron Covenant Hold · hex 41070" [disabled]
+          - option "Sepulchral Synod Hold · hex 95701" [disabled]
+          - option "Mire Courts Hold · hex 154056" [disabled]
+          - option "Saltwind Remnant Hold · hex 97544" [disabled]
+          - option "Wardhall Remnant Hold · hex 113827" [disabled]
+          - option "Rimehorn Clans Hold · hex 60541" [disabled]
+          - option "Sable Steppe Hold · hex 123530" [disabled]
+          - option "Morrow Spore Hold · hex 94812" [disabled]
+          - option "Cistern Assembly Hold · hex 192801" [disabled]
+          - option "Unsealed Companies Hold · hex 77239" [disabled]
+          - option "Lantern Hospices Hold · hex 139276" [disabled]
+          - option "Cairnwing Concord Hold · hex 53673" [disabled]
+          - option "Red Sluice Directorate Hold · hex 139587" [disabled]
+          - option "Velvet Meridian Hold · hex 207440" [disabled]
+          - option "Brine Choir Hold · hex 193915" [disabled]
+          - option "Join the force there" [disabled]
+          - option "Hold the hex" [disabled] [selected]
+        - generic [ref=e117]:
+          - button "Raise a supply depot · 40 coin" [disabled] [ref=e118]
+          - paragraph [ref=e119]: This company has already spent its movement this turn.
+        - group [ref=e120]:
+          - generic "Army composition 1 / 12 formations" [ref=e121] [cursor=pointer]:
+            - text: Army composition
+            - generic [ref=e122]: 1 / 12 formations
+          - option "Travel company 002 · army.1041" [disabled] [selected]
+          - option "Travel company 003 · army.1081" [disabled]
+          - option "Travel company 004 · army.1121" [disabled]
+          - option "Travel company 005 · army.1161" [disabled]
+          - option "Travel company 006 · army.1201" [disabled]
+          - option "Travel company 007 · army.121" [disabled]
+          - option "Travel company 008 · army.1241" [disabled]
+          - option "Travel company 009 · army.1281" [disabled]
+          - option "Travel company 010 · army.1321" [disabled]
+          - option "Travel company 011 · army.1361" [disabled]
+          - option "Travel company 012 · army.1401" [disabled]
+          - option "Travel company 013 · army.1441" [disabled]
+          - option "Travel company 014 · army.1481" [disabled]
+          - option "Travel company 015 · army.1521" [disabled]
+          - option "Travel company 016 · army.1561" [disabled]
+          - option "Travel company 017 · army.1601" [disabled]
+          - option "Travel company 018 · army.161" [disabled]
+          - option "Travel company 019 · army.1641" [disabled]
+          - option "Travel company 020 · army.1681" [disabled]
+          - option "Travel company 021 · army.1721" [disabled]
+          - option "Travel company 022 · army.1761" [disabled]
+          - option "Travel company 023 · army.1801" [disabled]
+          - option "Travel company 024 · army.1841" [disabled]
+          - option "Travel company 025 · army.1881" [disabled]
+        - heading "Single-step shortcuts" [level=3] [ref=e123]
+        - paragraph [ref=e124]: "Optional: move one neighboring hex using the buttons below. For complete routes and attacks, use the map or Paths & marching orders above."
+        - generic [ref=e125]:
+          - button "Move to cell 7708" [disabled] [ref=e126]:
+            - text: Plains
+            - generic [ref=e127]: Hex 7708
+          - button "Move to cell 8347" [disabled] [ref=e128]:
+            - text: Plains
+            - generic [ref=e129]: Hex 8347
+          - button "Move to cell 8346" [disabled] [ref=e130]:
+            - text: Plains
+            - generic [ref=e131]: Hex 8346
+          - button "Move to cell 7706" [disabled] [ref=e132]:
+            - text: Plains
+            - generic [ref=e133]: Hex 7706
+          - button "Move to cell 7066" [disabled] [ref=e134]:
+            - text: Plains
+            - generic [ref=e135]: Hex 7066
+          - button "Move to cell 7067" [disabled] [ref=e136]:
+            - text: Plains
+            - generic [ref=e137]: Hex 7067
+        - region "Settlement siege orders" [ref=e138]:
+          - heading "Walls & blockades" [level=3] [ref=e139]
+          - paragraph [ref=e140]: No neighboring foreign settlements are in sight.
+        - region "Nearby enemy forces" [ref=e141]:
+          - heading "Field engagement" [level=3] [ref=e142]
+          - paragraph [ref=e143]: "Your force: 60 strength · 75 morale · 0 fatigue."
+          - paragraph [ref=e144]: No neighboring foreign land armies are in sight.
+        - generic [ref=e145]:
+          - generic [ref=e146]: Selected hex 7707
+          - paragraph [ref=e147]: Temperate grassland · Plains · fertility 60 · in sight
+  - contentinfo [ref=e148]:
+    - generic [ref=e150]:
+      - generic [ref=e151]: Selected army
+      - strong [ref=e152]: Travel company 001
+      - generic [ref=e153]: 1 / 12 formations · 60 strength · 0 movement
+      - button "Show selected orders" [ref=e155] [cursor=pointer]
+    - region "Next-action navigation" [ref=e156]:
+      - generic [ref=e157]:
+        - button "Previous army needing orders" [disabled] [ref=e158]: ‹
+        - button "Next army needing orders" [disabled] [ref=e159]: Next army N
+        - button "Previous idle settlement" [disabled] [ref=e160]: ‹
+        - button "Next idle settlement" [disabled] [ref=e161]: Next town S
+      - paragraph [ref=e162]: "Labor: 134 unassigned households · 40 settlements"
+      - generic [ref=e163]:
+        - button "Previous settlement with unassigned households" [disabled] [ref=e164]: ‹
+        - button "Next settlement with unassigned households" [disabled] [ref=e165]: Review households
+      - group [ref=e166]:
+        - generic "What wants a decision 2 kinds" [ref=e167] [cursor=pointer]:
+          - text: What wants a decision
+          - generic [ref=e168]: 2 kinds
+    - generic [ref=e169]:
+      - strong [ref=e171]: Turn 1
+      - button "End turn" [disabled] [ref=e172]:
+        - text: End turn
+        - generic [ref=e173]: E
+    - status [ref=e174]:
+      - generic [aria-hidden] [ref=e175]: ◆
+      - text: Resolving… Campaign exported. Keep this file as a backup.
+  - generic [ref=e176]:
+    - button "Art Lab" [ref=e177] [cursor=pointer]
+    - generic [ref=e178]: Development asset inspector
+```

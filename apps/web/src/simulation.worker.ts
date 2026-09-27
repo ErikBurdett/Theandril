@@ -1,8 +1,8 @@
-import { commandSchema, createGame, getDevelopmentEntity, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { commandSchema, createGame, getDevelopmentEntity, getMovementPreview, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupMovementCommand, type GroupMovementResult, type GroupMovementReview, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -25,7 +25,7 @@ const textEncoder = new TextEncoder();
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
 type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' }>;
 type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' }>;
-type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string };
+type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string } | { groupMovementResults: GroupMovementResult[]; groupMovementError?: string };
 
 function publish(id: number, message: string, reset = false, replaceMap = false, group?: GroupResponse): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
@@ -49,6 +49,7 @@ function publish(id: number, message: string, reset = false, replaceMap = false,
   metrics.groupPostingResultBytes = group && 'groupPostingResults' in group ? resultBytes : 0;
   metrics.groupCharterResultBytes = group && 'groupCharterResults' in group ? resultBytes : 0;
   metrics.groupProductionResultBytes = group && 'groupProductionResults' in group ? resultBytes : 0;
+  metrics.groupMovementResultBytes = group && 'groupMovementResults' in group ? resultBytes : 0;
   metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes + resultBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
@@ -94,6 +95,62 @@ function applyGroupCommands(game: GameState, commands: GroupCommand[]) {
     }
   }
   return { results, error };
+}
+
+const movementIdentifier = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 100 && /^[a-z][a-z0-9_.-]*$/.test(value);
+function movementPreviewPlan(request: Extract<Request, { type: 'groupMovementPreview' }>, factionId: string) {
+  if (!Number.isSafeInteger(request.id) || request.id < 0
+    || Object.keys(request).some(key => !['id', 'type', 'factionId', 'armyIds', 'target', 'append'].includes(key))
+    || !movementIdentifier(request.factionId) || !Array.isArray(request.armyIds) || request.armyIds.length < 1 || request.armyIds.length > MAX_GROUP_ORDER_COMMANDS
+    || Object.keys(request.armyIds).length !== request.armyIds.length || !Array.from(request.armyIds).every(movementIdentifier)
+    || new Set(request.armyIds).size !== request.armyIds.length
+    || !Number.isSafeInteger(request.target) || request.target < 0 || request.target > 349_999 || typeof request.append !== 'boolean') {
+    throw new Error(`A group travel review requires 1 to ${MAX_GROUP_ORDER_COMMANDS} distinct army IDs and a destination in a valid request.`);
+  }
+  if (request.factionId !== factionId) throw new Error('This seat does not control that faction.');
+  return { armyIds: [...request.armyIds].sort(), target: request.target, append: request.append };
+}
+
+/** Envelope validation is atomic; each legal-shaped order is still adjudicated
+ * by simulation, including missing/foreign armies and paused/blocked routes. */
+function movementCommands(request: Extract<Request, { type: 'groupMovement' }>, factionId: string): GroupMovementCommand[] {
+  if (!Number.isSafeInteger(request.id) || request.id < 0
+    || Object.keys(request).some(key => !['id', 'type', 'commands', 'expectedHash'].includes(key))
+    || typeof request.expectedHash !== 'string' || !/^[a-f0-9]{8}$/.test(request.expectedHash)
+    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS
+    || Object.keys(request.commands).length !== request.commands.length) {
+    throw new Error(`Group travel requires 1 to ${MAX_GROUP_ORDER_COMMANDS} orders and a reviewed campaign hash in a valid request.`);
+  }
+  const ids = new Set<string>();
+  const commands = Array.from(request.commands).map((input, index): GroupMovementCommand => {
+    const parsed = commandSchema.safeParse(input);
+    if (!parsed.success || !['queueMovement', 'resumeMovement', 'cancelMovement'].includes(parsed.data.type)) throw new Error(`Group travel item ${index + 1} is not a valid travel order.`);
+    const command = parsed.data as GroupMovementCommand;
+    if (command.factionId !== factionId) throw new Error('This seat does not control every faction in the group travel order.');
+    if (ids.has(command.armyId)) throw new Error('Group travel may name each army only once.');
+    ids.add(command.armyId);
+    return command;
+  });
+  const first = commands[0]!;
+  if (commands.some(command => command.type !== first.type
+    || command.type === 'queueMovement' && first.type === 'queueMovement' && (command.target !== first.target || Boolean(command.append) !== Boolean(first.append)))) {
+    throw new Error('Group travel requires the same action, destination and waypoint choice for every army.');
+  }
+  return commands.sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0);
+}
+
+function applyMovementCommands(game: GameState, commands: GroupMovementCommand[]) {
+  const results: GroupMovementResult[] = [];
+  for (const command of commands) {
+    try {
+      const result = applyCommand(game, command);
+      const message = result.ok ? result.events.at(-1)?.message : result.error ?? 'The travel order could not be completed.';
+      results.push({ armyId: command.armyId, accepted: result.ok, ...(message ? { message } : {}) });
+    } catch (cause) {
+      return { results, error: `Recording was interrupted after ${results.length} completed travel order${results.length === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${cause instanceof Error ? cause.message : String(cause)}` };
+    }
+  }
+  return { results, error: undefined };
 }
 
 /** Only transport shape is checked here. Content, ownership, payment, queue
@@ -181,6 +238,7 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
 async function handle(request: Request): Promise<void> {
   let selectionGroupApplied = false;
   let groupProductionStarted = false;
+  let groupMovementStarted = false;
   try {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
@@ -193,6 +251,7 @@ async function handle(request: Request): Promise<void> {
       metrics.aiMs = 0;
       metrics.totalTransferBytes = 0;
       metrics.cellTransferBytes = 0; metrics.landQueryCount = 0; metrics.landQueryBytes = 0; metrics.totalLandQueryBytes = 0; metrics.developmentQueryCount = 0; metrics.developmentQueryBytes = 0; metrics.totalDevelopmentQueryBytes = 0;
+      metrics.groupMovementQueryCount = 0; metrics.groupMovementQueryBytes = 0; metrics.totalGroupMovementQueryBytes = 0; metrics.groupMovementQueryMs = 0;
       publish(request.id, request.mode === 'watch' ? 'AI watch is paused. Resume to observe every faction act, or step one round.' : 'Your people await a hearth. Select the caravan and found your first settlement.', true);
       return;
     }
@@ -211,6 +270,25 @@ async function handle(request: Request): Promise<void> {
     }
     if (!state || !journal) throw new Error('Begin or load a campaign first.');
     if (recordingFailed) throw new Error('Recording was interrupted. Restore a saved campaign before continuing.');
+    if (request.type === 'groupMovementPreview') {
+      const plan = movementPreviewPlan(request, state.turnOwnerId), started = performance.now();
+      const currentHash = queryObservation ? queryHash : stateHash(state);
+      const view = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none', developmentCandidates: false });
+      queryHash = currentHash;
+      const review: GroupMovementReview = { hash: currentHash, target: plan.target, append: plan.append, results: plan.armyIds.map(armyId => {
+        const preview = getMovementPreview(view, armyId, plan.target, { append: plan.append });
+        return { armyId, target: preview.target, cost: preview.cost, steps: preview.path.length, canQueue: preview.canQueue,
+          blocker: !preview.canQueue && preview.action === 'attack' ? 'Queued travel cannot include an automatic attack.' : preview.blocker,
+          limited: preview.limited, expandedNodes: preview.expandedNodes };
+      }) };
+      metrics.groupMovementQueryMs = performance.now() - started;
+      metrics.groupMovementQueryBytes = textEncoder.encode(JSON.stringify(review)).byteLength;
+      metrics.groupMovementQueryCount = (metrics.groupMovementQueryCount ?? 0) + 1;
+      metrics.totalGroupMovementQueryBytes = (metrics.totalGroupMovementQueryBytes ?? 0) + metrics.groupMovementQueryBytes;
+      metrics.totalTransferBytes += metrics.groupMovementQueryBytes;
+      send({ id: request.id, type: 'groupMovementPreview', ...review, metrics: { ...metrics } });
+      return;
+    }
     if (request.type === 'watchFog') {
       if (journal.mode !== 'watch') throw new Error('Fog controls are available only in AI-watch campaigns.');
       if (typeof request.enabled !== 'boolean') throw new Error('Fog of war must be enabled or disabled with a boolean.');
@@ -295,6 +373,21 @@ async function handle(request: Request): Promise<void> {
       publish(request.id, await autosave(message));
       return;
     }
+    if (request.type === 'groupMovement') {
+      if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
+      if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
+      if (state.battle || state.pendingCapture) throw new Error('Finish the current battle or settlement decision before applying group travel orders.');
+      const commands = movementCommands(request, state.turnOwnerId);
+      if (request.expectedHash !== stateHash(state)) throw new Error('The campaign changed; review the group routes again before issuing orders.');
+      const started = performance.now();
+      groupMovementStarted = true;
+      const { results, error } = applyMovementCommands(state, commands);
+      metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
+      const accepted = results.filter(result => result.accepted).length;
+      const message = error ?? `${accepted} travel order${accepted === 1 ? '' : 's'} accepted; ${results.length - accepted} refused.`;
+      publish(request.id, !error && accepted ? await autosave(message) : message, false, false, { groupMovementResults: results, ...(error ? { groupMovementError: error } : {}) });
+      return;
+    }
     if (request.type === 'groupProduction') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
@@ -375,9 +468,11 @@ async function handle(request: Request): Promise<void> {
   } catch (error) {
     // An accepted edit may fail while publishing its view. Its canonical
     // mutation must never be mistaken for a refusal or followed by stale orders.
-    if (selectionGroupApplied || groupProductionStarted) recordingFailed = true;
+    if (selectionGroupApplied || groupProductionStarted || groupMovementStarted) recordingFailed = true;
     const message = error instanceof Error ? error.message : String(error);
-    send({ id: request.id, type: 'error', message: groupProductionStarted
+    send({ id: request.id, type: 'error', message: groupMovementStarted
+      ? `The travel result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
+      : groupProductionStarted
       ? `The production result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
       : selectionGroupApplied ? `The group changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
   }

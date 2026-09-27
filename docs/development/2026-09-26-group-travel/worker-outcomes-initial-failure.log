@@ -1,0 +1,36 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-group-movement.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-group-movement.test.ts (10 tests | 1 failed) 1366ms
+     × returns factual accepted arrival, interrupted-route and cancellation outcomes 25ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-movement.test.ts > actual worker coordinated travel > returns factual accepted arrival, interrupted-route and cancellation outcomes
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ apps/web/src/worker-group-movement.test.ts:239:127
+    237|     expect(arrived.observation.routes).toEqual([]);
+    238|     game.armies['army.4']!.cell = 503; refreshAuthoredSight(game);
+    239|     expect(applyCommand(game, { type: 'declareWar', factionId: game.tu…
+       |                                                                                                                               ^
+    240|     const threatened = await importFixture(game);
+    241|     const paused = await request({ type: 'groupMovement', expectedHash…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  23:07:38
+   Duration  2.01s (transform 519ms, setup 0ms, import 578ms, tests 1.37s, environment 0ms)
+
