@@ -76,10 +76,11 @@ batched versus serial archive/state/hash/observation results and worker bytes;
 measure representative Huge/Legendary batch costs and the 640-command ceiling.
 
 The bounded editor, personal library, transport and recovery integration are now
-implemented. Scoped tests, source reviews and four explicit actual-worker samples
-are retained in the evidence packet. Final test counts, browser/screenshot
-acceptance and built-production checks remain pending; the architecture status
-does not claim publication or completed release acceptance.
+verified. The full implementation suite, thirty affected browser journeys and
+generated built-production journey pass; source reviews, native captures and four
+actual-worker samples are retained. The final editorial suite passes 1,977 tests
+and 32 local Pages journeys. Publication/live checks remain separate, and none
+of these bounded results completes a whole release gate.
 
 This advances the existing production-sequence/template scope only. It does not
 add standing repeat production, refunds/reordering, smarter governors, theater

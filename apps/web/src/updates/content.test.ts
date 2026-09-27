@@ -2,8 +2,17 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
-  it('publishes saved campaign groups with explicit orders, frozen history and bounded scale evidence', () => {
+  it('keeps paid production, personal templates and authored verification within their distinct boundaries', () => {
     const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'production-sequences', sequence: 10, sourceRevision: '420219d278ae17f42a04871c6319ecf62a4af216', image: 'production-sequence-results' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['one to five existing construction or recruitment items', '120 ordinary queue orders costing 1,440 coin', '318-by-39-pixel native locator PNG, 4,767 bytes', 'not an organically grown realm', 'accepted prefix remains paid and queued', 'A second Apply submits the current whole list', 'Save up to twenty-four production templates', 'not included in campaign exports', 'Applied queues and active charters remain canonical campaign state', 'exactly one production request/state and one correlated, target-free movement query', '210,762 measured payload bytes', '22,970,874 bytes', '4,842,958 bytes in 245.647 milliseconds', '1,975 headless tests across 247 files in 59.76 seconds', 'Thirty affected Chromium gameplay journeys pass in 3.9 minutes', 'One separate built-production sequence journey passes in 7.3 seconds', 'reported separately, not added together', 'Rules/save remain 32 and content remains 015468d1', 'no new pacing run is claimed', 'M3 remains in progress', 'All fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    expect(text).not.toMatch(/PENDING FINAL|PUBLICATION BLOCKER|reused context from dispatch 09/);
+    expect(story.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/worker-serial-probe.log')).toBe(true);
+    expect(story.evidence.some(link => link.path === 'tests/production/production-sequences.spec.ts')).toBe(true);
+  });
+  it('publishes saved campaign groups with explicit orders, frozen history and bounded scale evidence', () => {
+    const story = dispatches.find(entry => entry.id === 'selection-groups')!;
     expect(story).toMatchObject({ id: 'selection-groups', sequence: 9, sourceRevision: '0d26fa3c34ac89164637f515e95671420400a841', image: 'selection-groups-recall' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     for (const claim of ['twenty-four groups across armies and hearths', '128 members per group', 'Recall changes neither the canonical hash nor worker-transfer totals', 'Empty groups remain', 'Rules/save advance to 32; content remains 015468d1', 'frozen forty-eight-row schema', '147,456 and 196,608', 'add 36,518 and 36,590 bytes to observation JSON', 'not packed worker responses or browser frame-time measurements', '1,941 headless tests across 243 files pass in 59.19 seconds', 'Twenty affected Chromium gameplay journeys pass in 2.6 minutes', 'One separate built-production group journey passes in 7.8 seconds', 'reported separately, not added together', 'Two earlier browser failures', 'M3 remains in progress', 'All fifteen release gates remain open', 'no new pacing run is claimed']) expect(text).toContain(claim);
@@ -11,7 +20,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {

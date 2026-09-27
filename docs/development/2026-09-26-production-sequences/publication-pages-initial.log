@@ -1,0 +1,213 @@
+[WebServer] (node:944968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:945347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 32 tests using 1 worker
+
+(node:945391) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (1.5s)
+  ✓   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (333ms)
+  ✘   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (5.3s)
+(node:946004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (330ms)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (596ms)
+  ✘   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (5.5s)
+(node:947032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 tests/gameplay/roadmap.spec.ts:29:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (544ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:50:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (594ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:67:1 › same-document Back and Forward restore filters and linked-item evidence (742ms)
+  ✓  10 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 1440px / 100% text (837ms)
+  ✓  11 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 390px / 130% text (739ms)
+  ✓  12 tests/gameplay/roadmap.spec.ts:125:1 › unknown item links recover honestly and dispatches link to the full roadmap (483ms)
+  ✓  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (1.9s)
+  ✓  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (1.9s)
+  ✓  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (1.6s)
+  ✓  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (1.9s)
+  ✓  17 tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text (288ms)
+  ✓  18 tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works (392ms)
+  ✘  19 tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results (5.5s)
+(node:948576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance (5.3s)
+(node:949456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (352ms)
+  ✓  22 tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch (675ms)
+  ✓  23 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (5.8s)
+  ✓  24 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (7.5s)
+  ✓  25 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1.6s)
+  ✓  26 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (712ms)
+  ✓  27 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (4.4s)
+  ✓  28 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (2.3s)
+  ✓  29 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (4.8s)
+  ✓  30 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (8.8s)
+  ✓  31 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (7.5s)
+  ✓  32 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.3s)
+
+
+  1) tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ───────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.dispatch-row')
+    Expected: 9
+    Received: 10
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.dispatch-row') with timeout 5000ms
+      - waiting for locator('.dispatch-row')
+        14 × locator resolved to 10 elements
+           - unexpected value "10"
+
+
+      18 | test('dispatches remain refresh-safe at their new path', async ({ page }) => {
+      19 |   await page.goto('updates/dispatches/');
+    > 20 |   await expect(page.locator('.dispatch-row')).toHaveCount(9);
+         |                                               ^
+      21 |   await page.locator('.dispatch-row a').first().click();
+      22 |   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
+      23 | });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/home.spec.ts:20:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#roadmap-empire-management')
+    Expected substring: "saved reusable army order templates"
+    Received string:    "◐ In progressGate IMake large empires practical to governSearchable registries issue existing postings, charters and ordered production to selected groups. Named campaign groups recall whom to select; separate personal browser libraries recall charter policies or production lists. Apply remains explicit, and paid prefixes stay visible after refusals. ACT-32 and wider M3 coordination remain in progress.Next: Extend charters, postings and production sequences with broader governor decisions, bounded theaters, patrol/escort roles, reusable army order templates and coordinated orders, keeping inspectable blockers and clear overrides.Evidence & acceptance for Make large empires practical to governDelivered in this checkpoint✓Map-first management and paged source queries let players inspect entities without duplicating the entire simulation into React.✓Standing hearth charters fill an empty queue within a stated coin ceiling and treasury reserve; direct player work takes precedence and stalled policies explain why.✓Army postings and settlement muster points retain ordinary routes, arrival behavior and blocked reasons. Working policies leave the next-action list; stalled ones remain actionable.✓Selection survives search and 25-row pages. Up to 128 land armies ashore receive existing Hold/Join postings at their current positions or one owned hearth; clearing skips armies without postings. One final worker response reports accepted and refused commands, with refused armies retained for review.✓The authored 100-owned-army, forty-hearth Legendary browser journey verifies individual override, group clearing and exact manual-save restoration. Separate capacity and damaged-response scenarios cover partial refusal and recovery; keyboard and 390px controls pass.✓Up to 128 owned hearths receive an existing Works/Wealth/Learning/Muster charter and per-work ceiling together. Army and hearth selections stay independent across tabs. Assignment and revocation preserve queues and treasury; the form explains the shared forty-coin reserve and ongoing Muster upkeep.✓The forty-hearth browser journey preserves queued work, overrides one policy and restores the exact saved state. A generated-campaign production journey founds a hearth, grants Wealth, saves, revokes at 390px and reloads without development hooks.✓Up to 24 named charter focus/ceiling templates persist in this browser across sessions and campaigns. Recall fills the existing form; Apply charters remains explicit. Template edits leave active charters and the canonical hash unchanged, and campaign exports exclude the library. Keyboard/narrow controls and denied, malformed and restored-access storage journeys pass.✓Up to 24 named campaign groups retain army/hearth selections with 128 members each through save, replay and campaign export/import. Recall changes only the active tab’s checks, skips embarked armies and gives no orders. Permanent losses prune memberships, empty groups remain, and updating warns before replacing all members. Keyboard/narrow controls, generated production restoration and authored forty-hearth/100-army workflows pass.✓Apply an ordered list of one to five existing construction/recruitment items to up to 128 owned hearths. Ordinary canonical commands append after existing queues and spend current coin; a refusal stops that hearth, preserves its paid prefix and leaves it selected for correction. One bounded request publishes one final state for at most 640 attempts.✓Up to 24 named production templates hold ordered lists in a separate personal browser library. Choosing an entry only inspects it; Recall fills the editor and Apply remains the paid action. Template actions never enter campaign saves or exports, and pending or failed preference storage leaves direct editing and production usable.Remaining acceptance○Extend charters, postings and production sequences with broader governor decisions, bounded theaters, patrol/escort roles, reusable army order templates and coordinated orders, keeping inspectable blockers and clear overrides.○Complete broader governor decisions, onboarding, accessible keyboard/tooltip workflows, durable settings and critical canvas alternatives for all major systems; group assignment, saved selections and personal charter/production templates do not complete them.○Prove combined delegation and override in representative mature campaigns with 100+ armies and many settlements; the authored group-order fixture is a bounded checkpoint. Profile sustained query transfers and virtualize large registries where needed.Source & verificationProduction sequences verification1,975 tests across 247 files before publication; Thirty affected Chromium gameplay journeys and one separate built-production sequence journey pass; these overlapping scopes are reported separately. Ordinary paid queues, browser-local templates, partial refusal/recovery and bounded worker measurements.Saved groups verification1,941 tests across 243 files, 20 affected Chromium journeys and one separate built-production group journey; saved membership, exact history, bounded metadata and sixty-four-realm save repair.Charter templates verification1,902 tests across 237 files, 16 affected Chromium journeys and one separate built-production template journey; browser-local policies, explicit application and storage recovery.Group charters verification1,889 tests across 235 files, 12 affected Chromium journeys and one new built-production charter journey; authored scale, queues, partial refusal and saved recovery.Group postings verification1,876 headless tests, seven affected Chromium journeys and 27 production Pages checks at the implementation checkpoint; authored scale, partial refusal and recovery evidence.Implementation statusReviewed campaign foundations, earlier playable slices and known gaps at the pinned evidence snapshot. Historical test totals remain separate.Release acceptance criteriaThe full objective gate, including integration, AI, saving and verification requirements.Link to this item Make large empires practical to govern →"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#roadmap-empire-management') with timeout 5000ms
+      - waiting for locator('#roadmap-empire-management')
+        14 × locator resolved to <article tabindex="-1" class="roadmap-item" data-status="in-progress" id="roadmap-empire-management" aria-labelledby="title-empire-management">…</article>
+           - unexpected value "◐ In progressGate IMake large empires practical to governSearchable registries issue existing postings, charters and ordered production to selected groups. Named campaign groups recall whom to select; separate personal browser libraries recall charter policies or production lists. Apply remains explicit, and paid prefixes stay visible after refusals. ACT-32 and wider M3 coordination remain in progress.Next: Extend charters, postings and production sequences with broader governor decisions, bounded theaters, patrol/escort roles, reusable army order templates and coordinated orders, keeping inspectable blockers and clear overrides.Evidence & acceptance for Make large empires practical to governDelivered in this checkpoint✓Map-first management and paged source queries let players inspect entities without duplicating the entire simulation into React.✓Standing hearth charters fill an empty queue within a stated coin ceiling and treasury reserve; direct player work takes precedence and stalled policies explain why.✓Army postings and settlement muster points retain ordinary routes, arrival behavior and blocked reasons. Working policies leave the next-action list; stalled ones remain actionable.✓Selection survives search and 25-row pages. Up to 128 land armies ashore receive existing Hold/Join postings at their current positions or one owned hearth; clearing skips armies without postings. One final worker response reports accepted and refused commands, with refused armies retained for review.✓The authored 100-owned-army, forty-hearth Legendary browser journey verifies individual override, group clearing and exact manual-save restoration. Separate capacity and damaged-response scenarios cover partial refusal and recovery; keyboard and 390px controls pass.✓Up to 128 owned hearths receive an existing Works/Wealth/Learning/Muster charter and per-work ceiling together. Army and hearth selections stay independent across tabs. Assignment and revocation preserve queues and treasury; the form explains the shared forty-coin reserve and ongoing Muster upkeep.✓The forty-hearth browser journey preserves queued work, overrides one policy and restores the exact saved state. A generated-campaign production journey founds a hearth, grants Wealth, saves, revokes at 390px and reloads without development hooks.✓Up to 24 named charter focus/ceiling templates persist in this browser across sessions and campaigns. Recall fills the existing form; Apply charters remains explicit. Template edits leave active charters and the canonical hash unchanged, and campaign exports exclude the library. Keyboard/narrow controls and denied, malformed and restored-access storage journeys pass.✓Up to 24 named campaign groups retain army/hearth selections with 128 members each through save, replay and campaign export/import. Recall changes only the active tab’s checks, skips embarked armies and gives no orders. Permanent losses prune memberships, empty groups remain, and updating warns before replacing all members. Keyboard/narrow controls, generated production restoration and authored forty-hearth/100-army workflows pass.✓Apply an ordered list of one to five existing construction/recruitment items to up to 128 owned hearths. Ordinary canonical commands append after existing queues and spend current coin; a refusal stops that hearth, preserves its paid prefix and leaves it selected for correction. One bounded request publishes one final state for at most 640 attempts.✓Up to 24 named production templates hold ordered lists in a separate personal browser library. Choosing an entry only inspects it; Recall fills the editor and Apply remains the paid action. Template actions never enter campaign saves or exports, and pending or failed preference storage leaves direct editing and production usable.Remaining acceptance○Extend charters, postings and production sequences with broader governor decisions, bounded theaters, patrol/escort roles, reusable army order templates and coordinated orders, keeping inspectable blockers and clear overrides.○Complete broader governor decisions, onboarding, accessible keyboard/tooltip workflows, durable settings and critical canvas alternatives for all major systems; group assignment, saved selections and personal charter/production templates do not complete them.○Prove combined delegation and override in representative mature campaigns with 100+ armies and many settlements; the authored group-order fixture is a bounded checkpoint. Profile sustained query transfers and virtualize large registries where needed.Source & verificationProduction sequences verification1,975 tests across 247 files before publication; Thirty affected Chromium gameplay journeys and one separate built-production sequence journey pass; these overlapping scopes are reported separately. Ordinary paid queues, browser-local templates, partial refusal/recovery and bounded worker measurements.Saved groups verification1,941 tests across 243 files, 20 affected Chromium journeys and one separate built-production group journey; saved membership, exact history, bounded metadata and sixty-four-realm save repair.Charter templates verification1,902 tests across 237 files, 16 affected Chromium journeys and one separate built-production template journey; browser-local policies, explicit application and storage recovery.Group charters verification1,889 tests across 235 files, 12 affected Chromium journeys and one new built-production charter journey; authored scale, queues, partial refusal and saved recovery.Group postings verification1,876 headless tests, seven affected Chromium journeys and 27 production Pages checks at the implementation checkpoint; authored scale, partial refusal and recovery evidence.Implementation statusReviewed campaign foundations, earlier playable slices and known gaps at the pinned evidence snapshot. Historical test totals remain separate.Release acceptance criteriaThe full objective gate, including integration, AI, saving and verification requirements.Link to this item Make large empires practical to govern →"
+
+
+      20 |   await empire.locator('summary').click();
+      21 |   await expect(empire).toContainText('Up to 24 named campaign groups');
+    > 22 |   await expect(empire).toContainText('saved reusable army order templates');
+         |                        ^
+      23 |   await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/0d26fa3c34ac89164637f515e95671420400a841/docs/development/2026-09-25-selection-groups/README.md');
+      24 |   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
+      25 |   expect(workers).toEqual([]);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/roadmap.spec.ts:22:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('status')
+    Expected: "9 dispatches"
+    Received: "10 dispatches"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+        14 × locator resolved to <p role="status" aria-live="polite">10 dispatches</p>
+           - unexpected value "10 dispatches"
+
+
+      101 |   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
+      102 |   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
+    > 103 |   await expect(page.getByRole('status')).toHaveText('9 dispatches');
+          |                                          ^
+      104 |   await expect(page.locator('.dispatch-row')).toHaveCount(9);
+      105 | });
+      106 |
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:103:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: 'Road to 1.0' })
+    Expected substring: "observed supply"
+    Received string:    "The promise & the remaining workRoad to 1.0Selected gates and decisions. Not a complete release report or a completion percentage.The agreed scope stays put. The evidence changes. A scoped approval moves a piece of the game forward; it does not clear every gate around it.Open the full roadmap →Browse checked completed checkpoints, in-progress systems and pending features with evidence and remaining acceptance. The selected decisions below use the current roadmap snapshot; historical dispatches retain their own evidence.Accepted scopeThe agreed game, not a moving finish lineThe canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.Read the source for The agreed game, not a moving finish line↗Current / partialGates E & F · Save integrity and combatRules32 retains campaign groups with exact rules31 checkpoints and mixed-history saves and exports. A benchmark exposed a pre-existing sixty-four-realm research-save limit; current saves now support it while historical schemas remain frozen. Campaign-safety and fleet-store evidence remains historical; whole save, combat and release gates remain open.Read the source for Gates E & F · Save integrity and combat↗Current / partialGates B, F2 & J · A playable foundationTwenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.Read the source for Gates B, F2 & J · A playable foundation↗Open gateGate C & integration · Remaining campaign proofThe production-sequence implementation passes 1,975 headless tests across 247 files before its dispatch publication. Thirty affected Chromium gameplay journeys and one separate built-production sequence journey pass; these overlapping scopes are reported separately. Ordinary queue commands still own paid work; rules/save32, AI policy and content prices remain unchanged. Fleet attrition and Standard/Long pacing limits remain separately dated evidence, not new measurements. M0 and overall integration remain open.Read the source for Gate C & integration · Remaining campaign proof↗Current / partialGate I · Orders across a large realmNamed campaign groups recall army/hearth selections before explicit orders. Production sequences apply one to five ordinary projects to up to 128 owned hearths, preserving existing queues and paid prefixes; partial refusals remain selected for correction. Separate browser-local libraries hold up to 24 charter policies and 24 production templates, excluded from campaign exports. Theaters, army order templates, broader governors and combined mature-empire acceptance remain open.Read the source for Gate I · Orders across a large realm↗Open gateGates D, K & L · Scale and browser confidenceStorage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.Read the source for Gates D, K & L · Scale and browser confidence↗Proposal / deferredSuggested follow-ups, not new release promisesPromoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.Read the source for Suggested follow-ups, not new release promises↗Not this updateGate M, full magic and a 1.0 announcementNo online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.Read the source for Gate M, full magic and a 1.0 announcement↗Read all release gates →"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('region', { name: 'Road to 1.0' }) with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Road to 1.0' })
+        14 × locator resolved to <section id="scope" class="scope-section" aria-labelledby="scope-title">…</section>
+           - unexpected value "The promise & the remaining workRoad to 1.0Selected gates and decisions. Not a complete release report or a completion percentage.The agreed scope stays put. The evidence changes. A scoped approval moves a piece of the game forward; it does not clear every gate around it.Open the full roadmap →Browse checked completed checkpoints, in-progress systems and pending features with evidence and remaining acceptance. The selected decisions below use the current roadmap snapshot; historical dispatches retain their own evidence.Accepted scopeThe agreed game, not a moving finish lineThe canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.Read the source for The agreed game, not a moving finish line↗Current / partialGates E & F · Save integrity and combatRules32 retains campaign groups with exact rules31 checkpoints and mixed-history saves and exports. A benchmark exposed a pre-existing sixty-four-realm research-save limit; current saves now support it while historical schemas remain frozen. Campaign-safety and fleet-store evidence remains historical; whole save, combat and release gates remain open.Read the source for Gates E & F · Save integrity and combat↗Current / partialGates B, F2 & J · A playable foundationTwenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.Read the source for Gates B, F2 & J · A playable foundation↗Open gateGate C & integration · Remaining campaign proofThe production-sequence implementation passes 1,975 headless tests across 247 files before its dispatch publication. Thirty affected Chromium gameplay journeys and one separate built-production sequence journey pass; these overlapping scopes are reported separately. Ordinary queue commands still own paid work; rules/save32, AI policy and content prices remain unchanged. Fleet attrition and Standard/Long pacing limits remain separately dated evidence, not new measurements. M0 and overall integration remain open.Read the source for Gate C & integration · Remaining campaign proof↗Current / partialGate I · Orders across a large realmNamed campaign groups recall army/hearth selections before explicit orders. Production sequences apply one to five ordinary projects to up to 128 owned hearths, preserving existing queues and paid prefixes; partial refusals remain selected for correction. Separate browser-local libraries hold up to 24 charter policies and 24 production templates, excluded from campaign exports. Theaters, army order templates, broader governors and combined mature-empire acceptance remain open.Read the source for Gate I · Orders across a large realm↗Open gateGates D, K & L · Scale and browser confidenceStorage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.Read the source for Gates D, K & L · Scale and browser confidence↗Proposal / deferredSuggested follow-ups, not new release promisesPromoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.Read the source for Suggested follow-ups, not new release promises↗Not this updateGate M, full magic and a 1.0 announcementNo online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.Read the source for Gate M, full magic and a 1.0 announcement↗Read all release gates →"
+
+
+      113 |   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
+      114 |   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
+    > 115 |   await expect(ledger).toContainText('observed supply');
+          |                        ^
+      116 |   await expect(ledger).toContainText('1,941 headless tests');
+      117 |   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
+      118 |   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:115:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/publication-pages-output/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ────────────
+    tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+    tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results 
+    tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+  28 passed (1.4m)

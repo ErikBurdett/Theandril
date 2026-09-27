@@ -11,7 +11,7 @@ Canonical refusals stop only that hearth; a recorder exception stops the batch,
 omits uncertain outcomes and retains recovery. Publication failures also lock.
 No queue eligibility, price or AI rule is duplicated in worker/UI. Response rows
 contain attempted prefixes, and own-seat/watch/battle/victory guards precede work.
-The benchmark verifies640attempts as the bounded ceiling, single publication,
+The benchmark verifies 640 attempts as the bounded ceiling, single publication,
 exact replay/recorded order and unchanged fog. Large observation transfers remain.
 
 Personal storage uses a separate bounded/version-checked database, transactional
@@ -29,7 +29,7 @@ omitted the normal selected-army movement refresh; its replacement asserts the
 exact production/state and movement/query pairs separately, not a loose bound.
 Canonical charters are checked against serial observation with two real policies.
 
-Evidence: full implementation1975/247 in tests.log; thirty affected browser
+Evidence: full implementation 1975 / 247 in tests.log; thirty affected browser
 journeys in browser-final.log; generated built-production journey in
 production-initial.log. No timeout change, skip or assertion suppression. The
 full suite includes determinism/save/replay coverage; existing simulation/rules,

@@ -1,9 +1,11 @@
 import type { Dispatch } from './types';
+import { productionSequencesDispatch } from './production-sequences';
 
 /** Editorial sequence, not release dates. Historical evidence is pinned below. */
 export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
+  productionSequencesDispatch,
   {
     publication: 'published', sourceRevision: '0d26fa3c34ac89164637f515e95671420400a841', sequence: 9,
     id: 'selection-groups', edition: '09', title: 'Recall a group, then give the order',

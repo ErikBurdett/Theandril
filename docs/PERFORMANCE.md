@@ -6,8 +6,8 @@
 measure the actual simulation worker module with structured-clone transfer and
 canonical journaling. Each case has **one elapsed sample**, on an i9-13900K with
 Node 26.7.0; setup, import, export and replay are outside the timed batch. Rules/save
-32 and content `015468d1` are unchanged. Full implementation and affected browser checks pass; final publication acceptance
-is recorded separately; these measurements do not imply deployment or gate completion.
+32 and content `015468d1` are unchanged. Full implementation and affected browser checks pass;
+final publication acceptance is recorded separately; these measurements do not imply deployment or gate completion.
 
 The authored generator-4 Huge/Legendary fixtures have 196,608/307,200 cells,
 32/40 realms and 1,500/4,000 armies, including 47/100 owned armies. These old

@@ -7,7 +7,7 @@ All fifteen release gates and the broader M3 milestone remain open.
 
 The working candidate follows baseline
 `3a8767b3b881e620510f773695aa209af3ec988d`; that commit does **not** contain this
-implementation. The implementation commit is pinned by dispatch 10 and the publication record. The initial build contains a draft journal; final journal checks are separate. See [ADR 0043](../../architecture/0043-production-sequences.md)
+implementation. The reviewed implementation is `420219d278ae17f42a04871c6319ecf62a4af216`, pinned by dispatch 10 and the publication record. The initial build contains a draft journal; final journal checks are separate. See [ADR 0043](../../architecture/0043-production-sequences.md)
 and the [dispatch work packet](work-packet.md).
 
 ## Player workflow and authority
@@ -71,12 +71,14 @@ These scopes overlap and must not be added together.
 | Scoped UI lint/whitespace | [Successful tool transcript](ui-lint-tool-transcript.log), empty output and exit 0 |
 | Integrated typecheck | [Successful log](typecheck.log); earlier incomplete-integration failure retained separately |
 | Worker/storage suites | [31 worker checks](worker-final.log) and [17 storage checks](template-tests.log), including ten new production-template cases; also included in the full suite |
-| Initial affected browser | [9 pass /1 fail](browser-initial.log), 1.1 minutes; corrected traffic assertion passes in the final run |
-| Full implementation suite | [1,975 tests /247 files pass](tests.log), 59.76 seconds with four workers |
+| Initial affected browser | [9 pass / 1 fail](browser-initial.log), 1.1 minutes; corrected traffic assertion passes in the final run |
+| Full implementation suite | [1,975 tests / 247 files pass](tests.log), 59.76 seconds with four workers |
 | Affected gameplay | [30 Chromium journeys pass](browser-final.log), 3.9 minutes; ten new plus twenty existing |
-| Generated built production | [One journey passes](production-initial.log), 7.3 seconds test /8.3 seconds run; ordinary controls and manual/portable restoration without debug hooks |
+| Generated built production | [One journey passes](production-initial.log), 7.3 seconds test / 8.3 seconds run; ordinary controls and manual/portable restoration without debug hooks |
 | Build and validation | [Pages build](build-initial.log), [lint](lint.log), [content](content-validation.log), [art](art-validation.log) pass; existing large-chunk warning retained |
-| Final journal/Pages/publication/live | Recorded separately after implementation pin; no deployment claim at this checkpoint |
+| Final journal suite | [1,977 tests / 247 files](publication-tests.log), 58.02 seconds; [typecheck](publication-typecheck.log), [lint](publication-lint.log), [build](publication-build.log) pass |
+| Local Pages | [32/32 pass](publication-pages.log), 1.1 minutes after documented catalogue corrections; exact native journal captures retained under publication-captures/ |
+| Publication/live | Recorded after publication; no deployment claim at this local checkpoint |
 
 The UI transcripts preserve the actual earlier tool output; they are explicitly
 labelled transcripts, not new executions or redirected raw logs. The
@@ -103,11 +105,11 @@ derived quotes match serial canonical observation rather than stale blockers.
 
 The browser batch pays 1,440 coin for 120 commands across forty hearths, emits
 one 4,400,231-byte measured state payload and a separately measured 923-byte
-movement JSON reply, with39 packed-cell bytes. Hash changes `fdfd0520` →
+movement JSON reply, with 39 packed-cell bytes. Hash changes `fdfd0520` →
 `fd8bc27b`, matching serial execution. This excludes browser structured-clone
 framing and is distinct from the benchmark fixtures below. Individual additions,
 manual restoration, preference CRUD/no command traffic/export exclusion,
-keyboard and390px layouts pass. Original reviewed PNGs and settings are retained
+keyboard and 390 px layouts pass. Original reviewed PNGs and settings are retained
 in [screenshots/provenance.json](screenshots/provenance.json); raw local Playwright
 output directories are ignored, with the failed snapshot and runner log retained
 here. Native captures are copied without image transformation.
@@ -129,15 +131,15 @@ lock and restoration. No production failure is relabeled as a test-only issue.
 The harness imports the real worker, uses structured-clone transfer and canonical
 journaling, and validates the downloaded campaign afterward. Each of the four
 cases is **one elapsed sample**, on an i9-13900K with Node 26.7.0. Setup, import,
-export and replay are outside the timed batch. These are authored generator4
-worlds, distinct from current generator8 map dimensions and organic campaign play.
+export and replay are outside the timed batch. These are authored generator 4
+worlds, distinct from current generator 8 map dimensions and organic campaign play.
 
 | Authored workload | Hearths × items | Attempts | Batch ms | Command ms | Transfer bytes | Result bytes | Final hash |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| Huge mature:196,608 cells,32 realms,1,500 armies |32 ×3|96|104.648|1.385|1,791,958|5,500|`0a5a53bf`|
-| Huge expanded ceiling |128 ×5|640|120.915|6.499|2,271,820|31,452|`059cebe5`|
-| Legendary mature:307,200 cells,40 realms,4,000 armies |40 ×3|120|199.278|0.784|4,399,407|6,889|`09633fa8`|
-| Legendary expanded ceiling |128 ×5|640|245.647|3.854|4,842,958|31,457|`7a850cbb`|
+| Huge mature: 196,608 cells, 32 realms, 1,500 armies | 32 × 3 | 96 | 104.648 | 1.385 | 1,791,958 | 5,500 | `0a5a53bf` |
+| Huge expanded ceiling | 128 × 5 | 640 | 120.915 | 6.499 | 2,271,820 | 31,452 | `059cebe5` |
+| Legendary mature: 307,200 cells, 40 realms, 4,000 armies | 40 × 3 | 120 | 199.278 | 0.784 | 4,399,407 | 6,889 | `09633fa8` |
+| Legendary expanded ceiling | 128 × 5 | 640 | 245.647 | 3.854 | 4,842,958 | 31,457 | `7a850cbb` |
 
 Every case emits one final state response and 39 cell-transfer bytes; total bytes
 include the permitted observation and result payload. The representative worlds
@@ -145,14 +147,16 @@ retain their authored paid 37-cell borders. Ceiling worlds explicitly expand to 
 owned hearths and rebase land to legal starting borders. Owned army counts are 47
 for Huge and 100 for Legendary; the 32/40 representative hearths are all authored
 under one realm. The three-project list is Guard → Workshop → Guard; the ceiling
-list is five Guards. Treasury falls by 1,152 /7,680 /1,440 /7,680 coin respectively.
+list is five Guards. Treasury falls by 1,152 / 7,680 / 1,440 / 7,680 coin respectively.
 
 All four samples preserve exact recorded command order, match final replay/hash
 and leave observed fog unchanged. The separate actual-worker unit comparison
 checks batched versus serial campaign archives/state and saved continuation on an
 authored 40-hearth Small map; it is a different fixture from these large-world
-timings and from the browser's Legendary fixture. Final measured serial byte
-figures await a retained parent test log.
+timings and from the browser's Legendary fixture. [The retained serial probe](worker-serial-probe.log) records 210,762 B for one batch
+(including 6,864 result bytes) versus 22,970,874 B for 120 serial states, with exact
+archive/hash `bbbaecff` and saved continuation. Single measured elapsed samples
+are 15.98 ms versus 1331.57 ms; no percentile or renderer claim follows.
 
 The multi-megabyte observation payloads and gap between batch and command time
 remain visible costs. These samples do not establish render/frame latency,
@@ -162,11 +166,13 @@ prior Standard 234 / Long 342 / Epic 379 remains separately dated evidence.
 
 ## Remaining acceptance
 
-Finish the failed 40-hearth journey, independent screenshot review, the final
-affected browser run, full local checks and a generated built-production journey
-without development hooks. Retain failures and exact final evidence before an
-implementation commit is pinned. Publication requires its own factual/visual
-review, source-linked dispatch, build, Pages and live readback.
+The forty-hearth journey, 30 affected browsers, full implementation suite and
+generated production journey now pass. [Independent source/factual review](factual-review.md)
+and [visual review](browser-review.md) disclose authorship. The publication
+suite passes 1,977 tests / 247 files in 58.02 seconds after two new editorial boundary
+checks; [log](publication-tests.log). Final Pages/live and rendered-publication
+review are recorded separately. Earlier closing instructions in the pinned
+implementation README were stale; its passing tables/logs remain unchanged.
 
 This implements a bounded part of existing production-sequence/template scope;
 it does not complete M3. Theater strategy, patrol/escorts, reusable army order
@@ -175,5 +181,15 @@ remain. There is no standing repeat production, refund/queue-reorder system,
 cross-device template sync, live cross-tab refresh or per-hearth resume plan.
 The current [implementation status](../../IMPLEMENTATION_STATUS.md),
 [performance record](../../PERFORMANCE.md) and
-[1.0 plan](../../1.0-DEVELOPMENT.md) remain canonical; the parent owns their later
-reconciliation. No global status or published journal was changed by this draft.
+[1.0 plan](../../1.0-DEVELOPMENT.md) remain canonical and are updated with this
+checkpoint. Deployment is separate from release acceptance.
+
+## Publication correction
+
+The first 32-journey Pages run passed 28 and failed 4 ([retained log](publication-pages-initial.log)).
+Two tests still expected nine articles, the roadmap test retained the old source
+pin/wording, and the scope ledger test expected the prior checkpoint count and
+fleet sentence. Updating those explicit catalogue expectations preserves the
+interaction, search, source-link and open-gate assertions. No runtime change was
+needed. The new feature passed in that run. A separate caption spacing correction
+changes no screenshot bytes or factual scope; the final build and 32 journeys follow.

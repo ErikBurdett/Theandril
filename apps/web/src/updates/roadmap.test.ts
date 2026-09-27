@@ -11,7 +11,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.some(item => item.startsWith('Up to 24 named campaign groups'))).toBe(true);
     expect(empire.delivered.join(' ')).toContain('empty groups remain');
     expect(empire.remaining.join(' ')).not.toContain('durable named groups');
-    expect(empire.remaining.join(' ')).toContain('saved reusable army order templates');
+    expect(empire.remaining.join(' ')).toContain('reusable army order templates');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-25-selection-groups/README.md')).toBe(true);
     expect(roadmapItems.find(item => item.id === 'durable-archives')!.delivered.join(' ')).toContain('frozen historical schemas retain forty-eight-row limits');
     expect(roadmapItems.find(item => item.id === 'giant-scale')!.delivered.join(' ')).toContain('147,456/196,608');
@@ -66,7 +66,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-26', revision: '0d26fa3c34ac89164637f515e95671420400a841', rules: 32 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-26', revision: '420219d278ae17f42a04871c6319ecf62a4af216', rules: 32 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -95,7 +95,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.join(' ')).toContain('Up to 128 owned hearths');
     expect(empire.delivered.join(' ')).toContain('Assignment and revocation preserve queues and treasury');
     expect(empire.remaining.join(' ')).not.toContain('Complete settlement batch policies');
-    expect(empire.remaining.join(' ')).toContain('saved reusable army order templates');
+    expect(empire.remaining.join(' ')).toContain('reusable army order templates');
     expect(empire.remaining.join(' ')).toContain('broader governor decisions');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-24-group-charters/README.md')).toBe(true);
   });
@@ -106,10 +106,23 @@ describe('the source-backed roadmap contract', () => {
     expect(text).toContain('Up to 24 named charter focus/ceiling templates');
     expect(text).toContain('Apply charters remains explicit');
     expect(text).toContain('campaign exports exclude the library');
-    expect(empire.remaining.join(' ')).toContain('production sequences');
+    expect(empire.remaining.join(' ')).toContain('reusable army order templates');
     expect(empire.remaining.join(' ')).toContain('bounded theaters');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-25-charter-templates/README.md')).toBe(true);
     expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
+    expect(roadmapGates.every(gate => ['in-progress', 'pending'].includes(gate.status))).toBe(true);
+  });
+  it('records production lists as a bounded checkpoint while preserving manual correction and broader delegation acceptance', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    const delivered = empire.delivered.join(' '), remaining = empire.remaining.join(' ');
+    expect(empire.status).toBe('in-progress');
+    for (const claim of ['one to five existing construction/recruitment items', 'up to 128 owned hearths', 'preserves its paid prefix and leaves it selected for correction', 'at most 640 attempts', 'Up to 24 named production templates', 'Apply remains the paid action', 'never enter campaign saves or exports', 'failed preference storage leaves direct editing and production usable']) expect(delivered, claim).toContain(claim);
+    for (const claim of ['broader governor decisions', 'bounded theaters', 'patrol/escort roles', 'reusable army order templates', 'representative mature campaigns']) expect(remaining, claim).toContain(claim);
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/README.md')).toBe(true);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(61);
+    expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
+    expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
+    expect(roadmapGates).toHaveLength(15);
     expect(roadmapGates.every(gate => ['in-progress', 'pending'].includes(gate.status))).toBe(true);
   });
 });
