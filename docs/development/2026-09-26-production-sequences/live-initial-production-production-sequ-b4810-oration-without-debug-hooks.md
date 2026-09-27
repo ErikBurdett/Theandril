@@ -1,0 +1,258 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: production/production-sequences.spec.ts >> built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks
+- Location: tests/production/production-sequences.spec.ts:52:1
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f3e3]:
+  - button "Import save file"
+  - generic [ref=f3e4]:
+    - banner [ref=f3e5]:
+      - heading "Theandril" [level=1] [ref=f3e8]
+      - generic [ref=f3e9]:
+        - generic [ref=f3e10]:
+          - generic [ref=f3e11]: TREASURY
+          - strong [ref=f3e12]: 42 coin
+        - generic [ref=f3e13]:
+          - generic [ref=f3e14]: KNOWLEDGE
+          - strong [ref=f3e15]: "0"
+    - navigation "Campaign navigation" [ref=f3e16]:
+      - generic [ref=f3e17]:
+        - text: Standard pace ·
+        - generic [ref=f3e18]: 2 realms
+    - group [ref=f3e19]:
+      - generic "Campaign & settings" [ref=f3e20] [cursor=pointer]
+  - main [ref=f3e21]:
+    - region "Strategic map" [ref=f3e22]:
+      - generic "World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls." [ref=f3e23]
+      - navigation "Map management" [ref=f3e24]:
+        - button "Armies & fleets" [ref=f3e25] [cursor=pointer]
+        - button "Settlements" [ref=f3e29] [cursor=pointer]
+        - button "Characters & agents" [ref=f3e33] [cursor=pointer]:
+          - generic [ref=f3e36]: Characters
+        - button "Realm progression" [ref=f3e37] [cursor=pointer]:
+          - generic [ref=f3e40]: Research
+        - button "Realm affairs" [ref=f3e41] [cursor=pointer]:
+          - generic [ref=f3e44]: Diplomacy
+        - button "Campaign journal" [ref=f3e45] [cursor=pointer]
+        - button "World overview" [ref=f3e49] [cursor=pointer]
+      - generic [ref=f3e53]:
+        - button "Zoom in" [ref=f3e54] [cursor=pointer]: +
+        - button "Zoom out" [ref=f3e55] [cursor=pointer]: −
+        - button "Focus selection" [ref=f3e56] [cursor=pointer]
+        - button "Open map actions" [ref=f3e57] [cursor=pointer]
+        - button "Map guide" [ref=f3e58] [cursor=pointer]: "?"
+      - group:
+        - generic "World map · Terrain" [ref=f3e59] [cursor=pointer]
+  - dialog [ref=f3e60]:
+    - banner [ref=f3e61]:
+      - generic [ref=f3e62]:
+        - generic [ref=f3e63]: The realm's ledgers
+        - heading "Selected orders" [active] [level=2] [ref=f3e64]
+        - paragraph [ref=f3e65]: Second Sequence Hearth
+      - button "Close Selected orders" [ref=f3e66] [cursor=pointer]: ×
+    - region "Selected entity orders" [ref=f3e68]:
+      - button "Show on map" [ref=f3e69] [cursor=pointer]
+      - group [ref=f3e70]:
+        - heading "Second Sequence Hearth" [level=2] [ref=f3e71]
+        - paragraph [ref=f3e72]: A hearth of the Ashen Compact · cell 1218
+        - generic [ref=f3e73]:
+          - generic [ref=f3e74]:
+            - strong [ref=f3e75]: "1"
+            - generic [ref=f3e76]: Population
+          - generic [ref=f3e77]:
+            - strong [ref=f3e78]: "0"
+            - generic [ref=f3e79]: Stored food
+        - heading "Production queue" [level=3] [ref=f3e80]
+        - list [ref=f3e81]:
+          - listitem [ref=f3e82]:
+            - text: Root cellar
+            - generic [ref=f3e83]: 0 / 18 industry
+          - listitem [ref=f3e84]:
+            - text: Charter market
+            - generic [ref=f3e85]: 0 / 24 industry
+        - group [ref=f3e86]:
+          - generic "Muster point none" [ref=f3e87] [cursor=pointer]:
+            - text: Muster point
+            - generic [ref=f3e88]: none
+          - option "Second Sequence Hearth · hex 1218" [selected]
+        - generic "Settlement production" [ref=f3e89]:
+          - group [ref=f3e90]:
+            - generic "Standing charter none" [ref=f3e91] [cursor=pointer]:
+              - text: Standing charter
+              - generic [ref=f3e92]: none
+            - option "Works" [selected]
+            - option "Wealth"
+            - option "Learning"
+            - option "Muster"
+          - group [ref=f3e93]:
+            - generic "Construction 2 available" [ref=f3e94] [cursor=pointer]:
+              - text: Construction
+              - generic [ref=f3e95]: 2 available
+            - generic [ref=f3e96]:
+              - article [ref=f3e97]:
+                - generic [ref=f3e99]:
+                  - heading "Root cellar" [level=4] [ref=f3e100]
+                  - paragraph [ref=f3e101]: 18 industry · 8 coin
+                  - paragraph [ref=f3e102]: +4 food each turn
+                - paragraph [ref=f3e103]: That building is already built or queued.
+                - button "Build Root cellar" [disabled] [ref=f3e104]
+              - article [ref=f3e105]:
+                - generic [ref=f3e107]:
+                  - heading "Cinder workshop" [level=4] [ref=f3e108]
+                  - paragraph [ref=f3e109]: 24 industry · 12 coin
+                  - paragraph [ref=f3e110]: +4 industry each turn
+                - button "Build Cinder workshop" [ref=f3e111] [cursor=pointer]
+              - article [ref=f3e112]:
+                - generic [ref=f3e114]:
+                  - heading "Charter market" [level=4] [ref=f3e115]
+                  - paragraph [ref=f3e116]: 24 industry · 10 coin
+                  - paragraph [ref=f3e117]: +5 coin each turn
+                - paragraph [ref=f3e118]: That building is already built or queued.
+                - button "Build Charter market" [disabled] [ref=f3e119]
+              - article [ref=f3e120]:
+                - generic [ref=f3e122]:
+                  - heading "Witness archive" [level=4] [ref=f3e123]
+                  - paragraph [ref=f3e124]: 24 industry · 12 coin
+                  - paragraph [ref=f3e125]: +4 knowledge each turn
+                - button "Build Witness archive" [ref=f3e126] [cursor=pointer]
+              - article [ref=f3e127]:
+                - generic [ref=f3e129]:
+                  - heading "Charter harbor" [level=4] [ref=f3e130]
+                  - paragraph [ref=f3e131]: 36 industry · 20 coin
+                  - paragraph [ref=f3e132]: +2 coin each turn
+                - paragraph [ref=f3e133]: Research Coastal navigation first.
+                - button "Build Charter harbor" [disabled] [ref=f3e134]
+          - group [ref=f3e135]:
+            - generic "Recruit land forces 6 available" [ref=f3e136] [cursor=pointer]:
+              - text: Recruit land forces
+              - generic [ref=f3e137]: 6 available
+          - group [ref=f3e138]:
+            - generic "Recruit fleet hulls 0 available" [ref=f3e139] [cursor=pointer]:
+              - text: Recruit fleet hulls
+              - generic [ref=f3e140]: 0 available
+        - region "Settlement territory" [ref=f3e141]:
+          - heading "Land & stewardship" [level=3] [ref=f3e142]
+          - group [ref=f3e143]:
+            - generic "Road connections" [ref=f3e144] [cursor=pointer]
+          - paragraph [ref=f3e145]: colony · Capital
+          - paragraph [ref=f3e146]: "Colony: 1–2 people · Settlement: 3–7 · City: 8+. Capital is a separate designation."
+          - paragraph [ref=f3e147]: 7 claimed tiles · 0 / 1 assigned workers · reach 2
+          - paragraph [ref=f3e148]: Connected territory and population can keep growing. Each person can work one additional tile. Larger hearths need more food, investment and civic upkeep.
+          - paragraph [ref=f3e149]: "Next person: 0 / 12 food · consumption 2 food per turn · civic upkeep 1 coin (1 population, 0 territory, 0 administration)."
+          - paragraph [ref=f3e150]: "Realm coin per turn: 7 income − 2 upkeep = 5. Queued formations add 0 upkeep when completed."
+          - region "Border growth" [ref=f3e151]:
+            - paragraph [ref=f3e152]:
+              - strong [ref=f3e153]: "Border growth:"
+              - text: 0 / 8 civic progress · +1 per active turn
+            - progressbar "Civic progress toward next border" [ref=f3e154]
+            - paragraph [ref=f3e155]: "Next expansion: hex 1121. About 8 active turns at this rate. Larger populations, markets, archives and Surveyed estates support growth."
+            - paragraph [ref=f3e156]: Expansion claims one connected, charted tile at a time. It does not assign workers or build improvements. Siege and occupation pause growth; conquest resets its progress. Buying a tile is immediate and increases the next expansion threshold.
+          - paragraph [ref=f3e157]: The center is worked for free. Borders do not block travel. Only worked tiles contribute their yields; natural features remain after cultivation.
+          - paragraph [ref=f3e158]: Map borders mark the realm perimeter. Select tiles to inspect this town’s individual claims. Dim land shows remembered ownership, not live information beyond sight.
+          - paragraph [ref=f3e159]:
+            - strong [ref=f3e160]: "Land yields:"
+            - text: +2 food, +2 coin, +1 knowledge
+          - paragraph [ref=f3e161]: Includes the center, assigned tiles and any capital bonus; buildings and other economy effects are separate.
+          - group [ref=f3e162]:
+            - generic "Culture & economy · Ashen Compact" [ref=f3e163] [cursor=pointer]
+          - paragraph [ref=f3e164]: Select a tile on the map to inspect this settlement’s land. Army movement is off while a settlement is selected.
+          - button "Select tiles" [ref=f3e165] [cursor=pointer]
+          - region "Land hex 1218" [ref=f3e166]:
+            - heading "Hex 1218 · Steppe" [level=4] [ref=f3e167]
+            - paragraph [ref=f3e168]: Settlement center · automatically worked
+            - paragraph [ref=f3e169]:
+              - strong [ref=f3e170]: "Natural features:"
+            - list [ref=f3e171]:
+              - listitem [ref=f3e172]:
+                - strong [ref=f3e173]: Fresh spring
+                - text: · +1 food
+                - generic [ref=f3e174]: Reliable fresh water feeds a worked hex. It does not create a navigable river.
+            - table [ref=f3e175]:
+              - caption [ref=f3e176]: Yield breakdown per worked turn
+              - rowgroup [ref=f3e177]:
+                - row [ref=f3e178]:
+                  - columnheader "Source" [ref=f3e179]
+                  - columnheader "Contribution" [ref=f3e180]
+              - rowgroup [ref=f3e181]:
+                - row [ref=f3e182]:
+                  - rowheader "Biome" [ref=f3e183]
+                  - cell "+1 food, +1 coin" [ref=f3e184]
+                - row [ref=f3e185]:
+                  - rowheader "Features" [ref=f3e186]
+                  - cell "+1 food" [ref=f3e187]
+                - row [ref=f3e188]:
+                  - rowheader "Faction affinity" [ref=f3e189]
+                  - cell "No change" [ref=f3e190]
+                - row [ref=f3e191]:
+                  - rowheader "Improvement" [ref=f3e192]
+                  - cell "No change" [ref=f3e193]
+                - row [ref=f3e194]:
+                  - rowheader "Feature interactions" [ref=f3e195]
+                  - cell "No change" [ref=f3e196]
+                - row [ref=f3e197]:
+                  - rowheader "Final tile yield" [ref=f3e198]
+                  - cell "+2 food, +1 coin" [ref=f3e199]
+            - paragraph [ref=f3e200]: Construction replaces any existing improvement only on completion. Its benefits require an assigned worker; cancelling unfinished work does not refund its cost.
+            - group [ref=f3e201]:
+              - generic "Tile improvements" [ref=f3e202] [cursor=pointer]
+            - group [ref=f3e203]:
+              - generic "Cultivate biome" [ref=f3e204] [cursor=pointer]
+        - region "Settlement condition" [ref=f3e205]:
+          - generic [ref=f3e206]:
+            - generic [ref=f3e207]:
+              - text: Devastation
+              - strong [ref=f3e208]: 0/100
+            - generic [ref=f3e209]:
+              - text: Occupation
+              - strong [ref=f3e210]: 0 turns
+        - group [ref=f3e211]:
+          - generic "Appoint characters & officers" [ref=f3e212] [cursor=pointer]
+        - generic [ref=f3e213]:
+          - generic [ref=f3e214]: Selected hex 1218
+          - paragraph [ref=f3e215]: Steppe · Plains · fertility 100 · in sight
+          - paragraph [ref=f3e216]: River · headwater
+        - paragraph [ref=f3e217]: Claimed land · Ashen Compact · Second Sequence Hearth
+  - contentinfo [ref=f3e218]:
+    - generic [ref=f3e220]:
+      - generic [ref=f3e221]: Selected settlement
+      - strong [ref=f3e222]: Second Sequence Hearth
+      - generic [ref=f3e223]: 1 people · 2 queued projects
+      - button "Show selected orders" [ref=f3e225] [cursor=pointer]
+    - region "Next-action navigation" [ref=f3e226]:
+      - generic [ref=f3e227]:
+        - button "Previous army needing orders" [ref=f3e228] [cursor=pointer]: ‹
+        - button "Next army needing orders" [ref=f3e229] [cursor=pointer]: Next army N
+        - button "Previous idle settlement" [disabled] [ref=f3e230]: ‹
+        - button "Next idle settlement" [disabled] [ref=f3e231]: Next town S
+      - paragraph [ref=f3e232]: "Labor: 1 unassigned household · 1 settlement"
+      - generic [ref=f3e233]:
+        - button "Previous settlement with unassigned households" [ref=f3e234] [cursor=pointer]: ‹
+        - button "Next settlement with unassigned households" [ref=f3e235] [cursor=pointer]: Review households
+      - group [ref=f3e236]:
+        - generic "What wants a decision 2 kinds" [ref=f3e237] [cursor=pointer]:
+          - text: What wants a decision
+          - generic [ref=f3e238]: 2 kinds
+    - generic [ref=f3e239]:
+      - strong [ref=f3e241]: Turn 1
+      - button "End turn" [ref=f3e242] [cursor=pointer]:
+        - text: End turn
+        - generic [ref=f3e243]: E
+    - status [ref=f3e244]:
+      - generic [aria-hidden] [ref=f3e245]: ◆
+      - text: Campaign exported. Keep this file as a backup.
+```

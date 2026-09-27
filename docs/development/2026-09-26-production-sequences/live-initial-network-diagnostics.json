@@ -1,0 +1,561 @@
+{
+  "scope": "Extracted from failed Playwright traces: HTTP200 response records slower than4seconds, HTTP failures, assertion errors and final actions. HTTP200 is not proof of a completed response body: receive/body/content sizes may remain -1 when the test closes. Worker-internal and uncompleted requests are incomplete coverage.",
+  "cases": [
+    {
+      "case": "gameplay-updates-a-keyboar-e4521--return-to-the-same-control",
+      "slowSuccessfulRequests": [
+        {
+          "url": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=twenty-four-cultures",
+          "status": 200,
+          "ms": 12383.153
+        }
+      ],
+      "httpFailures": [],
+      "assertionErrors": [
+        "Error: expect(locator).toHaveJSProperty(expected) failed\n\nLocator:  getByRole('dialog', { name: 'Image detail' }).getByRole('img')\nExpected: 900\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveJSProperty\" getByRole('dialog', { name: 'Image detail' }).getByRole('img') with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Image detail' }).getByRole('img')\n    14 \u00d7 locator resolved to <img width=\"900\" height=\"325\" loading=\"lazy\" src=\"/Theandril/updates/cultures.webp\" alt=\"Three distinctly built cultural cities arranged on a textured hex map in Theandril\u2019s authored art-review gallery.\"/>\n       - unexpected value \"0\"\n",
+        "Expect failed"
+      ],
+      "lastActions": [
+        {
+          "callId": "call@1396",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=button[name=\"Enlarge cultures image\"s]",
+            "expression": "to.be.visible",
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 268275.01
+        },
+        {
+          "callId": "call@1398",
+          "class": "Frame",
+          "method": "focus",
+          "params": {
+            "selector": "internal:role=button[name=\"Enlarge cultures image\"s]",
+            "strict": true
+          },
+          "startTime": 268297.618
+        },
+        {
+          "callId": "call@1400",
+          "class": "Page",
+          "method": "keyboardPress",
+          "params": {
+            "key": "Enter"
+          },
+          "startTime": 268304.063
+        },
+        {
+          "callId": "call@1402",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=dialog[name=\"Image detail\"i]",
+            "expression": "to.be.visible",
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 268311.105
+        },
+        {
+          "callId": "call@1404",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=dialog[name=\"Image detail\"i] >> internal:role=img",
+            "expression": "to.have.property",
+            "expressionArg": "naturalWidth",
+            "expectedValue": {
+              "value": {
+                "n": 900
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 268316.196
+        }
+      ]
+    },
+    {
+      "case": "production-battlefield-bui-0a8e0-s-without-development-hooks",
+      "slowSuccessfulRequests": [
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 4136.758000000001
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/client-RzuSRENx.js",
+          "status": 200,
+          "ms": 4758.919
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/game-xcGUJ5Tk.js",
+          "status": 200,
+          "ms": 4759.16
+        }
+      ],
+      "httpFailures": [],
+      "assertionErrors": [
+        "Error: expect(locator).toContainText(expected) failed\n\nLocator: getByTestId('feedback')\nExpected substring: \"Imported campaign\"\nReceived string:    \"\u25c6Resolving\u2026 A world of broken oaths awaits a new beginning.\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toContainText\" getByTestId('feedback') with timeout 5000ms\n  - waiting for getByTestId('feedback')\n    14 \u00d7 locator resolved to <div role=\"status\" class=\"feedback \" aria-live=\"polite\" data-testid=\"feedback\">\u2026</div>\n       - unexpected value \"\u25c6Resolving\u2026 A world of broken oaths awaits a new beginning.\"\n",
+        "Expect failed"
+      ],
+      "lastActions": [
+        {
+          "callId": "call@63",
+          "class": "BrowserContext",
+          "method": "newPage",
+          "params": {},
+          "startTime": 287471.302
+        },
+        {
+          "callId": "call@65",
+          "class": "Frame",
+          "method": "goto",
+          "params": {
+            "url": "./",
+            "waitUntil": "load"
+          },
+          "startTime": 287520.056
+        },
+        {
+          "callId": "call@67",
+          "class": "Frame",
+          "method": "evaluateExpression",
+          "params": {
+            "expression": "() => typeof window.__THEANDRIL__",
+            "isFunction": true,
+            "arg": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            }
+          },
+          "startTime": 295254.855
+        },
+        {
+          "callId": "call@69",
+          "class": "Frame",
+          "method": "setInputFiles",
+          "params": {
+            "selector": "internal:label=\"Import save file\"i",
+            "strict": true,
+            "payloads": [
+              {
+                "name": "production-battle.theandril",
+                "mimeType": "application/gzip",
+                "buffer": "<Buffer>"
+              }
+            ]
+          },
+          "startTime": 295305.099
+        },
+        {
+          "callId": "call@71",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:testid=[data-testid=\"feedback\"s]",
+            "expression": "to.have.text",
+            "expectedText": [
+              {
+                "string": "Imported campaign",
+                "matchSubstring": true,
+                "normalizeWhiteSpace": true
+              }
+            ],
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 295329.56
+        }
+      ]
+    },
+    {
+      "case": "production-deployment-asse-8b5b2--configured-deployment-base",
+      "slowSuccessfulRequests": [
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 13996.125
+        }
+      ],
+      "httpFailures": [],
+      "assertionErrors": [
+        "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator:  locator('.setup .faction-card .faction-art')\nExpected: \"ready\"\nReceived: \"loading\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveAttribute\" locator('.setup .faction-card .faction-art') with timeout 5000ms\n  - waiting for locator('.setup .faction-card .faction-art')\n    14 \u00d7 locator resolved to <span aria-hidden=\"true\" data-art-state=\"loading\" data-art-content-id=\"ui.crest\" data-art-id=\"ui.crest.ashen_compact\" class=\"faction-art faction-art--loading\" data-art-definition=\"faction.ashen_compact\" title=\"Selected culture crest \u00b7 loading approved artwork\">\u2026</span>\n       - unexpected value \"loading\"\n",
+        "Expect failed"
+      ],
+      "lastActions": [
+        {
+          "callId": "call@433",
+          "class": "Frame",
+          "method": "goto",
+          "params": {
+            "url": "./",
+            "waitUntil": "load"
+          },
+          "startTime": 343173.723
+        },
+        {
+          "callId": "call@435",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=heading[name=\"Establish your campaign\"s]",
+            "expression": "to.be.visible",
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 355270.406
+        },
+        {
+          "callId": "call@437",
+          "class": "Frame",
+          "method": "evaluateExpression",
+          "params": {
+            "expression": "() => typeof window.__THEANDRIL__",
+            "isFunction": true,
+            "arg": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            }
+          },
+          "startTime": 355295.435
+        },
+        {
+          "callId": "call@439",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=button[name=\"Art Lab\"s]",
+            "expression": "to.have.count",
+            "expectedNumber": 0,
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 355299.571
+        },
+        {
+          "callId": "call@441",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": ".setup .faction-card .faction-art",
+            "expression": "to.have.attribute.value",
+            "expressionArg": "data-art-state",
+            "expectedText": [
+              {
+                "string": "ready"
+              }
+            ],
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 355304.239
+        }
+      ]
+    },
+    {
+      "case": "production-map-actions-bui-a9ed1-d-without-development-hooks",
+      "slowSuccessfulRequests": [
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 10506.884
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/game-EKnMcxVw.css",
+          "status": 200,
+          "ms": 16363.992
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/game-xcGUJ5Tk.js",
+          "status": 200,
+          "ms": 19848.861999999997
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/client-RzuSRENx.js",
+          "status": 200,
+          "ms": 19871.06
+        }
+      ],
+      "httpFailures": [],
+      "assertionErrors": [
+        "Error: expect(locator).toContainText(expected) failed\n\nLocator: getByTestId('feedback')\nExpected substring: \"Imported campaign\"\nReceived string:    \"\u25c6Resolving\u2026 A world of broken oaths awaits a new beginning.\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toContainText\" getByTestId('feedback') with timeout 5000ms\n  - waiting for getByTestId('feedback')\n    14 \u00d7 locator resolved to <div role=\"status\" class=\"feedback \" aria-live=\"polite\" data-testid=\"feedback\">\u2026</div>\n       - unexpected value \"\u25c6Resolving\u2026 A world of broken oaths awaits a new beginning.\"\n",
+        "Expect failed"
+      ],
+      "lastActions": [
+        {
+          "callId": "call@443",
+          "class": "BrowserContext",
+          "method": "newPage",
+          "params": {},
+          "startTime": 385671.448
+        },
+        {
+          "callId": "call@445",
+          "class": "Frame",
+          "method": "goto",
+          "params": {
+            "url": "./",
+            "waitUntil": "load"
+          },
+          "startTime": 385761.092
+        },
+        {
+          "callId": "call@447",
+          "class": "Frame",
+          "method": "evaluateExpression",
+          "params": {
+            "expression": "() => typeof window.__THEANDRIL__",
+            "isFunction": true,
+            "arg": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            }
+          },
+          "startTime": 414618.172
+        },
+        {
+          "callId": "call@449",
+          "class": "Frame",
+          "method": "setInputFiles",
+          "params": {
+            "selector": "internal:label=\"Import save file\"i",
+            "strict": true,
+            "payloads": [
+              {
+                "name": "production-map-actions.theandril",
+                "mimeType": "application/gzip",
+                "buffer": "<Buffer>"
+              }
+            ]
+          },
+          "startTime": 414634.443
+        },
+        {
+          "callId": "call@451",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:testid=[data-testid=\"feedback\"s]",
+            "expression": "to.have.text",
+            "expectedText": [
+              {
+                "string": "Imported campaign",
+                "matchSubstring": true,
+                "normalizeWhiteSpace": true
+              }
+            ],
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 414657.763
+        }
+      ]
+    },
+    {
+      "case": "production-production-sequ-b4810-oration-without-debug-hooks",
+      "slowSuccessfulRequests": [
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 5841.556999999999
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/BufferResource-Budik9LZ.js",
+          "status": 200,
+          "ms": 8044.245
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/RenderTargetSystem-6QEmFJsH.js",
+          "status": 200,
+          "ms": 8072.647999999999
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/Filter-BdX1YQXJ.js",
+          "status": 200,
+          "ms": 8073.416
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/ui/hearth-card/ornament.corner-idle.webp",
+          "status": 200,
+          "ms": 7689.143
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/art/battle.png",
+          "status": 200,
+          "ms": 7548.011
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/assets/WebGLRenderer-BtRwEd0K.js",
+          "status": 200,
+          "ms": 8184.274
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 6230.87
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 5940.549
+        },
+        {
+          "url": "https://erikburdett.github.io/Theandril/",
+          "status": 200,
+          "ms": 17591.721
+        }
+      ],
+      "httpFailures": [],
+      "assertionErrors": [],
+      "lastActions": [
+        {
+          "callId": "call@357",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": "internal:role=dialog[name=\"Selected orders\"s]",
+            "expression": "to.be.visible",
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 465196.994
+        },
+        {
+          "callId": "call@359",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": ".production-queue",
+            "expression": "to.have.text",
+            "expectedText": [
+              {
+                "string": "Root cellar",
+                "matchSubstring": true,
+                "normalizeWhiteSpace": true
+              }
+            ],
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 465209.872
+        },
+        {
+          "callId": "call@361",
+          "class": "Frame",
+          "method": "expect",
+          "params": {
+            "selector": ".production-queue",
+            "expression": "to.have.text",
+            "expectedText": [
+              {
+                "string": "Charter market",
+                "matchSubstring": true,
+                "normalizeWhiteSpace": true
+              }
+            ],
+            "expectedValue": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            },
+            "isNot": false,
+            "timeout": 5000
+          },
+          "startTime": 465218.001
+        },
+        {
+          "callId": "call@363",
+          "class": "Page",
+          "method": "screenshot",
+          "params": {
+            "type": "png"
+          },
+          "startTime": 465223.369
+        },
+        {
+          "callId": "call@366",
+          "class": "Frame",
+          "method": "evaluateExpression",
+          "params": {
+            "expression": "() => document.documentElement.scrollWidth <= innerWidth",
+            "isFunction": true,
+            "arg": {
+              "value": {
+                "v": "undefined"
+              },
+              "handles": []
+            }
+          },
+          "startTime": 465300.772
+        }
+      ]
+    }
+  ]
+}

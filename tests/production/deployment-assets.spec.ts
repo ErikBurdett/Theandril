@@ -21,11 +21,20 @@ test('built game loads verified map art, UI materials and its real worker inside
   const approved = JSON.parse(approvedBytes.toString('utf8')) as RuntimeCatalog;
   const foundation = approved.atlases.find(atlas => atlas.id === 'foundation')!;
   expect(foundation).toBeDefined();
+  // Read the application's actual download before timing DOM readiness. The
+  // approved crest cannot decode/render until this input has completely arrived.
+  // Register before navigation so a fast response cannot escape the waiter.
+  const foundationDownload = page.waitForResponse(response => response.url() === localUrl(foundation.imageUrl));
   await page.goto('./');
   await expect(page.getByRole('heading', { name: 'Establish your campaign', exact: true })).toBeVisible();
   expect(new URL(page.url()).pathname).toBe(mount.pathname);
   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
   await expect(page.getByRole('button', { name: 'Art Lab', exact: true })).toHaveCount(0);
+  const foundationResponse = await foundationDownload;
+  expect(foundationResponse.ok(), 'Successful foundation download before crest rendering').toBe(true);
+  const foundationBytes = await foundationResponse.body();
+  expect(foundationBytes.byteLength).toBeGreaterThan(0);
+  expect(createHash('sha256').update(foundationBytes).digest('hex')).toBe(foundation.sha256);
   await expect(page.locator('.setup .faction-card .faction-art')).toHaveAttribute('data-art-state', 'ready');
 
   // These are computed, actually used CSS backgrounds, not source-code strings

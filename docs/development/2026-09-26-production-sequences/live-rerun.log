@@ -1,0 +1,56 @@
+
+Running 5 tests using 1 worker
+
+(node:1180545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (11.7s)
+  ✓  2 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (24.7s)
+  ✘  3 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (10.6s)
+(node:1184477) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (10.9s)
+  ✓  5 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (13.5s)
+
+
+  1) tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.setup .faction-card .faction-art')
+    Expected: "ready"
+    Received: "loading"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.setup .faction-card .faction-art') with timeout 5000ms
+      - waiting for locator('.setup .faction-card .faction-art')
+        14 × locator resolved to <span aria-hidden="true" data-art-state="loading" data-art-content-id="ui.crest" data-art-id="ui.crest.ashen_compact" class="faction-art faction-art--loading" data-art-definition="faction.ashen_compact" title="Selected culture crest · loading approved artwork">…</span>
+           - unexpected value "loading"
+
+
+      27 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+      28 |   await expect(page.getByRole('button', { name: 'Art Lab', exact: true })).toHaveCount(0);
+    > 29 |   await expect(page.locator('.setup .faction-card .faction-art')).toHaveAttribute('data-art-state', 'ready');
+         |                                                                   ^
+      30 |
+      31 |   // These are computed, actually used CSS backgrounds, not source-code strings
+      32 |   // or extra fetches that could hide a broken stylesheet base rewrite.
+        at /home/telephoneheater/Work/Theandril/tests/production/deployment-assets.spec.ts:29:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-rerun-output/production-deployment-asse-8b5b2--configured-deployment-base/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-rerun-output/production-deployment-asse-8b5b2--configured-deployment-base/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-rerun-output/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-rerun-output/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+  4 passed (1.2m)

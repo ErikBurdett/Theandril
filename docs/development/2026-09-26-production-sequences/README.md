@@ -193,3 +193,22 @@ fleet sentence. Updating those explicit catalogue expectations preserves the
 interaction, search, source-link and open-gate assertions. No runtime change was
 needed. The new feature passed in that run. A separate caption spacing correction
 changes no screenshot bytes or factual scope; the final build and 32 journeys follow.
+
+## Live verification and asset dependency correction
+
+Published application `b5fc0997506e78a8e05fbdd0cf4deea8cf9019d7` passes both
+GitHub workflows and exact source/image readback. The first live suite passes
+27 of32; five failures are retained in live-pages-initial.log. Four pass unchanged
+in live-rerun.log, including production sequences (13.5seconds). The crest remains
+loading at the five-second assertion. Trace records show HTTP200 responses with
+slow arrival and an unfinished foundation body; headers do not prove full input.
+
+The asset smoke previously asserted decoded readiness before awaiting the atlas
+body, which it validated later. It now registers the exact browser response before
+navigation and verifies successful status, completed bytes and the approved hash
+before the unchanged readiness assertion. No prefetch, mock, runtime, cache or
+45-second whole-test/five-second assertion limit changes. Parent review confirms
+all subsequent art, CSS, worker, URL-base and no-debug-hook checks remain. The
+corrected check passes locally in1.6seconds and live in8.9seconds; typecheck and
+scoped lint pass. These are focused passes, not a clean32-case live result. Final
+full live evidence is recorded separately; both earlier runs remain visible.

@@ -1,0 +1,230 @@
+
+Running 32 tests using 1 worker
+
+(node:1123819) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (40.8s)
+  ✓   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (8.3s)
+  ✓   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (8.2s)
+  ✓   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (4.9s)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (9.1s)
+  ✓   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (7.3s)
+  ✓   7 tests/gameplay/roadmap.spec.ts:29:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (11.1s)
+  ✓   8 tests/gameplay/roadmap.spec.ts:50:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (8.2s)
+  ✓   9 tests/gameplay/roadmap.spec.ts:67:1 › same-document Back and Forward restore filters and linked-item evidence (5.5s)
+  ✓  10 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 1440px / 100% text (6.0s)
+  ✓  11 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 390px / 130% text (9.1s)
+  ✓  12 tests/gameplay/roadmap.spec.ts:125:1 › unknown item links recover honestly and dispatches link to the full roadmap (9.6s)
+  ✓  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (27.5s)
+  ✓  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (19.5s)
+  ✓  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (16.2s)
+  ✓  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (37.6s)
+  ✓  17 tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text (6.3s)
+  ✓  18 tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works (10.0s)
+  ✓  19 tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results (8.4s)
+  ✓  20 tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance (4.7s)
+  ✘  21 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (14.0s)
+(node:1151494) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  22 tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch (13.6s)
+  ✘  23 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (13.0s)
+(node:1153204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (42.2s)
+  ✘  25 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (17.3s)
+(node:1156775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  26 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (6.3s)
+  ✓  27 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (11.1s)
+  ✓  28 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (7.3s)
+  ✘  29 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (34.1s)
+(node:1161834) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  30 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (45.3s)
+(node:1164459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  31 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (17.7s)
+  ✓  32 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (6.2s)
+
+
+  1) tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control 
+
+    Error: expect(locator).toHaveJSProperty(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Image detail' }).getByRole('img')
+    Expected: 900
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveJSProperty" getByRole('dialog', { name: 'Image detail' }).getByRole('img') with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Image detail' }).getByRole('img')
+        14 × locator resolved to <img width="900" height="325" loading="lazy" src="/Theandril/updates/cultures.webp" alt="Three distinctly built cultural cities arranged on a textured hex map in Theandril’s authored art-review gallery."/>
+           - unexpected value "0"
+
+
+      129 |   const dialog = page.getByRole('dialog', { name: 'Image detail' });
+      130 |   await expect(dialog).toBeVisible();
+    > 131 |   await expect(dialog.getByRole('img')).toHaveJSProperty('naturalWidth', 900);
+          |                                         ^
+      132 |   await expect(dialog.getByRole('button', { name: 'Close image', exact: true })).toBeFocused();
+      133 |   await page.keyboard.press('Escape');
+      134 |   await expect(dialog).not.toBeVisible();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:131:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-pages-output/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-pages-output/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "◆Resolving… A world of broken oaths awaits a new beginning."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+           - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+
+
+      14 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+      15 |   await page.getByLabel('Import save file').setInputFiles({ name: 'production-battle.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(borderBattleCampaign()))) });
+    > 16 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      17 |   await openRealmAffairs(page);
+      18 |   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
+      19 |   await openSelectedOrders(page);
+        at /home/telephoneheater/Work/Theandril/tests/production/battlefield.spec.ts:16:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-battlefield-bui-0a8e0-s-without-development-hooks/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-pages-output/production-battlefield-bui-0a8e0-s-without-development-hooks/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-pages-output/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.setup .faction-card .faction-art')
+    Expected: "ready"
+    Received: "loading"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.setup .faction-card .faction-art') with timeout 5000ms
+      - waiting for locator('.setup .faction-card .faction-art')
+        14 × locator resolved to <span aria-hidden="true" data-art-state="loading" data-art-content-id="ui.crest" data-art-id="ui.crest.ashen_compact" class="faction-art faction-art--loading" data-art-definition="faction.ashen_compact" title="Selected culture crest · loading approved artwork">…</span>
+           - unexpected value "loading"
+
+
+      27 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+      28 |   await expect(page.getByRole('button', { name: 'Art Lab', exact: true })).toHaveCount(0);
+    > 29 |   await expect(page.locator('.setup .faction-card .faction-art')).toHaveAttribute('data-art-state', 'ready');
+         |                                                                   ^
+      30 |
+      31 |   // These are computed, actually used CSS backgrounds, not source-code strings
+      32 |   // or extra fetches that could hide a broken stylesheet base rewrite.
+        at /home/telephoneheater/Work/Theandril/tests/production/deployment-assets.spec.ts:29:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-deployment-asse-8b5b2--configured-deployment-base/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-pages-output/production-deployment-asse-8b5b2--configured-deployment-base/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-pages-output/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "◆Resolving… A world of broken oaths awaits a new beginning."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+           - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+
+
+      52 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+      53 |   await page.getByLabel('Import save file').setInputFiles({ name: 'production-map-actions.theandril', mimeType: 'application/gzip', buffer: imported });
+    > 54 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      55 |   const treasury = page.locator('.resources > div').filter({ has: page.getByText('TREASURY', { exact: true }) }).locator('strong');
+      56 |   await expect(treasury).toHaveText(`${initial.treasury} coin`);
+      57 |   await openTown(page, town.name);
+        at /home/telephoneheater/Work/Theandril/tests/production/map-actions.spec.ts:54:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-map-actions-bui-a9ed1-d-without-development-hooks/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-pages-output/production-map-actions-bui-a9ed1-d-without-development-hooks/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-map-actions-bui-a9ed1-d-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-pages-output/production-map-actions-bui-a9ed1-d-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-production-sequ-b4810-oration-without-debug-hooks/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-26-production-sequences/live-pages-output/production-production-sequ-b4810-oration-without-debug-hooks/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-26-production-sequences/live-pages-output/production-production-sequ-b4810-oration-without-debug-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-26-production-sequences/live-pages-output/production-production-sequ-b4810-oration-without-debug-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control 
+    tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+    tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+    tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks 
+    tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks 
+  27 passed (8.2m)
