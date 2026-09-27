@@ -30,3 +30,9 @@ This verdict is local Chromium evidence. It does not attest deployment, organic 
 | [390px-and-130-text / reader-top.png](publication-captures/gameplay-updates-readable-journal-at-390px-and-130-text/reader-top.png) | `26df93ec3a7f248eafc51493f219f11c00f5164a8d7a39246723814f8d4815b1` |
 | [390px-and-130-text / reader-chapter.png](publication-captures/gameplay-updates-readable-journal-at-390px-and-130-text/reader-chapter.png) | `f90f7b0c8f4d90a705f44c973c431e29e7f8d455b9071ee7601510be9d892917` |
 | [390px-and-130-text / defense-theater-summary-illustration.png](publication-captures/gameplay-updates-readable-journal-at-390px-and-130-text/defense-theater-summary-illustration.png) | `cd875bb1fdad8302ef179639bfc75f6bbf64889b35301ed88133fbc9babeb74f` |
+
+## Post-publication review addendum
+
+The reviewer verified all sixteen final captures byte-for-byte against the originally inspected images; [exact comparison](publication-rendered-hashes.json). Reader figures are 406px wide on desktop, 310px at 390px/100% and 292px at 390px/130%. The archive feature enlarges the small raster and is visibly coarser; its caption remains readable, and no native-width claim is made for that surface.
+
+The optional dialog probe failed before browser/server launch because its temporary script imported a nonexistent root pnpm-layout path. [Retained harness error](publication-image-details.log). No dialog bounds or extra browser success is claimed from that failed helper. The 34-case suite and independent pixel verdict are unaffected; exact new-image enlargement is checked separately during live readback.

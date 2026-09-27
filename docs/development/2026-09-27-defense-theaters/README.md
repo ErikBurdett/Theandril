@@ -1,6 +1,6 @@
 # Defensive theaters — implementation evidence
 
-27 September 2026. **Implemented and locally verified; publication checks in progress.**
+27 September 2026. **Published and live-verified.**
 Baseline: `c5aa2615798bbc09efc9ca011dbb77f3d198980e`.
 
 Acceptance: named defensive theaters fill missing hearth guards and gather
@@ -229,3 +229,13 @@ The corrected publication suite passes **2,075 tests / 258 files in 57.79 second
 The initial full Pages run passes 32 journeys and exposes two stale catalogue expectations: the home test still counted eleven articles and the roadmap test still expected the prior evidence revision. Both now expect dispatch twelve and the actual P1 snapshot. Application behavior, timeouts and assertions are otherwise unchanged; the initial log and traces remain retained.
 
 The final [34-case Pages run](publication-pages.log) passes in **1.1 minutes**, covering seventeen files. The initial 32-pass/two-stale-expectation run is retained as [publication-pages-initial.log](publication-pages-initial.log), with its original traces and captures. The final run includes the new generated-production theater journey; it is not added to the earlier overlapping production or affected-gameplay counts. The article/catalogue have [independent factual review](publication-review.md), and native rendered views have [independent layout review](publication-visual-review.md).
+
+## Published checkpoint and tracker
+
+Published revision **`bce46a1442a0b2aa33487952b4d43e1d96cb8540`**, implementation **`0ecd2d1767f613942cf9f22315da624164cc4055`**. Both exact GitHub workflows succeed: [Verify build](https://github.com/ErikBurdett/Theandril/actions/runs/36344470706) and [Pages](https://github.com/ErikBurdett/Theandril/actions/runs/36344470740). The [same 34 live production journeys](live-pages.log) pass in **2.3 minutes**, without failures, retries or skips; [identity reconciliation](live-pages-identities.json) matches the local run. The new theater journey takes 5.4 seconds live.
+
+[Exact public readback](live-readback.json) verifies the latest ledger revision, game HTML/JavaScript/CSS/worker bytes, absence of development hooks, dispatch 12, all nine evidence links, exact native illustration and enlargement, every roadmap record, and all fifteen open gates. [Deployment record](deployment.json). The primary checkout was synchronized to the published revision, master at zero ahead/behind, before recording these final documentation-only results.
+
+DHARMA now records the reviewed progress in ACT-32, M3 and the still-open DH-021 pacing issue. [Concrete preview](tracker-preview.json), [guarded application](tracker-applied.json) and [exact source/generated-page readback](tracker-readback.json) preserve unrelated records, ACT-36 done and DH-020 resolved. The helper author separately reconstructed all three proposed output hashes and checked 139 evidence seals; this is disclosed self-audit, alongside the parent's review and an independent AI agent's earlier helper review. Proposal seal: `ba2c4a487dd67887af0f8730486717a971a22b7665683ac62a1c2d43c65a0d6a`. Only the three named tracker source records changed; the local tracker build completed successfully. No weekly writer or inventory was run.
+
+Next useful work is threat-aware defensive reinforcement or a governor slice over these existing canonical commands, with blocked-route handling and direct overrides preserved. Patrol/escorts, invasion planning, army templates and combined mature-realm acceptance remain incomplete. DH-021 needs deliberate headline pacing work across more seeds; no target or price has been silently changed. This is a development deployment, not 1.0 acceptance.

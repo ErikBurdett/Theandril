@@ -1,0 +1,57 @@
+{
+  "revision": "bce46a1442a0b2aa33487952b4d43e1d96cb8540",
+  "sourceRevision": "0ecd2d1767f613942cf9f22315da624164cc4055",
+  "date": "2026-09-27",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=defense-theaters",
+  "rulesVersion": 33,
+  "contentHash": "015468d1",
+  "actions": [
+    {
+      "id": 36344470706,
+      "name": "Verify build",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "bce46a1442a0b2aa33487952b4d43e1d96cb8540",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36344470706"
+    },
+    {
+      "id": 36344470740,
+      "name": "Publish development demo to Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "bce46a1442a0b2aa33487952b4d43e1d96cb8540",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36344470740"
+    }
+  ],
+  "local": {
+    "implementationHeadless": 2075,
+    "implementationFiles": 258,
+    "implementationDuration": "61.02s",
+    "headless": 2075,
+    "files": 258,
+    "headlessDuration": "57.79s",
+    "affectedGameplay": 33,
+    "pages": 34,
+    "pagesDuration": "1.1m",
+    "finalProduction": 1,
+    "finalProductionSeconds": 5.0
+  },
+  "live": {
+    "pages": 34,
+    "passed": 34,
+    "duration": "2.3m",
+    "newProductionJourneySeconds": 5.4,
+    "readback": "live-readback.json",
+    "identities": "live-pages-identities.json"
+  },
+  "catalogue": {
+    "items": 23,
+    "completed": 6,
+    "inProgress": 13,
+    "pending": 4,
+    "delivered": 68,
+    "remaining": 49,
+    "allReleaseGatesOpen": 15
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "revision": "bce46a1442a0b2aa33487952b4d43e1d96cb8540",
+  "sourceRevision": "0ecd2d1767f613942cf9f22315da624164cc4055",
+  "roadmapSourceRevision": "0ecd2d1767f613942cf9f22315da624164cc4055",
+  "origin": "https://erikburdett.github.io/Theandril/",
+  "started": "2026-09-27T19:34:41.686Z",
+  "scope": "Public live readback: latest build-ledger SHA, production setup and exact local built game/worker asset bytes; edition12 title/evidence/image; all roadmap records and open gates. No campaign, gameplay journey, deployment action or release acceptance.",
+  "revisionScope": "Revision comes from the newest build-generated public ledger. GitHub deployment workflow identity is verified separately; this helper makes no independent build-attestation claim.",
+  "noWrite": false,
+  "checks": {
+    "latestLedgerRevision": "bce46a1442a0b2aa33487952b4d43e1d96cb8540",
+    "game": {
+      "htmlSha256": "51c8d0bc42bd0ffcd018976563505e344298b09da4e4a38ac6fde10c50f6e40e",
+      "productionSetup": true,
+      "noDevelopmentHooks": true,
+      "exactBuiltAssets": [
+        {
+          "path": "assets/game-DjMYAuv3.js",
+          "bytes": 1053292,
+          "sha256": "e83846a4c92542fc21f175462a9bb960f4ed9e6df89150040f367b4d2cd75f3e"
+        },
+        {
+          "path": "assets/simulation.worker-D6stYPMk.js",
+          "bytes": 792118,
+          "sha256": "c50e91e5c1dd2883f471270c553c5e6374539c8f9931573786ba5fb45417217f"
+        },
+        {
+          "path": "assets/game-N83dwyUU.css",
+          "bytes": 112946,
+          "sha256": "15643e3c3845aafed7ff44f10519d80ab52854dfce36580e1dba08447f3e3502"
+        }
+      ]
+    },
+    "dispatch": {
+      "id": "defense-theaters",
+      "edition": 12,
+      "title": "Give your hearths a standing watch",
+      "source": "0ecd2d1767f613942cf9f22315da624164cc4055",
+      "evidenceLinks": 9,
+      "image": {
+        "id": "defense-theater-summary",
+        "path": "updates/defense-theater-summary.png",
+        "bytes": 4295,
+        "sha256": "1bf7e35a12e1dbccc0ed98498eaa5adff5aa99edf4da16d0e2df863c5862399c",
+        "width": 406,
+        "height": 19
+      }
+    },
+    "roadmap": {
+      "source": "0ecd2d1767f613942cf9f22315da624164cc4055",
+      "date": "2026-09-27",
+      "counts": {
+        "completed": 6,
+        "in-progress": 13,
+        "pending": 4
+      },
+      "itemCount": 23,
+      "deliveredAcceptancePoints": 68,
+      "remainingAcceptancePoints": 49,
+      "totalAcceptancePoints": 117,
+      "allRecordsReconciled": true,
+      "openReleaseGates": 15
+    }
+  },
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "passed": true,
+  "finished": "2026-09-27T19:34:50.286Z",
+  "scriptSha256": "e08618a73d1d76d6c396d8d737f7746e685692c4d0b879715dc3fb55ed869fed"
+}

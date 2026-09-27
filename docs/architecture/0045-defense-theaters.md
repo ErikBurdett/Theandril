@@ -1,6 +1,6 @@
 # 0045 — Automatic defensive theaters
 
-Status: implemented and locally verified; publication checks in progress, 27 September 2026. Extends M3/ACT-32; no release gate closes.
+Status: implemented, published and live-verified, 27 September 2026. Extends M3/ACT-32; no release gate closes.
 
 A defensive theater names protected owned hearths, explicit combat land armies,
 a known reserve hex and a floor of one to four army containers per hearth. It
