@@ -1,0 +1,88 @@
+[WebServer] (node:2172727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2173153) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 33 tests using 1 worker
+
+(node:2173183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (1.4s)
+  ✓   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (321ms)
+  ✓   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (387ms)
+  ✓   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (237ms)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (531ms)
+  ✓   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (454ms)
+  ✓   7 tests/gameplay/roadmap.spec.ts:29:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (483ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:50:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (498ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:67:1 › same-document Back and Forward restore filters and linked-item evidence (691ms)
+  ✓  10 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 1440px / 100% text (795ms)
+  ✓  11 tests/gameplay/roadmap.spec.ts:98:3 › roadmap keyboard and layout at 390px / 130% text (691ms)
+  ✓  12 tests/gameplay/roadmap.spec.ts:125:1 › unknown item links recover honestly and dispatches link to the full roadmap (434ms)
+  ✓  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (1.9s)
+  ✓  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (1.8s)
+  ✓  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (1.5s)
+  ✓  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (1.7s)
+  ✓  17 tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text (218ms)
+  ✓  18 tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works (327ms)
+  ✓  19 tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results (422ms)
+  ✘  20 tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance (5.3s)
+(node:2175299) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (324ms)
+  ✓  22 tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch (653ms)
+  ✓  23 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (5.2s)
+  ✓  24 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (6.4s)
+  ✓  25 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1.3s)
+  ✓  26 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (709ms)
+  ✓  27 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (3.5s)
+  ✓  28 tests/production/group-movement.spec.ts:6:1 › generated production group travel moves ordinary armies and retains postings, replay and portable saved routes without development hooks (5.2s)
+  ✓  29 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (2.0s)
+  ✓  30 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (4.1s)
+  ✓  31 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (6.8s)
+  ✓  32 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (5.9s)
+  ✓  33 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.1s)
+
+
+  1) tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: 'Road to 1.0' })
+    Expected substring: "1,975 headless tests"
+    Received string:    "The promise & the remaining workRoad to 1.0Selected gates and decisions. Not a complete release report or a completion percentage.The agreed scope stays put. The evidence changes. A scoped approval moves a piece of the game forward; it does not clear every gate around it.Open the full roadmap →Browse checked completed checkpoints, in-progress systems and pending features with evidence and remaining acceptance. The selected decisions below use the current roadmap snapshot; historical dispatches retain their own evidence.Accepted scopeThe agreed game, not a moving finish lineThe canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.Read the source for The agreed game, not a moving finish line↗Current / partialGates E & F · Save integrity and combatRules32 retains campaign groups with exact rules31 checkpoints and mixed-history saves and exports. A benchmark exposed a pre-existing sixty-four-realm research-save limit; current saves now support it while historical schemas remain frozen. Campaign-safety and fleet-store evidence remains historical; whole save, combat and release gates remain open.Read the source for Gates E & F · Save integrity and combat↗Current / partialGates B, F2 & J · A playable foundationTwenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.Read the source for Gates B, F2 & J · A playable foundation↗Open gateGate C & integration · Remaining campaign proofThe group-travel implementation passes 2,000 headless tests across 250 files. Twenty-one affected Chromium journeys plus six focused journeys with four overlaps cover 23 distinct cases; one separate generated-production journey passes without development hooks. Ordinary movement commands retain authority; rules/save32, AI policy and prices remain unchanged. These scopes precede dispatch publication. Fleet attrition and Standard/Long pacing limits remain separately dated evidence. M0 and overall integration remain open.Read the source for Gate C & integration · Remaining campaign proof↗Current / partialGate I · Orders across a large realmNamed campaign groups recall selections before explicit orders. Up to 128 owned land armies ashore can review a shared destination, apply ordinary routes, append, resume or cancel; arrival stays individual and postings remain active. Production sequences preserve existing queues and paid prefixes. Separate browser-local libraries hold up to 24 charter policies and 24 production templates, excluded from campaign exports. Theaters, patrol/escort roles, army order templates, broader governors and combined mature-empire acceptance remain open.Read the source for Gate I · Orders across a large realm↗Open gateGates D, K & L · Scale and browser confidenceStorage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.Read the source for Gates D, K & L · Scale and browser confidence↗Proposal / deferredSuggested follow-ups, not new release promisesPromoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.Read the source for Suggested follow-ups, not new release promises↗Not this updateGate M, full magic and a 1.0 announcementNo online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.Read the source for Gate M, full magic and a 1.0 announcement↗Read all release gates →"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('region', { name: 'Road to 1.0' }) with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Road to 1.0' })
+        14 × locator resolved to <section id="scope" class="scope-section" aria-labelledby="scope-title">…</section>
+           - unexpected value "The promise & the remaining workRoad to 1.0Selected gates and decisions. Not a complete release report or a completion percentage.The agreed scope stays put. The evidence changes. A scoped approval moves a piece of the game forward; it does not clear every gate around it.Open the full roadmap →Browse checked completed checkpoints, in-progress systems and pending features with evidence and remaining acceptance. The selected decisions below use the current roadmap snapshot; historical dispatches retain their own evidence.Accepted scopeThe agreed game, not a moving finish lineThe canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.Read the source for The agreed game, not a moving finish line↗Current / partialGates E & F · Save integrity and combatRules32 retains campaign groups with exact rules31 checkpoints and mixed-history saves and exports. A benchmark exposed a pre-existing sixty-four-realm research-save limit; current saves now support it while historical schemas remain frozen. Campaign-safety and fleet-store evidence remains historical; whole save, combat and release gates remain open.Read the source for Gates E & F · Save integrity and combat↗Current / partialGates B, F2 & J · A playable foundationTwenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.Read the source for Gates B, F2 & J · A playable foundation↗Open gateGate C & integration · Remaining campaign proofThe group-travel implementation passes 2,000 headless tests across 250 files. Twenty-one affected Chromium journeys plus six focused journeys with four overlaps cover 23 distinct cases; one separate generated-production journey passes without development hooks. Ordinary movement commands retain authority; rules/save32, AI policy and prices remain unchanged. These scopes precede dispatch publication. Fleet attrition and Standard/Long pacing limits remain separately dated evidence. M0 and overall integration remain open.Read the source for Gate C & integration · Remaining campaign proof↗Current / partialGate I · Orders across a large realmNamed campaign groups recall selections before explicit orders. Up to 128 owned land armies ashore can review a shared destination, apply ordinary routes, append, resume or cancel; arrival stays individual and postings remain active. Production sequences preserve existing queues and paid prefixes. Separate browser-local libraries hold up to 24 charter policies and 24 production templates, excluded from campaign exports. Theaters, patrol/escort roles, army order templates, broader governors and combined mature-empire acceptance remain open.Read the source for Gate I · Orders across a large realm↗Open gateGates D, K & L · Scale and browser confidenceStorage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.Read the source for Gates D, K & L · Scale and browser confidence↗Proposal / deferredSuggested follow-ups, not new release promisesPromoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.Read the source for Suggested follow-ups, not new release promises↗Not this updateGate M, full magic and a 1.0 announcementNo online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.Read the source for Gate M, full magic and a 1.0 announcement↗Read all release gates →"
+
+
+      114 |   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
+      115 |   await expect(ledger).toContainText('Fleet attrition and Standard/Long pacing limits remain separately dated evidence');
+    > 116 |   await expect(ledger).toContainText('1,975 headless tests');
+          |                        ^
+      117 |   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
+      118 |   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
+      119 |   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:116:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+  32 passed (1.1m)

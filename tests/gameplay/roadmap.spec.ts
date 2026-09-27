@@ -20,7 +20,7 @@ test('the roadmap is discoverable from home and shows bounded completion with ev
   await empire.locator('summary').click();
   await expect(empire).toContainText('Up to 24 named campaign groups');
   await expect(empire).toContainText('reusable army order templates');
-  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/420219d278ae17f42a04871c6319ecf62a4af216/docs/development/2026-09-25-selection-groups/README.md');
+  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/3b0918999a166f36f6f3d51fbcb49413de549163/docs/development/2026-09-25-selection-groups/README.md');
   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
   expect(workers).toEqual([]);
   expect(errors).toEqual([]);

@@ -2,6 +2,8 @@
 
 26–27 September 2026. **Implemented and locally verified; publication remains pending.**
 Baseline: `c38f82c9c3aa2fedd6ea808d71aedaf6512ad72b`.
+Reviewed implementation: `3b0918999a166f36f6f3d51fbcb49413de549163`;
+public journal and final deployment verification are recorded separately.
 
 This ACT-32/M3 slice lets checked armies review and follow a shared destination,
 append a waypoint, resume paused routes and cancel travel routes. It uses existing
@@ -222,7 +224,40 @@ hash are retained. See the [visual review](visual-review.md) for the bounded
 candidate caption and separate generated-production image.
 
 The missing posting-recovery cases and fresh narrow captures are complete.
-Final journal publication/layout and live checks remain separate. Keep the
-[developer dispatch](dispatch-draft.md) in draft until its reviewed media and
-publication evidence are complete. This checkpoint does not close ACT-32/M3 or
+Final live checks remain separate. The [early draft](dispatch-draft.md) is retained
+as history; the reviewed dispatch is now part of the existing public catalogue. This checkpoint does not close ACT-32/M3 or
 any of the fifteen 1.0 release gates.
+
+
+## Journal publication checks
+
+Dispatch 11 pins implementation `3b0918999a166f36f6f3d51fbcb49413de549163`.
+The [independent factual review](publication-review.md) reconciles all evidence
+paths, historical entries, counts, timing boundaries and exact native media.
+The existing catalogue has 23 items: 6 completed, 13 in progress and 4 pending,
+with 63 delivered and 49 remaining editorial bullets. These are not a fixed-scope
+completion percentage. All fifteen release gates remain open.
+
+The [final full suite](publication-tests.log) passes **2,000 tests / 250 files in
+53.68 seconds**. An [earlier publication run](publication-tests-initial.log) passed
+2,001 before removal of one newly added prose-copy assertion; no existing runtime
+or edge-case test was removed, and general revision, media and link contracts
+remain. The [focused journal run](publication-focused.log) passed 57 tests at that
+earlier inventory. Its first attempt failed five Git subprocess checks because
+of sandbox EPERM; [that output](publication-focused-sandbox-failure.log) is retained.
+Final source [typecheck](publication-typecheck.log), [scoped journal lint](publication-lint.log)
+and [Pages build](publication-build.log) pass.
+
+The [initial local Pages run](publication-pages-initial.log) passed 32 of 33
+journeys. One scope-ledger assertion still expected the previous checkpoint's
+1,975 tests; it now expects this pinned implementation's 2,000. The runtime and
+limits are unchanged. The failed screenshot/context are preserved in
+[publication-initial-failure](publication-initial-failure/). A complete corrected
+Pages run passes **33/33 in 1.0 minute** ([log](publication-pages.log)).
+[Independent rendered review](publication-visual-review.md) approves sixteen
+reference captures across four viewport/text settings. Exact live publication
+remains pending.
+
+The screenshot provenance now distinguishes the 26 September production capture
+from the final authored recaptures just after midnight on 27 September. The P1
+manifest used the work-start date for the set; exact pixels and hashes are unchanged.

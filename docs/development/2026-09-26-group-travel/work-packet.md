@@ -29,3 +29,12 @@ production journey; typecheck, lint, content/art validation and Pages build pass
 Four bounded worker measurements and source/pixel reviews are retained in the
 checkpoint README. The 318×19 result PNG is 2,337 exact native bytes; publication
 will retain its original source and hash without transformation.
+
+Reviewed implementation source: `3b0918999a166f36f6f3d51fbcb49413de549163`.
+Dispatch 11 will pin this source and retain previous published dispatches.
+
+Final publication candidate: 2,000 tests / 250 files in53.68 seconds and33/33
+local Pages journeys in1.0 minute. Independent factual and rendered reviews pass.
+The existing media cap remains3MiB; all16images total3,141,226bytes. Initial
+sandbox checks, stale browser expectation and corrected capture evidence remain
+recorded in the README. Publication remains authorized and live checks follow.

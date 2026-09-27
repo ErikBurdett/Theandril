@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "licenseNotes": "Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.",
-  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately. The two exact 23 September group-postings captures were inspected at desktop and 390px width; source hashes and authored setup are retained in docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json. Publication layout is verified separately. The exact 24 September group-charters narrow capture was inspected at 390px width; it deliberately shows an invalid unsubmitted grant ceiling with valid revocation. Source settings and hash are retained in docs/development/2026-09-24-group-charters/screenshots/provenance.json. Publication layout is reviewed separately. The exact 25 September charter-templates controls capture was inspected at 318 by 724 pixels from a 390px viewport, preserving keyboard focus on Recall before explicit Apply. Original capture settings and hashes are retained in docs/development/2026-09-25-charter-templates/screenshots/provenance.json. Publication layout is reviewed separately. The exact 25 September saved-groups capture is a native 318 by 121 browser clip of the selector and Recall button at a 390px viewport. Full captures, bounds and exact hashes are retained in docs/development/2026-09-25-selection-groups/screenshots/provenance.json. The clip excludes member/status text and outer focus-ring pixels beyond its element bounds. Publication layout is reviewed separately. The exact26September production-result capture is a native318by39browser clip of the forty-hearth/120-order summary at390px width; it omits editor and queue details. Full captures, bounds and hashes are retained in docs/development/2026-09-26-production-sequences/screenshots/provenance.json. Independent visual and publication layout review is recorded separately.",
+  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately. The two exact 23 September group-postings captures were inspected at desktop and 390px width; source hashes and authored setup are retained in docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json. Publication layout is verified separately. The exact 24 September group-charters narrow capture was inspected at 390px width; it deliberately shows an invalid unsubmitted grant ceiling with valid revocation. Source settings and hash are retained in docs/development/2026-09-24-group-charters/screenshots/provenance.json. Publication layout is reviewed separately. The exact 25 September charter-templates controls capture was inspected at 318 by 724 pixels from a 390px viewport, preserving keyboard focus on Recall before explicit Apply. Original capture settings and hashes are retained in docs/development/2026-09-25-charter-templates/screenshots/provenance.json. Publication layout is reviewed separately. The exact 25 September saved-groups capture is a native 318 by 121 browser clip of the selector and Recall button at a 390px viewport. Full captures, bounds and exact hashes are retained in docs/development/2026-09-25-selection-groups/screenshots/provenance.json. The clip excludes member/status text and outer focus-ring pixels beyond its element bounds. Publication layout is reviewed separately. The exact26September production-result capture is a native318by39browser clip of the forty-hearth/120-order summary at390px width; it omits editor and queue details. Full captures, bounds and hashes are retained in docs/development/2026-09-26-production-sequences/screenshots/provenance.json. Independent visual and publication layout review is recorded separately. The exact group-travel result capture is a native 318 by 19 browser clip at a 390px viewport, showing only 100 orders accepted and zero refused. Full captures, reviewed corrections and exact hashes are retained in docs/development/2026-09-26-group-travel/screenshots/provenance.json and visual-review.md. No transform or re-encoding was applied; publication layout is reviewed separately.",
   "assets": [
     {
       "id": "campaign",
@@ -307,6 +307,25 @@
       "height": 39,
       "alt": "Production result: forty hearths complete, zero partial or refused; 120 orders accepted and zero refused.",
       "caption": "Actual result summary from the authored forty-hearth regression fixture after Guard → Workshop → Guard: 120 paid queue orders. Native 318 × 39 capture from a 390px viewport; it shows only the result, not the full editor, an organically earned realm or whole-scale acceptance."
+    },
+    {
+      "id": "group-travel-results",
+      "path": "updates/group-travel-results.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "3b0918999a166f36f6f3d51fbcb49413de549163",
+      "sourcePath": "docs/development/2026-09-26-group-travel/screenshots/group-travel-results.png",
+      "sourceSha256": "5a18a317736a6e99a2cf1dd18bef8c8175a4486e0e99a56b1f4d03fd01adfb67",
+      "sourceWidth": 318,
+      "sourceHeight": 19,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact native Playwright locator PNG; no transform or re-encoding",
+      "sha256": "5a18a317736a6e99a2cf1dd18bef8c8175a4486e0e99a56b1f4d03fd01adfb67",
+      "bytes": 2337,
+      "width": 318,
+      "height": 19,
+      "alt": "Group travel result: 100 orders accepted and zero refused.",
+      "caption": "Actual result summary from the authored hundred-army travel regression fixture. Native 318 × 19 capture at a 390px viewport; it shows accepted orders, not every route, synchronized arrival or an organically grown realm."
     }
   ],
   "sharedMaterials": [
@@ -347,5 +366,5 @@
       "caption": "Decorative interface material, not a depiction of canonical gameplay."
     }
   ],
-  "totalJournalImageBytes": 3138889
+  "totalJournalImageBytes": 3141226
 }

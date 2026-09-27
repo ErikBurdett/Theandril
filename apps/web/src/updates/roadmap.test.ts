@@ -66,7 +66,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-26', revision: '420219d278ae17f42a04871c6319ecf62a4af216', rules: 32 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-27', revision: '3b0918999a166f36f6f3d51fbcb49413de549163', rules: 32 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -88,6 +88,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.remaining.join(' ')).toContain('patrol/escort');
     expect(empire.remaining.join(' ')).toContain('representative mature campaigns');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-23-deploy-and-group-postings/README.md')).toBe(true);
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-group-travel/README.md')).toBe(true);
   });
   it('recognizes delivered group charters while retaining wider governor and template work', () => {
     const empire = roadmapItems.find(item => item.id === 'empire-management')!;
@@ -119,7 +120,7 @@ describe('the source-backed roadmap contract', () => {
     for (const claim of ['one to five existing construction/recruitment items', 'up to 128 owned hearths', 'preserves its paid prefix and leaves it selected for correction', 'at most 640 attempts', 'Up to 24 named production templates', 'Apply remains the paid action', 'never enter campaign saves or exports', 'failed preference storage leaves direct editing and production usable']) expect(delivered, claim).toContain(claim);
     for (const claim of ['broader governor decisions', 'bounded theaters', 'patrol/escort roles', 'reusable army order templates', 'representative mature campaigns']) expect(remaining, claim).toContain(claim);
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/README.md')).toBe(true);
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(61);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(63);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
     expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
     expect(roadmapGates).toHaveLength(15);
