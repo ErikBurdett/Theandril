@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { gunzipSync } from 'node:zlib';
 import { expect, test } from 'vitest';
-import { deserializeGame, serializeGame } from '@theandril/sim';
+import { deserializeGame, serializeGame, SAVE_VERSION } from '@theandril/sim';
 import { replayArchive, resumeJournal, type CampaignArchive } from '@theandril/chronicle';
 import { deserializeCampaign, exportSave, importSave, SaveStore, serializeCampaign } from './index';
 import captured from '../../chronicle/src/fixtures/v31-selection-groups-baseline.json';
@@ -22,7 +22,7 @@ test('persists, reopens and exports rules32 saved groups with the untouched orig
     const archive = restored.journal.materialize();
     expect(archive.initialSave).toBe(entry.archive.initialSave);
     expect(archive.records.slice(0, entry.archive.records.length)).toEqual(entry.archive.records);
-    expect(archive.records.at(-1)?.rulesVersion).toBe(32);
+    expect(archive.records.at(-1)?.rulesVersion).toBe(SAVE_VERSION);
     const imported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(restored.game, archive))));
     expect(serializeGame(imported.game)).toBe(saved); expect(imported.archive).toEqual(archive);
     expect(serializeGame(replayArchive(imported.archive))).toBe(saved);

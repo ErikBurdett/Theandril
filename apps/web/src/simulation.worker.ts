@@ -236,7 +236,7 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
 }
 
 async function handle(request: Request): Promise<void> {
-  let selectionGroupApplied = false;
+  let delegationApplied: 'group' | 'theater' | false = false;
   let groupProductionStarted = false;
   let groupMovementStarted = false;
   try {
@@ -450,14 +450,14 @@ async function handle(request: Request): Promise<void> {
       }
       const result = applyCommand(state, request.command);
       if (!result.ok) throw new Error(result.error ?? 'The command could not be completed.');
-      selectionGroupApplied = request.command.type === 'setSelectionGroup' || request.command.type === 'deleteSelectionGroup';
+      delegationApplied = ['setSelectionGroup', 'deleteSelectionGroup'].includes(request.command.type) ? 'group' : ['setTheater', 'deleteTheater'].includes(request.command.type) ? 'theater' : false;
       const pending = settleDecisions(state);
       metrics.commandMs = performance.now() - started;
       let message = result.events.at(-1)?.message ?? 'Orders received.';
       if (pending === 'capture') message += ' Choose the captured settlement’s fate before continuing.';
       if (aiWarnings.length) message += ' ' + aiWarnings.join(' ');
       if (state.victory) message += ' The campaign has ended. Its two chronicles are ready to read.';
-      if (state.victory || pending === 'capture' || ['resolveCapture', 'respondPeace', 'endTurn', 'queueMovement', 'cancelMovement', 'resumeMovement', 'recruitCharacter', 'assignCharacter', 'unassignCharacter', 'promoteCharacter', 'startCharacterMission', 'cancelCharacterMission', 'useCommanderAbility'].includes(request.command.type) || ((request.command.type === 'battleOrder' || request.command.type === 'autoResolveBattle') && !state.battle)) message = await autosave(message);
+      if (state.victory || pending === 'capture' || ['setTheater', 'deleteTheater', 'resolveCapture', 'respondPeace', 'endTurn', 'queueMovement', 'cancelMovement', 'resumeMovement', 'recruitCharacter', 'assignCharacter', 'unassignCharacter', 'promoteCharacter', 'startCharacterMission', 'cancelCharacterMission', 'useCommanderAbility'].includes(request.command.type) || ((request.command.type === 'battleOrder' || request.command.type === 'autoResolveBattle') && !state.battle)) message = await autosave(message);
       publish(request.id, message);
     } else if (request.type === 'save') {
       await saves.saveCampaign(state, journal, 'manual');
@@ -468,13 +468,13 @@ async function handle(request: Request): Promise<void> {
   } catch (error) {
     // An accepted edit may fail while publishing its view. Its canonical
     // mutation must never be mistaken for a refusal or followed by stale orders.
-    if (selectionGroupApplied || groupProductionStarted || groupMovementStarted) recordingFailed = true;
+    if (delegationApplied || groupProductionStarted || groupMovementStarted) recordingFailed = true;
     const message = error instanceof Error ? error.message : String(error);
     send({ id: request.id, type: 'error', message: groupMovementStarted
       ? `The travel result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
       : groupProductionStarted
       ? `The production result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
-      : selectionGroupApplied ? `The group changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
+      : delegationApplied ? `The ${delegationApplied} changed but its update could not be displayed. Restore a saved campaign before continuing. ${message}` : message, ...(recordingFailed ? { recoveryRequired: true } : {}) });
   }
 }
 

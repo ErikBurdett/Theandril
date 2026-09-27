@@ -311,3 +311,24 @@ This short fog-limited, software-assisted Chromium result does not establish the
 No hierarchical pathfinder exists; adjacent movement is bounded neighbor lookup, so long-distance route timings remain pending. Fully explored/mature giant browser fixtures, virtualized registries, mainstream hardware, Firefox/WebKit, multiplayer and mixed late-game battle/magic/diplomacy workloads are still required. Rendering and simulation budgets remain separate.
 
 The prior conquest slice measured complete young turns of 5.34/6.85 ms versus current 6.14/7.73 ms; extra progression/visibility observation work increases that small baseline. Current mature means are lower (17.42/46.36 ms versus 26.12/66.16 ms), but changed AI economics and command mixes make this unsuitable as a pure optimization claim: current mature runs issue 76,402/196,748 commands and end with different settlement counts. Production output is a 629.12 kB main chunk (192.77 kB gzip), a 308.84 kB worker and 37.56 kB CSS. The large-main-chunk and upstream Zod annotation warnings remain documented, not suppressed.
+
+
+## Defensive theaters — local rules 33 candidate
+
+The [raw measurements](development/2026-09-27-defense-theaters/benchmark-final.json)
+use one warmup and three identical-save samples per case. Headless allocation
+medians are 1.515 ms Huge / 3.049 ms Legendary for 100 assigned guards; the per-realm
+ceiling of eight theaters × 128 members × 16 hearths is 8.814 / 8.527 ms, with 128
+attempts (64 accepted, 64 refused). Compact theater arrays are 12,656–141,617 bytes.
+Generated-geography representative cases and authored open-land/isolated-island
+ceiling cases are distinguished in the [evidence](development/2026-09-27-defense-theaters/README.md).
+
+These generator 4 Huge/Legendary worlds have 196,608/307,200 cells and 32/40 realms,
+with one active delegated realm. Raw full-observation bytes include map cells and
+are not actual worker payloads. Loading, hashing, setup and replay are outside
+timing; observation caches are warm. All 512 possible theaters, 8192 global route
+attempts, 4096-node search saturation, full turns, worker/autosave transport,
+rendering and sustained memory remain unmeasured. The additional bounded AI
+adoption reachability queries have separate evidence in the implementation packet.
+
+The separate [AI adoption benchmark](development/2026-09-27-defense-theaters/ai-benchmark-final.json) measures one warmup plus three fresh-observation samples in a quiet window. Reachable / island-fallback / all-blocked medians are 0.348 / 1.966 / 2.082 ms on Huge and 0.162 / 1.635 / 2.074 ms on Legendary. Each case uses 3 / 8 / 8 ordinary previews. Reported 25 / 4,942 / 6,504 expanded nodes count target search only; range search shares each preview's 4,096-node cap. Eight queries bound combined expansions at 32,768. These are authored four-hearth, hundred-company cases with 841 observed cells in one active realm, not natural-world, saturated-search, full-AI-turn or before/after speedup evidence. The earlier overlapping run is retained and excluded from accepted timings.

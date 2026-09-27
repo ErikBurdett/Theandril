@@ -1,0 +1,28 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/theaters.test.ts (9 tests | 1 failed) 256ms
+     × bounds failed routing and rotates destinations so an inaccessible hearth cannot starve a reachable one 21ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/theaters.test.ts > defensive theaters > bounds failed routing and rotates destinations so an inaccessible hearth cannot starve a reachable one
+RangeError: Natural feature terrain and depth disagree.
+ ❯ naturalFeatures packages/mapgen/src/index.ts:357:159
+
+ ❯ cellReadContext packages/sim/src/territory.ts:271:65
+ ❯ packages/sim/src/territory.ts:490:23
+ ❯ settlementLandObservation packages/sim/src/territory.ts:489:87
+ ❯ packages/sim/src/territory.ts:540:12
+ ❯ getLandObservation packages/sim/src/territory.ts:535:29
+ ❯ getObservation packages/sim/src/simulation.ts:665:11
+ ❯ packages/sim/src/theaters.test.ts:94:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  01:50:56
+   Duration  887ms (transform 422ms, setup 0ms, import 564ms, tests 256ms, environment 0ms)
+

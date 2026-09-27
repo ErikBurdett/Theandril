@@ -1,0 +1,356 @@
+{
+  "version": 1,
+  "sourceRevision": "Uncommitted candidate; exact measured source hashes follow.",
+  "sources": [
+    {
+      "path": "scripts/benchmark-theater-adoption.ts",
+      "sha256": "6a0744bf766461943ef7b153f40606d545d325f4d8f24b8c74ed80ef1f4afa5f"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "01532bd3d1b1737cd9b3359cc880f92cc28a42a6c21116efeccd314899feb518"
+    },
+    {
+      "path": "packages/sim/src/movement.ts",
+      "sha256": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+    }
+  ],
+  "saveVersion": 33,
+  "contentHash": "015468d1",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "scope": "Absolute pure home-watch planner timing, one warmup plus three fresh-observation samples per authored case. No before-change speedup claim. Flat authored geography,100 own combat companies and four candidate hearths within mature Huge/Legendary entity populations; not natural geography or worst-case search saturation. Setup, observations, strict saves, hashing and command/automatic-movement proofs excluded. Each canonical preview first computes movement range and then target search within a shared4096-node cap; reported expandedNodes counts only target search. At most eight previews bound combined work to32768 expansions. One adoption-capable realm; excludes complete AI turns, whole campaigns, workers, browser and physical storage.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "reachable",
+      "synthetic": true,
+      "cells": 196608,
+      "factions": 32,
+      "globalArmies": 1554,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 558592,
+      "commands": [
+        {
+          "type": "setTheater",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.1565",
+            "settlement.65"
+          ],
+          "armyIds": [
+            "army.1089",
+            "army.1121"
+          ],
+          "reserveCell": 10260,
+          "guardsPerSettlement": 1,
+          "enabled": true
+        }
+      ],
+      "commandBytes": 226,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.3657549999999219,
+        0.34799499999996897,
+        0.2491340000000264
+      ],
+      "medianMs": 0.34799499999996897,
+      "minMs": 0.2491340000000264,
+      "maxMs": 0.3657549999999219,
+      "routeQueries": [
+        3,
+        3,
+        3
+      ],
+      "targetSearchExpandedNodes": [
+        25,
+        25,
+        25
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "d028f363",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 1,
+      "automaticAccepted": 2
+    },
+    {
+      "size": "huge",
+      "workload": "island-fallback",
+      "synthetic": true,
+      "cells": 196608,
+      "factions": 32,
+      "globalArmies": 1554,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 557520,
+      "commands": [
+        {
+          "type": "setTheater",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.1565"
+          ],
+          "armyIds": [
+            "army.1089",
+            "army.1121"
+          ],
+          "reserveCell": 10276,
+          "guardsPerSettlement": 1,
+          "enabled": true
+        }
+      ],
+      "commandBytes": 210,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.182260999999926,
+        1.9655459999999039,
+        1.5866819999998825
+      ],
+      "medianMs": 1.9655459999999039,
+      "minMs": 1.5866819999998825,
+      "maxMs": 2.182260999999926,
+      "routeQueries": [
+        8,
+        8,
+        8
+      ],
+      "targetSearchExpandedNodes": [
+        4942,
+        4942,
+        4942
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "c7bd9c17",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 1,
+      "automaticAccepted": 2
+    },
+    {
+      "size": "huge",
+      "workload": "all-blocked",
+      "synthetic": true,
+      "cells": 196608,
+      "factions": 32,
+      "globalArmies": 1554,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 557180,
+      "commands": [],
+      "commandBytes": 2,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.399022999999943,
+        2.0822410000000673,
+        1.868797000000086
+      ],
+      "medianMs": 2.0822410000000673,
+      "minMs": 1.868797000000086,
+      "maxMs": 2.399022999999943,
+      "routeQueries": [
+        8,
+        8,
+        8
+      ],
+      "targetSearchExpandedNodes": [
+        6504,
+        6504,
+        6504
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "318f8c24",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 0,
+      "automaticAccepted": 0
+    },
+    {
+      "size": "legendary",
+      "workload": "reachable",
+      "synthetic": true,
+      "cells": 307200,
+      "factions": 40,
+      "globalArmies": 4001,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 550568,
+      "commands": [
+        {
+          "type": "setTheater",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.4081",
+            "settlement.81"
+          ],
+          "armyIds": [
+            "army.1081",
+            "army.1121"
+          ],
+          "reserveCell": 12820,
+          "guardsPerSettlement": 1,
+          "enabled": true
+        }
+      ],
+      "commandBytes": 226,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.14864399999987654,
+        0.19887000000016997,
+        0.1623120000003837
+      ],
+      "medianMs": 0.1623120000003837,
+      "minMs": 0.14864399999987654,
+      "maxMs": 0.19887000000016997,
+      "routeQueries": [
+        3,
+        3,
+        3
+      ],
+      "targetSearchExpandedNodes": [
+        25,
+        25,
+        25
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "32a6f541",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 1,
+      "automaticAccepted": 2
+    },
+    {
+      "size": "legendary",
+      "workload": "island-fallback",
+      "synthetic": true,
+      "cells": 307200,
+      "factions": 40,
+      "globalArmies": 4001,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 549470,
+      "commands": [
+        {
+          "type": "setTheater",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.4081"
+          ],
+          "armyIds": [
+            "army.1081",
+            "army.1121"
+          ],
+          "reserveCell": 12836,
+          "guardsPerSettlement": 1,
+          "enabled": true
+        }
+      ],
+      "commandBytes": 210,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        1.6352499999993597,
+        1.6165670000000318,
+        1.757158000000345
+      ],
+      "medianMs": 1.6352499999993597,
+      "minMs": 1.6165670000000318,
+      "maxMs": 1.757158000000345,
+      "routeQueries": [
+        8,
+        8,
+        8
+      ],
+      "targetSearchExpandedNodes": [
+        4942,
+        4942,
+        4942
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "149e4c82",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 1,
+      "automaticAccepted": 2
+    },
+    {
+      "size": "legendary",
+      "workload": "all-blocked",
+      "synthetic": true,
+      "cells": 307200,
+      "factions": 40,
+      "globalArmies": 4001,
+      "ownArmies": 101,
+      "ownCombatCompanies": 100,
+      "candidateHearths": 4,
+      "observedCells": 841,
+      "observationBytes": 549104,
+      "commands": [],
+      "commandBytes": 2,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.029443999999785,
+        2.225035999999818,
+        2.073881999999685
+      ],
+      "medianMs": 2.073881999999685,
+      "minMs": 2.029443999999785,
+      "maxMs": 2.225035999999818,
+      "routeQueries": [
+        8,
+        8,
+        8
+      ],
+      "targetSearchExpandedNodes": [
+        6504,
+        6504,
+        6504
+      ],
+      "maxRouteQueries": 8,
+      "pathNodeBudgetPerPreview": 4096,
+      "theoreticalCombinedRangeAndTargetNodeBound": 32768,
+      "canonicalHash": "59d5cfbb",
+      "canonicalUnmutated": true,
+      "permittedObservationUnmutated": true,
+      "repeatedPlanExact": true,
+      "ordinaryCommandsAccepted": 0,
+      "automaticAccepted": 0
+    }
+  ]
+}

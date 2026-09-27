@@ -1,0 +1,12 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+apps/web/src/main.tsx(632,9): error TS2322: Type '(order: TheaterCommand) => Promise<SelectionGroupResult>' is not assignable to type 'TheaterIssue'.
+  Type 'Promise<SelectionGroupResult>' is not assignable to type 'Promise<{ accepted: boolean; message: string; }>'.
+    Type 'SelectionGroupResult' is not assignable to type '{ accepted: boolean; message: string; }'.
+      Types of property 'message' are incompatible.
+        Type 'string | undefined' is not assignable to type 'string'.
+          Type 'undefined' is not assignable to type 'string'.
+apps/web/src/theater-response.ts(2,46): error TS2307: Cannot find module '../../../packages/sim/src/theater-state' or its corresponding type declarations.
+ ELIFECYCLE  Command failed with exit code 2.

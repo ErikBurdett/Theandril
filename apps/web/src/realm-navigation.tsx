@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { CHARTER_NAMES, type Observation } from '@theandril/sim';
 import { addGroupSelection, groupPostingArmies, GroupPostingOrders, GROUP_POSTING_LIMIT, type GroupPostingIssue } from './group-postings';
@@ -6,6 +6,7 @@ import { groupCharterTowns, GroupCharterOrders, type GroupCharterIssue } from '.
 import { SelectionGroups, type SelectionGroupIssue } from './selection-groups';
 import { GroupProductionOrders, type GroupProductionIssue } from './group-production';
 import { GroupMovementOrders, type GroupMovementIssue, type GroupMovementPreviewIssue } from './group-movement';
+import { DefenseTheaters, type TheaterIssue } from './defense-theaters';
 import './realm-navigation.css';
 
 export type RegistryKind = 'armies' | 'settlements';
@@ -44,9 +45,10 @@ export function RealmNavigation({ registry, armyCount, townCount, characterCount
   </div>;
 }
 
-export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onSelectionGroupCommand, onPendingChange }: {
+export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, onPendingChange }: {
   view: Observation; registry: RegistryKind; search: string; force: string; selection: Selection; select: (selection: Selection) => void;
   hash?: string; busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onSelectionGroupCommand?: SelectionGroupIssue; onPendingChange?: (pending: boolean) => void;
+  onTheaterCommand?: TheaterIssue; knownSelectedCell?: number;
 }) {
   const [sort, setSort] = useState<Sort>('id');
   const [page, setPage] = useState(0);
@@ -55,7 +57,14 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const [selectionGroupPending, setSelectionGroupPending] = useState(false);
   const [productionPending, setProductionPending] = useState(false);
   const [movementPending, setMovementPending] = useState(false);
-  const locked = busy || selectionGroupPending || productionPending || movementPending;
+  const [theaterPending, setTheaterPending] = useState(false);
+  const pendingFlags = useRef({ selection: false, production: false, movement: false, theater: false });
+  const reportPending = (kind: keyof typeof pendingFlags.current, pending: boolean) => {
+    pendingFlags.current[kind] = pending;
+    ({ selection: setSelectionGroupPending, production: setProductionPending, movement: setMovementPending, theater: setTheaterPending })[kind](pending);
+    onPendingChange?.(Object.values(pendingFlags.current).some(Boolean));
+  };
+  const locked = busy || selectionGroupPending || productionPending || movementPending || theaterPending;
   const availableArmyIds = useMemo(() => new Set(groupPostingArmies(view).map(army => army.id)), [view]);
   const availableTownIds = useMemo(() => new Set(groupCharterTowns(view).map(town => town.id)), [view]);
   const groupIds = registry === 'armies' ? armyGroupIds : townGroupIds;
@@ -80,15 +89,16 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const charters = new Map(view.charters.map(charter => [charter.settlementId, charter]));
-  const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement) : Boolean(onGroupCharter || onGroupProduction));
+  const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onTheaterCommand) : Boolean(onGroupCharter || onGroupProduction));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
   return <div className="realm-registry-content">
     <div className="registry-tools"><label>Registry order<select value={sort} disabled={locked} onChange={event => setSort(event.target.value as Sort)}><option value="id">Stable order</option><option value="name">Name A–Z</option></select></label><span>{entries.length} {registry === 'armies' ? 'forces' : 'towns'}</span></div>
-    {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={setSelectionGroupPending}/>}
+    {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={pending => reportPending('selection', pending)}/>}
     {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
-    {registry === 'armies' && onGroupMovement && onGroupMovementPreview && <GroupMovementOrders view={view} hash={hash} selected={currentGroupIds} selectedCell={selection.cell} busy={busy || selectionGroupPending || productionPending} issue={onGroupMovement} preview={onGroupMovementPreview} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => { setMovementPending(pending); onPendingChange?.(pending); }}/>}
+    {registry === 'armies' && onGroupMovement && onGroupMovementPreview && <GroupMovementOrders view={view} hash={hash} selected={currentGroupIds} selectedCell={selection.cell} busy={busy || selectionGroupPending || productionPending || theaterPending} issue={onGroupMovement} preview={onGroupMovementPreview} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('movement', pending)}/>}
+    {registry === 'armies' && onTheaterCommand && <DefenseTheaters view={view} checked={currentGroupIds} knownSelectedCell={knownSelectedCell} busy={busy || selectionGroupPending || productionPending || movementPending} issue={onTheaterCommand} onPendingChange={pending => reportPending('theater', pending)}/>}
     {registry === 'settlements' && onGroupCharter && <GroupCharterOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupCharter} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
-    {registry === 'settlements' && onGroupProduction && <GroupProductionOrders view={view} selected={currentGroupIds} busy={locked} issue={onGroupProduction} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={setProductionPending}/>}
+    {registry === 'settlements' && onGroupProduction && <GroupProductionOrders view={view} selected={currentGroupIds} busy={locked} issue={onGroupProduction} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('production', pending)}/>}
     <div className="registry" data-testid={registry === 'armies' ? 'army-registry' : 'settlement-registry'}>{visible.map(item => {
       const army = 'formations' in item ? item : undefined;
       const town = 'queue' in item ? item : undefined;

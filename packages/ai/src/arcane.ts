@@ -1,6 +1,7 @@
 import { hexDistance } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
+import { heldTheaterArmyIds } from './theaters';
 
 /** Rules 23. A realm cannot study Arcane Theory until it holds a surveyed seam,
  * so a realm without one pays to survey the ground it already occupies. Surveys
@@ -8,7 +9,7 @@ import type { AiPlan } from './diplomacy';
 const SURVEY_TURNS = 6;
 const SURVEY_RESERVE = 60;
 
-export function planArcaneSurvey(view: Observation): AiPlan | null {
+export function planArcaneSurvey(view: Observation, heldArmyIds: ReadonlySet<string> = heldTheaterArmyIds(view)): AiPlan | null {
   if (view.arcaneSites.some(site => site.controlled)) return null;
   if (view.treasury < view.arcaneSearchCoinCost + SURVEY_RESERVE) return null;
   const seat = view.factions.findIndex(faction => faction.id === view.factionId);
@@ -20,7 +21,7 @@ export function planArcaneSurvey(view: Observation): AiPlan | null {
   // moved; nothing is diverted from an expedition or a march. Land detail is
   // trimmed in an AI observation, so proximity to a hearth stands for its borders.
   const army = view.armies
-    .filter(item => item.factionId === view.factionId && item.movement > 0 && item.domain !== 'naval' && !item.carrierId && !surveyed.has(item.cell)
+    .filter(item => item.factionId === view.factionId && !heldArmyIds.has(item.id) && item.movement > 0 && item.domain !== 'naval' && !item.carrierId && !surveyed.has(item.cell)
       && hearths.some(town => hexDistance(item.cell, town.cell, view.width) <= 4))
     .sort((a, b) => a.cell - b.cell || (a.id < b.id ? -1 : 1))[0];
   if (!army) return null;

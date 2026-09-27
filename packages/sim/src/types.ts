@@ -1,3 +1,4 @@
+import type { DefenseTheater, ObservedDefenseTheater, TheaterCommand } from './theaters';
 import type { SelectionGroup, SelectionGroupKind } from './selection-groups';
 import type { ResourceState, ResourceObservation, ResourceCommand } from './resources';
 import type { DevelopmentState, DevelopmentObservation, DevelopmentCommand } from './development';
@@ -192,6 +193,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | TheaterCommand
   | { type: 'setSelectionGroup'; factionId: string; groupId?: string; kind: SelectionGroupKind; name: string; memberIds: string[] }
   | { type: 'deleteSelectionGroup'; factionId: string; groupId: string }
   | ResourceCommand
@@ -248,6 +250,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  theaters: DefenseTheater[];
+  nextTheaterId: number;
   selectionGroups: SelectionGroup[];
   nextSelectionGroupId: number;
   resources: ResourceState;
@@ -292,6 +296,7 @@ export interface GameState {
 }
 
 export interface Observation {
+  theaters?: ObservedDefenseTheater[];
   selectionGroups: SelectionGroup[];
   resources?: ResourceObservation;
   development?: DevelopmentObservation;

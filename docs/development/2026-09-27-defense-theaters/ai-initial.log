@@ -1,0 +1,25 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/theaters.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts [ packages/ai/src/theaters.test.ts ]
+Error: Cannot find package '@theandril/chronicle' imported from /home/telephoneheater/Work/Theandril/packages/ai/src/theaters.test.ts
+ ❯ packages/ai/src/theaters.test.ts:3:1
+      1| import { describe, expect, it } from 'vitest';
+      2| import { applyCommand, createArmyFormation, createGame, deserializeGam…
+      3| import { createJournal, replayArchive } from '@theandril/chronicle';
+       | ^
+      4| import { withRules } from '../../sim/src/rules';
+      5| import { refreshAuthoredSight } from '../../test-fixtures/src/authored…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  01:50:43
+   Duration  564ms (transform 385ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

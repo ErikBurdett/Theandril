@@ -1,3 +1,4 @@
+import { theaterCampaign } from '../../../packages/test-fixtures/src/theater-fixture';
 import 'fake-indexeddb/auto';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementPreview, getObservation, serializeGame, stateHash, type GameState } from '@theandril/sim';
@@ -325,5 +326,41 @@ describe('actual worker coordinated travel', () => {
       expect(stateHash((await exported()).game)).toBe(result.hash);
       expect((await request({ type: 'load' }, 'state')).hash).toBe(initial.hash);
     } finally { failingSave.mockRestore(); }
+  });
+});
+
+
+describe('actual worker defensive theater edits', () => {
+  it('journals, autosaves, transfers and replays an accepted theater and refuses invalid edits unchanged', async () => {
+    const game = theaterCampaign(100); await importFixture(game);
+    const command = { type: 'setTheater' as const, factionId: game.turnOwnerId, name: 'Hundred company watch', settlementIds: Object.keys(game.settlements), armyIds: Object.keys(game.armies), reserveCell: 495, guardsPerSettlement: 1, enabled: true };
+    const saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    try {
+      const response = await request({ type: 'command', command }, 'state');
+      expect(response.observation.theaters?.[0]?.armyIds).toHaveLength(100);
+      expect(saved).toHaveBeenCalledTimes(1); expect(saved.mock.calls[0]?.[2]).toBe('auto');
+      const exact = await exported(); expect(stateHash(exact.game)).toBe(response.hash);
+      expect(exact.archive).toBeDefined(); expect(stateHash(replayArchive(exact.archive!))).toBe(response.hash);
+      const rejected = await request({ type: 'command', command: { ...command, theaterId: 'theater.1', armyIds: ['army.missing'] } }, 'error');
+      expect(rejected.recoveryRequired).not.toBe(true); expect(saved).toHaveBeenCalledTimes(1);
+      expect(stateHash((await exported()).game)).toBe(response.hash);
+      expect((await request({ type: 'loadAuto' }, 'state')).hash).toBe(response.hash);
+    } finally { saved.mockRestore(); }
+  });
+
+  it('locks after accepted theater publication fails and restores the autosaved accepted state', async () => {
+    const game = theaterCampaign(); await importFixture(game);
+    const command = { type: 'setTheater' as const, factionId: game.turnOwnerId, name: 'Publication watch', settlementIds: Object.keys(game.settlements), armyIds: Object.keys(game.armies), reserveCell: 495, guardsPerSettlement: 1, enabled: true };
+    const send = host.postMessage;
+    const broken = vi.spyOn(host, 'postMessage').mockImplementation((response, options) => {
+      if (response.type === 'state' && response.observation.theaters?.length) throw new Error('Authored theater publication failure.');
+      send(response, options);
+    });
+    try {
+      const response = await request({ type: 'command', command }, 'error');
+      expect(response.recoveryRequired).toBe(true); expect(response.message).toContain('theater changed');
+      expect((await request({ type: 'save' }, 'error')).recoveryRequired).toBe(true);
+    } finally { broken.mockRestore(); }
+    expect((await request({ type: 'loadAuto' }, 'state')).observation.theaters?.[0]?.name).toBe(command.name);
   });
 });

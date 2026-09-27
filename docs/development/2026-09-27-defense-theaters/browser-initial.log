@@ -1,0 +1,13 @@
+[WebServer] (node:633632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:634589) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:634632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/defense-theaters.spec.ts:33:1 › a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override (6.9s)
+  ✓  2 tests/gameplay/defense-theaters.spec.ts:92:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater (9.1s)
+
+  2 passed (16.9s)

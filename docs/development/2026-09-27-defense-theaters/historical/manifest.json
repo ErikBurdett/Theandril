@@ -1,0 +1,310 @@
+{
+  "version": 32,
+  "contentHash": "015468d1",
+  "sourceRevision": "c5aa2615798bbc09efc9ca011dbb77f3d198980e",
+  "captureCommand": "node --import tsx scripts/capture-defense-theaters33.ts c5aa2615798bbc09efc9ca011dbb77f3d198980e",
+  "provenance": "Independently captured before canonical rules33 changes. Every checkpoint was strictly loaded and fully replayed byte-identically on the genuine rules32 implementation. Gzip is lossless storage; raw save/archive hashes and compressed-file hashes are retained. Generated complete histories and explicitly authored from-save travel history are distinguished.",
+  "cases": {
+    "generated-origin": {
+      "setup": "Generated tiny two-realm standard campaign, seed20260927, generator4, no city states; untouched start.",
+      "hash": "e565abef",
+      "turn": 1,
+      "records": 0,
+      "factions": 2,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "save": {
+        "file": "generated-origin.save.json.gz",
+        "bytes": 20995,
+        "sha256": "a9bc0f274e3b1cde50fc8bb08227df096ceeba8c3bfbb6aebc424a5fe43952b7",
+        "gzipBytes": 3300,
+        "gzipSha256": "7ee6c41ae15e9614113574ed6f7d657568826218f0baff36b36fac68f605e9cc"
+      },
+      "archive": {
+        "file": "generated-origin.archive.json.gz",
+        "bytes": 21786,
+        "sha256": "84ae48845f28f8ace4fe0125b513c341e71d7c8a2887652d8451a9dc8acadeea",
+        "gzipBytes": 3421,
+        "gzipSha256": "1a84c6c2536d34dfd9bafeeab170c5d6a67fb8e2c35fab02f4d46e0639331c26"
+      }
+    },
+    "generated-delegated": {
+      "setup": "Ordinary group creation, founding prunes its consumed caravan, hearth group, wealth charter and held scout posting.",
+      "hash": "401350c2",
+      "turn": 1,
+      "records": 5,
+      "factions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "First company",
+          "memberIds": [
+            "army.2"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Old hearths",
+          "memberIds": [
+            "settlement.5"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 251,
+          "mode": "hold"
+        }
+      ],
+      "routes": {},
+      "save": {
+        "file": "generated-delegated.save.json.gz",
+        "bytes": 23252,
+        "sha256": "0acb33012b2de43951e62700b4b27f4c9cc41cc7d5b731622cc3c6d71dae8dec",
+        "gzipBytes": 3814,
+        "gzipSha256": "02dd960f995d0c7ead230b76925721ea909b95740dcce0ffe23ac952beff7c56"
+      },
+      "archive": {
+        "file": "generated-delegated.archive.json.gz",
+        "bytes": 24087,
+        "sha256": "b6be93127e5c2e759eadb20e9a7a4180ee35d79ccb4cdc82e6ed61ae4f60609f",
+        "gzipBytes": 3916,
+        "gzipSha256": "02466c770a6ab4e9db669a606c1789520d74984dce027605d168b3224e65f09e"
+      }
+    },
+    "generated-continued": {
+      "setup": "Exact continuation of generated-delegated through three ordinary endTurn commands under rules32.",
+      "hash": "0698250a",
+      "turn": 4,
+      "records": 8,
+      "factions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "First company",
+          "memberIds": [
+            "army.2"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Old hearths",
+          "memberIds": [
+            "settlement.5"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 251,
+          "mode": "hold"
+        }
+      ],
+      "routes": {},
+      "save": {
+        "file": "generated-continued.save.json.gz",
+        "bytes": 24245,
+        "sha256": "346f1edf55c1029dcd7d940112057ac825dcaeb3d83a15ebea8626fc32128e50",
+        "gzipBytes": 3941,
+        "gzipSha256": "08bc8958f23f75373bb29984cdde2b3611f7eec444c4bd918de94939565632fb"
+      },
+      "archive": {
+        "file": "generated-continued.archive.json.gz",
+        "bytes": 25683,
+        "sha256": "8d048968b64977412e18787243c33811737264c22993334e2a2484ed1290b530",
+        "gzipBytes": 4105,
+        "gzipSha256": "96bd005be51e05de6d351b909dabe8cbce1690ce1941210702d781c968151b94"
+      }
+    },
+    "travel-ordered": {
+      "setup": "Authored flat resource-free tiny gallery; generated cultures/economy, relocated starts, revealed map. Ordinary saved group, hold posting, direct queued route and appended waypoint.",
+      "hash": "00e4338c",
+      "turn": 1,
+      "records": 4,
+      "factions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "Road watch",
+          "memberIds": [
+            "army.1",
+            "army.2"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 500,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.2": {
+          "armyId": "army.2",
+          "origin": 505,
+          "waypoints": [
+            514,
+            520
+          ],
+          "path": [
+            506,
+            507,
+            508,
+            509,
+            510,
+            511,
+            512,
+            513,
+            514,
+            515,
+            516,
+            517,
+            518,
+            519,
+            520
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        }
+      },
+      "save": {
+        "file": "travel-ordered.save.json.gz",
+        "bytes": 34877,
+        "sha256": "6ecd3ce0b18daf6b3609c64df920e55723df33c40e48e9bfb599dc55e942a19a",
+        "gzipBytes": 5038,
+        "gzipSha256": "802c114b0c5d2a28fba755acd9a72ea6c559ecb94b83122ebe993deb473397f3"
+      },
+      "archive": {
+        "file": "travel-ordered.archive.json.gz",
+        "bytes": 36157,
+        "sha256": "6cf98b09a7dad142ec87938d769e6dcc46579a11895c069e6d03a7e13aace523",
+        "gzipBytes": 5285,
+        "gzipSha256": "ade7a3ae5322f1ce02f07997cd5ec16303016052c14f91c726aa1e83fcdebb07"
+      }
+    },
+    "travel-continued": {
+      "setup": "Exact continuation of travel-ordered: ordinary cancel, end turn, replacement direct route and end turn; saved membership and independent hold posting persist.",
+      "hash": "dc43fe88",
+      "turn": 3,
+      "records": 8,
+      "factions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "Road watch",
+          "memberIds": [
+            "army.1",
+            "army.2"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 500,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.2": {
+          "armyId": "army.2",
+          "origin": 505,
+          "waypoints": [
+            508
+          ],
+          "path": [
+            506,
+            507,
+            508
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        }
+      },
+      "save": {
+        "file": "travel-continued.save.json.gz",
+        "bytes": 37019,
+        "sha256": "445b66ff814dba0d8f2d6633ece0e5dd4e27d30ca32559bb77892e76c4c249c6",
+        "gzipBytes": 5202,
+        "gzipSha256": "feb305f13eac0be5a6280c6d0d1df52d517939542c90562042f9caa3639e4035"
+      },
+      "archive": {
+        "file": "travel-continued.archive.json.gz",
+        "bytes": 39265,
+        "sha256": "c3a9ccebf6af44073b6f825dfa3a25451cc43fed26383a9d04e0409a706dd0c9",
+        "gzipBytes": 5540,
+        "gzipSha256": "61ff3f098cb926ae5eb667f97ce438c3418f8015a462c344a31398db7e2a18ab"
+      }
+    },
+    "sixty-four-origin": {
+      "setup": "Generated standard world seed20260925, generator8, forty major realms and twenty-four city states; actual 64-seat research/save boundary.",
+      "hash": "4ef30a36",
+      "turn": 1,
+      "records": 0,
+      "factions": 64,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "save": {
+        "file": "sixty-four-origin.save.json.gz",
+        "bytes": 421949,
+        "sha256": "9015bac69a8deb89e6350a9fdc5ced57a43ba36b42f3f6f8e4bfceef29daf848",
+        "gzipBytes": 29382,
+        "gzipSha256": "e97ce7f84f711ca2af73caefe65a463c9181a54d9e69d293297aac7a88942b50"
+      },
+      "archive": {
+        "file": "sixty-four-origin.archive.json.gz",
+        "bytes": 432872,
+        "sha256": "e24bb43964de5854b7b2fdeae9b296be0d589c453b037ed9ca4ef3b44c5c67d3",
+        "gzipBytes": 29627,
+        "gzipSha256": "fc4f860769b7f5cebeab6be08e414b6356783d797de76f0b3ff68ea8aec324bf"
+      }
+    },
+    "sixty-four-continued": {
+      "setup": "Exact generated 64-seat continuation through one ordinary endTurn; no AI campaign or maturity claim.",
+      "hash": "6add8139",
+      "turn": 2,
+      "records": 1,
+      "factions": 64,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "save": {
+        "file": "sixty-four-continued.save.json.gz",
+        "bytes": 428863,
+        "sha256": "a1172765425ed534fea79a48b24bda06ccca56a0472c9313da6d24710abafcfd",
+        "gzipBytes": 29776,
+        "gzipSha256": "626248fc13b0aee140a87cf4c15e5b79fb2b70fb62fd4568da15613d1a8d00d1"
+      },
+      "archive": {
+        "file": "sixty-four-continued.archive.json.gz",
+        "bytes": 440000,
+        "sha256": "58dfc63b726685b1a68a24b060e43eb3ed69d96326bfdf5b940c9ea868a3fedb",
+        "gzipBytes": 30151,
+        "gzipSha256": "61b76b01a78d4acd9df7da8efcbad5ff7a7c867786a0c57aad571c94fd929026"
+      }
+    }
+  }
+}

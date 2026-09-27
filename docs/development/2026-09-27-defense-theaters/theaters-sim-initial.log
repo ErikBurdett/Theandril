@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/theaters.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/theaters.test.ts [ packages/sim/src/theaters.test.ts ]
+TypeError: peaceCommandSchemas is not iterable
+ ❯ packages/sim/src/simulation.ts:60:6
+     58|   z.object({ type: z.literal('adoptDoctrine'), factionId: identifier, …
+     59|   z.object({ type: z.literal('startVictoryProject'), factionId: identi…
+     60|   ...peaceCommandSchemas,
+       |      ^
+     61| ]);
+     62| // Freeze historical command options explicitly. Future commands do no…
+ ❯ packages/sim/src/diplomacy.ts:3:1
+ ❯ packages/sim/src/warfare.ts:11:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  01:49:54
+   Duration  606ms (transform 420ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

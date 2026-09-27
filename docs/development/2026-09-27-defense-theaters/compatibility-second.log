@@ -1,0 +1,202 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/save.test.ts (30 tests | 6 failed) 281ms
+     × migrates explicit v0 nextEntityId snapshots without changing campaign state 28ms
+     × verifies v1 checksums and the known content pack before adding warfare defaults 9ms
+     × migrates checked v2 state into settlement provenance and diplomacy defaults 9ms
+     × continues a synthetic v2 field-battle shape with an initialized war memory 28ms
+     × migrates the recognized v3 content pack and verifies its checksum before defaults 7ms
+     × preserves a synthetic v3 siege-battle shape and its pending conquest decision 31ms
+ ❯ |unit| packages/chronicle/src/defense-theaters-compatibility.test.ts (20 tests | 1 failed) 1166ms
+     × rejects resealed future fields in frozen32 before migration and verifies the original checksum 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/chronicle/src/defense-theaters-compatibility.test.ts > rules33 theaters preserve independently captured rules32 history > rejects resealed future fields in frozen32 before migration and verifies the original checksum
+AssertionError: expected [Function] to throw error matching /Unrecognized keys/ but got 'Cannot read save: [\n  {\n    "code":…'
+
+- Expected:
+/Unrecognized keys/
+
++ Received:
+"Cannot read save: [
+  {
+    \"code\": \"unrecognized_keys\",
+    \"keys\": [
+      \"theaters\"
+    ],
+    \"path\": [
+      \"state\"
+    ],
+    \"message\": \"Unrecognized key: \\\"theaters\\\"\"
+  }
+]"
+
+ ❯ packages/chronicle/src/defense-theaters-compatibility.test.ts:75:61
+     73|       const future = JSON.parse(save); future.state[field] = field ===…
+     74|       future.stateChecksum = checksum(JSON.stringify(future.state));
+     75|       expect(() => deserializeGame(JSON.stringify(future))).toThrow(/U…
+       |                                                             ^
+     76|     }
+     77|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:118:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:126:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:144:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:163:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:176:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "theaters",
+      "nextTheaterId"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized keys: \"theaters\", \"nextTheaterId\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:914:25
+    912|   let originalVersion: number;
+    913|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    914|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    915|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    916|   const data = envelope.state;
+ ❯ migrateCurrent packages/sim/src/save.test.ts:198:24
+ ❯ packages/sim/src/save.test.ts:202:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  2 failed | 6 passed (8)
+      Tests  7 failed | 93 passed (100)
+   Start at  01:50:24
+   Duration  1.74s (transform 2.66s, setup 0ms, import 3.92s, tests 3.04s, environment 0ms)
+

@@ -1,0 +1,1668 @@
+Starting rules32 headline-standard: standard map,12 realms,seed20260905,target about200 turns; DH-021 remains open.
+rules32 standard: turn101,0 adoptions,0 accepted automatic dispatches.
+rules32 standard: turn201,0 adoptions,0 accepted automatic dispatches.
+Finished rules32 standard: turn234,prosperity,0 refused;0 accepted theater creations/edits;0 accepted/0 refused automatic routes.
+Starting rules33 headline-standard: standard map,12 realms,seed20260905,target about200 turns; DH-021 remains open.
+rules33 standard: turn101,12 adoptions,7 accepted automatic dispatches.
+rules33 standard: turn201,12 adoptions,8 accepted automatic dispatches.
+Finished rules33 standard: turn242,prosperity,0 refused;12 accepted theater creations/edits;8 accepted/210 refused automatic routes.
+Starting rules32 headline-long: standard map,12 realms,seed20260905,target about300 turns; DH-021 remains open.
+rules32 long: turn101,0 adoptions,0 accepted automatic dispatches.
+rules32 long: turn201,0 adoptions,0 accepted automatic dispatches.
+rules32 long: turn301,0 adoptions,0 accepted automatic dispatches.
+Finished rules32 long: turn342,prosperity,0 refused;0 accepted theater creations/edits;0 accepted/0 refused automatic routes.
+Starting rules33 headline-long: standard map,12 realms,seed20260905,target about300 turns; DH-021 remains open.
+rules33 long: turn101,12 adoptions,7 accepted automatic dispatches.
+rules33 long: turn201,12 adoptions,8 accepted automatic dispatches.
+rules33 long: turn301,12 adoptions,9 accepted automatic dispatches.
+Finished rules33 long: turn336,prosperity,0 refused;12 accepted theater creations/edits;9 accepted/304 refused automatic routes.
+Starting rules32 headline: standard map,12 realms,seed20260905,target 350–400 turns.
+rules32 epic: turn101,0 adoptions,0 accepted automatic dispatches.
+rules32 epic: turn201,0 adoptions,0 accepted automatic dispatches.
+rules32 epic: turn301,0 adoptions,0 accepted automatic dispatches.
+Finished rules32 epic: turn379,prosperity,0 refused;0 accepted theater creations/edits;0 accepted/0 refused automatic routes.
+Starting rules33 headline: standard map,12 realms,seed20260905,target 350–400 turns.
+rules33 epic: turn101,12 adoptions,7 accepted automatic dispatches.
+rules33 epic: turn201,12 adoptions,8 accepted automatic dispatches.
+rules33 epic: turn301,12 adoptions,9 accepted automatic dispatches.
+Finished rules33 epic: turn384,prosperity,0 refused;12 accepted theater creations/edits;9 accepted/352 refused automatic routes.
+{
+  "schemaVersion": 1,
+  "sourceContext": "Uncommitted candidate runtime sources; exact file fingerprints below, not a claimed published revision.",
+  "historicalBaselineRevision": "c5aa2615798bbc09efc9ca011dbb77f3d198980e",
+  "historicalManifestPath": "docs/development/2026-09-27-defense-theaters/historical/manifest.json",
+  "historicalManifestSha256": "ca1934baae080209ba8e538a006ac3c4ce7b93ba15eae09a89b779a0e12b8ef6",
+  "sources": {
+    "aggregateSha256": "819efedd166a21b389d2efc3c3c4b89cae34834ef97699dff0427cc58ebf3210",
+    "files": [
+      {
+        "path": "packages/ai/src/arcane.ts",
+        "sha256": "d111022bdeb912b5e1a088fb2707f80457b2a9dbb21e671a2767d598afefdb23"
+      },
+      {
+        "path": "packages/ai/src/characters.ts",
+        "sha256": "a009d7c1a70e58abd284f2e7ab91150b8a6915e9737902430647ed7214b376d4"
+      },
+      {
+        "path": "packages/ai/src/conquest.ts",
+        "sha256": "762494fd8e7d2d0ff4c9b088747e113545bb74035d53afceefbe99b6e2b64797"
+      },
+      {
+        "path": "packages/ai/src/diplomacy.ts",
+        "sha256": "6d27a521b7e4c0c6f622bc3a84c1b9c0972717909c8549a5ce4526a25268dbba"
+      },
+      {
+        "path": "packages/ai/src/expansion.ts",
+        "sha256": "5f7ab417fb0954e0853c2e88fb07d45e218abb2e4041ad565a9b3d4403e61d4d"
+      },
+      {
+        "path": "packages/ai/src/index.ts",
+        "sha256": "49d3be8ebc686d6fa6083abdcead258c16615934bdba695f794c18e81be2bb44"
+      },
+      {
+        "path": "packages/ai/src/land.ts",
+        "sha256": "fba0b45165e53324aeea349865eccb619d3f43c9f5559787eabba01b0a834bbc"
+      },
+      {
+        "path": "packages/ai/src/naval.ts",
+        "sha256": "3fd47f47b4889faa989ec5b20fa68e54d05082e891e2aff78436faf9638b44e8"
+      },
+      {
+        "path": "packages/ai/src/navigation.ts",
+        "sha256": "9db6e98d0130ff0d71f09e4cf2e0a0a309cd7bcc5f6d23aaadbccfcc5785feaa"
+      },
+      {
+        "path": "packages/ai/src/observation-index.ts",
+        "sha256": "f7dfef9442dcf806af2e7402cf8452af387842ac768eaf735286214109ee4bfa"
+      },
+      {
+        "path": "packages/ai/src/observation-options.ts",
+        "sha256": "584d72e727ed7ec0e686ec1fcf96d9e1784a67d32ec734233c7fed552d66ae6a"
+      },
+      {
+        "path": "packages/ai/src/progression.ts",
+        "sha256": "8c47c515b51d5e673a7b41fb6832e9d65c17d60c789ccf128e3df7db38541e1e"
+      },
+      {
+        "path": "packages/ai/src/recruitment.ts",
+        "sha256": "4d46904af62d9fb5610768184a843bf5f0a26f80dae70a13269b356d2def015e"
+      },
+      {
+        "path": "packages/ai/src/roads.ts",
+        "sha256": "0119ad6d5dbbf9bd0e00001b166c80676d20a0784d34c8029310f64586b42c00"
+      },
+      {
+        "path": "packages/ai/src/sea-knowledge.ts",
+        "sha256": "db9aa29d3ce595778d91913813082b2774e53f724dce2b1fea6e5d11b6ea366b"
+      },
+      {
+        "path": "packages/ai/src/supply.ts",
+        "sha256": "91e2d1a11e91d602184d7483cfd10d1a5a66714f4bd8c816b675b0a48ead26f9"
+      },
+      {
+        "path": "packages/ai/src/testing/pacing-campaign.ts",
+        "sha256": "bbc5f7ab597d4c3230371bae1771875c86be6ebf97c114a72e7cfd3ef4e3a2da"
+      },
+      {
+        "path": "packages/ai/src/theaters.ts",
+        "sha256": "89b7f30c5fb314f7758680b332d07b9fe2ff41065a7009f9cea432a48fc846b3"
+      },
+      {
+        "path": "packages/content/src/characters.ts",
+        "sha256": "e786ec0a275dc122902dde2ab51b4270368533010eb252ed2fb2ef99d11c8048"
+      },
+      {
+        "path": "packages/content/src/city-states.ts",
+        "sha256": "8edfe05fbbee962c903f0115bfe8e7c364d13d2884d68d1921bff2d4b10429f7"
+      },
+      {
+        "path": "packages/content/src/development.ts",
+        "sha256": "22cbaf25499f49c9f39de523692239e881738f763a217f9efc0d99994787c117"
+      },
+      {
+        "path": "packages/content/src/ecology.ts",
+        "sha256": "f5a21a46213445e68171f6468e7d955a4a5997d3bab1d824f8e9c80c50a51b3f"
+      },
+      {
+        "path": "packages/content/src/factions.ts",
+        "sha256": "5d4c54b6adb4e89d2801a44a247e09a21fcf5bfd34b5ccb0a788cd9a82992e53"
+      },
+      {
+        "path": "packages/content/src/index.ts",
+        "sha256": "4601297575e5887e82f1e925616c2a5747ef264c4d4e11a0b3c6a07ff21fb542"
+      },
+      {
+        "path": "packages/content/src/magic.ts",
+        "sha256": "0344a69e340ef8dcceeda8a36126037952c7b9f33b2c28527d710dac44b46cd5"
+      },
+      {
+        "path": "packages/content/src/progression.ts",
+        "sha256": "b525289341a14b0acc96c3041a0f98b5f6a11b594f00df810b3e11c4a74d05c8"
+      },
+      {
+        "path": "packages/content/src/resources.ts",
+        "sha256": "74f9bbf266bd64592b33692c5448adc5fe6ebfd2e16a0865de11d71554c68e89"
+      },
+      {
+        "path": "packages/mapgen/src/climate-v6.ts",
+        "sha256": "7a4887cd3e572bdef2481a5aa23432eaadad719db8ab3472eb428f46844f3633"
+      },
+      {
+        "path": "packages/mapgen/src/geography-metrics.ts",
+        "sha256": "7473e887079da15c0cb182ebd548603bf0e3a4907fb12a7f53ba83032e0f849b"
+      },
+      {
+        "path": "packages/mapgen/src/geography-v5.ts",
+        "sha256": "80e4ac6488d01abd6535f32b2bac8025213f1411c19f8b36bafd8b6fa1c3ee73"
+      },
+      {
+        "path": "packages/mapgen/src/geography-v8.ts",
+        "sha256": "dc838bec2cce5b62f9373ed7955a30bbfc63884797333ce70711f8c12011b885"
+      },
+      {
+        "path": "packages/mapgen/src/hydrology.ts",
+        "sha256": "dbcef798c8704432ca2d3422ffe51903506edc375fccfe888f2ea80eb94dd403"
+      },
+      {
+        "path": "packages/mapgen/src/index.ts",
+        "sha256": "d3600ae2a28adbbb901cf02a06c42d7b469a4b3301c10e8c41938e86470555fe"
+      },
+      {
+        "path": "packages/mapgen/src/inland-seas-v7.ts",
+        "sha256": "8eddd6efcf41aeeccf5de850db73e101ec8dee863a9021ec09388473937fd70c"
+      },
+      {
+        "path": "packages/mapgen/src/relief-v6.ts",
+        "sha256": "0f552573add0086c6a875cac5d30d47e4528405a76591dd63aa22587d858794c"
+      },
+      {
+        "path": "packages/sim/src/arcane-sites.ts",
+        "sha256": "d2178cd67ab0569f9111573049cd4bee8d5d9e4bb497529ea386d185d558a1cb"
+      },
+      {
+        "path": "packages/sim/src/army-composition.ts",
+        "sha256": "f079b603600fcf81840f77c01b85b20d005196b457d794cfcf1b87020eaed1af"
+      },
+      {
+        "path": "packages/sim/src/battle-abilities.ts",
+        "sha256": "68b80ba525c8f4bc566620ca908b14a708f6b1ca8e088c783d2714af91dc2cfd"
+      },
+      {
+        "path": "packages/sim/src/battle-frontage.ts",
+        "sha256": "f8d619b7c0894ac063824f5b19d4ebd8c804f0b845328822aee3c88f31c908a0"
+      },
+      {
+        "path": "packages/sim/src/battle-record.ts",
+        "sha256": "b7fa3ef0acb777a8e53d360ee8e58c7e54b9048aae933152691311dc8e13a708"
+      },
+      {
+        "path": "packages/sim/src/canonical-cells.ts",
+        "sha256": "4c3175175ee06d4a2742bc75ae6e0d1d793520da93798377fefe17341d804be9"
+      },
+      {
+        "path": "packages/sim/src/characters.ts",
+        "sha256": "0724e8b92252920d99e66d0673dd8b0a6d3490c5d92a5854a30952d40b6025bc"
+      },
+      {
+        "path": "packages/sim/src/charters.ts",
+        "sha256": "112e07de9403457ea7254af72db336efd59ce363c131a98298c187e3450339a1"
+      },
+      {
+        "path": "packages/sim/src/clients.ts",
+        "sha256": "a1c97f5853340bb3b63f8da3d4e7695453158a79409ff5a4a811562d61947f98"
+      },
+      {
+        "path": "packages/sim/src/combat/development-snapshot.ts",
+        "sha256": "aa077511fcfed8555cce70171a333f2d796fcf0773032a75c2583c644113fc7d"
+      },
+      {
+        "path": "packages/sim/src/combat/index.ts",
+        "sha256": "ed781e1f02687e44db2a49ae63549a7ace55db70788bf80c9fa63edc065a7d0a"
+      },
+      {
+        "path": "packages/sim/src/combat/individual.ts",
+        "sha256": "60846926e6957b78b42460f12241eb96bc4a09a9d7b687cb64e6e4ec3d9c1186"
+      },
+      {
+        "path": "packages/sim/src/combat/presentation.ts",
+        "sha256": "3acc17b8cd883b86be3002917ca160b15c2d9a4784f99dd9030cd4cf05e89720"
+      },
+      {
+        "path": "packages/sim/src/depots.ts",
+        "sha256": "051d5d322b8d75027bec80b9640632a29a5ea3a06198f90908a16da1e04d317a"
+      },
+      {
+        "path": "packages/sim/src/development.ts",
+        "sha256": "45f46076bc1c7df497f032c16c213fc5da4d642a31e1341b49f5ef12054aac3a"
+      },
+      {
+        "path": "packages/sim/src/diplomacy.ts",
+        "sha256": "f2ad6b35f9cec424be087216d80c9dc72189a4369311073fdeb0f20c2bf9244d"
+      },
+      {
+        "path": "packages/sim/src/faction-starts.ts",
+        "sha256": "0cc988a129d9f4ddb73b8078270d6441b3c9798f2bf2369e8627641fbfca658c"
+      },
+      {
+        "path": "packages/sim/src/fleet-provisions.ts",
+        "sha256": "dd80bb4c658a75e399fe51cecafe5bec609a925d6ac265907fbfe54c33cd8edf"
+      },
+      {
+        "path": "packages/sim/src/growth-economy.ts",
+        "sha256": "8d7037470e0a80b68ff829e3a079df8318b5a70d7fdae8fe73db60f4a8813f5f"
+      },
+      {
+        "path": "packages/sim/src/index.ts",
+        "sha256": "f2c2ff083f9f4bb80c8868d7fbcdadd32f8736e5f291bb4aefab2cfa28164a04"
+      },
+      {
+        "path": "packages/sim/src/magic.ts",
+        "sha256": "38b87041e557ead332859eb3d287afc37931d591a723ca8439dff1cdfd132a0f"
+      },
+      {
+        "path": "packages/sim/src/movement.ts",
+        "sha256": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+      },
+      {
+        "path": "packages/sim/src/naval.ts",
+        "sha256": "53b0966df2b6394c12203685efd883524867daafb0bf3cc98ed0786a70ae8da1"
+      },
+      {
+        "path": "packages/sim/src/postings.ts",
+        "sha256": "049a454aff7c65e4d30a9318afe3a5a305d5efd4a7fa153f475f1997ed2b974e"
+      },
+      {
+        "path": "packages/sim/src/progression.ts",
+        "sha256": "f9a7853503373f18799136b80f0222f0d584f1eac127c159a25c386d95f52b6a"
+      },
+      {
+        "path": "packages/sim/src/resources.ts",
+        "sha256": "df7221ea32787211cc05ff41752047a3a955f473b024948cc32d6856e82cf5cd"
+      },
+      {
+        "path": "packages/sim/src/roads.ts",
+        "sha256": "3f0d5744fe698038c24cbceb4009a3a1b027c8a5df24471012cbefdb4024ed58"
+      },
+      {
+        "path": "packages/sim/src/rules.ts",
+        "sha256": "df7a337450620adf8aad02404b1dda6cd7332c4e89745547bc2a8d12acd5e4d6"
+      },
+      {
+        "path": "packages/sim/src/save.ts",
+        "sha256": "6b17cb40ee2e32bf981cd7fb8d6afc722e359319e2fd98ac2cff4ab362ebcf73"
+      },
+      {
+        "path": "packages/sim/src/seats.ts",
+        "sha256": "0bd60255f231b9c8e37a65d1c4a4a6f1384309c7c2e72f9528db083db1a8fbdf"
+      },
+      {
+        "path": "packages/sim/src/selection-groups.ts",
+        "sha256": "cc3e30053acc86ee0c13404e63a43bb0c1c3daf7b56b3405da2aa11bfb06548c"
+      },
+      {
+        "path": "packages/sim/src/siege.ts",
+        "sha256": "93371a9d20781bca28fbb97a2d18174293bd46326fa54383d2d688f351bc7fca"
+      },
+      {
+        "path": "packages/sim/src/simulation.ts",
+        "sha256": "06dafee4eccc26b0af00bc9efd2f3dea9646f478028a86d747759c0d0a92d349"
+      },
+      {
+        "path": "packages/sim/src/spectator.ts",
+        "sha256": "19c34e39e704eaa5c3e187c2c78d27163f9acbcc563dfe8cfcb21413ee1b3ab9"
+      },
+      {
+        "path": "packages/sim/src/supply.ts",
+        "sha256": "de58da5bae95fc2e25145dd6d410a29097497bf793f79cc0bc6014dd01e27421"
+      },
+      {
+        "path": "packages/sim/src/territory.ts",
+        "sha256": "13d5b9404f2273ebc1d66ed56caba7131401f42324da560722ed9b2af3086661"
+      },
+      {
+        "path": "packages/sim/src/theater-state.ts",
+        "sha256": "e5d3e43b1620230681be7b2e0e8e3f2d5f897fbaa2ddf10c6e9173bdda9c18e9"
+      },
+      {
+        "path": "packages/sim/src/theaters.ts",
+        "sha256": "d53afd72ecc3d9028fbe7feab2d21f8c975f1d4325e5a236a0465016677c6014"
+      },
+      {
+        "path": "packages/sim/src/types.ts",
+        "sha256": "1d8c620aebed973dbb2c619c84c8d8985a9ce3b7c336709fcf802d08c7b4221e"
+      },
+      {
+        "path": "packages/sim/src/visibility.ts",
+        "sha256": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a"
+      },
+      {
+        "path": "packages/sim/src/warfare.ts",
+        "sha256": "4c9acf8f800bb16b56cd3c219786746728f6bd25fa41613cca57afb7501028a3"
+      },
+      {
+        "path": "scripts/compare-theater-pacing.ts",
+        "sha256": "a28aee15817fc71e689bb80fef8d2ee0bd5dfb88ebb6a86e30fc539abd600d30"
+      },
+      {
+        "path": "scripts/measure-pacing.ts",
+        "sha256": "e23c9f6de41a67653fd3f957261037c6fb7ea93f3233bacd51cc4d093e0ec174"
+      }
+    ]
+  },
+  "contentHash": "015468d1",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "scope": "One seed for each of three standard-map12-realm headline paces, identical current source selecting frozen32 or current33 rules. Same unmodified planner except its observed theater capability. Canonical commands/events only; no policy tuning or injected adoption. Elapsed times are instrumented campaign runtimes, not allocator benchmarks. No complete archive/replay or multi-seed pacing confidence claim.",
+  "runs": [
+    {
+      "name": "headline-standard",
+      "rulesVersion": 32,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "standard",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 32
+      },
+      "target": "about200 turns; DH-021 remains open",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 234,
+      "victoryPath": "prosperity",
+      "winner": "faction.saltwind_remnant",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 72,
+        "moveTo": 16735,
+        "endTurn": 233,
+        "queue": 700,
+        "setWorkedTiles": 2552,
+        "adoptInstitution": 12,
+        "research": 117,
+        "develop": 93,
+        "improveTile": 41,
+        "recruitCharacter": 62,
+        "terraformTile": 2,
+        "assignCharacter": 62,
+        "mergeArmies": 153,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 462,
+        "accelerateRoad": 10,
+        "declareWar": 194,
+        "besiege": 130,
+        "embarkArmy": 39,
+        "searchArcane": 193,
+        "assault": 30,
+        "autoResolveBattle": 544,
+        "proposePeace": 187,
+        "attack": 514,
+        "respondPeace": 187,
+        "promoteCharacter": 84,
+        "disembarkArmy": 27,
+        "buildDepot": 244,
+        "sellResource": 89,
+        "proposeClient": 36,
+        "respondClient": 32,
+        "resolveCapture": 26,
+        "liftSiege": 51,
+        "cancelCharacterMission": 2,
+        "researchArcane": 3,
+        "startVictoryProject": 2
+      },
+      "domainEventCounts": {
+        "settlement_founded": 72,
+        "army_moved": 47271,
+        "turn_started": 2784,
+        "production_queued": 700,
+        "worked_tiles_changed": 2552,
+        "settlement_grew": 896,
+        "building_completed": 318,
+        "institution_adopted": 12,
+        "technology_researched": 117,
+        "territory_expanded": 3244,
+        "development_acquired": 93,
+        "land_work_started": 43,
+        "unit_recruited": 378,
+        "land_work_progress": 64,
+        "land_work_completed": 39,
+        "character_recruited": 62,
+        "character_assigned": 71,
+        "road_planned": 74,
+        "road_segment_built": 336,
+        "formations_transferred": 153,
+        "doctrine_adopted": 12,
+        "character_mission_started": 462,
+        "character_mission_progress": 462,
+        "character_mission_completed": 456,
+        "road_accelerated": 10,
+        "army_command_changed": 63,
+        "war_declared": 388,
+        "siege_started": 260,
+        "siege_progress": 468,
+        "army_embarked": 39,
+        "road_completed": 52,
+        "arcane_survey_empty": 190,
+        "fleet_resupplied": 550,
+        "battle_started": 1088,
+        "battle_ability_used": 288,
+        "army_retreated": 520,
+        "formation_experience": 1039,
+        "battle_finished": 1088,
+        "siege_lifted": 206,
+        "peace_proposed": 374,
+        "peace_accepted": 374,
+        "character_promoted": 84,
+        "army_disembarked": 27,
+        "supply_attrition": 752,
+        "character_battle_experience": 299,
+        "movement_interrupted": 635,
+        "army_destroyed": 6,
+        "peace_expired": 352,
+        "fleet_stores_empty": 196,
+        "arcane_site_found": 3,
+        "depot_built": 244,
+        "resource_contract": 89,
+        "client_proposed": 72,
+        "client_refused": 24,
+        "capture_pending": 26,
+        "settlement_captured": 52,
+        "capital_changed": 5,
+        "road_segment_reused": 48,
+        "upkeep_shortfall": 1,
+        "client_accepted": 40,
+        "commander_rallied": 28,
+        "character_recovered": 42,
+        "depot_razed": 212,
+        "client_ended": 34,
+        "character_mission_cancelled": 2,
+        "client_offer_expired": 8,
+        "formation_destroyed": 28,
+        "character_mission_interrupted": 1,
+        "arcane_researched": 3,
+        "victory_project_started": 24,
+        "victory_project_progress": 384,
+        "campaign_victory": 12
+      },
+      "depots": 138,
+      "acceptedSetTheaterCount": 0,
+      "acceptedTheaterCreations": 0,
+      "adoptedFactions": [],
+      "adoptions": [],
+      "endingTheaters": 0,
+      "endingEnabledTheaters": 0,
+      "endingMembers": 0,
+      "maxTheaters": 0,
+      "maxAssignedMembers": 0,
+      "automaticDispatchCount": 0,
+      "automaticRefusalCount": 0,
+      "automaticAttemptCount": 0,
+      "endTurnMovementQueuedEvents": 0,
+      "endTurnTheaterBlockedEvents": 0,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": false,
+      "observationsChecked": 2822,
+      "historicalTheaterCapabilityAbsent": true,
+      "historicalTheaterCommandsRejected": true,
+      "initialHash": "010502f2",
+      "initialRules32Hash": "010502f2",
+      "finalHash": "226252d3",
+      "finalSaveBytes": 2449638,
+      "finalSaveSha256": "7647c0d75a2a26e91da00c135978d0ba3447412c8febbc121144c23f82688f39",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "1e3832e75f6ffa41d1a4954498ffcd3a82ac9fd128dd89886102afd396e442bf",
+      "elapsedMs": 17976.683773
+    },
+    {
+      "name": "headline-standard",
+      "rulesVersion": 33,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "standard",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 33
+      },
+      "target": "about200 turns; DH-021 remains open",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 242,
+      "victoryPath": "prosperity",
+      "winner": "faction.saltwind_remnant",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 68,
+        "moveTo": 16261,
+        "endTurn": 241,
+        "queue": 660,
+        "setWorkedTiles": 2510,
+        "adoptInstitution": 12,
+        "research": 116,
+        "develop": 71,
+        "improveTile": 30,
+        "recruitCharacter": 61,
+        "terraformTile": 1,
+        "assignCharacter": 61,
+        "mergeArmies": 130,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 668,
+        "accelerateRoad": 12,
+        "declareWar": 191,
+        "besiege": 126,
+        "setTheater": 12,
+        "embarkArmy": 35,
+        "searchArcane": 228,
+        "assault": 30,
+        "autoResolveBattle": 505,
+        "proposePeace": 181,
+        "attack": 475,
+        "respondPeace": 181,
+        "promoteCharacter": 110,
+        "disembarkArmy": 24,
+        "liftSiege": 46,
+        "buildDepot": 227,
+        "sellResource": 47,
+        "proposeClient": 45,
+        "respondClient": 36,
+        "resolveCapture": 27,
+        "cancelCharacterMission": 3,
+        "startVictoryProject": 1
+      },
+      "domainEventCounts": {
+        "settlement_founded": 68,
+        "army_moved": 47080,
+        "turn_started": 2880,
+        "production_queued": 660,
+        "worked_tiles_changed": 2510,
+        "settlement_grew": 902,
+        "building_completed": 293,
+        "institution_adopted": 12,
+        "technology_researched": 116,
+        "territory_expanded": 3277,
+        "development_acquired": 71,
+        "land_work_started": 31,
+        "unit_recruited": 358,
+        "land_work_progress": 39,
+        "land_work_completed": 30,
+        "character_recruited": 61,
+        "character_assigned": 72,
+        "road_planned": 66,
+        "road_segment_built": 326,
+        "formations_transferred": 130,
+        "doctrine_adopted": 12,
+        "character_mission_started": 668,
+        "character_mission_progress": 668,
+        "character_mission_completed": 657,
+        "road_accelerated": 12,
+        "army_command_changed": 113,
+        "war_declared": 382,
+        "siege_started": 252,
+        "siege_progress": 398,
+        "theater_saved": 12,
+        "army_embarked": 35,
+        "road_completed": 49,
+        "arcane_survey_empty": 227,
+        "fleet_resupplied": 550,
+        "battle_started": 1010,
+        "battle_ability_used": 263,
+        "army_retreated": 480,
+        "formation_experience": 959,
+        "battle_finished": 1010,
+        "siege_lifted": 196,
+        "peace_proposed": 362,
+        "peace_accepted": 362,
+        "character_promoted": 110,
+        "army_disembarked": 24,
+        "supply_attrition": 960,
+        "movement_queued": 8,
+        "movement_completed": 8,
+        "character_battle_experience": 341,
+        "theater_dispatch_blocked": 210,
+        "movement_interrupted": 623,
+        "army_destroyed": 9,
+        "peace_expired": 350,
+        "fleet_stores_empty": 195,
+        "arcane_site_found": 1,
+        "depot_built": 227,
+        "resource_contract": 47,
+        "client_proposed": 90,
+        "client_offer_expired": 16,
+        "commander_rallied": 39,
+        "client_refused": 28,
+        "formation_destroyed": 19,
+        "character_recovered": 55,
+        "capture_pending": 27,
+        "settlement_captured": 54,
+        "capital_changed": 4,
+        "depot_razed": 142,
+        "client_accepted": 44,
+        "road_segment_reused": 34,
+        "client_ended": 38,
+        "character_mission_cancelled": 3,
+        "character_mission_interrupted": 4,
+        "theater_members_lost": 1,
+        "victory_project_started": 12,
+        "victory_project_progress": 240,
+        "campaign_victory": 12
+      },
+      "depots": 156,
+      "acceptedSetTheaterCount": 12,
+      "acceptedTheaterCreations": 12,
+      "adoptedFactions": [
+        "faction.ashen_compact",
+        "faction.cinder_march",
+        "faction.glass_tide",
+        "faction.iron_covenant",
+        "faction.mire_courts",
+        "faction.morrow_spore",
+        "faction.reedbound_council",
+        "faction.rimehorn_clans",
+        "faction.sable_steppe",
+        "faction.saltwind_remnant",
+        "faction.sepulchral_synod",
+        "faction.wardhall_remnant"
+      ],
+      "adoptions": [
+        {
+          "turn": 23,
+          "factionId": "faction.glass_tide",
+          "theaterId": "theater.1",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 29,
+          "factionId": "faction.mire_courts",
+          "theaterId": "theater.2",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.iron_covenant",
+          "theaterId": "theater.3",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.rimehorn_clans",
+          "theaterId": "theater.4",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 31,
+          "factionId": "faction.ashen_compact",
+          "theaterId": "theater.5",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.saltwind_remnant",
+          "theaterId": "theater.6",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.sable_steppe",
+          "theaterId": "theater.7",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 35,
+          "factionId": "faction.morrow_spore",
+          "theaterId": "theater.8",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 36,
+          "factionId": "faction.wardhall_remnant",
+          "theaterId": "theater.9",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.reedbound_council",
+          "theaterId": "theater.10",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.sepulchral_synod",
+          "theaterId": "theater.11",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 45,
+          "factionId": "faction.cinder_march",
+          "theaterId": "theater.12",
+          "members": 1,
+          "hearths": 1
+        }
+      ],
+      "endingTheaters": 12,
+      "endingEnabledTheaters": 12,
+      "endingMembers": 11,
+      "maxTheaters": 12,
+      "maxAssignedMembers": 12,
+      "automaticDispatchCount": 8,
+      "automaticRefusalCount": 210,
+      "automaticAttemptCount": 218,
+      "endTurnMovementQueuedEvents": 8,
+      "endTurnTheaterBlockedEvents": 210,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": true,
+      "observationsChecked": 2919,
+      "historicalTheaterCapabilityAbsent": null,
+      "historicalTheaterCommandsRejected": null,
+      "initialHash": "5cd8b685",
+      "initialRules32Hash": "010502f2",
+      "finalHash": "ac642f3c",
+      "finalSaveBytes": 2431349,
+      "finalSaveSha256": "387fd2ad28ffe541500cf7d7368c49039f06ac591c100e20f471254be8c9adc2",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "ce27738c1fa0e47b2034c8ad0da5cc2de9fc3543332462b1122cdb45118b3702",
+      "elapsedMs": 18201.619656
+    },
+    {
+      "name": "headline-long",
+      "rulesVersion": 32,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "long",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 32
+      },
+      "target": "about300 turns; DH-021 remains open",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 342,
+      "victoryPath": "prosperity",
+      "winner": "faction.sable_steppe",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 70,
+        "moveTo": 25234,
+        "endTurn": 341,
+        "queue": 724,
+        "setWorkedTiles": 3374,
+        "adoptInstitution": 12,
+        "research": 115,
+        "develop": 164,
+        "improveTile": 96,
+        "recruitCharacter": 65,
+        "terraformTile": 6,
+        "assignCharacter": 65,
+        "mergeArmies": 179,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 873,
+        "accelerateRoad": 9,
+        "declareWar": 288,
+        "besiege": 186,
+        "embarkArmy": 40,
+        "searchArcane": 291,
+        "assault": 35,
+        "autoResolveBattle": 796,
+        "proposePeace": 285,
+        "attack": 761,
+        "respondPeace": 285,
+        "promoteCharacter": 127,
+        "disembarkArmy": 30,
+        "buildDepot": 341,
+        "sellResource": 432,
+        "proposeClient": 67,
+        "respondClient": 63,
+        "resolveCapture": 30,
+        "liftSiege": 84,
+        "researchArcane": 2,
+        "claimCell": 11,
+        "cancelCharacterMission": 2,
+        "startVictoryProject": 3
+      },
+      "domainEventCounts": {
+        "settlement_founded": 70,
+        "army_moved": 69828,
+        "turn_started": 4080,
+        "production_queued": 724,
+        "worked_tiles_changed": 3374,
+        "settlement_grew": 1120,
+        "building_completed": 308,
+        "institution_adopted": 12,
+        "technology_researched": 115,
+        "territory_expanded": 4372,
+        "development_acquired": 164,
+        "land_work_started": 102,
+        "unit_recruited": 414,
+        "land_work_progress": 184,
+        "land_work_completed": 97,
+        "character_recruited": 65,
+        "character_assigned": 79,
+        "road_planned": 79,
+        "road_segment_built": 381,
+        "formations_transferred": 179,
+        "doctrine_adopted": 12,
+        "character_mission_started": 873,
+        "character_mission_progress": 872,
+        "character_mission_completed": 859,
+        "road_accelerated": 9,
+        "army_command_changed": 102,
+        "war_declared": 576,
+        "siege_started": 372,
+        "siege_progress": 586,
+        "army_embarked": 40,
+        "road_completed": 60,
+        "arcane_survey_empty": 288,
+        "fleet_resupplied": 761,
+        "battle_started": 1592,
+        "battle_ability_used": 578,
+        "army_retreated": 750,
+        "formation_experience": 1524,
+        "battle_finished": 1592,
+        "siege_lifted": 308,
+        "peace_proposed": 570,
+        "peace_accepted": 562,
+        "character_promoted": 127,
+        "army_disembarked": 30,
+        "supply_attrition": 1478,
+        "character_battle_experience": 593,
+        "movement_interrupted": 890,
+        "army_destroyed": 23,
+        "peace_expired": 546,
+        "fleet_stores_empty": 313,
+        "arcane_site_found": 3,
+        "depot_built": 341,
+        "resource_contract": 432,
+        "client_proposed": 134,
+        "client_refused": 58,
+        "capture_pending": 30,
+        "settlement_captured": 60,
+        "capital_changed": 5,
+        "road_segment_reused": 84,
+        "upkeep_shortfall": 142,
+        "client_accepted": 68,
+        "depot_razed": 364,
+        "character_recovered": 60,
+        "client_ended": 64,
+        "character_mission_interrupted": 6,
+        "commander_rallied": 30,
+        "formation_destroyed": 42,
+        "client_offer_expired": 8,
+        "arcane_researched": 2,
+        "character_mission_failed": 1,
+        "territory_claimed": 11,
+        "peace_rejected": 8,
+        "character_mission_cancelled": 2,
+        "victory_project_started": 36,
+        "victory_project_progress": 1080,
+        "victory_project_paused": 12,
+        "victory_project_resumed": 12,
+        "campaign_victory": 12
+      },
+      "depots": 159,
+      "acceptedSetTheaterCount": 0,
+      "acceptedTheaterCreations": 0,
+      "adoptedFactions": [],
+      "adoptions": [],
+      "endingTheaters": 0,
+      "endingEnabledTheaters": 0,
+      "endingMembers": 0,
+      "maxTheaters": 0,
+      "maxAssignedMembers": 0,
+      "automaticDispatchCount": 0,
+      "automaticRefusalCount": 0,
+      "automaticAttemptCount": 0,
+      "endTurnMovementQueuedEvents": 0,
+      "endTurnTheaterBlockedEvents": 0,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": false,
+      "observationsChecked": 4122,
+      "historicalTheaterCapabilityAbsent": true,
+      "historicalTheaterCommandsRejected": true,
+      "initialHash": "9462785a",
+      "initialRules32Hash": "9462785a",
+      "finalHash": "3b2e3cbe",
+      "finalSaveBytes": 3302411,
+      "finalSaveSha256": "2f352228125cbdc26e612b52d9ba6d166bacf4cec4db450a12e2ca769e8a0b8f",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "aab2ef47bf1f873ec6b5389e482c9340720c98a4e3517032d8a7bcea9518e46b",
+      "elapsedMs": 30187.34889
+    },
+    {
+      "name": "headline-long",
+      "rulesVersion": 33,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "long",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 33
+      },
+      "target": "about300 turns; DH-021 remains open",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 336,
+      "victoryPath": "prosperity",
+      "winner": "faction.saltwind_remnant",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 85,
+        "moveTo": 24021,
+        "endTurn": 335,
+        "queue": 820,
+        "setWorkedTiles": 3718,
+        "adoptInstitution": 12,
+        "research": 118,
+        "develop": 124,
+        "improveTile": 69,
+        "recruitCharacter": 69,
+        "terraformTile": 7,
+        "assignCharacter": 69,
+        "mergeArmies": 205,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 1025,
+        "accelerateRoad": 13,
+        "declareWar": 284,
+        "besiege": 190,
+        "setTheater": 12,
+        "embarkArmy": 36,
+        "searchArcane": 288,
+        "assault": 44,
+        "autoResolveBattle": 730,
+        "proposePeace": 280,
+        "attack": 686,
+        "respondPeace": 280,
+        "promoteCharacter": 142,
+        "disembarkArmy": 25,
+        "liftSiege": 90,
+        "buildDepot": 316,
+        "sellResource": 209,
+        "proposeClient": 73,
+        "respondClient": 63,
+        "resolveCapture": 40,
+        "cancelCharacterMission": 9,
+        "startVictoryProject": 3,
+        "claimCell": 1
+      },
+      "domainEventCounts": {
+        "settlement_founded": 85,
+        "army_moved": 68846,
+        "turn_started": 4008,
+        "production_queued": 820,
+        "worked_tiles_changed": 3718,
+        "settlement_grew": 1229,
+        "building_completed": 358,
+        "institution_adopted": 12,
+        "technology_researched": 118,
+        "territory_expanded": 4836,
+        "development_acquired": 124,
+        "land_work_started": 76,
+        "unit_recruited": 453,
+        "land_work_progress": 134,
+        "land_work_completed": 71,
+        "character_recruited": 69,
+        "character_assigned": 87,
+        "road_planned": 110,
+        "road_segment_built": 537,
+        "formations_transferred": 205,
+        "doctrine_adopted": 12,
+        "character_mission_started": 1025,
+        "character_mission_progress": 1025,
+        "character_mission_completed": 1005,
+        "road_accelerated": 13,
+        "army_command_changed": 148,
+        "war_declared": 568,
+        "siege_started": 380,
+        "siege_progress": 650,
+        "theater_saved": 12,
+        "army_embarked": 36,
+        "road_completed": 67,
+        "arcane_survey_empty": 284,
+        "fleet_resupplied": 802,
+        "battle_started": 1460,
+        "battle_ability_used": 488,
+        "army_retreated": 683,
+        "formation_experience": 1373,
+        "battle_finished": 1460,
+        "siege_lifted": 298,
+        "peace_proposed": 560,
+        "peace_accepted": 560,
+        "character_promoted": 142,
+        "army_disembarked": 25,
+        "supply_attrition": 1608,
+        "movement_queued": 9,
+        "movement_completed": 9,
+        "character_battle_experience": 547,
+        "theater_dispatch_blocked": 304,
+        "movement_interrupted": 925,
+        "army_destroyed": 18,
+        "peace_expired": 538,
+        "fleet_stores_empty": 297,
+        "arcane_site_found": 4,
+        "depot_built": 316,
+        "resource_contract": 209,
+        "client_proposed": 146,
+        "client_offer_expired": 20,
+        "client_refused": 50,
+        "commander_rallied": 52,
+        "client_accepted": 76,
+        "character_recovered": 75,
+        "capture_pending": 40,
+        "settlement_captured": 80,
+        "depot_razed": 342,
+        "character_mission_cancelled": 9,
+        "formation_destroyed": 49,
+        "client_ended": 70,
+        "road_segment_reused": 136,
+        "character_died": 1,
+        "capital_changed": 3,
+        "character_mission_interrupted": 4,
+        "character_mission_failed": 1,
+        "victory_project_started": 36,
+        "victory_project_progress": 684,
+        "territory_claimed": 1,
+        "campaign_victory": 12
+      },
+      "depots": 145,
+      "acceptedSetTheaterCount": 12,
+      "acceptedTheaterCreations": 12,
+      "adoptedFactions": [
+        "faction.ashen_compact",
+        "faction.cinder_march",
+        "faction.glass_tide",
+        "faction.iron_covenant",
+        "faction.mire_courts",
+        "faction.morrow_spore",
+        "faction.reedbound_council",
+        "faction.rimehorn_clans",
+        "faction.sable_steppe",
+        "faction.saltwind_remnant",
+        "faction.sepulchral_synod",
+        "faction.wardhall_remnant"
+      ],
+      "adoptions": [
+        {
+          "turn": 23,
+          "factionId": "faction.glass_tide",
+          "theaterId": "theater.1",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 29,
+          "factionId": "faction.mire_courts",
+          "theaterId": "theater.2",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.iron_covenant",
+          "theaterId": "theater.3",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.rimehorn_clans",
+          "theaterId": "theater.4",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 31,
+          "factionId": "faction.ashen_compact",
+          "theaterId": "theater.5",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.saltwind_remnant",
+          "theaterId": "theater.6",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.sable_steppe",
+          "theaterId": "theater.7",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 35,
+          "factionId": "faction.morrow_spore",
+          "theaterId": "theater.8",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 36,
+          "factionId": "faction.wardhall_remnant",
+          "theaterId": "theater.9",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.reedbound_council",
+          "theaterId": "theater.10",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.sepulchral_synod",
+          "theaterId": "theater.11",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 45,
+          "factionId": "faction.cinder_march",
+          "theaterId": "theater.12",
+          "members": 1,
+          "hearths": 1
+        }
+      ],
+      "endingTheaters": 12,
+      "endingEnabledTheaters": 12,
+      "endingMembers": 12,
+      "maxTheaters": 12,
+      "maxAssignedMembers": 12,
+      "automaticDispatchCount": 9,
+      "automaticRefusalCount": 304,
+      "automaticAttemptCount": 313,
+      "endTurnMovementQueuedEvents": 9,
+      "endTurnTheaterBlockedEvents": 304,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": true,
+      "observationsChecked": 4060,
+      "historicalTheaterCapabilityAbsent": null,
+      "historicalTheaterCommandsRejected": null,
+      "initialHash": "c208fe30",
+      "initialRules32Hash": "9462785a",
+      "finalHash": "4e71d9eb",
+      "finalSaveBytes": 3148863,
+      "finalSaveSha256": "72abc7f79605945f48a3508fe6be37ad2f1aad5ed30f100db32a0f32d785b824",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "735645356c9ae8d4fc524446cba731edb2b5b6adf87e34c8287bc5be15357f9b",
+      "elapsedMs": 28671.99854
+    },
+    {
+      "name": "headline",
+      "rulesVersion": 32,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "epic",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 32
+      },
+      "target": "350–400 turns",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 379,
+      "victoryPath": "prosperity",
+      "winner": "faction.sable_steppe",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 72,
+        "moveTo": 28404,
+        "endTurn": 378,
+        "queue": 754,
+        "setWorkedTiles": 3632,
+        "adoptInstitution": 12,
+        "research": 115,
+        "develop": 214,
+        "improveTile": 151,
+        "recruitCharacter": 65,
+        "terraformTile": 18,
+        "assignCharacter": 65,
+        "mergeArmies": 195,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 968,
+        "accelerateRoad": 11,
+        "declareWar": 316,
+        "besiege": 227,
+        "embarkArmy": 38,
+        "searchArcane": 312,
+        "assault": 45,
+        "autoResolveBattle": 836,
+        "proposePeace": 316,
+        "attack": 791,
+        "respondPeace": 316,
+        "promoteCharacter": 126,
+        "disembarkArmy": 28,
+        "buildDepot": 360,
+        "sellResource": 553,
+        "proposeClient": 82,
+        "respondClient": 75,
+        "resolveCapture": 40,
+        "liftSiege": 110,
+        "researchArcane": 2,
+        "claimCell": 8,
+        "cancelCharacterMission": 6,
+        "startVictoryProject": 3
+      },
+      "domainEventCounts": {
+        "settlement_founded": 72,
+        "army_moved": 78252,
+        "turn_started": 4524,
+        "production_queued": 754,
+        "worked_tiles_changed": 3632,
+        "settlement_grew": 1182,
+        "building_completed": 317,
+        "institution_adopted": 12,
+        "technology_researched": 115,
+        "territory_expanded": 4733,
+        "development_acquired": 214,
+        "land_work_started": 169,
+        "unit_recruited": 433,
+        "land_work_progress": 335,
+        "land_work_completed": 165,
+        "character_recruited": 65,
+        "character_assigned": 80,
+        "road_planned": 94,
+        "road_segment_built": 468,
+        "formations_transferred": 195,
+        "doctrine_adopted": 12,
+        "character_mission_started": 968,
+        "character_mission_progress": 967,
+        "character_mission_completed": 952,
+        "road_accelerated": 11,
+        "army_command_changed": 92,
+        "war_declared": 632,
+        "siege_started": 454,
+        "siege_progress": 724,
+        "army_embarked": 38,
+        "road_completed": 67,
+        "arcane_survey_empty": 308,
+        "fleet_resupplied": 850,
+        "battle_started": 1672,
+        "battle_ability_used": 602,
+        "army_retreated": 778,
+        "formation_experience": 1590,
+        "battle_finished": 1672,
+        "siege_lifted": 372,
+        "peace_proposed": 632,
+        "peace_accepted": 626,
+        "character_promoted": 126,
+        "army_disembarked": 28,
+        "supply_attrition": 1670,
+        "character_battle_experience": 517,
+        "movement_interrupted": 985,
+        "army_destroyed": 24,
+        "peace_expired": 612,
+        "fleet_stores_empty": 334,
+        "arcane_site_found": 4,
+        "depot_built": 360,
+        "resource_contract": 553,
+        "client_proposed": 164,
+        "client_refused": 68,
+        "capture_pending": 40,
+        "settlement_captured": 80,
+        "capital_changed": 7,
+        "road_segment_reused": 100,
+        "upkeep_shortfall": 181,
+        "client_accepted": 82,
+        "depot_razed": 374,
+        "character_recovered": 69,
+        "client_ended": 78,
+        "character_mission_interrupted": 4,
+        "commander_rallied": 38,
+        "formation_destroyed": 48,
+        "client_offer_expired": 14,
+        "arcane_researched": 2,
+        "character_mission_failed": 3,
+        "territory_claimed": 8,
+        "peace_rejected": 6,
+        "character_mission_cancelled": 6,
+        "character_died": 1,
+        "victory_project_started": 36,
+        "victory_project_progress": 1608,
+        "land_work_cancelled": 1,
+        "campaign_victory": 12
+      },
+      "depots": 173,
+      "acceptedSetTheaterCount": 0,
+      "acceptedTheaterCreations": 0,
+      "adoptedFactions": [],
+      "adoptions": [],
+      "endingTheaters": 0,
+      "endingEnabledTheaters": 0,
+      "endingMembers": 0,
+      "maxTheaters": 0,
+      "maxAssignedMembers": 0,
+      "automaticDispatchCount": 0,
+      "automaticRefusalCount": 0,
+      "automaticAttemptCount": 0,
+      "endTurnMovementQueuedEvents": 0,
+      "endTurnTheaterBlockedEvents": 0,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": false,
+      "observationsChecked": 4576,
+      "historicalTheaterCapabilityAbsent": true,
+      "historicalTheaterCommandsRejected": true,
+      "initialHash": "c6449438",
+      "initialRules32Hash": "c6449438",
+      "finalHash": "2aa12fea",
+      "finalSaveBytes": 3357866,
+      "finalSaveSha256": "731a38d0d428d1b71c06eec9055aaaef732fc66ff0547e35d56889843ef09c89",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "cdfbf20f5f5b6f3cd18c82d295039a99860ecfd506dff5f5779177eeb6a665d6",
+      "elapsedMs": 36293.33387500001
+    },
+    {
+      "name": "headline",
+      "rulesVersion": 33,
+      "configuration": {
+        "seed": 20260905,
+        "pace": "epic",
+        "size": "standard",
+        "factionCount": 12,
+        "rulesVersion": 33
+      },
+      "target": "350–400 turns",
+      "generatorVersion": 8,
+      "cells": 31360,
+      "finalTurn": 384,
+      "victoryPath": "prosperity",
+      "winner": "faction.saltwind_remnant",
+      "maxRounds": 900,
+      "refused": 0,
+      "retainedRefusals": [],
+      "acceptedCommands": {
+        "found": 87,
+        "moveTo": 27033,
+        "endTurn": 383,
+        "queue": 876,
+        "setWorkedTiles": 4138,
+        "adoptInstitution": 12,
+        "research": 118,
+        "develop": 148,
+        "improveTile": 97,
+        "recruitCharacter": 69,
+        "terraformTile": 6,
+        "assignCharacter": 69,
+        "mergeArmies": 218,
+        "adoptDoctrine": 12,
+        "startCharacterMission": 1146,
+        "accelerateRoad": 24,
+        "declareWar": 345,
+        "besiege": 261,
+        "setTheater": 12,
+        "embarkArmy": 43,
+        "searchArcane": 333,
+        "assault": 51,
+        "autoResolveBattle": 845,
+        "proposePeace": 341,
+        "attack": 794,
+        "respondPeace": 339,
+        "promoteCharacter": 146,
+        "disembarkArmy": 32,
+        "liftSiege": 115,
+        "buildDepot": 372,
+        "sellResource": 228,
+        "proposeClient": 88,
+        "respondClient": 80,
+        "resolveCapture": 44,
+        "cancelCharacterMission": 10,
+        "startVictoryProject": 3,
+        "claimCell": 3
+      },
+      "domainEventCounts": {
+        "settlement_founded": 87,
+        "army_moved": 77061,
+        "turn_started": 4584,
+        "production_queued": 876,
+        "worked_tiles_changed": 4138,
+        "settlement_grew": 1319,
+        "building_completed": 380,
+        "institution_adopted": 12,
+        "technology_researched": 118,
+        "territory_expanded": 5393,
+        "development_acquired": 148,
+        "land_work_started": 103,
+        "unit_recruited": 487,
+        "land_work_progress": 189,
+        "land_work_completed": 97,
+        "character_recruited": 69,
+        "character_assigned": 85,
+        "road_planned": 111,
+        "road_segment_built": 581,
+        "formations_transferred": 218,
+        "doctrine_adopted": 12,
+        "character_mission_started": 1146,
+        "character_mission_progress": 1145,
+        "character_mission_completed": 1130,
+        "road_accelerated": 24,
+        "army_command_changed": 188,
+        "war_declared": 690,
+        "siege_started": 522,
+        "siege_progress": 868,
+        "theater_saved": 12,
+        "army_embarked": 43,
+        "road_completed": 73,
+        "arcane_survey_empty": 329,
+        "fleet_resupplied": 911,
+        "battle_started": 1690,
+        "battle_ability_used": 690,
+        "army_retreated": 792,
+        "formation_experience": 1589,
+        "battle_finished": 1690,
+        "siege_lifted": 430,
+        "peace_proposed": 682,
+        "peace_accepted": 678,
+        "character_promoted": 146,
+        "army_disembarked": 32,
+        "supply_attrition": 1900,
+        "movement_queued": 9,
+        "movement_completed": 9,
+        "character_battle_experience": 722,
+        "theater_dispatch_blocked": 352,
+        "movement_interrupted": 1020,
+        "army_destroyed": 23,
+        "peace_expired": 666,
+        "fleet_stores_empty": 317,
+        "arcane_site_found": 4,
+        "depot_built": 372,
+        "resource_contract": 228,
+        "client_proposed": 176,
+        "client_offer_expired": 16,
+        "client_refused": 76,
+        "commander_rallied": 50,
+        "client_accepted": 84,
+        "character_recovered": 91,
+        "capture_pending": 44,
+        "settlement_captured": 88,
+        "depot_razed": 432,
+        "character_mission_cancelled": 10,
+        "formation_destroyed": 56,
+        "client_ended": 80,
+        "road_segment_reused": 131,
+        "character_died": 2,
+        "peace_offer_expired": 2,
+        "capital_changed": 3,
+        "character_mission_interrupted": 3,
+        "victory_project_started": 36,
+        "victory_project_progress": 1392,
+        "land_work_cancelled": 2,
+        "theater_members_lost": 1,
+        "territory_claimed": 3,
+        "campaign_victory": 12
+      },
+      "depots": 156,
+      "acceptedSetTheaterCount": 12,
+      "acceptedTheaterCreations": 12,
+      "adoptedFactions": [
+        "faction.ashen_compact",
+        "faction.cinder_march",
+        "faction.glass_tide",
+        "faction.iron_covenant",
+        "faction.mire_courts",
+        "faction.morrow_spore",
+        "faction.reedbound_council",
+        "faction.rimehorn_clans",
+        "faction.sable_steppe",
+        "faction.saltwind_remnant",
+        "faction.sepulchral_synod",
+        "faction.wardhall_remnant"
+      ],
+      "adoptions": [
+        {
+          "turn": 23,
+          "factionId": "faction.glass_tide",
+          "theaterId": "theater.1",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 29,
+          "factionId": "faction.mire_courts",
+          "theaterId": "theater.2",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.iron_covenant",
+          "theaterId": "theater.3",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 30,
+          "factionId": "faction.rimehorn_clans",
+          "theaterId": "theater.4",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 31,
+          "factionId": "faction.ashen_compact",
+          "theaterId": "theater.5",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.saltwind_remnant",
+          "theaterId": "theater.6",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 32,
+          "factionId": "faction.sable_steppe",
+          "theaterId": "theater.7",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 35,
+          "factionId": "faction.morrow_spore",
+          "theaterId": "theater.8",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 36,
+          "factionId": "faction.wardhall_remnant",
+          "theaterId": "theater.9",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.reedbound_council",
+          "theaterId": "theater.10",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 38,
+          "factionId": "faction.sepulchral_synod",
+          "theaterId": "theater.11",
+          "members": 1,
+          "hearths": 1
+        },
+        {
+          "turn": 45,
+          "factionId": "faction.cinder_march",
+          "theaterId": "theater.12",
+          "members": 1,
+          "hearths": 1
+        }
+      ],
+      "endingTheaters": 12,
+      "endingEnabledTheaters": 12,
+      "endingMembers": 11,
+      "maxTheaters": 12,
+      "maxAssignedMembers": 12,
+      "automaticDispatchCount": 9,
+      "automaticRefusalCount": 352,
+      "automaticAttemptCount": 361,
+      "endTurnMovementQueuedEvents": 9,
+      "endTurnTheaterBlockedEvents": 352,
+      "dispatchEventsReconciled": true,
+      "theaterPolicyUsed": true,
+      "observationsChecked": 4640,
+      "historicalTheaterCapabilityAbsent": null,
+      "historicalTheaterCommandsRejected": null,
+      "initialHash": "8c95612e",
+      "initialRules32Hash": "c6449438",
+      "finalHash": "03dbe061",
+      "finalSaveBytes": 3476741,
+      "finalSaveSha256": "8d99e01bff6641c47a5f85863bad4fa056964f5b7943549735148f608617e46f",
+      "strictFinalSaveRoundtrip": true,
+      "commandResultTraceSha256": "dd812cbea73c7291ea90ef5c63c27d69dbf58e55563de888dc3493c2a8f8cd2a",
+      "elapsedMs": 36173.714452000015
+    }
+  ],
+  "comparisons": [
+    {
+      "pace": "standard",
+      "rules32Turn": 234,
+      "rules33Turn": 242,
+      "deltaTurns": 8,
+      "sameInitialRules32Hash": true,
+      "rules33TheaterPolicyUsed": true
+    },
+    {
+      "pace": "long",
+      "rules32Turn": 342,
+      "rules33Turn": 336,
+      "deltaTurns": -6,
+      "sameInitialRules32Hash": true,
+      "rules33TheaterPolicyUsed": true
+    },
+    {
+      "pace": "epic",
+      "rules32Turn": 379,
+      "rules33Turn": 384,
+      "deltaTurns": 5,
+      "sameInitialRules32Hash": true,
+      "rules33TheaterPolicyUsed": true
+    }
+  ]
+}

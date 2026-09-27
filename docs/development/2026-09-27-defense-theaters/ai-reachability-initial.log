@@ -1,0 +1,142 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/theaters.test.ts (10 tests | 4 failed) 239ms
+     × declines island-only assignments and bounds route work even with more candidate hearths 47ms
+     × chooses a reachable local hearth when the first stable-ID hearth is a visible island 17ms
+     × does not invent a route across unknown fog or inspect changes beyond permitted sight 10ms
+     × allows an already stationed guard on an island without manufacturing a travel order 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts > observed defensive theater adoption > declines island-only assignments and bounds route work even with more candidate hearths
+AssertionError: expected [ { type: 'setTheater', …(7) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "armyIds": [
++       "army.11",
++       "army.12",
++     ],
++     "enabled": true,
++     "factionId": "faction.ashen_compact",
++     "guardsPerSettlement": 1,
++     "name": "Home watch",
++     "reserveCell": 588,
++     "settlementIds": [
++       "settlement.15",
++       "settlement.16",
++     ],
++     "type": "setTheater",
++   },
++ ]
+
+ ❯ packages/ai/src/theaters.test.ts:74:27
+     72|     rebaseAuthoredLand(game); game = deserializeGame(serializeGame(gam…
+     73|     const view = getObservation(game, game.turnOwnerId), before = stat…
+     74|     expect(plan.commands).toEqual([]);
+       |                           ^
+     75|     expect(plan.heldArmyIds.size).toBe(0);
+     76|     expect(stateHash(game)).toBe(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts > observed defensive theater adoption > chooses a reachable local hearth when the first stable-ID hearth is a visible island
+AssertionError: expected { type: 'setTheater', …(7) } to match object { type: 'setTheater', …(2) }
+(5 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "reserveCell": 598,
++   "reserveCell": 588,
+    "settlementIds": [
++     "settlement.15",
+      "settlement.16",
+    ],
+    "type": "setTheater",
+  }
+
+ ❯ packages/ai/src/theaters.test.ts:84:21
+     82|     isolateHearth(game, game.settlements[island!]!.cell); rebaseAuthor…
+     83|     const view = getObservation(game, game.turnOwnerId), plan = planDe…
+     84|     expect(command).toMatchObject({ type: 'setTheater', settlementIds:…
+       |                     ^
+     85|     if (command?.type !== 'setTheater') throw new Error('Expected reac…
+     86|     for (const id of command.armyIds) expect(getMovementPreview(view, …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts > observed defensive theater adoption > does not invent a route across unknown fog or inspect changes beyond permitted sight
+AssertionError: expected [ { type: 'setTheater', …(7) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "armyIds": [
++       "army.11",
++       "army.12",
++     ],
++     "enabled": true,
++     "factionId": "faction.ashen_compact",
++     "guardsPerSettlement": 1,
++     "name": "Home watch",
++     "reserveCell": 588,
++     "settlementIds": [
++       "settlement.15",
++       "settlement.16",
++     ],
++     "type": "setTheater",
++   },
++ ]
+
+ ❯ packages/ai/src/theaters.test.ts:98:27
+     96|     const view = getObservation(game, owner), plan = planDefenseTheate…
+     97|     expect(view.cells.some(cell => cell.cell === hiddenCell)).toBe(fal…
+     98|     expect(plan.commands).toEqual([]); expect(plan.heldArmyIds.size).t…
+       |                           ^
+     99|     game.world.terrain[hiddenCell] = 0; game.world.biome[hiddenCell] =…
+    100|     const hiddenEnemy = Object.values(game.armies).find(army => army.f…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts > observed defensive theater adoption > allows an already stationed guard on an island without manufacturing a travel order
+AssertionError: expected { type: 'setTheater', …(7) } to match object { type: 'setTheater', …(2) }
+(5 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "reserveCell": 588,
+    "settlementIds": [
+      "settlement.15",
++     "settlement.16",
+    ],
+    "type": "setTheater",
+  }
+
+ ❯ packages/ai/src/theaters.test.ts:114:21
+    112|     rebaseAuthoredLand(game); game = deserializeGame(serializeGame(gam…
+    113|     const plan = planDefenseTheater(getObservation(game, game.turnOwne…
+    114|     expect(command).toMatchObject({ type: 'setTheater', settlementIds:…
+       |                     ^
+    115|     if (command?.type !== 'setTheater') throw new Error('Expected same…
+    116|     expect(command.armyIds.length).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 6 passed (10)
+   Start at  12:48:18
+   Duration  871ms (transform 444ms, setup 0ms, import 567ms, tests 239ms, environment 0ms)
+

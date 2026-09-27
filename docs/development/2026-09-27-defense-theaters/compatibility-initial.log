@@ -1,0 +1,39 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/chronicle/src/selection-groups-compatibility.test.ts (0 test)
+ ❯ |unit| packages/persistence/src/selection-groups.test.ts (0 test)
+ ❯ |unit| packages/sim/src/save.test.ts (0 test)
+ ❯ |unit| packages/chronicle/src/fleet-provisions-compatibility.test.ts (0 test)
+ ❯ |unit| packages/sim/src/sixty-four-seat-save.test.ts (0 test)
+ ❯ |unit| packages/persistence/src/defense-theaters.test.ts (0 test)
+ ❯ |unit| packages/chronicle/src/defense-theaters-compatibility.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/chronicle/src/defense-theaters-compatibility.test.ts [ packages/chronicle/src/defense-theaters-compatibility.test.ts ]
+ FAIL  |unit| packages/chronicle/src/fleet-provisions-compatibility.test.ts [ packages/chronicle/src/fleet-provisions-compatibility.test.ts ]
+ FAIL  |unit| packages/chronicle/src/selection-groups-compatibility.test.ts [ packages/chronicle/src/selection-groups-compatibility.test.ts ]
+ FAIL  |unit| packages/persistence/src/defense-theaters.test.ts [ packages/persistence/src/defense-theaters.test.ts ]
+ FAIL  |unit| packages/persistence/src/selection-groups.test.ts [ packages/persistence/src/selection-groups.test.ts ]
+ FAIL  |unit| packages/sim/src/save.test.ts [ packages/sim/src/save.test.ts ]
+ FAIL  |unit| packages/sim/src/sixty-four-seat-save.test.ts [ packages/sim/src/sixty-four-seat-save.test.ts ]
+TypeError: peaceCommandSchemas is not iterable
+ ❯ packages/sim/src/simulation.ts:60:6
+     58|   z.object({ type: z.literal('adoptDoctrine'), factionId: identifier, …
+     59|   z.object({ type: z.literal('startVictoryProject'), factionId: identi…
+     60|   ...peaceCommandSchemas,
+       |      ^
+     61| ]);
+     62| // Freeze historical command options explicitly. Future commands do no…
+ ❯ packages/sim/src/diplomacy.ts:3:1
+ ❯ packages/sim/src/warfare.ts:11:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+
+ Test Files  7 failed (7)
+      Tests  no tests
+   Start at  01:48:01
+   Duration  545ms (transform 2.23s, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

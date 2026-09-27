@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
 import { checksum } from '@theandril/content';
-import { applyCommand, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion } from '@theandril/sim';
+import { applyCommand, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, SAVE_VERSION } from '@theandril/sim';
 import { parseArchive, replayArchive, resumeJournal, type CampaignArchive } from './index';
 import captured from './fixtures/v31-selection-groups-baseline.json';
 
@@ -31,8 +31,8 @@ describe('rules32 groups and independent prechange31 evidence', () => {
     const archive = journal.materialize(), saved = serializeGame(game);
     expect(archive.initialSave).toBe(entry.archive.initialSave);
     expect(archive.records.slice(0, entry.archive.records.length)).toEqual(entry.archive.records);
-    expect(archive.records.slice(entry.archive.records.length).every(record => record.rulesVersion === 32)).toBe(true);
-    expect(archive.records.at(-1)).toMatchObject({ checkpointVersion: 32, checkpoint: stateHash(game) });
+    expect(archive.records.slice(entry.archive.records.length).every(record => record.rulesVersion === SAVE_VERSION)).toBe(true);
+    expect(archive.records.at(-1)).toMatchObject({ checkpointVersion: SAVE_VERSION, checkpoint: stateHash(game) });
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(saved);
     expect(serializeGame(deserializeGame(saved))).toBe(saved);
   });

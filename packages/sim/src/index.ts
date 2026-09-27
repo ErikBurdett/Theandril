@@ -10,7 +10,7 @@ export type { BattleAbilityOption, BattleAbilityState } from './battle-abilities
 export { schema13CampaignBattleSchema } from './save';
 export type { ArcaneResearchState, ArcaneResearchObservation, ArcaneResearchOption } from './magic';
 export type { CampaignPace, RosterVersion } from '@theandril/content';
-export { createGame, applyCommand, applyCommandForVersion, getObservation, settlementYields, validateEndTurn, commandSchema, commandSchemaForVersion } from './simulation';
+export { createGame, applyCommand, applyCommandForVersion, getObservation, settlementYields, validateEndTurn, commandSchema, version32CommandSchema, commandSchemaForVersion } from './simulation';
 export type { ObservationOptions } from './simulation';
 export { stateHash, stateHashForVersion, serializeGame, serializeGameForVersion, deserializeGame, replayGame, SAVE_VERSION, eventSchema, campaignBattleSchema, schema15CampaignBattleSchema, schema7CampaignBattleSchema, schema6CampaignBattleSchema, legacyCampaignBattleSchema, battleReportForVersion } from './save';
 export * from './territory';
@@ -50,3 +50,7 @@ export * from './growth-economy';
 
 export { MAX_SELECTION_GROUPS_PER_FACTION, MAX_SELECTION_GROUP_MEMBERS, SELECTION_GROUP_NAME_MAX, SELECTION_GROUP_KINDS } from './selection-groups';
 export type { SelectionGroup, SelectionGroupKind } from './selection-groups';
+
+export { MAX_THEATERS_PER_FACTION, MAX_THEATER_HEARTHS, MAX_THEATER_MEMBERS, MAX_THEATER_DISPATCHES } from './theaters';
+export type { DefenseTheater, ObservedDefenseTheater, TheaterCommand, TheaterDispatch, TheaterHearth, TheaterMember } from './theaters';
+export { observedDefenseTheaterSchema } from './theater-state';

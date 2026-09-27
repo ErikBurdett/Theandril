@@ -1,0 +1,39 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/theaters.test.ts (6 tests | 1 failed) 199ms
+     × keeps an otherwise boardable land column out of naval embarkation planning 19ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/theaters.test.ts > theater members remain reserved across actor planners > keeps an otherwise boardable land column out of naval embarkation planning
+AssertionError: expected [ { type: 'research', …(2) } ] to deep equally contain { type: 'embarkArmy', …(3) }
+
+- Expected:
+{
+  "armyId": "army.9",
+  "factionId": "faction.ashen_compact",
+  "fleetId": "army.2",
+  "type": "embarkArmy",
+}
+
++ Received:
+[
+  {
+    "factionId": "faction.ashen_compact",
+    "technologyId": "technology.ocean_navigation",
+    "type": "research",
+  },
+]
+
+ ❯ packages/ai/src/theaters.test.ts:155:43
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  01:50:57
+   Duration  881ms (transform 472ms, setup 0ms, import 614ms, tests 199ms, environment 0ms)
+

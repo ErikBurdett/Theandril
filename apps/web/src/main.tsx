@@ -1,3 +1,5 @@
+import type { TheaterIssue } from './defense-theaters';
+import { assertTheaterApplied, assertTheaterResponse } from './theater-response';
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { createRoot } from 'react-dom/client';
 import { CAMPAIGN_PACES, FACTIONS } from '@theandril/content';
@@ -101,6 +103,7 @@ function App() {
   const groupMovementPreviews = useRef(new GroupMovementPreviewRequests());
   const groupMovementPreviewWorkers = useRef(new Map<number, Worker>());
   const selectionGroupRequests = useRef(new GroupOrderRequests<SelectionGroupResult>());
+  const pendingTheater = useRef<{ id: number; command: Parameters<TheaterIssue>[0] } | undefined>(undefined);
   const fogRequests = useRef(new WatchFogRequests());
   const [fogEnabled, setFogEnabled] = useState(true);
   const [fogPending, setFogPending] = useState(false);
@@ -382,6 +385,8 @@ function App() {
     if (response.type === 'state') {
       try {
         assertSelectionGroupResponse(response.observation.selectionGroups, response.observation.factionId);
+        assertTheaterResponse(response.observation.theaters, response.observation.factionId);
+        if (pendingTheater.current?.id === response.id) assertTheaterApplied(response.observation.theaters, pendingTheater.current.command);
         groupProductionRequests.current.validate(response.id, response.observation.factionId, response.groupProductionResults, response.groupProductionError);
         groupMovementRequests.current.validate(response.id, response.observation.factionId, response.groupMovementResults, response.groupMovementError);
         setNavigationNotice('');
@@ -494,9 +499,9 @@ function App() {
     instance.onmessage = event => { if (worker.current === instance) receive(event); else { landRequestWorkers.current.delete(event.data.id); developmentRequestWorkers.current.delete(event.data.id); groupMovementPreviewWorkers.current.delete(event.data.id); } };
     instance.onerror = event => {
       if (worker.current !== instance) { forgetWorkerDetailRequests(instance); instance.terminate(); return; }
-      // A paid batch may have finished before the worker failed to publish it.
+      // A canonical edit may have finished before the worker failed to publish it.
       // Rejecting the promise alone must not unlock a stale campaign view.
-      if (groupProductionRequests.current.busy || groupMovementRequests.current.busy) { campaignFault.current = true; setRecoveryRequired(true); }
+      if ([groupPostingRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current].some(requests => requests.busy)) { campaignFault.current = true; setRecoveryRequired(true); }
       for (const requests of [groupPostingRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
@@ -623,6 +628,22 @@ function App() {
     const [result] = await pending;
     if (!result) throw new Error('The saved group response is missing. Restore the campaign before continuing.');
     return result;
+  };
+  const issueTheater: TheaterIssue = async order => {
+    const instance = worker.current;
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing defensive theaters.');
+    const id = ++sequence.current;
+    const pending = selectionGroupRequests.current.enqueue(id);
+    pendingTheater.current = { id, command: order };
+    setBusy(true); setError(false);
+    try { instance.postMessage({ id, type: 'command', command: order } satisfies Request); }
+    catch (cause) {
+      selectionGroupRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
+      setBusy(false);
+    }
+    const [result] = await pending.finally(() => { if (pendingTheater.current?.id === id) pendingTheater.current = undefined; });
+    if (!result || typeof result.message !== 'string') throw new Error('The defensive theater response is missing. Restore the campaign before continuing.');
+    return { accepted: result.accepted, message: result.message };
   };
   const command = (order: GameCommand) => {
     if (groupPostingRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy) return;
@@ -908,7 +929,7 @@ function App() {
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
     {observation && managementWindow && !showSetup && !battleActive && !observation.pendingCapture && <CampaignWindow key={managementWindow} title={{ registry: 'Realm registry', orders: 'Selected orders', affairs: 'Realm affairs', journal: 'Campaign journal', guide: 'Map guide' }[managementWindow]} subtitle={managementWindow === 'orders' ? army?.name ?? settlement?.name ?? 'Map inspection' : realmName} close={() => setManagementWindow(undefined)} returnFocus={mapHost.current}>
-      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupCharter={issueGroupCharter} onGroupProduction={issueGroupProduction} hash={hash.current} onGroupMovement={issueGroupMovement} onGroupMovementPreview={reviewGroupMovement} onSelectionGroupCommand={issueSelectionGroup} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
+      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupCharter={issueGroupCharter} onGroupProduction={issueGroupProduction} hash={hash.current} onGroupMovement={issueGroupMovement} onGroupMovementPreview={reviewGroupMovement} onSelectionGroupCommand={issueSelectionGroup} onTheaterCommand={issueTheater} knownSelectedCell={selection.cell !== undefined && renderer.current?.isExplored(selection.cell) ? selection.cell : undefined} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
       {managementWindow === 'orders' && <section className="inspector" aria-label="Selected entity orders"><button className="window-map-link" onClick={showMap}>Show on map</button><fieldset className="strategic-orders" disabled={ordersBusy}>{panes?.sidebar}</fieldset></section>}
       {managementWindow === 'affairs' && <section data-testid="realm-affairs"><FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/><PublicProjects view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><SiegeLedger view={observation} locate={cell => { mapFocusAfterWindow.current = true; renderer.current?.focus(cell); setManagementWindow(undefined); }}/></section>}
       {managementWindow === 'journal' && <><RealmJournal view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><BattleHistory view={observation} replayId={battleTransfer?.packet.battleId} replay={() => { pauseWatch(); setManagementWindow(undefined); setBattleReview(true); }}/>{observation.victory && <button onClick={openChronicles}>Read campaign chronicles</button>}</>}

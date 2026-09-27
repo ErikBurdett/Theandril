@@ -1,6 +1,7 @@
 import { hexDistance } from '@theandril/mapgen';
 import type { ArmyView, GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
+import { heldTheaterArmyIds } from './theaters';
 
 export interface CharacterPlan extends AiPlan { coinSpent: number; heldArmyIds: Set<string> }
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
@@ -9,9 +10,9 @@ const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id >
 export const isWaykeeperBattleArmy = (army: ArmyView): boolean => army.domain === 'land' && !army.carrierId && army.canAttack && !army.canFound && army.formations.length >= 4;
 
 /** Sparse functional planner: eligibility comes from sim, priority only from observed facts. */
-export function planCharacters(view: Observation, coinBudget: number): CharacterPlan {
+export function planCharacters(view: Observation, coinBudget: number, reservedArmyIds: ReadonlySet<string> = heldTheaterArmyIds(view)): CharacterPlan {
   const commands: GameCommand[] = [], reasons: string[] = [];
-  const heldArmyIds = new Set(view.characters.flatMap(character => character.mission ? [character.mission.armyId] : []));
+  const heldArmyIds = new Set([...reservedArmyIds, ...view.characters.flatMap(character => character.mission ? [character.mission.armyId] : [])]);
   const initialBudget = Math.max(0, coinBudget);
   const result = (): CharacterPlan => ({ commands, reasons, coinSpent: initialBudget - budget, heldArmyIds });
   let budget = initialBudget;
@@ -25,7 +26,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   const exposed = (army: ArmyView): boolean => threats.some(enemy => hexDistance(enemy.cell, army.cell, view.width) <= 3 && enemy.strength >= army.strength);
   const marshals = new Set(own.filter(army => army.commander).map(army => army.id));
   const companions = new Map(own.map(army => [army.id, army.agents.length]));
-  const useful = (army: ArmyView): boolean => !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
+  const useful = (army: ArmyView): boolean => !reservedArmyIds.has(army.id) && !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
   const priority = (army: ArmyView, role: string): number => role === 'marshal' || role === 'waykeeper'
     ? army.formations.length * 100 + army.strength
     : role === 'engineer' ? (army.maxStrength - army.strength) * 4 + army.formations.length * 30
@@ -33,6 +34,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   for (const character of living.slice(0, 64)) {
     if (commands.length >= 6) break;
     const carrier = character.location?.kind === 'army' ? armies.get(character.location.armyId) : undefined;
+    if (carrier && reservedArmyIds.has(carrier.id)) continue;
     if (character.mission) {
       if (carrier && exposed(carrier)) {
         commands.push({ type: 'cancelCharacterMission', factionId: view.factionId, characterId: character.id });

@@ -1,6 +1,7 @@
 import { hexDistance } from '@theandril/mapgen';
 import { DEPOT_SPACING, MAX_REALM_DEPOTS, type Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
+import { heldTheaterArmyIds } from './theaters';
 
 /** Rules 28. A realm at war whose force is wasting outside supply raises a depot
  * under it rather than abandon the operation. One a turn, out of surplus, and only
@@ -16,7 +17,8 @@ export function planDepot(view: Observation, busy: ReadonlySet<string>): AiPlan 
   const own = view.depots.filter(depot => depot.factionId === view.factionId);
   if (own.length >= MAX_REALM_DEPOTS) return null;
   const hearths = new Set(view.settlements.map(item => item.cell));
-  const candidates = view.armies.filter(item => item.factionId === view.factionId && item.domain !== 'naval' && starving.has(item.id) && item.movement > 0 && !item.carrierId && !busy.has(item.id)
+  const reserved = heldTheaterArmyIds(view);
+  const candidates = view.armies.filter(item => item.factionId === view.factionId && item.domain !== 'naval' && starving.has(item.id) && item.movement > 0 && !item.carrierId && !busy.has(item.id) && !reserved.has(item.id)
     && !hearths.has(item.cell) && !view.depots.some(depot => depot.cell === item.cell)
     && own.every(depot => hexDistance(depot.cell, item.cell, view.width) >= DEPOT_SPACING));
   if (!candidates.length) return null;

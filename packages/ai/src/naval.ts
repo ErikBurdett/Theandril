@@ -6,6 +6,7 @@ import { protectedFactions, type AiPlan } from './diplomacy';
 import { createNavigation } from './navigation';
 import { createSeaKnowledge, type BasinRelation, type BasinStatus } from './sea-knowledge';
 import { observedCells } from './observation-index';
+import { heldTheaterArmyIds } from './theaters';
 
 export const MAX_NAVAL_FLEETS = 8;
 export const MAX_NAVAL_ROUTE_QUERIES = 8;
@@ -264,7 +265,7 @@ function findCoastalFoundingSite(view: Observation, army: ArmyView, towns: Obser
 
 /** Public proposals only. No persistent ghost operation, canonical writes or hidden map access. */
 export function planNaval(view: Observation, coinBudget: number, options: NavalPlanOptions = {}): NavalPlan {
-  const commands: GameCommand[] = [], reasons: string[] = [], heldArmyIds = new Set(options.heldArmyIds), queuedSettlementIds = new Set<string>();
+  const commands: GameCommand[] = [], reasons: string[] = [], heldArmyIds = new Set([...heldTheaterArmyIds(view), ...(options.heldArmyIds ?? [])]), queuedSettlementIds = new Set<string>();
   let budget = Math.max(0, coinBudget), interrupts = false;
   const result = (): NavalPlan => ({ commands, reasons, heldArmyIds, queuedSettlementIds, coinSpent: Math.max(0, coinBudget) - budget, interrupts });
   const provisions = new Map(view.supply.filter(item => item.fleetProvisions).map(item => [item.armyId, item.fleetProvisions!]));

@@ -1,0 +1,35 @@
+Listing tests:
+  defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls
+  defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry
+  defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry
+  defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry
+  defense-theaters.spec.ts:34:1 › a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override
+  defense-theaters.spec.ts:104:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater
+  group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign
+  group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign
+  group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides
+  group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit
+  group-movement-recovery.spec.ts:6:3 › group travel missing-results after real movement locks orders until the actual manual save is restored
+  group-movement-recovery.spec.ts:6:3 › group travel wrong-army after real movement locks orders until the actual manual save is restored
+  group-movement-recovery.spec.ts:6:3 › group travel worker-crash after real movement locks orders until the actual manual save is restored
+  group-movement-recovery.spec.ts:58:1 › a superseded route review cannot fault a restored campaign when its late reply claims recovery is required
+  group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch
+  group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves
+  group-movement.spec.ts:212:1 › canonical destination refusals retain only the unavailable army for correction
+  group-movement.spec.ts:241:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting
+  group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign
+  group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign
+  group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save
+  group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies
+  production-sequence-response-recovery.spec.ts:7:3 › a production batch with missing-results ends pending work, locks orders and restores the actual manual save
+  production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-item ends pending work, locks orders and restores the actual manual save
+  production-sequence-response-recovery.spec.ts:7:3 › a production batch with map-revision ends pending work, locks orders and restores the actual manual save
+  production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-type ends pending work, locks orders and restores the actual manual save
+  production-sequence-response-recovery.spec.ts:7:3 › a production batch with worker-crash ends pending work, locks orders and restores the actual manual save
+  production-sequences.spec.ts:117:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues
+  production-sequences.spec.ts:286:1 › shared coin and ordinary duplicate, full-queue and prerequisite refusals retain paid prefixes in stable hearth order
+  selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths
+  selection-groups.spec.ts:163:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign
+  selection-groups.spec.ts:231:1 › recalling a carried army skips it without rewriting the saved group, while explicit empty replacement is canonical
+  selection-groups.spec.ts:263:1 › a damaged saved-group response ends pending work, locks uncertain orders and recovers from a real manual save
+Total: 33 tests in 11 files

@@ -1,0 +1,53 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-group-movement.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-group-movement.test.ts (12 tests | 2 failed) 1919ms
+     × journals, autosaves, transfers and replays an accepted theater and refuses invalid edits unchanged 165ms
+     × locks after accepted theater publication fails and restores the autosaved accepted state 42ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-movement.test.ts > actual worker defensive theater edits > journals, autosaves, transfers and replays an accepted theater and refuses invalid edits unchanged
+AssertionError: expected 'b2ac7935' to be '5b702f90' // Object.is equality
+
+Expected: "5b702f90"
+Received: "b2ac7935"
+
+ ❯ apps/web/src/worker-group-movement.test.ts:347:63
+    345|       expect(rejected.recoveryRequired).not.toBe(true); expect(saved).…
+    346|       expect(stateHash((await exported()).game)).toBe(response.hash);
+    347|       expect((await request({ type: 'load' }, 'state')).hash).toBe(res…
+       |                                                               ^
+    348|     } finally { saved.mockRestore(); }
+    349|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-movement.test.ts > actual worker defensive theater edits > locks after accepted theater publication fails and restores the autosaved accepted state
+AssertionError: expected undefined to be 'Publication watch' // Object.is equality
+
+- Expected:
+"Publication watch"
+
++ Received:
+undefined
+
+ ❯ apps/web/src/worker-group-movement.test.ts:364:88
+    362|       expect((await request({ type: 'save' }, 'error')).recoveryRequir…
+    363|     } finally { broken.mockRestore(); }
+    364|     expect((await request({ type: 'load' }, 'state')).observation.thea…
+       |                                                                                        ^
+    365|   });
+    366| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 22 passed (24)
+   Start at  01:54:06
+   Duration  2.76s (transform 1.49s, setup 0ms, import 2.00s, tests 2.42s, environment 0ms)
+

@@ -1,0 +1,6 @@
+Listing tests:
+  defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls
+  defense-theater-recovery.spec.ts:84:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry
+  defense-theater-recovery.spec.ts:84:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry
+  defense-theater-recovery.spec.ts:84:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry
+Total: 4 tests in 1 file
