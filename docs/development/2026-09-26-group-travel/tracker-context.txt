@@ -1,0 +1,54 @@
+## Theandril  (`Theandril` in DHARMA Tracker)
+
+Browser-native dark-fantasy 4X, under active development toward 1.0.
+
+Hosting: GitHub Pages (game and development journal)
+
+Links:
+- Theandril: https://erikburdett.github.io/Theandril/
+- Theandril development journal: https://erikburdett.github.io/Theandril/updates/
+
+Repository: https://github.com/ErikBurdett/Theandril
+
+Road to 1.0: 56% — 63 of 112 acceptance points delivered (measured 2026-09-27)
+6 of 23 catalogue items are complete; all 15 release gates remain open. Explicit group route review, movement, resume/cancel and recovery advance the existing empire-management item. Delivered/remaining bullets are recomputed from the published structured catalogue; editorial regrouping can change the denominator. They are not a fixed-scope completion percentage or release acceptance. ACT-32/M3 remain in progress.
+- M0 in-progress — Stabilize the campaign and close the current AI findings: Every retained campaign-safety scenario passes against the rules that ship, including the pending-assault regression that had been frozen at rules 17. The wider gates behind M0 are still open.
+- M1 in-progress — Client states and unification victory: A contestable two-thirds Unification bid is playable, city-states seat beside the realms, and a realm may take another as its paid client whose hearths stand behind its bid. Client capture outcomes and transfers between patron and client remain.
+- M2 in-progress — A complete magical discovery loop: Seams are hidden under Ashfall glass, found by a paid survey, drawn for ashglass and required before Arcane Theory; Unbinding answers a working with a working and costs its caster a round. Reactive interception and personal path growth remain.
+- M3 in-progress — Empire delegation and coordinated orders: Standing charters, muster points, postings, grouped alerts and orders, canonical army/hearth selections, personal charter/production templates and paid production sequences are delivered. The group-travel slice adds explicit coordinated journeys: Group travel reviews compact canonical routes for up to 128 selected owned land armies ashore, then explicitly applies replacement routes or appended waypoints in stable army-ID order through ordinary commands. Current movement can be spent immediately. Resume and cancel act on eligible selected routes; existing postings remain and can resume their own movement later unless separately cleared. Accepted armies leave the selection; refused armies remain for correction. Preview context is hash-bound and advisory, with individual overrides and exact saved/replayed outcomes. Uncertain mutation responses lock orders until a saved campaign is restored; superseded preview errors do not lock a restored campaign. Verification: 2,000 headless tests across 250 files; 23 distinct affected Chromium journeys from passing runs of 21 and six with four repeated cases; one separate generated-production journey; 33 local and the same 33 live production Pages journeys passed. These overlapping scopes are not additive totals. Rules/save 32 and content 015468d1 unchanged. Theaters, patrol/escort roles, reusable army-order templates, broader governor decisions and combined mature-realm acceptance remain open. This slice does not add synchronized arrival, automatic attacks/war, standing repeat production or automatic retries.
+- M4 in-progress — Supply, trade and sustained military operations: Land, depot and harbor supply plus finite fleet provisions are published under rules/save 31. Fleets carry eight turns of stores, passengers share shortages and AI plans visible returns/refills and paid staging harbors. Epic 379 fits 350-400; Long 342 and Standard 234 remain above approximate 300/200 targets. Material costs, trade routes, taxation, treaty access, coordinated operations and broader recovery remain.
+- M5 in-progress — Independent powers, political pressure and agent roles: Twenty-four city-states are authored, playable and courtable as clients. Clans, pirates, mercenaries, enclaves and the political layer are not built.
+- M6 open — Epochs, crises and the living campaign: Navigate eras, upheaval and world crises rather than a flat timeline.
+- M7 open — Progression depth and the third victory path: Two victory paths exist; the third and the deeper progression behind it do not.
+- M8 in-progress — Authored breadth, exploration and final presentation: Twenty-four cultures, seven map types and the city-state register are published; the quantitative content and art targets are not met.
+- M9 open — Authoritative online campaigns: The deployed game is single-player; no server, rooms or reconnect exist.
+- M10 open — Sustained proof and release signoff: Prove the integrated release at scale and across browsers, then sign the gates.
+
+Since the edition: 9 commits, 15 files uncommitted on `master`.
+
+Recent:
+- 37 min ago · **Theandril** · GitHub Actions success `7dfe0c6` — Publish development demo to Pages · master
+- 38 min ago · **Theandril** · CI success `7dfe0c6` — Verify build · master
+- 40 min ago · **Theandril** · commit committed `7dfe0c6` — Publish group-travel dispatch and verified roadmap progress
+- 73 min ago · **Theandril** · commit committed `3b09189` — Add reviewed group travel across selected armies (ACT-32)
+- 2 h ago · **Theandril** · GitHub Actions success `c38f82c` — Publish development demo to Pages · master
+- 2 h ago · **Theandril** · CI success `c38f82c` — Verify build · master
+- 2 h ago · **Theandril** · commit committed `c38f82c` — docs: record production-sequence deployment and live verification
+- 3 h ago · **Theandril** · GitHub Actions success `24cd30e` — Publish development demo to Pages · master
+- 3 h ago · **Theandril** · CI success `24cd30e` — Verify build · master
+- 3 h ago · **Theandril** · commit committed `24cd30e` — Verify downloaded atlas before asserting crest readiness
+- 4 h ago · **Theandril** · GitHub Actions success `b5fc099` — Publish development demo to Pages · master
+- 4 h ago · **Theandril** · CI success `b5fc099` — Verify build · master
+- 4 h ago · **Theandril** · commit committed `b5fc099` — Publish production-sequence dispatch and verified roadmap progress
+- 5 h ago · **Theandril** · commit committed `420219d` — Add reusable production sequences across selected hearths
+- 12 h ago · **Theandril** · CI success `3a8767b` — Verify build · master
+
+Open issues:
+- `DH-021` low — Standard and Long Theandril campaigns run longer than the pace descriptions promise: Measure the headline cases with pnpm measure:pacing, then either re-price Standard and Long with the current pace pack frozen, as rules 18, 21 and 22 did, or change the stated targets to match.
+
+Queued actions:
+- #12 `ACT-32` doing — Let a large realm be governed without ordering every hearth (M3)
+- #13 `ACT-33` doing — Sustain and disrupt wars through supply, trade and treaties (M4)
+- #14 `ACT-38` backlog — Bring Standard and Long Theandril campaigns back to their stated lengths
+- #25 `ACT-29` backlog — Give Theandril's city-states their own artwork
+- #26 `ACT-30` backlog — Let city-states be courted, not only conquered

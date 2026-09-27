@@ -1,0 +1,56 @@
+{
+  "revision": "7dfe0c6a587e019eeec2501d21d212928f6e0918",
+  "sourceRevision": "3b0918999a166f36f6f3d51fbcb49413de549163",
+  "date": "2026-09-27",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=group-travel",
+  "rulesVersion": 32,
+  "contentHash": "015468d1",
+  "actions": [
+    {
+      "id": 36297841535,
+      "name": "Verify build",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "7dfe0c6a587e019eeec2501d21d212928f6e0918",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36297841535"
+    },
+    {
+      "id": 36297841548,
+      "name": "Publish development demo to Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "7dfe0c6a587e019eeec2501d21d212928f6e0918",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36297841548"
+    }
+  ],
+  "local": {
+    "headless": 2000,
+    "files": 250,
+    "headlessDuration": "53.68s",
+    "affectedGameplay": 23,
+    "affectedRuns": [
+      21,
+      6
+    ],
+    "affectedOverlap": 4,
+    "pages": 33,
+    "pagesDuration": "1.0m"
+  },
+  "live": {
+    "pages": 33,
+    "passed": 33,
+    "duration": "1.4m",
+    "newProductionJourneySeconds": 6.8,
+    "readback": "live-readback.json"
+  },
+  "catalogue": {
+    "items": 23,
+    "completed": 6,
+    "inProgress": 13,
+    "pending": 4,
+    "delivered": 63,
+    "remaining": 49,
+    "allReleaseGatesOpen": 15
+  }
+}

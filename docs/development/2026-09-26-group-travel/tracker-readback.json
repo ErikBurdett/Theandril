@@ -1,0 +1,25 @@
+{
+  "verified": true,
+  "sourceRevision": "3b0918999a166f36f6f3d51fbcb49413de549163",
+  "publishedRevision": "7dfe0c6a587e019eeec2501d21d212928f6e0918",
+  "hashes": {
+    "actions.json": "bd28728d8cdf920a33cbdbf9b31c5d02056adf4e18cb742217460d0c7eb574a3",
+    "projects.json": "429b92bb3fd74f895f60f32d997ecff73adc8daead7eb0357c7dc89f64cfaf51",
+    "issues.json": "2ff6a7fcb5cbf40b6913c568e29b3d4e9128f715cd3849ee809184c9b7dfa76e"
+  },
+  "statuses": {
+    "ACT-32": "doing",
+    "ACT-36": "done",
+    "DH-020": "resolved",
+    "DH-021": "open",
+    "M3": "in-progress"
+  },
+  "roadmap": {
+    "done": 63,
+    "total": 112,
+    "updated": "2026-09-27",
+    "note": "6 of 23 catalogue items are complete; all 15 release gates remain open. Explicit group route review, movement, resume/cancel and recovery advance the existing empire-management item. Delivered/remaining bullets are recomputed from the published structured catalogue; editorial regrouping can change the denominator. They are not a fixed-scope completion percentage or release acceptance. ACT-32/M3 remain in progress."
+  },
+  "milestoneDetail": "Standing charters, muster points, postings, grouped alerts and orders, canonical army/hearth selections, personal charter/production templates and paid production sequences are delivered. The group-travel slice adds explicit coordinated journeys: Group travel reviews compact canonical routes for up to 128 selected owned land armies ashore, then explicitly applies replacement routes or appended waypoints in stable army-ID order through ordinary commands. Current movement can be spent immediately. Resume and cancel act on eligible selected routes; existing postings remain and can resume their own movement later unless separately cleared. Accepted armies leave the selection; refused armies remain for correction. Preview context is hash-bound and advisory, with individual overrides and exact saved/replayed outcomes. Uncertain mutation responses lock orders until a saved campaign is restored; superseded preview errors do not lock a restored campaign. Verification: 2,000 headless tests across 250 files; 23 distinct affected Chromium journeys from passing runs of 21 and six with four repeated cases; one separate generated-production journey; 33 local and the same 33 live production Pages journeys passed. These overlapping scopes are not additive totals. Rules/save 32 and content 015468d1 unchanged. Theaters, patrol/escort roles, reusable army-order templates, broader governor decisions and combined mature-realm acceptance remain open. This slice does not add synchronized arrival, automatic attacks/war, standing repeat production or automatic retries.",
+  "scope": "Exact proposed two-file output hashes match; issues unchanged; normal local tracker build exited0."
+}

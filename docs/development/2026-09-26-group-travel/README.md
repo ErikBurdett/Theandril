@@ -1,6 +1,6 @@
 # Coordinated group travel — implementation evidence
 
-26–27 September 2026. **Implemented and locally verified; publication remains pending.**
+26–27 September 2026. **Implemented, locally verified, published and live-verified.**
 Baseline: `c38f82c9c3aa2fedd6ea808d71aedaf6512ad72b`.
 Reviewed implementation: `3b0918999a166f36f6f3d51fbcb49413de549163`;
 public journal and final deployment verification are recorded separately.
@@ -161,7 +161,7 @@ not a live deployment check.
 | Actual-worker performance | Four completed single samples | [Final benchmark](worker-movement-benchmark-final.log); scope and assertions detailed above |
 | Focused Chromium follow-up | 6/6 pass; 53.6s | [Focused run](browser-focused.log): four repeated travel cases plus two omitted posting-recovery cases; 23 distinct affected journeys across both runs |
 | Screenshot acceptance | Desktop, narrow and native result inspected | [Visual review](visual-review.md), [exact native provenance](screenshots/provenance.json) |
-| Publication/live verification | Pending | No deployment, live Pages or final published-layout pass is claimed here |
+| Publication/live verification | Pass | [Exact deployment](deployment.json), [33 live Pages journeys](live-pages.log), [exact live readback](live-readback.json) and [independent deployment review](deployment-review.md) |
 
 The 21-case affected run includes existing movement, postings and saved-group
 journeys, as well as the eight new travel/recovery scenarios. A misspelled test
@@ -256,8 +256,38 @@ limits are unchanged. The failed screenshot/context are preserved in
 Pages run passes **33/33 in 1.0 minute** ([log](publication-pages.log)).
 [Independent rendered review](publication-visual-review.md) approves sixteen
 reference captures across four viewport/text settings. Exact live publication
-remains pending.
+is verified below.
 
 The screenshot provenance now distinguishes the 26 September production capture
 from the final authored recaptures just after midnight on 27 September. The P1
 manifest used the work-start date for the set; exact pixels and hashes are unchanged.
+
+
+## Deployed checkpoint
+
+Published **`7dfe0c6a587e019eeec2501d21d212928f6e0918`** passes
+[Verify build](https://github.com/ErikBurdett/Theandril/actions/runs/36297841535)
+and [Pages publication](https://github.com/ErikBurdett/Theandril/actions/runs/36297841548).
+[All 33 live Pages journeys pass](live-pages.log) in **1.4 minutes**, with the same
+file/title identities as the local suite. Generated live group travel passes in
+6.8 seconds. These are separate local/live runs, not additive test totals.
+
+The [exact live readback](live-readback.json) matches the newest public commit,
+reviewed local game HTML, game JavaScript/CSS and worker bytes, dispatch11's
+P1 source links and native image, all23 roadmap records and all15 open gates.
+It records no page, request, HTTP or console errors. Its
+[initial attempt](live-readback-initial.json) passed game/dispatch checks but
+could not locate source links in collapsed roadmap details because accessible-role
+queries exclude hidden content. The helper now includes those hidden DOM links
+for exact href verification; the application and actual-control Pages tests are
+unchanged. The initial failure remains evidence, not a successful readback.
+
+[deployment.json](deployment.json) binds the workflow, implementation, source,
+local/live tests and catalogue counts. The [guarded tracker apply](tracker-apply.log) and [readback](tracker-readback.json)
+match the independently reviewed two-file proposal and preserve all other
+records, including ACT-36 done, DH-020 resolved and DH-021 open. ACT-32 stays
+doing, M3 stays in progress. The normal local DHARMA build passed. The initial
+read-only preview failed on pnpm banner lines preceding content JSON; corrected
+strict parsing and the unchanged validation log are documented in
+[the failure note](tracker-preview-initial.txt). No tracker write occurred on
+that failure. Broader M3 acceptance and all fifteen release gates remain open.
