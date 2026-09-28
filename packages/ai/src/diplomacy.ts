@@ -7,6 +7,11 @@ export interface AiPlan { commands: GameCommand[]; reasons: string[] }
 export function protectedFactions(view: Observation): Set<string> {
   const bound = view.diplomacy.clients.flatMap(bond =>
     bond.patronId === view.factionId ? [bond.clientId] : bond.clientId === view.factionId ? [bond.patronId] : []);
+  for (const agreement of view.supplyAccess?.agreements ?? []) if (agreement.expiresTurn > view.turn) {
+    if (agreement.buyerId === view.factionId) bound.push(agreement.providerId);
+    else if (agreement.providerId === view.factionId) bound.push(agreement.buyerId);
+  }
+  for (const offer of view.supplyAccess?.offers ?? []) if (offer.buyerId === view.factionId && offer.expiresTurn > view.turn) bound.push(offer.providerId);
   return new Set([...bound, ...view.diplomacy.treaties.filter(treaty => treaty.expiresTurn > view.turn)
     .flatMap(treaty => treaty.parties.filter(id => id !== view.factionId))]);
 }

@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/supply-access.test.ts (7 tests | 1 failed) 316ms
+     × discloses no new name or harbor upgrades after agreement and removes a lost source with generic notices 27ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/supply-access.test.ts > paid source-specific supply access > discloses no new name or harbor upgrades after agreement and removes a lost source with generic notices
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/sim/src/supply-access.test.ts:120:61
+    118|     expect(observeSupplyAccess(state, buyerId).agreements[0]!.source).…
+    119|     expect(armySupply(state, fieldId).reason).toContain(N.islandName);
+    120|     expect(suppliedCells(state, buyerId).has(N.voyageCell)).toBe(false…
+       |                                                             ^
+    121|     state.settlements[N.islandId]!.factionId = buyerId;
+    122|     const events = advanceSupplyAccess(state);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 15 passed (16)
+   Start at  16:29:40
+   Duration  2.59s (transform 1.13s, setup 0ms, import 1.69s, tests 2.47s, environment 0ms)
+

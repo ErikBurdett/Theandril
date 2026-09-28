@@ -1,4 +1,6 @@
-import { applyCommand, createGame, getObservation, type GameCommand, type GameState } from '../packages/sim/src/index';
+import { writeFileSync } from 'node:fs';
+import { applyCommand, createGame, getObservation, stateHashForVersion, type GameCommand, type GameState } from '../packages/sim/src/index';
+import { rulesVersion, withRules, type RulesVersion } from '../packages/sim/src/rules';
 import { planTurn } from '../packages/ai/src/index';
 import type { CampaignPace } from '../packages/content/src/index';
 
@@ -33,11 +35,32 @@ const CASES: readonly Case[] = [
 
 const MAX_ROUNDS = 900;
 
-function play(entry: Case): { turn: number; path: string; refused: number; depots: number } {
-  const state: GameState = createGame({ seed: entry.seed, pace: entry.pace, size: entry.size, factionCount: entry.seats });
-  let refused = 0;
+function play(entry: Case, rules?: RulesVersion) {
+  const state: GameState = createGame({ seed: entry.seed, pace: entry.pace, size: entry.size, factionCount: entry.seats, ...(rules ? { rulesVersion: rules } : {}) });
+  // Generation selects an origin; historical execution is explicitly scoped.
+  // Keep observations, AI capabilities, commands and the final seal together.
+  return withRules(state, rules ?? rulesVersion(state), () => playCampaign(state));
+}
+
+function playCampaign(state: GameState) {
+  let refused = 0, automaticRefusals = 0, theaterDispatches = 0, reinforcementPhases = 0, dispatchesToThreatenedHearths = 0;
+  const commands: Record<string, number> = {}, events: Record<string, number> = {};
   const issue = (command: GameCommand): void => {
     const result = applyCommand(state, command);
+    commands[command.type] = (commands[command.type] ?? 0) + 1;
+    for (const event of result.events) {
+      events[event.type] = (events[event.type] ?? 0) + 1;
+      if (event.type === 'theater_dispatch_blocked') automaticRefusals++;
+    }
+    if (result.ok && command.type === 'endTurn') for (const theater of state.theaters) {
+      if (!theater.enabled || theater.lastRunTurn !== state.turn) continue;
+      const holds = theater.reinforcementHolds ?? [], heldCells = new Set(holds.map(hold => state.settlements[hold.settlementId]?.cell));
+      if (holds.length) reinforcementPhases++;
+      for (const dispatch of theater.lastDispatches) if (dispatch.accepted) {
+        theaterDispatches++;
+        if (heldCells.has(dispatch.targetCell)) dispatchesToThreatenedHearths++;
+      }
+    }
     if (!result.ok) { refused++; process.stderr.write(`  refused at turn ${state.turn}: ${JSON.stringify(command)}: ${result.error}\n`); }
   };
   for (let round = 0; round < MAX_ROUNDS && !state.victory; round++) {
@@ -60,10 +83,18 @@ function play(entry: Case): { turn: number; path: string; refused: number; depot
     }
     issue({ type: 'endTurn', factionId: state.turnOwnerId });
   }
-  return { turn: state.turn, path: state.victory?.path ?? 'none', refused, depots: state.depots.length };
+  return { rulesVersion: rulesVersion(state), turn: state.turn, path: state.victory?.path ?? 'none', winner: state.victory?.factionId ?? null,
+    refused, automaticRefusals, theaterDispatches, reinforcementPhases, dispatchesToThreatenedHearths, depots: state.depots.length, stateHash: stateHashForVersion(state, rulesVersion(state)), commands, events };
 }
 
-const requested = process.argv.slice(2);
+const args = process.argv.slice(2);
+const option = (name: string) => args.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
+const requested = args.filter(arg => !arg.startsWith('--'));
+const seeds = option('seeds')?.split(',').map(Number);
+const versions = option('rules')?.split(',').map(Number) as RulesVersion[] | undefined;
+if (args.some(arg => arg.startsWith('--') && !/^--(seeds|rules|json)=/.test(arg))
+  || seeds?.some(seed => !Number.isInteger(seed) || seed < 0 || seed > 0xffff_ffff)
+  || versions?.some(version => version !== 33 && version !== 34)) throw new Error('Use --seeds=uint32,... --rules=33,34 (one or both versions) --json=path.');
 const selected = requested.length === 0 ? CASES.filter(entry => entry.name === 'headline')
   : requested.includes('all') ? CASES
     : CASES.filter(entry => requested.includes(entry.name) || requested.includes(entry.name.replace('headline-', '')));
@@ -71,11 +102,15 @@ if (!selected.length) {
   process.stderr.write(`Unknown case. Available: ${CASES.map(entry => entry.name).join(', ')}, all\n`);
   process.exit(1);
 }
-for (const entry of selected) {
-  process.stdout.write(`${entry.name} (${entry.pace}, ${entry.size}, ${entry.seats} realms, seed ${entry.seed}) — target ${entry.target}\n`);
+const results = [];
+for (const original of selected) for (const seed of seeds ?? [original.seed]) for (const rules of versions ?? [undefined]) {
+  const entry = { ...original, seed };
+  process.stdout.write(`${entry.name} (${entry.pace}, ${entry.size}, ${entry.seats} realms, seed ${entry.seed}, rules ${rules ?? 'current'}) — target ${entry.target}\n`);
   const started = Date.now();
-  const result = play(entry);
-  process.stdout.write(`  turn ${result.turn} · ${result.path} · ${result.depots} depots · ${result.refused} refused orders · ${Math.round((Date.now() - started) / 1000)}s\n`);
+  const result = play(entry, rules);
+  results.push({ ...entry, ...result, elapsedMs: Date.now() - started });
+  if (option('json')) writeFileSync(option('json')!, JSON.stringify({ maxRounds: MAX_ROUNDS, results }, null, 2) + '\n');
+  process.stdout.write(`  turn ${result.turn} · ${result.path} · ${result.depots} depots · ${result.refused} refused orders · ${result.automaticRefusals} automatic refusals · ${Math.round((Date.now() - started) / 1000)}s\n`);
   if (result.path === 'none') process.stdout.write('  NO VICTORY within the round cap: the campaign did not resolve.\n');
   if (result.refused) process.stdout.write('  REFUSED ORDERS: the planner asked for something the rules do not allow.\n');
 }

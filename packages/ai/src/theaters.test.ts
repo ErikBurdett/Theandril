@@ -124,7 +124,7 @@ describe('observed defensive theater adoption', () => {
   it('adopts two spare companies through an ordinary command without reusing them in the same complete plan', () => {
     const game = defenseCampaign(), view = getObservation(game, game.turnOwnerId), before = structuredClone(view);
     const result = planTurnWithReasons(view), command = result.commands.find(command => command.type === 'setTheater');
-    expect(command).toMatchObject({ type: 'setTheater', name: 'Home watch', settlementIds: townIds(game), guardsPerSettlement: 1, enabled: true });
+    expect(command).toMatchObject({ type: 'setTheater', name: 'Home watch', settlementIds: townIds(game), guardsPerSettlement: 1, reinforcementLimit: 1, enabled: true });
     if (command?.type !== 'setTheater') throw new Error('Expected real adoption');
     expect(command.armyIds).toHaveLength(2);
     const members = view.armies.filter(army => command.armyIds.includes(army.id));

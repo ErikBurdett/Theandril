@@ -1,0 +1,72 @@
+
+Running 1 test using 1 worker
+
+(node:3776615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/empire-delegation.spec.ts:71:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (14.4s)
+
+
+  1) tests/gameplay/empire-delegation.spec.ts:71:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  0
+    + Received  + 27
+
+      Array [
+    +   "faction.ashen_compact.25",
+    +   "faction.brine_choir",
+    +   "faction.cairnwing_concord",
+    +   "faction.cinder_march.27",
+    +   "faction.cistern_assembly",
+    +   "faction.emberwake_convocation",
+    +   "faction.glass_tide",
+    +   "faction.glass_tide.28",
+    +   "faction.iron_covenant",
+    +   "faction.iron_covenant.29",
+    +   "faction.lantern_hospices",
+    +   "faction.manytrack_moot",
+    +   "faction.margin_observance",
+    +   "faction.mire_courts",
+        "faction.mire_courts.31",
+    +   "faction.morrow_spore",
+    +   "faction.red_sluice",
+    +   "faction.reedbound_council.26",
+    +   "faction.rimehorn_clans",
+    +   "faction.sable_steppe",
+    +   "faction.saltwind_remnant",
+        "faction.saltwind_remnant.32",
+    +   "faction.sepulchral_synod",
+    +   "faction.sepulchral_synod.30",
+    +   "faction.underhush_exchange",
+    +   "faction.unsealed_companies",
+    +   "faction.velvet_meridian",
+    +   "faction.vesper_court",
+    +   "faction.wardhall_remnant",
+      ]
+
+      226 |   expect(report.lastDispatches.some(dispatch => !dispatch.accepted && dispatch.armyId === fixture.strandedId)).toBe(true);
+      227 |   expect(report.lastDispatches.some(dispatch => dispatch.accepted)).toBe(true);
+    > 228 |   expect(allocated.wars).toEqual(initial.wars); expect(allocated.battle).toBe(false);
+          |                          ^
+      229 |   expect(allocated.charters).toHaveLength(30);
+      230 |   expect(allocated.queues.filter(town => town.queue.length).length).toBeGreaterThan(paid.queues.filter(town => town.queue.length).length);
+      231 |   await disclose(page, 'next-action-causes');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:228:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-quiet/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-quiet/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-quiet/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-quiet/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/empire-delegation.spec.ts:71:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 

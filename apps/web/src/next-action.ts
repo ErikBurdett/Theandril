@@ -1,12 +1,12 @@
-import type { Observation } from '@theandril/sim';
+import { MAX_THEATERS_PER_FACTION, type Observation } from '@theandril/sim';
 
 /** Every candidate carries the cause that put it here, so a wide realm can read
  * and work one kind of exception at a time instead of cycling every entity. */
-export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'out-of-supply' | 'empty-queue' | 'charter-stalled' | 'households';
+export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'out-of-supply' | 'empty-queue' | 'charter-stalled' | 'households' | 'theater-attention';
 export interface ActionCandidate { id: string; name: string; cell: number; reason: string; cause: ActionCause }
 export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
-export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[] }
-export type ActionKind = 'army' | 'settlement' | 'household';
+export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[]; theaters: ActionCandidate[] }
+export type ActionKind = 'army' | 'settlement' | 'household' | 'theater';
 export interface ActionGroup { kind: ActionKind; cause: ActionCause; label: string; count: number }
 const CAUSE_LABELS: Readonly<Record<ActionCause, string>> = {
   'movement': 'with movement remaining',
@@ -16,11 +16,13 @@ const CAUSE_LABELS: Readonly<Record<ActionCause, string>> = {
   'empty-queue': 'with an empty production queue',
   'charter-stalled': 'with a stalled charter',
   'households': 'with unassigned households',
+  'theater-attention': 'need attention',
 };
 const plural = (kind: ActionKind, count: number): string =>
   kind === 'army' ? count === 1 ? 'company' : 'companies' : count === 1 ? 'hearth' : 'hearths';
 
-/** One row per cause, largest first: the shape of the work, not a list of names. */
+/** One row per cause. Theater exceptions precede the ordinary idle-work queues;
+ * other causes retain their count ordering rather than listing every actor. */
 export function actionGroups(candidates: ActionCandidates): ActionGroup[] {
   const groups: ActionGroup[] = [];
   for (const [kind, items] of [['army', candidates.armies], ['settlement', candidates.settlements], ['household', candidates.households]] as const) {
@@ -28,7 +30,9 @@ export function actionGroups(candidates: ActionCandidates): ActionGroup[] {
     for (const item of items) counts.set(item.cause, (counts.get(item.cause) ?? 0) + 1);
     for (const [cause, count] of counts) groups.push({ kind, cause, count, label: `${count} ${plural(kind, count)} ${CAUSE_LABELS[cause]}` });
   }
-  return groups.sort((a, b) => b.count - a.count || (a.label < b.label ? -1 : a.label > b.label ? 1 : 0));
+  if (candidates.theaters.length) groups.push({ kind: 'theater', cause: 'theater-attention', count: candidates.theaters.length,
+    label: `Defensive theaters need attention · ${candidates.theaters.length}` });
+  return groups.sort((a, b) => Number(b.kind === 'theater') - Number(a.kind === 'theater') || b.count - a.count || (a.label < b.label ? -1 : a.label > b.label ? 1 : 0));
 }
 export type Direction = 1 | -1;
 export interface ShortcutBindings { army: string; settlement: string; turn: string }
@@ -37,11 +41,13 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'supply' | 'sieges' | 'land'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'supply' | 'sieges' | 'land' | 'theaters'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
   const postings = new Map(view.postings.map(posting => [posting.armyId, posting] as const));
+  const enabledTheaters = (view.theaters ?? []).filter(theater => theater.factionId === view.factionId && theater.enabled).slice(0, MAX_THEATERS_PER_FACTION);
+  const delegatedArmies = new Set(enabledTheaters.flatMap(theater => theater.armyIds));
   // A force wasting outside supply is the most urgent thing an army can be doing,
   // so it is named ahead of a posting or a route however those stand.
   const starving = new Map(view.supply.filter(item => !item.supplied).map(item => [item.armyId, item] as const));
@@ -55,10 +61,12 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
     // An army under a posting answers for itself; only a stuck one wants a look,
     // and then the posting's own reason is the reason.
     const posting = postings.get(army.id);
-    if (posting && !posting.blocker) continue;
     if (posting?.blocker) { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'posting-stalled', reason: `Posting stalled: ${posting.blocker}` }); continue; }
-    armies.push({ id: army.id, name: army.name, cell: army.cell, cause: route?.status === 'paused' ? 'route-interrupted' : 'movement',
-      reason: route?.status === 'paused' ? `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` : `${army.movement} movement remaining` });
+    // Direct travel remains a decision even when a healthy posting or theater
+    // will take over later. Delegation only removes ordinary idle movement.
+    if (route?.status === 'paused') { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'route-interrupted', reason: `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` }); continue; }
+    if (posting || delegatedArmies.has(army.id)) continue;
+    armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'movement', reason: `${army.movement} movement remaining` });
   }
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));
   // A hearth under a charter answers for itself. It is only worth a look when the
@@ -78,7 +86,19 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
     if (town && unassignedHouseholds > 0) households.push({ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds, cause: 'households',
       reason: `${unassignedHouseholds} unassigned household${unassignedHouseholds === 1 ? '' : 's'}. Review land to assign worked tiles; unassigned households add no tile yields.` });
   }
-  return { armies: armies.sort(byId), settlements: settlements.sort(byId), households: households.sort(byId) };
+  // Read only the canonical report: no speculative threat or route calculation.
+  const theaters: ActionCandidate[] = [];
+  for (const theater of enabledTheaters) {
+    const reasons: string[] = [];
+    if (theater.missingGuards > 0) reasons.push(`${theater.missingGuards} missing ${theater.missingGuards === 1 ? 'guard' : 'guards'}`);
+    const refused = theater.lastDispatches.filter(dispatch => !dispatch.accepted).length;
+    if (refused) reasons.push(`${refused} refused ${refused === 1 ? 'dispatch' : 'dispatches'}`);
+    const unavailable = theater.hearths.filter(hearth => !hearth.available).length;
+    if (unavailable) reasons.push(`${unavailable} unavailable ${unavailable === 1 ? 'hearth' : 'hearths'}`);
+    if (!theater.armyIds.length) reasons.push('No assigned armies');
+    if (reasons.length) theaters.push({ id: theater.id, name: theater.name, cell: theater.reserveCell, cause: 'theater-attention', reason: reasons.join(' · ') });
+  }
+  return { armies: armies.sort(byId), settlements: settlements.sort(byId), households: households.sort(byId), theaters: theaters.sort(byId) };
 }
 
 /** Advance from the selected ID even if it stopped being eligible; stable wrap. */

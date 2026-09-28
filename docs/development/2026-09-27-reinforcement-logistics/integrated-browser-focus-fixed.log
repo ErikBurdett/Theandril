@@ -1,0 +1,50 @@
+
+Running 1 test using 1 worker
+
+(node:3276114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (21.8s)
+
+
+  1) tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByTestId('turn-counter')
+    Expected: "Turn 3"
+    Received: "Turn 2"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" getByTestId('turn-counter') with timeout 5000ms
+      - waiting for getByTestId('turn-counter')
+        14 × locator resolved to <strong data-testid="turn-counter">Turn 2</strong>
+           - unexpected value "Turn 2"
+
+
+      52 |   if (await options.getAttribute('open') !== null) await options.locator(':scope > summary').click();
+      53 |   await page.getByRole('button', { name: 'End turn', exact: true }).click();
+    > 54 |   await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${turn + 1}`);
+         |                                                  ^
+      55 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
+      56 | }
+      57 |
+        at endTurn (/home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:54:50)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:177:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-focus-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-focus-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-focus-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-focus-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 

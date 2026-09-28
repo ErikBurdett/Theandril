@@ -1,0 +1,38 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-group-movement.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-group-movement.test.ts (17 tests | 2 failed | 15 skipped) 584ms
+     × locks a player round after the real AI accepts and pays a supply offer but publication fails 272ms
+     × locks a watch round after the real AI accepts and pays a supply offer but publication fails 190ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-movement.test.ts > actual worker paid supply acceptance > locks a player round after the real AI accepts and pays a supply offer but publication fails
+ FAIL  |unit| apps/web/src/worker-group-movement.test.ts > actual worker paid supply acceptance > locks a watch round after the real AI accepts and pays a supply offer but publication fails
+AssertionError: expected undefined to be true // Object.is equality
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ apps/web/src/worker-group-movement.test.ts:420:39
+    418|       expect(saved).toHaveBeenCalledTimes(1); expect(saved.mock.calls[…
+    419|       expect(failed.message).toContain(`Authored ${mode} AI supply pub…
+    420|       expect(failed.recoveryRequired).toBe(true);
+       |                                       ^
+    421|       for (const body of [round, { type: 'save' }, { type: 'export' }]…
+    422|         expect((await request(body, 'error')).recoveryRequired).toBe(t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 15 skipped (17)
+   Start at  17:27:15
+   Duration  1.37s (transform 622ms, setup 0ms, import 696ms, tests 584ms, environment 0ms)
+

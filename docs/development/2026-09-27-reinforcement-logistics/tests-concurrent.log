@@ -1,0 +1,42 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |repository| apps/web/src/updates/changelog.test.ts (6 tests | 1 failed) 27888ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 27883ms
+ ❯ |repository| tests/art-factory.test.ts (8 tests | 1 failed) 31374ms
+     × retains reviewed frames, evidence and original sources with fresh exact reports 20016ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |repository| tests/art-factory.test.ts > published artwork and retained clean-checkout inputs > retains reviewed frames, evidence and original sources with fresh exact reports
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/art-factory.test.ts:133:3
+    131|   });
+    132|
+    133|   it('retains reviewed frames, evidence and original sources with fres…
+       |   ^
+    134|     expect(paletteSchema.parse(JSON.parse((await artifact('assets/pale…
+    135|     const evidence = new Set<string>();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ apps/web/src/updates/changelog.test.ts:12:3
+     10|   // determinism check) and share the result rather than building a th…
+     11|   let generated: ReturnType<typeof buildFeed>;
+     12|   it('is deterministic and the committed feed is an exact record from …
+       |   ^
+     13|     generated = buildFeed();
+     14|     expect(buildFeed()).toEqual(generated);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 264 passed (266)
+      Tests  2 failed | 2144 passed (2146)
+   Start at  19:31:13
+   Duration  37.72s (transform 56.57s, setup 0ms, import 199.61s, tests 617.68s, environment 32ms)
+

@@ -1,0 +1,81 @@
+{
+  "requests": [
+    "import",
+    "movementQuery",
+    "command",
+    "movementQuery",
+    "export",
+    "movementQuery"
+  ],
+  "replies": [
+    {
+      "request": "import",
+      "reply": "state",
+      "elapsedMs": 1638.5,
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1711971,
+        "totalTransferBytes": 1711971,
+        "cellTransferBytes": 26105,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "developmentQueryCount": 0,
+        "developmentQueryBytes": 0,
+        "totalDevelopmentQueryBytes": 0,
+        "groupPostingResultBytes": 0,
+        "groupCharterResultBytes": 0,
+        "groupProductionResultBytes": 0,
+        "groupMovementResultBytes": 0
+      }
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 8.400000095367432
+    },
+    {
+      "request": "command",
+      "reply": "state",
+      "elapsedMs": 690.2000000476837,
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 197,
+        "aiMs": 136.90000009536743,
+        "transferBytes": 1652451,
+        "totalTransferBytes": 3364422,
+        "cellTransferBytes": 140,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "developmentQueryCount": 0,
+        "developmentQueryBytes": 0,
+        "totalDevelopmentQueryBytes": 0,
+        "groupPostingResultBytes": 0,
+        "groupCharterResultBytes": 0,
+        "groupProductionResultBytes": 0,
+        "groupMovementResultBytes": 0
+      }
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 13
+    },
+    {
+      "request": "export",
+      "reply": "export",
+      "elapsedMs": 1134.2000000476837
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 7.5
+    }
+  ],
+  "feedback": "◆Campaign exported. Keep this file as a backup.",
+  "turn": 4,
+  "hash": "607cd0c7"
+}

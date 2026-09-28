@@ -1,0 +1,164 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/save.test.ts (30 tests | 6 failed) 338ms
+     × migrates explicit v0 nextEntityId snapshots without changing campaign state 28ms
+     × verifies v1 checksums and the known content pack before adding warfare defaults 10ms
+     × migrates checked v2 state into settlement provenance and diplomacy defaults 9ms
+     × continues a synthetic v2 field-battle shape with an initialized war memory 31ms
+     × migrates the recognized v3 content pack and verifies its checksum before defaults 7ms
+     × preserves a synthetic v3 siege-battle shape and its pending conquest decision 37ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:120:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:128:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:146:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:165:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:178:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "supplyAccess"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"supplyAccess\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:937:25
+    935|   let originalVersion: number;
+    936|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    937|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    938|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    939|   const data = envelope.state;
+ ❯ migrateCurrent packages/sim/src/save.test.ts:200:24
+ ❯ packages/sim/src/save.test.ts:204:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 6 passed (7)
+      Tests  6 failed | 95 passed (101)
+   Start at  16:27:56
+   Duration  2.62s (transform 2.79s, setup 0ms, import 4.34s, tests 4.79s, environment 1ms)
+

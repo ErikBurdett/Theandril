@@ -45,10 +45,11 @@ export function RealmNavigation({ registry, armyCount, townCount, characterCount
   </div>;
 }
 
-export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, onPendingChange }: {
+export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, theaterFocus, onPendingChange }: {
   view: Observation; registry: RegistryKind; search: string; force: string; selection: Selection; select: (selection: Selection) => void;
   hash?: string; busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onSelectionGroupCommand?: SelectionGroupIssue; onPendingChange?: (pending: boolean) => void;
   onTheaterCommand?: TheaterIssue; knownSelectedCell?: number;
+  theaterFocus?: { id: string; nonce: number };
 }) {
   const [sort, setSort] = useState<Sort>('id');
   const [page, setPage] = useState(0);
@@ -96,7 +97,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
     {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={pending => reportPending('selection', pending)}/>}
     {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
     {registry === 'armies' && onGroupMovement && onGroupMovementPreview && <GroupMovementOrders view={view} hash={hash} selected={currentGroupIds} selectedCell={selection.cell} busy={busy || selectionGroupPending || productionPending || theaterPending} issue={onGroupMovement} preview={onGroupMovementPreview} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('movement', pending)}/>}
-    {registry === 'armies' && onTheaterCommand && <DefenseTheaters view={view} checked={currentGroupIds} knownSelectedCell={knownSelectedCell} busy={busy || selectionGroupPending || productionPending || movementPending} issue={onTheaterCommand} onPendingChange={pending => reportPending('theater', pending)}/>}
+    {registry === 'armies' && onTheaterCommand && <DefenseTheaters view={view} checked={currentGroupIds} knownSelectedCell={knownSelectedCell} theaterFocus={theaterFocus} busy={busy || selectionGroupPending || productionPending || movementPending} issue={onTheaterCommand} onPendingChange={pending => reportPending('theater', pending)}/>}
     {registry === 'settlements' && onGroupCharter && <GroupCharterOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupCharter} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
     {registry === 'settlements' && onGroupProduction && <GroupProductionOrders view={view} selected={currentGroupIds} busy={locked} issue={onGroupProduction} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('production', pending)}/>}
     <div className="registry" data-testid={registry === 'armies' ? 'army-registry' : 'settlement-registry'}>{visible.map(item => {

@@ -22,5 +22,5 @@ export function assertTheaterApplied(theaters: ObservedDefenseTheater[] | undefi
   }
   const row = theaters.find(row => command.theaterId ? row.id === command.theaterId : row.name === command.name.trim());
   const same = (a: string[], b: string[]) => { const sorted = [...b].sort(); return a.length === sorted.length && a.every((id, index) => id === sorted[index]); };
-  if (!row || row.factionId !== command.factionId || row.name !== command.name.trim() || row.reserveCell !== command.reserveCell || row.guardsPerSettlement !== command.guardsPerSettlement || row.enabled !== command.enabled || !same(row.armyIds, command.armyIds) || !same(row.settlementIds, command.settlementIds)) throw new Error('The defensive theater response does not match the accepted edit.');
+  if (!row || row.factionId !== command.factionId || row.name !== command.name.trim() || row.reserveCell !== command.reserveCell || row.guardsPerSettlement !== command.guardsPerSettlement || (row.reinforcementLimit ?? 0) !== (command.reinforcementLimit ?? 0) || row.enabled !== command.enabled || !same(row.armyIds, command.armyIds) || !same(row.settlementIds, command.settlementIds)) throw new Error('The defensive theater response does not match the accepted edit.');
 }

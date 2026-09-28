@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { checksum } from '@theandril/content';
-import { applyCommand, createGame, deserializeGame, serializeGame, stateHash } from './index';
+import { applyCommand, createGame, deserializeGame, serializeGame, stateHash, SAVE_VERSION } from './index';
 
 function delegated() {
   const game = createGame({ seed: 20260927, size: 'tiny', generatorVersion: 4, factionCount: 2, cityStateCount: 0 });
@@ -15,14 +15,14 @@ function reseal(envelope: ReturnType<typeof JSON.parse>) {
   return JSON.stringify(envelope);
 }
 
-describe('strict rules33 theater persistence', () => {
+describe('strict current theater persistence', () => {
   it('retains the independent counter, delegated configuration and factual bounded dispatch report in the current hash', () => {
     const game = delegated(), before = stateHash(game);
     expect(applyCommand(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
     expect(game.theaters[0]?.lastRunTurn).toBe(game.turn);
     expect(stateHash(game)).not.toBe(before);
     const save = serializeGame(game), loaded = deserializeGame(save);
-    expect(JSON.parse(save).version).toBe(33);
+    expect(JSON.parse(save).version).toBe(SAVE_VERSION);
     expect(loaded.theaters).toEqual(game.theaters); expect(loaded.nextTheaterId).toBe(2);
     expect(serializeGame(loaded)).toBe(save); expect(stateHash(loaded)).toBe(stateHash(game));
     loaded.theaters[0]!.name = 'A distinct saved policy';

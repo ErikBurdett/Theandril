@@ -13,6 +13,7 @@ const applyLegacy = (state: GameState, command: unknown) => applyCommandForVersi
 interface SaveFixture {
   version: number; gameVersion: string; contentHash: string; stateChecksum: string;
   state: {
+    supplyAccess: GameState['supplyAccess'];
     theaters: GameState['theaters']; nextTheaterId: number;
     selectionGroups: GameState['selectionGroups']; nextSelectionGroupId: number;
     resources: GameState['resources']; development: GameState['development'];
@@ -75,7 +76,8 @@ function previousV3State(save: SaveFixture) {
   if (save.state.depots.length) throw new Error('Synthetic historical projection cannot discard supply depots.');
   if (save.state.selectionGroups.length || save.state.nextSelectionGroupId !== 1) throw new Error('Synthetic historical projection cannot discard saved group metadata.');
   if (save.state.theaters.length || save.state.nextTheaterId !== 1) throw new Error('Synthetic historical projection cannot discard theater metadata.');
-  const { theaters: _theaters, nextTheaterId: _theaterId, selectionGroups: _groups, nextSelectionGroupId: _groupId, progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
+  if (save.state.supplyAccess.offers.length || save.state.supplyAccess.agreements.length || save.state.supplyAccess.nextId !== 1) throw new Error('Synthetic historical projection cannot discard supply access metadata.');
+  const { supplyAccess: _access, theaters: _theaters, nextTheaterId: _theaterId, selectionGroups: _groups, nextSelectionGroupId: _groupId, progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
   const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));

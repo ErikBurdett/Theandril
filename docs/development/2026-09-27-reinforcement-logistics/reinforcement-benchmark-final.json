@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "sourceRevision": "uncommitted candidate; see retained invocation",
+  "saveVersion": 34,
+  "contentHash": "015468d1",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "scope": "Headless canonical phase and observation timing, one warmup and independent identical-save samples. Setup/loading/hashing/archive replay are excluded. Complete observations follow the phase and isolated theater read, with their caches already available. One active realm, not simultaneous64-realm saturation, browser/worker transport or campaign pacing. Route expansion counters are not exposed; this does not claim worst-case search-budget saturation. Movement can legitimately change sight.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "representative",
+      "reinforcement": true,
+      "synthetic": true,
+      "geography": "Original generated geography; authored nearby second hearth, charted route corridor and100 guard companies.",
+      "generatorVersion": 4,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1556,
+      "theaters": 1,
+      "assignedHearths": 2,
+      "assignedMembers": 100,
+      "dispatchBudgetPerTheater": 16,
+      "phaseAttempts": 16,
+      "phaseAccepted": 16,
+      "phaseRefused": 0,
+      "phaseDomainEvents": 32,
+      "observedCells": 94,
+      "fullOwnObservationBytes": 495397,
+      "theaterArrayBytes": 13366,
+      "configurationAddedObservationBytes": 11065,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "timings": {
+        "theaterPhase": {
+          "samplesMs": [
+            1.515878000000157,
+            1.766352999999981,
+            1.599902999999813
+          ],
+          "medianMs": 1.599902999999813,
+          "minMs": 1.515878000000157,
+          "maxMs": 1.766352999999981
+        },
+        "isolatedTheaterRead": {
+          "samplesMs": [
+            0.6428300000000036,
+            0.9012989999998808,
+            0.7546280000001389
+          ],
+          "medianMs": 0.7546280000001389,
+          "minMs": 0.6428300000000036,
+          "maxMs": 0.9012989999998808
+        },
+        "completeOwnObservation": {
+          "samplesMs": [
+            4.438600000000179,
+            5.4503679999997985,
+            4.952612000000045
+          ],
+          "medianMs": 4.952612000000045,
+          "minMs": 4.438600000000179,
+          "maxMs": 5.4503679999997985
+        }
+      },
+      "repeatedPhaseHash": "78cf1813",
+      "canonicalEndTurnHash": "5a3defc3",
+      "archiveBytes": 2688153,
+      "ordinaryTheaterCommandsAccepted": 1,
+      "exactPhaseRepeat": true,
+      "strictSaveRoundtrip": true,
+      "canonicalEndTurnArchiveReplay": true,
+      "replayOwnObservationMatches": true
+    },
+    {
+      "size": "huge",
+      "workload": "ceiling",
+      "reinforcement": true,
+      "synthetic": true,
+      "geography": "Authored flat land with eight small isolated member islands; generated geography replaced.",
+      "generatorVersion": 4,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 2605,
+      "theaters": 8,
+      "assignedHearths": 128,
+      "assignedMembers": 1024,
+      "dispatchBudgetPerTheater": 16,
+      "phaseAttempts": 128,
+      "phaseAccepted": 64,
+      "phaseRefused": 64,
+      "phaseDomainEvents": 320,
+      "observedCells": 16424,
+      "fullOwnObservationBytes": 6861674,
+      "theaterArrayBytes": 159093,
+      "configurationAddedObservationBytes": 134815,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "timings": {
+        "theaterPhase": {
+          "samplesMs": [
+            9.843635999999606,
+            9.258501000000251,
+            8.954820999999356
+          ],
+          "medianMs": 9.258501000000251,
+          "minMs": 8.954820999999356,
+          "maxMs": 9.843635999999606
+        },
+        "isolatedTheaterRead": {
+          "samplesMs": [
+            1.824786000000131,
+            1.6884680000002845,
+            1.8294599999999264
+          ],
+          "medianMs": 1.824786000000131,
+          "minMs": 1.6884680000002845,
+          "maxMs": 1.8294599999999264
+        },
+        "completeOwnObservation": {
+          "samplesMs": [
+            37.78749299999981,
+            34.846669999999904,
+            37.99275300000045
+          ],
+          "medianMs": 37.78749299999981,
+          "minMs": 34.846669999999904,
+          "maxMs": 37.99275300000045
+        }
+      },
+      "repeatedPhaseHash": "cf518982",
+      "canonicalEndTurnHash": "92a17e48",
+      "archiveBytes": 3350805,
+      "ordinaryTheaterCommandsAccepted": 8,
+      "exactPhaseRepeat": true,
+      "strictSaveRoundtrip": true,
+      "canonicalEndTurnArchiveReplay": true,
+      "replayOwnObservationMatches": true
+    },
+    {
+      "size": "legendary",
+      "workload": "representative",
+      "reinforcement": true,
+      "synthetic": true,
+      "geography": "Original generated geography; authored nearby second hearth, charted route corridor and100 guard companies.",
+      "generatorVersion": 4,
+      "cells": 307200,
+      "factions": 40,
+      "armies": 4003,
+      "theaters": 1,
+      "assignedHearths": 2,
+      "assignedMembers": 100,
+      "dispatchBudgetPerTheater": 16,
+      "phaseAttempts": 16,
+      "phaseAccepted": 16,
+      "phaseRefused": 0,
+      "phaseDomainEvents": 75,
+      "observedCells": 95,
+      "fullOwnObservationBytes": 455199,
+      "theaterArrayBytes": 13148,
+      "configurationAddedObservationBytes": 11184,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "timings": {
+        "theaterPhase": {
+          "samplesMs": [
+            2.4746439999998984,
+            2.3378090000005614,
+            2.1367489999993268
+          ],
+          "medianMs": 2.3378090000005614,
+          "minMs": 2.1367489999993268,
+          "maxMs": 2.4746439999998984
+        },
+        "isolatedTheaterRead": {
+          "samplesMs": [
+            1.262113999999201,
+            1.2994810000000143,
+            1.2219470000000001
+          ],
+          "medianMs": 1.262113999999201,
+          "minMs": 1.2219470000000001,
+          "maxMs": 1.2994810000000143
+        },
+        "completeOwnObservation": {
+          "samplesMs": [
+            6.091689999999289,
+            5.956428999999844,
+            5.777353999999832
+          ],
+          "medianMs": 5.956428999999844,
+          "minMs": 5.777353999999832,
+          "maxMs": 6.091689999999289
+        }
+      },
+      "repeatedPhaseHash": "187a5bc3",
+      "canonicalEndTurnHash": "14dabd5f",
+      "archiveBytes": 4544673,
+      "ordinaryTheaterCommandsAccepted": 1,
+      "exactPhaseRepeat": true,
+      "strictSaveRoundtrip": true,
+      "canonicalEndTurnArchiveReplay": true,
+      "replayOwnObservationMatches": true
+    },
+    {
+      "size": "legendary",
+      "workload": "ceiling",
+      "reinforcement": true,
+      "synthetic": true,
+      "geography": "Authored flat land with eight small isolated member islands; generated geography replaced.",
+      "generatorVersion": 4,
+      "cells": 307200,
+      "factions": 40,
+      "armies": 5052,
+      "theaters": 8,
+      "assignedHearths": 128,
+      "assignedMembers": 1024,
+      "dispatchBudgetPerTheater": 16,
+      "phaseAttempts": 128,
+      "phaseAccepted": 64,
+      "phaseRefused": 64,
+      "phaseDomainEvents": 320,
+      "observedCells": 16424,
+      "fullOwnObservationBytes": 6863616,
+      "theaterArrayBytes": 159393,
+      "configurationAddedObservationBytes": 135087,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "timings": {
+        "theaterPhase": {
+          "samplesMs": [
+            9.92374800000107,
+            9.46620299999995,
+            8.956796000000395
+          ],
+          "medianMs": 9.46620299999995,
+          "minMs": 8.956796000000395,
+          "maxMs": 9.92374800000107
+        },
+        "isolatedTheaterRead": {
+          "samplesMs": [
+            2.748725999999806,
+            3.2232830000011745,
+            2.726021000000401
+          ],
+          "medianMs": 2.748725999999806,
+          "minMs": 2.726021000000401,
+          "maxMs": 3.2232830000011745
+        },
+        "completeOwnObservation": {
+          "samplesMs": [
+            40.39225299999998,
+            44.76186199999938,
+            37.73258100000021
+          ],
+          "medianMs": 40.39225299999998,
+          "minMs": 37.73258100000021,
+          "maxMs": 44.76186199999938
+        }
+      },
+      "repeatedPhaseHash": "99452140",
+      "canonicalEndTurnHash": "7a733968",
+      "archiveBytes": 5175475,
+      "ordinaryTheaterCommandsAccepted": 8,
+      "exactPhaseRepeat": true,
+      "strictSaveRoundtrip": true,
+      "canonicalEndTurnArchiveReplay": true,
+      "replayOwnObservationMatches": true
+    }
+  ]
+}

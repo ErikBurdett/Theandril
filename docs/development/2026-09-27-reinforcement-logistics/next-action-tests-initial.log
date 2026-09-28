@@ -1,0 +1,110 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/next-action.test.ts (13 tests | 4 failed) 42ms
+     × reports newly unassigned households after real growth even while the town has a full production queue 22ms
+     × uses observed capacity rather than population, excludes missing/foreign/full summaries and orders labor by stable ID 7ms
+     × includes land/fleets and zero-movement paused routes but skips foreign, dead, embarked, busy and automatic forces 1ms
+     × does not call a real investing army idle after the next turn refreshes its movement 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/next-action.test.ts > observed-only next-action navigation > reports newly unassigned households after real growth even while the town has a full production queue
+ZodError: [
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [],
+    "message": "Invalid input: expected object, received undefined"
+  }
+]
+ ❯ canonicalPayload packages/sim/src/save.ts:417:45
+    415|         reinforcementLimit: theater.reinforcementLimit ?? 0, reinforce…
+    416|       nextTheaterId: theaterCounterSchema.parse(state.nextTheaterId),
+    417|       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
+       |                                             ^
+    418|   };
+    419|   return payload;
+ ❯ serializeGameForVersion packages/sim/src/save.ts:480:18
+ ❯ serializeGame packages/sim/src/save.ts:550:10
+ ❯ growingHouseholdCampaign tests/gameplay/household-fixture.ts:21:26
+ ❯ apps/web/src/next-action.test.ts:20:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |unit| apps/web/src/next-action.test.ts > observed-only next-action navigation > uses observed capacity rather than population, excludes missing/foreign/full summaries and orders labor by stable ID
+ZodError: [
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [],
+    "message": "Invalid input: expected object, received undefined"
+  }
+]
+ ❯ canonicalPayload packages/sim/src/save.ts:417:45
+    415|         reinforcementLimit: theater.reinforcementLimit ?? 0, reinforce…
+    416|       nextTheaterId: theaterCounterSchema.parse(state.nextTheaterId),
+    417|       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
+       |                                             ^
+    418|   };
+    419|   return payload;
+ ❯ serializeGameForVersion packages/sim/src/save.ts:480:18
+ ❯ serializeGame packages/sim/src/save.ts:550:10
+ ❯ growingHouseholdCampaign tests/gameplay/household-fixture.ts:21:26
+ ❯ apps/web/src/next-action.test.ts:38:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |unit| apps/web/src/next-action.test.ts > observed-only next-action navigation > includes land/fleets and zero-movement paused routes but skips foreign, dead, embarked, busy and automatic forces
+ZodError: [
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [],
+    "message": "Invalid input: expected object, received undefined"
+  }
+]
+ ❯ canonicalPayload packages/sim/src/save.ts:417:45
+    415|         reinforcementLimit: theater.reinforcementLimit ?? 0, reinforce…
+    416|       nextTheaterId: theaterCounterSchema.parse(state.nextTheaterId),
+    417|       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
+       |                                             ^
+    418|   };
+    419|   return payload;
+ ❯ payloadForVersion packages/sim/src/save.ts:608:78
+ ❯ stateHashForVersion packages/sim/src/save.ts:633:88
+ ❯ stateHash packages/sim/src/save.ts:638:10
+ ❯ apps/web/src/next-action.test.ts:68:49
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |unit| apps/web/src/next-action.test.ts > observed-only next-action navigation > does not call a real investing army idle after the next turn refreshes its movement
+ZodError: [
+  {
+    "expected": "object",
+    "code": "invalid_type",
+    "path": [],
+    "message": "Invalid input: expected object, received undefined"
+  }
+]
+ ❯ canonicalPayload packages/sim/src/save.ts:417:45
+    415|         reinforcementLimit: theater.reinforcementLimit ?? 0, reinforce…
+    416|       nextTheaterId: theaterCounterSchema.parse(state.nextTheaterId),
+    417|       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
+       |                                             ^
+    418|   };
+    419|   return payload;
+ ❯ serializeGameForVersion packages/sim/src/save.ts:480:18
+ ❯ serializeGame packages/sim/src/save.ts:550:10
+ ❯ borderBattleCampaign packages/test-fixtures/src/combat-fixture.ts:53:26
+ ❯ conquestCampaign packages/test-fixtures/src/conquest-fixture.ts:29:17
+ ❯ apps/web/src/next-action.test.ts:131:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 9 passed (13)
+   Start at  16:21:41
+   Duration  760ms (transform 478ms, setup 0ms, import 639ms, tests 42ms, environment 0ms)
+

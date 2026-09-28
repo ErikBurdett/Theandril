@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:3556283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/empire-delegation.spec.ts:60:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (14.2s)
+
+
+  1) tests/gameplay/empire-delegation.spec.ts:60:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "◆Resolving… A world of broken oaths awaits a new beginning."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        13 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+           - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+
+
+       95 |   await page.goto('/');
+       96 |   await page.getByLabel('Import save file').setInputFiles({ name: 'authored-mature-delegation.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture.game))) });
+    >  97 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+          |                                              ^
+       98 |   stage('browser navigation, portable import and rendered state');
+       99 |   const initial = await snapshot(page);
+      100 |   expect(initial.armies).toHaveLength(128); expect(initial.queues).toHaveLength(30); expect(initial.wars).toHaveLength(2); expect(initial.events).toBeGreaterThanOrEqual(32);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:97:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-isolation/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-isolation/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-isolation/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-isolation/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/empire-delegation.spec.ts:60:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 

@@ -8,6 +8,10 @@ const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
 const initial = getObservation(game, game.turnOwnerId);
 function army(id: string, override: Partial<ArmyView> = {}): ArmyView { return { ...initial.armies[0]!, id, factionId: initial.factionId, name: id, movement: 3, ...override }; }
 const route = (armyId: string, status: 'active' | 'paused'): Observation['routes'][number] => ({ armyId, origin: 10, path: [11], waypoints: [11], status, pauseReason: status === 'paused' ? 'A foreign force blocks the next step.' : null, knownHostileIds: [] });
+type Theater = NonNullable<Observation['theaters']>[number];
+const theater = (id: string, override: Partial<Theater> = {}): Theater => ({ id, factionId: initial.factionId, name: id, settlementIds: ['town.1'], armyIds: ['army.1'], reserveCell: 5,
+  guardsPerSettlement: 1, enabled: true, lastRunTurn: null, lastDispatches: [], hearths: [{ settlementId: 'town.1', name: 'Home', cell: 5, available: true, stationed: 1, incoming: 0, required: 1, deficit: 0 }],
+  members: [], missingGuards: 0, blocker: null, ...override });
 const bindings = { army: 'n', settlement: 's', turn: 'e' };
 const keyEvent = { key: 'n', shiftKey: false, ctrlKey: false, altKey: false, metaKey: false, repeat: false, isComposing: false, defaultPrevented: false };
 
@@ -75,6 +79,47 @@ describe('observed-only next-action navigation', () => {
     expect(actionCandidates(view).settlements.map(item => item.id)).toEqual(['town.1']);
   });
 
+  it('removes enabled theater reserves from idle decisions while preserving direct-route and posting exceptions', () => {
+    const view: Observation = { ...initial,
+      armies: ['reserve', 'paused', 'posting', 'disabled', 'ordinary', 'foreign-theater', 'active'].map(id => army(id, { movement: id === 'paused' ? 0 : 3 })),
+      routes: [route('paused', 'paused'), route('active', 'active')],
+      postings: [
+        { armyId: 'paused', factionId: initial.factionId, cell: 5, mode: 'hold', arrived: true, blocker: null },
+        { armyId: 'posting', factionId: initial.factionId, cell: 5, mode: 'hold', arrived: false, blocker: 'No safe route is known.' },
+      ],
+      theaters: [theater('theater.enabled', { armyIds: ['reserve', 'paused', 'posting', 'active'] }), theater('theater.disabled', { enabled: false, armyIds: ['disabled'] }),
+        theater('theater.foreign', { factionId: 'foreign', armyIds: ['foreign-theater'] })],
+    };
+    const before = JSON.stringify(view);
+    expect(actionCandidates(view).armies.map(({ id, cause }) => ({ id, cause }))).toEqual([
+      { id: 'disabled', cause: 'movement' }, { id: 'foreign-theater', cause: 'movement' }, { id: 'ordinary', cause: 'movement' },
+      { id: 'paused', cause: 'route-interrupted' }, { id: 'posting', cause: 'posting-stalled' },
+    ]);
+    expect(actionCandidates({ ...view, theaters: undefined }).armies.some(item => item.id === 'reserve')).toBe(true);
+    expect(JSON.stringify(view)).toBe(before);
+  });
+
+  it('groups only enabled owned theaters needing observed attention without treating accepted dispatches as arrived', () => {
+    const view: Observation = { ...initial, theaters: [
+      theater('theater.4', { armyIds: [], members: [] }),
+      theater('theater.2', { lastRunTurn: 2, lastDispatches: [{ armyId: 'army.1', targetCell: 5, accepted: false, message: 'No safe route.' }] }),
+      theater('theater.1', { missingGuards: 2 }),
+      theater('theater.3', { hearths: [{ settlementId: 'lost', name: 'Unavailable hearth', cell: null, available: false, stationed: 0, incoming: 0, required: 1, deficit: 0 }] }),
+      theater('theater.covered', { hearths: [{ settlementId: 'town.1', name: 'Home', cell: 5, available: true, stationed: 0, incoming: 1, required: 1, deficit: 0 }], lastDispatches: [{ armyId: 'army.1', targetCell: 5, accepted: true, message: 'Travel paused.' }] }),
+      theater('theater.paused', { enabled: false, armyIds: [], missingGuards: 4 }),
+      theater('theater.foreign', { factionId: 'foreign', missingGuards: 4 }),
+    ] };
+    const before = JSON.stringify(view), candidates = actionCandidates(view);
+    expect(candidates.theaters.map(({ id, reason }) => ({ id, reason }))).toEqual([
+      { id: 'theater.1', reason: '2 missing guards' }, { id: 'theater.2', reason: '1 refused dispatch' },
+      { id: 'theater.3', reason: '1 unavailable hearth' }, { id: 'theater.4', reason: 'No assigned armies' },
+    ]);
+    expect(nextAction(candidates.theaters, 'theater.4')?.id).toBe('theater.1');
+    expect(actionGroups({ ...candidates, armies: Array.from({ length: 100 }, (_, index) => ({ id: `army.${index}`, name: 'Idle', cell: 5, cause: 'movement', reason: '' })) })[0])
+      .toEqual({ kind: 'theater', cause: 'theater-attention', count: 4, label: 'Defensive theaters need attention · 4' });
+    expect(JSON.stringify(view)).toBe(before);
+  });
+
   it('skips standing siege duty even when movement refreshes or an old route remains paused', () => {
     const view = { ...initial, armies: [army('army.1'), army('army.2')], routes: [route('army.2', 'paused')], sieges: [
       { settlementId: 'town.1', armyId: 'army.1', factionId: initial.factionId, startedTurn: 1, defenses: 10, supplies: 5, militiaStrength: 20, militiaMorale: 50, militiaFatigue: 0, canAssault: false, assaultBlocker: 'Wait one turn', defenderStrength: 20 },
@@ -99,13 +144,14 @@ describe('observed-only next-action navigation', () => {
       armies: [candidate('army.1', 'movement'), candidate('army.2', 'movement'), candidate('army.3', 'route-interrupted')],
       settlements: [candidate('settlement.1', 'charter-stalled')],
       households: [{ ...candidate('settlement.2', 'households'), unassignedHouseholds: 3 }],
+      theaters: [],
     })).toEqual([
       { kind: 'army', cause: 'movement', count: 2, label: '2 companies with movement remaining' },
       { kind: 'army', cause: 'route-interrupted', count: 1, label: '1 company with an interrupted route' },
       { kind: 'settlement', cause: 'charter-stalled', count: 1, label: '1 hearth with a stalled charter' },
       { kind: 'household', cause: 'households', count: 1, label: '1 hearth with unassigned households' },
     ]);
-    expect(actionGroups({ armies: [], settlements: [], households: [] })).toEqual([]);
+    expect(actionGroups({ armies: [], settlements: [], households: [], theaters: [] })).toEqual([]);
   });
 
   it('wraps stable IDs forward/backward, including from a removed or now-ineligible selection', () => {

@@ -1,0 +1,1202 @@
+Preparing huge: generated geography, eight authored witnesses, actual paid imports; setup is outside timing.
+Preparing legendary: generated geography, eight authored witnesses, actual paid imports; setup is outside timing.
+{
+  "capturedAt": "2026-09-28T01:44:11.515Z",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "os": "linux 7.2.5-3-omarchy",
+  "rulesVersion": 34,
+  "contentHash": "015468d1",
+  "smoke": false,
+  "aiOnly": false,
+  "warmups": 1,
+  "measuredSamples": 3,
+  "sourceFingerprints": {
+    "scripts/benchmark-supply-access.ts": "5693243f8899d40a2679ead19ef3dee17ba20d82c318c2a700a85c90c5be4f5b",
+    "packages/sim/src/supply-access.ts": "c28c15e3e6ddae8b9906723605088eb7ddbe93302a5594fe7e6f1b3bfd7a2deb",
+    "packages/sim/src/supply-access-state.ts": "6dde00309bcf1bdfa7319b1e3f36d0c1219d72734aa40b3a952f7562cdcfff69",
+    "packages/sim/src/supply.ts": "3b33cd9a13a0aff69dc5817d20272f62cffa17a0ad66e900df9699c63d6bb897",
+    "packages/sim/src/simulation.ts": "18049317ed1295dc3bf6e3277c3cbda973f45e619b11b43e07a179f0b6d36049",
+    "packages/sim/src/save.ts": "cd2ab76b9b459b67a22d54ea8334f6e931c0e32bf2ae1ae6eccc0cd068e1d90e",
+    "packages/sim/src/rules.ts": "3cc6c395c92c565101e0f362f30c6aa1eb2a52c174fc46f8e03fc354826ad43e",
+    "packages/test-fixtures/src/index.ts": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09",
+    "packages/test-fixtures/src/authored-land.ts": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891",
+    "packages/ai/src/supply-access.ts": "a2c1ecb611670c9fc04740c0d69c96b6de1e0effeba1955edce25abd0127bd61",
+    "packages/ai/src/observation-index.ts": "f7dfef9442dcf806af2e7402cf8452af387842ac768eaf735286214109ee4bfa",
+    "packages/sim/src/movement.ts": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+  },
+  "workloads": [
+    {
+      "size": "huge",
+      "synthetic": true,
+      "seed": 20260905,
+      "generatorVersion": 4,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1508,
+      "hearths": 32,
+      "measuredBuyers": 1,
+      "activeImports": 8,
+      "authoredWitnesses": 8,
+      "formationsPerWitness": 3,
+      "authoredHarbors": 7,
+      "geographyAndResourceSha256": "27decb6990a85789b5c4f9d49007dfc5213afdd01d650dd1b58014ea1c702198",
+      "generatedGeographyUnchanged": true,
+      "sources": [
+        {
+          "sourceId": "settlement.72",
+          "providerId": "faction.saltwind_remnant",
+          "armyId": "army.1565",
+          "cell": 45591,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.83",
+          "providerId": "faction.brine_choir",
+          "armyId": "army.1568",
+          "cell": 27714,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.89",
+          "providerId": "faction.ashen_compact.25",
+          "armyId": "army.1571",
+          "cell": 131881,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.91",
+          "providerId": "faction.cinder_march.27",
+          "armyId": "army.1574",
+          "cell": 29071,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.92",
+          "providerId": "faction.glass_tide.28",
+          "armyId": "army.1577",
+          "cell": 150699,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.93",
+          "providerId": "faction.iron_covenant.29",
+          "armyId": "army.1580",
+          "cell": 32990,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.96",
+          "providerId": "faction.saltwind_remnant.32",
+          "armyId": "army.1583",
+          "cell": 129525,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.66",
+          "providerId": "faction.reedbound_council",
+          "armyId": "army.1586",
+          "cell": 116568,
+          "harbor": false
+        }
+      ],
+      "feeCoinPerSource": 10,
+      "termTurns": 5,
+      "totalActualFeeCoin": 80,
+      "inputHash": "c3fe2ee9",
+      "noAgreements": {
+        "inputHash": "c5b87aef",
+        "actualCells": 61,
+        "forecastCells": 61,
+        "importedActualCells": 0,
+        "importedForecastCells": 0,
+        "suppliedWitnesses": 0,
+        "observedCells": 213,
+        "observationBytes": 617174,
+        "compactObservationBytes": 50,
+        "outputSha256": "97cac6a265de770e9e72af2a79a944acdcfa5318bd542f0dd53bf129b841d92b",
+        "readOnlyHashMatched": true,
+        "timings": {
+          "sourceGraph": {
+            "samplesMs": [
+              0.1398670000007769,
+              0.1373620000003939,
+              0.13149799999973766
+            ],
+            "medianMs": 0.1373620000003939,
+            "minMs": 0.13149799999973766,
+            "maxMs": 0.1398670000007769
+          },
+          "contractForecast": {
+            "samplesMs": [
+              0.016631000000415952,
+              0.01682399999936024,
+              0.019575000000259024
+            ],
+            "medianMs": 0.01682399999936024,
+            "minMs": 0.016631000000415952,
+            "maxMs": 0.019575000000259024
+          },
+          "compactContractObservation": {
+            "samplesMs": [
+              0.00238199999967037,
+              0.00274000000081287,
+              0.002163999999538646
+            ],
+            "medianMs": 0.00238199999967037,
+            "minMs": 0.002163999999538646,
+            "maxMs": 0.00274000000081287
+          },
+          "ownArmySupply": {
+            "samplesMs": [
+              0.24567500000011933,
+              0.20923000000038883,
+              0.20418899999913265
+            ],
+            "medianMs": 0.20923000000038883,
+            "minMs": 0.20418899999913265,
+            "maxMs": 0.24567500000011933
+          },
+          "ownObservation": {
+            "samplesMs": [
+              10.581996999999319,
+              9.829232999999476,
+              9.690805999999611
+            ],
+            "medianMs": 9.829232999999476,
+            "minMs": 9.690805999999611,
+            "maxMs": 10.581996999999319
+          }
+        }
+      },
+      "eightActiveAgreements": {
+        "inputHash": "c3fe2ee9",
+        "actualCells": 549,
+        "forecastCells": 213,
+        "importedActualCells": 488,
+        "importedForecastCells": 152,
+        "suppliedWitnesses": 8,
+        "observedCells": 213,
+        "observationBytes": 623834,
+        "compactObservationBytes": 2122,
+        "outputSha256": "58ceef7563d5d87927499d9cfbc0c15dd43cf82d2565e5005ddab83a016c0a6b",
+        "readOnlyHashMatched": true,
+        "timings": {
+          "sourceGraph": {
+            "samplesMs": [
+              0.9854099999993196,
+              0.8372330000001966,
+              0.6911790000003748
+            ],
+            "medianMs": 0.8372330000001966,
+            "minMs": 0.6911790000003748,
+            "maxMs": 0.9854099999993196
+          },
+          "contractForecast": {
+            "samplesMs": [
+              0.3849820000004911,
+              0.36172700000042823,
+              0.396947000000182
+            ],
+            "medianMs": 0.3849820000004911,
+            "minMs": 0.36172700000042823,
+            "maxMs": 0.396947000000182
+          },
+          "compactContractObservation": {
+            "samplesMs": [
+              0.004958000000442553,
+              0.005062000000179978,
+              0.005603999999948428
+            ],
+            "medianMs": 0.005062000000179978,
+            "minMs": 0.004958000000442553,
+            "maxMs": 0.005603999999948428
+          },
+          "ownArmySupply": {
+            "samplesMs": [
+              0.2263330000005226,
+              0.22012400000039634,
+              0.2229799999995521
+            ],
+            "medianMs": 0.2229799999995521,
+            "minMs": 0.22012400000039634,
+            "maxMs": 0.2263330000005226
+          },
+          "ownObservation": {
+            "samplesMs": [
+              13.393082999999933,
+              12.19626100000005,
+              10.920798999999533
+            ],
+            "medianMs": 12.19626100000005,
+            "minMs": 10.920798999999533,
+            "maxMs": 13.393082999999933
+          }
+        }
+      },
+      "ai": [
+        {
+          "variant": "useful-source",
+          "inputHash": "c5b87aef",
+          "observedCells": 213,
+          "observationBytes": 617174,
+          "forecastSources": [
+            "settlement.72",
+            "settlement.83",
+            "settlement.89",
+            "settlement.91"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 632,
+          "proposalCount": 1,
+          "heldArmyIds": [
+            "army.1565"
+          ],
+          "outputSha256": "0859bd4536d805b16ad141482863e32e8394d002a103fd89fad482691d646bef",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.27264900000000125,
+                0.18486399999983405,
+                0.17704299999968498
+              ],
+              "medianMs": 0.18486399999983405,
+              "minMs": 0.17704299999968498,
+              "maxMs": 0.27264900000000125
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.22638400000005277,
+                0.184346000000005,
+                0.20750600000064878
+              ],
+              "medianMs": 0.20750600000064878,
+              "minMs": 0.184346000000005,
+              "maxMs": 0.22638400000005277
+            }
+          },
+          "ordinaryPurchaseProof": {
+            "command": {
+              "type": "proposeSupplyAccess",
+              "factionId": "faction.ashen_compact",
+              "targetFactionId": "faction.saltwind_remnant",
+              "settlementId": "settlement.72",
+              "feeCoin": 20,
+              "termTurns": 10
+            },
+            "response": {
+              "type": "respondSupplyAccess",
+              "factionId": "faction.saltwind_remnant",
+              "offerId": "supply-offer.1",
+              "accept": true
+            },
+            "heldArmyId": "army.1565",
+            "paidCoin": 20,
+            "actualWitnessSupplied": true,
+            "journalRecords": 2,
+            "afterHash": "c36156b4",
+            "fullReplayMatches": true,
+            "strictSaveMatches": true
+          },
+          "verifiedOwnReturnRoute": null,
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline before its eight contracts; measured turn explicitly aligned to the ordinary ten-turn purchase cadence. All eight authored overseas witnesses and source sightings remain. No offered, accepted or supplied result is injected."
+        },
+        {
+          "variant": "nearer-own-line",
+          "inputHash": "273e1441",
+          "observedCells": 226,
+          "observationBytes": 613286,
+          "forecastSources": [
+            "settlement.72",
+            "settlement.83",
+            "settlement.89",
+            "settlement.91"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 632,
+          "proposalCount": 0,
+          "heldArmyIds": [],
+          "outputSha256": "9379f80fee966ce488a7923b4ccf466a4a52b3269c60732214c4805ae2f21f44",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.1775710000001709,
+                0.15820299999995768,
+                0.17130999999972119
+              ],
+              "medianMs": 0.17130999999972119,
+              "minMs": 0.15820299999995768,
+              "maxMs": 0.1775710000001709
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.2841649999991205,
+                0.22364399999969464,
+                0.25852300000042305
+              ],
+              "medianMs": 0.25852300000042305,
+              "minMs": 0.22364399999969464,
+              "maxMs": 0.2841649999991205
+            }
+          },
+          "ordinaryPurchaseProof": null,
+          "verifiedOwnReturnRoute": {
+            "armyId": "army.1565",
+            "target": 48447,
+            "cost": 2,
+            "steps": 1,
+            "targetSearchExpandedNodes": 2
+          },
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline; one authored witness relocated just outside its actual own line, seven witness formations reduced to single-company foragers, one existing scout/guard retains the first foreign source in sight. Generated terrain/resources remain unchanged. The measured turn is explicitly aligned to the ordinary ten-turn purchase cadence."
+        }
+      ],
+      "invalidation": [
+        {
+          "mode": "war-command",
+          "afterHash": "616bc9fd",
+          "agreementsRemaining": 7,
+          "sourcesRemaining": 7,
+          "lapsedEvents": 2,
+          "actualCells": 488,
+          "forecastCells": 194,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": null,
+          "outputSha256": "b82a7551315b6c6003800905e57ad341c34deda9fb8a77df9eb74c4f6dd73c1c",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.2601759999997739,
+                0.23607800000172574,
+                0.28243099999963306
+              ],
+              "medianMs": 0.2601759999997739,
+              "minMs": 0.23607800000172574,
+              "maxMs": 0.28243099999963306
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.5570959999995466,
+                0.8312220000007073,
+                0.8219860000008339
+              ],
+              "medianMs": 0.8219860000008339,
+              "minMs": 0.5570959999995466,
+              "maxMs": 0.8312220000007073
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.3230279999997947,
+                0.32427499999903375,
+                0.3589160000010452
+              ],
+              "medianMs": 0.32427499999903375,
+              "minMs": 0.3230279999997947,
+              "maxMs": 0.3589160000010452
+            }
+          }
+        },
+        {
+          "mode": "source-loss-phase",
+          "afterHash": "47f25f31",
+          "agreementsRemaining": 7,
+          "sourcesRemaining": 7,
+          "lapsedEvents": 2,
+          "actualCells": 488,
+          "forecastCells": 194,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": {
+            "previousOwner": "faction.saltwind_remnant",
+            "newOwner": "faction.cinder_march",
+            "displacedArmyIds": [
+              "army.1000",
+              "army.1032",
+              "army.104",
+              "army.1064",
+              "army.1096",
+              "army.1128",
+              "army.1160",
+              "army.1192",
+              "army.1224",
+              "army.1256",
+              "army.1288",
+              "army.1320",
+              "army.1352",
+              "army.136",
+              "army.1384",
+              "army.1416",
+              "army.1448",
+              "army.1480",
+              "army.1512",
+              "army.1544",
+              "army.16",
+              "army.168",
+              "army.200",
+              "army.232",
+              "army.264",
+              "army.296",
+              "army.328",
+              "army.360",
+              "army.392",
+              "army.424",
+              "army.456",
+              "army.488",
+              "army.520",
+              "army.552",
+              "army.584",
+              "army.616",
+              "army.648",
+              "army.680",
+              "army.712",
+              "army.744",
+              "army.776",
+              "army.808",
+              "army.840",
+              "army.872",
+              "army.904",
+              "army.936",
+              "army.968"
+            ],
+            "from": 45591,
+            "to": 45079
+          },
+          "outputSha256": "eef1146444ab909906d780f1460f5dbe613da7ea0607cb4ed5968d25edaaf2d7",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.03702499999963038,
+                0.036982999999963795,
+                0.03642299999955867
+              ],
+              "medianMs": 0.036982999999963795,
+              "minMs": 0.03642299999955867,
+              "maxMs": 0.03702499999963038
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.8877029999985098,
+                1.1554109999997308,
+                0.5028889999994135
+              ],
+              "medianMs": 0.8877029999985098,
+              "minMs": 0.5028889999994135,
+              "maxMs": 1.1554109999997308
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.3566430000009859,
+                0.3188110000010056,
+                0.28334800000084215
+              ],
+              "medianMs": 0.3188110000010056,
+              "minMs": 0.28334800000084215,
+              "maxMs": 0.3566430000009859
+            }
+          }
+        },
+        {
+          "mode": "expiry-phase",
+          "afterHash": "5ee9c288",
+          "agreementsRemaining": 0,
+          "sourcesRemaining": 0,
+          "lapsedEvents": 16,
+          "actualCells": 61,
+          "forecastCells": 61,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": null,
+          "outputSha256": "43f5e09216c219b8affb38345bea488989d3c34a12ce54f151fabadd029cac2c",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.02487699999983306,
+                0.014930000001186272,
+                0.0183469999992667
+              ],
+              "medianMs": 0.0183469999992667,
+              "minMs": 0.014930000001186272,
+              "maxMs": 0.02487699999983306
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.0966019999996206,
+                0.09429400000044552,
+                0.1267470000002504
+              ],
+              "medianMs": 0.0966019999996206,
+              "minMs": 0.09429400000044552,
+              "maxMs": 0.1267470000002504
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.014752999999473104,
+                0.01493800000025658,
+                0.016442000000097323
+              ],
+              "medianMs": 0.01493800000025658,
+              "minMs": 0.014752999999473104,
+              "maxMs": 0.016442000000097323
+            }
+          }
+        }
+      ],
+      "continuation": {
+        "originalRecords": 16,
+        "originalArchiveSha256": "55a1204f1d705e9d5bf992601f74196cd17a5afe2241e3fa00d3b90d51b65066",
+        "continuationCommands": 5,
+        "finalRecords": 21,
+        "finalHash": "5b18fdf1",
+        "finalArchiveSha256": "d971b4faf9d6f08aae01dff6e09330cf7d2053189750cf8b859473b616eab808",
+        "exactSavedMirror": true,
+        "fullReplayMatches": true,
+        "strictSaveMatches": true,
+        "actualExpiryViaEndTurns": true,
+        "ordinaryWarReplayHash": "616bc9fd",
+        "sourceLossLimit": "Ownership-loss measurement starts at an explicitly authored lifecycle boundary. Original guards are relocated together onto empty neighboring land, preserving their faction, formations and unchanged generated geography. No battle, retreat command, casualties or capture acceptance is claimed by this benchmark."
+      }
+    },
+    {
+      "size": "legendary",
+      "synthetic": true,
+      "seed": 20260905,
+      "generatorVersion": 4,
+      "cells": 307200,
+      "factions": 40,
+      "armies": 4008,
+      "hearths": 40,
+      "measuredBuyers": 1,
+      "activeImports": 8,
+      "authoredWitnesses": 8,
+      "formationsPerWitness": 3,
+      "authoredHarbors": 5,
+      "geographyAndResourceSha256": "0b5a5085f42e3b327557fcea07511093481d4be2d863537b13dfd85e69fbf9cc",
+      "generatedGeographyUnchanged": true,
+      "sources": [
+        {
+          "sourceId": "settlement.109",
+          "providerId": "faction.iron_covenant.29",
+          "armyId": "army.4081",
+          "cell": 55968,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.112",
+          "providerId": "faction.saltwind_remnant.32",
+          "armyId": "army.4084",
+          "cell": 190997,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.114",
+          "providerId": "faction.rimehorn_clans.34",
+          "armyId": "army.4087",
+          "cell": 242728,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.120",
+          "providerId": "faction.cairnwing_concord.40",
+          "armyId": "army.4090",
+          "cell": 264844,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.99",
+          "providerId": "faction.brine_choir",
+          "armyId": "army.4093",
+          "cell": 193915,
+          "harbor": true
+        },
+        {
+          "sourceId": "settlement.100",
+          "providerId": "faction.emberwake_convocation",
+          "armyId": "army.4096",
+          "cell": 109924,
+          "harbor": false
+        },
+        {
+          "sourceId": "settlement.101",
+          "providerId": "faction.underhush_exchange",
+          "armyId": "army.4099",
+          "cell": 212059,
+          "harbor": false
+        },
+        {
+          "sourceId": "settlement.102",
+          "providerId": "faction.vesper_court",
+          "armyId": "army.4102",
+          "cell": 222206,
+          "harbor": false
+        }
+      ],
+      "feeCoinPerSource": 10,
+      "termTurns": 5,
+      "totalActualFeeCoin": 80,
+      "inputHash": "9b06cdc9",
+      "noAgreements": {
+        "inputHash": "02ab4674",
+        "actualCells": 61,
+        "forecastCells": 61,
+        "importedActualCells": 0,
+        "importedForecastCells": 0,
+        "suppliedWitnesses": 0,
+        "observedCells": 213,
+        "observationBytes": 1256745,
+        "compactObservationBytes": 50,
+        "outputSha256": "060d6eedddd2be5d8f87cf7d6432568a2fa79464db9eb3f8b1296c8d48f1c8a6",
+        "readOnlyHashMatched": true,
+        "timings": {
+          "sourceGraph": {
+            "samplesMs": [
+              0.18770600000061677,
+              0.25562600000193925,
+              0.23125399999844376
+            ],
+            "medianMs": 0.23125399999844376,
+            "minMs": 0.18770600000061677,
+            "maxMs": 0.25562600000193925
+          },
+          "contractForecast": {
+            "samplesMs": [
+              0.018415999998978805,
+              0.019835999999486376,
+              0.021884999998292187
+            ],
+            "medianMs": 0.019835999999486376,
+            "minMs": 0.018415999998978805,
+            "maxMs": 0.021884999998292187
+          },
+          "compactContractObservation": {
+            "samplesMs": [
+              0.0026680000009946525,
+              0.0033849999999802094,
+              0.002852999998140149
+            ],
+            "medianMs": 0.002852999998140149,
+            "minMs": 0.0026680000009946525,
+            "maxMs": 0.0033849999999802094
+          },
+          "ownArmySupply": {
+            "samplesMs": [
+              0.5850419999987935,
+              0.6612569999997504,
+              0.6415689999994356
+            ],
+            "medianMs": 0.6415689999994356,
+            "minMs": 0.5850419999987935,
+            "maxMs": 0.6612569999997504
+          },
+          "ownObservation": {
+            "samplesMs": [
+              27.69102700000076,
+              27.221622000000934,
+              26.037498000001506
+            ],
+            "medianMs": 27.221622000000934,
+            "minMs": 26.037498000001506,
+            "maxMs": 27.69102700000076
+          }
+        }
+      },
+      "eightActiveAgreements": {
+        "inputHash": "9b06cdc9",
+        "actualCells": 549,
+        "forecastCells": 213,
+        "importedActualCells": 488,
+        "importedForecastCells": 152,
+        "suppliedWitnesses": 8,
+        "observedCells": 213,
+        "observationBytes": 1263528,
+        "compactObservationBytes": 2154,
+        "outputSha256": "21adf0d5a5ac0b9613d132669b5f7154906dd944a475bd880210095856dbe151",
+        "readOnlyHashMatched": true,
+        "timings": {
+          "sourceGraph": {
+            "samplesMs": [
+              0.5833750000019791,
+              0.929800999998406,
+              0.6053460000002815
+            ],
+            "medianMs": 0.6053460000002815,
+            "minMs": 0.5833750000019791,
+            "maxMs": 0.929800999998406
+          },
+          "contractForecast": {
+            "samplesMs": [
+              0.25039299999843934,
+              0.2931639999987965,
+              0.2812180000000808
+            ],
+            "medianMs": 0.2812180000000808,
+            "minMs": 0.25039299999843934,
+            "maxMs": 0.2931639999987965
+          },
+          "compactContractObservation": {
+            "samplesMs": [
+              0.0054390000004787,
+              0.005552999999054009,
+              0.0057149999993271194
+            ],
+            "medianMs": 0.005552999999054009,
+            "minMs": 0.0054390000004787,
+            "maxMs": 0.0057149999993271194
+          },
+          "ownArmySupply": {
+            "samplesMs": [
+              0.599515000001702,
+              0.621078000000125,
+              0.6466200000031677
+            ],
+            "medianMs": 0.621078000000125,
+            "minMs": 0.599515000001702,
+            "maxMs": 0.6466200000031677
+          },
+          "ownObservation": {
+            "samplesMs": [
+              26.23798899999747,
+              29.375796000000264,
+              26.999007999998867
+            ],
+            "medianMs": 26.999007999998867,
+            "minMs": 26.23798899999747,
+            "maxMs": 29.375796000000264
+          }
+        }
+      },
+      "ai": [
+        {
+          "variant": "useful-source",
+          "inputHash": "02ab4674",
+          "observedCells": 213,
+          "observationBytes": 1256745,
+          "forecastSources": [
+            "settlement.109",
+            "settlement.112",
+            "settlement.114",
+            "settlement.120"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 674,
+          "proposalCount": 1,
+          "heldArmyIds": [
+            "army.4081"
+          ],
+          "outputSha256": "b70bc47b5c1118bcc3602f9274deea715cdcf19dfd8da17f775b5f38f80009d9",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.1801610000002256,
+                0.19038300000102026,
+                0.17285500000070897
+              ],
+              "medianMs": 0.1801610000002256,
+              "minMs": 0.17285500000070897,
+              "maxMs": 0.19038300000102026
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.2105119999978342,
+                0.1916540000020177,
+                0.20011800000065705
+              ],
+              "medianMs": 0.20011800000065705,
+              "minMs": 0.1916540000020177,
+              "maxMs": 0.2105119999978342
+            }
+          },
+          "ordinaryPurchaseProof": {
+            "command": {
+              "type": "proposeSupplyAccess",
+              "factionId": "faction.ashen_compact",
+              "targetFactionId": "faction.iron_covenant.29",
+              "settlementId": "settlement.109",
+              "feeCoin": 20,
+              "termTurns": 10
+            },
+            "response": {
+              "type": "respondSupplyAccess",
+              "factionId": "faction.iron_covenant.29",
+              "offerId": "supply-offer.1",
+              "accept": true
+            },
+            "heldArmyId": "army.4081",
+            "paidCoin": 20,
+            "actualWitnessSupplied": true,
+            "journalRecords": 2,
+            "afterHash": "e5d60a51",
+            "fullReplayMatches": true,
+            "strictSaveMatches": true
+          },
+          "verifiedOwnReturnRoute": null,
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline before its eight contracts; measured turn explicitly aligned to the ordinary ten-turn purchase cadence. All eight authored overseas witnesses and source sightings remain. No offered, accepted or supplied result is injected."
+        },
+        {
+          "variant": "nearer-own-line",
+          "inputHash": "528fc927",
+          "observedCells": 226,
+          "observationBytes": 1252904,
+          "forecastSources": [
+            "settlement.109",
+            "settlement.112",
+            "settlement.114",
+            "settlement.120"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 674,
+          "proposalCount": 0,
+          "heldArmyIds": [],
+          "outputSha256": "929fbfd0f7a0a099f41c5d4227bfe1e94d6c8f4f3dffea858fefab47697c763b",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.15385600000081467,
+                0.2008529999984603,
+                0.17703500000061467
+              ],
+              "medianMs": 0.17703500000061467,
+              "minMs": 0.15385600000081467,
+              "maxMs": 0.2008529999984603
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.2794659999999567,
+                0.29435299999749986,
+                0.36126100000183214
+              ],
+              "medianMs": 0.29435299999749986,
+              "minMs": 0.2794659999999567,
+              "maxMs": 0.36126100000183214
+            }
+          },
+          "ordinaryPurchaseProof": null,
+          "verifiedOwnReturnRoute": {
+            "armyId": "army.4081",
+            "target": 131456,
+            "cost": 2,
+            "steps": 1,
+            "targetSearchExpandedNodes": 2
+          },
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline; one authored witness relocated just outside its actual own line, seven witness formations reduced to single-company foragers, one existing scout/guard retains the first foreign source in sight. Generated terrain/resources remain unchanged. The measured turn is explicitly aligned to the ordinary ten-turn purchase cadence."
+        }
+      ],
+      "invalidation": [
+        {
+          "mode": "war-command",
+          "afterHash": "f2f8b24a",
+          "agreementsRemaining": 7,
+          "sourcesRemaining": 7,
+          "lapsedEvents": 2,
+          "actualCells": 488,
+          "forecastCells": 194,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": null,
+          "outputSha256": "b91e55217a600c2a2f480c316ebd3e3ddd883a1d4d258a46a36eefb012a980ff",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.5613009999979113,
+                0.6262540000025183,
+                0.584632000001875
+              ],
+              "medianMs": 0.584632000001875,
+              "minMs": 0.5613009999979113,
+              "maxMs": 0.6262540000025183
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.8221220000014,
+                0.49883800000316114,
+                0.7946009999977832
+              ],
+              "medianMs": 0.7946009999977832,
+              "minMs": 0.49883800000316114,
+              "maxMs": 0.8221220000014
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.2623669999993581,
+                0.24457000000256812,
+                0.26771499999813386
+              ],
+              "medianMs": 0.2623669999993581,
+              "minMs": 0.24457000000256812,
+              "maxMs": 0.26771499999813386
+            }
+          }
+        },
+        {
+          "mode": "source-loss-phase",
+          "afterHash": "c2239b1b",
+          "agreementsRemaining": 7,
+          "sourcesRemaining": 7,
+          "lapsedEvents": 2,
+          "actualCells": 488,
+          "forecastCells": 194,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": {
+            "previousOwner": "faction.iron_covenant.29",
+            "newOwner": "faction.reedbound_council",
+            "displacedArmyIds": [
+              "army.1029",
+              "army.1069",
+              "army.1109",
+              "army.1149",
+              "army.1189",
+              "army.1229",
+              "army.1269",
+              "army.1309",
+              "army.1349",
+              "army.1389",
+              "army.1429",
+              "army.1469",
+              "army.149",
+              "army.1509",
+              "army.1549",
+              "army.1589",
+              "army.1629",
+              "army.1669",
+              "army.1709",
+              "army.1749",
+              "army.1789",
+              "army.1829",
+              "army.1869",
+              "army.189",
+              "army.1909",
+              "army.1949",
+              "army.1989",
+              "army.2029",
+              "army.2069",
+              "army.2109",
+              "army.2149",
+              "army.2189",
+              "army.2229",
+              "army.2269",
+              "army.229",
+              "army.2309",
+              "army.2349",
+              "army.2389",
+              "army.2429",
+              "army.2469",
+              "army.2509",
+              "army.2549",
+              "army.2589",
+              "army.2629",
+              "army.2669",
+              "army.269",
+              "army.2709",
+              "army.2749",
+              "army.2789",
+              "army.2829",
+              "army.2869",
+              "army.2909",
+              "army.2949",
+              "army.2989",
+              "army.3029",
+              "army.3069",
+              "army.309",
+              "army.3109",
+              "army.3149",
+              "army.3189",
+              "army.3229",
+              "army.3269",
+              "army.3309",
+              "army.3349",
+              "army.3389",
+              "army.3429",
+              "army.3469",
+              "army.349",
+              "army.3509",
+              "army.3549",
+              "army.3589",
+              "army.3629",
+              "army.3669",
+              "army.3709",
+              "army.3749",
+              "army.3789",
+              "army.3829",
+              "army.3869",
+              "army.389",
+              "army.3909",
+              "army.3949",
+              "army.3989",
+              "army.4029",
+              "army.4069",
+              "army.429",
+              "army.469",
+              "army.509",
+              "army.549",
+              "army.58",
+              "army.589",
+              "army.629",
+              "army.669",
+              "army.709",
+              "army.749",
+              "army.789",
+              "army.829",
+              "army.869",
+              "army.909",
+              "army.949",
+              "army.989"
+            ],
+            "from": 55968,
+            "to": 55328
+          },
+          "outputSha256": "e004ff9c4da0b4935b9838e194ac342b9aaaf778addc7158d4b50d97e06d772e",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.03126699999847915,
+                0.03567599999951199,
+                0.029187000000092667
+              ],
+              "medianMs": 0.03126699999847915,
+              "minMs": 0.029187000000092667,
+              "maxMs": 0.03567599999951199
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.8395390000005136,
+                0.7107109999997192,
+                0.8448290000014822
+              ],
+              "medianMs": 0.8395390000005136,
+              "minMs": 0.7107109999997192,
+              "maxMs": 0.8448290000014822
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.27228500000637723,
+                0.25904300000547664,
+                0.25403499999811174
+              ],
+              "medianMs": 0.25904300000547664,
+              "minMs": 0.25403499999811174,
+              "maxMs": 0.27228500000637723
+            }
+          }
+        },
+        {
+          "mode": "expiry-phase",
+          "afterHash": "3bcb07fa",
+          "agreementsRemaining": 0,
+          "sourcesRemaining": 0,
+          "lapsedEvents": 16,
+          "actualCells": 61,
+          "forecastCells": 61,
+          "firstWitnessSupplied": false,
+          "sourceLossSetup": null,
+          "outputSha256": "6c37306984948dd0cd00d90f45c3b2832f88a19c2a95d5d858d4a662c2015532",
+          "strictSaveRoundtrip": true,
+          "timings": {
+            "invalidation": {
+              "samplesMs": [
+                0.022833999995782506,
+                0.020702999994682614,
+                0.026530999995884486
+              ],
+              "medianMs": 0.022833999995782506,
+              "minMs": 0.020702999994682614,
+              "maxMs": 0.026530999995884486
+            },
+            "actualSourceGraph": {
+              "samplesMs": [
+                0.17910899999696994,
+                0.12204799999744864,
+                0.18512399999599438
+              ],
+              "medianMs": 0.17910899999696994,
+              "minMs": 0.12204799999744864,
+              "maxMs": 0.18512399999599438
+            },
+            "contractForecast": {
+              "samplesMs": [
+                0.018592000000353437,
+                0.01641899999958696,
+                0.017329000002064276
+              ],
+              "medianMs": 0.017329000002064276,
+              "minMs": 0.01641899999958696,
+              "maxMs": 0.018592000000353437
+            }
+          }
+        }
+      ],
+      "continuation": {
+        "originalRecords": 16,
+        "originalArchiveSha256": "b21a34df434a62ad902e222b638e6d6dd58a6e9c7a43b3b9ee0f395fe244d604",
+        "continuationCommands": 5,
+        "finalRecords": 21,
+        "finalHash": "a5dffa90",
+        "finalArchiveSha256": "98ab89c8166182e9c1a7232f95688d6da240163ee6d0eaafdc21737895a3e393",
+        "exactSavedMirror": true,
+        "fullReplayMatches": true,
+        "strictSaveMatches": true,
+        "actualExpiryViaEndTurns": true,
+        "ordinaryWarReplayHash": "f2f8b24a",
+        "sourceLossLimit": "Ownership-loss measurement starts at an explicitly authored lifecycle boundary. Original guards are relocated together onto empty neighboring land, preserving their faction, formations and unchanged generated geography. No battle, retreat command, casualties or capture acceptance is claimed by this benchmark."
+      }
+    }
+  ],
+  "configuredBounds": {
+    "maxImportsPerBuyer": 8,
+    "maxOffersPerBuyer": 8,
+    "maximumRealms": 64,
+    "maximumGlobalAgreements": 512,
+    "maximumGlobalOffers": 512
+  },
+  "scope": "One buyer at its eight-import ceiling, plus AI review before the imports, on synthetic matureCampaign Huge/Legendary fixtures. Existing generated geography/resources remain exact. Eight three-company forces establish ordinary current sight of existing foreign hearths; harbors are authored only at naturally coastal sources. The separate AI nearer-own-line variant retains those sightings with foragers and explicitly relocates one needy force beside a verified reachable own line. Offers, acceptance and payment use ordinary commands. The full benchmark also checks war termination and a saved expiry continuation. Neither organic expansion, 64-buyer saturation, browser rendering nor release acceptance is claimed.",
+  "timing": "1 discarded warmup and 3 measured sample(s) each deserialize an identical strict snapshot. Setup, loading, hashing, serialization, output comparisons and archive replay are outside phase timing. AI source-forecast and planner timings use separate fresh permitted observations built outside timing, so source-index construction is included and the direct forecast does not warm the planner. Actual planner route-query counts are not instrumented; only configured bounds are reported. Full-workload contract-forecast timing receives a precomputed actual map; whole-own-observation timing includes its normal repeated supply/read-model work. War timing includes the full declareWar command; ownership-loss/expiry timings isolate cleanup at explicitly prepared lifecycle boundaries. Local samples provide medians/ranges, not tail confidence or universal performance guarantees. Smoke samples are correctness checks, not accepted final timing.",
+  "complexity": "For a buyer, source filtering scans at most 512 active agreements globally (8 per realm across64 realms). Actual and forecast spread each use fixed nine cost buckets over nearby cells, not a whole-map scan; their radius is at most8 road steps and no more than217 hexes per isolated seed, with overlapping seeds shared per spread. Settlement source selection scans hearths; occupied-cell checks use spatial indexes. Cleanup visits pending offers plus active agreements and tests source/war references; at current bounds at most512 offers plus512 agreements. Own observation additionally traverses visible/explored cells and entity/read-model collections. This one-buyer measurement is not a proof of simultaneous512-agreement throughput."
+}
+

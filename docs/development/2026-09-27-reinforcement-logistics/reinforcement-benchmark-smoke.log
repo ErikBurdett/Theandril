@@ -1,0 +1,72 @@
+Preparing huge-representative; fixture setup and save loading are outside phase timings.
+{
+  "version": 1,
+  "sourceRevision": "uncommitted candidate; see retained invocation",
+  "saveVersion": 34,
+  "contentHash": "015468d1",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "scope": "Headless canonical phase and observation timing, one warmup and independent identical-save samples. Setup/loading/hashing/archive replay are excluded. Complete observations follow the phase and isolated theater read, with their caches already available. One active realm, not simultaneous64-realm saturation, browser/worker transport or campaign pacing. Route expansion counters are not exposed; this does not claim worst-case search-budget saturation. Movement can legitimately change sight.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "representative",
+      "reinforcement": true,
+      "synthetic": true,
+      "geography": "Original generated geography; authored nearby second hearth, charted route corridor and100 guard companies.",
+      "generatorVersion": 4,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1556,
+      "theaters": 1,
+      "assignedHearths": 2,
+      "assignedMembers": 100,
+      "dispatchBudgetPerTheater": 16,
+      "phaseAttempts": 16,
+      "phaseAccepted": 16,
+      "phaseRefused": 0,
+      "phaseDomainEvents": 32,
+      "observedCells": 94,
+      "fullOwnObservationBytes": 495397,
+      "theaterArrayBytes": 13366,
+      "configurationAddedObservationBytes": 11065,
+      "warmups": 1,
+      "measuredSamples": 1,
+      "timings": {
+        "theaterPhase": {
+          "samplesMs": [
+            2.931985000000168
+          ],
+          "medianMs": 2.931985000000168,
+          "minMs": 2.931985000000168,
+          "maxMs": 2.931985000000168
+        },
+        "isolatedTheaterRead": {
+          "samplesMs": [
+            0.8947349999998551
+          ],
+          "medianMs": 0.8947349999998551,
+          "minMs": 0.8947349999998551,
+          "maxMs": 0.8947349999998551
+        },
+        "completeOwnObservation": {
+          "samplesMs": [
+            6.389611000000059
+          ],
+          "medianMs": 6.389611000000059,
+          "minMs": 6.389611000000059,
+          "maxMs": 6.389611000000059
+        }
+      },
+      "repeatedPhaseHash": "78cf1813",
+      "canonicalEndTurnHash": "5a3defc3",
+      "archiveBytes": 2688153,
+      "ordinaryTheaterCommandsAccepted": 1,
+      "exactPhaseRepeat": true,
+      "strictSaveRoundtrip": true,
+      "canonicalEndTurnArchiveReplay": true,
+      "replayOwnObservationMatches": true
+    }
+  ]
+}

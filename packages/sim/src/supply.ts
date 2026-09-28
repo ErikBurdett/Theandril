@@ -1,12 +1,13 @@
 import { UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
-import type { DomainEvent, GameState } from './types';
+import type { DomainEvent, GameState, Observation } from './types';
 import { DEPOT_BUDGET, depotsOf } from './depots';
 import { hasRoadEdge } from './roads';
 import { indexes } from './visibility';
 import { atWar } from './warfare';
 import { rulesVersion } from './rules';
 import { FLEET_PROVISION_TURNS } from './fleet-provisions';
+import { supplyAccessSources, type SupplyAccessSource } from './supply-access';
 export { FLEET_PROVISION_TURNS } from './fleet-provisions';
 
 /** Rules 27: a realm feeds its armies from its hearths, from rules 28 also from
@@ -57,12 +58,72 @@ const forages = (state: GameState, armyId: string): boolean => {
   return !army || army.formations.length < SUPPLY_MIN_FORMATIONS || army.formations.some(item => units.get(item.unitId)?.canFound);
 };
 
+// Query-local labels preserve the agreement's disclosure without repeated
+// agreement scans per army or looking up a foreign hearth's current name.
+const importedLabels = new WeakMap<Map<number, string>, Map<string, SupplyAccessSource>>();
+type SupplySeed = { cell: number; source: string; spent: number };
+type SupplyGraph = { width: number; height: number; terrain: (cell: number) => number; road: (cell: number) => number; known?: (cell: number) => boolean; blocked: (cell: number) => boolean };
+/** Bucketed bounded propagation shared by actual supply and the contracted
+ * forecast. The latter passes only permitted cells, blockers and remembered roads. */
+function spreadSupply(state: GameState, reached: Map<number, string>, seeds: readonly SupplySeed[], overWater: boolean,
+  blocked: (cell: number) => boolean, knownOnly?: string): void {
+  spreadGraph({ width: state.world.width, height: state.world.height, terrain: cell => state.world.terrain[cell] ?? 0,
+    road: cell => knownOnly ? state.roads.known[knownOnly]?.[cell] ?? 0 : state.roads.edges[cell] ?? 0,
+    known: knownOnly ? cell => state.explored[knownOnly]?.has(cell) ?? false : undefined, blocked }, reached, seeds, overWater);
+}
+function spreadGraph(graph: SupplyGraph, reached: Map<number, string>, seeds: readonly SupplySeed[], overWater: boolean): void {
+  const { width, height } = graph;
+  const buckets: number[][] = Array.from({ length: SUPPLY_BUDGET + 1 }, () => []);
+  const spent = new Map<number, number>(), source = new Map<number, string>();
+  for (const seed of [...seeds].sort((a, b) => a.cell - b.cell)) {
+    if ((spent.get(seed.cell) ?? Infinity) <= seed.spent) continue;
+    spent.set(seed.cell, seed.spent); source.set(seed.cell, seed.source); buckets[seed.spent]!.push(seed.cell);
+  }
+  for (let cost = 0; cost <= SUPPLY_BUDGET; cost++) for (const cell of buckets[cost]!.sort((a, b) => a - b)) {
+    if ((spent.get(cell) ?? Infinity) < cost) continue;
+    for (const next of neighbors(cell, width, height).sort((a, b) => a - b)) {
+      if (graph.known && !graph.known(next)) continue;
+      if (!overWater && !isPassable(graph.terrain(next))) continue;
+      if (graph.blocked(next)) continue;
+      const mask = graph.road(cell);
+      const step = hasRoadEdge(cell, next, width, mask) ? SUPPLY_ROAD_COST : SUPPLY_OPEN_COST;
+      const total = cost + step;
+      if (total > SUPPLY_BUDGET || total >= (spent.get(next) ?? Infinity)) continue;
+      spent.set(next, total); source.set(next, source.get(cell)!); buckets[total]!.push(next);
+    }
+  }
+  for (const [cell, owner] of source) if (!reached.has(cell)) reached.set(cell, owner);
+}
+
+const previewGraphs = new WeakMap<Observation, SupplyGraph>();
+/** Prospective contracted reach from a currently observed foreign hearth.
+ * Uses the exact supply propagation above, with only permitted terrain, roads
+ * and blockers. This is a forecast, never proof against unseen disruption. */
+export function previewSupplyAccessCells(view: Observation, settlementId: string): number[] {
+  if (!view.supplyAccess) return [];
+  const town = view.settlements.find(item => item.id === settlementId && item.factionId !== view.factionId);
+  if (!town || view.wars.includes(town.factionId) || view.sieges.some(siege => siege.settlementId === town.id)
+    || view.visibleSiegeSettlementIds.includes(town.id) || !view.cells.some(cell => cell.cell === town.cell && cell.visible)) return [];
+  let graph = previewGraphs.get(view);
+  if (!graph) {
+    const cells = new Map(view.cells.map(cell => [cell.cell, { terrain: cell.terrain, road: cell.roadMask ?? 0 }]));
+    const blocked = new Set([...view.settlements.filter(item => item.factionId !== view.factionId).map(item => item.cell),
+      ...view.armies.filter(army => !army.carrierId && view.wars.includes(army.factionId)).map(army => army.cell)]);
+    graph = { width: view.width, height: view.height, terrain: cell => cells.get(cell)?.terrain ?? 0,
+      road: cell => cells.get(cell)?.road ?? 0, known: cell => cells.has(cell), blocked: cell => blocked.has(cell) };
+    previewGraphs.set(view, graph);
+  }
+  const reached = new Map<number, string>(), seeds = [{ cell: town.cell, source: town.id, spent: 0 }];
+  spreadGraph(graph, reached, seeds, false);
+  if (town.buildings.includes(HARBOR_BUILDING_ID)) spreadGraph(graph, reached, seeds, true);
+  return [...reached.keys()].sort((a, b) => a - b);
+}
+
 /** Every hex a realm can feed, and the hearth that feeds it. Bounded by the
  * realm's own hearths and the supply budget, never by the size of the map. */
 export function suppliedCells(state: GameState, factionId: string): Map<number, string> {
   const reached = new Map<number, string>();
   if (rulesVersion(state) < 27) return reached;
-  const { width, height } = state.world;
   const index = indexes(state);
   const blocked = (cell: number): boolean => {
     const other = index.settlements.get(cell);
@@ -73,31 +134,7 @@ export function suppliedCells(state: GameState, factionId: string): Map<number, 
     }
     return false;
   };
-  /** A bucketed search: costs are one or two, so the frontier needs no heap. The
-   * first line to reach a hex feeds it; a later, longer one changes nothing. */
-  const spread = (seeds: readonly { cell: number; source: string; spent: number }[], overWater: boolean): void => {
-    const buckets: number[][] = Array.from({ length: SUPPLY_BUDGET + 1 }, () => []);
-    const spent = new Map<number, number>();
-    const source = new Map<number, string>();
-    for (const seed of [...seeds].sort((a, b) => a.cell - b.cell)) {
-      if ((spent.get(seed.cell) ?? Infinity) <= seed.spent) continue;
-      spent.set(seed.cell, seed.spent); source.set(seed.cell, seed.source); buckets[seed.spent]!.push(seed.cell);
-    }
-    for (let cost = 0; cost <= SUPPLY_BUDGET; cost++) {
-      for (const cell of buckets[cost]!.sort((a, b) => a - b)) {
-        if ((spent.get(cell) ?? Infinity) < cost) continue;
-        for (const next of neighbors(cell, width, height).sort((a, b) => a - b)) {
-          if (!overWater && !isPassable(state.world.terrain[next] ?? 0)) continue;
-          if (blocked(next)) continue;
-          const step = hasRoadEdge(cell, next, width, state.roads.edges[cell] ?? 0) ? SUPPLY_ROAD_COST : SUPPLY_OPEN_COST;
-          const total = cost + step;
-          if (total > SUPPLY_BUDGET || total >= (spent.get(next) ?? Infinity)) continue;
-          spent.set(next, total); source.set(next, source.get(cell)!); buckets[total]!.push(next);
-        }
-      }
-    }
-    for (const [cell, owner] of source) if (!reached.has(cell)) reached.set(cell, owner);
-  };
+  const spread = (seeds: readonly SupplySeed[], overWater: boolean) => spreadSupply(state, reached, seeds, overWater, blocked);
 
   const hearths = Object.values(state.settlements).filter(town => town.factionId === factionId && !state.sieges[town.id]);
   spread([
@@ -111,7 +148,47 @@ export function suppliedCells(state: GameState, factionId: string): Map<number, 
     const ports = hearths.filter(town => town.buildings.includes(HARBOR_BUILDING_ID));
     if (ports.length) spread(ports.map(town => ({ cell: town.cell, source: town.id, spent: 0 })), true);
   }
+  if (rulesVersion(state) >= 34) {
+    const agreements = supplyAccessSources(state, factionId);
+    const labels = new Map(agreements.map(agreement => [agreement.id, { ...agreement.source }]));
+    importedLabels.set(reached, labels);
+    spread(agreements.map(agreement => ({ cell: agreement.source.cell, source: agreement.id, spent: 0 })), false);
+    spread(agreements.filter(agreement => agreement.source.harbor && state.settlements[agreement.source.settlementId]?.buildings.includes(HARBOR_BUILDING_ID))
+      .map(agreement => ({ cell: agreement.source.cell, source: agreement.id, spent: 0 })), true);
+  }
   return reached;
+}
+
+/** Own supply retains its historical projection. Imported reach is a forecast
+ * from frozen contractual facts, explored terrain and visible blockers. An
+ * unseen siege/army/road/source change cannot reveal itself as map geometry.
+ * Actual own-army status continues to use suppliedCells, not this forecast. */
+export function observedSuppliedCells(state: GameState, factionId: string, actual = suppliedCells(state, factionId)): Map<number, string> {
+  if (rulesVersion(state) < 34) return actual;
+  const reached = new Map([...actual].filter(([, source]) => !source.startsWith('supply-access.')));
+  const index = indexes(state), visible = index.visible.get(factionId);
+  const agreements = state.supplyAccess.agreements.filter(agreement => agreement.buyerId === factionId && agreement.expiresTurn > state.turn
+    && !atWar(state, factionId, agreement.providerId) && state.explored[factionId]?.has(agreement.source.cell)
+    && (!visible?.has(agreement.source.cell) || state.settlements[agreement.source.settlementId]?.factionId === agreement.providerId && !state.sieges[agreement.source.settlementId]));
+  const blocked = (cell: number) => {
+    if (!visible?.has(cell)) return false;
+    const town = index.settlements.get(cell);
+    if (town && state.settlements[town]?.factionId !== factionId) return true;
+    for (const id of index.armies.get(cell) ?? []) if (!state.transports[id] && state.armies[id]?.factionId !== factionId && atWar(state, factionId, state.armies[id]!.factionId)) return true;
+    return false;
+  };
+  const seed = (agreement: typeof agreements[number]): SupplySeed => ({ cell: agreement.source.cell, source: agreement.id, spent: 0 });
+  spreadSupply(state, reached, agreements.map(seed), false, blocked, factionId);
+  spreadSupply(state, reached, agreements.filter(agreement => agreement.source.harbor
+    && (!visible?.has(agreement.source.cell) || state.settlements[agreement.source.settlementId]?.buildings.includes(HARBOR_BUILDING_ID))).map(seed), true, blocked, factionId);
+  importedLabels.set(reached, new Map(agreements.map(agreement => [agreement.id, { ...agreement.source }])));
+  return reached;
+}
+
+function sourceFacts(state: GameState, supplied: Map<number, string>, source: string): { settlementId: string | null; name: string } {
+  const contracted = importedLabels.get(supplied)?.get(source);
+  if (contracted) return { settlementId: contracted.settlementId, name: contracted.name };
+  return { settlementId: source.startsWith('depot.') || source.startsWith('supply-access.') ? null : source, name: state.settlements[source]?.name ?? source };
 }
 
 /** Why one army eats or does not, in the order a player meets the question. */
@@ -127,10 +204,11 @@ export function armySupply(state: GameState, armyId: string, supplied = supplied
     }
     if (isNaval(state, armyId)) {
       const source = supplied.get(army.cell);
+      const facts = source ? sourceFacts(state, supplied, source) : null;
       const remaining = army.provisions ?? FLEET_PROVISION_TURNS;
-      return { armyId, supplied: Boolean(source) || remaining > 0, sourceSettlementId: source && !source.startsWith('depot.') ? source : null,
+      return { armyId, supplied: Boolean(source) || remaining > 0, sourceSettlementId: facts?.settlementId ?? null,
         fleetProvisions: { remaining, capacity: FLEET_PROVISION_TURNS, refilling: Boolean(source) },
-        reason: source ? `Supplied from ${state.settlements[source]?.name ?? source}. Stores refill to ${FLEET_PROVISION_TURNS} turns at the end of the turn.`
+        reason: source ? `Supplied from ${facts!.name}. Stores refill to ${FLEET_PROVISION_TURNS} turns at the end of the turn.`
           : remaining > 0 ? `Stores feed this fleet and its passengers for ${remaining} more turn${remaining === 1 ? '' : 's'} beyond harbour supply. Return to resupply before they run out.`
             : `Out of stores: this fleet and its passengers lose ${SUPPLY_ATTRITION} strength a turn and recover slowly. Return to friendly harbour supply.` };
     }
@@ -138,8 +216,8 @@ export function armySupply(state: GameState, armyId: string, supplied = supplied
   if (isNaval(state, armyId)) return { armyId, supplied: true, sourceSettlementId: null, reason: 'A fleet carries its own stores.' };
   if (state.transports[armyId]) return { armyId, supplied: true, sourceSettlementId: null, reason: 'The army is aboard a fleet and draws on its stores.' };
   const source = supplied.get(army.cell);
-  if (source) return { armyId, supplied: true, sourceSettlementId: source.startsWith('depot.') ? null : source,
-    reason: source.startsWith('depot.') ? `Supplied from the depot at hex ${source.slice(6)}.` : `Supplied from ${state.settlements[source]?.name ?? source}.` };
+  if (source) return { armyId, supplied: true, sourceSettlementId: sourceFacts(state, supplied, source).settlementId,
+    reason: source.startsWith('depot.') ? `Supplied from the depot at hex ${source.slice(6)}.` : `Supplied from ${sourceFacts(state, supplied, source).name}.` };
   if (landless(state, army.factionId)) return { armyId, supplied: true, sourceSettlementId: null, reason: 'The realm holds no hearth; its forces live off the land.' };
   if (forages(state, armyId)) return { armyId, supplied: true, sourceSettlementId: null, reason: `A force of fewer than ${SUPPLY_MIN_FORMATIONS} companies, or one escorting a caravan, forages for itself.` };
   return { armyId, supplied: false, sourceSettlementId: null,

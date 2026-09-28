@@ -236,9 +236,17 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
 }
 
 async function handle(request: Request): Promise<void> {
-  let delegationApplied: 'group' | 'theater' | false = false;
+  let delegationApplied: 'group' | 'theater' | 'supply agreement' | false = false;
   let groupProductionStarted = false;
   let groupMovementStarted = false;
+  // An AI proposal can commit a paid agreement inside End turn or watchRound.
+  // Remember that mutation for the entire request, including early battle/capture
+  // publication, so a failed view cannot permit orders from the stale client.
+  const issueCommand = (game: GameState, command: GameCommand) => {
+    const result = applyCommand(game, command);
+    if (result.ok && ['proposeSupplyAccess', 'respondSupplyAccess', 'endSupplyAccess'].includes(command.type)) delegationApplied = 'supply agreement';
+    return result;
+  };
   try {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
@@ -354,7 +362,7 @@ async function handle(request: Request): Promise<void> {
         try {
           for (const command of planTurn(getObservation(state, faction.id, aiObservationOptions(state.turn)))) {
             if (state.victory) break;
-            applyCommand(state, command);
+            issueCommand(state, command);
             settleDecisions(state);
           }
         } catch (error) {
@@ -431,7 +439,7 @@ async function handle(request: Request): Promise<void> {
         for (const faction of state.factions.filter(faction => faction.id !== state!.turnOwnerId)) {
           try {
             for (const command of planTurn(getObservation(state, faction.id, aiObservationOptions(state.turn)))) {
-              applyCommand(state, command);
+              issueCommand(state, command);
               const pending = settleDecisions(state);
               if (!pending) continue;
               metrics.aiMs = performance.now() - aiStarted;
@@ -448,16 +456,16 @@ async function handle(request: Request): Promise<void> {
         }
         metrics.aiMs = performance.now() - aiStarted;
       }
-      const result = applyCommand(state, request.command);
+      const result = issueCommand(state, request.command);
       if (!result.ok) throw new Error(result.error ?? 'The command could not be completed.');
-      delegationApplied = ['setSelectionGroup', 'deleteSelectionGroup'].includes(request.command.type) ? 'group' : ['setTheater', 'deleteTheater'].includes(request.command.type) ? 'theater' : false;
+      delegationApplied = ['setSelectionGroup', 'deleteSelectionGroup'].includes(request.command.type) ? 'group' : ['setTheater', 'deleteTheater'].includes(request.command.type) ? 'theater' : delegationApplied;
       const pending = settleDecisions(state);
       metrics.commandMs = performance.now() - started;
       let message = result.events.at(-1)?.message ?? 'Orders received.';
       if (pending === 'capture') message += ' Choose the captured settlement’s fate before continuing.';
       if (aiWarnings.length) message += ' ' + aiWarnings.join(' ');
       if (state.victory) message += ' The campaign has ended. Its two chronicles are ready to read.';
-      if (state.victory || pending === 'capture' || ['setTheater', 'deleteTheater', 'resolveCapture', 'respondPeace', 'endTurn', 'queueMovement', 'cancelMovement', 'resumeMovement', 'recruitCharacter', 'assignCharacter', 'unassignCharacter', 'promoteCharacter', 'startCharacterMission', 'cancelCharacterMission', 'useCommanderAbility'].includes(request.command.type) || ((request.command.type === 'battleOrder' || request.command.type === 'autoResolveBattle') && !state.battle)) message = await autosave(message);
+      if (state.victory || pending === 'capture' || ['proposeSupplyAccess', 'respondSupplyAccess', 'endSupplyAccess', 'setTheater', 'deleteTheater', 'resolveCapture', 'respondPeace', 'endTurn', 'queueMovement', 'cancelMovement', 'resumeMovement', 'recruitCharacter', 'assignCharacter', 'unassignCharacter', 'promoteCharacter', 'startCharacterMission', 'cancelCharacterMission', 'useCommanderAbility'].includes(request.command.type) || ((request.command.type === 'battleOrder' || request.command.type === 'autoResolveBattle') && !state.battle)) message = await autosave(message);
       publish(request.id, message);
     } else if (request.type === 'save') {
       await saves.saveCampaign(state, journal, 'manual');

@@ -1,4 +1,6 @@
-import { advanceTheaters, assertNoTheaters, deleteTheater, observeTheaters, pruneTheaters, setTheater, theaterCommandSchemas } from './theaters';
+import { advanceTheaters, assertNoTheaters, assertNoTheaterReinforcements, deleteTheater, observeTheaters, pruneTheaters, setTheater, theaterCommandSchemas, theaterV33CommandSchemas } from './theaters';
+import { assertNoSupplyAccess, createSupplyAccess, supplyAccessCommandSchemas } from './supply-access-state';
+import { advanceSupplyAccess, endSupplyAccess, observeSupplyAccess, proposeSupplyAccess, respondSupplyAccess } from './supply-access';
 import { assertNoSelectionGroups, deleteSelectionGroup, observeSelectionGroups, pruneSelectionGroups, selectionGroupCommandSchemas, setSelectionGroup } from './selection-groups';
 import { createResources, harvestSettlementResources, resourceObservation, resourceCommandSchema, applyResourceCommand } from './resources';
 import { createDevelopmentState, developmentCommandSchema, chooseDevelopment, getDevelopmentObservation, hearthDevelopmentEffects, factionDevelopmentEffects, advanceDevelopment, pruneDevelopment, formationDevelopmentUpkeep, hearthDevelopmentUpkeep, factionDevelopmentUpkeep } from './development';
@@ -21,7 +23,7 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { advanceCharters, charterCommandSchemas, observeCharters, setCharter } from './charters';
 import { advancePostings, musterNewArmy, observePostings, postingCommandSchemas, setMuster, setPosting } from './postings';
-import { advanceSupply, observeSupply, suppliedCells, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
+import { advanceSupply, observeSupply, observedSuppliedCells, suppliedCells, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
 import { abandonDepot, advanceDepots, buildDepot, depotAbandonSchemas, depotCommandSchemas, DEPOT_COIN, depotUpkeep } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
@@ -110,8 +112,9 @@ const version26CommandSchema = z.discriminatedUnion('type', [...version25Command
 const version28CommandSchema = z.discriminatedUnion('type', [...version26CommandSchema.options, ...depotCommandSchemas]);
 const version31CommandSchema = z.discriminatedUnion('type', [...version28CommandSchema.options, ...depotAbandonSchemas]);
 export const version32CommandSchema = z.discriminatedUnion('type', [...version31CommandSchema.options, ...selectionGroupCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : commandSchema;
+export const version33CommandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterV33CommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterCommandSchemas, ...supplyAccessCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -124,6 +127,7 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
   if (version < 33) assertNoTheaters(state);
   if (version < 32) assertNoSelectionGroups(state);
   if (version < 31 && Object.values(state.armies).some(army => army.provisions !== undefined)) throw new Error('Historical rules cannot execute a campaign containing fleet provisions.');
@@ -151,7 +155,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33)]).default(33),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34)]).default(34),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -206,7 +210,7 @@ export function createGame(options: NewGameOptions): GameState {
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
-    theaters: [], nextTheaterId: 1,
+    theaters: [], nextTheaterId: 1, supplyAccess: createSupplyAccess(),
     selectionGroups: [], nextSelectionGroupId: 1,
     turn: 1, nextId: 1, turnOwnerId: owner.id, world, pace: checked.pace,
     factions: selected.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: 60, knowledge: 0 })),
@@ -352,6 +356,7 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
   }
   observe('movement', 'start');
   // Rules 27: an army outside its realm's supply wastes away and rests on nothing.
+  emitted.push(...advanceSupplyAccess(state));
   const starving = advanceSupply(state, emitted);
   for (const army of Object.values(state.armies)) {
     army.movement = state.transports[army.id] || armyHasCharacterMission(state, army.id) ? 0 : Math.max(1, effectiveArmyMovement(state, army, state.progression[army.factionId]?.doctrineId ?? null) - (unpaid.has(army.factionId) ? 1 : 0));
@@ -418,7 +423,13 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   if (state.pendingCapture) affectedArmies.push(state.pendingCapture.armyId);
   const diagnostics: string[] = [];
   const index = indexes(state);
-  if (command.type === 'setTheater' || command.type === 'deleteTheater') {
+  if (command.type === 'proposeSupplyAccess' || command.type === 'respondSupplyAccess' || command.type === 'endSupplyAccess') {
+    if (rulesVersion(state) < 34) return fail('Supply access requires current campaign rules.');
+    const result = command.type === 'proposeSupplyAccess' ? proposeSupplyAccess(state, command) : command.type === 'respondSupplyAccess' ? respondSupplyAccess(state, command) : endSupplyAccess(state, command);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'setTheater' || command.type === 'deleteTheater') {
+    if (rulesVersion(state) < 34 && command.type === 'setTheater' && command.reinforcementLimit !== undefined) return fail('Threat reinforcement requires current campaign rules.');
     const result = command.type === 'setTheater' ? setTheater(state, command) : deleteTheater(state, faction.id, command.theaterId);
     if (!result.ok) return result;
     emitted.push(...result.events);
@@ -609,6 +620,7 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   // never touch this register, and moves/queries/rejections never scan it.
   if (rulesVersion(state) >= 32 && state.selectionGroups.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneSelectionGroups(state, emitted);
   if (rulesVersion(state) >= 33 && state.theaters.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneTheaters(state, emitted);
+  if (rulesVersion(state) >= 34 && (command.type === 'declareWar' || command.type === 'resolveCapture' || emitted.some(event => event.type === 'battle_finished'))) emitted.push(...advanceSupplyAccess(state));
   if (command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileSieges(state, emitted);
   if (command.type === 'resolveCapture' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileCharacterMissions(state, emitted);
   if (command.type === 'resolveCapture' || command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileProjects(state, emitted);
@@ -643,6 +655,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
   const armies = Object.values(state.armies).filter(army => army.factionId === factionId || !state.transports[army.id] && visible.has(army.cell)).sort(compareId);
   const settlements = Object.values(state.settlements).filter(settlement => settlement.factionId === factionId || visible.has(settlement.cell)).sort(compareId);
   const knownFactions = new Set([factionId, ...armies.map(army => army.factionId), ...settlements.map(settlement => settlement.factionId)]);
+  const supplyAccess = rulesVersion(state) >= 34 ? observeSupplyAccess(state, factionId) : undefined;
+  if (supplyAccess) for (const record of [...supplyAccess.offers, ...supplyAccess.agreements]) { knownFactions.add(record.buyerId); knownFactions.add(record.providerId); }
   // A witnessed border identifies its public culture even when the town center
   // has not been reached. Last-seen ownership never reveals its current changes.
   for (const land of Object.values(state.land.known[factionId] ?? {})) if (land.factionId) knownFactions.add(land.factionId);
@@ -671,12 +685,13 @@ export function getObservation(state: GameState, factionId: string, options: Obs
       cargo: [], transportUsed: 0, carrierId: null, canEnterDeepWater: false, embarkOptions: [], disembarkOptions: [], transportOptionsTruncated: false }) })),
     productionOptions: observeProductionOptions(state, factionId),
     ...(rulesVersion(state) >= 33 ? { theaters: observeTheaters(state, factionId) } : {}),
+    ...(rulesVersion(state) >= 34 ? { theaterReinforcement: true as const, supplyAccess: supplyAccess! } : {}),
     selectionGroups: observeSelectionGroups(state, factionId),
     charters: observeCharters(state, factionId),
     postings: observePostings(state, factionId),
     musters: state.musters.filter(muster => muster.factionId === factionId),
     supply: observeSupply(state, factionId, supplyReach),
-    suppliedCells: [...supplyReach.keys()].sort((a, b) => a - b),
+    suppliedCells: [...observedSuppliedCells(state, factionId, supplyReach).keys()].sort((a, b) => a - b),
     depots: state.depots.filter(depot => depot.factionId === factionId || indexes(state).visible.get(factionId)?.has(depot.cell)),
     depotCoinCost: rulesVersion(state) >= 28 ? DEPOT_COIN : 0,
     ...getCharacterObservation(state, factionId), commanderAbilities: observeCommanderAbilities(state, factionId),

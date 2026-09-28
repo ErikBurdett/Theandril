@@ -1,5 +1,135 @@
 # Performance measurements
 
+## Reinforcement and negotiated supply — local rules 34
+
+Measured on the i9-13900K development host with Node 26.7.0, rules/save 34 and
+unchanged content `015468d1`. [The implementation packet](development/2026-09-27-reinforcement-logistics/README.md)
+records 2,146 tests across 266 files and 49 affected Chromium journeys passing.
+Built production and publication checks remain pending. These are local evidence
+scopes, not completed M3/M4 or 1.0 gates; all fifteen gates remain open.
+
+### Canonical reinforcement phases
+
+[Four final workloads](development/2026-09-27-reinforcement-logistics/reinforcement-benchmark-final.json)
+use one discarded warmup and three independent identical-save samples each.
+Generator-4 Huge/Legendary worlds have 196,608/307,200 cells and 32/40 realms.
+Representative cases retain generated geography but author a second hearth,
+charted corridor, 100 selected guards and visible wartime pressure. Ceiling
+cases replace geography with authored flat land and eight isolated member
+islands, with eight theaters, 128 protected hearths and 1,024 assigned armies in
+one realm. Both use reinforcement limit two. They are not organically grown realms.
+
+| Authored case | Global armies | Attempts: accepted/refused | Phase median ms | Theater read median ms | Own observation median ms | Own observation JSON bytes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Huge representative | 1,556 | 16: 16/0 | 1.600 | 0.755 | 4.953 | 495,397 |
+| Huge ceiling | 2,605 | 128: 64/64 | 9.259 | 1.825 | 37.787 | 6,861,674 |
+| Legendary representative | 4,003 | 16: 16/0 | 2.338 | 1.262 | 5.956 | 455,199 |
+| Legendary ceiling | 5,052 | 128: 64/64 | 9.466 | 2.749 | 40.392 | 6,863,616 |
+
+Setup, loading, hashing and archive replay are outside timing. Complete own
+observations follow the phase and isolated theater read with their caches already
+available; these columns are distinct scopes. Identical phases, strict saves,
+ordinary End-turn archive replay and replayed observations match in every case.
+The ceiling theater arrays alone cost 159,093/159,393 JSON bytes. The complete
+observation remains a much larger cost than isolated allocation.
+
+Coverage indexes armies/postings/sieges once per phase/read, then examines at most
+37 local hexes and their occupants per protected hearth. Each theater attempts at
+most sixteen ordinary routes, including refusals. This samples active allocation
+with reinforcement enabled, not a matched rules-33/34 speedup comparison,
+worst-case route-search saturation, simultaneous 64-realm workload or browser
+transport/frame measurement. Three samples do not establish tail confidence.
+
+### Imported supply, observations and bounded AI purchases
+
+[Final supply samples](development/2026-09-27-reinforcement-logistics/supply-benchmark-final.json)
+also use one warmup and three identical-save samples per phase. The generator-4
+Huge/Legendary fixtures retain all generated geography/resources, with 32/40
+realms and 1,508/4,008 armies after adding eight explicit three-company witness
+forces. One buyer purchases eight sources through sixteen real offer/acceptance
+commands, paying 80 coin. Seven/five harbors are authored only at naturally coastal
+sources. All eight witnesses change from actually unsupplied to supplied.
+
+| Scope | Huge, no contracts | Huge, eight contracts | Legendary, no contracts | Legendary, eight contracts |
+| --- | ---: | ---: | ---: | ---: |
+| Actual source graph median ms | 0.137 | 0.837 | 0.231 | 0.605 |
+| Permitted forecast median ms | 0.017 | 0.385 | 0.020 | 0.281 |
+| Own observation median ms | 9.829 | 12.196 | 27.222 | 26.999 |
+| Own observation JSON bytes | 617,174 | 623,834 | 1,256,745 | 1,263,528 |
+
+The small negative Legendary observation difference is sample variability, not an
+established speedup. Actual source coverage grows from 61 to 549 cells; the
+permitted last-known forecast grows to 213. Reads retain exact hashes and output
+seals. War-command medians are 0.260/0.585 ms; isolated ownership-loss cleanup is
+0.037/0.031 ms and expiry cleanup 0.018/0.023 ms, excluding their subsequent graph
+and forecast work. The initial loss-boundary fixture left the previous owner's
+guards inside a newly foreign hearth and correctly failed strict loading. The
+corrected setup explicitly displaces those guards onto empty adjacent land before
+timing; it preserves geography and strict save checks, and does not claim a played
+capture. [Failure, correction and exact scope](development/2026-09-27-reinforcement-logistics/supply-benchmark-review.md).
+Five actual End turns separately prove expiry, matching saved continuation and
+full replay. Ordinary war replay also matches.
+
+The same baseline before contracts measures real AI purchases and a conservative
+nearer-own-line veto. Useful-purchase planner medians are 0.208/0.200 ms;
+veto medians are 0.259/0.294 ms. Each useful case issues one ordinary proposal,
+gets an AI acceptance, pays 20 coin once, supplies its witness and replays exactly.
+Each veto returns no proposal beside a verified one-step existing supply route.
+The planner considers at most two actors, four sources and eight ordinary route
+previews; actual query counts are not instrumented. Forecast/planner samples use
+separate fresh permitted observations, prepared outside timing.
+
+Each buyer has at most eight imports and eight pending offers: across 64 realms,
+the configured registers allow 512 agreements plus 512 offers. Source filtering
+and cleanup scan those bounded registers. Supply propagation uses nine cost
+buckets, at most eight road steps/217 hexes per isolated source, with overlap
+shared; own observation also traverses its entity/read-model and known-cell
+collections. These are one-buyer measurements, not simultaneous global-register
+saturation, organic overseas expansion or browser/rendering acceptance.
+
+### Joined M3 browser observations and paired campaign pacing
+
+[The authored 128-army/30-hearth Huge journey](development/2026-09-27-reinforcement-logistics/integrated-acceptance.md)
+passes with actual UI orders and exact AI-inclusive manual/portable saved futures.
+Its 44-coin purse pays three production orders, leaving eight coin, then reaches
+zero after upkeep; 28 charters wait for funds while already-paid work advances.
+The single correctness journey reports 26 request/reply pairs and twelve state
+publications of 1,652,451–1,993,343 bytes each, totaling 21,670,006 bytes across
+the original and restored sessions. These are existing worker result metrics,
+not direct browser structured-clone measurements.
+
+The explicit three-army group review takes 64.0 ms roundtrip, including 0.9 ms
+worker query time, and returns 582 bytes. The 30-hearth charter batch reports
+120.4 ms roundtrip/1.2 ms command time; partial production 112.2/0.6 ms; travel
+application 582.7/1.4 ms. The first End turn takes 754.5 ms roundtrip with 219.6 ms
+command time, including 156.7 ms AI. These single observations include ordinary
+UI work/assertions and, in stage timings, screenshots. They are neither quiet
+sampled latency nor frame-time thresholds. Command/roundtrip differences cannot
+be attributed solely to rendering; the large state publications remain visible.
+
+[The corrected final pacing matrix](development/2026-09-27-reinforcement-logistics/pacing-comparison.json)
+contains eighteen runs: three predetermined seeds × three Standard-map,
+twelve-realm paces × rules 33/34. Each of the nine historical rows matches its
+genuine pre-change hash and command/event counts; paired current outcomes and
+counts also match. All reach Prosperity with zero submitted or automatic refusals.
+
+| Seed | Standard, both versions | Long, both versions | Epic, both versions |
+| --- | ---: | ---: | ---: |
+| 20260905 | 233 | 311 | 349 |
+| 20260906 | 211 | 312 | 367 |
+| 20260907 | 225 | 309 | 373 |
+
+Across the nine current campaigns, five accepted ordinary theater routes target
+cells associated with reinforcement holds. That counter proves neither arrival
+nor that extra reinforcement caused a dispatch; paired command/event counts are
+unchanged. There are **zero supply requests or responses** in these campaigns.
+Authored planner/worker/browser evidence therefore remains separate from organic
+supply adoption. DH-021 stays open: Standard/Long remain above approximate 200/300
+targets and one Epic is a turn below 350. No prices, targets or tiny proxy bounds
+changed. The retained initial matrices used the wrong execution context and are
+invalid paired-history evidence; the corrected tool scopes observations, AI,
+commands and hashes together. Campaign elapsed times are not quiet phase timings.
+
 ## Coordinated group travel — local rules 32 candidate
 
 [Final actual-worker samples](development/2026-09-26-group-travel/worker-movement-benchmark-final.log)

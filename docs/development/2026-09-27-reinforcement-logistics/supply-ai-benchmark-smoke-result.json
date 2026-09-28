@@ -1,0 +1,178 @@
+{
+  "capturedAt": "2026-09-27T22:18:12.159Z",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "os": "linux 7.2.5-3-omarchy",
+  "rulesVersion": 34,
+  "contentHash": "015468d1",
+  "smoke": true,
+  "aiOnly": true,
+  "warmups": 1,
+  "measuredSamples": 1,
+  "sourceFingerprints": {
+    "scripts/benchmark-supply-access.ts": "631f9c96368a27e420d00cca34640bc9c62ae7a5389cdef047bd3b51dd3fa20d",
+    "packages/sim/src/supply-access.ts": "c28c15e3e6ddae8b9906723605088eb7ddbe93302a5594fe7e6f1b3bfd7a2deb",
+    "packages/sim/src/supply-access-state.ts": "6dde00309bcf1bdfa7319b1e3f36d0c1219d72734aa40b3a952f7562cdcfff69",
+    "packages/sim/src/supply.ts": "3b33cd9a13a0aff69dc5817d20272f62cffa17a0ad66e900df9699c63d6bb897",
+    "packages/sim/src/simulation.ts": "18049317ed1295dc3bf6e3277c3cbda973f45e619b11b43e07a179f0b6d36049",
+    "packages/sim/src/save.ts": "cd2ab76b9b459b67a22d54ea8334f6e931c0e32bf2ae1ae6eccc0cd068e1d90e",
+    "packages/sim/src/rules.ts": "3cc6c395c92c565101e0f362f30c6aa1eb2a52c174fc46f8e03fc354826ad43e",
+    "packages/test-fixtures/src/index.ts": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09",
+    "packages/test-fixtures/src/authored-land.ts": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891",
+    "packages/ai/src/supply-access.ts": "a2c1ecb611670c9fc04740c0d69c96b6de1e0effeba1955edce25abd0127bd61",
+    "packages/ai/src/observation-index.ts": "f7dfef9442dcf806af2e7402cf8452af387842ac768eaf735286214109ee4bfa",
+    "packages/sim/src/movement.ts": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+  },
+  "workloads": [
+    {
+      "size": "huge",
+      "cells": 196608,
+      "factions": 32,
+      "synthetic": true,
+      "geographyAndResourceSha256": "27decb6990a85789b5c4f9d49007dfc5213afdd01d650dd1b58014ea1c702198",
+      "sourceFixtureHash": "c5b87aef",
+      "ai": [
+        {
+          "variant": "useful-source",
+          "inputHash": "c5b87aef",
+          "observedCells": 213,
+          "observationBytes": 617174,
+          "forecastSources": [
+            "settlement.72",
+            "settlement.83",
+            "settlement.89",
+            "settlement.91"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 632,
+          "proposalCount": 1,
+          "heldArmyIds": [
+            "army.1565"
+          ],
+          "outputSha256": "0859bd4536d805b16ad141482863e32e8394d002a103fd89fad482691d646bef",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.3616219999994428
+              ],
+              "medianMs": 0.3616219999994428,
+              "minMs": 0.3616219999994428,
+              "maxMs": 0.3616219999994428
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.40188099999977567
+              ],
+              "medianMs": 0.40188099999977567,
+              "minMs": 0.40188099999977567,
+              "maxMs": 0.40188099999977567
+            }
+          },
+          "ordinaryPurchaseProof": {
+            "command": {
+              "type": "proposeSupplyAccess",
+              "factionId": "faction.ashen_compact",
+              "targetFactionId": "faction.saltwind_remnant",
+              "settlementId": "settlement.72",
+              "feeCoin": 20,
+              "termTurns": 10
+            },
+            "response": {
+              "type": "respondSupplyAccess",
+              "factionId": "faction.saltwind_remnant",
+              "offerId": "supply-offer.1",
+              "accept": true
+            },
+            "heldArmyId": "army.1565",
+            "paidCoin": 20,
+            "actualWitnessSupplied": true,
+            "journalRecords": 2,
+            "afterHash": "c36156b4",
+            "fullReplayMatches": true,
+            "strictSaveMatches": true
+          },
+          "verifiedOwnReturnRoute": null,
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline before its eight contracts; measured turn explicitly aligned to the ordinary ten-turn purchase cadence. All eight authored overseas witnesses and source sightings remain. No offered, accepted or supplied result is injected."
+        },
+        {
+          "variant": "nearer-own-line",
+          "inputHash": "273e1441",
+          "observedCells": 226,
+          "observationBytes": 613286,
+          "forecastSources": [
+            "settlement.72",
+            "settlement.83",
+            "settlement.89",
+            "settlement.91"
+          ],
+          "forecastCellCounts": [
+            19,
+            19,
+            19,
+            19
+          ],
+          "forecastBytes": 632,
+          "proposalCount": 0,
+          "heldArmyIds": [],
+          "outputSha256": "9379f80fee966ce488a7923b4ccf466a4a52b3269c60732214c4805ae2f21f44",
+          "readOnlyHashMatched": true,
+          "timings": {
+            "fourSourceForecasts": {
+              "samplesMs": [
+                0.40358800000103656
+              ],
+              "medianMs": 0.40358800000103656,
+              "minMs": 0.40358800000103656,
+              "maxMs": 0.40358800000103656
+            },
+            "supplyPlanner": {
+              "samplesMs": [
+                0.40717100000074424
+              ],
+              "medianMs": 0.40717100000074424,
+              "minMs": 0.40717100000074424,
+              "maxMs": 0.40717100000074424
+            }
+          },
+          "ordinaryPurchaseProof": null,
+          "verifiedOwnReturnRoute": {
+            "armyId": "army.1565",
+            "target": 48447,
+            "cost": 2,
+            "steps": 1,
+            "targetSearchExpandedNodes": 2
+          },
+          "routeQueryAccounting": {
+            "actualPlannerQueryCount": null,
+            "reason": "Planner internals are not instrumented; no measured query count is claimed.",
+            "configuredMaximumQueries": 8,
+            "maximumCombinedSearchNodes": 32768
+          },
+          "setup": "Same baseline; one authored witness relocated just outside its actual own line, seven witness formations reduced to single-company foragers, one existing scout/guard retains the first foreign source in sight. Generated terrain/resources remain unchanged. The measured turn is explicitly aligned to the ordinary ten-turn purchase cadence."
+        }
+      ]
+    }
+  ],
+  "configuredBounds": {
+    "maxImportsPerBuyer": 8,
+    "maxOffersPerBuyer": 8,
+    "maximumRealms": 64,
+    "maximumGlobalAgreements": 512,
+    "maximumGlobalOffers": 512
+  },
+  "scope": "One buyer at its eight-import ceiling on synthetic matureCampaign Huge/Legendary fixtures. Existing generated geography/resources remain exact. Eight three-company forces establish ordinary current sight of existing foreign hearths; harbors are authored only at naturally coastal sources. Offers, acceptance, payment, war termination and the separate saved expiry continuation use ordinary commands. Neither organic expansion, 64-buyer saturation, browser rendering nor release acceptance is claimed.",
+  "timing": "One discarded warmup and three measured samples each deserialize an identical strict snapshot. Setup, loading, hashing, serialization, output comparisons and archive replay are outside phase timing. Forecast timing receives a precomputed actual map; whole-own-observation timing includes its normal repeated supply/read-model work. War timing includes the full declareWar command; ownership-loss/expiry timings isolate cleanup at explicitly prepared lifecycle boundaries. Three local samples provide medians/ranges, not tail confidence or universal performance guarantees.",
+  "complexity": "For a buyer, source filtering scans at most 512 active agreements globally (8 per realm across64 realms). Actual and forecast spread each use fixed nine cost buckets over nearby cells, not a whole-map scan; their radius is at most8 road steps and no more than217 hexes per isolated seed, with overlapping seeds shared per spread. Settlement source selection scans hearths; occupied-cell checks use spatial indexes. Cleanup visits pending offers plus active agreements and tests source/war references; at current bounds at most512 offers plus512 agreements. Own observation additionally traverses visible/explored cells and entity/read-model collections. This one-buyer measurement is not a proof of simultaneous512-agreement throughput."
+}

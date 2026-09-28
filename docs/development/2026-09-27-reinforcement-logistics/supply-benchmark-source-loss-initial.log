@@ -1,0 +1,18 @@
+Preparing huge: generated geography, eight authored witnesses, actual paid imports; setup is outside timing.
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:643
+  if (!condition) throw new Error('Invalid save: ' + message);
+                        ^
+
+Error: Invalid save: hostile army occupies settlement
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:643:25)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:1012:5)
+    at invalidationSamples (/home/telephoneheater/Work/Theandril/scripts/benchmark-supply-access.ts:149:28)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-supply-access.ts:271:95)
+    at Array.map (<anonymous>)
+    at measure (/home/telephoneheater/Work/Theandril/scripts/benchmark-supply-access.ts:271:83)
+    at Array.map (<anonymous>)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-supply-access.ts:280:80)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+
+Node.js v26.7.0

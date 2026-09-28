@@ -1,0 +1,29 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/theater-reinforcement.test.ts (4 tests | 1 failed) 136ms
+     × caps demand, preserves the quiet hold through saves, and clamps it when explicitly lowering or disabling policy 19ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/theater-reinforcement.test.ts > threat-responsive theater reinforcement > caps demand, preserves the quiet hold through saves, and clamps it when explicitly lowering or disabling policy
+Error: Invalid save: diplomacy war is missing relationship memory
+ ❯ assert packages/sim/src/diplomacy.ts:218:89
+    216|   diplomacyStateSchema.parse(state.diplomacy);
+    217|   validateClients(state);
+    218|   const assert = (condition: unknown, message: string): void => { if (…
+       |                                                                                         ^
+    219|   const factions = new Set(state.factions.map(faction => faction.id));
+    220|   const ordered = (values: { id: string }[]): boolean => values.every(…
+ ❯ validateDiplomacy packages/sim/src/diplomacy.ts:242:34
+ ❯ deserializeGame packages/sim/src/save.ts:1270:3
+ ❯ packages/sim/src/theater-reinforcement.test.ts:72:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 12 passed (13)
+   Start at  16:25:52
+   Duration  1.27s (transform 1.20s, setup 0ms, import 1.60s, tests 516ms, environment 0ms)
+

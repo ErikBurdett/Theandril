@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:2618769) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (28.7s)
+
+
+  1) tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByTestId('defense-theaters').locator(':scope > summary')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" getByTestId('defense-theaters').locator(':scope > summary') with timeout 5000ms
+      - waiting for getByTestId('defense-theaters').locator(':scope > summary')
+        14 × locator resolved to <summary>Defensive theaters</summary>
+           - unexpected value "inactive"
+
+
+      172 |   await expect(theater).toHaveAttribute('open');
+      173 |   await expect(theater.getByRole('combobox', { name: 'Defensive theater', exact: true })).toHaveValue(created.id);
+    > 174 |   await expect(theater.locator(':scope > summary')).toBeFocused();
+          |                                                     ^
+      175 |   await endTurn(page);
+      176 |   const allocated = await snapshot(page), report = allocated.theaters!.find(row => row.id === created.id)!;
+      177 |   expect(report.enabled).toBe(true); expect(report.armyIds).toHaveLength(14);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:174:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-role-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-role-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-role-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-role-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/empire-delegation.spec.ts:58:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 

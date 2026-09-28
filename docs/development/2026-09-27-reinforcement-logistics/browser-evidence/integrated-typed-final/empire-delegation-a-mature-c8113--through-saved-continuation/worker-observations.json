@@ -1,0 +1,81 @@
+{
+  "requests": [
+    "import",
+    "movementQuery",
+    "command",
+    "movementQuery",
+    "export",
+    "movementQuery"
+  ],
+  "replies": [
+    {
+      "request": "import",
+      "reply": "state",
+      "elapsedMs": 1701.6999999284744,
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1711971,
+        "totalTransferBytes": 1711971,
+        "cellTransferBytes": 26105,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "developmentQueryCount": 0,
+        "developmentQueryBytes": 0,
+        "totalDevelopmentQueryBytes": 0,
+        "groupPostingResultBytes": 0,
+        "groupCharterResultBytes": 0,
+        "groupProductionResultBytes": 0,
+        "groupMovementResultBytes": 0
+      }
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 8.700000047683716
+    },
+    {
+      "request": "command",
+      "reply": "state",
+      "elapsedMs": 719.2999999523163,
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 204.79999995231628,
+        "aiMs": 143.40000009536743,
+        "transferBytes": 1652451,
+        "totalTransferBytes": 3364422,
+        "cellTransferBytes": 140,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "developmentQueryCount": 0,
+        "developmentQueryBytes": 0,
+        "totalDevelopmentQueryBytes": 0,
+        "groupPostingResultBytes": 0,
+        "groupCharterResultBytes": 0,
+        "groupProductionResultBytes": 0,
+        "groupMovementResultBytes": 0
+      }
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 13
+    },
+    {
+      "request": "export",
+      "reply": "export",
+      "elapsedMs": 1038.5
+    },
+    {
+      "request": "movementQuery",
+      "reply": "movementQuery",
+      "elapsedMs": 7.399999976158142
+    }
+  ],
+  "feedback": "◆Campaign exported. Keep this file as a backup.",
+  "turn": 4,
+  "hash": "607cd0c7"
+}

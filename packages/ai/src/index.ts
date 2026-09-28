@@ -16,6 +16,7 @@ import { settlementSpacing, settlementSiteValue } from './expansion';
 import { isCityState } from '@theandril/sim';
 import { observedCells } from './observation-index';
 import { heldTheaterArmyIds, planDefenseTheater } from './theaters';
+import { answerSupplyAccess, pendingSupplyAccessFees, planSupplyAccess } from './supply-access';
 
 export { chooseCaptureOption } from './conquest';
 export { aiObservationOptions, landPlanningTowns, LAND_PLANNING_TOWN_LIMIT } from './observation-options';
@@ -32,10 +33,16 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (view.battle) return { commands: [{ type: 'autoResolveBattle', factionId: view.factionId }], reasons: ['Resolve the current battle through shared tactical rules.'] };
   const capture = view.pendingCapture ? planConquestDecision(view) : null;
   if (capture) return capture;
+  // Promised fees also constrain paid peace terms and patronage decisions.
+  // This private planning purse never mutates the permitted observation.
+  const promisedSupplyFees = pendingSupplyAccessFees(view);
+  if (promisedSupplyFees) view = { ...view, treasury: Math.max(0, view.treasury - promisedSupplyFees) };
   const diplomatic = planDiplomacy(view);
   if (diplomatic) return diplomatic;
   const answered = answerPatronage(view);
   if (answered) return answered;
+  const supplyAnswer = answerSupplyAccess(view);
+  if (supplyAnswer) return supplyAnswer;
 
   const siegeDecision = planConquestDecision(view, heldTheaterArmyIds(view));
   if (siegeDecision) return siegeDecision;
@@ -65,8 +72,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const minor = isCityState(view.factionId);
   const advancement = planProgression(view, foundingReserve + expeditionSavings + oceanScoutReserve, !minor);
   if (advancement.commands.some(command => command.type === 'startVictoryProject')) return advancement;
+  const supplyPurchase = planSupplyAccess(view, advancement.coinSpent + advancement.reserve + foundingReserve + expeditionSavings + oceanScoutReserve
+    + Math.max(0, -(view.growth?.economy.net ?? 0)));
+  const supplyFee = (supplyPurchase?.commands ?? []).reduce((sum, command) => sum + (command.type === 'proposeSupplyAccess' ? command.feeCoin : 0), 0);
+  if (supplyFee) view = { ...view, treasury: Math.max(0, view.treasury - supplyFee) };
   const factionId = view.factionId;
   const theater = planDefenseTheater(view);
+  for (const id of supplyPurchase?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
   const patronage = proposePatronage(view);
   // An occasional paid survey of ground the realm already holds; both are bounded
@@ -79,8 +91,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...theater.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...theater.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;
@@ -96,6 +108,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const allOwnArmies = view.armies.filter(army => army.factionId === factionId);
   const ownArmies = allOwnArmies.filter(army => army.domain !== 'naval' && !army.carrierId);
   const protectedIds = protectedFactions(view);
+  for (const command of supplyPurchase?.commands ?? []) if (command.type === 'proposeSupplyAccess') protectedIds.add(command.targetFactionId);
   const enemies = view.armies.filter(army => army.factionId !== factionId && army.domain !== 'naval' && !army.carrierId);
   const enemyTowns = view.settlements.filter(town => town.factionId !== factionId);
   const enemyByCell = new Map<number, typeof enemies>();
@@ -153,7 +166,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // Normally retain a caravan's funding; honor a legally quoted first ocean
   // scout before generic economic reserves can repeatedly consume its coins.
   // This never spends the progression reserve already removed from budget.
-  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16), Math.min(budget, oceanScoutReserve)), { heldArmyIds: new Set([...theater.heldArmyIds, ...specialists.heldArmyIds, ...surveying]), knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
+  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16), Math.min(budget, oceanScoutReserve)), { heldArmyIds: new Set([...theater.heldArmyIds, ...specialists.heldArmyIds, ...surveying]), knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent), protectedFactionIds: protectedIds });
   plans.push(...naval.commands); reasons.push(...naval.reasons); budget -= naval.coinSpent;
   plannedUpkeep += naval.commands.reduce((sum, command) => sum + (command.type === 'queue' ? units.get(command.itemId)?.upkeep ?? 0 : 0), 0);
   if (naval.interrupts) return { commands: plans, reasons };

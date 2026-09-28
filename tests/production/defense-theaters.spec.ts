@@ -24,11 +24,12 @@ test('generated production adopts a defensive theater through ordinary controls 
   await panel.getByRole('textbox', { name: 'Theater name', exact: true }).fill('Home defense');
   await panel.getByRole('checkbox', { name: /^Watch Hearth · hex / }).check();
   await panel.getByRole('button', { name: 'Use checked armies (1)', exact: true }).click();
+  await panel.getByRole('combobox', { name: 'Extra guards when threatened', exact: true }).selectOption('1');
   await page.setViewportSize({ width: 390, height: 844 });
   await panel.getByRole('button', { name: 'Create theater', exact: true }).focus(); await page.keyboard.press('Enter');
   await expect(page.getByTestId('theater-report')).toContainText('Home defense · Enabled');
   const created = await exportedTravel(page), owner = created.game.turnOwnerId;
-  expect(created.game.theaters[0]).toMatchObject({ name: 'Home defense', enabled: true, lastRunTurn: null, lastDispatches: [] });
+  expect(created.game.theaters[0]).toMatchObject({ name: 'Home defense', enabled: true, reinforcementLimit: 1, lastRunTurn: null, lastDispatches: [] });
   expect(created.game.theaters[0]!.armyIds).toHaveLength(1);
   await page.getByTestId('campaign-menu').locator(':scope > summary').click();
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
@@ -49,6 +50,7 @@ test('generated production adopts a defensive theater through ordinary controls 
   await openRegistry(page, 'armies'); await panel.locator(':scope > summary').focus(); await page.keyboard.press('Enter');
   await panel.getByRole('combobox', { name: 'Defensive theater', exact: true }).selectOption(report.id);
   await panel.getByRole('button', { name: 'Pause theater', exact: true }).scrollIntoViewIfNeeded();
+  await expect(panel.getByRole('combobox', { name: 'Extra guards when threatened', exact: true })).toHaveValue('1');
   await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   await page.screenshot({ path: testInfo.outputPath('production-defense-theater-restored-narrow.png') });
   await closeManagement(page); await campaignMenu(page);

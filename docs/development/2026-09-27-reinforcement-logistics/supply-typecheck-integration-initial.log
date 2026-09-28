@@ -1,0 +1,13 @@
+packages/ai/src/supply-access.test.ts(2,57): error TS2305: Module '"@theandril/sim"' has no exported member 'previewSupplyAccessCells'.
+packages/ai/src/supply-access.test.ts(25,21): error TS2554: Expected 2 arguments, but got 1.
+packages/ai/src/supply-access.test.ts(26,20): error TS2554: Expected 2-4 arguments, but got 1.
+packages/ai/src/supply-access.test.ts(34,20): error TS2554: Expected 2-4 arguments, but got 1.
+packages/ai/src/supply-access.test.ts(37,20): error TS2554: Expected 2-4 arguments, but got 1.
+packages/ai/src/supply-access.test.ts(40,44): error TS2339: Property 'archive' does not exist on type 'CampaignJournal'.
+packages/ai/src/supply-access.test.ts(40,55): error TS2339: Property 'state' does not exist on type 'GameState'.
+packages/ai/src/supply-access.test.ts(50,48): error TS2353: Object literal may only specify known properties, and 'factionId' does not exist in type '{ armyId: string; origin: number; waypoints: number[]; path: number[]; status: "active" | "paused"; pauseReason: string | null; knownHostileIds: string[]; }'.
+packages/ai/src/supply-access.test.ts(51,48): error TS2353: Object literal may only specify known properties, and 'factionId' does not exist in type '{ armyId: string; origin: number; waypoints: number[]; path: number[]; status: "active" | "paused"; pauseReason: string | null; knownHostileIds: string[]; }'.
+packages/ai/src/supply-access.ts(3,3): error TS2305: Module '"@theandril/sim"' has no exported member 'previewSupplyAccessCells'.
+packages/ai/src/supply-access.ts(63,35): error TS7006: Parameter 'cell' implicitly has an 'any' type.
+packages/ai/src/supply-access.ts(64,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+packages/ai/src/supply-access.ts(64,19): error TS7006: Parameter 'b' implicitly has an 'any' type.

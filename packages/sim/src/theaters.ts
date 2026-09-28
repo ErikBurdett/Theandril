@@ -7,6 +7,7 @@ import { armyDomain } from './naval';
 import { armyHasCharacterMission } from './characters';
 import { queueMovement } from './movement';
 import { rulesVersion } from './rules';
+import { cellsWithin, indexes } from './visibility';
 
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const compare = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
@@ -27,7 +28,9 @@ export function setTheater(state: GameState, command: Extract<TheaterCommand, { 
   if (own.some(item => item.armyIds.some(id => command.armyIds.includes(id)) || item.settlementIds.some(id => command.settlementIds.includes(id)))) return fail('An army or hearth may belong to only one defensive theater.');
   if (!previous && state.nextTheaterId >= Number.MAX_SAFE_INTEGER) return fail('The theater identifier limit has been reached.');
   const theater: DefenseTheater = { id: previous?.id ?? `theater.${state.nextTheaterId}`, factionId: command.factionId, name: command.name,
-    settlementIds: [...command.settlementIds].sort(), armyIds: [...command.armyIds].sort(), reserveCell: command.reserveCell, guardsPerSettlement: command.guardsPerSettlement, enabled: command.enabled, lastRunTurn: null, lastDispatches: [] };
+    settlementIds: [...command.settlementIds].sort(), armyIds: [...command.armyIds].sort(), reserveCell: command.reserveCell, guardsPerSettlement: command.guardsPerSettlement, enabled: command.enabled, lastRunTurn: null, lastDispatches: [],
+    ...(rulesVersion(state) >= 34 ? { reinforcementLimit: command.reinforcementLimit ?? 0,
+      reinforcementHolds: command.enabled && command.reinforcementLimit ? (previous?.reinforcementHolds ?? []).filter(hold => command.settlementIds.includes(hold.settlementId) && hold.untilTurn >= state.turn).map(hold => ({ ...hold, extraGuards: Math.min(hold.extraGuards, command.reinforcementLimit!) })) : [] } : {}) };
   if (previous) state.theaters[state.theaters.indexOf(previous)] = theater;
   else { state.nextTheaterId++; state.theaters.push(theater); state.theaters.sort((a, b) => compare(a.id, b.id)); }
   return { ok: true, events: [notice(state, theater, 'theater_saved', `Saved defensive theater “${theater.name}”. ${theater.enabled ? 'Idle members receive assignments next turn.' : 'Automatic assignments are paused.'} Existing travel and postings continue.`)] };
@@ -51,6 +54,17 @@ export function pruneTheaters(state: GameState, events: DomainEvent[]): void {
  * Counts include nonmembers but only explicit members can receive commands. */
 function coverageIndex(state: GameState, theaters: readonly DefenseTheater[]) {
   const stationed = new Map<string, number>(), incoming = new Map<string, number>(), floors = new Map<string, number>();
+  const reinforcements = new Map<string, NonNullable<TheaterHearth['reinforcement']>>();
+  // Each owned hearth examines a radius-three disk (at most37 hexes) using
+  // existing spatial/sight indexes. Hidden armies and remembered contacts do
+  // not participate; no global cells × armies or factions × armies search.
+  const spatial = rulesVersion(state) >= 34 ? indexes(state) : undefined;
+  const hostiles = new Map<string, Set<string>>();
+  if (spatial) for (const [a, b] of state.wars) {
+    if (!hostiles.has(a)) hostiles.set(a, new Set());
+    if (!hostiles.has(b)) hostiles.set(b, new Set());
+    hostiles.get(a)!.add(b); hostiles.get(b)!.add(a);
+  }
   const key = (factionId: string, cell: number) => `${factionId}:${cell}`;
   const bump = (map: Map<string, number>, factionId: string, cell: number, amount: number) => { const k = key(factionId, cell); map.set(k, (map.get(k) ?? 0) + amount); };
   const count = (army: Army, amount: number) => {
@@ -60,10 +74,26 @@ function coverageIndex(state: GameState, theaters: readonly DefenseTheater[]) {
     if (target !== undefined && target !== army.cell) bump(incoming, army.factionId, target, amount);
   };
   for (const army of Object.values(state.armies)) count(army, 1);
-  for (const theater of theaters) if (theater.enabled) for (const id of theater.settlementIds) {
-    const town = state.settlements[id]; if (town?.factionId === theater.factionId) floors.set(key(theater.factionId, town.cell), theater.guardsPerSettlement);
+  for (const theater of theaters) for (const id of theater.settlementIds) {
+    const town = state.settlements[id]; if (town?.factionId !== theater.factionId) continue;
+    let extraGuards = 0;
+    if (spatial) {
+      const visible = spatial.visible.get(theater.factionId), limit = theater.enabled ? theater.reinforcementLimit ?? 0 : 0;
+      let visibleEnemies = 0;
+      if (limit) for (const cell of cellsWithin(state, town.cell, 3)) {
+        if (!visible?.has(cell)) continue;
+        for (const id of spatial.armies.get(cell) ?? []) {
+          const enemy = state.armies[id];
+          if (enemy && hostiles.get(theater.factionId)?.has(enemy.factionId) && eligible(enemy) && !state.transports[id]) visibleEnemies++;
+        }
+      }
+      const hold = limit ? theater.reinforcementHolds?.find(hold => hold.settlementId === id && hold.untilTurn >= state.turn) : undefined;
+      extraGuards = Math.min(limit, Math.max(visibleEnemies, hold?.extraGuards ?? 0));
+      reinforcements.set(id, { visibleEnemies, extraGuards, holdUntilTurn: hold?.untilTurn ?? null });
+    }
+    if (theater.enabled) floors.set(key(theater.factionId, town.cell), theater.guardsPerSettlement + extraGuards);
   }
-  return { stationed, incoming, floors, key, count, postings: new Set(state.postings.map(item => item.armyId)), besiegers: new Set(Object.values(state.sieges).map(item => item.armyId)) };
+  return { stationed, incoming, floors, reinforcements, key, count, postings: new Set(state.postings.map(item => item.armyId)), besiegers: new Set(Object.values(state.sieges).map(item => item.armyId)) };
 }
 type Coverage = ReturnType<typeof coverageIndex>;
 function hearthRows(state: GameState, theater: DefenseTheater, index: Coverage): TheaterHearth[] {
@@ -71,8 +101,9 @@ function hearthRows(state: GameState, theater: DefenseTheater, index: Coverage):
     const town = state.settlements[settlementId], available = town?.factionId === theater.factionId;
     const key = available ? index.key(theater.factionId, town.cell) : '';
     const stationed = index.stationed.get(key) ?? 0, incoming = index.incoming.get(key) ?? 0;
+    const reinforcement = index.reinforcements.get(settlementId), required = theater.guardsPerSettlement + (reinforcement?.extraGuards ?? 0);
     // No captured hearth location/name is refreshed through this read model.
-    return { settlementId, name: available ? town.name : settlementId, cell: available ? town.cell : null, available, stationed, incoming, required: theater.guardsPerSettlement, deficit: available ? Math.max(0, theater.guardsPerSettlement - stationed - incoming) : 0 };
+    return { settlementId, name: available ? town.name : settlementId, cell: available ? town.cell : null, available, stationed, incoming, required, deficit: available ? Math.max(0, required - stationed - incoming) : 0, ...(reinforcement ? { reinforcement } : {}) };
   });
 }
 function memberBlocker(state: GameState, army: Army, index: Coverage): string | null {
@@ -90,6 +121,12 @@ export function advanceTheaters(state: GameState, events: DomainEvent[]): void {
   const index = coverageIndex(state, state.theaters);
   for (const theater of state.theaters) {
     if (!theater.enabled) continue;
+    if (rulesVersion(state) >= 34) theater.reinforcementHolds = theater.settlementIds.flatMap(settlementId => {
+      const current = index.reinforcements.get(settlementId);
+      if (!current?.extraGuards) return [];
+      const untilTurn = current.visibleEnemies >= current.extraGuards ? state.turn + 1 : current.holdUntilTurn!;
+      return [{ settlementId, extraGuards: current.extraGuards, untilTurn }];
+    });
     theater.lastRunTurn = state.turn; theater.lastDispatches = [];
     if (!theater.settlementIds.some(id => state.settlements[id]?.factionId === theater.factionId)) continue;
     // Rotate even after failed searches: one inaccessible low-ID member cannot
@@ -133,8 +170,7 @@ export function observeTheaters(state: GameState, factionId: string): ObservedDe
       const status: TheaterMember['status'] = state.transports[armyId] ? 'blocked' : route || index.postings.has(armyId) ? route?.status === 'active' && available.has(target) ? 'incoming' : 'overridden' : blocker ? 'blocked' : available.has(army.cell) ? 'garrison' : army.cell === theater.reserveCell ? 'reserve' : 'ready';
       return { armyId, cell: army.cell, status, targetCell: target, blocker };
     });
-    return { ...theater, armyIds: [...theater.armyIds], settlementIds: [...theater.settlementIds], lastDispatches: theater.lastDispatches.map(item => ({ ...item })), hearths, members, missingGuards: hearths.reduce((sum, row) => sum + row.deficit, 0),
+    return { ...theater, ...(theater.reinforcementHolds ? { reinforcementHolds: theater.reinforcementHolds.map(hold => ({ ...hold })) } : {}), armyIds: [...theater.armyIds], settlementIds: [...theater.settlementIds], lastDispatches: theater.lastDispatches.map(item => ({ ...item })), hearths, members, missingGuards: hearths.reduce((sum, row) => sum + row.deficit, 0),
       blocker: !theater.enabled ? 'Automatic assignments are paused. Existing travel continues.' : !available.size ? 'No assigned hearth remains under your control. Update this theater before it can assign armies.' : !theater.armyIds.length ? 'No armies are assigned. Add combat land armies to fill garrison gaps.' : null };
   });
 }
-

@@ -1,0 +1,68 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/supply-access.test.ts (6 tests | 4 failed) 251ms
+     × buys a genuinely useful foreign harbor through ordinary commands, pays only on acceptance and refills its loaded convoy 83ms
+     × retains the public quote, operating reserve and caller commitments; never bids against existing requests or direct routes 34ms
+     × declines a land-only source for a fleet and prefers existing supply instead of paying for a duplicate 22ms
+     × cannot invent a foreign source or a route through unknown water, and ignores hidden state changes 30ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/supply-access.test.ts > observed supply-access diplomacy AI > buys a genuinely useful foreign harbor through ordinary commands, pays only on acceptance and refills its loaded convoy
+TypeError: previewSupplyAccessCells is not a function
+ ❯ planSupplyAccess packages/ai/src/supply-access.ts:57:19
+     55|       settlementId: town.id, feeCoin, termTurns: TERM_TURNS };
+     56|     if (assessSupplyAccess(view, command).band !== 'likely') continue;
+     57|     const reach = previewSupplyAccessCells(view, town.id);
+       |                   ^
+     58|     for (const army of actors) {
+     59|       const compatible = (cell: number) => {
+ ❯ packages/ai/src/supply-access.test.ts:21:82
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |unit| packages/ai/src/supply-access.test.ts > observed supply-access diplomacy AI > retains the public quote, operating reserve and caller commitments; never bids against existing requests or direct routes
+TypeError: previewSupplyAccessCells is not a function
+ ❯ planSupplyAccess packages/ai/src/supply-access.ts:57:19
+     55|       settlementId: town.id, feeCoin, termTurns: TERM_TURNS };
+     56|     if (assessSupplyAccess(view, command).band !== 'likely') continue;
+     57|     const reach = previewSupplyAccessCells(view, town.id);
+       |                   ^
+     58|     for (const army of actors) {
+     59|       const compatible = (cell: number) => {
+ ❯ packages/ai/src/supply-access.test.ts:47:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |unit| packages/ai/src/supply-access.test.ts > observed supply-access diplomacy AI > declines a land-only source for a fleet and prefers existing supply instead of paying for a duplicate
+TypeError: previewSupplyAccessCells is not a function
+ ❯ planSupplyAccess packages/ai/src/supply-access.ts:57:19
+     55|       settlementId: town.id, feeCoin, termTurns: TERM_TURNS };
+     56|     if (assessSupplyAccess(view, command).band !== 'likely') continue;
+     57|     const reach = previewSupplyAccessCells(view, town.id);
+       |                   ^
+     58|     for (const army of actors) {
+     59|       const compatible = (cell: number) => {
+ ❯ packages/ai/src/supply-access.test.ts:63:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |unit| packages/ai/src/supply-access.test.ts > observed supply-access diplomacy AI > cannot invent a foreign source or a route through unknown water, and ignores hidden state changes
+TypeError: previewSupplyAccessCells is not a function
+ ❯ packages/ai/src/supply-access.test.ts:94:12
+     92|     const view = decisionTurn(state, buyerId), before = stateHash(stat…
+     93|     expect(view.settlements.some(town => town.id === sourceId)).toBe(f…
+     94|     expect(previewSupplyAccessCells(view, sourceId)).toEqual([]);
+       |            ^
+     95|     expect(planSupplyAccess(view)).toBeNull(); expect(stateHash(state)…
+     96|     state.settlements[sourceId]!.name = 'Unseen renamed port';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  4 failed | 20 passed (24)
+   Start at  16:40:38
+   Duration  2.76s (transform 2.16s, setup 0ms, import 3.26s, tests 3.08s, environment 0ms)
+

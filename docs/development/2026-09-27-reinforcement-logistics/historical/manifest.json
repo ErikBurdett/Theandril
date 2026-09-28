@@ -1,0 +1,2333 @@
+{
+  "version": 33,
+  "contentHash": "015468d1",
+  "sourceRevision": "8e371b3290aaabd9421ce679b76cc8a5ce28d770",
+  "captureCommand": "node --import tsx scripts/capture-reinforcement-logistics34.ts 8e371b3290aaabd9421ce679b76cc8a5ce28d770",
+  "scriptSha256": "9e591a7acdc6be25ab7339d4d4b6578db6ab93f01e6f4c079125ac50df278268",
+  "sourceFingerprints": {
+    "packages/chronicle/package.json": "ba216a078f362cc0a7d58b821f6519a1b3e4154719c96a9f0a7342e2d8644001",
+    "packages/chronicle/src/battle14-compatibility.test.ts": "fb50d10d809c93e00939cfec016c8bbdc18e96a695b127d482aeb436a0ce725e",
+    "packages/chronicle/src/character-replay.test.ts": "ec84d3173798ef3560995cf3347c53200f8ace48806c0c7012ba87888a955f71",
+    "packages/chronicle/src/chronicle.test.ts": "f92ce40227f45539d056e0c0e0776e61b39d791d511d41466e107dbaab5dd422",
+    "packages/chronicle/src/compatibility.test.ts": "4758466f97389320a34ad97d73116f2fdcf8cd7cd313942100af057801de5424",
+    "packages/chronicle/src/defense-theaters-compatibility.test.ts": "8d86958318fa17efed4fc0a71c64dd609604476271b0005e3cfcedffb6830b52",
+    "packages/chronicle/src/development-compatibility.test.ts": "34d06c988874fc71f66e98bb0e5ae498c89381cb6e1aa927bcb18922908b4d37",
+    "packages/chronicle/src/fixtures/defense-theaters32.ts": "96a7fe0833f6060663df3b662cfa9178216354ddf7be867442ce0c53c0417f96",
+    "packages/chronicle/src/fixtures/legacy-conquest.ts": "c273aa1f58feec00ec5c781153a2ca54b0c3e3b89af18a177f8adb73f681a1de",
+    "packages/chronicle/src/fixtures/legacy-diplomacy.ts": "579dcb48907663c19e025e110661638ce69305a37f60e885718c2506337a935e",
+    "packages/chronicle/src/fixtures/legacy-planner.ts": "7d0fa4c824655b5cd8087b17433ade8d9dc13dd7bb7374b850783602ed872fc4",
+    "packages/chronicle/src/fixtures/legacy-progression.ts": "899532be0d850ec0fb6d9c472296d160fd48c129e0080d53247d67e2175b2fe6",
+    "packages/chronicle/src/fixtures/v10-archives.json": "feba9d6fffebbbedd8089ad6db4bb5035af8fe84c04f702abdb2d44c1ce538e8",
+    "packages/chronicle/src/fixtures/v11-geography-history.json": "117242739698e2579d692ef4721362aa6909980d64ef092f5b04ad3d6678d342",
+    "packages/chronicle/src/fixtures/v12-faction-history.json": "ec0909275fcb932ade3906ed53b7151add826d243954d784ba0b5311bcaac2e4",
+    "packages/chronicle/src/fixtures/v12-generator5-history.json": "4072d642686311856a39cee1f44418eee94862927736a5826e32b87eb21592fd",
+    "packages/chronicle/src/fixtures/v12-generator6-history.json": "aad9ddb63d9e975eeb3bc0c1a95b5e58fdddd2871d55f6d79959b44a8a2a028d",
+    "packages/chronicle/src/fixtures/v12-generator7-history.json": "a8c7818024ef1714e67b18ea003c6c20376759348547ac0c3ee8a67bc3a9f293",
+    "packages/chronicle/src/fixtures/v13-battle-history.json": "ff51d802566c20b8c42c0dbb3be23b153e4c09f83de18de96a898571f987042f",
+    "packages/chronicle/src/fixtures/v14-specialist-baseline.json": "2fd8324f7c1046a565214ff0930e93c6c1dfa3bfa1b841b52dcc64a9b057e204",
+    "packages/chronicle/src/fixtures/v15-development-baseline.json": "95395e55f543485ed5976c6db1e86059ba5e56106cce81305942d6e333f4311f",
+    "packages/chronicle/src/fixtures/v30-fleet-provisions-baseline.json": "a1a152bf76476523a15165bb7f0e9be5acdde798438c6221d22763647e32632b",
+    "packages/chronicle/src/fixtures/v31-selection-groups-baseline.json": "5f25c8c966d64e177b4b67e9e6fedec73bb93e507ef87e668edced0ae82e5bb1",
+    "packages/chronicle/src/fixtures/v5-archives.json": "d48cf1b3b8332e3e6e68f55228149800fff81b288fa73ac0b9acf1d4a10b52e6",
+    "packages/chronicle/src/fixtures/v6-archives.json": "4c8463a91e74ad65fb022c406f2c553894e70af9dcff05a62c44d9a433c8f7bf",
+    "packages/chronicle/src/fixtures/v7-archives.json": "10f174a2b30103aad9f4d85b04fc27c35f871d80dc19f8d6cc061ca8db7602e7",
+    "packages/chronicle/src/fixtures/v8-archives.json": "69ffd8fc68a6bcf994eb528e1f32abdeb7a7e603b2a37a72db6587f9db4a95b2",
+    "packages/chronicle/src/fixtures/v9-archives.json": "0f97394087904ab58ace1a2b1eb9365cf519d22de0ce8735ee6478c58ca99620",
+    "packages/chronicle/src/fleet-provisions-compatibility.test.ts": "0ae5737c25e0ae8320bf1b86b7ed1b110b7967f3d83c93d4879750ef8daa482e",
+    "packages/chronicle/src/generator5-compatibility.test.ts": "fc291fba50d86a76845e3500a72949db02968337b3769dd0db65b5410f6adc31",
+    "packages/chronicle/src/generator6-compatibility.test.ts": "8abb74240e35a986540277ef5aa3e42e6ecf13663a0bf10364006340fc81e410",
+    "packages/chronicle/src/generator7-compatibility.test.ts": "99d62d913b4eb44edf2174c25acf34548e0fd77c5b8193548456d8a56fe598c0",
+    "packages/chronicle/src/index.ts": "92f7e85c81215df6ad1692afc0f88aa5e5c9f7f40fd4615c956bc488356220ed",
+    "packages/chronicle/src/journal.test.ts": "c7464ea67a657bd4a00aa8162b8844e1e49f41602fe8fe9f4eb7eaa0b1430cd5",
+    "packages/chronicle/src/journal.ts": "7d42b1b78e2994e3d986bacdabaf1533fa9fabf5e62166b35e19c307ca8670f2",
+    "packages/chronicle/src/json-equivalence.test.ts": "16fc68b21786c43aef2f86f40af6661036432ed6f17420df07a846ddfe87f36e",
+    "packages/chronicle/src/json-equivalence.ts": "af649f8a62779172d0bef6fd8bbda08193f545904180d849d91bac3ddaf0a602",
+    "packages/chronicle/src/naval-replay.test.ts": "468230259e4e886647de7e8f3e27d9b55fb83d09a3d9a76842590c6d670a1950",
+    "packages/chronicle/src/schema10-compatibility.test.ts": "620e6f7fe36e79607874d170363a097f00fa5cc95e8c9f830528709ebdbabd2e",
+    "packages/chronicle/src/schema11-compatibility.test.ts": "44cbe4a79d186855be6ddb81e0dbc394b485e5a8387262d5a92d6091522b5c23",
+    "packages/chronicle/src/schema12-compatibility.test.ts": "5a0fc82ed099edd7013255a05ad2af15599b37779ae806f48d02f141b8013e20",
+    "packages/chronicle/src/schema13-compatibility.test.ts": "5aea3064258f1497c37cfcc9cdcb185fef30191dfc7c1b4f8b5d0ddcaa47db8c",
+    "packages/chronicle/src/schema6-compatibility.test.ts": "c657e28de6050af965c0eabec62f59f4499ca7fb2fc2a31b855e1e68ee62a1bf",
+    "packages/chronicle/src/schema7-compatibility.test.ts": "a3d4f8d53937f81c876201871460ca723c5e0f1896aac12ce5b084057200903e",
+    "packages/chronicle/src/schema8-compatibility.test.ts": "c7366b5ca209d520dcb7803347318a449d1f2858eca3635591a38331aceb3cf6",
+    "packages/chronicle/src/schema9-compatibility.test.ts": "4cf0d788766f681b8465a32f05b80279525b65ad060a5a6ed087ec8b88f20738",
+    "packages/chronicle/src/selection-groups-compatibility.test.ts": "4e675dee718500338f53e3ce646929fb0c88dedcba5979135e09310b221f7800",
+    "packages/chronicle/src/specialist-roster.test.ts": "c58b9d45565c729635cfe5768200402f3f54b378b890d7108acabee8f2d17ef2",
+    "packages/content/package.json": "c1578fc100735e27c785073ab0ca3e2a15888704735bf9d739b42a5454e03089",
+    "packages/content/src/characters.test.ts": "d6a62fe7e4727c0a8a4525160bb0c5658a73a11f4ab6a1d508f80bec6d81c51b",
+    "packages/content/src/characters.ts": "e786ec0a275dc122902dde2ab51b4270368533010eb252ed2fb2ef99d11c8048",
+    "packages/content/src/city-states.ts": "8edfe05fbbee962c903f0115bfe8e7c364d13d2884d68d1921bff2d4b10429f7",
+    "packages/content/src/content.test.ts": "547113d7325b39a109f1ad91271d9b293dc74725bc5acef9ee7d2d13c66a9151",
+    "packages/content/src/development.test.ts": "eb8d14f83888eda33e03f75d992a22e3fd89275ca5eae71d48e30a9e1e215374",
+    "packages/content/src/development.ts": "22cbaf25499f49c9f39de523692239e881738f763a217f9efc0d99994787c117",
+    "packages/content/src/ecology.test.ts": "a9ca8ab7b7941a29349129dc68e30e971b0d8e29dd430c2d22c7ad36076f29c5",
+    "packages/content/src/ecology.ts": "f5a21a46213445e68171f6468e7d955a4a5997d3bab1d824f8e9c80c50a51b3f",
+    "packages/content/src/factions.test.ts": "63048f0a4050ca605ae960d5dceed18ae4f55590609a2b76a9bd346f1612b967",
+    "packages/content/src/factions.ts": "5d4c54b6adb4e89d2801a44a247e09a21fcf5bfd34b5ccb0a788cd9a82992e53",
+    "packages/content/src/index.ts": "4601297575e5887e82f1e925616c2a5747ef264c4d4e11a0b3c6a07ff21fb542",
+    "packages/content/src/magic.test.ts": "9bd97d0349bd9afaf27a7e354c2110497369fb53dc7545fa330c8c3858946e3f",
+    "packages/content/src/magic.ts": "0344a69e340ef8dcceeda8a36126037952c7b9f33b2c28527d710dac44b46cd5",
+    "packages/content/src/progression.ts": "b525289341a14b0acc96c3041a0f98b5f6a11b594f00df810b3e11c4a74d05c8",
+    "packages/content/src/research-trees.test.ts": "818c0a2355ef85be5da208d42e3d4ae9535d9846363fc40b87a64038cf2edb12",
+    "packages/content/src/resources.ts": "74f9bbf266bd64592b33692c5448adc5fe6ebfd2e16a0865de11d71554c68e89",
+    "packages/mapgen/README.md": "4a81eb4ff80271c48253b89deb18fb3c24597a33c3db097db25d813c60d165c1",
+    "packages/mapgen/diagnostics/v5-geography-benchmark.json": "f236d9e18b3de5f16a5b6e7cc121eb3d88c3886a4a56e3fccc773faad62db8ec",
+    "packages/mapgen/diagnostics/v5-geography-final.json": "05e5f9a8778081f42e237b6024d7337075754525deeca3407fa2e3a79584f486",
+    "packages/mapgen/diagnostics/v5-overview-20260905.json": "99256c49ec8911dd21527066d6a6ef823f8cbe9c2973ade3d306de1c339c64d9",
+    "packages/mapgen/diagnostics/v5-overview-20260905.png": "8a731f3bd138bffcc1b8543c48aa5d5c1c86337766c5c30298cc2ca3302f97e8",
+    "packages/mapgen/diagnostics/v5-overview-42.json": "ad2ae0f0999e1faa46fbe3cf12e9fcecdd206f6679b4c2f8150ee4fea293eae0",
+    "packages/mapgen/diagnostics/v5-overview-42.png": "4a48ae81f6cb28601758152a598e5be8d0affe4c69dc52ef42fa8d59e538e8ae",
+    "packages/mapgen/diagnostics/v5-overview-74.json": "5dc485bc657305943515017a9ffc72bec0822754886ab4046c1c7bd5f5c3a3b1",
+    "packages/mapgen/diagnostics/v5-overview-74.png": "3e3000e293ba58b72933e4f2a50ceed441afe4d7d488043da237137d2de264d3",
+    "packages/mapgen/diagnostics/v5-tiny-overview-20260905.json": "8bda3b2ab4d331cfb1919a2ed9e75b2f1b4a73c718ac709596bc904303a928e8",
+    "packages/mapgen/diagnostics/v5-tiny-overview-20260905.png": "2870710539d249fe3c2ccdb70bc910b3ff3fc1ade6db0c0a51fc535590213d77",
+    "packages/mapgen/diagnostics/v5-tiny-overview-42.json": "938b5ba283b9c6229d751927df7a77109000f22af490b53d06165f4b86c416ce",
+    "packages/mapgen/diagnostics/v5-tiny-overview-42.png": "fa6657185ad02812b6bd959466bde735e3acb7b76fa12adfd40b90541f376956",
+    "packages/mapgen/diagnostics/v5-tiny-overview-74.json": "7b189cdee43b904356e8d96212e7bd02a3936ab08b518c445f2788df29eb6bf6",
+    "packages/mapgen/diagnostics/v5-tiny-overview-74.png": "5e3d6596e765973368dd4610b72c02d713b43398ae141cdfc54052958ac4476d",
+    "packages/mapgen/diagnostics/v6-geography-climate.json": "eaf2b4c44216896a6bc0915eacf66898eccbde09fd1d42f0c99d3ebfda30e9bd",
+    "packages/mapgen/diagnostics/v6-overview-20260905.json": "2e02fddaeff3ca8977ca617bbf6900403c5cf779878ec01fcc940981b11eda46",
+    "packages/mapgen/diagnostics/v6-overview-20260905.png": "2a618b76cccb58663df0f4d71af9cacfbba51fe9f36b7ccdde589c1e1f540357",
+    "packages/mapgen/diagnostics/v6-overview-42.json": "5b82690ddef119076c4c442dc4371059c6f66eef2d9598698b9f5ccf6bf2ea1f",
+    "packages/mapgen/diagnostics/v6-overview-42.png": "a7295002b2540698aae963951987bee971555470b17a346158020d252e24af86",
+    "packages/mapgen/diagnostics/v6-overview-74.json": "fe87c20c2c086c17a0d3c50f8179581cf013aa9f23ff00430360ad18aede47d5",
+    "packages/mapgen/diagnostics/v6-overview-74.png": "85d0d12c304053550e9c388e02137555a8daf36f955282d9e39d52c9cfa025b0",
+    "packages/mapgen/diagnostics/v6-tiny-overview-20260905.json": "b5e2e07b3b193282464e5221f8308b5a42cd23e8b82c84843a4f83a83478b9cc",
+    "packages/mapgen/diagnostics/v6-tiny-overview-20260905.png": "221d5c9d16d0cf0ce0053eba27ca0c04678ef5936ec36390a5e27e2b6dd204f4",
+    "packages/mapgen/diagnostics/v6-tiny-overview-42.json": "147837cbc4b77fdbd669a7a7645fa8cad9ec822b6b78a011c2ccacda6602c749",
+    "packages/mapgen/diagnostics/v6-tiny-overview-42.png": "6090a193fd188828465480cc7ee7d17bda442668cf611800a0d39023d3fe5e6a",
+    "packages/mapgen/diagnostics/v6-tiny-overview-74.json": "3bdb035b09eac25d650a540f3e37e2d13b4366c52cf8b01117b0e6e91f4c8b92",
+    "packages/mapgen/diagnostics/v6-tiny-overview-74.png": "ce11bb5e274cca29f7af18655dda18800a65a689b8dd735714b2da32446e3c58",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-20260905.json": "b7a50960708eb57a231f1af13580976d911a56a9ce6ba840e59231d080cb3fbf",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-20260905.png": "53c8164fa42047b27069e16c5ba2c9699300bd8a94d7726df5be284ecb530ed7",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-42.json": "d9bd2d5d882e0de569c9ccc988e1f601cd3b442119a2fe7d5f5a15fff0bd87e8",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-42.png": "375afbaf9839efaaa4366890febf2b991bb51071cfa86f07dc6104c256729488",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-74.json": "eb0ce2318c4060418fcd1994d09a0742320c47d1f2d91563c8a75aac035da2cb",
+    "packages/mapgen/diagnostics/v7-inland-seas-overview-74.png": "04531503c4c66c1ee8e68dede0b9c6d9e7f705108603aadae738d8598cc8fdf3",
+    "packages/mapgen/diagnostics/v7-inland-seas.json": "5c862b47c00161f73650d22c7449b0f7c1829a0363b06691512d242980048f73",
+    "packages/mapgen/package.json": "ecca63dab4568bfbec697dc898e02083288b709abab4527aac62e07ed94e28d3",
+    "packages/mapgen/src/biomes.test.ts": "73349717cb187a805093d843eaec839622f3d9e5bdf16507b4a33b8f12fec4ea",
+    "packages/mapgen/src/climate-v6.test.ts": "d1f652268ef82533ed8f9f49efaa5161f3a6d673d7d5963b5d0d956b6b4d1b8c",
+    "packages/mapgen/src/climate-v6.ts": "7a4887cd3e572bdef2481a5aa23432eaadad719db8ab3472eb428f46844f3633",
+    "packages/mapgen/src/features.test.ts": "2bb97a7265e565071a0272ebafcbe1afe77d732268b8ba30da660b01c11791de",
+    "packages/mapgen/src/generator-v8.test.ts": "20aed40ffe6c60861a1ec8bd93bf245b9d151d5fe4a13a9ba6a3de24ec0ab879",
+    "packages/mapgen/src/geography-metrics.test.ts": "d27615db9ae23975a32109070e624ba4ce8c4bba7e10c419ec54efa603016e5d",
+    "packages/mapgen/src/geography-metrics.ts": "7473e887079da15c0cb182ebd548603bf0e3a4907fb12a7f53ba83032e0f849b",
+    "packages/mapgen/src/geography-v5.test.ts": "0c208b13ed98739ee3fdc1a5201fd54d1cbf3698894a4e0ea98f8242c8ea147e",
+    "packages/mapgen/src/geography-v5.ts": "80e4ac6488d01abd6535f32b2bac8025213f1411c19f8b36bafd8b6fa1c3ee73",
+    "packages/mapgen/src/geography-v6.test.ts": "9296c1cf1a6c0267d08294996a939fbf7eeb0af788f2f8d68d3ddda2e8ef90af",
+    "packages/mapgen/src/geography-v8.ts": "dc838bec2cce5b62f9373ed7955a30bbfc63884797333ce70711f8c12011b885",
+    "packages/mapgen/src/historical-seals.test.ts": "b117c95e8388d6b4f2e7be044539f89a746655dba2766f06434d5d990e90e439",
+    "packages/mapgen/src/hydrology.ts": "dbcef798c8704432ca2d3422ffe51903506edc375fccfe888f2ea80eb94dd403",
+    "packages/mapgen/src/index.test.ts": "01bc33561ff0d8076d344c9c9b5a7a0e007024d4150ced0c8cfb018964036bd2",
+    "packages/mapgen/src/index.ts": "d3600ae2a28adbbb901cf02a06c42d7b469a4b3301c10e8c41938e86470555fe",
+    "packages/mapgen/src/inland-seas-v7.test.ts": "a6b78087ff5464c26003711de7fc8f76d9ff34b424b22e1d2b17b65a83f1de0f",
+    "packages/mapgen/src/inland-seas-v7.ts": "8eddd6efcf41aeeccf5de850db73e101ec8dee863a9021ec09388473937fd70c",
+    "packages/mapgen/src/relief-v6.ts": "0f552573add0086c6a875cac5d30d47e4528405a76591dd63aa22587d858794c",
+    "packages/mapgen/src/water-depth.test.ts": "b4973183f7ceb715b5aa6178fab6c07b5a44c116fd4eab28aafe4e266c0c8c65",
+    "packages/sim/README.md": "f5ff19114e8eb6ee546e0527adea228e03331e3dac9f1bfbfd7b04768e1e1eef",
+    "packages/sim/package.json": "f8a08cfce3f58efa39a4daa2afdf5f95893862255c153b2b8fb2a1119d08d6d6",
+    "packages/sim/src/arcane-sites.test.ts": "a64c31f1df9c1b84426e9c755aee35fd1768db9b9ab95e2194a48e2ccf6747e8",
+    "packages/sim/src/arcane-sites.ts": "d2178cd67ab0569f9111573049cd4bee8d5d9e4bb497529ea386d185d558a1cb",
+    "packages/sim/src/army-combat.test.ts": "a41712df9ce94239f0364cac4eeaa4a03ff552d4e541f34e347ea1f2ec9e7364",
+    "packages/sim/src/army-composition.test.ts": "6c083bd1ff14663fd29d4e846041d6df206a8cbee22427c2e433d5374de00071",
+    "packages/sim/src/army-composition.ts": "f079b603600fcf81840f77c01b85b20d005196b457d794cfcf1b87020eaed1af",
+    "packages/sim/src/battle-abilities.test.ts": "c692469faba5e64bf7792048109dceaa34aefa816fb2aeb090edda113a356897",
+    "packages/sim/src/battle-abilities.ts": "68b80ba525c8f4bc566620ca908b14a708f6b1ca8e088c783d2714af91dc2cfd",
+    "packages/sim/src/battle-frontage.test.ts": "b98c6bb7fef2f85012d299c77f1fe0538befb9511cdf323cd36089333285024b",
+    "packages/sim/src/battle-frontage.ts": "f8d619b7c0894ac063824f5b19d4ebd8c804f0b845328822aee3c88f31c908a0",
+    "packages/sim/src/battle-morale.test.ts": "862db4e29a4840e24b08e601393ce968fbcf24bd7d5e25c8359cb2ce3fa19c6f",
+    "packages/sim/src/battle-record.ts": "b7fa3ef0acb777a8e53d360ee8e58c7e54b9048aae933152691311dc8e13a708",
+    "packages/sim/src/canonical-cells.test.ts": "5319912650f3e518f5ef91b84d945b8d6a873a780931cf9fe4dc12efb30ed01b",
+    "packages/sim/src/canonical-cells.ts": "4c3175175ee06d4a2742bc75ae6e0d1d793520da93798377fefe17341d804be9",
+    "packages/sim/src/canonical-history.test.ts": "0080b6b2a404e9f598620593ada45e946bad255f1d10a602996bfa3e804e5dbf",
+    "packages/sim/src/canonical-land.test.ts": "f659905596d88fd2a2318782c7fc9baa505978509caa3d1ee2b87d6df4210078",
+    "packages/sim/src/characters.test.ts": "97b310db9a9f9c6c0892ac8fb1ccafe6f6ab8ff824f1c2430c42fd02e0481738",
+    "packages/sim/src/characters.ts": "0724e8b92252920d99e66d0673dd8b0a6d3490c5d92a5854a30952d40b6025bc",
+    "packages/sim/src/charters.test.ts": "55284f7f27c5a7fac31c702427111f0a375c1d9ebedd8662436e61cc854e1dc4",
+    "packages/sim/src/charters.ts": "112e07de9403457ea7254af72db336efd59ce363c131a98298c187e3450339a1",
+    "packages/sim/src/clients.test.ts": "b8bb94dbed871a91a73995c61a0c21b122f6d129c31cd60b2e53faca98f68193",
+    "packages/sim/src/clients.ts": "a1c97f5853340bb3b63f8da3d4e7695453158a79409ff5a4a811562d61947f98",
+    "packages/sim/src/combat/README.md": "2e56c2f3c5a6ddc6a7d651680ba924ab0517f920e37e2c18a2aef753dd616e2d",
+    "packages/sim/src/combat/combat.test.ts": "2426fd4c779f4ae1ccb7bd0fca3fadb7189484e0ff644aada40fc13db0664d14",
+    "packages/sim/src/combat/development-snapshot.ts": "aa077511fcfed8555cce70171a333f2d796fcf0773032a75c2583c644113fc7d",
+    "packages/sim/src/combat/index.ts": "ed781e1f02687e44db2a49ae63549a7ace55db70788bf80c9fa63edc065a7d0a",
+    "packages/sim/src/combat/individual.test.ts": "59b3f5873b6ab64450a7f4928a59796ef47ac6e47560b8aa9c9aab4e5b932985",
+    "packages/sim/src/combat/individual.ts": "60846926e6957b78b42460f12241eb96bc4a09a9d7b687cb64e6e4ec3d9c1186",
+    "packages/sim/src/combat/presentation.ts": "3acc17b8cd883b86be3002917ca160b15c2d9a4784f99dd9030cd4cf05e89720",
+    "packages/sim/src/depots.test.ts": "b6388fa498be3995c1b1d17e9364838442ced7405c518af770f4775ceffff3ce",
+    "packages/sim/src/depots.ts": "051d5d322b8d75027bec80b9640632a29a5ea3a06198f90908a16da1e04d317a",
+    "packages/sim/src/development.test.ts": "8d61186aa40f1c43cf29143dd94f978d373a9e2eded00c450b869f6103381414",
+    "packages/sim/src/development.ts": "45f46076bc1c7df497f032c16c213fc5da4d642a31e1341b49f5ef12054aac3a",
+    "packages/sim/src/diplomacy.test.ts": "e88429be247917ce29876f3b24ed82ca51a4f4069c674a49875d4d64c8b6a2e1",
+    "packages/sim/src/diplomacy.ts": "f2ad6b35f9cec424be087216d80c9dc72189a4369311073fdeb0f20c2bf9244d",
+    "packages/sim/src/envelope-hash.test.ts": "117154fb82b6ba479c0bac26e092e76c932965e19baee738e371a1903fa029e5",
+    "packages/sim/src/explored-sort.test.ts": "1fb712a785ebcd85dbc0dc4e42d1419923a865bd4123ce7056f5d84ca3298186",
+    "packages/sim/src/faction-starts.test.ts": "157ea0a38500fe3569416e77438f338dd18876fa3e16e2bdf40c1472fa1a40b6",
+    "packages/sim/src/faction-starts.ts": "0cc988a129d9f4ddb73b8078270d6441b3c9798f2bf2369e8627641fbfca658c",
+    "packages/sim/src/fixtures/v16-trained-battle-trace.json": "a3774b540a14d872132497f8ee91b4c58ec5f70567630695c1a45fcd01521184",
+    "packages/sim/src/fixtures/v16-trained-battle.json.gz": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb",
+    "packages/sim/src/fixtures/v5-army-replay.json": "8f005e7aab9e1db2d0e6b0bcb321d08f0d1388c6a92742b28acdbcc5a952812d",
+    "packages/sim/src/fleet-provisions.ts": "dd80bb4c658a75e399fe51cecafe5bec609a925d6ac265907fbfe54c33cd8edf",
+    "packages/sim/src/fleet-supply.test.ts": "a158a373746bcf49a9eab7b03bbafdcb922e7cd4d634ef31caa0fd408ba7a5e3",
+    "packages/sim/src/geography-save.test.ts": "bc5c493e59ce9b741465ca30af6ebdff0aba17ff3ad1dd450b1a8e997f1fa20c",
+    "packages/sim/src/growth-economy.test.ts": "91c55897f2cca818c6f5cfc80eb804c0e24715289d1c7f51eef2f7ca0284e281",
+    "packages/sim/src/growth-economy.ts": "8d7037470e0a80b68ff829e3a079df8318b5a70d7fdae8fe73db60f4a8813f5f",
+    "packages/sim/src/index.ts": "f2c2ff083f9f4bb80c8868d7fbcdadd32f8736e5f291bb4aefab2cfa28164a04",
+    "packages/sim/src/individual-campaign.test.ts": "47d916eceda7e146896c47b21b1d650f258bddccb912d54399e29144e263508f",
+    "packages/sim/src/land-queries.test.ts": "e1aec1a0e3a9256a790148a91ab6f43217c4b0596457d7846a4b65fd0e144991",
+    "packages/sim/src/legacy-growth-visibility.test.ts": "a5b7bb0d763044a546c694de833b63897f54f4131baaaf8aceeb00803e8ac474",
+    "packages/sim/src/magic.ts": "38b87041e557ead332859eb3d287afc37931d591a723ca8439dff1cdfd132a0f",
+    "packages/sim/src/movement-frontage.test.ts": "20190dcee0dcc8a764afb0637a12e24e21ff9eb4b8e9ecc4ec4de4cd1aa95b0d",
+    "packages/sim/src/movement-preview.test.ts": "f3149765b9e84f3b30634d0a652175f2f912d70ef7e7b24c324cdca19e7f29c5",
+    "packages/sim/src/movement-search-equivalence.test.ts": "943c8ef9dc819af6f7808dbc95712b880502866ab911ee281124be2bacc57c2a",
+    "packages/sim/src/movement.test.ts": "3401fda8e912c276c768e0f2367e67605b143b9b16d4ab7f39798a2082b77335",
+    "packages/sim/src/movement.ts": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3",
+    "packages/sim/src/naval-launch-quotes.test.ts": "0ddffc44a44e02881064f67d532f0d573664b83b05b8f3a2eb27742e464d7801",
+    "packages/sim/src/naval.test.ts": "3f8b4f3f84d8fd6624033f2382752d43167375c090964a315618d0e83089b499",
+    "packages/sim/src/naval.ts": "53b0966df2b6394c12203685efd883524867daafb0bf3cc98ed0786a70ae8da1",
+    "packages/sim/src/pacing.test.ts": "efee4892d06e0b85fd8346f76d609465faff971e698042bde135818a64098b20",
+    "packages/sim/src/pending-assault-save.test.ts": "7a4de4e14bb9b09f32968b9b9cd190eb95b3d9a89c0618a997c220de70e305c0",
+    "packages/sim/src/postings.test.ts": "a654fe4bc4482adb6232e9686b79d649ba4b4fa46bd3df41de3eb907fd033d63",
+    "packages/sim/src/postings.ts": "049a454aff7c65e4d30a9318afe3a5a305d5efd4a7fa153f475f1997ed2b974e",
+    "packages/sim/src/progression.test.ts": "d049373f8c8ee4e576331938effa6e8ceca82847c940bfeab52844e7df845b14",
+    "packages/sim/src/progression.ts": "f9a7853503373f18799136b80f0222f0d584f1eac127c159a25c386d95f52b6a",
+    "packages/sim/src/research-trees.test.ts": "dfc07f6b1d7744f41e7883c89ba3744214f792b184a37341ac885814f70256fa",
+    "packages/sim/src/resources.test.ts": "f280ec5610a9a889ba595b49005328726966efb595a026a3cdd245c5698db013",
+    "packages/sim/src/resources.ts": "df7221ea32787211cc05ff41752047a3a955f473b024948cc32d6856e82cf5cd",
+    "packages/sim/src/road-edge-cases.test.ts": "110be3c167997e6d200457d03a7d84c4a0deb2ab3819b5b35ddc858811e200a5",
+    "packages/sim/src/roads.test.ts": "cc3972b1b6e11578e50d7a870ff56d870bb76c1a05311452d0d7d4fbbf468691",
+    "packages/sim/src/roads.ts": "3f0d5744fe698038c24cbceb4009a3a1b027c8a5df24471012cbefdb4024ed58",
+    "packages/sim/src/roster.test.ts": "58ff9864ed2c2f34deb971112b7852a8496533ea222eedc9b131edf9f71337f1",
+    "packages/sim/src/route-previewer.test.ts": "6609e0818f4e8fd1abb493e8a56b60f03fd73613038cf1d373396f3b183bdf0a",
+    "packages/sim/src/rules.ts": "df7a337450620adf8aad02404b1dda6cd7332c4e89745547bc2a8d12acd5e4d6",
+    "packages/sim/src/save.test.ts": "35270071215db1c7c530d4657f3d27e87ac877651086d870c1b65753ee8fbb2e",
+    "packages/sim/src/save.ts": "6b17cb40ee2e32bf981cd7fb8d6afc722e359319e2fd98ac2cff4ab362ebcf73",
+    "packages/sim/src/seats.ts": "0bd60255f231b9c8e37a65d1c4a4a6f1384309c7c2e72f9528db083db1a8fbdf",
+    "packages/sim/src/selection-groups.test.ts": "178ee0445458ce6e37fd0d087f4394ebf9dbf105a12a3de355a8f55c2e7bac18",
+    "packages/sim/src/selection-groups.ts": "cc3e30053acc86ee0c13404e63a43bb0c1c3daf7b56b3405da2aa11bfb06548c",
+    "packages/sim/src/serialization-performance.test.ts": "ed026d58809e97e1aad8324b2295c540ce39ef8ef3dc661e1991dbab999f7250",
+    "packages/sim/src/siege.test.ts": "0a4ea154d01ab94d8760c2da1c0cb3288588a2cc22c22da6e1109550582a47f7",
+    "packages/sim/src/siege.ts": "93371a9d20781bca28fbb97a2d18174293bd46326fa54383d2d688f351bc7fca",
+    "packages/sim/src/simulation.test.ts": "b5fee83929a4c949366ca850a4d8b3bf68a72bb9f5cc9b3fcc031a8778ae5544",
+    "packages/sim/src/simulation.ts": "06dafee4eccc26b0af00bc9efd2f3dea9646f478028a86d747759c0d0a92d349",
+    "packages/sim/src/sixty-four-seat-save.test.ts": "5524c96ea08ee80726a7c5c04065dc4c9d74cc52843094a048dfea9f182db7b1",
+    "packages/sim/src/specialist-combat.test.ts": "a24d97de1de4b13ce058d9db84add3db9bf6d51686bdf14f2808a5589ab16709",
+    "packages/sim/src/spectator.ts": "19c34e39e704eaa5c3e187c2c78d27163f9acbcc563dfe8cfcb21413ee1b3ab9",
+    "packages/sim/src/supply.test.ts": "ed64bde81f9f0bafc883ee764df69765e8d11f6d8b6b5b372f4e0d16d5fa7778",
+    "packages/sim/src/supply.ts": "de58da5bae95fc2e25145dd6d410a29097497bf793f79cc0bc6014dd01e27421",
+    "packages/sim/src/territory-growth.test.ts": "08a3340674e27397374a8d700d802b66946b163000371b315ea3624a2621281e",
+    "packages/sim/src/territory-quote-performance.test.ts": "dc0dc85bd735434efb131b2c19080ca0b2d6f65688e08779ab8266a866272430",
+    "packages/sim/src/territory-review.test.ts": "2827ca9e3f7e82c38c11b7df2f46e23cd84a79599c731e9af7435d35c86f888e",
+    "packages/sim/src/territory.test.ts": "cfafed8c7f05ca9c1149b71f5d6385ec70974cf4db98437037dc0fab06c24874",
+    "packages/sim/src/territory.ts": "13d5b9404f2273ebc1d66ed56caba7131401f42324da560722ed9b2af3086661",
+    "packages/sim/src/theater-lifecycle.test.ts": "9f625fa9d260d933aca732cbb5bda7e4b00d64f720973ea242708d651f044e1c",
+    "packages/sim/src/theater-save.test.ts": "21d2122e15fb7198d89495e644a32c835471f69682b8fdf07d81685a389d9227",
+    "packages/sim/src/theater-state.ts": "e5d3e43b1620230681be7b2e0e8e3f2d5f897fbaa2ddf10c6e9173bdda9c18e9",
+    "packages/sim/src/theaters.test.ts": "50f73bd8b367194a2681dcc0c5c88f7695790540d048974b13e96c47e44d6acb",
+    "packages/sim/src/theaters.ts": "d53afd72ecc3d9028fbe7feab2d21f8c975f1d4325e5a236a0465016677c6014",
+    "packages/sim/src/types.ts": "1d8c620aebed973dbb2c619c84c8d8985a9ce3b7c336709fcf802d08c7b4221e",
+    "packages/sim/src/uncapped-capture.test.ts": "f09a37b7e00c01ad8fd7135ac5692b2f7ed3c8c042ca196c275c9cbd65c772e3",
+    "packages/sim/src/uncapped-growth.test.ts": "a29dfdf3e79c3226af3a38f969b7e066b9c065b765b50900078af7ddaeacbc3c",
+    "packages/sim/src/unification.test.ts": "8de3b4d4dbd2bac9e4a78038d557df6e196948e2bccd6b86166e6541c3971383",
+    "packages/sim/src/visibility.ts": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a",
+    "packages/sim/src/warfare.test.ts": "11d34d697fad6455d84332318d4bf2c6e4bae26e5895ee0fc1c1efd35d914228",
+    "packages/sim/src/warfare.ts": "4c9acf8f800bb16b56cd3c219786746728f6bd25fa41613cca57afb7501028a3",
+    "packages/test-fixtures/package.json": "5582e2a7f71690b05d3572055c953e518e6de2b47d53dba26fca3731a9bf4521",
+    "packages/test-fixtures/src/authored-land.ts": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891",
+    "packages/test-fixtures/src/character-fixture.ts": "8cc4c5960bdf7f9f7720e5c0ffc4c882be83a2720771dd599c09cb78495f173c",
+    "packages/test-fixtures/src/combat-fixture.test.ts": "e0a9fed8b796b164f36e1f0963b9c7cf81213b77c161fe04d05edc82fd962680",
+    "packages/test-fixtures/src/combat-fixture.ts": "b6667448593fd4ecb7347ab9a99c8706b15dab466d974f1a2db7f76ed4e37d36",
+    "packages/test-fixtures/src/conquest-fixture.test.ts": "a0c9348ed95dab33fe2ac578dd7debdd3361abd562b1f0c37bcc4e77ba7f8609",
+    "packages/test-fixtures/src/conquest-fixture.ts": "f8a8689af7e25a56abb5d558c281b78d5f7145f0989e8cf03e9acb1c04f5af9b",
+    "packages/test-fixtures/src/empire-land-fixture.test.ts": "a2fa78a553ba56ce3b677df601f1acfc8a8aae111b1d5f842f1c6e6169ef9b6c",
+    "packages/test-fixtures/src/empire-land-fixture.ts": "444e23982b6f6920899e83b54a7d5029594d78410acf53cf5ced18c2663bbfac",
+    "packages/test-fixtures/src/fixtures.test.ts": "770cd15515565435818b5fbebf4a528c4d5abf7c948c78601fb5f6b2366feaa0",
+    "packages/test-fixtures/src/index.ts": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09",
+    "packages/test-fixtures/src/naval-art-fixture.test.ts": "b91940624743150e3a5f825e9f5a9d3c0e1f6c5204a4855037a87c4c776fba29",
+    "packages/test-fixtures/src/naval-art-fixture.ts": "c610b7a70e25681785ce2a063b2d693d79e8b9a51c313fb910ac857bd55957b2",
+    "packages/test-fixtures/src/naval-fixture.ts": "22e7b98984b2612598b7999692461125afb2b21882743fb5bda317b4ca2cd73d",
+    "packages/test-fixtures/src/overseas-fixture.ts": "7d7b763402c7e954012d984f192b641646cc0e443b34c6abc633a7bf587321b8",
+    "packages/test-fixtures/src/resource-fixture.test.ts": "672d140eb011cd4b0ebf49fa6cc6506a2416db0c4adfa8b6051c4d8126e30454",
+    "packages/test-fixtures/src/resource-fixture.ts": "f2043d53c6c7664651f57a60f47d4999a0a1f72279b7b62aa42c6f8934d9c053",
+    "packages/test-fixtures/src/roads-fixture.ts": "f173cad53c3dff7499b11ebceee01cdd759f0e5ec76f9f1d8191b68d7d6700e2",
+    "packages/test-fixtures/src/theater-fixture.ts": "ce432ae9278c7cdd2b9243fbf2c37f2b09494fce2bdf77b0d0c06587732ff4e0",
+    "packages/test-fixtures/src/tile-footprints.test.ts": "b81f2744a2be2bd5db687790ae710c11554e5c1aa55b5c7158aaf113ee219dd3",
+    "packages/test-fixtures/src/tile-footprints.ts": "078ab977c3fd81e9d10110e3fda0f1983d0e34fbab3052e2858dae0f152a46e2",
+    "packages/test-fixtures/src/victory-fixture.ts": "3eed9b0f2a6023bda774e6d40b4101599ae19a72d1c577eccf0bdb2de3186e8a"
+  },
+  "provenance": "Captured before reinforcement/logistics changes on the unchanged genuine rules33 implementation. Every checkpoint strictly loads and fully replays to its original byte-identical save. Every accepted command is independently repeated from a strict save reload under explicit rules33, comparing complete command results/events and full save bytes. Historical raw JSON and lossless gzip hashes are separately retained. Generated complete histories and authored from-save theater history are distinguished.",
+  "acceptedCommands": 27,
+  "continuationPairs": [
+    [
+      "generated-origin",
+      "generated-delegated"
+    ],
+    [
+      "generated-delegated",
+      "generated-continued"
+    ],
+    [
+      "theaters-origin",
+      "theaters-ordered"
+    ],
+    [
+      "theaters-ordered",
+      "theaters-allocated"
+    ],
+    [
+      "theaters-allocated",
+      "theaters-paused"
+    ],
+    [
+      "theaters-paused",
+      "theaters-continued"
+    ],
+    [
+      "sixty-four-origin",
+      "sixty-four-continued"
+    ]
+  ],
+  "cases": {
+    "generated-origin": {
+      "setup": "Untouched generated tiny two-major-realm campaign, seed20260927, generator4, no city states.",
+      "coverage": "complete",
+      "hash": "3adbefb8",
+      "turn": 1,
+      "records": 0,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "theaters": [],
+      "nextTheaterId": 1,
+      "observedTheaters": [],
+      "commandSeals": [],
+      "save": {
+        "file": "generated-origin.save.json.gz",
+        "bytes": 21027,
+        "sha256": "a8ec6541453afbc534af714395b16ce61482e70aed21cbf63b5b64a9a5e41281",
+        "gzipBytes": 3316,
+        "gzipSha256": "972cbe2d9083ec394cf5514dfb4211c0ed7ff4fb65ea958de545f1ec7062f7f5"
+      },
+      "archive": {
+        "file": "generated-origin.archive.json.gz",
+        "bytes": 21822,
+        "sha256": "fff566bea0508a47572bd00153b725eb5ac72ecc367c986fb0100934bc9924b2",
+        "gzipBytes": 3436,
+        "gzipSha256": "5c6a538f8c088b7daddbadf38a3173ddbcc46f401f8aeb490827e414ff152f3f"
+      }
+    },
+    "generated-delegated": {
+      "setup": "Ordinary saved groups, founding with consumed-caravan membership pruning, wealth charter, hold posting and enabled theater.",
+      "coverage": "complete",
+      "hash": "4ee83c68",
+      "turn": 1,
+      "records": 6,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "First watch",
+          "memberIds": [
+            "army.2"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Remembered hearths",
+          "memberIds": [
+            "settlement.5"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 251,
+          "mode": "hold"
+        }
+      ],
+      "routes": {},
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.5"
+          ],
+          "armyIds": [
+            "army.2"
+          ],
+          "reserveCell": 251,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        }
+      ],
+      "nextTheaterId": 2,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.5"
+          ],
+          "armyIds": [
+            "army.2"
+          ],
+          "reserveCell": 251,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.5",
+              "name": "Remembered gate",
+              "cell": 251,
+              "available": true,
+              "stationed": 1,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.2",
+              "cell": 251,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": null
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "3adbefb8",
+          "afterHash": "622d1874",
+          "resultSha256": "0da1a34e01c99a1c634cd851b41b8c14173d42b50e28e8e7de1fd18f9c6c4557"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "622d1874",
+          "afterHash": "130d4f87",
+          "resultSha256": "cb479fc46f0756bc66e09e1e79c6b9e803cd738248ff9adb404ea7329be7f086"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "130d4f87",
+          "afterHash": "657f301c",
+          "resultSha256": "d27e4a71dfae3728999e5ff36e613fd0c318759ff60fbf1ad2298170550adc28"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "657f301c",
+          "afterHash": "71530ad3",
+          "resultSha256": "c998a6274489b6ec258d8c01a1fba132844ac581e9d4c22e73211ba112e32c0c"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "71530ad3",
+          "afterHash": "e0946664",
+          "resultSha256": "6c9443e75afc969690252a7a1fb042e2dfb22c489ded0224ee7ae84f067c32dc"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e0946664",
+          "afterHash": "4ee83c68",
+          "resultSha256": "31a122323d1e3a1ed67389f8b6c8d70332f669a89355f7ba2f0c96642daeabf8"
+        }
+      ],
+      "save": {
+        "file": "generated-delegated.save.json.gz",
+        "bytes": 23723,
+        "sha256": "ad02af6af515d53703e6af8c7df2bb8e8ed301c0c0e4513da65365992166d49c",
+        "gzipBytes": 3981,
+        "gzipSha256": "af63ac155a7f5fdb59254d85e0045993480bb78ea8db94befd1f163cf443f51d"
+      },
+      "archive": {
+        "file": "generated-delegated.archive.json.gz",
+        "bytes": 24683,
+        "sha256": "33a2736ccbb9ff168cda40334460db99005cc990332a71d844a87a30d0353973",
+        "gzipBytes": 4060,
+        "gzipSha256": "7469d948a43538406f9a327b32bae6d549a3111017be56af381a349fc7bf329e"
+      }
+    },
+    "generated-continued": {
+      "setup": "Exact three-end-turn rules33 continuation; the enabled theater preserves its member’s direct hold posting.",
+      "coverage": "complete",
+      "hash": "f005f1c4",
+      "turn": 4,
+      "records": 9,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "First watch",
+          "memberIds": [
+            "army.2"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Remembered hearths",
+          "memberIds": [
+            "settlement.5"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "cell": 251,
+          "mode": "hold"
+        }
+      ],
+      "routes": {},
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.5"
+          ],
+          "armyIds": [
+            "army.2"
+          ],
+          "reserveCell": 251,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": []
+        }
+      ],
+      "nextTheaterId": 2,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "Home watch",
+          "settlementIds": [
+            "settlement.5"
+          ],
+          "armyIds": [
+            "army.2"
+          ],
+          "reserveCell": 251,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.5",
+              "name": "Remembered gate",
+              "cell": 251,
+              "available": true,
+              "stationed": 1,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.2",
+              "cell": 251,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": null
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "3adbefb8",
+          "afterHash": "622d1874",
+          "resultSha256": "0da1a34e01c99a1c634cd851b41b8c14173d42b50e28e8e7de1fd18f9c6c4557"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "622d1874",
+          "afterHash": "130d4f87",
+          "resultSha256": "cb479fc46f0756bc66e09e1e79c6b9e803cd738248ff9adb404ea7329be7f086"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "130d4f87",
+          "afterHash": "657f301c",
+          "resultSha256": "d27e4a71dfae3728999e5ff36e613fd0c318759ff60fbf1ad2298170550adc28"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "657f301c",
+          "afterHash": "71530ad3",
+          "resultSha256": "c998a6274489b6ec258d8c01a1fba132844ac581e9d4c22e73211ba112e32c0c"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "71530ad3",
+          "afterHash": "e0946664",
+          "resultSha256": "6c9443e75afc969690252a7a1fb042e2dfb22c489ded0224ee7ae84f067c32dc"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e0946664",
+          "afterHash": "4ee83c68",
+          "resultSha256": "31a122323d1e3a1ed67389f8b6c8d70332f669a89355f7ba2f0c96642daeabf8"
+        },
+        {
+          "sequence": 7,
+          "beforeHash": "4ee83c68",
+          "afterHash": "91349191",
+          "resultSha256": "4f7dc1afa0b882f43d93235a11a0dd0089964d702e19f35a5d6e2a62e502e097"
+        },
+        {
+          "sequence": 8,
+          "beforeHash": "91349191",
+          "afterHash": "dfb850fa",
+          "resultSha256": "de805e83e8f06349f3446d8f97d6b3c5108903083e63d64d9b9cbb9e4ac41954"
+        },
+        {
+          "sequence": 9,
+          "beforeHash": "dfb850fa",
+          "afterHash": "f005f1c4",
+          "resultSha256": "dd165ff77efc75af9a9bc7971cc8a84daef8cb0d22e07f7f332302dc5baee372"
+        }
+      ],
+      "save": {
+        "file": "generated-continued.save.json.gz",
+        "bytes": 24713,
+        "sha256": "add8d994b11911269bb271d1f68baeba6042344204a776d46a42498f70507e15",
+        "gzipBytes": 4109,
+        "gzipSha256": "6c2d02fcfcba325e0cb24b83895386b716a918c8c9d513822e4eab869dfc43e7"
+      },
+      "archive": {
+        "file": "generated-continued.archive.json.gz",
+        "bytes": 26279,
+        "sha256": "bc7ede5ac79033bebc90b1bfbb270ba8d9a3370a8ce64d9dfeb75a53812f3deb",
+        "gzipBytes": 4254,
+        "gzipSha256": "6c0280334c2f18eb9020bb0cc001956cbc8fa88b13d1152a5a5ee7b22da8663b"
+      }
+    },
+    "theaters-origin": {
+      "setup": "Explicit authored tiny open-land gallery, seed20260927 generator4: all rewritten cells flat and resource deposits cleared, treasury100000, two founded hearths at500/510 and eight guard armies at495. Not an organically earned realm.",
+      "coverage": "from-save",
+      "hash": "2a4982fb",
+      "turn": 1,
+      "records": 0,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "theaters": [],
+      "nextTheaterId": 1,
+      "observedTheaters": [],
+      "commandSeals": [],
+      "save": {
+        "file": "theaters-origin.save.json.gz",
+        "bytes": 30290,
+        "sha256": "caa87f8a73bc62e3eee24741db8ed0daf7db7e914d32a02609cd00c45e48d76c",
+        "gzipBytes": 4949,
+        "gzipSha256": "b144a0a0fc8b34214d785e721b7aaed663abf1f39f4ba1a030c88a488e71cd79"
+      },
+      "archive": {
+        "file": "theaters-origin.archive.json.gz",
+        "bytes": 31352,
+        "sha256": "d4db5e6f861a0e356cd651c1c8f77a687d06d53f3b7c553d0bb61241b620c28e",
+        "gzipBytes": 5090,
+        "gzipSha256": "1963810617bc6c391d5b01fdeb432a0d0ef027801f4ede3a80d60db94f517e53"
+      }
+    },
+    "theaters-ordered": {
+      "setup": "Ordinary saved groups, active appended direct travel, actual merge-induced paused route, hold posting, enabled west theater and paused east theater; consumed donor pruned from saved membership.",
+      "coverage": "from-save",
+      "hash": "c03a7efa",
+      "turn": 1,
+      "records": 10,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "March watch",
+          "memberIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16",
+            "army.9"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Twin hearths",
+          "memberIds": [
+            "settlement.6",
+            "settlement.8"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.13",
+          "factionId": "faction.ashen_compact",
+          "cell": 495,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.10": {
+          "armyId": "army.10",
+          "origin": 498,
+          "waypoints": [
+            520,
+            530
+          ],
+          "path": [
+            499,
+            500,
+            501,
+            502,
+            503,
+            504,
+            505,
+            506,
+            507,
+            508,
+            509,
+            510,
+            511,
+            512,
+            513,
+            514,
+            515,
+            516,
+            517,
+            518,
+            519,
+            520,
+            519,
+            518,
+            517,
+            516,
+            515,
+            514,
+            513,
+            512,
+            511,
+            510,
+            509,
+            508,
+            507,
+            506,
+            505,
+            504,
+            503,
+            502,
+            501,
+            500,
+            499,
+            498,
+            497,
+            496,
+            495,
+            494,
+            493,
+            492,
+            491,
+            490,
+            489,
+            488,
+            487,
+            486,
+            485,
+            484,
+            483,
+            530
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "army.11": {
+          "armyId": "army.11",
+          "origin": 498,
+          "waypoints": [
+            500
+          ],
+          "path": [
+            499,
+            500
+          ],
+          "status": "paused",
+          "pauseReason": "Army composition changed; review the shared travel order.",
+          "knownHostileIds": []
+        }
+      },
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        }
+      ],
+      "nextTheaterId": 3,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.6",
+              "name": "West watch",
+              "cell": 500,
+              "available": true,
+              "stationed": 0,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 1
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.10",
+              "cell": 498,
+              "status": "overridden",
+              "targetCell": 530,
+              "blocker": "Existing travel takes priority until it finishes."
+            },
+            {
+              "armyId": "army.11",
+              "cell": 498,
+              "status": "overridden",
+              "targetCell": 500,
+              "blocker": "Paused travel takes priority. Resume or cancel it explicitly."
+            },
+            {
+              "armyId": "army.13",
+              "cell": 495,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            },
+            {
+              "armyId": "army.14",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.15",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.16",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 1,
+          "blocker": null
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.8",
+              "name": "East watch",
+              "cell": 510,
+              "available": true,
+              "stationed": 0,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 1
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.9",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 1,
+          "blocker": "Automatic assignments are paused. Existing travel continues."
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "2a4982fb",
+          "afterHash": "f3cb5d5d",
+          "resultSha256": "23524b13a940d5db6dfba4f53738cd9fe61cd2f8fdc3e1ff19108c775578fcb0"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "f3cb5d5d",
+          "afterHash": "313e7076",
+          "resultSha256": "ab6b0802d6e4bab5abf0a7af3a81e13c815e2e97b2401071d937e733cc158277"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "313e7076",
+          "afterHash": "57380b41",
+          "resultSha256": "5ffd45201d447d121b4af3ba47b68c7055ec0ea6d91f3130ac88380b70063709"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "57380b41",
+          "afterHash": "60e135ef",
+          "resultSha256": "759d70d5797d4541242066b8d4227b58badebf35861c04ab3859a1935a61cd0b"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "60e135ef",
+          "afterHash": "e95cc9fe",
+          "resultSha256": "ed542626d4d6a8bc5d0d3f1bd342ed89f2841ecc37a8ee2ad23ec3e90790d7fa"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e95cc9fe",
+          "afterHash": "95179e5a",
+          "resultSha256": "17d3f1ced76aadbda3ed50b2036b192ffb10b50aa7487303d24c40fb76e8fefe"
+        },
+        {
+          "sequence": 7,
+          "beforeHash": "95179e5a",
+          "afterHash": "2d6cca4c",
+          "resultSha256": "59e03873648e0ca763a7ebc88ecf6deb369c7b49a994a9f0f8f7ac435ab6c702"
+        },
+        {
+          "sequence": 8,
+          "beforeHash": "2d6cca4c",
+          "afterHash": "231c829a",
+          "resultSha256": "c90ea6747b09f55a1da2c83a973cb5e65eaef1a57011e08ad81f5aa2bc297461"
+        },
+        {
+          "sequence": 9,
+          "beforeHash": "231c829a",
+          "afterHash": "c7e0a821",
+          "resultSha256": "814f0f04870afddc871f5bf4133d4d2be5a80efd047b11d85cfc2949085b332b"
+        },
+        {
+          "sequence": 10,
+          "beforeHash": "c7e0a821",
+          "afterHash": "c03a7efa",
+          "resultSha256": "fef9b5e4e26589aff582ff30ff8b57a0260b8a5dcc17a2c8b608b5fb7764c6ef"
+        }
+      ],
+      "save": {
+        "file": "theaters-ordered.save.json.gz",
+        "bytes": 34604,
+        "sha256": "c6c5bb716357c312afbf00b8c77086f4bef78682af31123b62620edf9808a4c5",
+        "gzipBytes": 5853,
+        "gzipSha256": "82938baf23440c756d6ed3fc1a5d031fda551265f51f72b9d3f4101ad944877b"
+      },
+      "archive": {
+        "file": "theaters-ordered.archive.json.gz",
+        "bytes": 37252,
+        "sha256": "cd918f47752aa593f94e01fe2ffe720086d2315435abd81943a77152fa17aad0",
+        "gzipBytes": 6035,
+        "gzipSha256": "3279a5522fb29299b411db936a3ad6495f2e74f7589f69eb7fa02912cbb815d7"
+      }
+    },
+    "theaters-allocated": {
+      "setup": "First automatic ordinary-command allocation under rules33, with ongoing routes and recorded dispatch outcomes; active/paused direct routes and held posting remain authoritative.",
+      "coverage": "from-save",
+      "hash": "aed72ccb",
+      "turn": 2,
+      "records": 11,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "March watch",
+          "memberIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16",
+            "army.9"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Twin hearths",
+          "memberIds": [
+            "settlement.6",
+            "settlement.8"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.13",
+          "factionId": "faction.ashen_compact",
+          "cell": 495,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.10": {
+          "armyId": "army.10",
+          "origin": 501,
+          "waypoints": [
+            520,
+            530
+          ],
+          "path": [
+            502,
+            503,
+            504,
+            505,
+            506,
+            507,
+            508,
+            509,
+            510,
+            511,
+            512,
+            513,
+            514,
+            515,
+            516,
+            517,
+            518,
+            519,
+            520,
+            519,
+            518,
+            517,
+            516,
+            515,
+            514,
+            513,
+            512,
+            511,
+            510,
+            509,
+            508,
+            507,
+            506,
+            505,
+            504,
+            503,
+            502,
+            501,
+            500,
+            499,
+            498,
+            497,
+            496,
+            495,
+            494,
+            493,
+            492,
+            491,
+            490,
+            489,
+            488,
+            487,
+            486,
+            485,
+            484,
+            483,
+            530
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "army.11": {
+          "armyId": "army.11",
+          "origin": 498,
+          "waypoints": [
+            500
+          ],
+          "path": [
+            499,
+            500
+          ],
+          "status": "paused",
+          "pauseReason": "Army composition changed; review the shared travel order.",
+          "knownHostileIds": []
+        },
+        "army.15": {
+          "armyId": "army.15",
+          "origin": 498,
+          "waypoints": [
+            500
+          ],
+          "path": [
+            499,
+            500
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        }
+      },
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 2,
+          "lastDispatches": [
+            {
+              "armyId": "army.15",
+              "targetCell": 500,
+              "accepted": true,
+              "message": "Watch company 7 explored hex 498."
+            }
+          ]
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        }
+      ],
+      "nextTheaterId": 3,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 2,
+          "lastDispatches": [
+            {
+              "armyId": "army.15",
+              "targetCell": 500,
+              "accepted": true,
+              "message": "Watch company 7 explored hex 498."
+            }
+          ],
+          "hearths": [
+            {
+              "settlementId": "settlement.6",
+              "name": "West watch",
+              "cell": 500,
+              "available": true,
+              "stationed": 0,
+              "incoming": 1,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.10",
+              "cell": 501,
+              "status": "overridden",
+              "targetCell": 530,
+              "blocker": "Existing travel takes priority until it finishes."
+            },
+            {
+              "armyId": "army.11",
+              "cell": 498,
+              "status": "overridden",
+              "targetCell": 500,
+              "blocker": "Paused travel takes priority. Resume or cancel it explicitly."
+            },
+            {
+              "armyId": "army.13",
+              "cell": 495,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            },
+            {
+              "armyId": "army.14",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.15",
+              "cell": 498,
+              "status": "incoming",
+              "targetCell": 500,
+              "blocker": "Existing travel takes priority until it finishes."
+            },
+            {
+              "armyId": "army.16",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": null
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.8",
+              "name": "East watch",
+              "cell": 510,
+              "available": true,
+              "stationed": 0,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 1
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.9",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 1,
+          "blocker": "Automatic assignments are paused. Existing travel continues."
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "2a4982fb",
+          "afterHash": "f3cb5d5d",
+          "resultSha256": "23524b13a940d5db6dfba4f53738cd9fe61cd2f8fdc3e1ff19108c775578fcb0"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "f3cb5d5d",
+          "afterHash": "313e7076",
+          "resultSha256": "ab6b0802d6e4bab5abf0a7af3a81e13c815e2e97b2401071d937e733cc158277"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "313e7076",
+          "afterHash": "57380b41",
+          "resultSha256": "5ffd45201d447d121b4af3ba47b68c7055ec0ea6d91f3130ac88380b70063709"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "57380b41",
+          "afterHash": "60e135ef",
+          "resultSha256": "759d70d5797d4541242066b8d4227b58badebf35861c04ab3859a1935a61cd0b"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "60e135ef",
+          "afterHash": "e95cc9fe",
+          "resultSha256": "ed542626d4d6a8bc5d0d3f1bd342ed89f2841ecc37a8ee2ad23ec3e90790d7fa"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e95cc9fe",
+          "afterHash": "95179e5a",
+          "resultSha256": "17d3f1ced76aadbda3ed50b2036b192ffb10b50aa7487303d24c40fb76e8fefe"
+        },
+        {
+          "sequence": 7,
+          "beforeHash": "95179e5a",
+          "afterHash": "2d6cca4c",
+          "resultSha256": "59e03873648e0ca763a7ebc88ecf6deb369c7b49a994a9f0f8f7ac435ab6c702"
+        },
+        {
+          "sequence": 8,
+          "beforeHash": "2d6cca4c",
+          "afterHash": "231c829a",
+          "resultSha256": "c90ea6747b09f55a1da2c83a973cb5e65eaef1a57011e08ad81f5aa2bc297461"
+        },
+        {
+          "sequence": 9,
+          "beforeHash": "231c829a",
+          "afterHash": "c7e0a821",
+          "resultSha256": "814f0f04870afddc871f5bf4133d4d2be5a80efd047b11d85cfc2949085b332b"
+        },
+        {
+          "sequence": 10,
+          "beforeHash": "c7e0a821",
+          "afterHash": "c03a7efa",
+          "resultSha256": "fef9b5e4e26589aff582ff30ff8b57a0260b8a5dcc17a2c8b608b5fb7764c6ef"
+        },
+        {
+          "sequence": 11,
+          "beforeHash": "c03a7efa",
+          "afterHash": "aed72ccb",
+          "resultSha256": "36ad4dfb10ec78a9cbe69ab1cb2eba0034ee8ff8ae385ea62e3994b5b7ad1ca2"
+        }
+      ],
+      "save": {
+        "file": "theaters-allocated.save.json.gz",
+        "bytes": 35931,
+        "sha256": "c38370d1f0f9dbdfede8ae534d289e5e3cdc3cb90e7c09f52fdc05015f01ab5b",
+        "gzipBytes": 5995,
+        "gzipSha256": "4da23537575be26d1ad33dec4758d91665704c7d6485085994b81d974b60df87"
+      },
+      "archive": {
+        "file": "theaters-allocated.archive.json.gz",
+        "bytes": 38584,
+        "sha256": "46f87ae11bf4accb2fbc214d0eede87a6be0c491f7783a32bdc93d4a7e73ac1e",
+        "gzipBytes": 6172,
+        "gzipSha256": "cda97bb78fd5edf97d231bc66c9e71c792df76c9b847745b85dae67349c9fd00"
+      }
+    },
+    "theaters-paused": {
+      "setup": "Pausing the enabled theater stops future allocation while its already-issued travel continues; the other theater remains paused and existing overrides persist.",
+      "coverage": "from-save",
+      "hash": "51c98edf",
+      "turn": 3,
+      "records": 13,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "March watch",
+          "memberIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16",
+            "army.9"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Twin hearths",
+          "memberIds": [
+            "settlement.6",
+            "settlement.8"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.13",
+          "factionId": "faction.ashen_compact",
+          "cell": 495,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.10": {
+          "armyId": "army.10",
+          "origin": 504,
+          "waypoints": [
+            520,
+            530
+          ],
+          "path": [
+            505,
+            506,
+            507,
+            508,
+            509,
+            510,
+            511,
+            512,
+            513,
+            514,
+            515,
+            516,
+            517,
+            518,
+            519,
+            520,
+            519,
+            518,
+            517,
+            516,
+            515,
+            514,
+            513,
+            512,
+            511,
+            510,
+            509,
+            508,
+            507,
+            506,
+            505,
+            504,
+            503,
+            502,
+            501,
+            500,
+            499,
+            498,
+            497,
+            496,
+            495,
+            494,
+            493,
+            492,
+            491,
+            490,
+            489,
+            488,
+            487,
+            486,
+            485,
+            484,
+            483,
+            530
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "army.11": {
+          "armyId": "army.11",
+          "origin": 498,
+          "waypoints": [
+            500
+          ],
+          "path": [
+            499,
+            500
+          ],
+          "status": "paused",
+          "pauseReason": "Army composition changed; review the shared travel order.",
+          "knownHostileIds": []
+        }
+      },
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": []
+        }
+      ],
+      "nextTheaterId": 3,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.6",
+              "name": "West watch",
+              "cell": 500,
+              "available": true,
+              "stationed": 1,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.10",
+              "cell": 504,
+              "status": "overridden",
+              "targetCell": 530,
+              "blocker": "Existing travel takes priority until it finishes."
+            },
+            {
+              "armyId": "army.11",
+              "cell": 498,
+              "status": "overridden",
+              "targetCell": 500,
+              "blocker": "Paused travel takes priority. Resume or cancel it explicitly."
+            },
+            {
+              "armyId": "army.13",
+              "cell": 495,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            },
+            {
+              "armyId": "army.14",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.15",
+              "cell": 500,
+              "status": "garrison",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.16",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": "Automatic assignments are paused. Existing travel continues."
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": false,
+          "lastRunTurn": null,
+          "lastDispatches": [],
+          "hearths": [
+            {
+              "settlementId": "settlement.8",
+              "name": "East watch",
+              "cell": 510,
+              "available": true,
+              "stationed": 0,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 1
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.9",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 1,
+          "blocker": "Automatic assignments are paused. Existing travel continues."
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "2a4982fb",
+          "afterHash": "f3cb5d5d",
+          "resultSha256": "23524b13a940d5db6dfba4f53738cd9fe61cd2f8fdc3e1ff19108c775578fcb0"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "f3cb5d5d",
+          "afterHash": "313e7076",
+          "resultSha256": "ab6b0802d6e4bab5abf0a7af3a81e13c815e2e97b2401071d937e733cc158277"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "313e7076",
+          "afterHash": "57380b41",
+          "resultSha256": "5ffd45201d447d121b4af3ba47b68c7055ec0ea6d91f3130ac88380b70063709"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "57380b41",
+          "afterHash": "60e135ef",
+          "resultSha256": "759d70d5797d4541242066b8d4227b58badebf35861c04ab3859a1935a61cd0b"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "60e135ef",
+          "afterHash": "e95cc9fe",
+          "resultSha256": "ed542626d4d6a8bc5d0d3f1bd342ed89f2841ecc37a8ee2ad23ec3e90790d7fa"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e95cc9fe",
+          "afterHash": "95179e5a",
+          "resultSha256": "17d3f1ced76aadbda3ed50b2036b192ffb10b50aa7487303d24c40fb76e8fefe"
+        },
+        {
+          "sequence": 7,
+          "beforeHash": "95179e5a",
+          "afterHash": "2d6cca4c",
+          "resultSha256": "59e03873648e0ca763a7ebc88ecf6deb369c7b49a994a9f0f8f7ac435ab6c702"
+        },
+        {
+          "sequence": 8,
+          "beforeHash": "2d6cca4c",
+          "afterHash": "231c829a",
+          "resultSha256": "c90ea6747b09f55a1da2c83a973cb5e65eaef1a57011e08ad81f5aa2bc297461"
+        },
+        {
+          "sequence": 9,
+          "beforeHash": "231c829a",
+          "afterHash": "c7e0a821",
+          "resultSha256": "814f0f04870afddc871f5bf4133d4d2be5a80efd047b11d85cfc2949085b332b"
+        },
+        {
+          "sequence": 10,
+          "beforeHash": "c7e0a821",
+          "afterHash": "c03a7efa",
+          "resultSha256": "fef9b5e4e26589aff582ff30ff8b57a0260b8a5dcc17a2c8b608b5fb7764c6ef"
+        },
+        {
+          "sequence": 11,
+          "beforeHash": "c03a7efa",
+          "afterHash": "aed72ccb",
+          "resultSha256": "36ad4dfb10ec78a9cbe69ab1cb2eba0034ee8ff8ae385ea62e3994b5b7ad1ca2"
+        },
+        {
+          "sequence": 12,
+          "beforeHash": "aed72ccb",
+          "afterHash": "19bf7a6a",
+          "resultSha256": "58336952eae26f2e738e9ae6a6753ca04d7891b5398ab5ae0defc348018b98b3"
+        },
+        {
+          "sequence": 13,
+          "beforeHash": "19bf7a6a",
+          "afterHash": "51c98edf",
+          "resultSha256": "7b285d1c31b773818e3d1e9e7f17d7008d8f1d13e925ba0f3062a672fc820eff"
+        }
+      ],
+      "save": {
+        "file": "theaters-paused.save.json.gz",
+        "bytes": 37481,
+        "sha256": "2b18521c203c25e21787176aeb6c6d85578f5968c8928d5ef89c276b6160e8b6",
+        "gzipBytes": 6149,
+        "gzipSha256": "3e1c64881eab826c895166c53fb20c0957c6e1d7170d4b58578a11992db291e7"
+      },
+      "archive": {
+        "file": "theaters-paused.archive.json.gz",
+        "bytes": 40818,
+        "sha256": "fbd3f66b974341f4ea7210c44633f1f9534853243afb0500bec0fb910e36e7e3",
+        "gzipBytes": 6381,
+        "gzipSha256": "a122223a5fd52a7921e99bcdb2b1325657aee1c8a7a82246ad5691471b38367c"
+      }
+    },
+    "theaters-continued": {
+      "setup": "Exact continuation through explicit route resume, detaching the active direct traveler, re-enabling west/east watches and one end turn; detachment preserves the ordinary active route.",
+      "coverage": "from-save",
+      "hash": "5c98f6ba",
+      "turn": 4,
+      "records": 17,
+      "factions": 2,
+      "majorFactions": 2,
+      "selectionGroups": [
+        {
+          "id": "selection-group.1",
+          "factionId": "faction.ashen_compact",
+          "kind": "armies",
+          "name": "March watch",
+          "memberIds": [
+            "army.10",
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16",
+            "army.9"
+          ]
+        },
+        {
+          "id": "selection-group.2",
+          "factionId": "faction.ashen_compact",
+          "kind": "settlements",
+          "name": "Twin hearths",
+          "memberIds": [
+            "settlement.6",
+            "settlement.8"
+          ]
+        }
+      ],
+      "postings": [
+        {
+          "armyId": "army.13",
+          "factionId": "faction.ashen_compact",
+          "cell": 495,
+          "mode": "hold"
+        }
+      ],
+      "routes": {
+        "army.10": {
+          "armyId": "army.10",
+          "origin": 507,
+          "waypoints": [
+            520,
+            530
+          ],
+          "path": [
+            508,
+            509,
+            510,
+            511,
+            512,
+            513,
+            514,
+            515,
+            516,
+            517,
+            518,
+            519,
+            520,
+            519,
+            518,
+            517,
+            516,
+            515,
+            514,
+            513,
+            512,
+            511,
+            510,
+            509,
+            508,
+            507,
+            506,
+            505,
+            504,
+            503,
+            502,
+            501,
+            500,
+            499,
+            498,
+            497,
+            496,
+            495,
+            494,
+            493,
+            492,
+            491,
+            490,
+            489,
+            488,
+            487,
+            486,
+            485,
+            484,
+            483,
+            530
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "army.15": {
+          "armyId": "army.15",
+          "origin": 497,
+          "waypoints": [
+            495
+          ],
+          "path": [
+            496,
+            495
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "army.9": {
+          "armyId": "army.9",
+          "origin": 498,
+          "waypoints": [
+            510
+          ],
+          "path": [
+            499,
+            500,
+            501,
+            502,
+            503,
+            504,
+            505,
+            506,
+            507,
+            508,
+            509,
+            510
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        }
+      },
+      "theaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": [
+            {
+              "armyId": "army.15",
+              "targetCell": 495,
+              "accepted": true,
+              "message": "Watch company 7 explored hex 497."
+            }
+          ]
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": [
+            {
+              "armyId": "army.9",
+              "targetCell": 510,
+              "accepted": true,
+              "message": "Watch company 1 explored hex 498."
+            }
+          ]
+        }
+      ],
+      "nextTheaterId": 3,
+      "observedTheaters": [
+        {
+          "id": "theater.1",
+          "factionId": "faction.ashen_compact",
+          "name": "West watch",
+          "settlementIds": [
+            "settlement.6"
+          ],
+          "armyIds": [
+            "army.11",
+            "army.13",
+            "army.14",
+            "army.15",
+            "army.16"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": [
+            {
+              "armyId": "army.15",
+              "targetCell": 495,
+              "accepted": true,
+              "message": "Watch company 7 explored hex 497."
+            }
+          ],
+          "hearths": [
+            {
+              "settlementId": "settlement.6",
+              "name": "West watch",
+              "cell": 500,
+              "available": true,
+              "stationed": 1,
+              "incoming": 0,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.11",
+              "cell": 500,
+              "status": "garrison",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.13",
+              "cell": 495,
+              "status": "overridden",
+              "targetCell": null,
+              "blocker": "A standing posting takes priority. Clear it to delegate this army."
+            },
+            {
+              "armyId": "army.14",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            },
+            {
+              "armyId": "army.15",
+              "cell": 497,
+              "status": "overridden",
+              "targetCell": 495,
+              "blocker": "Existing travel takes priority until it finishes."
+            },
+            {
+              "armyId": "army.16",
+              "cell": 495,
+              "status": "reserve",
+              "targetCell": null,
+              "blocker": null
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": null
+        },
+        {
+          "id": "theater.2",
+          "factionId": "faction.ashen_compact",
+          "name": "East reserve",
+          "settlementIds": [
+            "settlement.8"
+          ],
+          "armyIds": [
+            "army.9"
+          ],
+          "reserveCell": 495,
+          "guardsPerSettlement": 1,
+          "enabled": true,
+          "lastRunTurn": 4,
+          "lastDispatches": [
+            {
+              "armyId": "army.9",
+              "targetCell": 510,
+              "accepted": true,
+              "message": "Watch company 1 explored hex 498."
+            }
+          ],
+          "hearths": [
+            {
+              "settlementId": "settlement.8",
+              "name": "East watch",
+              "cell": 510,
+              "available": true,
+              "stationed": 0,
+              "incoming": 1,
+              "required": 1,
+              "deficit": 0
+            }
+          ],
+          "members": [
+            {
+              "armyId": "army.9",
+              "cell": 498,
+              "status": "incoming",
+              "targetCell": 510,
+              "blocker": "Existing travel takes priority until it finishes."
+            }
+          ],
+          "missingGuards": 0,
+          "blocker": null
+        }
+      ],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "2a4982fb",
+          "afterHash": "f3cb5d5d",
+          "resultSha256": "23524b13a940d5db6dfba4f53738cd9fe61cd2f8fdc3e1ff19108c775578fcb0"
+        },
+        {
+          "sequence": 2,
+          "beforeHash": "f3cb5d5d",
+          "afterHash": "313e7076",
+          "resultSha256": "ab6b0802d6e4bab5abf0a7af3a81e13c815e2e97b2401071d937e733cc158277"
+        },
+        {
+          "sequence": 3,
+          "beforeHash": "313e7076",
+          "afterHash": "57380b41",
+          "resultSha256": "5ffd45201d447d121b4af3ba47b68c7055ec0ea6d91f3130ac88380b70063709"
+        },
+        {
+          "sequence": 4,
+          "beforeHash": "57380b41",
+          "afterHash": "60e135ef",
+          "resultSha256": "759d70d5797d4541242066b8d4227b58badebf35861c04ab3859a1935a61cd0b"
+        },
+        {
+          "sequence": 5,
+          "beforeHash": "60e135ef",
+          "afterHash": "e95cc9fe",
+          "resultSha256": "ed542626d4d6a8bc5d0d3f1bd342ed89f2841ecc37a8ee2ad23ec3e90790d7fa"
+        },
+        {
+          "sequence": 6,
+          "beforeHash": "e95cc9fe",
+          "afterHash": "95179e5a",
+          "resultSha256": "17d3f1ced76aadbda3ed50b2036b192ffb10b50aa7487303d24c40fb76e8fefe"
+        },
+        {
+          "sequence": 7,
+          "beforeHash": "95179e5a",
+          "afterHash": "2d6cca4c",
+          "resultSha256": "59e03873648e0ca763a7ebc88ecf6deb369c7b49a994a9f0f8f7ac435ab6c702"
+        },
+        {
+          "sequence": 8,
+          "beforeHash": "2d6cca4c",
+          "afterHash": "231c829a",
+          "resultSha256": "c90ea6747b09f55a1da2c83a973cb5e65eaef1a57011e08ad81f5aa2bc297461"
+        },
+        {
+          "sequence": 9,
+          "beforeHash": "231c829a",
+          "afterHash": "c7e0a821",
+          "resultSha256": "814f0f04870afddc871f5bf4133d4d2be5a80efd047b11d85cfc2949085b332b"
+        },
+        {
+          "sequence": 10,
+          "beforeHash": "c7e0a821",
+          "afterHash": "c03a7efa",
+          "resultSha256": "fef9b5e4e26589aff582ff30ff8b57a0260b8a5dcc17a2c8b608b5fb7764c6ef"
+        },
+        {
+          "sequence": 11,
+          "beforeHash": "c03a7efa",
+          "afterHash": "aed72ccb",
+          "resultSha256": "36ad4dfb10ec78a9cbe69ab1cb2eba0034ee8ff8ae385ea62e3994b5b7ad1ca2"
+        },
+        {
+          "sequence": 12,
+          "beforeHash": "aed72ccb",
+          "afterHash": "19bf7a6a",
+          "resultSha256": "58336952eae26f2e738e9ae6a6753ca04d7891b5398ab5ae0defc348018b98b3"
+        },
+        {
+          "sequence": 13,
+          "beforeHash": "19bf7a6a",
+          "afterHash": "51c98edf",
+          "resultSha256": "7b285d1c31b773818e3d1e9e7f17d7008d8f1d13e925ba0f3062a672fc820eff"
+        },
+        {
+          "sequence": 14,
+          "beforeHash": "51c98edf",
+          "afterHash": "fba2a48a",
+          "resultSha256": "e8502c67ae5aeae990b190e4a79786c35c16a223b4c5e483194c896812d8f3ec"
+        },
+        {
+          "sequence": 15,
+          "beforeHash": "fba2a48a",
+          "afterHash": "33f1c1a8",
+          "resultSha256": "530deb82c99eb62ca027ce115de8dc21b85e4998f25ba0187002927ec29038a3"
+        },
+        {
+          "sequence": 16,
+          "beforeHash": "33f1c1a8",
+          "afterHash": "32489043",
+          "resultSha256": "462f9b5fbfed224bf1afdfcd016545ba2df7d22483ebfcf25a1a916666f291be"
+        },
+        {
+          "sequence": 17,
+          "beforeHash": "32489043",
+          "afterHash": "5c98f6ba",
+          "resultSha256": "333d94f443d0291ce216b2a7388d18d642970ffb0d74ab6200e3a2716b51bbca"
+        }
+      ],
+      "save": {
+        "file": "theaters-continued.save.json.gz",
+        "bytes": 40580,
+        "sha256": "9506091b327d395ee0e3c99c6501fd41e9db3d83ae1a8bea94cb9ad1d346de62",
+        "gzipBytes": 6398,
+        "gzipSha256": "6bdfb4dc4281a3e0ca71598b947407555cf8931ab649586b48753758e05abf47"
+      },
+      "archive": {
+        "file": "theaters-continued.archive.json.gz",
+        "bytes": 44845,
+        "sha256": "cf8a13418d53445488af58aca6f4e841dceb730b6cacffd186f6bab01286bb12",
+        "gzipBytes": 6636,
+        "gzipSha256": "2bc4f4654c799117646f97334d3900f858794ee1a26c058104f09d8e647a351f"
+      }
+    },
+    "sixty-four-origin": {
+      "setup": "Untouched generated standard world seed20260925 generator8, forty major realms plus twenty-four city states: genuine64-seat rules33 save/replay boundary.",
+      "coverage": "complete",
+      "hash": "2526e8f4",
+      "turn": 1,
+      "records": 0,
+      "factions": 64,
+      "majorFactions": 40,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "theaters": [],
+      "nextTheaterId": 1,
+      "observedTheaters": [],
+      "commandSeals": [],
+      "save": {
+        "file": "sixty-four-origin.save.json.gz",
+        "bytes": 421981,
+        "sha256": "11939c3ef9289bfdcdd7b702f5de4a84f9949a320e1aab09b044c28ae23ea0f8",
+        "gzipBytes": 29400,
+        "gzipSha256": "486a59791ace57d4f6667415666c6d8fe5d20e6e7d0906e9747d900000df68e4"
+      },
+      "archive": {
+        "file": "sixty-four-origin.archive.json.gz",
+        "bytes": 432908,
+        "sha256": "1dfd3e6a8ffbd38a55c1f4eb3554421e36591e7c4e4fd32b79791d04c4b24a62",
+        "gzipBytes": 29645,
+        "gzipSha256": "82e5394b27baa1108e089cd4cc9e7432a740da06ab5017d9c13e7c5c5ce02a2f"
+      }
+    },
+    "sixty-four-continued": {
+      "setup": "Exact64-seat rules33 continuation through one ordinary endTurn; no AI campaign, maturity or frame-performance claim.",
+      "coverage": "complete",
+      "hash": "79e7ee61",
+      "turn": 2,
+      "records": 1,
+      "factions": 64,
+      "majorFactions": 40,
+      "selectionGroups": [],
+      "postings": [],
+      "routes": {},
+      "theaters": [],
+      "nextTheaterId": 1,
+      "observedTheaters": [],
+      "commandSeals": [
+        {
+          "sequence": 1,
+          "beforeHash": "2526e8f4",
+          "afterHash": "79e7ee61",
+          "resultSha256": "d7d26e5eb872ce2a1942a7a11f9ffa7b387eba854a33fd6a1d4bd5a34b0cdf47"
+        }
+      ],
+      "save": {
+        "file": "sixty-four-continued.save.json.gz",
+        "bytes": 428895,
+        "sha256": "dc1938956dfe6419d04d315a34f4503b59e3ea857e62f3e54649105f6a146351",
+        "gzipBytes": 29791,
+        "gzipSha256": "64daf092277bb275699e5e88f5eda8b29805aafb3a284615d2e94137d10547f9"
+      },
+      "archive": {
+        "file": "sixty-four-continued.archive.json.gz",
+        "bytes": 440036,
+        "sha256": "37a2f42731fcc24f73dce173435e49a227b495a0e2937cfbbefb1c7c32799aac",
+        "gzipBytes": 30167,
+        "gzipSha256": "8ca3618b63e8895fd417981c4da6aa6c6693d2c45754aaac8c925c498aa51193"
+      }
+    }
+  }
+}

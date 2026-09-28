@@ -31,7 +31,7 @@ export function planDefenseTheater(view: Observation): TheaterPlan {
     && !army.carrierId && army.canAttack && !army.canFound
     && !army.formations.some(formation => formation.unitId === 'unit.scout'))
     .sort((a, b) => b.strength - a.strength || b.formations.length - a.formations.length || byId(a, b));
-  const limit = Math.min(2, Math.floor(military.length / 3));
+  const limit = Math.min(view.theaterReinforcement ? 3 : 2, Math.floor(military.length / 3));
   if (!limit) return result();
   const committed = new Set([
     ...military.slice(0, 2).map(army => army.id),
@@ -44,8 +44,8 @@ export function planDefenseTheater(view: Observation): TheaterPlan {
     .sort((a, b) => hexDistance(a.cell, towns[0]!.cell, view.width) - hexDistance(b.cell, towns[0]!.cell, view.width) || byId(a, b))
     .slice(0, limit);
   if (!spares.length) return result();
-  // A cheap distance ranking selects four local alternatives. At most two
-  // spares × four hearths use ordinary permitted previews; no realm-wide
+  // A cheap distance ranking selects four local alternatives. At most eight
+  // ordinary permitted previews cover the bounded spares; no realm-wide
   // Cartesian route search, synthetic terrain rule or hidden connectivity.
   const candidates = towns.map(town => ({ town, distance: Math.min(...spares.map(army => hexDistance(army.cell, town.cell, view.width))) }))
     .sort((a, b) => a.distance - b.distance || byId(a.town, b.town)).slice(0, MAX_THEATER_ADOPTION_HEARTHS).map(item => item.town);
@@ -76,6 +76,6 @@ export function planDefenseTheater(view: Observation): TheaterPlan {
   for (const armyId of armyIds) heldArmyIds.add(armyId);
   const settlementIds = protectedTowns.map(town => town.id).sort();
   return result([{ type: 'setTheater', factionId: view.factionId, name: 'Home watch', settlementIds, armyIds,
-    reserveCell: reserve.cell, guardsPerSettlement: 1, enabled: true }],
+    reserveCell: reserve.cell, guardsPerSettlement: 1, enabled: true, ...(view.theaterReinforcement ? { reinforcementLimit: 1 } : {}) }],
   [`Delegate ${armyIds.length} spare compan${armyIds.length === 1 ? 'y' : 'ies'} to a home watch of ${settlementIds.length} hearth${settlementIds.length === 1 ? '' : 's'}, one army each; retain scouts and the two strongest field armies.`]);
 }

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { checksum } from '@theandril/content';
 import { applyCommand, applyCommandForVersion, commandSchemaForVersion, createGame, deserializeGame,
-  serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, type GameCommand } from '@theandril/sim';
+  serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, SAVE_VERSION, type GameCommand } from '@theandril/sim';
 import { parseArchive, replayArchive, resumeJournal } from './index';
 import { defenseTheaters32, defenseTheaters32ManifestBytes, historical32, historical32File } from './fixtures/defense-theaters32';
 
@@ -46,7 +46,7 @@ describe('rules33 theaters preserve independently captured rules32 history', () 
     expect(stateHashForVersion(game, 32)).toBe(final.entry.hash);
   });
 
-  it('resumes rules32 groups/postings with rules33 theaters while keeping every original archive record', () => {
+  it('resumes rules32 groups/postings with current theaters while keeping every original archive record', () => {
     const original = historical32('generated-delegated'), game = deserializeGame(original.save), journal = resumeJournal(game, original.archive);
     const factionId = game.turnOwnerId, army = game.armies['army.2']!, town = Object.values(game.settlements)[0]!;
     const oldGroups = structuredClone(game.selectionGroups), oldPosting = structuredClone(game.postings), nextId = game.nextId;
@@ -59,8 +59,8 @@ describe('rules33 theaters preserve independently captured rules32 history', () 
     const archive = journal.materialize(), save = serializeGame(game);
     expect(archive.initialSave).toBe(original.archive.initialSave);
     expect(archive.records.slice(0, original.archive.records.length)).toEqual(original.archive.records);
-    expect(archive.records.slice(original.archive.records.length).map(record => record.rulesVersion)).toEqual([33, 33]);
-    expect(archive.records.at(-1)).toMatchObject({ checkpointVersion: 33, checkpoint: stateHash(game) });
+    expect(archive.records.slice(original.archive.records.length).map(record => record.rulesVersion)).toEqual([SAVE_VERSION, SAVE_VERSION]);
+    expect(archive.records.at(-1)).toMatchObject({ checkpointVersion: SAVE_VERSION, checkpoint: stateHash(game) });
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(save);
     expect(serializeGame(deserializeGame(save))).toBe(save);
   });

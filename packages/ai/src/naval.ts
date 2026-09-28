@@ -77,7 +77,7 @@ function preferredPort(view: Observation, cells: ObservedCells, sea: SeaKnowledg
       || Number(b.town.buildings.includes('building.granary')) - Number(a.town.buildings.includes('building.granary')) || byId(a.town, b.town))[0]?.town;
 }
 export interface NavalPlan extends AiPlan { coinSpent: number; heldArmyIds: Set<string>; queuedSettlementIds: Set<string>; interrupts: boolean }
-export interface NavalPlanOptions { heldArmyIds?: ReadonlySet<string>; knowledgeBudget?: number }
+export interface NavalPlanOptions { heldArmyIds?: ReadonlySet<string>; knowledgeBudget?: number; protectedFactionIds?: ReadonlySet<string> }
 
 /** Match the existing broad-theater expansion scale. Compact seas can be charted
  * by the ferry and later ocean escort; a third permanent hull needs space or a threat. */
@@ -276,6 +276,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
     || provisions.has(army.id) && cells.get(army.cell)?.terrain === TERRAIN.water));
   const foreign = view.armies.filter(army => army.factionId !== factionId && !army.carrierId);
   const protectedIds = protectedFactions(view), wars = new Set(view.wars);
+  for (const id of options.protectedFactionIds ?? []) protectedIds.add(id);
   const towns = view.settlements.filter(town => town.factionId === factionId).sort(byId);
   const supplied = new Set(view.suppliedCells);
   const seaKnowledge = createSeaKnowledge(view, cells);

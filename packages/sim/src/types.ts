@@ -1,4 +1,5 @@
 import type { DefenseTheater, ObservedDefenseTheater, TheaterCommand } from './theaters';
+import type { SupplyAccessState, SupplyAccessObservation, SupplyAccessCommand } from './supply-access-state';
 import type { SelectionGroup, SelectionGroupKind } from './selection-groups';
 import type { ResourceState, ResourceObservation, ResourceCommand } from './resources';
 import type { DevelopmentState, DevelopmentObservation, DevelopmentCommand } from './development';
@@ -193,6 +194,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | SupplyAccessCommand
   | TheaterCommand
   | { type: 'setSelectionGroup'; factionId: string; groupId?: string; kind: SelectionGroupKind; name: string; memberIds: string[] }
   | { type: 'deleteSelectionGroup'; factionId: string; groupId: string }
@@ -250,6 +252,7 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  supplyAccess: SupplyAccessState;
   theaters: DefenseTheater[];
   nextTheaterId: number;
   selectionGroups: SelectionGroup[];
@@ -296,6 +299,8 @@ export interface GameState {
 }
 
 export interface Observation {
+  supplyAccess?: SupplyAccessObservation;
+  theaterReinforcement?: true;
   theaters?: ObservedDefenseTheater[];
   selectionGroups: SelectionGroup[];
   resources?: ResourceObservation;
@@ -316,7 +321,7 @@ export interface Observation {
   musters: Muster[];
   /** Rules 27: whether each of the realm's own armies is fed, and by which hearth. */
   supply: ArmySupply[];
-  /** Every hex this realm can feed, so the map can show its own supply. */
+  /** Own supply plus last-known contracted reach; actual own-army supply is in supply. */
   suppliedCells: number[];
   depots: Depot[];
   depotCoinCost: number;

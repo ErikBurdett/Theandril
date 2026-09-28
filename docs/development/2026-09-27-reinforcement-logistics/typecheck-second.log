@@ -1,0 +1,10 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+packages/sim/src/supply.ts(147,43): error TS2339: Property 'some' does not exist on type 'never[] | Set<string>'.
+  Property 'some' does not exist on type 'Set<string>'.
+packages/sim/src/supply.ts(147,48): error TS7006: Parameter 'id' implicitly has an 'any' type.
+packages/test-fixtures/src/empire-delegation-fixture.ts(112,12): error TS2551: Property 'ownArmies' does not exist on type 'Observation'. Did you mean 'armies'?
+packages/test-fixtures/src/empire-delegation-fixture.ts(112,45): error TS2551: Property 'ownSettlements' does not exist on type 'Observation'. Did you mean 'settlements'?
+ ELIFECYCLE  Command failed with exit code 2.

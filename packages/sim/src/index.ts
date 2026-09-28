@@ -26,7 +26,7 @@ export { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, 
 export type { Charter, CharterFocus, ObservedCharter } from './charters';
 export { POSTING_MODES, POSTING_NAMES, joinHost, musterFor, postingFor } from './postings';
 export type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
-export { FLEET_PROVISION_TURNS, HARBOR_BUILDING_ID, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MIN_FORMATIONS, SUPPLY_MORALE_RECOVERY, armySupply, suppliedCells } from './supply';
+export { FLEET_PROVISION_TURNS, HARBOR_BUILDING_ID, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MIN_FORMATIONS, SUPPLY_MORALE_RECOVERY, armySupply, suppliedCells, previewSupplyAccessCells } from './supply';
 export type { ArmySupply } from './supply';
 export { DEPOT_BUDGET, DEPOT_COIN, DEPOT_SPACING, DEPOT_UPKEEP, MAX_REALM_DEPOTS, depotObjection, depotsOf } from './depots';
 export type { Depot } from './depots';
@@ -54,3 +54,7 @@ export type { SelectionGroup, SelectionGroupKind } from './selection-groups';
 export { MAX_THEATERS_PER_FACTION, MAX_THEATER_HEARTHS, MAX_THEATER_MEMBERS, MAX_THEATER_DISPATCHES } from './theaters';
 export type { DefenseTheater, ObservedDefenseTheater, TheaterCommand, TheaterDispatch, TheaterHearth, TheaterMember } from './theaters';
 export { observedDefenseTheaterSchema } from './theater-state';
+
+export { assessSupplyAccess, assessSupplyAccessOffer } from './supply-access';
+export { MAX_SUPPLY_ACCESS_IMPORTS, MAX_SUPPLY_ACCESS_OFFERS, SUPPLY_ACCESS_COIN_PER_TURN, supplyAccessAssessmentSchema, supplyAccessObservationSchema } from './supply-access-state';
+export type { SupplyAccessCommand, SupplyAccessState, SupplyAccessSource, SupplyAccessOffer, SupplyAccessAgreement, SupplyAccessObservation, SupplyAccessAssessment } from './supply-access-state';

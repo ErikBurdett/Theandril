@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { CONTENT_HASH } from '@theandril/content';
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
-import { createArmyFormation, deserializeGame, getMovementPreview, getObservation, SAVE_VERSION, serializeGame, stateHash, type DomainEvent, type GameCommand, type GameState, type Settlement } from '@theandril/sim';
+import { applyCommand, createArmyFormation, deserializeGame, getMovementPreview, getObservation, SAVE_VERSION, serializeGame, stateHash, type DomainEvent, type GameCommand, type GameState, type Settlement } from '@theandril/sim';
 import { createJournal, replayArchive } from '../packages/chronicle/src';
 import { advanceTheaters, MAX_THEATER_DISPATCHES, MAX_THEATER_HEARTHS, MAX_THEATER_MEMBERS, MAX_THEATERS_PER_FACTION, observeTheaters } from '../packages/sim/src/theaters';
 import { rebaseAuthoredLand, refreshAuthoredSight } from '../packages/test-fixtures/src/authored-land';
@@ -21,6 +21,7 @@ const argument = (name: string): string | undefined => {
   return value;
 };
 const samples = Number(argument('--samples') ?? 3), output = argument('--out'), selectedCase = argument('--case');
+const reinforcement = process.argv.includes('--reinforcement');
 assert(Number.isSafeInteger(samples) && samples >= 1 && samples <= 10, '--samples must be1–10.');
 const cases = (['huge', 'legendary'] as const).flatMap(size => (['representative', 'ceiling'] as const).map(workload => ({ size, workload, name: `${size}-${workload}` })));
 assert(!selectedCase || cases.some(item => item.name === selectedCase), 'Unknown --case; use huge-representative, huge-ceiling, legendary-representative or legendary-ceiling.');
@@ -115,6 +116,23 @@ function measure(size: Scale, workload: Workload) {
   console.error(`Preparing ${size}-${workload}; fixture setup and save loading are outside phase timings.`);
   let state = matureCampaign(size);
   const commands = workload === 'ceiling' ? ceiling(state) : representative(state);
+  if (reinforcement) {
+    for (const command of commands) {
+      command.reinforcementLimit = 2;
+      for (const id of command.settlementIds) {
+        const town = state.settlements[id]!, cell = neighbors(town.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell]!))!;
+        assert.notEqual(cell, undefined);
+        const enemyId = addGuard(state, cell);
+        state.armies[enemyId]!.factionId = state.factions[1]!.id;
+        state.armies[enemyId]!.name = 'Authored visible wartime pressure';
+      }
+    }
+    refreshAuthoredSight(state);
+    if (!state.wars.some(pair => pair.includes(state.turnOwnerId) && pair.includes(state.factions[1]!.id))) {
+      const result = applyCommand(state, { type: 'declareWar', factionId: state.turnOwnerId, targetFactionId: state.factions[1]!.id });
+      assert(result.ok, result.error);
+    }
+  }
   refreshAuthoredSight(state);
   state = deserializeGame(serializeGame(state));
   const owner = state.turnOwnerId, baseline = getObservation(state, owner, options);
@@ -124,6 +142,7 @@ function measure(size: Scale, workload: Workload) {
     assert(result.ok, result.error);
   }
   const configured = getObservation(state, owner, options), snapshot = serializeGame(state);
+  if (reinforcement) assert(configured.theaters!.every(theater => theater.hearths.every(hearth => (hearth.reinforcement?.visibleEnemies ?? 0) >= 1 && hearth.required > theater.guardsPerSettlement)));
   assert.deepEqual({ ...configured, theaters: [], events: baseline.events }, baseline, 'Adding theater configuration must not alter other permitted facts beyond its domain events.');
   assert.equal(configured.events.filter(event => event.type === 'theater_saved').length, commands.length);
   const phaseMs: number[] = [], theaterReadMs: number[] = [], observationMs: number[] = [];
@@ -157,7 +176,7 @@ function measure(size: Scale, workload: Workload) {
   assert.equal(stateHash(replayed), canonicalHash);
   assert.equal(stateHash(deserializeGame(serializeGame(state))), canonicalHash);
   assert.deepEqual(getObservation(replayed, owner, options), getObservation(state, owner, options));
-  return { size, workload, synthetic: true,
+  return { size, workload, reinforcement, synthetic: true,
     geography: workload === 'ceiling' ? 'Authored flat land with eight small isolated member islands; generated geography replaced.' : 'Original generated geography; authored nearby second hearth, charted route corridor and100 guard companies.',
     generatorVersion: state.world.generatorVersion, cells: state.world.terrain.length, factions: state.factions.length, armies: Object.keys(state.armies).length,
     theaters: commands.length, assignedHearths: commands.reduce((sum, command) => sum + command.settlementIds.length, 0), assignedMembers: commands.reduce((sum, command) => sum + command.armyIds.length, 0),

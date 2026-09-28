@@ -1,4 +1,5 @@
 import { theaterCampaign } from '../../../packages/test-fixtures/src/theater-fixture';
+import { supplyAccessCampaign } from '../../../packages/test-fixtures/src/supply-access-fixture';
 import 'fake-indexeddb/auto';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementPreview, getObservation, serializeGame, stateHash, type GameState } from '@theandril/sim';
@@ -362,5 +363,166 @@ describe('actual worker defensive theater edits', () => {
       expect((await request({ type: 'save' }, 'error')).recoveryRequired).toBe(true);
     } finally { broken.mockRestore(); }
     expect((await request({ type: 'loadAuto' }, 'state')).observation.theaters?.[0]?.name).toBe(command.name);
+  });
+});
+
+/** A provider seat is selected in this authored origin before its journal is
+ * created. The buyer's ordinary proposal is recorded; no payment is injected. */
+function supplyProviderFixture() {
+  const fixture = supplyAccessCampaign(), game = fixture.state;
+  game.turnOwnerId = fixture.providerId;
+  const journal = createJournal(game, { mode: 'player', coverage: 'from-save' });
+  expect(journal.record(game, fixture.proposal).ok).toBe(true);
+  const offerId = game.supplyAccess.offers[0]!.id;
+  const accept = { type: 'respondSupplyAccess' as const, factionId: fixture.providerId, offerId, accept: true };
+  return { ...fixture, game, journal, accept };
+}
+
+describe('actual worker paid supply acceptance', () => {
+  it.each(['player', 'watch'] as const)('locks a %s round after the real AI accepts and pays a supply offer but publication fails', async mode => {
+    const { state: game, buyerId, providerId, proposal } = supplyAccessCampaign();
+    const journal = createJournal(game, { mode, coverage: 'from-save' });
+    expect(journal.record(game, proposal).ok).toBe(true);
+    const accept = { type: 'respondSupplyAccess', factionId: providerId, offerId: game.supplyAccess.offers[0]!.id, accept: true };
+    const origin = await exportSave(serializeCampaign(game, journal.materialize()));
+    const round: RequestBody = mode === 'watch' ? { type: 'watchRound' } : { type: 'command', command: { type: 'endTurn', factionId: buyerId } };
+
+    // Establish the real worker's uninterrupted result from this exact origin.
+    // Its actual AI planner must accept; the harness supplies no AI commands.
+    await request({ type: 'import', bytes: origin }, 'state');
+    const completedRound = await request(round, 'state'), expected = await exported();
+    expect(expected.game.turn).toBe(game.turn + 1);
+    const acceptanceIndex = expected.archive.records.findIndex(record => record.ok && JSON.stringify(record.command) === JSON.stringify(accept));
+    expect(acceptanceIndex).toBeGreaterThanOrEqual(1);
+    expect(expected.archive.records.filter(record => record.ok && JSON.stringify(record.command) === JSON.stringify(accept))).toHaveLength(1);
+    const beforePayment = replayArchive({ ...expected.archive, records: expected.archive.records.slice(0, acceptanceIndex), finalHash: null, finalHashVersion: null });
+    const afterPayment = replayArchive({ ...expected.archive, records: expected.archive.records.slice(0, acceptanceIndex + 1), finalHash: null, finalHashVersion: null });
+    expect(afterPayment.factions.find(faction => faction.id === buyerId)!.treasury).toBe(beforePayment.factions.find(faction => faction.id === buyerId)!.treasury - proposal.feeCoin);
+    expect(afterPayment.factions.find(faction => faction.id === providerId)!.treasury).toBe(beforePayment.factions.find(faction => faction.id === providerId)!.treasury + proposal.feeCoin);
+    expect(expected.game.supplyAccess).toMatchObject({ offers: [], agreements: [expect.objectContaining({ buyerId, providerId, feeCoin: proposal.feeCoin })], nextId: 3 });
+    expect(stateHash(replayArchive(expected.archive))).toBe(completedRound.hash);
+
+    await request({ type: 'import', bytes: origin }, 'state');
+    const send = host.postMessage, saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    let attempted: Extract<Response, { type: 'state' }> | undefined;
+    const broken = vi.spyOn(host, 'postMessage').mockImplementation((response, options) => {
+      if (response.type === 'state' && response.observation.supplyAccess?.agreements.length) {
+        attempted = structuredClone(response);
+        throw new Error(`Authored ${mode} AI supply publication failure.`);
+      }
+      send(response, options);
+    });
+    try {
+      const failed = await request(round, 'error');
+      expect(attempted?.hash).toBe(completedRound.hash);
+      expect(saved).toHaveBeenCalledTimes(1); expect(saved.mock.calls[0]?.[2]).toBe('auto');
+      expect(failed.message).toContain(`Authored ${mode} AI supply publication failure.`);
+      expect(failed.recoveryRequired).toBe(true);
+      for (const body of [round, { type: 'save' }, { type: 'export' }] as const) {
+        expect((await request(body, 'error')).recoveryRequired).toBe(true);
+      }
+      expect(saved).toHaveBeenCalledTimes(1);
+    } finally { broken.mockRestore(); saved.mockRestore(); }
+
+    const restored = await request({ type: 'loadAuto' }, 'state');
+    expect(restored.hash).toBe(completedRound.hash); expect(restored.campaign.mode).toBe(mode);
+    const exact = await exported();
+    expect(exact.text).toBe(expected.text);
+    expect(stateHash(replayArchive(exact.archive))).toBe(restored.hash);
+    // A subsequent ordinary round may spend or earn coin, but cannot record a
+    // second acceptance or payment for the already-consumed offer.
+    await request(round, 'state');
+    const continued = await exported();
+    expect(continued.archive.records.filter(record => record.ok && JSON.stringify(record.command) === JSON.stringify(accept))).toHaveLength(1);
+    expect(continued.game.supplyAccess.nextId).toBe(3);
+    expect(continued.game.supplyAccess.agreements).toHaveLength(1);
+    expect(stateHash(replayArchive(continued.archive))).toBe(stateHash(continued.game));
+  });
+
+  it('pays once, autosaves the exact accepted state and replays it after restore while refusing malformed or repeated acceptance unchanged', async () => {
+    const fixture = supplyProviderFixture(), { game, journal, accept, buyerId, providerId, proposal } = fixture;
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, journal.materialize())) }, 'state');
+    const expected = deserializeGame(serializeGame(game));
+    expect(applyCommand(expected, accept).ok).toBe(true);
+    const buyerBefore = game.factions.find(faction => faction.id === buyerId)!.treasury;
+    const providerBefore = game.factions.find(faction => faction.id === providerId)!.treasury;
+    const saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    try {
+      const response = await request({ type: 'command', command: accept }, 'state');
+      expect(response.hash).toBe(stateHash(expected)); expect(response.hash).not.toBe(initial.hash);
+      expect(response.observation.supplyAccess).toMatchObject({ offers: [], agreements: [expect.objectContaining({ buyerId, providerId, feeCoin: proposal.feeCoin })] });
+      expect(saved).toHaveBeenCalledTimes(1); expect(saved.mock.calls[0]?.[2]).toBe('auto');
+      expect(response.message).toContain('Autosaved.');
+      const exact = await exported();
+      expect(serializeGame(exact.game)).toBe(serializeGame(expected));
+      expect(exact.game.factions.find(faction => faction.id === buyerId)!.treasury).toBe(buyerBefore - proposal.feeCoin);
+      expect(exact.game.factions.find(faction => faction.id === providerId)!.treasury).toBe(providerBefore + proposal.feeCoin);
+      expect(exact.archive.records.map(record => record.command)).toEqual([proposal, accept]);
+      expect(stateHash(replayArchive(exact.archive))).toBe(response.hash);
+      expect((await request({ type: 'loadAuto' }, 'state')).hash).toBe(response.hash);
+      expect((await exported()).archive).toEqual(exact.archive);
+      const malformed = { ...accept, accept: 'yes' };
+      for (const command of [malformed, { ...accept, factionId: buyerId }, { ...accept, offerId: 'supply-offer.999999' }, accept]) {
+        const refusal = await request({ type: 'command', command } as RequestBody, 'error');
+        expect(refusal.recoveryRequired).not.toBe(true);
+        expect(serializeGame((await exported()).game)).toBe(serializeGame(expected));
+      }
+      expect(saved).toHaveBeenCalledTimes(1);
+      const afterRefusals = await exported();
+      expect(stateHash(replayArchive(afterRefusals.archive))).toBe(response.hash);
+      expect(afterRefusals.game.supplyAccess.agreements).toHaveLength(1);
+    } finally { saved.mockRestore(); }
+  });
+
+  it('locks after an accepted payment cannot be published and restores the accepted autosave without paying a second time', async () => {
+    const { game, journal, accept, buyerId, proposal } = supplyProviderFixture();
+    await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, journal.materialize())) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const expected = deserializeGame(serializeGame(game)); expect(applyCommand(expected, accept).ok).toBe(true);
+    const buyerAfter = expected.factions.find(faction => faction.id === buyerId)!.treasury;
+    const send = host.postMessage, saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    let acceptedPublication: Extract<Response, { type: 'state' }> | undefined;
+    const broken = vi.spyOn(host, 'postMessage').mockImplementation((response, options) => {
+      if (response.type === 'state' && response.observation.supplyAccess?.agreements.length) {
+        acceptedPublication = structuredClone(response);
+        throw new Error('Authored supply payment publication failure.');
+      }
+      send(response, options);
+    });
+    try {
+      const failed = await request({ type: 'command', command: accept }, 'error');
+      expect(failed.recoveryRequired).toBe(true); expect(failed.message).toContain('supply agreement changed');
+      expect(acceptedPublication?.hash).toBe(stateHash(expected));
+      expect(saved).toHaveBeenCalledTimes(1);
+      for (const body of [{ type: 'command', command: accept }, { type: 'save' }, { type: 'export' }] as const) {
+        expect((await request(body, 'error')).recoveryRequired).toBe(true);
+      }
+      expect(saved).toHaveBeenCalledTimes(1);
+    } finally { broken.mockRestore(); saved.mockRestore(); }
+    const restored = await request({ type: 'loadAuto' }, 'state'); expect(restored.hash).toBe(stateHash(expected));
+    const exact = await exported();
+    expect(exact.game.factions.find(faction => faction.id === buyerId)!.treasury).toBe(buyerAfter);
+    expect(exact.archive.records.map(record => record.command)).toEqual([proposal, accept]);
+    expect(stateHash(replayArchive(exact.archive))).toBe(restored.hash);
+    const repeated = await request({ type: 'command', command: accept }, 'error');
+    expect(repeated.recoveryRequired).not.toBe(true);
+    const afterRepeat = await exported();
+    expect(afterRepeat.game.factions.find(faction => faction.id === buyerId)!.treasury).toBe(buyerAfter);
+    expect(afterRepeat.game.supplyAccess.agreements).toHaveLength(1);
+    expect(stateHash(replayArchive(afterRepeat.archive))).toBe(restored.hash);
+  });
+
+  it('reports failed autosave honestly while retaining the paid in-memory state and the prior manual offer', async () => {
+    const { game, journal, accept } = supplyProviderFixture();
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, journal.materialize())) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const expected = deserializeGame(serializeGame(game)); expect(applyCommand(expected, accept).ok).toBe(true);
+    const broken = vi.spyOn(SaveStore.prototype, 'saveCampaign').mockRejectedValue(new Error('Authored unavailable supply storage.'));
+    try {
+      const accepted = await request({ type: 'command', command: accept }, 'state');
+      expect(accepted.hash).toBe(stateHash(expected)); expect(accepted.message).toContain('Autosave failed: Authored unavailable supply storage.');
+      expect(serializeGame((await exported()).game)).toBe(serializeGame(expected));
+      expect((await request({ type: 'load' }, 'state')).hash).toBe(initial.hash);
+    } finally { broken.mockRestore(); }
   });
 });

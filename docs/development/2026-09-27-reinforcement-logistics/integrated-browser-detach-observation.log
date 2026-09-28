@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+(node:3999873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (15.9s)
+
+
+  1) tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 13
+    Received length: 14
+    Received array:  ["army.1089", "army.1121", "army.1153", "army.1185", "army.1217", "army.1249", "army.1281", "army.129", "army.1313", "army.1345", …]
+
+      250 |   await theater.getByRole('button', { name: `Detach ${incomingName} from theater`, exact: true }).click();
+      251 |   const detached = await snapshot(page);
+    > 252 |   expect(detached.theaters!.find(row => row.id === created.id)!.armyIds).toHaveLength(13);
+          |                                                                          ^
+      253 |   expect(detached.theaters!.find(row => row.id === created.id)!.enabled).toBe(true);
+      254 |   expect(detached.routes).toEqual(allocated.routes); expect(detached.postings).toEqual(allocated.postings);
+      255 |   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:252:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-budget-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-budget-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-budget-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-09-27-reinforcement-logistics/browser-evidence/integrated-budget-fixed/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 

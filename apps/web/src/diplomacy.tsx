@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { isCityState } from '@theandril/sim';
 import type { GameCommand, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { FactionArt } from './faction-art';
+import { SupplyAccessPanel } from './supply-access';
 
 export type PeaceReview = (targetFactionId: string, terms: PeaceTerms) => Promise<PeaceAssessment>;
 type IssueOrder = (command: GameCommand) => void;
@@ -97,6 +98,7 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
   const blocked = busy || Boolean(view.battle || view.pendingCapture);
   return <section className="faction-encounters" data-testid="faction-encounters" aria-label="Encountered factions">
     <h3>Beyond your borders</h3>
+    <SupplyAccessPanel view={view} stateHash={stateHash} busy={blocked} issue={issue}/>
     {encounters.length === 0 && <p className="field-help">Explore to meet the powers beyond your frontier.</p>}
     {encounters.map(faction => {
       const treaty = view.diplomacy.treaties.find(treaty => treaty.parties.includes(faction.id));
