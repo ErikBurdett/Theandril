@@ -1,0 +1,58 @@
+{
+  "revision": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+  "sourceRevision": "f33a816f3a853229695b902af007e4e3f3547275",
+  "date": "2026-09-28",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=reinforcement-logistics",
+  "rulesVersion": 34,
+  "contentHash": "015468d1",
+  "actions": [
+    {
+      "id": 36382113259,
+      "name": "Verify build",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36382113259"
+    },
+    {
+      "id": 36382113108,
+      "name": "Publish development demo to Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36382113108"
+    }
+  ],
+  "local": {
+    "implementationHeadless": 2146,
+    "implementationFiles": 266,
+    "implementationDuration": "56.51s",
+    "headless": 2146,
+    "files": 266,
+    "headlessDuration": "60.52s",
+    "affectedGameplay": 49,
+    "pages": 35,
+    "pagesDuration": "1.2m",
+    "finalProduction": 2,
+    "finalProductionDuration": "10.4s"
+  },
+  "live": {
+    "pages": 35,
+    "passed": 35,
+    "readback": "live-readback.json",
+    "identities": "live-pages-identities.json",
+    "duration": "1.4m",
+    "newSupplyJourneySeconds": 4.6,
+    "newTheaterJourneySeconds": 5.0
+  },
+  "catalogue": {
+    "items": 23,
+    "completed": 6,
+    "inProgress": 13,
+    "pending": 4,
+    "delivered": 78,
+    "remaining": 49,
+    "allReleaseGatesOpen": 15
+  }
+}

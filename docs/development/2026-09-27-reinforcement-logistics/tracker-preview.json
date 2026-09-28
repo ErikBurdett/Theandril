@@ -1,0 +1,374 @@
+{
+  "previewSha256": "0a9c911c4ce829a48420b37c64f98fd9ba70456621cfcb1806b156fe7931daa8",
+  "proposal": {
+    "date": "2026-09-28",
+    "source": "f33a816f3a853229695b902af007e4e3f3547275",
+    "published": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+    "helperSha256": "1bf410c8c8a3b0dee1c78d9fbe4b48f64422944fdc4be0b4beb16507d138e969",
+    "metadataSha256": "607cf75c37b451de3ed84ffdc031d65db191552211aa690d0370f3237923e34d",
+    "inputHashes": {
+      "actions": "765fcd2370a1f8a2b2455799cfa6594d0d1f905fbea2fb281e9900cf87086b81",
+      "projects": "68562d2b888ed6968c5f7bb30435e88091e8394f48040462b6d69cf5a93f7dbf",
+      "issues": "3e48e21c50d568b9982d21e2e23ae73aa9d636a060916a0c9e529720644d8457"
+    },
+    "outputHashes": {
+      "actions": "26cabdb9c42721db7de224cc02adb9c15fe6b239b7f5e2e1b04dcec648d4dadb",
+      "projects": "be997638f008a240b74ba13d0d93df001610186602c7999d59bbda032a5c0f91",
+      "issues": "1918ec7b909240c6e2e9801679c976ddbd30467c65a68c654432e4d561bfed98"
+    },
+    "evidenceHashes": {
+      "docs/development/2026-09-27-reinforcement-logistics/tests-final.log": "be693eb2d81dcaabf0730ca393bbee353ef559ebb5802235f86d1384163fe42f",
+      "docs/development/2026-09-27-reinforcement-logistics/publication-tests.log": "aa3a858d6c06a5c6437894519c15311634e56877c28fd851846735c1e7208c53",
+      "docs/development/2026-09-27-reinforcement-logistics/affected-browser-final.log": "bc9ba9bb81e9707d6e4b969b77d639fe4ff4d652253772dd6bdd73f2e04b2179",
+      "docs/development/2026-09-27-reinforcement-logistics/production-final.log": "9f6aa8d92c53ada7f779a6c7c639e205f9afe0f4c69b5959afa6990ad53f556d",
+      "docs/development/2026-09-27-reinforcement-logistics/local-pages.log": "24a262d5d887b092e7cc7069e77bffb390146bc8ce089f842319f612e6c7bf74",
+      "docs/development/2026-09-27-reinforcement-logistics/live-pages.log": "187dc75efa04d8e23f2d5de44106360769c143e85d28d001dc8772e7daafea0c",
+      "docs/development/2026-09-27-reinforcement-logistics/compatibility-final.log": "47ada8f95679c6f6acc6cb2680c51b5e94fc89098a9e6c53dc8f8d74b062be74",
+      "docs/development/2026-09-27-reinforcement-logistics/deployment.json": "1b735d450be84d8630fde2ee432d3b0085ab5ce40c36b9d07f9eeaf791e41786",
+      "docs/development/2026-09-27-reinforcement-logistics/live-readback.json": "87c33d219bba9329d4f385402c8aefd409e6cee4eaa4bae8e225658c89969e16",
+      "docs/development/2026-09-27-reinforcement-logistics/pacing-matrix.json": "f8b764a6b56219ef30fad4885f6104d0f2017179cdcf30efe6f4c91c83020962",
+      "docs/development/2026-09-27-reinforcement-logistics/supply-benchmark-final.json": "fa6871923ac1ff02f1a1dfe031629849cbcbe7366c2fe71af75f96bd1960ed14",
+      "docs/development/2026-09-27-reinforcement-logistics/reinforcement-benchmark-final.json": "238ede79c5333d1b72e0145871b3be6b6866657b54a099fa60fe094bcf3ee9a1"
+    },
+    "changedRecords": {
+      "ACT-32": {
+        "id": "ACT-32",
+        "status": "doing",
+        "opened": "2026-09-22",
+        "updated": "2026-09-28",
+        "source": "Theandril 1.0 roadmap",
+        "history": [
+          {
+            "date": "2026-09-22",
+            "status": "next",
+            "note": "Queued after rules 24 closed M2's counter half. M3 is the next work package on the road to 1.0."
+          },
+          {
+            "date": "2026-09-22",
+            "status": "doing",
+            "note": "Rules 25 shipped the settlement half: a standing charter per hearth with a coin ceiling, a treasury reserve, a derived next work or refusal, a player override, and a next-action list that drops a hearth answering for itself. Army grouping, rally and standing roles remain."
+          },
+          {
+            "date": "2026-09-22",
+            "status": "doing",
+            "note": "Rules 26 shipped the army half: a standing posting that marches an army under the ordinary travel order and then holds its hex or joins the force there, and a hearth muster point that posts every company it raises. Theatre and patrol orders, multi-army selection and grouping alerts by cause remain."
+          },
+          {
+            "date": "2026-09-22",
+            "status": "doing",
+            "note": "The end-of-turn list now groups what wants a decision by actionable cause, and each cause is its own navigable queue. Theatre and patrol orders, multi-army selection and acting on a whole group at once remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Published 36fea99729452651c09cc7d5ddae81bb1dca4db2: fleet provisions (ACT-35) and ACT-32 group postings are live at rules/save 31. Players select up to 128 land armies ashore across registry pages/search, issue Hold/Join or clear postings, inspect partial refusals and override one army independently. One worker response preserves canonical command/archive outcomes. 1,878 tests, seven affected development journeys and all28 live production Pages journeys pass; public readback and source evidence: ~/Work/Theandril/docs/development/2026-09-23-deploy-and-group-postings/. M3/M4 and all 15 gates remain open; Standard 234/Long 342 pacing remain above approximate targets, Epic 379 is inside 350-400."
+          },
+          {
+            "date": "2026-09-24",
+            "status": "doing",
+            "note": "2026-09-24 local checkpoint at source ee12011edb9990e8a5948301174b039fbbb9c04d: ACT-32 now includes bounded group settlement charters. Players select up to 128 owned hearths across pages, search and registry tabs, apply an existing Works/Wealth/Learning/Muster charter with a per-hearth coin ceiling, or revoke existing charters together. One final worker observation reports canonical partial refusals; individual overrides, paid queues, treasury and save/replay are preserved. 1,889 tests across 235 files and 12 affected browser journeys pass, including an authored 40-hearth/100-owned-army Legendary fixture and damaged-response recovery. The final publication suite passes 1,891 headless tests and 29 local production Pages journeys. The live run passes 28 scenarios; one artwork-loading check exceeds its five-second readiness limit and passes on an unchanged focused rerun. Its slow successful HTTP transfers and initial failure are retained. The separate built charter journey also passes. Rules/save remain 31, content remains 015468d1, and no AI or pace price changed. Evidence: ~/Work/Theandril/docs/development/2026-09-24-group-charters/. ACT-32 and M3 remain in progress; durable named groups, theaters/patrol/escorts, reusable templates, broader governor decisions and combined mature-realm acceptance remain. All 15 release gates remain open."
+          },
+          {
+            "date": "2026-09-25",
+            "status": "doing",
+            "note": "2026-09-25 verified charter-template progress, source/evidence HEAD 1d256b09b5a7fe273d2e340b6c4014b722f9d49d. Players can keep up to 24 named charter templates in a personal browser/origin-local library, each holding an existing charter focus and coin ceiling. Selecting a template issues no orders; Recall fills the form and Apply charters remains a separate explicit action. Saving, updating or deleting templates leaves active charters unchanged. Templates survive browser reload and campaign changes but are excluded from campaign exports; applied charters remain canonical saved and replayed state. Strict bounded storage validation and transactional writes preserve existing rows on failure, and visible storage errors leave direct charter controls usable. Final publication verification passes 1,904 headless tests across 237 files, 16 affected Chromium journeys, 30 local production Pages journeys and 30 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save remain 31, content remains 015468d1; this browser preference slice changes no rules, AI or campaign prices and requires no new pacing run. Evidence: ~/Work/Theandril/docs/development/2026-09-25-charter-templates/. ACT-32 and M3 remain in progress. Durable named groups, theaters/patrol/escorts, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. All 15 release gates remain open."
+          },
+          {
+            "date": "2026-09-25",
+            "status": "doing",
+            "note": "Edition No. 2: Rules 25 and 26, grouped attention, group postings (3ae1581), group charters (f78ed07) and the charter-template library (3ed4a6c) all shipped and deployed this week. Saved realm groups (rules/save 32) are uncommitted on master with a passing initial full suite and a third browser run in flight; tracked by the new commit-and-publish action."
+          },
+          {
+            "date": "2026-09-26",
+            "status": "doing",
+            "note": "2026-09-26 verified saved-selection-group progress at published HEAD 676d56471cb806fb007fc0207ea16b0b638c467c, implementation source 0d26fa3c34ac89164637f515e95671420400a841. Each realm can retain up to 24 named selection groups of owned land armies or hearths combined, with at most 128 members each. Ordinary canonical commands create, rename, replace or delete groups. A dedicated deterministic group counter preserves gameplay entity IDs, and observations expose only detached own groups to the viewer. Choosing a saved record issues no order; explicit Recall replaces the eligible selection on that registry tab, and posting/charter application remains a separate action. Permanent member loss is pruned at relevant successful lifecycle commands; empty named groups and temporarily embarked land armies are retained. Groups survive canonical save/reload, replay and campaign export/import. Genuine prechange rules-31 snapshots and archives retain their original bytes and seals; older saves gain fresh empty group registers. Rules 32 also repairs the existing 64-seat save limit for arcane research; earlier strict schemas stay frozen. Final publication verification passes 1,943 headless tests across 243 files, 20 affected Chromium journeys, 31 local production Pages journeys and 31 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save 32 adds organizational metadata and repairs the current 64-seat save research-register limit while preserving historical schema limits; content remains 015468d1. No AI strategy or campaign prices changed. Evidence: ~/Work/Theandril/docs/development/2026-09-25-selection-groups/. ACT-32 and M3 remain in progress. Theaters, patrol/escort roles, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. All 15 release gates remain open."
+          },
+          {
+            "date": "2026-09-26",
+            "status": "doing",
+            "note": "2026-09-26: verified production-sequence progress at published HEAD 24cd30e309ca191181482b7525d3eac6aebb4fbf, implementation source 420219d278ae17f42a04871c6319ecf62a4af216. Production sequences append an ordered list of one to five existing projects to up to 128 owned hearth queues in stable hearth ID order. Every accepted ordinary queue command spends its normal coin immediately from the shared treasury; a refusal stops that hearth while later hearths continue. Paid prefixes and existing queues remain intact. Complete hearths leave the selection; partial/refused hearths remain with exact results for manual review. Up to 24 named production templates persist in a separate browser/origin-local library; choosing and explicit Recall issue no orders, and Apply remains separate. Personal templates are excluded from campaign exports; the applied canonical queues survive save, replay and portable export/import. Storage failure, uncertain worker results and post-payment worker failure are surfaced without automatic retry or false rollback; saved-campaign recovery locks uncertain orders. Final publication verification passes 1,977 headless tests across 247 files, 30 affected Chromium journeys and 32 local production Pages journeys. 32 live Pages journeys passed in one complete final run. Earlier live evidence remains retained: the initial run had 27 passes and five failures; its unchanged five-case focused rerun had four passes and one remaining deployment-assets failure. Neither earlier attempt is described as a clean 32/32 pass. These are separate suite scopes, not additive test totals. Rules/save 32 and content 015468d1 remain unchanged. No simulation rule, AI policy or campaign price changed; no new pacing result is claimed. Evidence: ~/Work/Theandril/docs/development/2026-09-26-production-sequences/. ACT-32 and M3 remain in progress. Theaters, patrol/escort roles, army-order templates, broader governor decisions and combined mature-realm acceptance remain open. Standing repeat production, refunds/reordering and automatic retries are not delivered. All 15 release gates remain open."
+          },
+          {
+            "date": "2026-09-27",
+            "status": "doing",
+            "note": "2026-09-27: verified group-travel progress at published HEAD 7dfe0c6a587e019eeec2501d21d212928f6e0918, implementation source 3b0918999a166f36f6f3d51fbcb49413de549163. Group travel reviews compact canonical routes for up to 128 selected owned land armies ashore, then explicitly applies replacement routes or appended waypoints in stable army-ID order through ordinary commands. Current movement can be spent immediately. Resume and cancel act on eligible selected routes; existing postings remain and can resume their own movement later unless separately cleared. Accepted armies leave the selection; refused armies remain for correction. Preview context is hash-bound and advisory, with individual overrides and exact saved/replayed outcomes. Uncertain mutation responses lock orders until a saved campaign is restored; superseded preview errors do not lock a restored campaign. Verification: 2,000 headless tests across 250 files; 23 distinct affected Chromium journeys from passing runs of 21 and six with four repeated cases; one separate generated-production journey; 33 local and the same 33 live production Pages journeys passed. These overlapping scopes are not additive totals. Rules/save 32 and content 015468d1 remain unchanged; no simulation rule, AI policy or campaign price changed and no new pacing result is claimed. Evidence: ~/Work/Theandril/docs/development/2026-09-26-group-travel/. ACT-32/M3 remain in progress; all 15 release gates remain open. Theaters, patrol/escort roles, reusable army-order templates, broader governor decisions and combined mature-realm acceptance remain open. This slice does not add synchronized arrival, automatic attacks/war, standing repeat production or automatic retries."
+          },
+          {
+            "date": "2026-09-27",
+            "status": "doing",
+            "note": "2026-09-27: verified defensive-theater progress at publication bce46a1442a0b2aa33487952b4d43e1d96cb8540, implementation 0ecd2d1767f613942cf9f22315da624164cc4055. Named defensive theaters persist in the campaign under rules/save 33: up to eight per realm, sixteen hearths and 128 member armies per theater, with one to four whole-army guards per hearth and a reserve hex. On End turn, bounded deterministic allocation uses ordinary movement and the realm’s known information. Direct or paused routes, postings, cargo, missions and sieges retain their precedence. Incoming coverage is reported separately from stationed guards. Detach, pause and delete stop future delegation without cancelling already issued routes. Human controls, ordinary AI adoption, narrow/keyboard interaction, exact save/replay, mixed historical continuation and lock-until-restore handling of uncertain worker mutations are verified. Implementation: 2,075 headless tests across 258 files; publication: 2,075 tests across 258 files. 33 affected Chromium journeys, one separate generated production journey, and the same 34 local/live production Pages journeys passed. The 100-check compatibility run is separately retained. These overlapping scopes are not additive test totals. Content remains 015468d1; frozen rules 32 history is preserved. Final rules 33 headline standard-map, twelve-realm, seed 20260905 campaigns: Standard 233, Long 311, Epic 349 turns; frozen rules 32 baselines are Standard 234, Long 342 and Epic 379. Submitted-command refusals: Standard 0, Long 0, Epic 0. Automatic blocked theater route attempts: Standard 0, Long 0, Epic 0. These are separate counters. The earlier 242/336/384-turn comparison and 210/304/352 automatic blocked attempts are retained pre-fix diagnostics, not final acceptance results. Final measurements include the bounded AI reachability correction. One seed per pace does not establish multi-seed confidence. DH-021 remains open; no pace pack or stated target was silently retuned. Evidence: ~/Work/Theandril/docs/development/2026-09-27-defense-theaters/. Threat-aware defense, patrol/escort roles, invasion strategy, reusable army-order templates, broader governor decisions and combined mature-realm acceptance remain open. Authored 100-army controls and headless Huge/Legendary representative and single-realm ceiling measurements are bounded evidence; they do not prove organic maturity, simultaneous 64-realm saturation, arrival, combat adequacy or rendering performance. ACT-32/M3 remain in progress and all 15 release gates remain open."
+          },
+          {
+            "date": "2026-09-28",
+            "status": "doing",
+            "note": "Rules/save 34 adds opt-in visible-threat reinforcement with bounded quiet-turn holds, preserving physical minimum guards and direct-order priority. Joined authored mature-realm controls, partial refusals and exact AI-inclusive saved continuation are verified. Patrol/escort roles, reusable army-order templates, broader governors and organic-scale acceptance remain. Separate verification scopes: implementation 2146, publication 2146, affected browser 49, built production 2, local/live Pages 35/35, compatibility 102. These overlapping counts are not additive. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/ All 15 release gates remain open."
+          }
+        ],
+        "title": "Let a large realm be governed without ordering every hearth (M3)",
+        "rank": 12,
+        "projects": [
+          "Theandril"
+        ],
+        "effort": "L",
+        "why": "Rules/save 34 adds opt-in visible-threat reinforcement with bounded quiet-turn holds, preserving physical minimum guards and direct-order priority. Joined authored mature-realm controls, partial refusals and exact AI-inclusive saved continuation are verified. Patrol/escort roles, reusable army-order templates, broader governors and organic-scale acceptance remain.",
+        "consequence": "The empire-management catalogue item stays open, late-campaign turns stay tedious for a human while the AI plays them instantly, and M4's supply and sustained operations have no order layer to build on.",
+        "fix": "Rules/save 34 adds opt-in visible-threat reinforcement with bounded quiet-turn holds, preserving physical minimum guards and direct-order priority. Joined authored mature-realm controls, partial refusals and exact AI-inclusive saved continuation are verified. Patrol/escort roles, reusable army-order templates, broader governors and organic-scale acceptance remain.",
+        "done_when": "In a saved mature realm a player sets a policy and a coordinated order, resolves grouped exceptions, and overrides one actor without disabling the rest; automation never issues an order the player could not issue, blocked orders explain themselves, and the whole thing survives save, replay and a browser journey.",
+        "prompt": "Repository: ~/Work/Theandril. Read docs/development/2026-09-27-reinforcement-logistics/README.md and docs/1.0-DEVELOPMENT.md. Rules/save 34 adds opt-in visible-threat reinforcement with bounded quiet-turn holds, preserving physical minimum guards and direct-order priority. Joined authored mature-realm controls, partial refusals and exact AI-inclusive saved continuation are verified. Patrol/escort roles, reusable army-order templates, broader governors and organic-scale acceptance remain. Preserve deterministic canonical commands, fog, direct overrides and frozen histories. Keep M3/M4 in progress and all 15 gates open. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/",
+        "workdir": "~/Work/Theandril",
+        "issues": [],
+        "due": null
+      },
+      "ACT-33": {
+        "id": "ACT-33",
+        "status": "doing",
+        "opened": "2026-09-23",
+        "updated": "2026-09-28",
+        "source": "Theandril 1.0 roadmap",
+        "history": [
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Opened with rules 27, which delivered land supply: hearths feed four hexes and twice as far along a road, enemies and sieges cut the line, and a force of three or more companies outside supply wastes away and rests badly. Ports and depots, supply costs, trade routes, tax policy, treaty access and persistent naval operations remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Rules 28 added built depots: a company raises one for forty coin, it feeds half a hearth's reach, it costs two coin a turn, depots stand three hexes apart, and any enemy that walks onto one razes it. Ports, supply costs in resources, trade routes, tax policy and treaty access remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Rules 29 drew supply on the map and let a realm pull its own depot down, closing an upkeep obligation rules 28 had made permanent. Teaching the AI to play supply was attempted three times and reverted each time: every version shifted campaign length outside its intended band, so it must move together with a deliberate re-tune of the pacing windows."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Rules 29 drew supply on the map, let a realm pull down its own depot, and gave the AI depot building. AI depot raiding, ports, supply costs in resources, trade routes, tax policy and treaty access remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "The AI now raids enemy depots as a target of opportunity - within three hexes and weighted below engaging an enemy force. The first cut ranged eight hexes at four times the pull of an enemy army and pushed the headline campaign from 388 to 446 turns as both sides rebuilt the same posts; the tuned version holds it at 389 while still razing 238 depots. No rules, save or content change. Ports, supply costs in resources, trade routes, tax policy and treaty access remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Rules 30 carried a harbour hearth's supply line out over the water, so a fleet or a landing near a friendly coast is fed without building a post, and rewrote the search as two clean passes rather than one whose water-crossing depended on which line won a tie. Purely additive: the headline campaign still measures 389 turns. Fleets remain exempt from supply entirely; removing that, supply costs in resources, trade routes, tax policy and treaty access remain."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Fixed a latent AI accounting bug: the turn budget was computed from the treasury without subtracting the arcane survey, depot and patronage subsidy already paid in the same pass, so the planner could commit coin it had spent. Fleet supply provisions were built, tested and measured but not shipped - they put the headline campaign at 427 turns on eight provision turns and 412 on sixteen against 388 without them, because naval invasions fail when the AI does not plan around fleet supply. Shipping needs AI naval staging measured back into band, or a deliberate Epic re-price with the pace pack frozen."
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Implemented and verified locally at rules/save 31: eight provision turns, shared hull/passenger attrition, harbour resupply, observed AI return/staging and a reviewed coastal-depth fix. Final headline Epic 379 turns (target 350-400), Long 342 versus prior 367, Standard 234 versus prior 223; all seven pacing cases have zero refused orders. 1,861 tests and nine affected browser journeys pass, as do typecheck, lint, content validation and production build; historical saves/replay remain exact. Primary master working tree is uncommitted; nothing published or deployed. Broad naval recovery and Standard/Long balance remain open. Evidence: ~/Work/Theandril/docs/development/prompt-reports/2026-09-23-fleet-provisions.md"
+          },
+          {
+            "date": "2026-09-23",
+            "status": "doing",
+            "note": "Published 36fea99729452651c09cc7d5ddae81bb1dca4db2: fleet provisions (ACT-35) and ACT-32 group postings are live at rules/save 31. Players select up to 128 land armies ashore across registry pages/search, issue Hold/Join or clear postings, inspect partial refusals and override one army independently. One worker response preserves canonical command/archive outcomes. 1,878 tests, seven affected development journeys and all28 live production Pages journeys pass; public readback and source evidence: ~/Work/Theandril/docs/development/2026-09-23-deploy-and-group-postings/. M3/M4 and all 15 gates remain open; Standard 234/Long 342 pacing remain above approximate targets, Epic 379 is inside 350-400."
+          },
+          {
+            "date": "2026-09-25",
+            "status": "doing",
+            "note": "Edition No. 2: Rules 27 to 31 shipped: supply lines, depots, the supply overlay with AI depot building and raiding, harbour supply and finite fleet provisions (b623c2c), deployed with 36fea99. Trade routes, taxation and treaty access remain; the Standard and Long pacing overshoot is now its own issue."
+          },
+          {
+            "date": "2026-09-28",
+            "status": "doing",
+            "note": "Rules/save 34 adds paid source-specific foreign supply access through ordinary proposals and acceptance. Fees pay once on acceptance; imported land/harbor supply retains ordinary blockade, ownership, war and expiry constraints. Participant-only disclosures, AI fee reserves, save/replay and uncertain-payment recovery are verified. This grants no movement rights. Trade routes/interception, taxation, material supply costs and broader coordinated operations remain. Separate verification scopes: implementation 2146, publication 2146, affected browser 49, built production 2, local/live Pages 35/35, compatibility 102. These overlapping counts are not additive. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/ All 15 release gates remain open."
+          }
+        ],
+        "title": "Sustain and disrupt wars through supply, trade and treaties (M4)",
+        "rank": 13,
+        "projects": [
+          "Theandril"
+        ],
+        "effort": "L",
+        "why": "Rules/save 34 adds paid source-specific foreign supply access through ordinary proposals and acceptance. Fees pay once on acceptance; imported land/harbor supply retains ordinary blockade, ownership, war and expiry constraints. Participant-only disclosures, AI fee reserves, save/replay and uncertain-payment recovery are verified. This grants no movement rights. Trade routes/interception, taxation, material supply costs and broader coordinated operations remain.",
+        "consequence": "The supply-and-trade catalogue item stays open, and M5's political pressure and M6's crises both assume an economy that can be squeezed.",
+        "fix": "Rules/save 34 adds paid source-specific foreign supply access through ordinary proposals and acceptance. Fees pay once on acceptance; imported land/harbor supply retains ordinary blockade, ownership, war and expiry constraints. Participant-only disclosures, AI fee reserves, save/replay and uncertain-payment recovery are verified. This grants no movement rights. Trade routes/interception, taxation, material supply costs and broader coordinated operations remain.",
+        "done_when": "A realm can extend supply by building rather than only by conquering, a trade route can be established, taxed and cut, and a treaty changes what an ally may move through - all through ordinary commands that survive save and replay, with campaign pacing still inside its window.",
+        "prompt": "Repository: ~/Work/Theandril. Read docs/development/2026-09-27-reinforcement-logistics/README.md and docs/1.0-DEVELOPMENT.md. Rules/save 34 adds paid source-specific foreign supply access through ordinary proposals and acceptance. Fees pay once on acceptance; imported land/harbor supply retains ordinary blockade, ownership, war and expiry constraints. Participant-only disclosures, AI fee reserves, save/replay and uncertain-payment recovery are verified. This grants no movement rights. Trade routes/interception, taxation, material supply costs and broader coordinated operations remain. Preserve deterministic canonical commands, fog, direct overrides and frozen histories. Keep M3/M4 in progress and all 15 gates open. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/",
+        "workdir": "~/Work/Theandril",
+        "issues": [],
+        "due": null
+      },
+      "ACT-38": {
+        "id": "ACT-38",
+        "status": "backlog",
+        "opened": "2026-09-25",
+        "updated": "2026-09-28",
+        "completed": null,
+        "source": "Edition No. 2",
+        "history": [
+          {
+            "date": "2026-09-25",
+            "status": "backlog",
+            "note": "Added by Edition No. 2."
+          },
+          {
+            "date": "2026-09-28",
+            "status": "backlog",
+            "note": "Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/"
+          }
+        ],
+        "title": "Bring Standard and Long Theandril campaigns back to their stated lengths",
+        "rank": 14,
+        "projects": [
+          "Theandril"
+        ],
+        "effort": "M",
+        "why": "Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open.",
+        "consequence": "Two of three paces overshoot what the new-campaign form promises.",
+        "fix": "Measure with pnpm measure:pacing, then re-price with the pace pack frozen or change the stated targets, with the owner's decision.",
+        "done_when": "Measured Standard and Long headline campaigns match the targets the form states.",
+        "prompt": "Repository: ~/Work/Theandril. Read docs/development/2026-09-27-reinforcement-logistics/README.md and docs/development/2026-09-27-reinforcement-logistics/pacing-matrix.json. Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open. Preserve frozen packs; evaluate headline and multi-seed evidence before a deliberately authorized repricing or target revision.",
+        "workdir": "~/Work/Theandril",
+        "issues": [
+          "DH-021"
+        ],
+        "due": null
+      }
+    },
+    "issue": {
+      "id": "DH-021",
+      "status": "open",
+      "opened": "2026-09-25",
+      "updated": "2026-09-28",
+      "resolved": null,
+      "evidence": [
+        {
+          "label": "b623c2c",
+          "url": "https://github.com/ErikBurdett/Theandril/commit/b623c2c91d4d852cba710f2d996c28a6b1b5d624",
+          "note": "Fleet provisions; the report records Standard 234, Long 342, Epic 379."
+        },
+        {
+          "label": "0ecd2d1 final theater pacing",
+          "url": "https://github.com/ErikBurdett/Theandril/blob/0ecd2d1767f613942cf9f22315da624164cc4055/docs/development/2026-09-27-defense-theaters/pacing-fixed-comparison.json",
+          "note": "Final rules 33 Standard 233, Long 311, Epic 349; separate submitted refusals and automatic blocked routes; DH-021 remains open."
+        }
+      ],
+      "checks": [],
+      "history": [
+        {
+          "date": "2026-09-25",
+          "status": "open",
+          "note": "Opened by Edition No. 2."
+        },
+        {
+          "date": "2026-09-27",
+          "status": "open",
+          "note": "Published rules 33 defensive theaters at bce46a1442a0b2aa33487952b4d43e1d96cb8540, source 0ecd2d1767f613942cf9f22315da624164cc4055. Final rules 33 headline standard-map, twelve-realm, seed 20260905 campaigns: Standard 233, Long 311, Epic 349 turns; frozen rules 32 baselines are Standard 234, Long 342 and Epic 379. Submitted-command refusals: Standard 0, Long 0, Epic 0. Automatic blocked theater route attempts: Standard 0, Long 0, Epic 0. These are separate counters. The earlier 242/336/384-turn comparison and 210/304/352 automatic blocked attempts are retained pre-fix diagnostics, not final acceptance results. Final measurements include the bounded AI reachability correction. One seed per pace does not establish multi-seed confidence. DH-021 remains open; no pace pack or stated target was silently retuned. Final evidence: docs/development/2026-09-27-defense-theaters/pacing-fixed-comparison.json and docs/development/2026-09-27-defense-theaters/pacing-fixed.log."
+        },
+        {
+          "date": "2026-09-28",
+          "status": "open",
+          "note": "Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/"
+        }
+      ],
+      "title": "Standard and Long Theandril campaigns run longer than the pace descriptions promise",
+      "severity": "low",
+      "category": "quality",
+      "projects": [
+        "Theandril"
+      ],
+      "summary": "Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open.",
+      "issue": "Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/",
+      "consequence": "Headline and multi-seed campaign behavior still require reconciliation with stated pace targets.",
+      "fix": "Assess the retained final headline and multi-seed measurements before deliberately repricing a new sealed pack or revising target descriptions; preserve historical packs and keep this issue open.",
+      "prompt": "Repository: ~/Work/Theandril. Read docs/development/2026-09-27-reinforcement-logistics/README.md and docs/development/2026-09-27-reinforcement-logistics/pacing-matrix.json. Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open. Keep this issue open until advertised targets and measured behavior agree. Do not tune tiny proxies or silently change frozen content.",
+      "workdir": "~/Work/Theandril",
+      "due": null
+    },
+    "roadmap": {
+      "title": "Road to 1.0",
+      "measure": "Acceptance points delivered across Theandril’s own published roadmap catalogue — each item’s record of what it has shipped and what it still owes.",
+      "unit": "acceptance points",
+      "done": 78,
+      "total": 127,
+      "updated": "2026-09-28",
+      "source": "https://erikburdett.github.io/Theandril/updates/roadmap/",
+      "source_label": "The published roadmap and its evidence",
+      "note": "6 of 23 catalogue items complete; all 15 gates open. Counts are editorial catalogue bullets, not a fixed-scope completion percentage or release acceptance. ACT-32/M3 and ACT-33/M4 remain in progress.",
+      "milestones": [
+        {
+          "id": "M0",
+          "title": "Stabilize the campaign and close the current AI findings",
+          "status": "in-progress",
+          "detail": "Every retained campaign-safety scenario passes against the rules that ship, including the pending-assault regression that had been frozen at rules 17. The wider gates behind M0 are still open."
+        },
+        {
+          "id": "M1",
+          "title": "Client states and unification victory",
+          "status": "in-progress",
+          "detail": "A contestable two-thirds Unification bid is playable, city-states seat beside the realms, and a realm may take another as its paid client whose hearths stand behind its bid. Client capture outcomes and transfers between patron and client remain."
+        },
+        {
+          "id": "M2",
+          "title": "A complete magical discovery loop",
+          "status": "in-progress",
+          "detail": "Seams are hidden under Ashfall glass, found by a paid survey, drawn for ashglass and required before Arcane Theory; Unbinding answers a working with a working and costs its caster a round. Reactive interception and personal path growth remain."
+        },
+        {
+          "id": "M3",
+          "title": "Empire delegation and coordinated orders",
+          "status": "in-progress",
+          "detail": "Rules/save 34 adds opt-in visible-threat reinforcement with bounded quiet-turn holds, preserving physical minimum guards and direct-order priority. Joined authored mature-realm controls, partial refusals and exact AI-inclusive saved continuation are verified. Patrol/escort roles, reusable army-order templates, broader governors and organic-scale acceptance remain. Separate verification scopes: implementation 2146, publication 2146, affected browser 49, built production 2, local/live Pages 35/35, compatibility 102. These overlapping counts are not additive. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/"
+        },
+        {
+          "id": "M4",
+          "title": "Supply, trade and sustained military operations",
+          "status": "in-progress",
+          "detail": "Rules/save 34 adds paid source-specific foreign supply access through ordinary proposals and acceptance. Fees pay once on acceptance; imported land/harbor supply retains ordinary blockade, ownership, war and expiry constraints. Participant-only disclosures, AI fee reserves, save/replay and uncertain-payment recovery are verified. This grants no movement rights. Trade routes/interception, taxation, material supply costs and broader coordinated operations remain. Separate verification scopes: implementation 2146, publication 2146, affected browser 49, built production 2, local/live Pages 35/35, compatibility 102. These overlapping counts are not additive. Source f33a816f3a853229695b902af007e4e3f3547275; publication abb2369fd289a549c59704fbbe4aa6fb8354bafb. Evidence: ~/Work/Theandril/docs/development/2026-09-27-reinforcement-logistics/ Final rules 34 headline standard-map/12-realm/seed20260905 measurements: Standard 233 turns, 0 submitted refusals, 0 automatic blocked routes; Long 311 turns, 0 submitted refusals, 0 automatic blocked routes; Epic 349 turns, 0 submitted refusals, 0 automatic blocked routes. Matched frozen rules 33 headline results: Standard 233 turns; Long 311 turns; Epic 349 turns. The report contains eighteen runs: nine configurations, each under 33 and 34. Counters and seeds remain distinct. No target-band acceptance or price change is inferred. ACT-38 and DH-021 stay open."
+        },
+        {
+          "id": "M5",
+          "title": "Independent powers, political pressure and agent roles",
+          "status": "in-progress",
+          "detail": "Twenty-four city-states are authored, playable and courtable as clients. Clans, pirates, mercenaries, enclaves and the political layer are not built."
+        },
+        {
+          "id": "M6",
+          "title": "Epochs, crises and the living campaign",
+          "status": "open",
+          "detail": "Navigate eras, upheaval and world crises rather than a flat timeline."
+        },
+        {
+          "id": "M7",
+          "title": "Progression depth and the third victory path",
+          "status": "open",
+          "detail": "Two victory paths exist; the third and the deeper progression behind it do not."
+        },
+        {
+          "id": "M8",
+          "title": "Authored breadth, exploration and final presentation",
+          "status": "in-progress",
+          "detail": "Twenty-four cultures, seven map types and the city-state register are published; the quantitative content and art targets are not met."
+        },
+        {
+          "id": "M9",
+          "title": "Authoritative online campaigns",
+          "status": "open",
+          "detail": "The deployed game is single-player; no server, rooms or reconnect exist."
+        },
+        {
+          "id": "M10",
+          "title": "Sustained proof and release signoff",
+          "status": "open",
+          "detail": "Prove the integrated release at scale and across browsers, then sign the gates."
+        }
+      ]
+    },
+    "preserved": [
+      "ACT-36 done",
+      "DH-020 resolved",
+      "all other records and unmodified fields",
+      "resources.json untouched"
+    ]
+  },
+  "applied": false
+}

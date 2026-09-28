@@ -1,6 +1,6 @@
 # Prepared DHARMA progress update
 
-Prepared 2026-09-27; **not applied**. Helper: `/tmp/theandril-record-reinforcement-logistics.py`. It is an offline preview tool until explicitly invoked with `--apply` and the exact reviewed preview seal. The final source/publication IDs, verification counts, workflow IDs, pacing results and catalogue totals are intentionally not filled in yet.
+Prepared 2026-09-27; **applied and read back 2026-09-28**. The preparation procedure below is retained as history; actual pins, reviewed proposal and output seals are in `tracker-release.json`, `tracker-preview.json`, `tracker-applied.json` and `tracker-readback.json`. Helper: `/tmp/theandril-record-reinforcement-logistics.py`. It is an offline preview tool until explicitly invoked with `--apply` and the exact reviewed preview seal. The final source/publication IDs, verification counts, workflow IDs, pacing results and catalogue totals are intentionally not filled in yet.
 
 The current tracker was inspected using `tracker-context dharma --project Theandril` and its actual actions, projects, issues and resources JSON. Only `data/actions.json`, `data/projects.json` and `data/issues.json` are proposed write targets. `resources.json` is inventory output and stays untouched.
 
@@ -40,3 +40,5 @@ TRACKER_HOME=/home/telephoneheater/Projects/DHARMA/dharma-tracker /home/telephon
 Preparation validation: Python syntax parsing and the read-only template invocation passed. A small read-only guard check accepted the retained 54-pass worker log, rejected the retained initial two-failure log, checked the template's current input seals and confirmed unchanged tracker bytes. Final release validation is deliberately pending actual supplied metadata. The helper and procedure are a reviewed-update mechanism, not an independent replacement for source, browser, performance or publication reviews.
 
 Independent helper review caught and corrected two preparation issues before use: the final pacing matrix contains paired rules33/34 rows rather than current-only rows, and the combined built-production scope includes an authored imported supply scenario alongside a generated theater campaign. Neither issue reached tracker data.
+
+Final application used reviewed preview `0a9c911c4ce829a48420b37c64f98fd9ba70456621cfcb1806b156fe7931daa8`. The corrected helper source is retained under `tracker-tools/`; review and eight isolated guard/rollback checks precede application. Tracker build completed successfully, and the generated Theandril page contains the published evidence. Final input/output checks pass; no inventory or weekly writer ran.

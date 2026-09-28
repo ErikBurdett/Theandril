@@ -1,0 +1,72 @@
+{
+  "revision": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+  "sourceRevision": "f33a816f3a853229695b902af007e4e3f3547275",
+  "roadmapSourceRevision": "f33a816f3a853229695b902af007e4e3f3547275",
+  "origin": "https://erikburdett.github.io/Theandril/",
+  "started": "2026-09-28T05:37:28.787Z",
+  "scope": "Public live readback: latest build-ledger SHA, production setup and exact local built game/worker asset bytes; edition13 title/evidence/image; all roadmap records and open gates. No campaign, gameplay journey, deployment action or release acceptance.",
+  "revisionScope": "Revision comes from the newest build-generated public ledger. GitHub deployment workflow identity is verified separately; this helper makes no independent build-attestation claim.",
+  "noWrite": false,
+  "checks": {
+    "latestLedgerRevision": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+    "game": {
+      "htmlSha256": "368b2232ed82e18cdd1370c7af7aeb0862182f6d1644e5891e65fa5940ba8bb1",
+      "productionSetup": true,
+      "noDevelopmentHooks": true,
+      "exactBuiltAssets": [
+        {
+          "path": "assets/game-DLqF3uvl.js",
+          "bytes": 1065819,
+          "sha256": "37caf7eaf722baacd81793cea67c853fa4feee44971564ac2b821945acd2cb1d"
+        },
+        {
+          "path": "assets/simulation.worker-B3mL7bUx.js",
+          "bytes": 814018,
+          "sha256": "6b382f9343f0edb7f5fe2e5543b2ac2141839e987dcbede3958099b5297370bb"
+        },
+        {
+          "path": "assets/game-N83dwyUU.css",
+          "bytes": 112946,
+          "sha256": "15643e3c3845aafed7ff44f10519d80ab52854dfce36580e1dba08447f3e3502"
+        }
+      ]
+    },
+    "dispatch": {
+      "id": "reinforcement-logistics",
+      "edition": 13,
+      "title": "Hold the frontier, provision the crossing",
+      "source": "f33a816f3a853229695b902af007e4e3f3547275",
+      "evidenceLinks": 9,
+      "image": {
+        "id": "fleet-provisions-refilled-narrow",
+        "path": "updates/fleet-provisions-refilled-narrow.png",
+        "bytes": 193720,
+        "sha256": "0f76fdf207fa30ba20f4b1397ad8ef7fff7c752e1ac175f8d46f779b831e6be4",
+        "width": 390,
+        "height": 844
+      }
+    },
+    "roadmap": {
+      "source": "f33a816f3a853229695b902af007e4e3f3547275",
+      "date": "2026-09-28",
+      "counts": {
+        "completed": 6,
+        "in-progress": 13,
+        "pending": 4
+      },
+      "itemCount": 23,
+      "deliveredAcceptancePoints": 78,
+      "remainingAcceptancePoints": 49,
+      "totalAcceptancePoints": 127,
+      "allRecordsReconciled": true,
+      "openReleaseGates": 15
+    }
+  },
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "passed": true,
+  "finished": "2026-09-28T05:37:33.957Z",
+  "scriptSha256": "2add56bd9e15f8b04418d7f514d934ef0f49f472dad16e243cfa4bd4089b320a"
+}

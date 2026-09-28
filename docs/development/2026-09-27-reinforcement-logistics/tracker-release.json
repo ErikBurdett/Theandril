@@ -1,0 +1,100 @@
+{
+  "date": "2026-09-28",
+  "source": "f33a816f3a853229695b902af007e4e3f3547275",
+  "published": "abb2369fd289a549c59704fbbe4aa6fb8354bafb",
+  "inputHashes": {
+    "actions": "765fcd2370a1f8a2b2455799cfa6594d0d1f905fbea2fb281e9900cf87086b81",
+    "projects": "68562d2b888ed6968c5f7bb30435e88091e8394f48040462b6d69cf5a93f7dbf",
+    "issues": "3e48e21c50d568b9982d21e2e23ae73aa9d636a060916a0c9e529720644d8457"
+  },
+  "checks": [
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/tests-final.log",
+      "sha256": "be693eb2d81dcaabf0730ca393bbee353ef559ebb5802235f86d1384163fe42f",
+      "pin": "source",
+      "scope": "implementation",
+      "kind": "headless",
+      "passed": 2146,
+      "files": 266
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/publication-tests.log",
+      "sha256": "aa3a858d6c06a5c6437894519c15311634e56877c28fd851846735c1e7208c53",
+      "pin": "published",
+      "scope": "publication",
+      "kind": "headless",
+      "passed": 2146,
+      "files": 266
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/affected-browser-final.log",
+      "sha256": "bc9ba9bb81e9707d6e4b969b77d639fe4ff4d652253772dd6bdd73f2e04b2179",
+      "pin": "source",
+      "scope": "affected",
+      "kind": "browser",
+      "passed": 49,
+      "files": null
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/production-final.log",
+      "sha256": "9f6aa8d92c53ada7f779a6c7c639e205f9afe0f4c69b5959afa6990ad53f556d",
+      "pin": "source",
+      "scope": "production",
+      "kind": "browser",
+      "passed": 2,
+      "files": null
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/local-pages.log",
+      "sha256": "24a262d5d887b092e7cc7069e77bffb390146bc8ce089f842319f612e6c7bf74",
+      "pin": "published",
+      "scope": "localPages",
+      "kind": "browser",
+      "passed": 35,
+      "files": null
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/live-pages.log",
+      "sha256": "187dc75efa04d8e23f2d5de44106360769c143e85d28d001dc8772e7daafea0c",
+      "pin": "live",
+      "scope": "livePages",
+      "kind": "browser",
+      "passed": 35,
+      "files": null
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/compatibility-final.log",
+      "sha256": "47ada8f95679c6f6acc6cb2680c51b5e94fc89098a9e6c53dc8f8d74b062be74",
+      "pin": "source",
+      "scope": "compatibility",
+      "kind": "headless",
+      "passed": 102,
+      "files": 7
+    }
+  ],
+  "deployment": {
+    "path": "docs/development/2026-09-27-reinforcement-logistics/deployment.json",
+    "sha256": "1b735d450be84d8630fde2ee432d3b0085ab5ce40c36b9d07f9eeaf791e41786",
+    "pin": "live"
+  },
+  "readback": {
+    "path": "docs/development/2026-09-27-reinforcement-logistics/live-readback.json",
+    "sha256": "87c33d219bba9329d4f385402c8aefd409e6cee4eaa4bae8e225658c89969e16",
+    "pin": "live"
+  },
+  "pacing": {
+    "path": "docs/development/2026-09-27-reinforcement-logistics/pacing-matrix.json",
+    "sha256": "f8b764a6b56219ef30fad4885f6104d0f2017179cdcf30efe6f4c91c83020962",
+    "pin": "source"
+  },
+  "supplyBenchmark": {
+    "path": "docs/development/2026-09-27-reinforcement-logistics/supply-benchmark-final.json",
+    "sha256": "fa6871923ac1ff02f1a1dfe031629849cbcbe7366c2fe71af75f96bd1960ed14",
+    "pin": "source"
+  },
+  "reinforcementBenchmark": {
+    "path": "docs/development/2026-09-27-reinforcement-logistics/reinforcement-benchmark-final.json",
+    "sha256": "238ede79c5333d1b72e0145871b3be6b6866657b54a099fa60fe094bcf3ee9a1",
+    "pin": "source"
+  }
+}

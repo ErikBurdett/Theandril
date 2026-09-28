@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-28 | [Reinforcement, supply agreements and verified deployment](2026-09-28-reinforcement-logistics.md) | Published `abb2369`; ACT-32/33 advanced; 2,146 tests, 49 affected gameplay, 35 local and 35 live Pages journeys pass |
 | 2026-09-27 | [Defensive theaters and verified deployment](2026-09-27-defense-theaters.md) | Published `bce46a1`; ACT-32 advanced; 2,075 tests, 33 affected gameplay, 34 local and 34 live Pages journeys pass |
 | 2026-09-27 | [Group travel and verified deployment](2026-09-27-group-travel.md) | Published `7dfe0c6`; ACT-32 advanced; 2,000 tests, 23 distinct affected gameplay, 33 local and 33 live Pages journeys pass |
 | 2026-09-26 | [Production sequences, personal templates and deployment](2026-09-26-production-sequences.md) | Published `24cd30e`; ACT-32 advanced; 1,977 tests, 30 affected gameplay, 32 local and 32 live Pages journeys pass |

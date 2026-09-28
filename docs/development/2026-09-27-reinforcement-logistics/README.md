@@ -5,7 +5,7 @@ Implementation verified 28 September 2026; work began 27 September. Baseline:
 content `015468d1` unchanged. This packet advances ACT-32/M3, ACT-33/M4 and
 DH-021/ACT-38 evidence. All fifteen release gates remain open. Full local headless,
 affected Chromium, benchmark, paired pacing and built-production runs pass.
-Local publication verification passes; live deployment is pending; this is not a prompt completion report.
+Local publication and live deployment verification pass; this is not a prompt completion report.
 
 ## Implemented player outcomes
 
@@ -53,7 +53,7 @@ These scopes overlap; their counts must not be added.
 | Publication headless | 2,146/2,146 in 266 files, 60.52s; see `publication-tests.log` |
 | Local production Pages | 35/35 in 1.2 minutes; see `local-pages.log`. Includes the two new production cases, without adding overlapping counts. |
 | Publication checks | Typecheck, lint, content/art validation and Pages-subpath build pass; `publication-*.log` and `build-final.log` |
-| Live deployment | Pending; no release-acceptance claim |
+| Live deployment | Both exact workflows pass at `abb2369`; exact HTML/game/worker/image/source/catalogue readback passes. The same 35 Pages journeys pass live in 1.4 minutes without retries. See `deployment.json`, `live-readback.json` and `live-pages.log`. |
 
 [Historical capture review](historical-capture-review.md),
 [manifest](historical/manifest.json),
@@ -220,3 +220,9 @@ The focused strict-parser browser rerun passes 1/1 in 37.7 seconds; see `integra
 ## Reviewed publication candidate
 
 Implementation source: `f33a816f3a853229695b902af007e4e3f3547275`. Dispatch 13, “Hold the frontier, provision the crossing,” and the existing catalogue retain twenty-three item identities and statuses, 78 delivered/49 remaining editorial statements, and all fifteen open release gates. The denominator is editorial, not fixed-scope release completion. [Content and immutable evidence review](publication-content-review.md) verifies forty-three referenced paths against P1, unchanged historical entries and unchanged public image bytes. The first scoped journal check hit sandbox `git` subprocess restrictions; its escalated 25-check correction and the full publication pass are separately retained. Raw tool logs and Playwright failure contexts keep their original whitespace; source whitespace checks pass.
+
+## Published and recorded
+
+Publication `abb2369fd289a549c59704fbbe4aa6fb8354bafb` delivers the game and reviewed dispatch together. [Deployment](deployment.json), [exact live readback](live-readback.json), [identical local/live journey identities](live-pages-identities.json), [visual review](publication-visual-review.md) and [live evidence review](live-evidence-review.md) retain separate evidence scopes. The local comparison build explicitly regenerated the Git ledger at the publication revision, as CI does, then restored only the generated source feed to committed bytes. Game code and worker bytes match the deployed build.
+
+DHARMA applied the reviewed sealed proposal and rebuilt its local site. [Tracker readback](tracker-readback.json) verifies exact output hashes and preservation of ACT-32/ACT-33 doing, M3/M4 in progress, ACT-38 backlog, DH-021 open, ACT-36 done and DH-020 resolved. The resource inventory was not edited. [The helper review](tracker-helper-review.md) records two fixed administrative safeguards and eight isolated fake-file checks; exact helper and test bytes are retained under `tracker-tools/`. No release gate was closed.
