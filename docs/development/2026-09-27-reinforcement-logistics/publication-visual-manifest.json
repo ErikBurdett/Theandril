@@ -1,0 +1,247 @@
+{
+  "reviewDate": "2026-09-28",
+  "implementationRevision": "f33a816f3a853229695b902af007e4e3f3547275",
+  "captureRunLog": "docs/development/2026-09-27-reinforcement-logistics/local-pages.log",
+  "captureTest": "tests/gameplay/updates.spec.ts",
+  "captureConfig": "playwright.pages.config.ts",
+  "baseURL": "http://127.0.0.1:4175/Theandril/",
+  "captureDescription": "Existing native Playwright page and figure-locator PNGs from parent production Pages run. Inspected in place; no copy, pixel transform, crop or re-encoding performed by reviewer. Root font-size scaling is part of the authored browser test.",
+  "publicHistoricalImage": {
+    "path": "apps/web/public/updates/fleet-provisions-refilled-narrow.png",
+    "bytes": 193720,
+    "sha256": "0f76fdf207fa30ba20f4b1397ad8ef7fff7c752e1ac175f8d46f779b831e6be4",
+    "width": 390,
+    "height": 844,
+    "sourceRevision": "b623c2c91d4d852cba710f2d996c28a6b1b5d624"
+  },
+  "reviewedSourceSha256": {
+    "apps/web/src/updates/reinforcement-logistics.ts": "3c0ba71a692568564898c3dd81267a0137840d2a85fb7def04c5905afba6f914",
+    "apps/web/src/updates/library.ts": "c296146cdc849d24988aeee918770cd151f67dc0438ac163b4d539e4439d8339",
+    "apps/web/src/updates/media.json": "df780b51d1953d19a7f6692de35ae9e5f14f7c5d80e82ead563813350ad6eb96",
+    "apps/web/public/updates/provenance.json": "df780b51d1953d19a7f6692de35ae9e5f14f7c5d80e82ead563813350ad6eb96",
+    "tests/gameplay/updates.spec.ts": "7b5d689f783a17d7549217265bb6db8b8d5d37d09f4d2b702ea399545acbbfab",
+    "playwright.pages.config.ts": "6c5f0f8167218adb0cf500db94332129c1c40fc6e9026a8f0e7f06d38acd60fa"
+  },
+  "files": [
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-top.png",
+      "bytes": 277004,
+      "sha256": "a1f31639011165fb2b5c8452ed9d1645b1520766453857cf1c8776076436bc4a",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        1366,
+        768
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-chapter.png",
+      "bytes": 378187,
+      "sha256": "318a175e0017cf71be4941d25d251a20f88e732360ac63433f311ec13c6fbaeb",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        1366,
+        768
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1366px-and-100-text/historical-fleet-provisions-illustration.png",
+      "bytes": 223573,
+      "sha256": "860cfb992159a11c61426851f1d8956cf75fd73845d8c6de11af72428145645b",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        391,
+        965
+      ],
+      "captureMethod": "locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1366px-and-100-text/layout-evidence.json",
+      "bytes": 284,
+      "sha256": "240dd3dc260f9ccc7a2a0293601a66f80e456d6e048ec1a48b35d0352f4336da",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "textScalePercent": 100
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-top.png",
+      "bytes": 384366,
+      "sha256": "3f52a98d5d2d3e2861c2603ba13bad97259e4b2c645fb8fa93e2e55639144fa4",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        1440,
+        1000
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-chapter.png",
+      "bytes": 493244,
+      "sha256": "16564f48861c2f6579488f3824d809da0f069ade6015331f1150849f8a1daac3",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        1440,
+        1000
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1440px-and-100-text/historical-fleet-provisions-illustration.png",
+      "bytes": 223255,
+      "sha256": "39a44a6aa796f02317eef0ffb9c24be5b38975e21a9098a910f782d8182a5c32",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        391,
+        965
+      ],
+      "captureMethod": "locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-1440px-and-100-text/layout-evidence.json",
+      "bytes": 285,
+      "sha256": "ed3a1c6d85218dd6562fd201a4cb98c871d217bbe535170e4d1cd4aad47e3662",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "textScalePercent": 100
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-100-text/reader-top.png",
+      "bytes": 165655,
+      "sha256": "d6ad237821191d8802d43b3a0eff7940c8764c298f457ae579480888a3dc4f4f",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-100-text/reader-chapter.png",
+      "bytes": 200832,
+      "sha256": "1683c8a42991722c20679f924a110791ef1ae4ffd7e4e82d784f348ec9b35b81",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-100-text/historical-fleet-provisions-illustration.png",
+      "bytes": 148861,
+      "sha256": "59f8f844ad8e989b08d80c1cd157a75aa797f36e08bc64b697e8035bd1b2a897",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 100,
+      "pngDimensions": [
+        310,
+        836
+      ],
+      "captureMethod": "locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-100-text/layout-evidence.json",
+      "bytes": 283,
+      "sha256": "4ce4e1d71eb30d7ae962454f9afa8dbfda515a72c4368a1f084eb2ce8bfc4b1c",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 100
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-130-text/reader-top.png",
+      "bytes": 156675,
+      "sha256": "48e20e7d86243beede1cd4ac2dc4d06dbc7f3f97f7c38010356270f8466c512c",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 130,
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-130-text/reader-chapter.png",
+      "bytes": 186359,
+      "sha256": "4989cb9a9edd046ac5bc244eadae08493c5f73bed878215390b25e4260c2f3df",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 130,
+      "pngDimensions": [
+        390,
+        844
+      ],
+      "captureMethod": "page.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-130-text/historical-fleet-provisions-illustration.png",
+      "bytes": 163300,
+      "sha256": "7c2102746f48288bf6a55a22d4c930ae45efb217ca29bfde09db500d2526d750",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 130,
+      "pngDimensions": [
+        292,
+        909
+      ],
+      "captureMethod": "locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-27-reinforcement-logistics/browser-evidence/local-pages/gameplay-updates-readable-journal-at-390px-and-130-text/layout-evidence.json",
+      "bytes": 283,
+      "sha256": "0076114b8a4a9cb35f456c180f2f4580ee2967406a34ed7d94c3e93a21c1e2b4",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScalePercent": 130
+    }
+  ]
+}

@@ -17,7 +17,7 @@ describe('journal discovery', () => {
         const footnote = markup.match(/<p class="feature-footnote">(.*?)<\/p>/)?.[1];
         expect(footnote).toBe(`Source checkpoint ${sourceRevision.slice(0, 7)} · Not a 1.0 release.`);
         expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/IMPLEMENTATION_STATUS.md"`);
-        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-27-defense-theaters/README.md"`);
+        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-27-reinforcement-logistics/README.md"`);
       }
     } finally {
       dispatches[0] = original;
@@ -32,6 +32,6 @@ describe('journal discovery', () => {
     expect(filterDispatches(dispatches, 'Vesper', 'Engineering')).toEqual([]);
     expect(filterDispatches(dispatches, '', 'All')).toEqual(dispatches);
     expect(filterDispatches(dispatches, 'no-such-dispatch', 'All')).toEqual([]);
-    expect(filterDispatches(dispatches, 'CAPTURE garrison', 'Engineering').map(story => story.id)).toEqual(['defense-theaters', 'r17-campaign-safety']);
+    expect(filterDispatches(dispatches, 'CAPTURE garrison', 'Engineering').map(story => story.id)).toEqual(['reinforcement-logistics', 'defense-theaters', 'r17-campaign-safety']);
   });
 });

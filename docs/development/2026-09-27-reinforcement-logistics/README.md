@@ -5,7 +5,7 @@ Implementation verified 28 September 2026; work began 27 September. Baseline:
 content `015468d1` unchanged. This packet advances ACT-32/M3, ACT-33/M4 and
 DH-021/ACT-38 evidence. All fifteen release gates remain open. Full local headless,
 affected Chromium, benchmark, paired pacing and built-production runs pass.
-Publication verification is pending; this is not a prompt completion report.
+Local publication verification passes; live deployment is pending; this is not a prompt completion report.
 
 ## Implemented player outcomes
 
@@ -50,7 +50,10 @@ These scopes overlap; their counts must not be added.
 | Paired headline pacing | All eighteen rules-33/34 runs complete; nine old rows match genuine pre-change hashes/command/event counts, see `pacing-comparison.json` |
 | Built production | 2/2 pass in 10.4s without development hooks; generated theater and authored supply import, see `production-final.log` |
 | Content/art and Pages-subpath build | Pass; see `content-final.log`, `art-final.log` and `build-initial.log` |
-| Publication | Pending; no deployment or release-acceptance claim |
+| Publication headless | 2,146/2,146 in 266 files, 60.52s; see `publication-tests.log` |
+| Local production Pages | 35/35 in 1.2 minutes; see `local-pages.log`. Includes the two new production cases, without adding overlapping counts. |
+| Publication checks | Typecheck, lint, content/art validation and Pages-subpath build pass; `publication-*.log` and `build-final.log` |
+| Live deployment | Pending; no release-acceptance claim |
 
 [Historical capture review](historical-capture-review.md),
 [manifest](historical/manifest.json),
@@ -213,3 +216,7 @@ The first full suite retained six sandbox subprocess failures (`tests-initial.lo
 The final typecheck caught an unknown command read in the acceptance test (`typecheck-test-boundary-initial.log`). Its archive assertions now parse each command with the canonical schema for its recorded rules version. Production runtime did not change; final typecheck and lint pass.
 
 The focused strict-parser browser rerun passes 1/1 in 37.7 seconds; see `integrated-typed-final.log`. This overlaps the 49-journey scope.
+
+## Reviewed publication candidate
+
+Implementation source: `f33a816f3a853229695b902af007e4e3f3547275`. Dispatch 13, “Hold the frontier, provision the crossing,” and the existing catalogue retain twenty-three item identities and statuses, 78 delivered/49 remaining editorial statements, and all fifteen open release gates. The denominator is editorial, not fixed-scope release completion. [Content and immutable evidence review](publication-content-review.md) verifies forty-three referenced paths against P1, unchanged historical entries and unchanged public image bytes. The first scoped journal check hit sandbox `git` subprocess restrictions; its escalated 25-check correction and the full publication pass are separately retained. Raw tool logs and Playwright failure contexts keep their original whitespace; source whitespace checks pass.
