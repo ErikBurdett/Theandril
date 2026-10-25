@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-group-patrol.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-group-patrol.test.ts (6 tests | 1 failed) 1296ms
+     × refuses player mutation in watch mode without recording or saving 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > refuses player mutation in watch mode without recording or saving
+Error: Complete history must begin at the generated campaign start.
+ ❯ parseArchive packages/chronicle/src/index.ts:150:99
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:38
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ apps/web/src/worker-group-patrol.test.ts:164:48
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 8 passed (9)
+   Start at  23:49:51
+   Duration  1.96s (transform 579ms, setup 0ms, import 647ms, tests 1.30s, environment 0ms)
+

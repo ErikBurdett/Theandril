@@ -1,5 +1,28 @@
 # Performance measurements
 
+## Explicit group patrol batches — 2026-10-24
+
+[Six retained single samples](development/2026-10-24-group-patrols/worker-benchmark-results.json)
+exercise the actual worker module in a same-thread Node host with structuredClone
+and fake IndexedDB. Generated Huge/Legendary geography remains intact; own guards
+are authored to 128, ordinary commands create policies and an issued route, and
+local permitted fog exposes 61 cells. Setup/import/export/replay are excluded
+from each batch interval. [Exact scope](development/2026-10-24-group-patrols/worker-benchmark.md).
+
+| Map | Pause ms | Resume ms | Remove ms |
+| --- | ---: | ---: | ---: |
+| Huge | 330.824 | 382.883 | 389.917 |
+| Legendary | 668.912 | 634.563 | 673.485 |
+
+Each batch records 128 ordinary commands, autosaves once, publishes one final
+state, performs no detail-query request and sends an empty 39-byte packed cell
+change. Result metadata ranges from 14,714 to 16,923 bytes. Exact command mirrors,
+replay/autosave restoration and unchanged armies/nonempty routes pass. The separate
+cold-observation, canonical/journal, autosave and clone values remain in the raw
+report. Fake-storage autosave dominates these samples. These are not browser
+Worker scheduling, physical-storage latency, medians, percentiles, frame budgets
+or organic campaign acceptance. No per-turn hot path or campaign rule changed.
+
 ## Registry order filters — presentation scope, 2026-10-24
 
 The owned-order projection costs O(A + P + R + C) over supplied observed armies,

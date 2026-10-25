@@ -1,0 +1,213 @@
+{
+  "scope": "Read-only inspection of retained first-run production evidence; no new browser run or campaign simulation. Exact replay assertions ran in the passing production journey.",
+  "firstRun": {
+    "tests": 7,
+    "seconds": 44.5,
+    "normalJourneySeconds": 9.0,
+    "recoveryCases": 3,
+    "log": "docs/development/2026-10-24-group-patrols/browser-first.log"
+  },
+  "phases": [
+    {
+      "action": "paused",
+      "records": 154,
+      "addedCommands": 49,
+      "stateChecksum": "ed1ca081",
+      "sha256": "f77a550d52de068ecd584443a948499b9e245427d8eabc40dadf194a1c3db1da",
+      "bytes": 16830
+    },
+    {
+      "action": "resumed",
+      "records": 253,
+      "addedCommands": 99,
+      "stateChecksum": "fdf67f26",
+      "sha256": "127a477b9cde5e16aec38b5657daae90836edcc72fa7a6bd4e836d88314f766c",
+      "bytes": 17530
+    },
+    {
+      "action": "removed",
+      "records": 352,
+      "addedCommands": 99,
+      "stateChecksum": "91fac403",
+      "sha256": "38316005808de4201835499b71f95b52e98292c8f99f293e7bd74b42eba4d202",
+      "bytes": 17703
+    },
+    {
+      "action": "restored",
+      "records": 352,
+      "addedCommands": 0,
+      "stateChecksum": "91fac403",
+      "sha256": "2b25f8f4ece4634c7aa656d7c044254a99388367e2684f56ec1d5dac3f63b3a8",
+      "bytes": 17701
+    }
+  ],
+  "artifactChecks": {
+    "allRecordsAcceptedRules35": true,
+    "sameTurnAdministrativeBatches": true,
+    "priorArchivePrefixesExact": true,
+    "allArmiesRoutesPostingsEqualAcrossExports": true,
+    "restoredSnapshotAndArchiveExact": true
+  },
+  "normalJourneyEvidence": {
+    "authored": "Open-terrain theaterCampaign(101), two hearths, treasury, named companies and foreign obstruction guard; 105 ordinary setup records.",
+    "initialHash": "c6f43460",
+    "counts": {
+      "armies": 101,
+      "policies": 99,
+      "enabled": 49,
+      "paused": 50,
+      "setupCommands": 105
+    },
+    "phases": [
+      {
+        "action": "paused",
+        "hash": "acebff08",
+        "records": 154,
+        "accepted": 49,
+        "skipped": 52
+      },
+      {
+        "action": "resumed",
+        "hash": "f89dea4d",
+        "records": 253,
+        "accepted": 99,
+        "skipped": 2
+      },
+      {
+        "action": "removed",
+        "hash": "a488bb10",
+        "records": 352,
+        "accepted": 99,
+        "skipped": 2
+      }
+    ],
+    "finalHash": "a488bb10",
+    "unchangedRoutes": {
+      "army.98": {
+        "armyId": "army.98",
+        "origin": 498,
+        "waypoints": [
+          510
+        ],
+        "path": [
+          499,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510
+        ],
+        "status": "paused",
+        "pauseReason": "Another faction now blocks the next step.",
+        "knownHostileIds": []
+      },
+      "army.99": {
+        "armyId": "army.99",
+        "origin": 498,
+        "waypoints": [
+          510
+        ],
+        "path": [
+          450,
+          451,
+          452,
+          453,
+          454,
+          455,
+          456,
+          457,
+          458,
+          459,
+          460,
+          461,
+          510
+        ],
+        "status": "active",
+        "pauseReason": null,
+        "knownHostileIds": []
+      }
+    },
+    "unchangedArmies": true,
+    "unchangedPostings": true,
+    "warPausePreservedUntilRemoval": true,
+    "exactReplayEveryPhase": true,
+    "exactReload": true,
+    "finalRecords": 352,
+    "realPendingFilterLock": true
+  },
+  "recoveryScope": {
+    "injectedFaults": [
+      "missing-results",
+      "wrong-army",
+      "worker-crash"
+    ],
+    "injectionBoundary": "Native worker completed state reply, after real canonical mutation; presentation reply damaged or synthetic worker error dispatched. No substituted game state or command outcome.",
+    "testedRestoration": "Explicit pre-action manual save (8 records), then one ordinary successful retry (9 records).",
+    "retainedEvidence": "Passing production source/assertions, console log and three screenshots; separate recovery export files were not written."
+  },
+  "sourceSha256": {
+    "tests/gameplay/group-patrol-fixture.ts": "f5c46c25d5ccb851b66140333e3d15b3c1ebf6d148c8d9683e5be421acf9412e",
+    "tests/gameplay/army-order-filter-fixture.ts": "ccd0e74296f2b083afcc46f5fff236e1f7b783e1aca556429098c3e9eca46af6",
+    "tests/gameplay/group-movement-fixture.ts": "dd950829d91e856b2a183a4eb4fa29f421afc9db7d6afd0988fab0ff3d8c213a",
+    "tests/gameplay/ui-navigation.ts": "547610133f11cac5525bccd94f0326d3ead074cc435a5bcf450d889917a01f35",
+    "tests/production/group-patrols.spec.ts": "dd462a79016ad1eae30ae10a887e0502727cf293ed017965e6367c9e236b02d3",
+    "tests/production/group-patrol-recovery.spec.ts": "0168bf14bd514944d41db17f76e287f8451fc24427162a6050f33c8c8e985e59",
+    "apps/web/src/group-patrols.tsx": "11c724e1cc485b2f2dfdf7075b3cd585355f48876b2fcf112abb203bb5f9b106",
+    "apps/web/src/group-patrol-requests.ts": "927d4e437578a01a46f5763bdbf93ad7c31985bc2ddc1a8f6c7e6ee98845febf",
+    "apps/web/src/protocol.ts": "0749c0b73d1bae5a4e93c5cd38f5f3785b6f215832d28627bf552e1ecf9641f0",
+    "apps/web/src/simulation.worker.ts": "0e22e1d51cb25b26dc9e2e8afe9e18b0b9eec0f0e9f04d9ec531dd9799858a53",
+    "apps/web/src/main.tsx": "1361b0b1c72a259cc1d0a70fd294c11dcac09ea4b3e7b5e5d33450ac1908700b",
+    "apps/web/src/realm-navigation.tsx": "62c546107554373eb2052d31d971199c25edd49b4918cf5552f10143f70ba1b3",
+    "apps/web/src/realm-windows.tsx": "f43d7a67f3852d33778a652350cc85a8e39f11c369eb7068182bff14028636ce"
+  },
+  "images": [
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-01893-ed-restoration-before-retry/patrol-worker-crash-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735999,
+      "sha256": "ed5c34349d4e602565b8dbd61adb71abc511679423ed598d3739e2e2903e7cd9"
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-292bc-ed-restoration-before-retry/patrol-wrong-army-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735913,
+      "sha256": "282dd7447cde8f3d1290f3eddde52e7629f431b182f6a85cc10ff9d178b87cdc"
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-d84cc-ed-restoration-before-retry/patrol-missing-results-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735914,
+      "sha256": "726668abfdfc5d6bb685d8fd36f86816e9f634396462f618b2835740518fb087"
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-actions-native.png",
+      "width": 318,
+      "height": 149,
+      "bytes": 31103,
+      "sha256": "5a1a6eb8f4cfaf0b2c66fb9832887cd16faf009d70dc36185565b8c76cd921fc"
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-pause-desktop.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 910581,
+      "sha256": "a1266d972795c6f2b7e9234d242f8549ce27a79b54ae09ab58c395b25181f7c6"
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-remove-narrow-130.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 174674,
+      "sha256": "c37cb999997915a62ce51a2279e19e043ad54823c4336a98cda4ef7584ce7380"
+    }
+  ]
+}

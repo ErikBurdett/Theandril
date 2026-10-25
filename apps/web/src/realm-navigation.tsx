@@ -5,6 +5,7 @@ import { addGroupSelection, groupPostingArmies, GroupPostingOrders, GROUP_POSTIN
 import { groupCharterTowns, GroupCharterOrders, type GroupCharterIssue } from './group-charters';
 import { SelectionGroups, type SelectionGroupIssue } from './selection-groups';
 import { GroupProductionOrders, type GroupProductionIssue } from './group-production';
+import { GroupPatrolOrders, type GroupPatrolIssue } from './group-patrols';
 import { GroupMovementOrders, type GroupMovementIssue, type GroupMovementPreviewIssue } from './group-movement';
 import { DefenseTheaters, type TheaterIssue } from './defense-theaters';
 import { ARMY_ORDER_FILTERS, armyOrderCounts, buildArmyOrderIndex, matchesArmyOrderFilter, type ArmyOrderFilter, type ArmyOrderStatus } from './army-order-status';
@@ -51,9 +52,9 @@ export function RealmNavigation({ registry, armyCount, townCount, characterCount
   </div>;
 }
 
-export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, theaterFocus, onPendingChange }: {
+export function RealmRegistry({ view, hash, registry, search, force, selection, select, busy = false, onGroupPosting, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onGroupPatrol, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, theaterFocus, onPendingChange }: {
   view: Observation; registry: RegistryKind; search: string; force: string; selection: Selection; select: (selection: Selection) => void;
-  hash?: string; busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onSelectionGroupCommand?: SelectionGroupIssue; onPendingChange?: (pending: boolean) => void;
+  hash?: string; busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onGroupPatrol?: GroupPatrolIssue; onSelectionGroupCommand?: SelectionGroupIssue; onPendingChange?: (pending: boolean) => void;
   onTheaterCommand?: TheaterIssue; knownSelectedCell?: number;
   theaterFocus?: { id: string; nonce: number };
 }) {
@@ -66,13 +67,14 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const [productionPending, setProductionPending] = useState(false);
   const [movementPending, setMovementPending] = useState(false);
   const [theaterPending, setTheaterPending] = useState(false);
-  const pendingFlags = useRef({ selection: false, production: false, movement: false, theater: false });
+  const [patrolPending, setPatrolPending] = useState(false);
+  const pendingFlags = useRef({ selection: false, production: false, movement: false, theater: false, patrol: false });
   const reportPending = (kind: keyof typeof pendingFlags.current, pending: boolean) => {
     pendingFlags.current[kind] = pending;
-    ({ selection: setSelectionGroupPending, production: setProductionPending, movement: setMovementPending, theater: setTheaterPending })[kind](pending);
+    ({ selection: setSelectionGroupPending, production: setProductionPending, movement: setMovementPending, theater: setTheaterPending, patrol: setPatrolPending })[kind](pending);
     onPendingChange?.(Object.values(pendingFlags.current).some(Boolean));
   };
-  const locked = busy || selectionGroupPending || productionPending || movementPending || theaterPending;
+  const locked = busy || selectionGroupPending || productionPending || movementPending || theaterPending || patrolPending;
   const availableArmyIds = useMemo(() => new Set(groupPostingArmies(view).map(army => army.id)), [view]);
   const availableTownIds = useMemo(() => new Set(groupCharterTowns(view).map(town => town.id)), [view]);
   const groupIds = registry === 'armies' ? armyGroupIds : townGroupIds;
@@ -103,7 +105,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const visible = entries.slice(current * REGISTRY_PAGE_SIZE, (current + 1) * REGISTRY_PAGE_SIZE);
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const charters = new Map(view.charters.map(charter => [charter.settlementId, charter]));
-  const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onTheaterCommand) : Boolean(onGroupCharter || onGroupProduction));
+  const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onGroupPatrol || onTheaterCommand) : Boolean(onGroupCharter || onGroupProduction));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
   return <div className="realm-registry-content">
     {registry === 'armies' && <div className="registry-tools"><label>Army orders<select value={orderFilter} disabled={locked} onChange={event => setOrderFilter(event.target.value as ArmyOrderFilter)}>
@@ -112,8 +114,9 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
     <div className="registry-tools"><label>Registry order<select value={sort} disabled={locked} onChange={event => setSort(event.target.value as Sort)}><option value="id">Stable order</option><option value="name">Name A–Z</option></select></label><span>{entries.length} {registry === 'armies' ? 'forces' : 'towns'}</span></div>
     {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={pending => reportPending('selection', pending)}/>}
     {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
-    {registry === 'armies' && onGroupMovement && onGroupMovementPreview && <GroupMovementOrders view={view} hash={hash} selected={currentGroupIds} selectedCell={selection.cell} busy={busy || selectionGroupPending || productionPending || theaterPending} issue={onGroupMovement} preview={onGroupMovementPreview} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('movement', pending)}/>}
-    {registry === 'armies' && onTheaterCommand && <DefenseTheaters view={view} checked={currentGroupIds} knownSelectedCell={knownSelectedCell} theaterFocus={theaterFocus} busy={busy || selectionGroupPending || productionPending || movementPending} issue={onTheaterCommand} onPendingChange={pending => reportPending('theater', pending)}/>}
+    {registry === 'armies' && onGroupMovement && onGroupMovementPreview && <GroupMovementOrders view={view} hash={hash} selected={currentGroupIds} selectedCell={selection.cell} busy={busy || selectionGroupPending || productionPending || theaterPending || patrolPending} issue={onGroupMovement} preview={onGroupMovementPreview} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('movement', pending)}/>}
+    {registry === 'armies' && onGroupPatrol && <GroupPatrolOrders view={view} hash={hash} selected={currentGroupIds} matching={matchingGroupIds} busy={busy || selectionGroupPending || productionPending || movementPending || theaterPending} issue={onGroupPatrol} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('patrol', pending)}/>}
+    {registry === 'armies' && onTheaterCommand && <DefenseTheaters view={view} checked={currentGroupIds} knownSelectedCell={knownSelectedCell} theaterFocus={theaterFocus} busy={busy || selectionGroupPending || productionPending || movementPending || patrolPending} issue={onTheaterCommand} onPendingChange={pending => reportPending('theater', pending)}/>}
     {registry === 'settlements' && onGroupCharter && <GroupCharterOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupCharter} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
     {registry === 'settlements' && onGroupProduction && <GroupProductionOrders view={view} selected={currentGroupIds} busy={locked} issue={onGroupProduction} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))} onPendingChange={pending => reportPending('production', pending)}/>}
     <div className="registry" data-testid={registry === 'armies' ? 'army-registry' : 'settlement-registry'}>{visible.map(item => {

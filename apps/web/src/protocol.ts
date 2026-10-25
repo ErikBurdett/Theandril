@@ -13,6 +13,8 @@ export const MAX_GROUP_PRODUCTION_SETTLEMENTS = 128;
 export interface GroupPostingResult { armyId: string; accepted: boolean; message?: string }
 export interface GroupCharterResult { settlementId: string; accepted: boolean; message?: string }
 export interface GroupProductionResult { settlementId: string; orders: { itemId: string; accepted: boolean; message?: string }[] }
+export type GroupPatrolCommand = Extract<GameCommand, { type: 'setPatrolEnabled' | 'clearPatrol' }>;
+export interface GroupPatrolResult { armyId: string; accepted: boolean; message?: string }
 export type GroupMovementCommand = Extract<GameCommand, { type: 'queueMovement' | 'resumeMovement' | 'cancelMovement' }>;
 export interface GroupMovementResult { armyId: string; accepted: boolean; message?: string }
 export interface GroupMovementPreviewPlan { factionId: string; armyIds: string[]; target: number; append: boolean }
@@ -22,6 +24,7 @@ export interface GroupMovementReview { hash: string; target: number; append: boo
 export type Request =
   | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; cityStateCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
   | { id: number; type: 'command'; command: GameCommand }
+  | { id: number; type: 'groupPatrol'; commands: GroupPatrolCommand[]; expectedHash: string }
   | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[] }
   | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[] }
   | { id: number; type: 'groupProduction'; factionId: string; settlementIds: string[]; itemIds: string[] }
@@ -49,6 +52,7 @@ export interface WorkerMetrics {
   developmentQueryCount?: number;
   developmentQueryBytes?: number;
   totalDevelopmentQueryBytes?: number;
+  groupPatrolResultBytes?: number;
   groupPostingResultBytes?: number;
   groupCharterResultBytes?: number;
   groupProductionResultBytes?: number;
@@ -70,4 +74,4 @@ export type Response =
   | { id: number; type: 'error'; message: string; recoveryRequired?: boolean }
   | { id: number; type: 'export'; bytes: Uint8Array }
   | { id: number; type: 'message'; message: string }
-  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string; groupMovementResults?: GroupMovementResult[]; groupMovementError?: string };
+  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPatrolResults?: GroupPatrolResult[]; groupPatrolError?: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string; groupMovementResults?: GroupMovementResult[]; groupMovementError?: string };

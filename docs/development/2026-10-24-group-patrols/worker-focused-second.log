@@ -1,0 +1,97 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/worker-group-patrol.test.ts (6 tests | 6 failed) 224ms
+     × pauses, resumes and removes 128 policies in stable order with one final state/save per batch and exact replay, preserving travel and armies 51ms
+     × rejects malformed, mixed, foreign-seat and stale envelopes before any command or save 13ms
+     × keeps canonical partial refusals and their records without discarding successful peers 13ms
+     × refuses player mutation in watch mode without recording or saving 8ms
+     × locks after a recorder throws following mutation, stops remaining orders, and restores the prior manual save 9ms
+     × locks failed final publication and restores the exact accepted autosave without retrying orders 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > pauses, resumes and removes 128 policies in stable order with one final state/save per batch and exact replay, preserving travel and armies
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:95:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > rejects malformed, mixed, foreign-seat and stale envelopes before any command or save
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:125:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > keeps canonical partial refusals and their records without discarding successful peers
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:150:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > refuses player mutation in watch mode without recording or saving
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:164:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > locks after a recorder throws following mutation, stops remaining orders, and restores the prior manual save
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:172:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > locks failed final publication and restores the exact accepted autosave without retrying orders
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:85:30
+     83|   }
+     84|   expect(journal.record(game, { type: 'queueMovement', factionId: game…
+     85|   expect(game.routes.length).toBeGreaterThan(0);
+       |                              ^
+     86|   const commands: GroupPatrolCommand[] = armyIds.map(armyId => ({ type…
+     87|   return { game, journal, armyIds, commands };
+ ❯ apps/web/src/worker-group-patrol.test.ts:195:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  6 failed | 3 passed (9)
+   Start at  23:49:44
+   Duration  878ms (transform 583ms, setup 0ms, import 652ms, tests 230ms, environment 0ms)
+

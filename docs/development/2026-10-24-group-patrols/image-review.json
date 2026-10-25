@@ -1,0 +1,113 @@
+{
+  "status": "Native image candidate approved for exact-byte publication after implementation pin; final article display review pending",
+  "implementationRevision": null,
+  "sourceSha256": {
+    "apps/web/src/group-patrols.tsx": "11c724e1cc485b2f2dfdf7075b3cd585355f48876b2fcf112abb203bb5f9b106",
+    "apps/web/src/realm-navigation.tsx": "62c546107554373eb2052d31d971199c25edd49b4918cf5552f10143f70ba1b3",
+    "apps/web/src/realm-windows.tsx": "f43d7a67f3852d33778a652350cc85a8e39f11c369eb7068182bff14028636ce",
+    "tests/production/group-patrols.spec.ts": "dd462a79016ad1eae30ae10a887e0502727cf293ed017965e6367c9e236b02d3",
+    "tests/production/group-patrol-recovery.spec.ts": "0168bf14bd514944d41db17f76e287f8451fc24427162a6050f33c8c8e985e59",
+    "tests/gameplay/group-patrol-fixture.ts": "f5c46c25d5ccb851b66140333e3d15b3c1ebf6d148c8d9683e5be421acf9412e"
+  },
+  "images": [
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-01893-ed-restoration-before-retry/patrol-worker-crash-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735999,
+      "sha256": "ed5c34349d4e602565b8dbd61adb71abc511679423ed598d3739e2e2903e7cd9",
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-292bc-ed-restoration-before-retry/patrol-wrong-army-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735913,
+      "sha256": "282dd7447cde8f3d1290f3eddde52e7629f431b182f6a85cc10ff9d178b87cdc",
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrol-re-d84cc-ed-restoration-before-retry/patrol-missing-results-recovery.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 735914,
+      "sha256": "726668abfdfc5d6bb685d8fd36f86816e9f634396462f618b2835740518fb087",
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-actions-native.png",
+      "width": 318,
+      "height": 149,
+      "bytes": 31103,
+      "sha256": "5a1a6eb8f4cfaf0b2c66fb9832887cd16faf009d70dc36185565b8c76cd921fc",
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-pause-desktop.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 910581,
+      "sha256": "a1266d972795c6f2b7e9234d242f8549ce27a79b54ae09ab58c395b25181f7c6",
+      "visuallyInspected": true
+    },
+    {
+      "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-remove-narrow-130.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 174674,
+      "sha256": "c37cb999997915a62ce51a2279e19e043ad54823c4336a98cda4ef7584ce7380",
+      "visuallyInspected": true
+    }
+  ],
+  "publicationCandidate": {
+    "path": "docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-actions-native.png",
+    "width": 318,
+    "height": 149,
+    "bytes": 31103,
+    "sha256": "5a1a6eb8f4cfaf0b2c66fb9832887cd16faf009d70dc36185565b8c76cd921fc",
+    "visuallyInspected": true,
+    "proposedAssetId": "group-patrol-actions",
+    "proposedPublicPath": "apps/web/public/updates/group-patrol-actions.png",
+    "captureTest": "tests/production/group-patrols.spec.ts",
+    "locator": "[data-testid=group-patrols] > .group-selection-actions",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "textScale": 1.3,
+    "deviceScaleFactor": 1,
+    "observer": "Ashen Compact",
+    "fixture": "Authored open-terrain theaterCampaign(101), two hearths, treasury, named companies and foreign obstruction; 105 ordinary setup records",
+    "moment": "After Resume accepted 99 policy commands, before Remove; 101 selected armies outside the paused-patrol filter, 99 enabled policies and two armies without a policy",
+    "caption": "Native control detail from an authored 101-company campaign at 390px and 130% text. After resuming 99 patrol policies, Pause and Remove each apply to 99; Resume is disabled because none are paused. Captured before removal; this detail excludes the selection context and outcome summary.",
+    "alt": "Three group patrol buttons: Pause enabled patrols (99), disabled Resume paused patrols (0), and Remove selected patrols (99).",
+    "transforms": "None. Native Playwright locator capture; no post-capture crop, resize, re-encoding or compositing.",
+    "generator": null,
+    "copyRequired": "Exact source bytes and SHA-256; not copied into runtime yet"
+  },
+  "budget": {
+    "capBytes": 3670016,
+    "currentInventoryBytes": 3481838,
+    "addedBytes": 31103,
+    "projectedInventoryBytes": 3512941,
+    "remainingBytes": 157075,
+    "capChanged": false
+  },
+  "acceptance": {
+    "browserTests": 7,
+    "browserSeconds": 44.5,
+    "normalJourneySeconds": 9.0,
+    "recoveryCases": 3,
+    "firstRunPassed": true,
+    "sourceFullTests": 2339,
+    "sourceFullFiles": 285,
+    "sourceFullSeconds": 62.78,
+    "fullSuiteEvidenceOwner": "Parent integration; image inspection does not independently repeat suite"
+  },
+  "limitations": [
+    "Native detail cannot itself prove accepted commands, canonical refusal handling, route invariance or save/replay; corresponding tests and artifacts provide that evidence.",
+    "Recovery captures show deliberately injected presentation faults after real canonical mutation, before explicit restoration; they are not organic gameplay refusals.",
+    "No new browser, build, test, benchmark or image generation was run during this inspection.",
+    "Implementation SHA and final article/layout approval remain pending."
+  ]
+}

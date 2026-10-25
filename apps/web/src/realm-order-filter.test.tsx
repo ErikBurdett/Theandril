@@ -45,6 +45,18 @@ describe('army registry order filters', () => {
       .toEqual(registryEntries(view, 'settlements', '', 'all', 'id'));
   });
 
+  it('exposes optional group patrol controls only for armies and respects the shared registry lock', () => {
+    const { game, view } = roster();
+    const html = renderToStaticMarkup(<RealmRegistry view={view} hash={stateHash(game)} registry="armies" search="" force="all" selection={{}} select={forbidden} onGroupPatrol={async () => forbidden()} busy/>);
+    expect(html).toContain('data-testid="group-patrols"');
+    expect(html).toContain('Army orders<select disabled=""');
+    expect(html).toContain('<button disabled="">Pause enabled patrols (0)</button>');
+    expect(html.match(/type="checkbox"/g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    expect(html.match(/type="checkbox" aria-label="[^"]+" disabled=""/g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    const towns = renderToStaticMarkup(<RealmRegistry view={view} hash={stateHash(game)} registry="settlements" search="" force="all" selection={{}} select={forbidden} onGroupPatrol={async () => forbidden()}/>);
+    expect(towns).not.toContain('data-testid="group-patrols"');
+  });
+
   it('defaults to all forces with four exact filter labels and only 25 rows', () => {
     const { view } = roster();
     const html = renderToStaticMarkup(<RealmRegistry view={view} registry="armies" search="" force="all" selection={{}} select={forbidden}/>);

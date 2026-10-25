@@ -1,5 +1,38 @@
 # Theandril implementation status
 
+## Pause, resume and remove patrols together — 2026-10-24
+
+**Locally verified; preparing its own deployment.** Group patrol controls use
+existing registry checks to pause enabled policies, resume disabled policies or
+remove policies. They preserve existing active/paused travel, armies, postings
+and war-pause options. Unaffected and refused actors remain checked; only confirmed
+accepted actors leave selection. Counts include checked armies outside the current
+filter, and results remain paged to 25 rows. Ashore-only selection is explicit.
+
+A strict 1–128-command worker envelope checks the current hash, one faction,
+one action and distinct IDs before mutation. Ordinary simulation commands remain
+authoritative, execute in stable order, produce one final state and autosave once.
+Malformed/missing replies, recording interruptions and worker errors require
+saved-restoration recovery; they never silently report success or retry. No new
+canonical rule, schema, AI, price or automatic turn behavior is added. Rules/save
+stay 35 and content stays 015468d1; no pacing rerun is warranted.
+
+**Verification.** Full suite **2,339 tests / 285 files, 62.78 seconds**, typecheck,
+lint and production build pass. All **seven affected production checks pass in
+44.5 seconds**: the new workflow, three reply-failure recovery cases and three
+existing registry/travel/posting journeys. The authored 101-army workflow applies
+49/99/99 ordinary orders, retains 52/2/2 unaffected checks, preserves every army,
+route and posting, and restores the exact 352-record archive. Independent source,
+export and native-image reviews find no scoped blocker. Six Huge/Legendary
+128-policy headless worker-module samples pass at 331–390 / 635–673 ms with exact
+replay/autosave; these Node/fake-storage samples are not browser latency or
+percentile claims. [Evidence](development/2026-10-24-group-patrols/README.md).
+
+ACT-32/M3 advances but remains partial. Mobile escorts need target lifecycle and
+coordinated movement; a fixed-cell follower alone does not prove protection.
+Broader governors/programs, organic mature-realm acceptance, DH-021, R06 and all
+fifteen release gates remain open.
+
 ## Find postings, waiting orders and paused patrols — 2026-10-24
 
 **Published as `e0d8112`, implementation `da12978`.** Both GitHub workflows

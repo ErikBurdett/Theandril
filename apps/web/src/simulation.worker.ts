@@ -2,7 +2,7 @@ import { commandSchema, createGame, getDevelopmentEntity, getMovementPreview, ge
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupMovementCommand, type GroupMovementResult, type GroupMovementReview, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupPatrolCommand, type GroupPatrolResult, type GroupMovementCommand, type GroupMovementResult, type GroupMovementReview, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -25,7 +25,7 @@ const textEncoder = new TextEncoder();
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
 type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' }>;
 type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' }>;
-type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string } | { groupMovementResults: GroupMovementResult[]; groupMovementError?: string };
+type GroupResponse = { groupPatrolResults: GroupPatrolResult[]; groupPatrolError?: string } | { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string } | { groupMovementResults: GroupMovementResult[]; groupMovementError?: string };
 
 function publish(id: number, message: string, reset = false, replaceMap = false, group?: GroupResponse): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
@@ -46,6 +46,7 @@ function publish(id: number, message: string, reset = false, replaceMap = false,
   const packed = packCells(cells);
   metrics.cellTransferBytes = cellTransferBytes(packed);
   const resultBytes = group ? textEncoder.encode(JSON.stringify(group)).byteLength : 0;
+  metrics.groupPatrolResultBytes = group && 'groupPatrolResults' in group ? resultBytes : 0;
   metrics.groupPostingResultBytes = group && 'groupPostingResults' in group ? resultBytes : 0;
   metrics.groupCharterResultBytes = group && 'groupCharterResults' in group ? resultBytes : 0;
   metrics.groupProductionResultBytes = group && 'groupProductionResults' in group ? resultBytes : 0;
@@ -153,6 +154,48 @@ function applyMovementCommands(game: GameState, commands: GroupMovementCommand[]
   return { results, error: undefined };
 }
 
+/** Envelope validation is atomic; each legal-shaped order is still adjudicated
+ * by simulation, including missing/foreign armies and absent patrol policies. */
+function patrolCommands(request: Extract<Request, { type: 'groupPatrol' }>, factionId: string): GroupPatrolCommand[] {
+  if (!Number.isSafeInteger(request.id) || request.id < 0
+    || Object.keys(request).some(key => !['id', 'type', 'commands', 'expectedHash'].includes(key))
+    || typeof request.expectedHash !== 'string' || !/^[a-f0-9]{8}$/.test(request.expectedHash)
+    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS
+    || Object.keys(request.commands).length !== request.commands.length) {
+    throw new Error(`Group patrol requires 1 to ${MAX_GROUP_ORDER_COMMANDS} orders and a current campaign hash in a valid request.`);
+  }
+  const ids = new Set<string>();
+  const commands = Array.from(request.commands).map((input, index): GroupPatrolCommand => {
+    const parsed = commandSchema.safeParse(input);
+    if (!parsed.success || !['setPatrolEnabled', 'clearPatrol'].includes(parsed.data.type)) throw new Error(`Group patrol item ${index + 1} is not a valid patrol order.`);
+    const command = parsed.data as GroupPatrolCommand;
+    if (command.factionId !== factionId) throw new Error('This seat does not control every faction in the group patrol order.');
+    if (ids.has(command.armyId)) throw new Error('Group patrol may name each army only once.');
+    ids.add(command.armyId);
+    return command;
+  });
+  const first = commands[0]!;
+  if (commands.some(command => command.type !== first.type
+    || command.type === 'setPatrolEnabled' && first.type === 'setPatrolEnabled' && command.enabled !== first.enabled)) {
+    throw new Error('Group patrol requires the same action and enabled choice for every army.');
+  }
+  return commands.sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0);
+}
+
+function applyPatrolCommands(game: GameState, commands: GroupPatrolCommand[]) {
+  const results: GroupPatrolResult[] = [];
+  for (const command of commands) {
+    try {
+      const result = applyCommand(game, command);
+      const message = result.ok ? result.events.at(-1)?.message : result.error ?? 'The patrol order could not be completed.';
+      results.push({ armyId: command.armyId, accepted: result.ok, ...(message ? { message } : {}) });
+    } catch (cause) {
+      return { results, error: `Recording was interrupted after ${results.length} completed patrol order${results.length === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${cause instanceof Error ? cause.message : String(cause)}` };
+    }
+  }
+  return { results, error: undefined };
+}
+
 /** Only transport shape is checked here. Content, ownership, payment, queue
  * capacity and prerequisites remain ordinary canonical queue decisions. */
 function productionSequence(request: Extract<Request, { type: 'groupProduction' }>, factionId: string) {
@@ -239,6 +282,7 @@ async function handle(request: Request): Promise<void> {
   let delegationApplied: 'group' | 'theater' | 'supply agreement' | false = false;
   let groupProductionStarted = false;
   let groupMovementStarted = false;
+  let groupPatrolStarted = false;
   // An AI proposal can commit a paid agreement inside End turn or watchRound.
   // Remember that mutation for the entire request, including early battle/capture
   // publication, so a failed view cannot permit orders from the stale client.
@@ -396,6 +440,21 @@ async function handle(request: Request): Promise<void> {
       publish(request.id, !error && accepted ? await autosave(message) : message, false, false, { groupMovementResults: results, ...(error ? { groupMovementError: error } : {}) });
       return;
     }
+    if (request.type === 'groupPatrol') {
+      if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
+      if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
+      if (state.battle || state.pendingCapture) throw new Error('Finish the current battle or settlement decision before applying group patrol orders.');
+      const commands = patrolCommands(request, state.turnOwnerId);
+      if (request.expectedHash !== stateHash(state)) throw new Error('The campaign changed; check the selected patrols again before issuing orders.');
+      const started = performance.now();
+      groupPatrolStarted = true;
+      const { results, error } = applyPatrolCommands(state, commands);
+      metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
+      const accepted = results.filter(result => result.accepted).length;
+      const message = error ?? `${accepted} patrol order${accepted === 1 ? '' : 's'} accepted; ${results.length - accepted} refused.`;
+      publish(request.id, !error && accepted ? await autosave(message) : message, false, false, { groupPatrolResults: results, ...(error ? { groupPatrolError: error } : {}) });
+      return;
+    }
     if (request.type === 'groupProduction') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
@@ -476,9 +535,11 @@ async function handle(request: Request): Promise<void> {
   } catch (error) {
     // An accepted edit may fail while publishing its view. Its canonical
     // mutation must never be mistaken for a refusal or followed by stale orders.
-    if (delegationApplied || groupProductionStarted || groupMovementStarted) recordingFailed = true;
+    if (delegationApplied || groupProductionStarted || groupMovementStarted || groupPatrolStarted) recordingFailed = true;
     const message = error instanceof Error ? error.message : String(error);
-    send({ id: request.id, type: 'error', message: groupMovementStarted
+    send({ id: request.id, type: 'error', message: groupPatrolStarted
+      ? `The patrol result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
+      : groupMovementStarted
       ? `The travel result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
       : groupProductionStarted
       ? `The production result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`

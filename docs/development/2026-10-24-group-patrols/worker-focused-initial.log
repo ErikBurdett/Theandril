@@ -1,0 +1,85 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/worker-group-patrol.test.ts (6 tests | 6 failed) 177ms
+     × pauses, resumes and removes 128 policies in stable order with one final state/save per batch and exact replay, preserving travel and armies 33ms
+     × rejects malformed, mixed, foreign-seat and stale envelopes before any command or save 9ms
+     × keeps canonical partial refusals and their records without discarding successful peers 8ms
+     × refuses player mutation in watch mode without recording or saving 5ms
+     × locks after a recorder throws following mutation, stops remaining orders, and restores the prior manual save 7ms
+     × locks failed final publication and restores the exact accepted autosave without retrying orders 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > pauses, resumes and removes 128 policies in stable order with one final state/save per batch and exact replay, preserving travel and armies
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:95:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > rejects malformed, mixed, foreign-seat and stale envelopes before any command or save
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:125:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > keeps canonical partial refusals and their records without discarding successful peers
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:150:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > refuses player mutation in watch mode without recording or saving
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:164:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > locks after a recorder throws following mutation, stops remaining orders, and restores the prior manual save
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:172:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol.test.ts > actual worker grouped patrol policies > locks failed final publication and restores the exact accepted autosave without retrying orders
+TypeError: Cannot read properties of undefined (reading 'mode')
+ ❯ createArchive packages/chronicle/src/index.ts:121:38
+
+ ❯ CampaignJournal.create packages/chronicle/src/journal.ts:35:51
+ ❯ createJournal packages/chronicle/src/journal.ts:108:115
+ ❯ patrolFixture apps/web/src/worker-group-patrol.test.ts:79:50
+ ❯ apps/web/src/worker-group-patrol.test.ts:195:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  6 failed | 3 passed (9)
+   Start at  23:49:36
+   Duration  818ms (transform 547ms, setup 0ms, import 613ms, tests 181ms, environment 0ms)
+
