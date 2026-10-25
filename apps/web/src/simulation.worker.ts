@@ -286,6 +286,7 @@ async function handle(request: Request): Promise<void> {
   let groupProductionStarted = false;
   let groupMovementStarted = false;
   let groupPatrolStarted = false;
+  let groupPolicyStarted: 'posting' | 'charter' | false = false;
   // An AI proposal can commit a paid agreement inside End turn or watchRound.
   // Remember that mutation for the entire request, including early battle/capture
   // publication, so a failed view cannot permit orders from the stale client.
@@ -478,6 +479,7 @@ async function handle(request: Request): Promise<void> {
       const commands = groupCommands(request, state.turnOwnerId);
       if (request.expectedHash !== stateHash(state)) throw new Error('The campaign changed; review the selected armies or hearths again before issuing group orders.');
       const started = performance.now();
+      groupPolicyStarted = request.type === 'groupPosting' ? 'posting' : 'charter';
       const { results, error } = applyGroupCommands(state, commands);
       metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
       const accepted = results.filter(result => result.accepted).length, kind = request.type === 'groupPosting' ? 'posting' : 'charter';
@@ -540,9 +542,11 @@ async function handle(request: Request): Promise<void> {
   } catch (error) {
     // An accepted edit may fail while publishing its view. Its canonical
     // mutation must never be mistaken for a refusal or followed by stale orders.
-    if (delegationApplied || groupProductionStarted || groupMovementStarted || groupPatrolStarted) recordingFailed = true;
+    if (delegationApplied || groupProductionStarted || groupMovementStarted || groupPatrolStarted || groupPolicyStarted) recordingFailed = true;
     const message = error instanceof Error ? error.message : String(error);
-    send({ id: request.id, type: 'error', message: groupPatrolStarted
+    send({ id: request.id, type: 'error', message: groupPolicyStarted
+      ? `The ${groupPolicyStarted} result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
+      : groupPatrolStarted
       ? `The patrol result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`
       : groupMovementStarted
       ? `The travel result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. ${message}`

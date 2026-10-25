@@ -1,8 +1,21 @@
 # Theandril implementation status
 
+## Recover after a group policy result cannot be published — 2026-10-25
+
+Round 3 locks gameplay after posting/charter command execution begins and final
+worker publication throws. Both old-worker and production-browser regressions
+proved two accepted orders could leave End turn enabled without a recovery flag.
+The fix requires saved restoration and preserves normal stale-request rejection
+before mutation. Exact manual restoration and fresh retry replay pass. Autosave
+policy, rules/save 35, content 015468d1 and AI behavior remain unchanged.
+Full **2,386 tests / 289 files**, typecheck, lint, build and ten affected Pages
+cases pass. [Evidence](development/2026-10-25-group-publication-recovery/README.md).
+M3, DH-021, R06 and all fifteen gates remain open.
+
 ## Assign shared patrols across the army registry — 2026-10-25
 
-Round 2 of the four-round continuation assigns two shared explored points and
+**Published as `64b5d9e`**; both workflows, exact readback and both live journeys
+pass. Round 2 of the four-round continuation assigns two shared explored points and
 an explicit war option to up to 128 checked armies ashore. New policies start
 enabled; existing paused/enabled states survive. Replacement resets the next
 point while existing routes and postings keep priority. Ordinary simulation

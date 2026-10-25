@@ -1,0 +1,97 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:75) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry (8.3s)
+(node:227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry (9.0s)
+
+
+  1) tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected pattern: /restore a saved campaign/i
+    Received string:  "!Authored publication evidence: {\"hash\":\"782d91b7\",\"results\":[{\"armyId\":\"army.10\",\"accepted\":true},{\"armyId\":\"army.9\",\"accepted\":true}]}"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!Authored publication evidence: {"hash":"782d91b7","results":[{"armyId":"army.10","accepted":true},{"armyId":"army.9","accepted":true}]}"
+
+
+      114 |     await page.screenshot({ path: testInfo.outputPath(`${kind}-publication-failure.png`) });
+      115 |
+    > 116 |     await expect(page.getByTestId('feedback')).toContainText(/restore a saved campaign/i);
+          |                                                ^
+      117 |     expect(response.recoveryRequired).toBe(true);
+      118 |     await expect(panel.getByRole('alert')).toContainText(/restore a saved campaign/i);
+      119 |     await expect(results).toHaveCount(0);
+        at /home/telephoneheater/Work/Theandril/tests/production/group-publication-recovery.spec.ts:116:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-7dd1d-n-and-restores-before-retry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-7dd1d-n-and-restores-before-retry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-7dd1d-n-and-restores-before-retry/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-7dd1d-n-and-restores-before-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected pattern: /restore a saved campaign/i
+    Received string:  "!Authored publication evidence: {\"hash\":\"caafaa3d\",\"results\":[{\"settlementId\":\"settlement.6\",\"accepted\":true},{\"settlementId\":\"settlement.8\",\"accepted\":true}]}"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!Authored publication evidence: {"hash":"caafaa3d","results":[{"settlementId":"settlement.6","accepted":true},{"settlementId":"settlement.8","accepted":true}]}"
+
+
+      114 |     await page.screenshot({ path: testInfo.outputPath(`${kind}-publication-failure.png`) });
+      115 |
+    > 116 |     await expect(page.getByTestId('feedback')).toContainText(/restore a saved campaign/i);
+          |                                                ^
+      117 |     expect(response.recoveryRequired).toBe(true);
+      118 |     await expect(panel.getByRole('alert')).toContainText(/restore a saved campaign/i);
+      119 |     await expect(results).toHaveCount(0);
+        at /home/telephoneheater/Work/Theandril/tests/production/group-publication-recovery.spec.ts:116:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-ff30e-n-and-restores-before-retry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-ff30e-n-and-restores-before-retry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-ff30e-n-and-restores-before-retry/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-25-group-publication-recovery/old-browser-results/production-group-publicati-ff30e-n-and-restores-before-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry 
+    tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry 

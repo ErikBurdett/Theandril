@@ -1,0 +1,43 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run apps/web/src/worker-queries.test.ts -t 'group posting and charter publication recovery' --maxWorkers=1
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-queries.test.ts (39 tests | 2 failed | 37 skipped) 255ms
+     × locks after posting publication fails following accepted orders and restores the manual save 111ms
+     × locks after charter publication fails following accepted orders and restores the manual save 56ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/worker-queries.test.ts > group posting and charter publication recovery > locks after posting publication fails following accepted orders and restores the manual save
+ FAIL  |unit| apps/web/src/worker-queries.test.ts > group posting and charter publication recovery > locks after charter publication fails following accepted orders and restores the manual save
+AssertionError: expected undefined to be true // Object.is equality
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ apps/web/src/worker-queries.test.ts:980:43
+    978|         expect(acceptedHash).not.toBe(initial.hash); expect(acceptedRo…
+    979|         expect(record).toHaveBeenCalledTimes(2); expect(saved).not.toH…
+    980|         expect(rejected.recoveryRequired).toBe(true);
+       |                                           ^
+    981|         expect(rejected.message).toContain('Some orders may have appli…
+    982|         for (const next of [body, { type: 'save' }, { type: 'export' }…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 37 skipped (39)
+   Start at  03:20:01
+   Duration  880ms (transform 486ms, setup 0ms, import 558ms, tests 255ms, environment 0ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

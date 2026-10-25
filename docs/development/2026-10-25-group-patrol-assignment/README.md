@@ -49,3 +49,12 @@ The public combined dispatch follows review of all four development rounds.
 
 [Full rerun](full-tests-final.log):**2,384 tests / 289 files pass**, 64.40 seconds,
 four workers. No production change was required for the registry test correction.
+
+## Deployment
+
+Published **64b5d9ef1583d672944b1a5c0a836dae8f845ed5**. Both exact-commit
+[workflows](actions.json) pass; [public readback](public-readback/readback.json)
+matches a preserved build. Both new browser journeys pass on Pages in8.8 seconds
+([live log](live.log)). The final local image-capture rerun passes both cases in
+9.7 seconds; its native endpoint image is62,254 bytes and was visually inspected.
+It is an original browser clip of the controls, without image transformation.

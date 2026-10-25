@@ -951,3 +951,46 @@ describe('actual worker production-sequence boundary', () => {
     expect((await request(body, 'state')).groupProductionResults?.every(row => row.orders[0]!.accepted)).toBe(true);
   });
 });
+
+
+describe('group posting and charter publication recovery', () => {
+  for (const kind of ['posting', 'charter'] as const) {
+    it(`locks after ${kind} publication fails following accepted orders and restores the manual save`, async () => {
+      const fixture = kind === 'posting' ? groupPostingFixture(2) : groupCharterFixture(2);
+      const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(fixture.game)) }, 'state');
+      await request({ type: 'save' }, 'message');
+      const before = await exported();
+      const body = { type: kind === 'posting' ? 'groupPosting' : 'groupCharter', commands: fixture.commands, expectedHash: initial.hash } as RequestBody;
+      const send = host.postMessage;
+      const saved = vi.spyOn(SaveStore.prototype, 'saveCampaign'), record = vi.spyOn(CampaignJournal.prototype, 'record');
+      let acceptedHash: string | undefined;
+      let acceptedRows: number | undefined;
+      const broken = vi.spyOn(host, 'postMessage').mockImplementation((message, options) => {
+        if (message.type === 'state' && (message.groupPostingResults || message.groupCharterResults)) {
+          acceptedHash = message.hash;
+          acceptedRows = (message.groupPostingResults ?? message.groupCharterResults)!.filter(row => row.accepted).length;
+          throw new Error('Authored publication interruption after ordinary group commands.');
+        }
+        send(message, options);
+      });
+      try {
+        const rejected = await request(body, 'error');
+        expect(acceptedHash).not.toBe(initial.hash); expect(acceptedRows).toBe(2);
+        expect(record).toHaveBeenCalledTimes(2); expect(saved).not.toHaveBeenCalled();
+        expect(rejected.recoveryRequired).toBe(true);
+        expect(rejected.message).toContain('Some orders may have applied');
+        for (const next of [body, { type: 'save' }, { type: 'export' }] as RequestBody[]) {
+          expect((await request(next, 'error')).recoveryRequired).toBe(true);
+        }
+        expect(record).toHaveBeenCalledTimes(2); expect(saved).not.toHaveBeenCalled();
+      } finally { broken.mockRestore(); saved.mockRestore(); record.mockRestore(); }
+      expect((await request({ type: 'load' }, 'state')).hash).toBe(initial.hash);
+      expect((await exported()).text).toBe(before.text);
+      const accepted = await request(body, 'state');
+      expect((accepted.groupPostingResults ?? accepted.groupCharterResults)?.every(row => row.accepted)).toBe(true);
+      const after = await exported();
+      expect(after.archive.records).toHaveLength(before.archive.records.length + 2);
+      expect(stateHash(replayArchive(after.archive))).toBe(accepted.hash);
+    });
+  }
+});
