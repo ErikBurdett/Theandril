@@ -1,0 +1,32 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |repository| apps/web/src/updates/changelog.test.ts (6 tests | 1 failed) 28143ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 28139ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ apps/web/src/updates/changelog.test.ts:12:3
+     10|   // determinism check) and share the result rather than building a th…
+     11|   let generated: ReturnType<typeof buildFeed>;
+     12|   it('is deterministic and the committed feed is an exact record from …
+       |   ^
+     13|     generated = buildFeed();
+     14|     expect(buildFeed()).toEqual(generated);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 281 passed (282)
+      Tests  1 failed | 2319 passed (2320)
+   Start at  22:16:22
+   Duration  36.56s (transform 41.71s, setup 0ms, import 172.21s, tests 623.82s, environment 31ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

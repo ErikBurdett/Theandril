@@ -2,7 +2,7 @@
 
 ## Find postings, waiting orders and paused patrols — 2026-10-24
 
-**Locally verified; preparing its own deployment.** The army registry now offers
+**Implementation committed as `da12978`; publication prepared separately.** The army registry now offers
 All forces, Postings and patrols, Orders waiting and Paused patrols. Counts compose
 with existing search/domain filters before stable 25-row paging. Rows expose
 actual posting destinations/reasons, patrol-policy state and travel interruptions

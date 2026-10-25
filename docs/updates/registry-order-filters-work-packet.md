@@ -1,6 +1,6 @@
 # Find waiting orders in a crowded roster
 
-**Dispatch 17 preparation — outside runtime.** Proposed ID `registry-order-filters`. Source revision, accepted implementation, test outcomes and illustration remain pending. This draft describes the intended bounded workflow and must be reconciled with the final verified code before publication. It does not claim that the unapplied registry draft is delivered.
+**Dispatch 17 publication preparation.** ID `registry-order-filters`, implementation pin `da12978fb596a73a7fddcfb8e914efb7924efbc2`. The reviewed story and exact selector PNG are now integrated into the journal for coordinated publication checks; no publication or live outcome is claimed here. The earlier design sections below are retained as preparation history and are superseded by the verified checkpoint and current publication packet. See `docs/development/2026-10-24-registry-publication/README.md` for final claims, source identities, image budget and pending checks.
 
 ## Player problem and proposed story
 

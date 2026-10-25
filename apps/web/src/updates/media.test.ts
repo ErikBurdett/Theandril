@@ -9,7 +9,7 @@ it('ships only traceable local imagery under the approved 3.5 MiB journal budget
   const manifestPath = resolve(root, 'updates/provenance.json');
   const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : { assets: [] };
   const assets: Asset[] = manifest.assets;
-  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago', 'technical-ledger', 'transport-landing', 'fleet-provisions-saved-voyage', 'fleet-provisions-exhausted-narrow', 'fleet-provisions-refilled-narrow', 'group-postings-desktop', 'group-postings-narrow', 'group-charters-narrow', 'charter-templates-controls', 'selection-groups-recall', 'production-sequence-results', 'group-travel-results', 'defense-theater-summary', 'patrol-narrow-actions', 'posting-templates-controls']);
+  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago', 'technical-ledger', 'transport-landing', 'fleet-provisions-saved-voyage', 'fleet-provisions-exhausted-narrow', 'fleet-provisions-refilled-narrow', 'group-postings-desktop', 'group-postings-narrow', 'group-charters-narrow', 'charter-templates-controls', 'selection-groups-recall', 'production-sequence-results', 'group-travel-results', 'defense-theater-summary', 'patrol-narrow-actions', 'posting-templates-controls', 'registry-paused-selector']);
   let bytes = 0;
   for (const asset of assets) {
     expect(asset.path).toMatch(/^updates\/[a-z-]+\.(webp|png)$/);
@@ -23,7 +23,7 @@ it('ships only traceable local imagery under the approved 3.5 MiB journal budget
     }
     expect(createHash('sha256').update(data).digest('hex')).toBe(asset.sha256);
     expect(createHash('sha256').update(readFileSync(asset.sourcePath)).digest('hex')).toBe(asset.sourceSha256);
-    if (asset.id.startsWith('fleet-provisions-') || asset.id.startsWith('group-postings-') || asset.id === 'group-charters-narrow' || asset.id === 'charter-templates-controls' || asset.id === 'selection-groups-recall' || asset.id === 'production-sequence-results' || asset.id === 'group-travel-results' || asset.id === 'defense-theater-summary' || asset.id === 'patrol-narrow-actions' || asset.id === 'posting-templates-controls') {
+    if (asset.id.startsWith('fleet-provisions-') || asset.id.startsWith('group-postings-') || asset.id === 'group-charters-narrow' || asset.id === 'charter-templates-controls' || asset.id === 'selection-groups-recall' || asset.id === 'production-sequence-results' || asset.id === 'group-travel-results' || asset.id === 'defense-theater-summary' || asset.id === 'patrol-narrow-actions' || asset.id === 'posting-templates-controls' || asset.id === 'registry-paused-selector') {
       expect(asset.crop).toBeNull();
       expect(data.equals(readFileSync(asset.sourcePath))).toBe(true);
       expect(asset.sha256).toBe(asset.sourceSha256);
