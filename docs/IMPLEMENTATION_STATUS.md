@@ -2,7 +2,11 @@
 
 ## Find empty queues and waiting charters — 2026-10-25
 
-**Implementation committed as `5da6b62`; publication prepared separately.**
+**Published as `4e2c678`, implementation `5da6b62`.** Both workflows, exact public
+readback and three targeted live journeys pass (37.7 seconds). Publication checks
+pass 2,364 tests and 58 distinct local Pages cases across the initial run and a
+corrected journal-expectation rerun; the retained first run was 57 passes/1 stale
+assertion, followed by all ten journal cases passing. [Publication evidence](development/2026-10-25-settlement-publication/README.md).
 The settlement registry filters
 All hearths, No production, Without charters and Charters waiting. Overlapping
 counts follow search before stable 25-row paging. Checked hearths survive filter

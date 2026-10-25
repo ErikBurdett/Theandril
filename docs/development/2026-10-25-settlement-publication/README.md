@@ -116,3 +116,7 @@ assertion does not change the displayed source or assets. Small inline raster
 text on narrow screens remains explicitly distinguished from the readable caption
 and native-image inspection controls. Authorized publication and live verification
 are not inferred from these local results.
+
+## Published and verified
+
+Publication **4e2c678d45a2d621ed8aaa4bd19223a717f7896c** passes both [GitHub workflows](actions.json). The [exact live readback](live-readback/readback.json) matches built HTML, JavaScript, CSS, worker, image/provenance, generated ledger, dispatch-19 source pin and catalogue. All **three targeted live journeys pass in 37.7 seconds** ([log](live-pages.log)): settlement order filters, normal group charters and army order filters. The new live workflow takes 20.9 seconds. These live checks are separate from the 58 distinct local Pages cases. [Deployment record](deployment.json). All fifteen release gates remain open.

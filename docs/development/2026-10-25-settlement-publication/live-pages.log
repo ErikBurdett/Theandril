@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/army-order-filter.spec.ts:9:1 › production registry finds real waiting orders and a paused last-page patrol without changing travel, then explicitly resumes its policy (11.8s)
+  ✓  2 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (4.4s)
+  ✓  3 tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration (20.9s)
+
+  3 passed (37.7s)
