@@ -1,0 +1,11 @@
+# Dispatch 19 displayed-reader review
+
+All **twelve requested PNGs** were individually opened with `view_image`: reader top, the six-charter chapter and the displayed selector illustration at 1440×1000/100%, 1366×768/100%, 390×844/100% and 390×844/130%. The four corresponding layout JSON records were read. **No scoped visual blocker was found.** [Exact paths, dimensions, hashes and findings](review-captures.json).
+
+Desktop titles, summary, body paragraphs and the complete caption are legible, with clear paper margins and no overlapping navigation. At both narrow layouts, the title and chapter text wrap within the column. The 130% title occupies more lines and the body requires more scrolling; content meeting the bottom edge is ordinary vertical viewport continuation, not missing text. No horizontal clipping was visible in the inspected captures. The underlying reader test also asserts document width within one pixel of the viewport; this review did not rerun that assertion.
+
+The rendered illustration shows the actual closed **Settlement orders / Charters waiting (5)** selector. Its caption fully discloses the authored thirty-hearth fixture, 390px/130% source setting and control-only scope, including the omitted selection and command results. Inspect image and Original image remain visible. The inline raster lettering is small at narrow widths and does not enlarge like surrounding CSS text; the scaled caption identifies the control and the native-image links remain available. This is a screenshot illustration, not a usable game dropdown or proof of gameplay behavior.
+
+All four layout records report the exact settlement selector URL, loaded source image with natural width 340, no page errors and no workers. Natural width is not a claim about rendered figure width. The parent’s full Pages run and source checks are separate execution evidence; this reviewer performed no browser, test or build execution.
+
+This scoped review covers the requested top/chapter/figure captures rather than every scroll position, interactive state or evidence-link target. It does not certify cross-browser access, full accessibility, transfer timing, memory or frame rate. Final public deployment/readback remains parent-owned, and no release gate is closed here.

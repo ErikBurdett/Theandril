@@ -1,0 +1,72 @@
+{
+  "implementationRevision": "5da6b62e9d9522d973f87b0c7022ada370636dcc",
+  "files": {
+    "apps/web/src/updates/settlement-order-dispatch.ts": "b3b086dc0de4fb22f7bda7d8c1f5b2b7d70fa303aa81a653e099dff3e9c40258",
+    "apps/web/src/updates/content.ts": "80e5d142fe6c3e41103fa9a934ab422df541c263cb6801795b0de96b77404771",
+    "apps/web/src/updates/content.test.ts": "877c920ea672baa3e4bc8471049b29d7abecd6f69e4f97910ef355d9a999c62b",
+    "apps/web/src/updates/library.ts": "e6d4338adf0b9f4a381acd7b792a58e59fabb1f834c900f94fea895ea14ccce0",
+    "apps/web/src/updates/media.json": "5dd4d63b5805e91f29e1c9e9fa48f9da564f0a3961d7d5d03938fd34c957073a",
+    "apps/web/src/updates/media.test.ts": "4771c2eaaadd55c2c61e0f3ba98a658587b2048a98cf077f8af7d6e5850208ff",
+    "apps/web/src/updates/roadmap.test.ts": "eee0668437c42ac7c1bacd45cd5069c80627b0994117eec0137adc495a931c61",
+    "apps/web/public/updates/provenance.json": "5dd4d63b5805e91f29e1c9e9fa48f9da564f0a3961d7d5d03938fd34c957073a",
+    "apps/web/public/updates/settlement-order-selector.png": "bd8cf64276d7176b3159b8e85f621370fe347c42a999f54af565cd0b79e554c0",
+    "tests/gameplay/home.spec.ts": "a1184bb1d5eba5c94f1848b0f46882d146c58777edf9bdd776484d25b5e32a22",
+    "tests/gameplay/updates.spec.ts": "570c8d6a318e757c151092b3bce5003471658180e342f545df84623e9f726985",
+    "tests/gameplay/roadmap.spec.ts": "363a5f3e005ac53eedf05a58290acede52d78997b92135eeb58aab7e1a924e43"
+  },
+  "runtimeImplementationChanges": false,
+  "publicationAuthorChecks": {
+    "focusedTests": 36,
+    "files": 4,
+    "logs": [
+      "focused-first.log",
+      "focused-final.log"
+    ],
+    "lint": "lint-final.log"
+  },
+  "parentOwnedPending": [
+    "commit/deployment/live readback"
+  ],
+  "priorBrowserExpectation": {
+    "path": "tests/gameplay/updates.spec.ts",
+    "sha256": "530c77297813a157d08a360f9d9b7ac8a5d992b5ef4ded896a1de9b9495f80e4",
+    "retainedRun": "pages.log",
+    "outcome": "57 passed, 1 failed: old 2,339 ledger count expected instead of correct pinned implementation 2,362"
+  },
+  "browserExpectationCorrection": {
+    "path": "tests/gameplay/updates.spec.ts",
+    "sha256": "570c8d6a318e757c151092b3bce5003471658180e342f545df84623e9f726985",
+    "change": "Only the ledger text assertion changes from 2,339 to pinned implementation count 2,362; application and assets are unchanged. Publication full-suite count 2,364 is not substituted.",
+    "verification": "journal-corrected.log: 10 passed in 13.1 seconds; lint-browser-expectation.log: pass"
+  },
+  "parentCompleted": {
+    "fullSuite": {
+      "tests": 2364,
+      "files": 288,
+      "seconds": 63.73,
+      "log": "full-tests.log"
+    },
+    "sourceChecks": [
+      "typecheck.log",
+      "lint.log",
+      "content.log",
+      "art.log",
+      "build.log"
+    ],
+    "sourceReview": "review-source.md",
+    "displayedReaderReview": {
+      "images": 12,
+      "report": "review-captures.md"
+    },
+    "initialPages": {
+      "passed": 57,
+      "failed": 1,
+      "log": "pages.log"
+    },
+    "correctedJournal": {
+      "passed": 10,
+      "seconds": 13.1,
+      "log": "journal-corrected.log"
+    }
+  }
+}

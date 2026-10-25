@@ -1,0 +1,22 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:33) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:69) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (2.5s)
+  ✓   2 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (2.3s)
+  ✓   3 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (2.1s)
+  ✓   4 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (2.4s)
+  ✓   5 tests/gameplay/updates.spec.ts:52:1 › reading surfaces retain contrast without putting texture over the text (269ms)
+  ✓   6 tests/gameplay/updates.spec.ts:83:1 › unknown dispatch links fail honestly and keyboard skip navigation works (361ms)
+  ✓   7 tests/gameplay/updates.spec.ts:94:1 › archive search combines topic filters, survives refresh and recovers from no results (445ms)
+  ✓   8 tests/gameplay/updates.spec.ts:109:1 › scope ledger links real gates and a contributor can reach authoring guidance (371ms)
+  ✓   9 tests/gameplay/updates.spec.ts:125:1 › a keyboard reader can enlarge a real image and return to the same control (320ms)
+  ✓  10 tests/gameplay/updates.spec.ts:141:1 › public journal opens a permanent, refresh-safe campaign dispatch (1.0s)
+
+  10 passed (13.1s)

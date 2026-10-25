@@ -2,8 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
-  it('pins explicit group policy actions, actual saved history and measured limits without closing gates', () => {
+  it('pins settlement cohorts, explicit charter changes and candidate limits without closing gates', () => {
     const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'settlement-order-filters', sequence: 19, sourceRevision: '5da6b62e9d9522d973f87b0c7022ada370636dcc', image: 'settlement-order-selector' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['These are overlapping cohorts', '25-row pagination', 'Closing and reopening', 'Checked hearths stay selected', 'not a guaranteed purchase', 'Current queues come first', '30/24/10/5', '30/24/9/0', '503329a2', 'bb648af6', 'exact 36-record archive', 'treasury stays 3,940', '2,362 tests across 288 files in 63.88 seconds', 'four distinct affected scenarios', 'overlapping scopes are not additive', '340-by-71', '3,520,624 bytes', 'No new gameplay obligation was added or removed', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    for (const path of ['README.md', 'source-review.md', 'browser-review.md', 'final-export-review.json', 'image-review.json']) expect(story.evidence.some(link => link.path === `docs/development/2026-10-25-settlement-order-filters/${path}`), path).toBe(true);
+  });
+
+  it('pins explicit group policy actions, actual saved history and measured limits without closing gates', () => {
+    const story = dispatches.find(entry => entry.id === 'group-patrols')!;
     expect(story).toMatchObject({ id: 'group-patrols', sequence: 18, sourceRevision: '8d880eb60cdca549d5ff1086ef95e095e81feea5', image: 'group-patrol-actions' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     for (const claim of ['Actions include checked armies outside the current filter', 'does not resume a paused travel route', 'Confirmed accepted armies leave the selection', 'exact 352-record final archive', 'c6f43460, acebff08, f89dea4d and a488bb10', 'eight-record manual save', 'transport fault injections', '2,339 tests across 285 files', 'Seven affected production journeys', 'overlap and are not additive', 'same-thread Node host', 'fake IndexedDB', '330.824/382.883/389.917', '668.912/634.563/673.485', 'six single samples, not medians', 'only 61 observed cells', '3,512,941 bytes', 'No new pacing run is claimed', 'DH-021 remains open', 'No new gameplay obligation was added or removed', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
@@ -58,7 +66,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['settlement-order-filters', 'group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {

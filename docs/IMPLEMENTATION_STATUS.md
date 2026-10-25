@@ -2,7 +2,8 @@
 
 ## Find empty queues and waiting charters — 2026-10-25
 
-**Locally verified; publication pending.** The settlement registry filters
+**Implementation committed as `5da6b62`; publication prepared separately.**
+The settlement registry filters
 All hearths, No production, Without charters and Charters waiting. Overlapping
 counts follow search before stable 25-row paging. Checked hearths survive filter
 changes; group charter controls expose actors outside the current filter.
