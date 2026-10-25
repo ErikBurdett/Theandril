@@ -561,30 +561,32 @@ function App() {
     window.theandril = api;
     return () => { if (window.theandril === api) delete window.theandril; fogRequests.current.reset('The campaign view closed.'); };
   }, []);
-  const issueGroupPosting: GroupPostingIssue = commands => {
+  const issueGroupPosting: GroupPostingIssue = (commands, expectedHash) => {
     const instance = worker.current;
     if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected armies again.'));
     if (!commands.length) return Promise.reject(new Error('Select armies before issuing group orders.'));
     const id = ++sequence.current;
     const pending = groupPostingRequests.current.enqueue(id, commands);
     if (!groupPostingRequests.current.has(id)) return pending;
     setBusy(true); setError(false);
-    try { instance.postMessage({ id, type: 'groupPosting', commands } satisfies Request); }
+    try { instance.postMessage({ id, type: 'groupPosting', commands, expectedHash } satisfies Request); }
     catch (cause) {
       groupPostingRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
       setBusy(false);
     }
     return pending;
   };
-  const issueGroupCharter: GroupCharterIssue = commands => {
+  const issueGroupCharter: GroupCharterIssue = (commands, expectedHash) => {
     const instance = worker.current;
     if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected hearths again.'));
     if (!commands.length) return Promise.reject(new Error('Select hearths before issuing group orders.'));
     const id = ++sequence.current;
     const pending = groupCharterRequests.current.enqueue(id, commands);
     if (!groupCharterRequests.current.has(id)) return pending;
     setBusy(true); setError(false);
-    try { instance.postMessage({ id, type: 'groupCharter', commands } satisfies Request); }
+    try { instance.postMessage({ id, type: 'groupCharter', commands, expectedHash } satisfies Request); }
     catch (cause) {
       groupCharterRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
       setBusy(false);

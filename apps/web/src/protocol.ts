@@ -25,8 +25,8 @@ export type Request =
   | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; cityStateCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
   | { id: number; type: 'command'; command: GameCommand }
   | { id: number; type: 'groupPatrol'; commands: GroupPatrolCommand[]; expectedHash: string }
-  | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[] }
-  | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[] }
+  | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[]; expectedHash: string }
+  | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[]; expectedHash: string }
   | { id: number; type: 'groupProduction'; factionId: string; settlementIds: string[]; itemIds: string[] }
   | ({ id: number; type: 'groupMovementPreview' } & GroupMovementPreviewPlan)
   | { id: number; type: 'groupMovement'; commands: GroupMovementCommand[]; expectedHash: string }

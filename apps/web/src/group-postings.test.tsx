@@ -5,6 +5,19 @@ import { characterCampaign } from '../../../packages/test-fixtures/src/character
 import { addGroupSelection, groupPostingArmies, groupPostingCommands, groupPostingDestination, GroupPostingOrders, GROUP_POSTING_LIMIT } from './group-postings';
 
 describe('group army postings', () => {
+  it('requires an observed campaign hash for posting and clearing while keeping selection available', () => {
+    const game = characterCampaign(), initial = getObservation(game, game.turnOwnerId);
+    const army = groupPostingArmies(initial)[0]!;
+    expect(applyCommand(game, { type: 'setPosting', factionId: game.turnOwnerId, armyId: army.id, cell: army.cell, mode: 'hold' }).ok).toBe(true);
+    const view = getObservation(game, game.turnOwnerId), selected = new Set([army.id]);
+    for (const hash of [undefined, stateHash(game)]) {
+      const html = renderToStaticMarkup(<GroupPostingOrders view={view} hash={hash} selected={selected} matching={selected} busy={false} issue={async () => { throw new Error('Rendering cannot issue orders.'); }} selectMatching={() => {}} clearSelection={() => {}} accepted={() => {}}/>);
+      expect(html).toContain(`<button class="primary"${hash ? '' : ' disabled=""'}>Post selected armies (1)</button>`);
+      expect(html).toContain(`<button${hash ? '' : ' disabled=""'}>Clear selected postings (1)</button>`);
+      expect(html).toContain('<button>Clear group selection</button>');
+    }
+  });
+
   it('requires a fresh destination after the selected hearth is lost instead of silently ordering a local hold', () => {
     const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
     const points = view.settlements.filter(town => town.factionId === view.factionId);

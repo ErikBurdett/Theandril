@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/group-charters.test.tsx (5 tests | 1 failed) 104ms
+     × requires an observed campaign hash for granting and revoking while keeping selection available 52ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/group-charters.test.tsx > group hearth charters > requires an observed campaign hash for granting and revoking while keeping selection available
+AssertionError: expected '<section class="group-postings group-…' to contain '<button>Clear group selection</button>'
+
+Expected: "<button>Clear group selection</button>"
+Received: "<section class="group-postings group-charters" data-testid="group-charters" aria-label="Group hearth charters" aria-busy="false"><div class="group-selection-actions"><button disabled="">Select matching hearths</button><button>Clear hearth selection</button></div><p class="group-selection-count" role="status">1 hearth selected</p><p class="field-help">Check hearths to give them standing charters together. Select up to 128 at a time; page, search and registry changes keep your selection.</p><div class="group-posting-fields"><label>Charter focus<select><option value="works" selected="">Works</option><option value="wealth">Wealth</option><option value="learning">Learning</option><option value="muster">Muster</option></select></label><label>Coin ceiling per hearth<input type="number" min="4" max="64" step="1" required="" aria-invalid="false" value="24"/></label></div><p class="field-help">Applying charters spends no coin now. Each hearth may spend up to its ceiling on one work whenever its queue is empty, once per turn after upkeep. All charters share your treasury and leave 40 coin in reserve.</p><p class="field-help">Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.</p><details class="charter-templates" data-testid="charter-templates"><summary>Charter templates</summary><p class="field-help">Your personal template library stays in this browser across campaigns and sessions. It is separate from campaign saves and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.</p></details><div class="group-selection-actions"><button class="primary" disabled="">Apply charters (1)</button><button disabled="">Revoke charters (1)</button></div></section>"
+
+ ❯ apps/web/src/group-charters.test.tsx:18:20
+     16|       expect(html).toContain(`<button class="primary"${hash ? '' : ' d…
+     17|       expect(html).toContain(`<button${hash ? '' : ' disabled=""'}>Rev…
+     18|       expect(html).toContain('<button>Clear group selection</button>');
+       |                    ^
+     19|     }
+     20|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  1 failed | 69 passed (70)
+   Start at  03:05:35
+   Duration  13.81s (transform 2.19s, setup 0ms, import 3.00s, tests 13.67s, environment 0ms)
+

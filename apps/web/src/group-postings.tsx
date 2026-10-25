@@ -5,7 +5,7 @@ import { PostingTemplates } from './posting-templates';
 
 export type GroupPostingCommand = Extract<GameCommand, { type: 'setPosting' }>;
 export type { GroupPostingResult } from './protocol';
-export type GroupPostingIssue = (commands: GroupPostingCommand[]) => Promise<GroupPostingResult[]>;
+export type GroupPostingIssue = (commands: GroupPostingCommand[], expectedHash: string) => Promise<GroupPostingResult[]>;
 export const GROUP_POSTING_LIMIT = MAX_GROUP_POSTING_COMMANDS;
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 type PostingDestination = number | 'current' | '';
@@ -37,8 +37,8 @@ export function groupPostingCommands(view: Observation, selected: ReadonlySet<st
     .map(army => ({ type: 'setPosting', factionId: view.factionId, armyId: army.id, cell: destination === 'current' ? army.cell : destination, mode }));
 }
 
-export function GroupPostingOrders({ view, selected, matching, busy, issue, selectMatching, clearSelection, accepted }: {
-  view: Observation; selected: ReadonlySet<string>; matching: ReadonlySet<string>; busy: boolean;
+export function GroupPostingOrders({ view, hash, selected, matching, busy, issue, selectMatching, clearSelection, accepted }: {
+  view: Observation; hash?: string; selected: ReadonlySet<string>; matching: ReadonlySet<string>; busy: boolean;
   issue: GroupPostingIssue; selectMatching: () => void; clearSelection: () => void; accepted: (ids: ReadonlySet<string>) => void;
 }) {
   const points = view.settlements.filter(town => town.factionId === view.factionId);
@@ -59,13 +59,13 @@ export function GroupPostingOrders({ view, selected, matching, busy, issue, sele
   const target = groupPostingDestination(points, destination);
   const submit = async (nextMode: PostingMode | 'none') => {
     const commandTarget = nextMode === 'none' ? 'current' : target;
-    if (locked || commandTarget === '') return;
+    if (locked || !hash || commandTarget === '') return;
     const commands = groupPostingCommands(view, checked, commandTarget, nextMode);
     if (!commands.length) return;
     const names = new Map(armies.map(army => [army.id, army.name]));
     setPending(true); setError(''); setResults(undefined);
     try {
-      const response = await issue(commands);
+      const response = await issue(commands, hash);
       if (!mounted.current) return;
       setResults(response.map(result => ({ ...result, name: names.get(result.armyId) ?? result.armyId })));
       accepted(new Set(response.filter(result => result.accepted).map(result => result.armyId)));
@@ -87,7 +87,7 @@ export function GroupPostingOrders({ view, selected, matching, busy, issue, sele
       {target === '' && <p id="group-posting-destination-error" className="group-order-error">Choose a current owned hearth or where each army stands before posting. Clearing existing postings is still available.</p>}
       <p className="field-help">Each army receives its own posting. Existing travel orders come first. Routes, arrival and joining use the ordinary army rules; a stalled posting explains its reason in selected orders.</p>
       <PostingTemplates mode={mode} destination={target === '' ? undefined : target === 'current' ? 'current' : 'hearth'} busy={busy || pending} onPendingChange={setTemplatesBusy} recall={template => { setMode(template.mode); setDestination(template.destination === 'current' ? 'current' : ''); setResults(undefined); setError(''); }}/>
-      <div className="group-selection-actions"><button className="primary" disabled={locked || target === ''} onClick={() => { void submit(mode); }}>Post selected armies ({checked.size})</button><button disabled={locked || !postedCount} onClick={() => { void submit('none'); }}>Clear selected postings ({postedCount})</button></div>
+      <div className="group-selection-actions"><button className="primary" disabled={locked || !hash || target === ''} onClick={() => { void submit(mode); }}>Post selected armies ({checked.size})</button><button disabled={locked || !hash || !postedCount} onClick={() => { void submit('none'); }}>Clear selected postings ({postedCount})</button></div>
       {postedCount < checked.size && <p className="field-help">Clearing postings leaves the {checked.size - postedCount} selected armies without postings unchanged.</p>}
     </>}
     {pending && <p role="status">Applying group orders…</p>}

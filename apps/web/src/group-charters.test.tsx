@@ -6,6 +6,19 @@ import { MAX_GROUP_ORDER_COMMANDS } from './protocol';
 import { groupCharterCommands, groupCharterTowns, GroupCharterOrders } from './group-charters';
 
 describe('group hearth charters', () => {
+  it('requires an observed campaign hash for granting and revoking while keeping selection available', () => {
+    const game = characterCampaign(), initial = getObservation(game, game.turnOwnerId);
+    const town = groupCharterTowns(initial)[0]!;
+    expect(applyCommand(game, { type: 'setCharter', factionId: game.turnOwnerId, settlementId: town.id, focus: 'works', ceiling: 24 }).ok).toBe(true);
+    const view = getObservation(game, game.turnOwnerId), selected = new Set([town.id]);
+    for (const hash of [undefined, stateHash(game)]) {
+      const html = renderToStaticMarkup(<GroupCharterOrders view={view} hash={hash} selected={selected} matching={selected} busy={false} issue={async () => { throw new Error('Rendering cannot issue orders.'); }} selectMatching={() => {}} clearSelection={() => {}} accepted={() => {}}/>);
+      expect(html).toContain(`<button class="primary"${hash ? '' : ' disabled=""'}>Apply charters (1)</button>`);
+      expect(html).toContain(`<button${hash ? '' : ' disabled=""'}>Revoke charters (1)</button>`);
+      expect(html).toContain('<button>Clear hearth selection</button>');
+    }
+  });
+
   it('snapshots current owned hearths in stable order and bounds each group without changing the observation', () => {
     const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
     const home = view.settlements.find(town => town.factionId === view.factionId)!;

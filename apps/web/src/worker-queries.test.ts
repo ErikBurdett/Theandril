@@ -18,6 +18,7 @@ const pending = new Map<number, Pending>();
 const completed: number[] = [];
 const transfers = new Map<number, { bufferCount: number; before: number[]; detached: boolean[] }>();
 let sequence = 0;
+let lastPublishedHash = '';
 
 // Run the production worker's actual module/handler, without a browser or new
 // production debug API. Structured cloning implements the real transfer contract;
@@ -36,6 +37,7 @@ const host: {
       detached: buffers.map(buffer => buffer instanceof ArrayBuffer && buffer.byteLength === 0),
     });
     if (received.type === 'progress') return;
+    if (received.type === 'state') lastPublishedHash = received.hash;
     const waiter = pending.get(received.id);
     if (!waiter) throw new Error(`Unexpected worker reply ${received.id}: ${received.type}`);
     pending.delete(received.id); clearTimeout(waiter.timer); completed.push(received.id);
@@ -231,7 +233,7 @@ describe('actual worker group-posting boundary', () => {
     const initial = await request({ type: 'import', bytes }, 'state');
     const beforeCells = getObservation(game, game.turnOwnerId).cells;
     const started = performance.now();
-    const batch = dispatch({ type: 'groupPosting', commands: [...commands].reverse() }, 'state');
+    const batch = dispatch({ type: 'groupPosting', expectedHash: lastPublishedHash, commands: [...commands].reverse() }, 'state');
     const result = await batch.response, groupMs = performance.now() - started;
     expect(completed.filter(id => id === batch.id)).toHaveLength(1);
     expect(result.groupPostingResults).toEqual(commands.map(command => ({ armyId: command.armyId, accepted: true })));
@@ -253,7 +255,7 @@ describe('actual worker group-posting boundary', () => {
     await request({ type: 'save' }, 'message');
     expect((await request({ type: 'load' }, 'state')).hash).toBe(result.hash);
     const clear = { ...commands[0]!, mode: 'none' } as const;
-    const resumed = await request({ type: 'groupPosting', commands: [clear] }, 'state');
+    const resumed = await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands: [clear] }, 'state');
     expect(resumed.groupPostingResults).toEqual([{ armyId: clear.armyId, accepted: true }]);
     expect(applyCommand(grouped.game, clear).ok).toBe(true);
     expect(resumed.hash).toBe(stateHash(grouped.game));
@@ -279,7 +281,7 @@ describe('actual worker group-posting boundary', () => {
     const foreign = Object.values(game.armies).find(army => army.factionId !== owner)!;
     await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
     const items = [...commands, { ...commands[0]!, armyId: 'army.missing' }, { ...commands[0]!, armyId: foreign.id }];
-    const result = await request({ type: 'groupPosting', commands: items.reverse() }, 'state');
+    const result = await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands: items.reverse() }, 'state');
     expect(result.groupPostingResults?.filter(item => item.accepted)).toHaveLength(2);
     expect(result.groupPostingResults?.filter(item => !item.accepted)).toEqual([
       { armyId: foreign.id, accepted: false, message: 'You do not control that army.' },
@@ -295,7 +297,7 @@ describe('actual worker group-posting boundary', () => {
   it('accepts the full 128-order transport limit without truncation or extra state responses', async () => {
     const { game, commands } = groupPostingFixture(MAX_GROUP_POSTING_COMMANDS);
     await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
-    const batch = dispatch({ type: 'groupPosting', commands }, 'state'), result = await batch.response;
+    const batch = dispatch({ type: 'groupPosting', expectedHash: lastPublishedHash, commands }, 'state'), result = await batch.response;
     expect(result.groupPostingResults).toHaveLength(MAX_GROUP_POSTING_COMMANDS);
     expect(result.groupPostingResults?.every(item => item.accepted)).toBe(true);
     expect(result.observation.postings).toHaveLength(MAX_GROUP_POSTING_COMMANDS);
@@ -319,11 +321,11 @@ describe('actual worker group-posting boundary', () => {
       [first, undefined], sparse, { 0: first, length: 1 }, null,
     ];
     for (const input of invalid) {
-      const response = await request({ type: 'groupPosting', commands: input as typeof commands }, 'error');
+      const response = await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands: input as typeof commands }, 'error');
       expect(response.message.length).toBeGreaterThan(0);
       expect((await exported()).text).toBe(before.text);
     }
-    const forged = { type: 'groupPosting', commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
+    const forged = { type: 'groupPosting', expectedHash: lastPublishedHash, commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
     expect((await request(forged, 'error')).message).toContain('valid request');
     expect((await exported()).text).toBe(before.text);
   });
@@ -333,14 +335,14 @@ describe('actual worker group-posting boundary', () => {
     const watch = createJournal(game, { mode: 'watch', coverage: 'from-save' });
     await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, watch.materialize())) }, 'state');
     const before = await exported();
-    expect((await request({ type: 'groupPosting', commands }, 'error')).message).toContain('AI watch controls');
+    expect((await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands }, 'error')).message).toContain('AI watch controls');
     expect((await exported()).text).toBe(before.text);
     const won = unificationCampaign();
     for (let turn = 0; turn < 120 && !won.victory; turn++) expect(applyCommand(won, { type: 'endTurn', factionId: won.turnOwnerId }).ok).toBe(true);
     expect(won.victory).not.toBeNull();
     await request({ type: 'import', bytes: await exportSave(serializeGame(won)) }, 'state');
     const ended = await exported();
-    expect((await request({ type: 'groupPosting', commands }, 'error')).message).toContain('campaign has ended');
+    expect((await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands }, 'error')).message).toContain('campaign has ended');
     expect((await exported()).text).toBe(ended.text);
   });
 
@@ -355,7 +357,7 @@ describe('actual worker group-posting boundary', () => {
       return result;
     });
     try {
-      const batch = dispatch({ type: 'groupPosting', commands }, 'state'), partial = await batch.response;
+      const batch = dispatch({ type: 'groupPosting', expectedHash: lastPublishedHash, commands }, 'state'), partial = await batch.response;
       expect(completed.filter(id => id === batch.id)).toHaveLength(1);
       expect(interrupted).toHaveBeenCalledTimes(2);
       expect(partial.groupPostingResults).toEqual([{ armyId: commands[0]!.armyId, accepted: true }]);
@@ -364,12 +366,12 @@ describe('actual worker group-posting boundary', () => {
       expect(partial.observation.postings.map(item => item.armyId)).toEqual(commands.slice(0, 2).map(command => command.armyId));
       for (const command of commands.slice(0, 2)) expect(applyCommand(game, command).ok).toBe(true);
       expect(partial.hash).toBe(stateHash(game));
-      expect((await request({ type: 'groupPosting', commands: [commands[2]!] }, 'error')).message).toContain('Recording was interrupted');
+      expect((await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands: [commands[2]!] }, 'error')).message).toContain('Recording was interrupted');
       expect(interrupted).toHaveBeenCalledTimes(2);
     } finally { interrupted.mockRestore(); }
     const restored = await request({ type: 'load' }, 'state');
     expect(restored.observation.postings).toEqual([]);
-    const retried = await request({ type: 'groupPosting', commands }, 'state');
+    const retried = await request({ type: 'groupPosting', expectedHash: lastPublishedHash, commands }, 'state');
     expect(retried.groupPostingResults?.every(item => item.accepted)).toBe(true);
     expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
   });
@@ -403,6 +405,61 @@ function groupCharterFixture(count = 40, size: 'tiny' | 'small' | 'huge' | 'lege
   return { game: deserializeGame(serializeGame(game)), commands };
 }
 
+describe('group posting and charter intent boundary', () => {
+  for (const kind of ['posting', 'charter'] as const) {
+    for (const clear of [false, true]) {
+      it(`refuses stale ${kind} ${clear ? 'removal' : 'assignment'} without recording, saving or requiring recovery, then accepts a fresh retry`, async () => {
+        const fixture = kind === 'posting' ? groupPostingFixture(1) : groupCharterFixture(1);
+        await request({ type: 'import', bytes: await exportSave(serializeGame(fixture.game)) }, 'state');
+        const command = fixture.commands[0]!;
+        // Establish a real policy, retain its observed hash, then change that
+        // policy through the ordinary API. No worker failure is synthesized.
+        const reviewed = await request({ type: 'command', command }, 'state');
+        const newer: GameCommand = command.type === 'setPosting' ? { ...command, mode: 'join' } : { ...command, focus: 'wealth' };
+        const changed = await request({ type: 'command', command: newer }, 'state');
+        expect(changed.hash).not.toBe(reviewed.hash);
+        const body = command.type === 'setPosting'
+          ? { type: 'groupPosting' as const, commands: [{ ...command, mode: clear ? 'none' as const : command.mode }], expectedHash: reviewed.hash }
+          : { type: 'groupCharter' as const, commands: [{ ...command, focus: clear ? 'none' as const : command.focus }], expectedHash: reviewed.hash };
+        const before = await exported();
+        const record = vi.spyOn(CampaignJournal.prototype, 'record'), saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+        try {
+          const rejected = await request(body, 'error');
+          expect(rejected.message).toContain('The campaign changed');
+          expect(rejected.recoveryRequired).not.toBe(true);
+          expect((await exported()).text).toBe(before.text);
+          expect(record).not.toHaveBeenCalled(); expect(saved).not.toHaveBeenCalled();
+        } finally { record.mockRestore(); saved.mockRestore(); }
+        const accepted = await request({ ...body, expectedHash: changed.hash }, 'state');
+        expect((accepted.groupPostingResults ?? accepted.groupCharterResults)?.map(row => row.accepted)).toEqual([true]);
+        const after = await exported();
+        expect(after.archive.records).toHaveLength(before.archive.records.length + 1);
+        expect(after.archive.records.at(-1)?.command).toEqual(body.commands[0]);
+        expect(stateHash(replayArchive(after.archive))).toBe(accepted.hash);
+      });
+    }
+
+    it(`refuses missing and malformed ${kind} hashes before any canonical command`, async () => {
+      const fixture = kind === 'posting' ? groupPostingFixture(1) : groupCharterFixture(1);
+      const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(fixture.game)) }, 'state');
+      const base = { type: kind === 'posting' ? 'groupPosting' : 'groupCharter', commands: fixture.commands };
+      const before = await exported();
+      const record = vi.spyOn(CampaignJournal.prototype, 'record'), saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+      try {
+        for (const body of [base, ...[null, '', '0000000', '000000000', 'zzzzzzzz', 'ABCDEF12', 12345678].map(expectedHash => ({ ...base, expectedHash }))]) {
+          const rejected = await request(body as RequestBody, 'error');
+          expect(rejected.recoveryRequired).not.toBe(true);
+          expect((await exported()).text).toBe(before.text);
+        }
+        expect(record).not.toHaveBeenCalled(); expect(saved).not.toHaveBeenCalled();
+      } finally { record.mockRestore(); saved.mockRestore(); }
+      // A malformed request must not lock out a subsequent valid one.
+      const accepted = await request({ ...base, expectedHash: initial.hash } as RequestBody, 'state');
+      expect((accepted.groupPostingResults ?? accepted.groupCharterResults)?.every(row => row.accepted)).toBe(true);
+    });
+  }
+});
+
 describe('actual worker group-charter boundary', () => {
   it('journals 40 charters with one unchanged-map response, exact serial replay and saved continuation without spending or replacing queues', async () => {
     const { game, commands } = groupCharterFixture(), bytes = await exportSave(serializeGame(game));
@@ -411,7 +468,7 @@ describe('actual worker group-charter boundary', () => {
     const queues = Object.fromEntries(Object.values(game.settlements).map(town => [town.id, town.queue]));
     const treasury = game.factions.map(faction => faction.treasury);
     const started = performance.now();
-    const batch = dispatch({ type: 'groupCharter', commands: [...commands].reverse() }, 'state');
+    const batch = dispatch({ type: 'groupCharter', expectedHash: lastPublishedHash, commands: [...commands].reverse() }, 'state');
     const result = await batch.response, groupMs = performance.now() - started;
     expect(completed.filter(id => id === batch.id)).toHaveLength(1);
     expect(result.groupCharterResults).toEqual(commands.map(command => ({ settlementId: command.settlementId, accepted: true })));
@@ -433,11 +490,11 @@ describe('actual worker group-charter boundary', () => {
     expect(grouped.game.factions.map(faction => faction.treasury)).toEqual(treasury);
     await request({ type: 'save' }, 'message');
     const clear = { ...commands[0]!, focus: 'none' } as const;
-    await request({ type: 'groupCharter', commands: [clear] }, 'state');
+    await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands: [clear] }, 'state');
     const loaded = await request({ type: 'load' }, 'state');
     expect(loaded.hash).toBe(result.hash); expect(loaded.observation.charters).toHaveLength(40);
     expect(loaded.metrics.groupCharterResultBytes).toBe(0);
-    const resumed = await request({ type: 'groupCharter', commands: [clear] }, 'state');
+    const resumed = await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands: [clear] }, 'state');
     expect(resumed.groupCharterResults).toEqual([{ settlementId: clear.settlementId, accepted: true }]);
     expect(applyCommand(grouped.game, clear).ok).toBe(true);
     expect(resumed.hash).toBe(stateHash(grouped.game));
@@ -463,7 +520,7 @@ describe('actual worker group-charter boundary', () => {
     const foreign = Object.values(game.settlements).find(town => town.factionId !== game.turnOwnerId)!;
     await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
     const items = [...commands.slice(0, 2), { ...commands[2]!, focus: 'none' as const }, { ...commands[0]!, settlementId: foreign.id }, { ...commands[0]!, settlementId: 'settlement.missing' }];
-    const result = await request({ type: 'groupCharter', commands: items.reverse() }, 'state');
+    const result = await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands: items.reverse() }, 'state');
     expect(result.groupCharterResults?.filter(item => item.accepted)).toHaveLength(2);
     expect(result.groupCharterResults?.filter(item => !item.accepted)).toEqual([
       { settlementId: foreign.id, accepted: false, message: 'You do not control that settlement.' },
@@ -481,7 +538,7 @@ describe('actual worker group-charter boundary', () => {
     expect(MAX_GROUP_POSTING_COMMANDS).toBe(MAX_GROUP_ORDER_COMMANDS);
     const { game, commands } = groupCharterFixture(MAX_GROUP_ORDER_COMMANDS);
     await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
-    const batch = dispatch({ type: 'groupCharter', commands }, 'state'), result = await batch.response;
+    const batch = dispatch({ type: 'groupCharter', expectedHash: lastPublishedHash, commands }, 'state'), result = await batch.response;
     expect(result.groupCharterResults).toHaveLength(MAX_GROUP_ORDER_COMMANDS);
     expect(result.groupCharterResults?.every(item => item.accepted)).toBe(true);
     expect(result.observation.charters).toHaveLength(MAX_GROUP_ORDER_COMMANDS);
@@ -505,11 +562,11 @@ describe('actual worker group-charter boundary', () => {
       [first, { ...second, extra: true }], [first, null], [first, undefined], sparse, { 0: first, length: 1 }, null,
     ];
     for (const input of invalid) {
-      const response = await request({ type: 'groupCharter', commands: input as typeof commands }, 'error');
+      const response = await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands: input as typeof commands }, 'error');
       expect(response.message.length).toBeGreaterThan(0);
       expect((await exported()).text).toBe(before.text);
     }
-    const forged = { type: 'groupCharter', commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
+    const forged = { type: 'groupCharter', expectedHash: lastPublishedHash, commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
     expect((await request(forged, 'error')).message).toContain('valid request');
     expect((await exported()).text).toBe(before.text);
   });
@@ -519,14 +576,14 @@ describe('actual worker group-charter boundary', () => {
     const watch = createJournal(game, { mode: 'watch', coverage: 'from-save' });
     await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, watch.materialize())) }, 'state');
     const before = await exported();
-    expect((await request({ type: 'groupCharter', commands }, 'error')).message).toContain('AI watch controls');
+    expect((await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands }, 'error')).message).toContain('AI watch controls');
     expect((await exported()).text).toBe(before.text);
     const won = unificationCampaign();
     for (let turn = 0; turn < 120 && !won.victory; turn++) expect(applyCommand(won, { type: 'endTurn', factionId: won.turnOwnerId }).ok).toBe(true);
     expect(won.victory).not.toBeNull();
     await request({ type: 'import', bytes: await exportSave(serializeGame(won)) }, 'state');
     const ended = await exported();
-    expect((await request({ type: 'groupCharter', commands }, 'error')).message).toContain('campaign has ended');
+    expect((await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands }, 'error')).message).toContain('campaign has ended');
     expect((await exported()).text).toBe(ended.text);
   });
 
@@ -541,7 +598,7 @@ describe('actual worker group-charter boundary', () => {
       return result;
     });
     try {
-      const batch = dispatch({ type: 'groupCharter', commands }, 'state'), partial = await batch.response;
+      const batch = dispatch({ type: 'groupCharter', expectedHash: lastPublishedHash, commands }, 'state'), partial = await batch.response;
       expect(completed.filter(id => id === batch.id)).toHaveLength(1);
       expect(interrupted).toHaveBeenCalledTimes(2);
       expect(partial.groupCharterResults).toEqual([{ settlementId: commands[0]!.settlementId, accepted: true }]);
@@ -551,14 +608,14 @@ describe('actual worker group-charter boundary', () => {
       expect(partial.metrics.groupCharterResultBytes).toBe(new TextEncoder().encode(JSON.stringify({ groupCharterResults: partial.groupCharterResults, groupCharterError: partial.groupCharterError })).byteLength);
       for (const command of commands.slice(0, 2)) expect(applyCommand(game, command).ok).toBe(true);
       expect(partial.hash).toBe(stateHash(game));
-      for (const body of [{ type: 'groupCharter', commands: [commands[2]!] }, { type: 'save' }, { type: 'export' }] as RequestBody[]) {
+      for (const body of [{ type: 'groupCharter', expectedHash: lastPublishedHash, commands: [commands[2]!] }, { type: 'save' }, { type: 'export' }] as RequestBody[]) {
         expect((await request(body, 'error')).message).toContain('Recording was interrupted');
       }
       expect(interrupted).toHaveBeenCalledTimes(2);
     } finally { interrupted.mockRestore(); }
     const restored = await request({ type: 'load' }, 'state');
     expect(restored.observation.charters).toEqual([]);
-    const retried = await request({ type: 'groupCharter', commands }, 'state');
+    const retried = await request({ type: 'groupCharter', expectedHash: lastPublishedHash, commands }, 'state');
     expect(retried.groupCharterResults?.every(item => item.accepted)).toBe(true);
     expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
   });

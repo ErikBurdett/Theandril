@@ -5,7 +5,7 @@ import { CharterTemplates } from './charter-templates';
 
 export type GroupCharterCommand = Extract<GameCommand, { type: 'setCharter' }>;
 export type { GroupCharterResult } from './protocol';
-export type GroupCharterIssue = (commands: GroupCharterCommand[]) => Promise<GroupCharterResult[]>;
+export type GroupCharterIssue = (commands: GroupCharterCommand[], expectedHash: string) => Promise<GroupCharterResult[]>;
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Snapshot permitted selection only; the canonical command decides legality. */
@@ -22,8 +22,8 @@ export function groupCharterCommands(view: Observation, selected: ReadonlySet<st
       ceiling: focus === 'none' ? charters.get(town.id)!.ceiling : ceiling }));
 }
 
-export function GroupCharterOrders({ view, selected, matching, busy, issue, selectMatching, clearSelection, accepted }: {
-  view: Observation; selected: ReadonlySet<string>; matching: ReadonlySet<string>; busy: boolean;
+export function GroupCharterOrders({ view, hash, selected, matching, busy, issue, selectMatching, clearSelection, accepted }: {
+  view: Observation; hash?: string; selected: ReadonlySet<string>; matching: ReadonlySet<string>; busy: boolean;
   issue: GroupCharterIssue; selectMatching: () => void; clearSelection: () => void; accepted: (ids: ReadonlySet<string>) => void;
 }) {
   const [focus, setFocus] = useState<CharterFocus>('works');
@@ -44,13 +44,13 @@ export function GroupCharterOrders({ view, selected, matching, busy, issue, sele
   const validCeiling = ceilingText.trim() !== '' && Number.isInteger(ceiling) && ceiling >= CHARTER_CEILING_MIN && ceiling <= CHARTER_CEILING_MAX;
   const locked = busy || pending || templatesBusy;
   const submit = async (nextFocus: CharterFocus | 'none') => {
-    if (locked || (nextFocus !== 'none' && !validCeiling)) return;
+    if (locked || !hash || (nextFocus !== 'none' && !validCeiling)) return;
     const commands = groupCharterCommands(view, checked, nextFocus, ceiling);
     if (!commands.length) return;
     const names = new Map(towns.map(town => [town.id, town.name]));
     setPending(true); setError(''); setResults(undefined);
     try {
-      const response = await issue(commands);
+      const response = await issue(commands, hash);
       if (!mounted.current) return;
       setResults(response.map(result => ({ ...result, name: names.get(result.settlementId) ?? result.settlementId })));
       accepted(new Set(response.filter(result => result.accepted).map(result => result.settlementId)));
@@ -71,7 +71,7 @@ export function GroupCharterOrders({ view, selected, matching, busy, issue, sele
       <p className="field-help">Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.</p>
       {queuedCount > 0 && <p className="field-help">{queuedCount} selected {queuedCount === 1 ? 'hearth already has' : 'hearths already have'} production queued; those orders come first.</p>}
       <CharterTemplates focus={focus} ceiling={validCeiling ? ceiling : undefined} busy={busy || pending} onPendingChange={setTemplatesBusy} recall={template => { setFocus(template.focus); setCeilingText(String(template.ceiling)); }}/>
-      <div className="group-selection-actions"><button className="primary" disabled={locked || !validCeiling} onClick={() => { void submit(focus); }}>Apply charters ({checked.size})</button><button disabled={locked || !charterCount} onClick={() => { void submit('none'); }}>Revoke charters ({charterCount})</button></div>
+      <div className="group-selection-actions"><button className="primary" disabled={locked || !hash || !validCeiling} onClick={() => { void submit(focus); }}>Apply charters ({checked.size})</button><button disabled={locked || !hash || !charterCount} onClick={() => { void submit('none'); }}>Revoke charters ({charterCount})</button></div>
       {charterCount < checked.size && <p className="field-help">Revocation leaves the {checked.size - charterCount} selected {checked.size - charterCount === 1 ? 'hearth' : 'hearths'} without charters unchanged.</p>}
     </>}
     {pending && <p role="status">Applying charter orders…</p>}

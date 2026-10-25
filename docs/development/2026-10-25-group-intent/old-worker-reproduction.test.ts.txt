@@ -1,0 +1,21 @@
+describe('legacy group intent reproduction', () => {
+  it('applies an older posting and charter intention after a real intervening command', async () => {
+    for (const kind of ['posting', 'charter'] as const) {
+      const fixture = kind === 'posting' ? groupPostingFixture(1) : groupCharterFixture(1);
+      const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(fixture.game)) }, 'state');
+      const command = fixture.commands[0]!;
+      const newer: GameCommand = command.type === 'setPosting' ? { ...command, mode: 'join' } : { ...command, focus: 'wealth' };
+      const changed = await request({ type: 'command', command: newer }, 'state');
+      expect(changed.hash).not.toBe(initial.hash);
+      const before = await exported();
+      const body = command.type === 'setPosting' ? { type: 'groupPosting' as const, commands: [command] } : { type: 'groupCharter' as const, commands: [command] };
+      const applied = await request(body, 'state');
+      const after = await exported();
+      expect(applied.hash).not.toBe(changed.hash);
+      expect(after.archive.records).toHaveLength(before.archive.records.length + 1);
+      expect(after.archive.records.at(-1)?.command).toEqual(command);
+      expect(stateHash(replayArchive(after.archive))).toBe(applied.hash);
+      (await import('node:fs/promises')).writeFile(`docs/development/2026-10-25-group-intent/old-${kind}-runtime.json`, JSON.stringify({ kind, reviewedHash: initial.hash, interveningHash: changed.hash, appliedHash: applied.hash, recordsBefore: before.archive.records.length, recordsAfter: after.archive.records.length, legacyEnvelope: body }, null, 2));
+    }
+  });
+});

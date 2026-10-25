@@ -1,5 +1,16 @@
 # Theandril implementation status
 
+## Bind group postings and charters to reviewed intent — 2026-10-25
+
+Round 1 of the four-round continuation: both legacy policy batches now carry the
+reviewed campaign hash through form, main thread and worker. Stale or malformed
+requests reject before mutation or recording; checks and form values remain for
+review and retry. Controlled old-worker reproduction retained. Full local suite
+passes **2,372 tests / 288 files**; typecheck, lint, Pages build and ten distinct
+affected browser cases pass across the documented selector correction.
+[Evidence](development/2026-10-25-group-intent/README.md). Rules/save 35 and content
+015468d1 remain unchanged. M3, DH-021, R06 and all fifteen gates remain open.
+
 ## Find empty queues and waiting charters — 2026-10-25
 
 **Published as `4e2c678`, implementation `5da6b62`.** Both workflows, exact public

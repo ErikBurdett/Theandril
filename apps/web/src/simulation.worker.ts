@@ -63,7 +63,8 @@ const groupEntityId = (command: GroupCommand): string => command.type === 'setPo
 /** Validate the entire transport envelope before the first canonical order. */
 function groupCommands(request: GroupRequest, factionId: string): GroupCommand[] {
   const posting = request.type === 'groupPosting', kind = posting ? 'posting' : 'charter';
-  if (!Number.isSafeInteger(request.id) || request.id < 0 || Object.keys(request).some(key => !['id', 'type', 'commands'].includes(key))
+  if (!Number.isSafeInteger(request.id) || request.id < 0 || Object.keys(request).some(key => !['id', 'type', 'commands', 'expectedHash'].includes(key))
+    || typeof request.expectedHash !== 'string' || !/^[a-f0-9]{8}$/.test(request.expectedHash)
     || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS) {
     throw new Error(`A group ${kind} requires between 1 and ${MAX_GROUP_ORDER_COMMANDS} ${kind} orders in a valid request.`);
   }
@@ -472,7 +473,9 @@ async function handle(request: Request): Promise<void> {
     if (request.type === 'groupPosting' || request.type === 'groupCharter') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
-      const commands = groupCommands(request, state.turnOwnerId), started = performance.now();
+      const commands = groupCommands(request, state.turnOwnerId);
+      if (request.expectedHash !== stateHash(state)) throw new Error('The campaign changed; review the selected armies or hearths again before issuing group orders.');
+      const started = performance.now();
       const { results, error } = applyGroupCommands(state, commands);
       metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
       const accepted = results.filter(result => result.accepted).length, kind = request.type === 'groupPosting' ? 'posting' : 'charter';
