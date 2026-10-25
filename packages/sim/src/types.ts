@@ -1,3 +1,4 @@
+import type { LandPolicy, LandPolicyCommand, ObservedLandPolicy } from './land-policy-state';
 import type { WorkerPolicy, WorkerPolicyCommand, ObservedWorkerPolicy } from './worker-policy-state';
 import type { Patrol, ObservedPatrol, PatrolCommand } from './patrol-state';
 import type { DefenseTheater, ObservedDefenseTheater, TheaterCommand } from './theaters';
@@ -196,6 +197,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | LandPolicyCommand
   | WorkerPolicyCommand
   | PatrolCommand
   | SupplyAccessCommand
@@ -258,6 +260,7 @@ export type GameCommand =
 export interface GameState {
   patrols: Patrol[];
   workerPolicies: WorkerPolicy[];
+  landPolicies: LandPolicy[];
   supplyAccess: SupplyAccessState;
   theaters: DefenseTheater[];
   nextTheaterId: number;
@@ -312,6 +315,8 @@ export interface Observation {
   patrols?: ObservedPatrol[];
   /** Rules 36: optional standing worker allocation, owned policies only. */
   workerPolicies?: ObservedWorkerPolicy[];
+  /** Rules 37: owned paid land-work commissions; summaries never scan tiles. */
+  landPolicies?: ObservedLandPolicy[];
   supplyAccess?: SupplyAccessObservation;
   theaterReinforcement?: true;
   theaters?: ObservedDefenseTheater[];

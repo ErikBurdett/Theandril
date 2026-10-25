@@ -13,6 +13,7 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
   const ecology = FACTION_ECOLOGIES[view.factions.find(faction => faction.id === view.factionId)?.definitionId ?? ''];
   const stocks = new Map(view.resources?.stockpiles.map(stock => [stock.resourceId, stock]));
   const policies = new Map(view.workerPolicies?.map(policy => [policy.settlementId, policy]));
+  const landPolicies = new Map(view.landPolicies?.map(policy => [policy.settlementId, policy]));
   const materialDemand = (resourceId: string | undefined): number => {
     const stock = resourceId ? stocks.get(resourceId) : undefined;
     return stock ? Math.floor(Math.max(0, 6 - stock.amount) * 4 / (1 + stock.perTurn)) : 0;
@@ -59,7 +60,7 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
       commands.push({ type: 'setWorkedTiles', factionId: view.factionId, settlementId: town.id, cells: workers });
       if (policy) reasons.push(`${town.name} returns to direct worker management for its material, funding or detailed land needs.`);
     }
-    if (coinSpent || land.work) continue;
+    if (coinSpent || land.work || (landPolicies.get(town.id)?.allowance ?? 0) > 0) continue;
     const worked = land.cells.filter(cell => workers.includes(cell.cell));
     // Give cultural cultivation a regular opportunity; do not burn treasury on
     // same-biome loops or work that removes a productive existing improvement.
@@ -92,8 +93,28 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
       coinSpent = cultivate.option.coinCost; reasons.push(`${town.name} cultivates ${cultivate.option.name} for its workers, paying ${coinSpent} coin.`);
     } else if (improvement[0]) {
       const chosen = improvement[0];
-      commands.push({ type: 'improveTile', factionId: view.factionId, settlementId: town.id, cell: chosen.cell.cell, improvementId: chosen.option.improvementId });
-      coinSpent = chosen.option.coinCost; reasons.push(`${town.name} improves worked land with ${chosen.option.name} for ${coinSpent} coin.`);
+      // Delegate only an identical, already-budgeted order. The strategic planner
+      // keeps replacements, incomplete pages and changing worker allocations.
+      // A one-job allowance is consumed immediately, so it cannot spend future
+      // reserves after a new strategic plan. The budget already accounts for
+      // earlier proposals; subtracting it from this old observation's treasury
+      // again would double-count those purchases as a new protected reserve.
+      const unchangedWorkers = !commands.some(command => (command.type === 'setWorkedTiles' || command.type === 'setWorkerPolicy') && command.settlementId === town.id);
+      const commissionChoice = view.landPolicies !== undefined && unchangedWorkers && land.worked.every(cell => pageCells.has(cell))
+        ? worked.filter(cell => cell.canWork && !cell.improvementId
+          && (!cell.resourceId || resourceById.get(cell.resourceId)?.improvementId === chosen.option.improvementId))
+          .flatMap(cell => cell.improvementOptions.filter(option => option.improvementId === chosen.option.improvementId && option.canStart && option.coinCost <= chosen.option.coinCost)
+            .map(option => ({ cell: cell.cell, coinCost: option.coinCost })))
+          .sort((a, b) => a.coinCost - b.coinCost || a.cell - b.cell)[0]
+        : undefined;
+      if (commissionChoice?.cell === chosen.cell.cell && commissionChoice.coinCost === chosen.option.coinCost) {
+        commands.push({ type: 'setLandPolicy', factionId: view.factionId, settlementId: town.id, improvementId: chosen.option.improvementId, allowance: chosen.option.coinCost, reserve: 0 });
+        reasons.push(`${town.name} commissions one ${chosen.option.name} for ${chosen.option.coinCost} coin from its planned land budget; further spending needs a new plan.`);
+      } else {
+        commands.push({ type: 'improveTile', factionId: view.factionId, settlementId: town.id, cell: chosen.cell.cell, improvementId: chosen.option.improvementId });
+        reasons.push(`${town.name} improves worked land with ${chosen.option.name} for ${chosen.option.coinCost} coin.`);
+      }
+      coinSpent = chosen.option.coinCost;
     } else {
       const seam = claimArcaneSeam(view, budget);
       if (seam) { commands.push(seam.command); reasons.push(seam.reason); coinSpent = seam.coinCost; continue; }

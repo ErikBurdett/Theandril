@@ -1,3 +1,4 @@
+import { assertNoLandPolicies, landPolicyStateSchema, validateLandPolicies } from './land-policy-state';
 import { assertNoWorkerPolicies, workerPolicyStateSchema, validateWorkerPolicies } from './worker-policy-state';
 import { assertNoPatrols, patrolStateSchema, validatePatrols } from './patrol-state';
 import { assertNoSelectionGroups, selectionGroupCounterSchema, selectionGroupStateSchema, validateSelectionGroups } from './selection-groups';
@@ -38,7 +39,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 36;
+export const SAVE_VERSION = 37;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -222,12 +223,14 @@ const stateV34Schema = stateV33Schema.extend({
   supplyAccess: supplyAccessStateSchema,
 }).strict();
 const stateV35Schema = stateV34Schema.extend({ patrols: patrolStateSchema }).strict();
-const stateSchema = stateV35Schema.extend({ workerPolicies: workerPolicyStateSchema }).strict();
-const withWorkerPolicies = <T>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema> });
-const withPatrols = <T>(state: T) => ({ ...state, patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema> });
+const stateV36Schema = stateV35Schema.extend({ workerPolicies: workerPolicyStateSchema }).strict();
+const stateSchema = stateV36Schema.extend({ landPolicies: landPolicyStateSchema }).strict();
+const withLandPolicies = <T>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema> });
+const withWorkerPolicies = <T>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema> });
+const withPatrols = <T>(state: T) => ({ ...state, patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema> });
 const withLogistics = <T extends { theaters: z.infer<typeof defenseTheaterV33StateSchema> }>(state: T) => ({ ...state,
-  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema> });
-const emptyTheaters = () => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema> });
+  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema> });
+const emptyTheaters = () => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema> });
 const withTheaters = <T>(state: T) => ({ ...state, ...emptyTheaters() });
 const withSelectionGroups = <T>(state: T) => withTheaters({ ...state, selectionGroups: [] as z.infer<typeof selectionGroupStateSchema>, nextSelectionGroupId: 1 });
 const withDepots = <T>(state: T) => withSelectionGroups({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
@@ -242,7 +245,8 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders() });
-const saveSchema = z.object({ version: z.literal(36), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(37), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV36Schema = saveSchema.extend({ version: z.literal(36), state: stateV36Schema }).strict();
 const saveV35Schema = saveSchema.extend({ version: z.literal(35), state: stateV35Schema }).strict();
 const saveV34Schema = saveSchema.extend({ version: z.literal(34), state: stateV34Schema }).strict();
 const saveV33Schema = saveSchema.extend({ version: z.literal(33), state: stateV33Schema }).strict();
@@ -426,6 +430,7 @@ function canonicalPayload(state: GameState) {
       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
       patrols: patrolStateSchema.parse(state.patrols),
       workerPolicies: workerPolicyStateSchema.parse(state.workerPolicies),
+      landPolicies: landPolicyStateSchema.parse(state.landPolicies),
   };
   return payload;
 }
@@ -475,6 +480,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 37) assertNoLandPolicies(state);
   if (version < 36) assertNoWorkerPolicies(state);
   if (version < 35) assertNoPatrols(state);
   if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
@@ -596,6 +602,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 37) assertNoLandPolicies(state);
   if (version < 36) assertNoWorkerPolicies(state);
   if (version < 35) assertNoPatrols(state);
   if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
@@ -621,8 +628,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 36) return latest;
-  const { workerPolicies: _workers, ...beforeWorkers } = latest;
+  if (version >= 37) return latest;
+  const { landPolicies: _landPolicies, ...beforeLandPolicies } = latest;
+  if (version >= 36) return beforeLandPolicies;
+  const { workerPolicies: _workers, ...beforeWorkers } = beforeLandPolicies;
   if (version >= 35) return beforeWorkers;
   const { patrols: _patrols, ...beforePatrols } = beforeWorkers;
   if (version >= 34) return beforePatrols;
@@ -878,6 +887,13 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 36) {
+    const prior = saveV36Schema.parse(raw);
+    assert(prior.contentHash === CONTENT_HASH, 'v36 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v36 snapshot checksum does not match its contents');
+    const state = withLandPolicies(prior.state);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+  }
   if (version === 35) {
     const prior = saveV35Schema.parse(raw);
     assert(prior.contentHash === CONTENT_HASH, 'v35 content hash is not a recognized compatible pack');
@@ -1295,7 +1311,7 @@ export function deserializeGame(text: string): GameState {
     transports: Object.fromEntries(data.transports.map(item => [item.armyId, item.fleetId])),
     selectionGroups: data.selectionGroups, nextSelectionGroupId: data.nextSelectionGroupId,
     theaters: data.theaters, nextTheaterId: data.nextTheaterId,
-    supplyAccess: data.supplyAccess, patrols: data.patrols, workerPolicies: data.workerPolicies,
+    supplyAccess: data.supplyAccess, patrols: data.patrols, workerPolicies: data.workerPolicies, landPolicies: data.landPolicies,
     charters: data.charters, postings: data.postings, musters: data.musters, depots: data.depots,
   };
   assert(Object.keys(state.sieges).length === data.sieges.length && Object.keys(state.ruins).length === data.ruins.length, 'duplicate siege or ruin records');
@@ -1311,6 +1327,7 @@ export function deserializeGame(text: string): GameState {
   validateTheaters(state);
   validatePatrols(state);
   validateWorkerPolicies(state);
+  validateLandPolicies(state);
   validateSupplyAccess(state);
   validateCharters(state);
   validatePostings(state);

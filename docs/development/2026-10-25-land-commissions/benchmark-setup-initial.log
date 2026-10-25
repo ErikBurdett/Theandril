@@ -1,0 +1,19 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: No generated suitable improvement sites at settlement.98
+    at estate (/home/telephoneheater/Work/Theandril/scripts/benchmark-land-policies.ts:44:5)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-land-policies.ts:152:61)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v26.7.0

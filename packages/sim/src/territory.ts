@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, TECHNOLOGIES, type LandYield } from '@theandril/content';
+import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, TECHNOLOGIES, resourceById, type LandYield } from '@theandril/content';
 import { BIOME_NAMES, hexDistance, naturalFeatures, neighbors } from '@theandril/mapgen';
 import type { DomainEvent, GameState, Settlement } from './types';
 import { cellsWithin, claimSightEnabled, indexes, updateSight } from './visibility';
 import { rulesVersion } from './rules';
+import { removeLandPolicy, type LandPolicy, type LandPolicyChoice } from './land-policy-state';
 import { removeWorkerPolicy, workerPolicyScore, type WorkerPolicy } from './worker-policy-state';
 
 const identifier = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
@@ -61,6 +62,8 @@ export interface SettlementLandObservation {
   capitalOption: LandOption; canCancelWork: boolean; cancelBlocker: string | null;
   borderExpansion: BorderExpansionObservation;
   cellWindow?: { offset: number; limit: number; total: number };
+  /** Current commission choice across all worked cells, only on requested detail. */
+  landPolicyChoice?: LandPolicyChoice;
 }
 export interface BorderExpansionObservation { progress: number; threshold: number; rate: number; nextCell: number | null; blocker: string | null }
 export interface LandObservation { settlements: SettlementLandObservation[]; cultivation: number; capitalSettlementId: string | null }
@@ -431,8 +434,67 @@ function townLandYield(state: GameState, town: Settlement, context?: TownReadCon
   return total;
 }
 
+/** Cheap summary reasons: candidate inspection belongs to selected land details. */
+export function commissionBlocker(state: GameState, policy: LandPolicy): string | null {
+  const town = state.settlements[policy.settlementId];
+  const blocker = townBlocker(state, town, policy.factionId);
+  if (blocker || !town) return blocker ?? 'That hearth no longer answers to this realm.';
+  if (state.land.settlements[town.id]?.work) return 'Existing paid land work must finish first.';
+  if (policy.allowance === 0) return 'The commission has exhausted its allowance.';
+  if ((faction(state, policy.factionId)?.treasury ?? 0) <= policy.reserve) return `The treasury is at or below the ${policy.reserve} coin reserve.`;
+  return null;
+}
+
+function commissionChoice(state: GameState, policy: LandPolicy, shared?: LandReadContext): LandPolicyChoice {
+  const empty = (blocker: string): LandPolicyChoice => ({ cell: null, coinCost: null, turns: null, blocker });
+  const obstruction = commissionBlocker(state, policy);
+  if (obstruction) return empty(obstruction);
+  const town = state.settlements[policy.settlementId]!, land = state.land.settlements[town.id]!, owner = faction(state, policy.factionId)!;
+  const context: TownReadContext = { owner: shared ?? landReadContext(state, owner), blocker: null, radius: settlementClaimRadius(town) };
+  // Earlier policies can spend this same purse; shared geometry must not freeze it.
+  context.owner.treasury = owner.treasury;
+  let selected: LandPolicyChoice | null = null, waiting: LandPolicyChoice | null = null;
+  for (const cell of land.worked) {
+    if (land.improvements[cell]) continue;
+    const derived = cellReadContext(state, town, cell, context, false);
+    if (workedBlocker(state, town, cell, derived)) continue;
+    const resourceId = state.resources.deposits[cell];
+    if (resourceId && resourceById.get(resourceId)?.improvementId !== policy.improvementId) continue;
+    const quote = improvementOption(state, town, cell, policy.improvementId, derived);
+    const blocker = quote.blocker ?? (quote.coinCost > policy.allowance ? `Requires ${quote.coinCost} coin; only ${policy.allowance} remains in this commission.` : null)
+      ?? (quote.coinCost > owner.treasury - policy.reserve ? `Requires ${quote.coinCost} coin while retaining the ${policy.reserve} coin treasury reserve.` : null);
+    const candidate = { cell, coinCost: quote.coinCost, turns: quote.turns, blocker };
+    if (blocker) {
+      if (!waiting || quote.coinCost < waiting.coinCost! || (quote.coinCost === waiting.coinCost && cell < waiting.cell!)) waiting = candidate;
+    } else if (!selected || quote.coinCost < selected.coinCost! || (quote.coinCost === selected.coinCost && cell < selected.cell!)) selected = candidate;
+  }
+  return selected ?? waiting ?? empty('No suitable worked, unimproved tile is available. Existing sites and mismatched resource deposits are protected.');
+}
+
+/** Selected detail and diagnostics inspect every worked cell, independent of UI pages. */
+export function getLandPolicyChoice(state: GameState, policy: LandPolicy): LandPolicyChoice { return commissionChoice(state, policy); }
+
+/** O(total worked cells), constant candidate memory; only commissioned hearths are scanned. */
+export function executeLandPolicies(state: GameState, policies: readonly LandPolicy[], emitted: DomainEvent[]): void {
+  const owners = new Map(state.factions.map(owner => [owner.id, owner]));
+  const contexts = new Map<string, LandReadContext>();
+  for (const policy of policies) {
+    const owner = owners.get(policy.factionId);
+    if (!owner) continue;
+    let context = contexts.get(owner.id);
+    if (!context) { context = landReadContext(state, owner); contexts.set(owner.id, context); }
+    const choice = commissionChoice(state, policy, context);
+    if (choice.blocker || choice.cell === null || choice.coinCost === null) continue;
+    const error = applyLandCommand(state, { type: 'improveTile', factionId: policy.factionId, settlementId: policy.settlementId, cell: choice.cell, improvementId: policy.improvementId }, emitted, 'commission');
+    if (error) throw new Error(`Canonical land commission quote was not executable: ${error}`);
+    policy.allowance -= choice.coinCost;
+    emitted.push({ turn: state.turn, factionId: policy.factionId, cell: choice.cell, type: 'land_policy_ordered',
+      message: `${state.settlements[policy.settlementId]!.name}'s land-work commission spent ${choice.coinCost} coin; ${policy.allowance} remains in its allowance.` });
+  }
+}
+
 /** All validation and quoting precede coin, territory, work or worker mutation. */
-export function applyLandCommand(state: GameState, input: unknown, emitted: DomainEvent[] = []): string | null {
+export function applyLandCommand(state: GameState, input: unknown, emitted: DomainEvent[] = [], source: 'manual' | 'commission' = 'manual'): string | null {
   const parsed = (rulesVersion(state) >= 16 ? landCommandSchema : landCommandV15Schema).safeParse(input);
   if (!parsed.success) return 'Malformed land command.';
   const command = parsed.data, town = state.settlements[command.settlementId], blocker = townBlocker(state, town, command.factionId);
@@ -452,6 +514,7 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
   if (command.type === 'cancelLandWork') {
     if (!land.work) return 'This settlement has no land-work order.';
     const cell = land.work.cell; land.work = null;
+    if (rulesVersion(state) >= 37 && source === 'manual') removeLandPolicy(state, town.id, emitted, 'manual');
     emitted.push(notice(state, town, 'land_work_cancelled', `${town.name} cancelled its land work at hex ${cell}; no coin was refunded.`, cell));
     return null;
   }
@@ -463,6 +526,7 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
   }
   const quote = command.type === 'claimCell' ? claimOption(state, town, command.cell) : command.type === 'improveTile' ? improvementOption(state, town, command.cell, command.improvementId) : terraformOption(state, town, command.cell, command.biome);
   if (quote.blocker) return quote.blocker;
+  if (rulesVersion(state) >= 37 && source === 'manual' && (command.type === 'improveTile' || command.type === 'terraformTile')) removeLandPolicy(state, town.id, emitted, 'manual');
   owner.treasury -= quote.coinCost;
   if (command.type === 'claimCell') {
     acquireClaim(state, town, command.cell);
@@ -498,6 +562,7 @@ export function resolveLandTurn(state: GameState, town: Settlement, emitted: Dom
 }
 
 export function handleLandCapture(state: GameState, settlementId: string, previousOwnerId: string, emitted: DomainEvent[] = []): void {
+  if (rulesVersion(state) >= 37) removeLandPolicy(state, settlementId, emitted, 'lost');
   if (rulesVersion(state) >= 36) removeWorkerPolicy(state, settlementId, emitted, 'lost');
   const land = state.land.settlements[settlementId], town = state.settlements[settlementId], index = getLandIndex(state);
   if (claimSightEnabled(state) && land) {
@@ -561,8 +626,9 @@ function settlementLandObservation(state: GameState, factionId: string, town: Se
       });
       return observed;
     });
+    const policy = includeCells && rulesVersion(state) >= 37 ? state.landPolicies.find(item => item.settlementId === town.id) : undefined;
     const obstruction = context.blocker ?? (!land.work ? 'This settlement has no land-work order.' : null);
-    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };
+    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(policy ? { landPolicyChoice: commissionChoice(state, policy, context.owner) } : {}), ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };
 }
 
 export function getLandObservation(state: GameState, factionId: string, visible: { has(cell: number): boolean }, details: LandDetails = 'all'): LandObservation {

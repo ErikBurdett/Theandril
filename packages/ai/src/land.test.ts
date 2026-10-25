@@ -18,7 +18,7 @@ describe('shared-rule AI land development', () => {
       for (const command of [...plan.commands, { type: 'endTurn' as const, factionId: game.turnOwnerId }]) {
         const result = applyCommand(game, command);
         expect(result, JSON.stringify(command)).toMatchObject({ ok: true }); expect(applyCommand(mirror, command)).toEqual(result);
-        if (command.type === 'improveTile' || command.type === 'terraformTile') paidOrders++;
+        if (result.events.some(event => event.type === 'land_work_started')) paidOrders++;
       }
       expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(mirror));
     }

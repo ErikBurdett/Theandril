@@ -65,3 +65,6 @@ export { getBesiegePreview } from './siege-establishment';
 export type { BesiegePreview } from './siege-establishment';
 
 export * from './worker-policies';
+
+export { advanceLandPolicies, observeLandPolicies, setLandPolicy } from './land-policies';
+export type { LandPolicy, LandPolicyCommand, ObservedLandPolicy, LandPolicyChoice } from './land-policy-state';

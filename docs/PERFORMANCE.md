@@ -1,5 +1,34 @@
 # Performance measurements
 
+## Paid land-work commissions — rules 37, 2026-10-25
+
+[Raw measurements](development/2026-10-25-land-commissions/benchmark.json) use an
+Intel Core i9-13900K. Each workload has three warmups and twelve measured samples.
+Each isolated paid phase restores a validated waiting-policy state outside the
+timer, then actually pays and starts one order per commission. A separate run
+installs policies through ordinary commands and resolves fifteen turns with exact
+saved mirrors, repeated payments and completed improvements.
+
+| Authored workload | Paid phase p95 ms | Full turn p95 ms | Policy summary bytes |
+| --- | ---: | ---: | ---: |
+| Huge, 32 hearths | 0.463 | 10.281 | 6,433 |
+| Legendary, 40 hearths | 1.591 | 29.568 | 8,062 |
+| Huge, 10,000 claims / 9,999 workers | 3.488 | 11.035 | 203 |
+
+Selection scans worked cells with constant candidate memory; compact policy
+summaries do not scan candidates. The fixtures author population, ownership,
+purses and plains on owned claims; deposits are cleared only on rewritten cells.
+They retain ordinary construction prices, rising costs and turn completion.
+The sustained runs start/complete 256/224, 320/280 and 8/7 orders respectively.
+These are not organically developed realms or maximum-world estate acceptance.
+
+Hashing, restoration, serialization and mirror verification are outside timings.
+AI planning, browser rendering/transfer and physical storage are not measured.
+Full authored observations are 2.20/4.91/1.66 MB, so these CPU measurements do not
+establish a worker-transfer budget pass. Full turn and paid-phase results are
+separate scopes, not quantities to subtract for an inferred speedup.
+
+
 ## Explicit group patrol batches — 2026-10-24
 
 [Six retained single samples](development/2026-10-24-group-patrols/worker-benchmark-results.json)

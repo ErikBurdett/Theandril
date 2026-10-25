@@ -1,0 +1,41 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/land-policies.test.ts (13 tests | 1 failed) 244ms
+     × keeps ordinary production charter priority after upkeep 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/land-policies.test.ts > paid land-work commissions > keeps ordinary production charter priority after upkeep
+AssertionError: expected { cell: 942, coinCost: 22, …(5) } to be null
+
+- Expected:
+null
+
++ Received:
+{
+  "cell": 942,
+  "coinCost": 22,
+  "improvementId": "improvement.terraced_fields",
+  "kind": "improve",
+  "remainingTurns": 2,
+  "startedTurn": 1,
+  "turns": 2,
+}
+
+ ❯ packages/sim/src/land-policies.test.ts:100:23
+     98|     expect(charter).toBeGreaterThanOrEqual(0);
+     99|     if (commission >= 0) expect(commission).toBeGreaterThan(charter);
+    100|     expect(land.work).toBeNull(); // upkeep plus existing charter has …
+       |                       ^
+    101|     expect(state.landPolicies[0]!.allowance).toBe(1000);
+    102|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 15 passed (16)
+   Start at  14:31:22
+   Duration  872ms (transform 806ms, setup 0ms, import 1.11s, tests 422ms, environment 0ms)
+

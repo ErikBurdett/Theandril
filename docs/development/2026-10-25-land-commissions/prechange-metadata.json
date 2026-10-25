@@ -1,0 +1,289 @@
+{
+  "baseline": "657a4a55c8d1fabe0f64fd2544c422a90995bf21",
+  "capturedAt": "2026-10-25T19:26:03.091Z",
+  "rulesVersion": 36,
+  "saveVersion": 36,
+  "description": "Generated tiny two-realm campaign, seed 41. No authored state mutation or AI commands. Ordinary founding, Food then Industry worker policies, two paid improvements and eight end turns. One completed improvement and one paid work order remain; exact complete archive replay verified on unmodified rules 36.",
+  "initialHash": "852ddbd7",
+  "initialSaveVersion": 36,
+  "finalStateHash": "e9013c5e",
+  "finalTurn": 9,
+  "finalHash": null,
+  "finalHashVersion": null,
+  "rawStateChecksum": "c4365207",
+  "contentHash": "015468d1",
+  "checkpoints": [
+    {
+      "sequence": 4,
+      "turn": 2,
+      "hash": "693a1675",
+      "version": 36
+    },
+    {
+      "sequence": 5,
+      "turn": 3,
+      "hash": "ab769fe8",
+      "version": 36
+    },
+    {
+      "sequence": 6,
+      "turn": 4,
+      "hash": "af5748f9",
+      "version": 36
+    },
+    {
+      "sequence": 7,
+      "turn": 5,
+      "hash": "600af919",
+      "version": 36
+    },
+    {
+      "sequence": 8,
+      "turn": 6,
+      "hash": "5cf85b17",
+      "version": 36
+    },
+    {
+      "sequence": 9,
+      "turn": 7,
+      "hash": "fb9ec385",
+      "version": 36
+    },
+    {
+      "sequence": 10,
+      "turn": 8,
+      "hash": "61500b02",
+      "version": 36
+    },
+    {
+      "sequence": 13,
+      "turn": 9,
+      "hash": "e9013c5e",
+      "version": 36
+    }
+  ],
+  "records": 13,
+  "commands": [
+    {
+      "type": "found",
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.1",
+      "name": "Pre-commission Hearth"
+    },
+    {
+      "type": "setWorkerPolicy",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "focus": "food"
+    },
+    {
+      "type": "improveTile",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "cell": 560,
+      "improvementId": "improvement.terraced_fields"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "setWorkerPolicy",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "focus": "industry"
+    },
+    {
+      "type": "improveTile",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "cell": 561,
+      "improvementId": "improvement.managed_woodlot"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "types": [
+        "settlement_founded"
+      ]
+    },
+    {
+      "sequence": 2,
+      "types": [
+        "worker_policy_set",
+        "worker_policy_allocated"
+      ]
+    },
+    {
+      "sequence": 3,
+      "types": [
+        "land_work_started"
+      ]
+    },
+    {
+      "sequence": 4,
+      "types": [
+        "settlement_grew",
+        "land_work_progress",
+        "worker_policy_allocated",
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 5,
+      "types": [
+        "land_work_completed",
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 6,
+      "types": [
+        "settlement_grew",
+        "worker_policy_allocated",
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 7,
+      "types": [
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 8,
+      "types": [
+        "settlement_grew",
+        "worker_policy_allocated",
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 9,
+      "types": [
+        "territory_expanded",
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 10,
+      "types": [
+        "turn_started",
+        "turn_started"
+      ]
+    },
+    {
+      "sequence": 11,
+      "types": [
+        "worker_policy_set",
+        "worker_policy_allocated"
+      ]
+    },
+    {
+      "sequence": 12,
+      "types": [
+        "land_work_started"
+      ]
+    },
+    {
+      "sequence": 13,
+      "types": [
+        "land_work_progress",
+        "turn_started",
+        "turn_started"
+      ]
+    }
+  ],
+  "finalTown": {
+    "id": "settlement.5",
+    "population": 4,
+    "food": 49,
+    "buildings": [],
+    "queue": [],
+    "land": {
+      "claimed": [
+        512,
+        560,
+        561,
+        608,
+        609,
+        610,
+        656,
+        657
+      ],
+      "worked": [
+        512,
+        561,
+        608,
+        656
+      ],
+      "improvements": {
+        "560": "improvement.terraced_fields"
+      },
+      "work": {
+        "cell": 561,
+        "coinCost": 31,
+        "turns": 3,
+        "remainingTurns": 2,
+        "startedTurn": 8,
+        "kind": "improve",
+        "improvementId": "improvement.managed_woodlot"
+      },
+      "borderGrowth": 4
+    }
+  },
+  "workerPolicies": [
+    {
+      "settlementId": "settlement.5",
+      "factionId": "faction.ashen_compact",
+      "focus": "industry"
+    }
+  ],
+  "files": [
+    {
+      "path": "packages/sim/src/fixtures/land-policy-v36-archive.json",
+      "bytes": 33617,
+      "sha256": "c96008dba7fc797310226bb812aea9803534bf7517eeec6cec8bcaedcf294b34"
+    },
+    {
+      "path": "packages/sim/src/fixtures/land-policy-v36-save.json",
+      "bytes": 26773,
+      "sha256": "df98c624c9975a869b51f425aa4d48550590f67e5c32a80ec0b25108a77a687a"
+    }
+  ]
+}

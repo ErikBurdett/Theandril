@@ -1,5 +1,34 @@
 # Theandril implementation status
 
+## Budgeted land-work commissions — 2026-10-25
+
+Rules/save **37** adds individual commissions for an exact existing improvement,
+a remaining total coin allowance and a treasury reserve. They pay ordinary quotes
+immediately when possible, then after upkeep and charters, without extra work
+progress. Only suitable worked, unimproved cells qualify; existing sites and
+mismatched deposits are protected. Successful direct work takes control back;
+revocation retains paid work, while ownership loss removes the commission.
+Selected detail gives the next quote or wait reason; compact summaries avoid
+candidate scans. Content **015468d1** is unchanged.
+
+Full local **2,461 tests / 298 files** pass in 67.00 seconds, with typecheck, lint
+and Pages build. Genuine captured rules-36 history retains its original bytes
+and seals through migration and mixed replay. Conservative AI uses exactly funded
+one-job commissions for identical existing choices; headline Standard/Long/Epic
+stays **219/329/374**, with 18/22/29 commission commands and no refused orders.
+Three authored paid-phase benchmarks and fifteen-turn saved mirrors pass; they
+do not establish organic empire, browser transfer or complete scale acceptance.
+All **74 local Pages cases pass in 5.3 minutes**, including two paid works in a
+generated hearth, exact saved restoration and narrow keyboard manual takeover.
+Displayed controls are reviewed; publication remains pending.
+[Evidence](development/2026-10-25-land-commissions/README.md),
+[ADR0055](architecture/0055-land-commissions.md).
+
+ACT-32/M3, DH-021, R06 and all fifteen release gates remain open. Next work:
+coordinated commission management, broader paid land/cultivation decisions and
+combined delegation in organically developed mature realms. Preserve explicit
+budgets, material consequences, manual overrides and historical replay.
+
 ## Standing worker stewardship — 2026-10-25
 
 **Published as `97b248e`**: both workflows, exact public readback and all six

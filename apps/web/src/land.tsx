@@ -5,6 +5,7 @@ import type { GameCommand, Observation } from '@theandril/sim';
 import { useLandQuery, type LandQuery } from './use-land-query';
 import { SettlementRoad } from './roads';
 import { WorkerPolicy } from './worker-policy';
+import { LandPolicy } from './land-policy';
 
 const yields = ['food', 'industry', 'coin', 'knowledge'] as const;
 export function yieldText(value: LandYield): string {
@@ -56,6 +57,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   const settlement = view.settlements.find(item => item.id === settlementId);
   const realm = view.factions.find(item => item.id === view.factionId);
   const workerPolicy = view.workerPolicies?.find(item => item.settlementId === settlementId && item.factionId === view.factionId);
+  const landPolicy = view.landPolicies?.find(item => item.settlementId === settlementId && item.factionId === view.factionId);
   if (!town || !settlement) return null;
   const cell = ready ? town.cells.find(item => item.cell === selectedCell) : undefined;
   const workerFull = town.worked.length >= town.workerCapacity;
@@ -85,7 +87,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
     {realm && <details className="realm-culture" data-testid="realm-culture"><summary>Culture & economy · {realm.name}</summary><FactionIdentity definitionId={realm.definitionId}/></details>}
     {!town.isCapital && <><button disabled={locked || !town.capitalOption.canStart} onClick={() => act({ type: 'setCapital', factionId: view.factionId, settlementId })}>Designate capital · {town.capitalOption.coinCost} coin</button><p className="field-help">{town.capitalOption.blocker ?? town.capitalOption.effectText}</p></>}
   </>;
-  const activeWork = town.work && <ActiveLandWork town={town} busy={locked} cancel={() => act({ type: 'cancelLandWork', factionId: view.factionId, settlementId })}/>;
+  const activeWork = town.work && <ActiveLandWork town={town} busy={locked} commissioned={!!landPolicy} cancel={() => act({ type: 'cancelLandWork', factionId: view.factionId, settlementId })}/>;
   const queryStatus = !ready && <div data-testid="land-query-status">{details.status === 'error' ? <p role="alert">Land details could not be loaded: {details.error}</p> : details.status === 'ready' ? <p role="status">This settlement’s land details are no longer available. Select an owned settlement or retry.</p> : <p role="status">Loading current land details… Tile quotes and land orders are unavailable until this review finishes.</p>}{(details.status === 'error' || details.status === 'ready') && <button type="button" disabled={busy || !queryEnabled} onClick={details.retry}>Retry land details</button>}</div>;
   const tilePicker = <>
     <p className="field-help">Select a tile on the map to inspect this settlement’s land. Army movement is off while a settlement is selected.</p>
@@ -110,6 +112,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
       {!cell.claimed && <><button disabled={busy || !cell.claim.canStart} onClick={() => act({ type: 'claimCell', factionId: view.factionId, settlementId, cell: cell.cell })}>Claim hex {cell.cell} · {cell.claim.coinCost} coin</button><p className="field-help">{cell.claim.blocker ?? cell.claim.effectText}</p></>}
       {cell.improvementId && <p><strong>Improvement:</strong> {IMPROVEMENTS.find(item => item.id === cell.improvementId)?.name ?? cell.improvementId}</p>}
       <p className="field-help">Construction replaces any existing improvement only on completion. Its benefits require an assigned worker; cancelling unfinished work does not refund its cost.</p>
+      {landPolicy && <p className="field-help" data-testid="land-policy-manual-warning">Starting construction or cultivation yourself ends this hearth’s land commission after the order succeeds.</p>}
       <details className="land-options" open={showImprovements} onToggle={event => setShowImprovements(event.currentTarget.open)}><summary>Tile improvements</summary>{cell.improvementOptions.map(option => <div className="land-option" key={option.improvementId}><button disabled={busy || !option.canStart} onClick={() => act({ type: 'improveTile', factionId: view.factionId, settlementId, cell: cell.cell, improvementId: option.improvementId })}>Build {option.name}</button><p>{option.coinCost} coin upfront · {option.turns} turns</p><p className="field-help">{option.effectText}</p>{option.blocker && <p className="land-blocker">{option.blocker}</p>}</div>)}</details>
       <details className="land-options" open={showCultivation} onToggle={event => setShowCultivation(event.currentTarget.open)}><summary>Cultivate biome</summary><p className="field-help">Paid, persistent biome work. Physical hills, mountains, water and natural features do not change. Conquest cancels unfinished work without a refund.</p>{cell.terraformOptions.map(option => <div className="land-option" key={option.biome}><button disabled={busy || !option.canStart} onClick={() => act({ type: 'terraformTile', factionId: view.factionId, settlementId, cell: cell.cell, biome: option.biome })}>Cultivate {option.name}</button><p>{option.coinCost} coin upfront · {option.turns} turns</p><p className="field-help">{option.effectText}</p>{option.blocker && <p className="land-blocker">{option.blocker}</p>}</div>)}</details>
       {compact && <details className="land-tile-facts" data-testid="land-tile-facts"><summary>Features & yield details</summary>{tileFacts}</details>}
@@ -117,13 +120,14 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   return <section className={`land-panel${compact ? ' land-panel-compact' : ''}`} data-testid="land-panel" data-settlement-id={settlementId} data-query-state={query ? details.status : 'ready'} data-query-hash={ready ? stateHash : undefined} aria-label="Settlement territory" aria-busy={!ready && details.status === 'loading'}>
     <h3>Land & stewardship</h3>
     <WorkerPolicy view={view} settlementId={settlementId} busy={busy || !queryEnabled} issue={issue}/>
+    <LandPolicy view={view} settlementId={settlementId} town={town} busy={busy || !queryEnabled} ready={ready} issue={issue}/>
     {compact ? <>{queryStatus}{activeWork}{tileActions}{tilePicker}<details className="land-town-overview" data-testid="land-town-overview"><summary>Settlement overview · {town.stage}{town.isCapital ? ' · Capital' : ''}</summary>{overview}</details></>
       : <>{overview}{activeWork}{queryStatus}{tilePicker}{tileActions}</>}
   </section>;
 }
 
-function ActiveLandWork({ town, busy, cancel }: { town: LandTown; busy: boolean; cancel: () => void }) {
+function ActiveLandWork({ town, busy, commissioned, cancel }: { town: LandTown; busy: boolean; commissioned: boolean; cancel: () => void }) {
   const work = town.work!;
   const name = work.kind === 'terraform' ? `Cultivate ${BIOME_NAMES[work.biome]}` : IMPROVEMENTS.find(item => item.id === work.improvementId)?.name ?? work.improvementId;
-  return <section className="land-work" data-testid="land-work" aria-label="Active land work"><strong>{name} · hex {work.cell}</strong><p>{work.turns - work.remainingTurns} / {work.turns} turns completed · {work.coinCost} coin paid</p>{town.workPaused && <p className="land-blocker">Paused: {town.workPaused}</p>}<button disabled={busy || !town.canCancelWork} onClick={cancel}>Cancel land work · no refund</button>{town.cancelBlocker && <p className="land-blocker">{town.cancelBlocker}</p>}</section>;
+  return <section className="land-work" data-testid="land-work" aria-label="Active land work"><strong>{name} · hex {work.cell}</strong><p>{work.turns - work.remainingTurns} / {work.turns} turns completed · {work.coinCost} coin paid</p>{town.workPaused && <p className="land-blocker">Paused: {town.workPaused}</p>}{commissioned && <p className="field-help" data-testid="land-policy-cancel-warning">Cancelling this paid work also ends the land commission. Its cost is not refunded.</p>}<button disabled={busy || !town.canCancelWork} onClick={cancel}>Cancel land work · no refund</button>{town.cancelBlocker && <p className="land-blocker">{town.cancelBlocker}</p>}</section>;
 }
