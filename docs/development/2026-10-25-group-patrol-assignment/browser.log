@@ -1,0 +1,19 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:33) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:75) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-patrol-assignment.spec.ts:11:1 › production assigns shared patrol endpoints to 101 checked armies and preserves paused policies and existing travel (5.8s)
+  ✓  2 tests/production/group-patrol-assignment.spec.ts:78:1 › a group-assigned patrol travels out and back in a generated campaign (2.3s)
+  ✓  3 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol missing-results after real policy mutation requires saved restoration before retry (5.8s)
+  ✓  4 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol wrong-army after real policy mutation requires saved restoration before retry (6.0s)
+  ✓  5 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol worker-crash after real policy mutation requires saved restoration before retry (6.4s)
+  ✓  6 tests/production/group-patrols.spec.ts:10:1 › production group patrols pause, resume and remove selected policies across filters without changing issued travel (9.4s)
+  ✓  7 tests/production/patrols.spec.ts:7:1 › a generated production campaign patrols, pauses and restores through real controls without development hooks (3.3s)
+
+  7 passed (40.0s)

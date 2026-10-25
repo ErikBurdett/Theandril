@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { Observation } from '@theandril/sim';
 import { MAX_GROUP_ORDER_COMMANDS, type GroupPatrolCommand, type GroupPatrolResult } from './protocol';
 import { groupPostingArmies } from './group-postings';
+import { patrolEndpoint } from './patrols';
 
 export type { GroupPatrolCommand, GroupPatrolResult } from './protocol';
 export type GroupPatrolIssue = (commands: GroupPatrolCommand[], expectedHash: string) => Promise<GroupPatrolResult[]>;
@@ -23,6 +24,17 @@ export function groupPatrolPlan(view: Observation, selected: ReadonlySet<string>
     if (!patrol.enabled && patrol.pauseOnWar) warPauseResumes++;
   }
   return { armies, commands, warPauseResumes, overLimit: false };
+}
+
+/** Compose ordinary commands, leaving explored terrain and army eligibility to sim. */
+export function groupPatrolAssignment(view: Observation, selected: ReadonlySet<string>, firstText: string, secondText: string, pauseOnWar: boolean) {
+  const armies = groupPostingArmies(view, selected), cells = view.width * view.height;
+  const firstCell = patrolEndpoint(firstText, cells), secondCell = patrolEndpoint(secondText, cells);
+  const valid = firstCell !== undefined && secondCell !== undefined && firstCell !== secondCell;
+  if (!valid || view.patrols === undefined || armies.length > MAX_GROUP_ORDER_COMMANDS) return [];
+  const policies = new Map(view.patrols.filter(patrol => patrol.factionId === view.factionId).map(patrol => [patrol.armyId, patrol]));
+  return armies.map((army): GroupPatrolCommand => ({ type: 'setPatrol', factionId: view.factionId, armyId: army.id,
+    firstCell, secondCell, enabled: policies.get(army.id)?.enabled ?? true, pauseOnWar }));
 }
 
 type NamedResult = GroupPatrolResult & { name: string };
@@ -51,15 +63,23 @@ export function GroupPatrolOrders({ view, hash, selected, matching, busy, issue,
   const [pending, setPending] = useState(false);
   const [results, setResults] = useState<{ rows: NamedResult[]; skipped: number }>();
   const [error, setError] = useState('');
+  const [firstText, setFirstText] = useState(''), [secondText, setSecondText] = useState('');
+  const [pauseOnWar, setPauseOnWar] = useState(false);
   const mounted = useRef(true), inFlight = useRef(false);
   const pendingCallback = useRef(onPendingChange); pendingCallback.current = onPendingChange;
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; pendingCallback.current(false); }; }, []);
   const { armies, commands, warPauseResumes, overLimit } = groupPatrolPlan(view, selected);
+  const assignments = groupPatrolAssignment(view, selected, firstText, secondText, pauseOnWar);
+  const points = view.settlements.filter(town => town.factionId === view.factionId);
+  const cells = view.width * view.height;
+  const firstCell = patrolEndpoint(firstText, cells), secondCell = patrolEndpoint(secondText, cells);
+  const validPoints = firstCell !== undefined && secondCell !== undefined && firstCell !== secondCell;
   const outside = armies.filter(army => !matching.has(army.id)).length;
   const locked = busy || pending;
-  const submit = async (action: GroupPatrolAction) => {
-    if (locked || inFlight.current || !hash || !commands[action].length) return;
-    const orders = commands[action], names = new Map(armies.map(army => [army.id, army.name]));
+  const submit = async (action: GroupPatrolAction | 'assign') => {
+    const orders = action === 'assign' ? assignments : commands[action];
+    if (locked || inFlight.current || !hash || !orders.length) return;
+    const names = new Map(armies.map(army => [army.id, army.name]));
     const skipped = armies.length - orders.length;
     inFlight.current = true; setPending(true); pendingCallback.current(true); setError(''); setResults(undefined);
     try {
@@ -74,14 +94,33 @@ export function GroupPatrolOrders({ view, hash, selected, matching, busy, issue,
       if (mounted.current) { setPending(false); pendingCallback.current(false); }
     }
   };
+  const endpoint = (label: 'First' | 'Second', value: string, setValue: (value: string) => void) => <>
+    <label>{label} group patrol point<input type="number" min={0} max={cells - 1} step={1} value={value} disabled={locked || overLimit} onChange={event => setValue(event.target.value)} aria-describedby="group-patrol-points-help"/></label>
+    <label>{label} group patrol shortcut<select value="" disabled={locked || overLimit} onChange={event => { if (event.target.value !== '') setValue(event.target.value); }}>
+      <option value="">Choose an owned hearth</option>{points.map(town => <option key={town.id} value={town.cell}>{town.name} · hex {town.cell}</option>)}
+    </select></label>
+  </>;
   if (view.patrols === undefined) return null;
   return <details className="group-movement" data-testid="group-patrols" aria-busy={pending}>
     <summary>Group patrols</summary>
     <p className="group-selection-count">{armies.length} armies selected{outside ? ` · ${outside} outside this filter` : ''}. {overLimit ? 'Reduce the selection before issuing patrol orders.' : `${commands.remove.length} have patrols.`}</p>
-    <p className="field-help">Use checked land armies ashore or a saved army group, up to {MAX_GROUP_ORDER_COMMANDS} at a time. Actions include checked armies outside this filter. Each action affects existing policies in the matching enabled/paused state only; armies without a patrol or already in the requested state stay checked.</p>
+    <p className="field-help">Use checked land armies ashore or a saved army group, up to {MAX_GROUP_ORDER_COMMANDS} at a time. Actions include checked armies outside this filter. Assigning patrols submits every checked land army ashore; each must be a combat army without caravans. The ordinary army rules explain any refusal.</p>
+    <details className="production-category" data-testid="group-patrol-assignment">
+      <summary>Assign two-point patrols</summary>
+      {endpoint('First', firstText, setFirstText)}
+      {endpoint('Second', secondText, setSecondText)}
+      <p id="group-patrol-points-help" className="field-help">Choose two different explored hex numbers, or use your hearths as shortcuts. Both points apply to every selected army. The order explains unexplored or unavailable destinations.</p>
+      <label className="waypoint-toggle"><input type="checkbox" checked={pauseOnWar} disabled={locked || overLimit} onChange={event => setPauseOnWar(event.target.checked)}/>Pause assigned patrols when war begins</label>
+      <p className="field-help">This war option replaces the option on every assigned patrol. While your realm is at war, enabled patrols with this option pause on the next turn; existing travel continues.</p>
+      <p className="field-help">Assignment creates new patrols enabled and preserves whether existing patrols are paused. Replacing a patrol resets its next point: the first point, or the second if the army already stands at the first. Existing routes and standing postings remain in place and take priority. Patrols never start battles automatically.</p>
+      {!validPoints && <p className="production-blocker">Choose two different hexes inside this world before assigning patrols.</p>}
+      <button className="primary wide" disabled={locked || !hash || !assignments.length} onClick={() => { void submit('assign'); }}>Assign patrols ({armies.length})</button>
+      <p className="field-help">This replaces {commands.remove.length} existing {commands.remove.length === 1 ? 'patrol' : 'patrols'}. Accepted armies leave the selection; refused armies stay checked.</p>
+    </details>
+    <p className="field-help">Pause, Resume and Remove affect existing policies in the matching enabled/paused state only; armies without a patrol or already in the requested state stay checked.</p>
     <p className="field-help">Pause and Remove stop future patrol assignments. Resume allows future assignments; it does not resume a paused travel route. Existing travel continues unchanged. Use Group travel → Cancel travel routes to stop issued travel too.</p>
     {overLimit && <p className="group-order-error" role="alert">Select at most {MAX_GROUP_ORDER_COMMANDS} armies. No partial selection will be submitted.</p>}
-    {warPauseResumes > 0 && <p className="field-help">{warPauseResumes} paused {warPauseResumes === 1 ? 'patrol has' : 'patrols have'} Pause when war begins enabled. Resuming during war pauses that policy again next turn. Change that option in the army’s patrol controls to keep it enabled through war.</p>}
+    {warPauseResumes > 0 && <p className="field-help">{warPauseResumes} paused {warPauseResumes === 1 ? 'patrol has' : 'patrols have'} Pause when war begins enabled. Resuming during war pauses that policy again next turn. Change that option in the army’s patrol controls, or replace its patrol above, to keep it enabled through war.</p>}
     <div className="group-selection-actions">
       <button disabled={locked || !hash || !commands.pause.length} onClick={() => { void submit('pause'); }}>Pause enabled patrols ({commands.pause.length})</button>
       <button disabled={locked || !hash || !commands.resume.length} onClick={() => { void submit('resume'); }}>Resume paused patrols ({commands.resume.length})</button>

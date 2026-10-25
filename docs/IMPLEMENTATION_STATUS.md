@@ -1,8 +1,23 @@
 # Theandril implementation status
 
+## Assign shared patrols across the army registry — 2026-10-25
+
+Round 2 of the four-round continuation assigns two shared explored points and
+an explicit war option to up to 128 checked armies ashore. New policies start
+enabled; existing paused/enabled states survive. Replacement resets the next
+point while existing routes and postings keep priority. Ordinary simulation
+refusals stay per actor; only accepted armies leave selection. Full **2,384 tests
+/ 289 files** pass after correcting a registry assertion to count army checks
+separately from the new war checkbox. Seven affected Pages cases pass, including
+101 assignments preserving 50 paused policies/exact 206-record restoration and a
+generated out-and-back patrol on turns 2/3. Typecheck, lint and build pass.
+[Evidence](development/2026-10-25-group-patrol-assignment/README.md). Rules/save 35,
+content 015468d1, M3 partial, DH-021/R06 and all fifteen gates remain unchanged.
+
 ## Bind group postings and charters to reviewed intent — 2026-10-25
 
-Round 1 of the four-round continuation: both legacy policy batches now carry the
+**Published as `6c77de4`**; both workflows, exact public readback and both live
+intent cases pass. Round 1 of the four-round continuation: both legacy policy batches carry the
 reviewed campaign hash through form, main thread and worker. Stale or malformed
 requests reject before mutation or recording; checks and form values remain for
 review and retry. Controlled old-worker reproduction retained. Full local suite

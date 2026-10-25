@@ -13,7 +13,7 @@ export const MAX_GROUP_PRODUCTION_SETTLEMENTS = 128;
 export interface GroupPostingResult { armyId: string; accepted: boolean; message?: string }
 export interface GroupCharterResult { settlementId: string; accepted: boolean; message?: string }
 export interface GroupProductionResult { settlementId: string; orders: { itemId: string; accepted: boolean; message?: string }[] }
-export type GroupPatrolCommand = Extract<GameCommand, { type: 'setPatrolEnabled' | 'clearPatrol' }>;
+export type GroupPatrolCommand = Extract<GameCommand, { type: 'setPatrol' | 'setPatrolEnabled' | 'clearPatrol' }>;
 export interface GroupPatrolResult { armyId: string; accepted: boolean; message?: string }
 export type GroupMovementCommand = Extract<GameCommand, { type: 'queueMovement' | 'resumeMovement' | 'cancelMovement' }>;
 export interface GroupMovementResult { armyId: string; accepted: boolean; message?: string }

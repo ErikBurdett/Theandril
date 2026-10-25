@@ -1,0 +1,33 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/realm-order-filter.test.tsx (7 tests | 1 failed) 177ms
+     × exposes optional group patrol controls only for armies and respects the shared registry lock 22ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/realm-order-filter.test.tsx > army registry order filters > exposes optional group patrol controls only for armies and respects the shared registry lock
+AssertionError: expected [ 'type="checkbox"', …(25) ] to have a length of 25 but got 26
+
+- Expected
++ Received
+
+- 25
++ 26
+
+ ❯ apps/web/src/realm-order-filter.test.tsx:54:44
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 288 passed (289)
+      Tests  1 failed | 2383 passed (2384)
+   Start at  03:14:51
+   Duration  68.79s (transform 5.58s, setup 0ms, import 36.36s, tests 216.72s, environment 18ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

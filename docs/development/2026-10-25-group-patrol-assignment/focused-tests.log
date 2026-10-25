@@ -1,0 +1,104 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run apps/web/src/group-patrols.test.tsx apps/web/src/worker-group-patrol-assignment.test.ts apps/web/src/worker-group-patrols.test.ts --maxWorkers=2
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/group-patrols.test.tsx (13 tests | 4 failed) 195ms
+     × refuses an oversized external selection without submitting a prefix and tolerates historical absence 15ms
+     × shows exact action counts, outside-filter checks, route consequences and war-pause caution 7ms
+     × locks every action while busy or missing a campaign hash, including no-policy selections 6ms
+     × submits a caravan-containing selection and retains its canonical refusal alongside accepted patrols 11ms
+stderr | apps/web/src/worker-group-patrol-assignment.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ❯ |unit| apps/web/src/worker-group-patrol-assignment.test.ts (6 tests | 1 failed) 1088ms
+     × records canonical missing-army and caravan refusals alongside successful assignments in stable order 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/group-patrols.test.tsx > group patrol policy controls > refuses an oversized external selection without submitting a prefix and tolerates historical absence
+AssertionError: expected [ '<button disabled=""', …(2) ] to have a length of 4 but got 3
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ apps/web/src/group-patrols.test.tsx:77:48
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |unit| apps/web/src/group-patrols.test.tsx > group patrol policy controls > shows exact action counts, outside-filter checks, route consequences and war-pause caution
+AssertionError: Target cannot be null or undefined.
+ ❯ apps/web/src/group-patrols.test.tsx:92:48
+     90|     expect(html).toContain('2 paused patrols have Pause when war begin…
+     91|     expect(html).toContain('Removing a patrol discards its saved point…
+     92|     expect(html.match(/<button disabled=""/g)).toHaveLength(1);
+       |                                                ^
+     93|     expect(html).toContain('Assign patrols (5)');
+     94|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |unit| apps/web/src/group-patrols.test.tsx > group patrol policy controls > locks every action while busy or missing a campaign hash, including no-policy selections
+AssertionError: expected [ '<button disabled=""', …(2) ] to have a length of 4 but got 3
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ apps/web/src/group-patrols.test.tsx:100:50
+     98|     for (const props of [{ busy: true, hash: '12345678', selected }, {…
+     99|       const html = renderToStaticMarkup(<GroupPatrolOrders view={view}…
+    100|       expect(html.match(/<button disabled=""/g)).toHaveLength(4);
+       |                                                  ^
+    101|     }
+    102|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |unit| apps/web/src/group-patrols.test.tsx > group patrol policy controls > submits a caravan-containing selection and retains its canonical refusal alongside accepted patrols
+Error: Invalid save: invalid runtime entity ID
+ ❯ assert packages/sim/src/save.ts:652:25
+    650|
+    651| function assert(condition: unknown, message: string): asserts conditio…
+    652|   if (!condition) throw new Error('Invalid save: ' + message);
+       |                         ^
+    653| }
+    654|
+ ❯ checkEntity packages/sim/src/save.ts:998:5
+ ❯ deserializeGame packages/sim/src/save.ts:1011:7
+ ❯ apps/web/src/group-patrols.test.tsx:151:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |unit| apps/web/src/worker-group-patrol-assignment.test.ts > actual worker group patrol assignment > records canonical missing-army and caravan refusals alongside successful assignments in stable order
+Error: Invalid save: invalid runtime entity ID
+ ❯ assert packages/sim/src/save.ts:652:25
+    650|
+    651| function assert(condition: unknown, message: string): asserts conditio…
+    652|   if (!condition) throw new Error('Invalid save: ' + message);
+       |                         ^
+    653| }
+    654|
+ ❯ checkEntity packages/sim/src/save.ts:998:5
+ ❯ deserializeGame packages/sim/src/save.ts:1011:7
+ ❯ readSave packages/persistence/src/index.ts:58:18
+ ❯ exportSave packages/persistence/src/index.ts:98:20
+ ❯ apps/web/src/worker-group-patrol-assignment.test.ts:125:66
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 14 passed (19)
+   Start at  03:11:18
+   Duration  1.74s (transform 951ms, setup 0ms, import 1.18s, tests 1.28s, environment 0ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

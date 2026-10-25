@@ -75,3 +75,11 @@ performance or pacing claim: this is bounded request validation, not a rules cha
 
 This is the first of four requested rounds. Publication readback is recorded
 after the immutable commit exists; this packet is not a completed prompt report.
+
+## Deployment
+
+Published **6c77de456f3555f869af7e5d0aa43ae834d83ba6**. Both exact-commit
+[GitHub workflows](actions.json) succeeded. [Public readback](public-readback/readback.json)
+compares the published HTML, chunks, worker, styles, journal catalogue and change
+feed with a preserved build of that exact commit. Both stale-intent cases pass
+on the public site in 11.0 seconds ([log](live.log)).

@@ -1,0 +1,9 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+apps/web/src/worker-group-patrol-assignment.test.ts(126,11): error TS2322: Type '{ type: string; factionId: string; armyId: string; firstCell: number; secondCell: number; enabled: boolean; pauseOnWar: boolean; }[]' is not assignable to type '{ factionId: string; armyId: string; firstCell: number; secondCell: number; enabled: boolean; type: "setPatrol"; pauseOnWar?: boolean | undefined; }[]'.
+  Type '{ type: string; factionId: string; armyId: string; firstCell: number; secondCell: number; enabled: boolean; pauseOnWar: boolean; }' is not assignable to type '{ factionId: string; armyId: string; firstCell: number; secondCell: number; enabled: boolean; type: "setPatrol"; pauseOnWar?: boolean | undefined; }'.
+    Types of property 'type' are incompatible.
+      Type 'string' is not assignable to type '"setPatrol"'.
+ ELIFECYCLE  Command failed with exit code 2.

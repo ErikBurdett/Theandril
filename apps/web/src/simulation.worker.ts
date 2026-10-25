@@ -168,7 +168,7 @@ function patrolCommands(request: Extract<Request, { type: 'groupPatrol' }>, fact
   const ids = new Set<string>();
   const commands = Array.from(request.commands).map((input, index): GroupPatrolCommand => {
     const parsed = commandSchema.safeParse(input);
-    if (!parsed.success || !['setPatrolEnabled', 'clearPatrol'].includes(parsed.data.type)) throw new Error(`Group patrol item ${index + 1} is not a valid patrol order.`);
+    if (!parsed.success || !['setPatrol', 'setPatrolEnabled', 'clearPatrol'].includes(parsed.data.type)) throw new Error(`Group patrol item ${index + 1} is not a valid patrol order.`);
     const command = parsed.data as GroupPatrolCommand;
     if (command.factionId !== factionId) throw new Error('This seat does not control every faction in the group patrol order.');
     if (ids.has(command.armyId)) throw new Error('Group patrol may name each army only once.');
@@ -177,8 +177,10 @@ function patrolCommands(request: Extract<Request, { type: 'groupPatrol' }>, fact
   });
   const first = commands[0]!;
   if (commands.some(command => command.type !== first.type
-    || command.type === 'setPatrolEnabled' && first.type === 'setPatrolEnabled' && command.enabled !== first.enabled)) {
-    throw new Error('Group patrol requires the same action and enabled choice for every army.');
+    || command.type === 'setPatrolEnabled' && first.type === 'setPatrolEnabled' && command.enabled !== first.enabled
+    || command.type === 'setPatrol' && first.type === 'setPatrol' && (command.firstCell !== first.firstCell
+      || command.secondCell !== first.secondCell || (command.pauseOnWar ?? false) !== (first.pauseOnWar ?? false)))) {
+    throw new Error('Group patrol requires the same action; assignments share points and a war option, while pause/resume shares its enabled choice.');
   }
   return commands.sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0);
 }
