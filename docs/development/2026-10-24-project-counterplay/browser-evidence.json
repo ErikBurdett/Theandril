@@ -1,0 +1,332 @@
+{
+  "scope": "Four first-turn built-production worker branches on an authored Short campaign. Exact exports/replay/manual restoration pass; sustained paused-siege policy and release acceptance are outside this run.",
+  "log": "browser-first.log",
+  "passed": 4,
+  "durationSeconds": 12.7,
+  "sources": [
+    {
+      "path": "packages/ai/src/project-counterplay.ts",
+      "sha256": "a86f74abc3417ee9f4e483b65b24a68cf04856b783902d17a6c9a797cc4aecac"
+    },
+    {
+      "path": "packages/ai/src/diplomacy.ts",
+      "sha256": "1037e7b5e54a6445705f7b52c22ef1a8209f220cbd1b8fa41e3ee2e7c2e498f8"
+    },
+    {
+      "path": "packages/ai/src/index.ts",
+      "sha256": "579c1f300b0b0322e3ae83c9b2d1807b38846abfad73dcc7609da87b5ebadd16"
+    },
+    {
+      "path": "packages/sim/src/siege-establishment.ts",
+      "sha256": "561e00534fee33fe39eb3b7bed205a65db1f254c58583460b329b719bb680167"
+    },
+    {
+      "path": "packages/sim/src/siege.ts",
+      "sha256": "1ced7a2bdb9ff4f0f24aaa699e580fc702529acd07bc62deeebe2c9e4352fe60"
+    },
+    {
+      "path": "packages/sim/src/simulation.ts",
+      "sha256": "68a208ff19af7ad1ddf0e27fa32a044fa449ff4335f20e6629ca848e4cc9dcc1"
+    },
+    {
+      "path": "tests/production/project-counterplay.spec.ts",
+      "sha256": "99127c957444aeacd7f26e03aa7e46e820aef3c2fa5c041ba67e89103e70d87b"
+    }
+  ],
+  "branches": [
+    {
+      "directory": "browser-results/production-project-counter-1439c-vance-with-no-initial-offer",
+      "mode": "player",
+      "incomingInitially": false,
+      "initialHash": "c705fc04",
+      "finalHash": "e9ea15d5",
+      "coverage": "from-save",
+      "recordCount": 2,
+      "allRecordsAccepted": true,
+      "decisionCommands": [
+        {
+          "sequence": 1,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.4",
+            "settlementId": "settlement.5"
+          }
+        },
+        {
+          "sequence": 2,
+          "turn": 27,
+          "afterTurn": 28,
+          "command": {
+            "type": "endTurn",
+            "factionId": "faction.ashen_compact"
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "browser-results/production-project-counter-1439c-vance-with-no-initial-offer/project-counterplay.json",
+          "bytes": 3050,
+          "sha256": "d9550f0504f1d0104902a3a7e3d5ddb7fd049694444b933bac711ddabf6045e7"
+        },
+        {
+          "path": "browser-results/production-project-counter-1439c-vance-with-no-initial-offer/project-counterplay.theandril",
+          "bytes": 12978,
+          "sha256": "fb2ce7ed784fbd8b666597c700b54b53d29d3a4357578b166c6cc308c0d27aef"
+        },
+        {
+          "path": "browser-results/production-project-counter-1439c-vance-with-no-initial-offer/project-paused-desktop.png",
+          "bytes": 608500,
+          "sha256": "708a0431cfb186befed590eed05a36f54cb540a213299e95e8b579241c11342c"
+        },
+        {
+          "path": "browser-results/production-project-counter-1439c-vance-with-no-initial-offer/project-paused-narrow.png",
+          "bytes": 217901,
+          "sha256": "0fac8fad76d738b914e03418b3a1c0cb3b52e380abdc357eacbbcf9a63510a38"
+        }
+      ]
+    },
+    {
+      "directory": "browser-results/production-project-counter-54c61-vance-with-no-initial-offer",
+      "mode": "watch",
+      "incomingInitially": false,
+      "initialHash": "c705fc04",
+      "finalHash": "0446e522",
+      "coverage": "from-save",
+      "recordCount": 4,
+      "allRecordsAccepted": true,
+      "decisionCommands": [
+        {
+          "sequence": 1,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "proposePeace",
+            "factionId": "faction.ashen_compact",
+            "targetFactionId": "faction.reedbound_council",
+            "terms": {
+              "offerCoin": 40,
+              "requestCoin": 0,
+              "truceTurns": 10
+            }
+          }
+        },
+        {
+          "sequence": 2,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "respondPeace",
+            "factionId": "faction.reedbound_council",
+            "offerId": "offer.12",
+            "accept": false
+          }
+        },
+        {
+          "sequence": 3,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.4",
+            "settlementId": "settlement.5"
+          }
+        },
+        {
+          "sequence": 4,
+          "turn": 27,
+          "afterTurn": 28,
+          "command": {
+            "type": "endTurn",
+            "factionId": "faction.ashen_compact"
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "browser-results/production-project-counter-54c61-vance-with-no-initial-offer/project-counterplay.json",
+          "bytes": 4833,
+          "sha256": "ac3ca04208a921bd70175aa777ef5ed9e6b90dd1f331b613f29703a88bb21bda"
+        },
+        {
+          "path": "browser-results/production-project-counter-54c61-vance-with-no-initial-offer/project-counterplay.theandril",
+          "bytes": 13277,
+          "sha256": "296ff74261c0bd7a063e3c5eca9031b551a958c7f16f535f1094b161073fffcd"
+        },
+        {
+          "path": "browser-results/production-project-counter-54c61-vance-with-no-initial-offer/project-paused-desktop.png",
+          "bytes": 648609,
+          "sha256": "72de12f60cadbc8c07e1c2cc564a48127294dc47e27ebf8cdda29d043915e060"
+        },
+        {
+          "path": "browser-results/production-project-counter-54c61-vance-with-no-initial-offer/project-paused-narrow.png",
+          "bytes": 215294,
+          "sha256": "743286812f57014674385694defb142441ec4b462e7214e40cd5daec3049a23d"
+        }
+      ]
+    },
+    {
+      "directory": "browser-results/production-project-counter-8ab02-ance-with-an-incoming-offer",
+      "mode": "player",
+      "incomingInitially": true,
+      "initialHash": "c705fc04",
+      "finalHash": "0446e522",
+      "coverage": "from-save",
+      "recordCount": 4,
+      "allRecordsAccepted": true,
+      "decisionCommands": [
+        {
+          "sequence": 1,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "proposePeace",
+            "factionId": "faction.ashen_compact",
+            "targetFactionId": "faction.reedbound_council",
+            "terms": {
+              "offerCoin": 0,
+              "requestCoin": 0,
+              "truceTurns": 10
+            }
+          }
+        },
+        {
+          "sequence": 2,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "respondPeace",
+            "factionId": "faction.reedbound_council",
+            "offerId": "offer.12",
+            "accept": false
+          }
+        },
+        {
+          "sequence": 3,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.4",
+            "settlementId": "settlement.5"
+          }
+        },
+        {
+          "sequence": 4,
+          "turn": 27,
+          "afterTurn": 28,
+          "command": {
+            "type": "endTurn",
+            "factionId": "faction.ashen_compact"
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "browser-results/production-project-counter-8ab02-ance-with-an-incoming-offer/project-counterplay.json",
+          "bytes": 4832,
+          "sha256": "f52e94ee4a442debfa30491c8d5a7d956e94897bddc0fb50be686ef4cf80b935"
+        },
+        {
+          "path": "browser-results/production-project-counter-8ab02-ance-with-an-incoming-offer/project-counterplay.theandril",
+          "bytes": 13275,
+          "sha256": "2764c653fc9b870ea72cc69196cd86a281340c7e000fdacebabc8f932971540b"
+        },
+        {
+          "path": "browser-results/production-project-counter-8ab02-ance-with-an-incoming-offer/project-paused-desktop.png",
+          "bytes": 608500,
+          "sha256": "708a0431cfb186befed590eed05a36f54cb540a213299e95e8b579241c11342c"
+        },
+        {
+          "path": "browser-results/production-project-counter-8ab02-ance-with-an-incoming-offer/project-paused-narrow.png",
+          "bytes": 217901,
+          "sha256": "0fac8fad76d738b914e03418b3a1c0cb3b52e380abdc357eacbbcf9a63510a38"
+        }
+      ]
+    },
+    {
+      "directory": "browser-results/production-project-counter-cd961-ance-with-an-incoming-offer",
+      "mode": "watch",
+      "incomingInitially": true,
+      "initialHash": "c705fc04",
+      "finalHash": "9b036fae",
+      "coverage": "from-save",
+      "recordCount": 15,
+      "allRecordsAccepted": true,
+      "decisionCommands": [
+        {
+          "sequence": 1,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "proposePeace",
+            "factionId": "faction.ashen_compact",
+            "targetFactionId": "faction.reedbound_council",
+            "terms": {
+              "offerCoin": 0,
+              "requestCoin": 0,
+              "truceTurns": 10
+            }
+          }
+        },
+        {
+          "sequence": 13,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "respondPeace",
+            "factionId": "faction.reedbound_council",
+            "offerId": "offer.12",
+            "accept": false
+          }
+        },
+        {
+          "sequence": 14,
+          "turn": 27,
+          "afterTurn": 27,
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.4",
+            "settlementId": "settlement.5"
+          }
+        },
+        {
+          "sequence": 15,
+          "turn": 27,
+          "afterTurn": 28,
+          "command": {
+            "type": "endTurn",
+            "factionId": "faction.ashen_compact"
+          }
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "browser-results/production-project-counter-cd961-ance-with-an-incoming-offer/project-counterplay.json",
+          "bytes": 12628,
+          "sha256": "659d3c5346f3d67e6c5f5b3b4c2b0ee413e33bc216c784823e34d7dc8fda383a"
+        },
+        {
+          "path": "browser-results/production-project-counter-cd961-ance-with-an-incoming-offer/project-counterplay.theandril",
+          "bytes": 14470,
+          "sha256": "0a41af212b6a779af7602d998793bae87de4ed706b416176af56c6cdc1dfa5b9"
+        },
+        {
+          "path": "browser-results/production-project-counter-cd961-ance-with-an-incoming-offer/project-paused-desktop.png",
+          "bytes": 648696,
+          "sha256": "36f967017f21e3020c729a3a4db111e1c22f05cab5e0bdd15a4d252b947ed291"
+        },
+        {
+          "path": "browser-results/production-project-counter-cd961-ance-with-an-incoming-offer/project-paused-narrow.png",
+          "bytes": 213480,
+          "sha256": "58aeac8c56866bab412866111a07260f639e6bf8238a8938d9bceb2e6691fc90"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/siege-establishment.test.ts (7 tests | 3 failed) 320ms
+     × replays rules 16 with exact results and final bytes 8ms
+     × replays rules 19 with exact results and final bytes 4ms
+     × replays rules 34 with exact results and final bytes 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/siege-establishment.test.ts > pre-refactor historical siege execution > replays rules 16 with exact results and final bytes
+ FAIL  |unit| packages/sim/src/siege-establishment.test.ts > pre-refactor historical siege execution > replays rules 19 with exact results and final bytes
+ FAIL  |unit| packages/sim/src/siege-establishment.test.ts > pre-refactor historical siege execution > replays rules 34 with exact results and final bytes
+AssertionError: expected { …(55) } to not have property "siegeEstablishment"
+
+- Expected:
+undefined
+
++ Received:
+true
+
+ ❯ packages/sim/src/siege-establishment.test.ts:87:47
+     85|     expect(serializeGameForVersion(game, seal.version)).toBe(seal.fina…
+     86|     const view = getObservation(game, game.turnOwnerId);
+     87|     if (seal.version < 35) { expect(view).not.toHaveProperty('siegeEst…
+       |                                               ^
+     88|     else { expect(view.siegeEstablishment).toBe(true); expect(view.str…
+     89|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 4 passed (7)
+   Start at  21:24:21
+   Duration  948ms (transform 422ms, setup 0ms, import 553ms, tests 320ms, environment 0ms)
+

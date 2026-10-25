@@ -1,4 +1,5 @@
 import { evaluatePeaceOffer, isCityState, type GameCommand, type Observation } from '@theandril/sim';
+import { reviewProjectCounterplay } from './project-counterplay';
 
 export interface AiPlan { commands: GameCommand[]; reasons: string[] }
 
@@ -16,24 +17,36 @@ export function protectedFactions(view: Observation): Set<string> {
     .flatMap(treaty => treaty.parties.filter(id => id !== view.factionId))]);
 }
 
-/** One diplomatic decision per pass avoids planning attacks against a newly accepted peace. */
+/** Accepted peace ends the pass. A rejection preserves war and the quoted
+ * siege facts, so an imminent-project rejection may carry that one siege in
+ * the same batch: Watch plans only once per realm per round. */
 export function planDiplomacy(view: Observation): AiPlan | null {
+  if (view.strategicCommandBlocker) return null;
   const incoming = [...view.diplomacy.offers].sort((a, b) => a.createdTurn - b.createdTurn || (a.id < b.id ? -1 : 1))
     .find(offer => offer.recipientId === view.factionId && offer.expiresTurn > view.turn && view.wars.includes(offer.proposerId));
   if (incoming) {
     const assessment = evaluatePeaceOffer(view, incoming);
     const accept = assessment.band === 'likely';
+    const interruption = reviewProjectCounterplay(view, protectedFactions(view), incoming.terms.truceTurns, incoming.proposerId);
+    if (interruption.command || interruption.peaceBlockedFactionIds.includes(incoming.proposerId)) return {
+      commands: [{ type: 'respondPeace', factionId: view.factionId, offerId: incoming.id, accept: false }, ...(interruption.command ? [interruption.command] : [])],
+      reasons: [`Reject ${incoming.id}: its ${incoming.terms.truceTurns}-turn binding peace would protect this enemy victory. ${interruption.reason}`],
+    };
     return {
       commands: [{ type: 'respondPeace', factionId: view.factionId, offerId: incoming.id, accept }],
       reasons: [`${accept ? 'Accept' : 'Reject'} ${incoming.id}: ${[...assessment.reasons, ...assessment.objections].join(' ')}`],
     };
   }
+  // This also runs during peace-offer cooldowns; no second same-turn planning
+  // pass is required to execute an available interruption before victory.
+  const interruption = reviewProjectCounterplay(view, protectedFactions(view));
+  if (interruption.command) return { commands: [interruption.command], reasons: [interruption.reason!] };
   const own = view.armies.filter(army => army.factionId === view.factionId);
   const strength = own.reduce((sum, army) => sum + army.strength, 0);
   const exhausted = own.some(army => army.morale < 30 || army.fatigue > 65);
   const pending = new Set(view.diplomacy.offers.flatMap(offer => [offer.proposerId, offer.recipientId]));
   for (const enemyId of [...view.wars].sort().slice(0, 48)) {
-    if (pending.has(enemyId)) continue;
+    if (pending.has(enemyId) || interruption.peaceBlockedFactionIds.includes(enemyId)) continue;
     const memory = view.diplomacy.relations.find(relation => relation.parties.includes(enemyId));
     if (!memory || memory.warStartedTurn === null || view.turn - memory.lastOfferTurn < 3) continue;
     const duration = view.turn - memory.warStartedTurn;

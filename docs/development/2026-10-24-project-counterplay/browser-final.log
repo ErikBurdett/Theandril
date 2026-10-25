@@ -1,0 +1,79 @@
+[WebServer] (node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:55) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer (3.8s)
+  ✓  2 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer (3.2s)
+  ✘  3 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer (47.2s)
+(node:379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer (5.8s)
+
+
+  1) tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('campaign-menu').locator(':scope > summary')
+        - locator resolved to <summary>Campaign & settings</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <dialog open="" class="chronicles-dialog" aria-labelledby="chronicles-title">…</dialog> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <dialog open="" class="chronicles-dialog" aria-labelledby="chronicles-title">…</dialog> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        77 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <dialog open="" class="chronicles-dialog" aria-labelledby="chronicles-title">…</dialog> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+       at gameplay/group-movement-fixture.ts:79
+
+      77 |   await closeManagement(page);
+      78 |   const menu = page.getByTestId('campaign-menu');
+    > 79 |   if (await menu.getAttribute('open') === null) await menu.locator(':scope > summary').click();
+         |                                                                                        ^
+      80 | }
+      81 | export async function exportedTravel(page: Page) {
+      82 |   await campaignMenu(page);
+        at campaignMenu (/home/telephoneheater/Work/Theandril/tests/gameplay/group-movement-fixture.ts:79:88)
+        at exportedTravel (/home/telephoneheater/Work/Theandril/tests/gameplay/group-movement-fixture.ts:82:3)
+        at /home/telephoneheater/Work/Theandril/tests/production/project-counterplay.spec.ts:95:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-24-project-counterplay/browser-final-results/production-project-counter-2690b-tion-with-an-incoming-offer/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-24-project-counterplay/browser-final-results/production-project-counter-2690b-tion-with-an-incoming-offer/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-24-project-counterplay/browser-final-results/production-project-counter-2690b-tion-with-an-incoming-offer/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-24-project-counterplay/browser-final-results/production-project-counter-2690b-tion-with-an-incoming-offer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer 
+  3 passed (1.1m)

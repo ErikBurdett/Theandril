@@ -1,0 +1,850 @@
+{
+  "scope": "Saved branches of the paid near-complete project; every recorded accepted/refused command mirrors and replays exactly.",
+  "initialHash": "c705fc04",
+  "incomingPlan": {
+    "commands": [
+      {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.12",
+        "accept": true
+      }
+    ],
+    "reasons": [
+      "Accept offer.12: A prolonged war favors a settlement. A longer binding peace gives time to rebuild."
+    ]
+  },
+  "outgoingPlan": {
+    "commands": [
+      {
+        "type": "proposePeace",
+        "factionId": "faction.reedbound_council",
+        "targetFactionId": "faction.ashen_compact",
+        "terms": {
+          "offerCoin": 0,
+          "requestCoin": 0,
+          "truceTurns": 10
+        }
+      }
+    ],
+    "reasons": [
+      "Seek peace with faction.ashen_compact: 12 turns of war; offer 0 coin while preserving upkeep reserves."
+    ]
+  },
+  "rivalAnswer": {
+    "commands": [
+      {
+        "type": "respondPeace",
+        "factionId": "faction.ashen_compact",
+        "offerId": "offer.12",
+        "accept": true
+      }
+    ],
+    "reasons": [
+      "Accept offer.12: A prolonged war favors a settlement. Relief from military pressure is valuable. A longer binding peace gives time to rebuild."
+    ]
+  },
+  "peaceBlocker": "A binding peace protects this faction until turn 37.",
+  "incoming": {
+    "finalHash": "7507057e",
+    "turn": 28,
+    "project": {
+      "id": "project.11",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 23,
+      "progress": 5,
+      "requiredTurns": 5,
+      "status": "completed",
+      "statusReason": null
+    },
+    "victory": {
+      "path": "prosperity",
+      "factionId": "faction.ashen_compact",
+      "projectId": "project.11",
+      "settlementId": "settlement.5",
+      "turn": 28
+    },
+    "history": [
+      {
+        "command": {
+          "type": "proposePeace",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "respondPeace",
+          "factionId": "faction.reedbound_council",
+          "offerId": "offer.12",
+          "accept": true
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_accepted",
+              "message": "Peace was signed until turn 37. 0 coin transferred; existing settlement ownership remains unchanged."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_accepted",
+              "message": "Peace was signed until turn 37. 0 coin transferred; existing settlement ownership remains unchanged."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "declareWar",
+          "factionId": "faction.reedbound_council",
+          "targetFactionId": "faction.ashen_compact"
+        },
+        "result": {
+          "ok": false,
+          "error": "A binding peace protects this faction until turn 37.",
+          "events": []
+        }
+      },
+      {
+        "command": {
+          "type": "besiege",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "settlementId": "settlement.5"
+        },
+        "result": {
+          "ok": false,
+          "error": "Declare war before besieging this settlement.",
+          "events": []
+        }
+      },
+      {
+        "command": {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "settlement_grew",
+              "message": "Kiln Ward grew to population 4.",
+              "factionId": "faction.ashen_compact",
+              "cell": 539
+            },
+            {
+              "turn": 28,
+              "type": "victory_project_progress",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth completed active turn 5 of 5."
+            },
+            {
+              "turn": 28,
+              "type": "victory_project_progress",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth completed active turn 5 of 5."
+            },
+            {
+              "turn": 28,
+              "type": "campaign_victory",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ashen Compact achieved Prosperity by completing the Hearth Exchange at Ledger Hearth on turn 28."
+            },
+            {
+              "turn": 28,
+              "type": "campaign_victory",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ashen Compact achieved Prosperity by completing the Hearth Exchange at Ledger Hearth on turn 28."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "outgoing": {
+    "finalHash": "9d133f01",
+    "turn": 28,
+    "project": {
+      "id": "project.11",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 23,
+      "progress": 5,
+      "requiredTurns": 5,
+      "status": "completed",
+      "statusReason": null
+    },
+    "victory": {
+      "path": "prosperity",
+      "factionId": "faction.ashen_compact",
+      "projectId": "project.11",
+      "settlementId": "settlement.5",
+      "turn": 28
+    },
+    "history": [
+      {
+        "command": {
+          "type": "proposePeace",
+          "factionId": "faction.reedbound_council",
+          "targetFactionId": "faction.ashen_compact",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "respondPeace",
+          "factionId": "faction.ashen_compact",
+          "offerId": "offer.12",
+          "accept": true
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_accepted",
+              "message": "Peace was signed until turn 37. 0 coin transferred; existing settlement ownership remains unchanged."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_accepted",
+              "message": "Peace was signed until turn 37. 0 coin transferred; existing settlement ownership remains unchanged."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "settlement_grew",
+              "message": "Kiln Ward grew to population 4.",
+              "factionId": "faction.ashen_compact",
+              "cell": 539
+            },
+            {
+              "turn": 28,
+              "type": "victory_project_progress",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth completed active turn 5 of 5."
+            },
+            {
+              "turn": 28,
+              "type": "victory_project_progress",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth completed active turn 5 of 5."
+            },
+            {
+              "turn": 28,
+              "type": "campaign_victory",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ashen Compact achieved Prosperity by completing the Hearth Exchange at Ledger Hearth on turn 28."
+            },
+            {
+              "turn": 28,
+              "type": "campaign_victory",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ashen Compact achieved Prosperity by completing the Hearth Exchange at Ledger Hearth on turn 28."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "interrupted": {
+    "finalHash": "3b043ea6",
+    "turn": 29,
+    "project": {
+      "id": "project.11",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 23,
+      "progress": 4,
+      "requiredTurns": 5,
+      "status": "paused",
+      "statusReason": "The host settlement is under siege."
+    },
+    "victory": null,
+    "history": [
+      {
+        "command": {
+          "type": "besiege",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "settlementId": "settlement.5"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "siege_started",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+            },
+            {
+              "turn": 27,
+              "type": "siege_started",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+            },
+            {
+              "turn": 27,
+              "type": "victory_project_paused",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+            },
+            {
+              "turn": 27,
+              "type": "victory_project_paused",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "siege_progress",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ledger Hearth: defenses 20, supplies 2."
+            },
+            {
+              "turn": 27,
+              "type": "siege_progress",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ledger Hearth: defenses 20, supplies 2."
+            },
+            {
+              "turn": 27,
+              "type": "settlement_grew",
+              "message": "Kiln Ward grew to population 4.",
+              "factionId": "faction.ashen_compact",
+              "cell": 539
+            },
+            {
+              "turn": 28,
+              "type": "turn_started",
+              "factionId": "faction.ashen_compact",
+              "message": "Turn 28: orders are ready."
+            },
+            {
+              "turn": 28,
+              "type": "turn_started",
+              "factionId": "faction.reedbound_council",
+              "message": "Turn 28: orders are ready."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 28,
+              "type": "siege_progress",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ledger Hearth: defenses 10, supplies 1."
+            },
+            {
+              "turn": 28,
+              "type": "siege_progress",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ledger Hearth: defenses 10, supplies 1."
+            },
+            {
+              "turn": 28,
+              "factionId": "faction.ashen_compact",
+              "type": "territory_expanded",
+              "message": "Commons Reach expanded its civic boundary to hex 634 after accumulating 10 border progress. No workers or improvements were assigned.",
+              "cell": 634
+            },
+            {
+              "turn": 28,
+              "factionId": "faction.ashen_compact",
+              "type": "territory_expanded",
+              "message": "Kiln Ward expanded its civic boundary to hex 493 after accumulating 10 border progress. No workers or improvements were assigned.",
+              "cell": 493
+            },
+            {
+              "turn": 29,
+              "type": "turn_started",
+              "factionId": "faction.ashen_compact",
+              "message": "Turn 29: orders are ready."
+            },
+            {
+              "turn": 29,
+              "type": "turn_started",
+              "factionId": "faction.reedbound_council",
+              "message": "Turn 29: orders are ready."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "blocked": {
+    "target": 535,
+    "blocker": "The army needs movement to establish a siege.",
+    "plan": {
+      "commands": [
+        {
+          "type": "respondPeace",
+          "factionId": "faction.reedbound_council",
+          "offerId": "offer.12",
+          "accept": true
+        }
+      ],
+      "reasons": [
+        "Accept offer.12: A prolonged war favors a settlement. A longer binding peace gives time to rebuild."
+      ]
+    },
+    "finalHash": "118ef131",
+    "turn": 27,
+    "project": {
+      "id": "project.11",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 23,
+      "progress": 4,
+      "requiredTurns": 5,
+      "status": "active",
+      "statusReason": null
+    },
+    "victory": null,
+    "history": [
+      {
+        "command": {
+          "type": "moveTo",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "target": 535
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "army_moved",
+              "message": "Project interruption guard explored hex 536.",
+              "cell": 536
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "army_moved",
+              "message": "Project interruption guard explored hex 535.",
+              "cell": 535
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "besiege",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "settlementId": "settlement.5"
+        },
+        "result": {
+          "ok": false,
+          "error": "The army needs movement to establish a siege.",
+          "events": []
+        }
+      },
+      {
+        "command": {
+          "type": "proposePeace",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "rejectedIncoming": {
+    "plan": {
+      "commands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.cinder_masonry"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "queue",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "itemId": "building.granary"
+        },
+        {
+          "type": "setWorkedTiles",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "cells": [
+            955,
+            1051,
+            1053
+          ]
+        },
+        {
+          "type": "improveTile",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "cell": 1051,
+          "improvementId": "improvement.timber_yard"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "settlementId": "settlement.5"
+        }
+      ],
+      "reasons": [
+        "Research Cinder masonry for the economy and the settlement sites currently observed; spend 24 knowledge.",
+        "Adopt Charter compact while preserving a caravan's funding.",
+        "Reedbound Hold improves worked land with Heartwood yard for 38 coin.",
+        "army.4 invests visible settlement settlement.5; assess its defenses next pass."
+      ]
+    },
+    "finalHash": "77001de2",
+    "turn": 27,
+    "project": {
+      "id": "project.11",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 23,
+      "progress": 4,
+      "requiredTurns": 5,
+      "status": "paused",
+      "statusReason": "The host settlement is under siege."
+    },
+    "victory": null,
+    "history": [
+      {
+        "command": {
+          "type": "proposePeace",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_proposed",
+              "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "respondPeace",
+          "factionId": "faction.reedbound_council",
+          "offerId": "offer.12",
+          "accept": false
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.ashen_compact",
+              "type": "peace_rejected",
+              "message": "Peace offer offer.12 was rejected."
+            },
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "peace_rejected",
+              "message": "Peace offer offer.12 was rejected."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.cinder_masonry"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "technology_researched",
+              "factionId": "faction.reedbound_council",
+              "message": "Reedbound Council researched Cinder masonry for 24 knowledge."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "institution_adopted",
+              "factionId": "faction.reedbound_council",
+              "message": "Reedbound Council adopted Charter compact for 30 coin."
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "queue",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "itemId": "building.granary"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "production_queued",
+              "message": "Reedbound Hold queued Root cellar for 8 coin.",
+              "cell": 1052
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "setWorkedTiles",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "cells": [
+            955,
+            1051,
+            1053
+          ]
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "worked_tiles_changed",
+              "message": "Reedbound Hold assigned workers to 3 claimed hexes; its center remains worked.",
+              "cell": 1052
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "improveTile",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.6",
+          "cell": 1051,
+          "improvementId": "improvement.timber_yard"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "factionId": "faction.reedbound_council",
+              "type": "land_work_started",
+              "message": "Reedbound Hold paid 38 coin for Heartwood yard at hex 1051; 3 active turns of work are required.",
+              "cell": 1051
+            }
+          ]
+        }
+      },
+      {
+        "command": {
+          "type": "besiege",
+          "factionId": "faction.reedbound_council",
+          "armyId": "army.4",
+          "settlementId": "settlement.5"
+        },
+        "result": {
+          "ok": true,
+          "events": [
+            {
+              "turn": 27,
+              "type": "siege_started",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+            },
+            {
+              "turn": 27,
+              "type": "siege_started",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+            },
+            {
+              "turn": 27,
+              "type": "victory_project_paused",
+              "factionId": "faction.ashen_compact",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+            },
+            {
+              "turn": 27,
+              "type": "victory_project_paused",
+              "factionId": "faction.reedbound_council",
+              "cell": 488,
+              "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

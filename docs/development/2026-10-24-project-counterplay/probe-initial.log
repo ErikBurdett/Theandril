@@ -1,0 +1,188 @@
+{
+  "authored": true,
+  "scope": "Prepared infrastructure and adjacent guard; ordinary paid project and actual end-turn progress. No campaign pacing attribution.",
+  "originalHash": "c705fc04",
+  "turn": 27,
+  "projectOwner": "faction.ashen_compact",
+  "actor": "faction.reedbound_council",
+  "army": {
+    "id": "army.4",
+    "factionId": "faction.reedbound_council",
+    "name": "Project interruption guard",
+    "cell": 489,
+    "movement": 3,
+    "formations": [
+      {
+        "id": "formation.4",
+        "unitId": "unit.guard",
+        "strength": 60,
+        "morale": 75,
+        "fatigue": 0
+      }
+    ],
+    "commander": null,
+    "agents": [],
+    "domain": "land",
+    "carrierId": null,
+    "cargo": [],
+    "transportCapacity": 0,
+    "transportUsed": 0,
+    "canEnterDeepWater": false,
+    "embarkOptions": [],
+    "disembarkOptions": [],
+    "transportOptionsTruncated": false,
+    "formationCapacity": 12,
+    "overCommand": false,
+    "commandBlocker": null,
+    "capacityReason": "Unled detachment: twelve-formation command capacity.",
+    "splitFormationLimit": 12,
+    "mergeOptions": [],
+    "mergeOptionsTruncated": false,
+    "movementBlocker": null,
+    "reorganizationBlocker": null,
+    "unitId": "unit.guard",
+    "displayUnitId": "unit.guard",
+    "strength": 60,
+    "maxStrength": 60,
+    "morale": 75,
+    "fatigue": 0,
+    "maxMovement": 3,
+    "sight": 2,
+    "upkeep": 2,
+    "canFound": false,
+    "canAttack": true
+  },
+  "host": {
+    "id": "settlement.5",
+    "factionId": "faction.ashen_compact",
+    "name": "Ledger Hearth",
+    "cell": 488,
+    "population": 4,
+    "food": 0,
+    "buildings": [
+      "building.archive",
+      "building.granary",
+      "building.market",
+      "building.workshop"
+    ],
+    "queue": [],
+    "founderFactionId": "faction.ashen_compact",
+    "devastation": 0,
+    "occupationTurns": 0
+  },
+  "project": {
+    "id": "project.11",
+    "projectId": "project.hearth_exchange",
+    "factionId": "faction.ashen_compact",
+    "settlementId": "settlement.5",
+    "settlementName": "Ledger Hearth",
+    "cell": 488,
+    "startedTurn": 23,
+    "progress": 4,
+    "requiredTurns": 5,
+    "status": "active",
+    "statusReason": null
+  },
+  "fundsBefore": 545,
+  "fundsAfter": 395,
+  "projectQuote": {
+    "id": "project.hearth_exchange",
+    "name": "Hearth Exchange",
+    "description": "Host a great exchange supported by three settlements with Charter markets and Witness archives. Sustain its full active period; blockades and conquest can interrupt the endeavor. Funding and duration depend on campaign pace.",
+    "coinCost": 120,
+    "activeTurns": 5,
+    "eligibleSettlementIds": [
+      "settlement.10",
+      "settlement.5",
+      "settlement.8"
+    ],
+    "blockers": []
+  },
+  "preview": {
+    "target": 488,
+    "path": [],
+    "cost": 0,
+    "action": "besiege",
+    "canMoveNow": false,
+    "canQueue": false,
+    "blocker": "Besiege this settlement and assault its defenses; travel cannot bypass a garrison.",
+    "limited": false,
+    "expandedNodes": 0
+  },
+  "outgoing": {
+    "commands": [
+      {
+        "type": "proposePeace",
+        "factionId": "faction.reedbound_council",
+        "targetFactionId": "faction.ashen_compact",
+        "terms": {
+          "offerCoin": 0,
+          "requestCoin": 0,
+          "truceTurns": 10
+        }
+      }
+    ],
+    "reasons": [
+      "Seek peace with faction.ashen_compact: 12 turns of war; offer 0 coin while preserving upkeep reserves."
+    ]
+  },
+  "incomingPlan": {
+    "commands": [
+      {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.12",
+        "accept": true
+      }
+    ],
+    "reasons": [
+      "Accept offer.12: A prolonged war favors a settlement. A longer binding peace gives time to rebuild."
+    ]
+  },
+  "interruptionResult": {
+    "ok": true,
+    "events": [
+      {
+        "turn": 27,
+        "type": "siege_started",
+        "factionId": "faction.reedbound_council",
+        "cell": 488,
+        "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+      },
+      {
+        "turn": 27,
+        "type": "siege_started",
+        "factionId": "faction.ashen_compact",
+        "cell": 488,
+        "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+      },
+      {
+        "turn": 27,
+        "type": "victory_project_paused",
+        "factionId": "faction.ashen_compact",
+        "cell": 488,
+        "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+      },
+      {
+        "turn": 27,
+        "type": "victory_project_paused",
+        "factionId": "faction.reedbound_council",
+        "cell": 488,
+        "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+      }
+    ]
+  },
+  "interruptedProject": {
+    "id": "project.11",
+    "projectId": "project.hearth_exchange",
+    "factionId": "faction.ashen_compact",
+    "settlementId": "settlement.5",
+    "settlementName": "Ledger Hearth",
+    "cell": 488,
+    "startedTurn": 23,
+    "progress": 4,
+    "requiredTurns": 5,
+    "status": "paused",
+    "statusReason": "The host settlement is under siege."
+  }
+}

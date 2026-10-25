@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:197) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (3.9s)
+  ✓  2 tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector (9.2s)
+  ✓  3 tests/production/posting-targets.spec.ts:58:1 › production unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (6.9s)
+  ✓  4 tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (6.2s)
+  ✓  5 tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration (6.9s)
+
+  5 passed (34.0s)

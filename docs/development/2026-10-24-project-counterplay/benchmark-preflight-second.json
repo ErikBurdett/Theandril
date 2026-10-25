@@ -1,0 +1,180 @@
+{
+  "scope": "Authored fully charted Huge/Legendary stress worlds with restricted current sight, 128 owned guard companies and a remote observed foreign roster. One rival project uses three authored developed hearths, ordinary paid research/institution/project/war and four real Short-pace turns to 4/5; final observer/army deployment is authored after that verified setup. Eight-project/four-query cap proofs remain separate synthetic tests. Absolute cold-observation isolated planner/public-query cost; one warmup and three samples. Four direct quotes target the same host with distinct actors and each executes on its own saved branch. Excludes setup, observation construction, protected-faction set construction, assertions, save/hash/command/replay, full AI/turns, campaign pacing, worker and rendering. No speedup, organic-campaign, network or whole-scale acceptance claim.",
+  "verificationOnly": true,
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "015468d1",
+  "sourceHashes": [
+    {
+      "path": "docs/development/2026-10-24-project-counterplay/benchmark-counterplay.ts",
+      "sha256": "cf2a42b22e438b9641493b0ae902a4310559308194b88c6860afb9e3744725e4"
+    },
+    {
+      "path": "packages/ai/src/project-counterplay.ts",
+      "sha256": "a86f74abc3417ee9f4e483b65b24a68cf04856b783902d17a6c9a797cc4aecac"
+    },
+    {
+      "path": "packages/ai/src/diplomacy.ts",
+      "sha256": "1037e7b5e54a6445705f7b52c22ef1a8209f220cbd1b8fa41e3ee2e7c2e498f8"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d"
+    },
+    {
+      "path": "packages/sim/src/siege-establishment.ts",
+      "sha256": "561e00534fee33fe39eb3b7bed205a65db1f254c58583460b329b719bb680167"
+    },
+    {
+      "path": "packages/sim/src/siege.ts",
+      "sha256": "1ced7a2bdb9ff4f0f24aaa699e580fc702529acd07bc62deeebe2c9e4352fe60"
+    },
+    {
+      "path": "packages/sim/src/simulation.ts",
+      "sha256": "68a208ff19af7ad1ddf0e27fa32a044fa449ff4335f20e6629ca848e4cc9dcc1"
+    },
+    {
+      "path": "packages/sim/src/progression.ts",
+      "sha256": "f9a7853503373f18799136b80f0222f0d584f1eac127c159a25c386d95f52b6a"
+    },
+    {
+      "path": "packages/sim/src/visibility.ts",
+      "sha256": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "sha256": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+    },
+    {
+      "path": "packages/test-fixtures/src/authored-land.ts",
+      "sha256": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891"
+    },
+    {
+      "path": "packages/chronicle/src/index.ts",
+      "sha256": "f50bd5b3f3632f15a1ae1d0a960e85a2d8ee427e554ba3b309c4712f10597757"
+    }
+  ],
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "accepted",
+      "hostVisible": true,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 18401009,
+      "queryCount": 1,
+      "consideredProjects": 1,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "initialHash": "a8070008",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 0,
+      "measuredSamples": 0,
+      "samplesMs": [],
+      "minMs": null,
+      "medianMs": null,
+      "maxMs": null,
+      "commands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025",
+          "settlementId": "settlement.66"
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1025",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "b0706d74",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrders": true,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    }
+  ]
+}

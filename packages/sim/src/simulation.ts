@@ -696,7 +696,12 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     ...(rulesVersion(state) >= 34 ? { theaterReinforcement: true as const, supplyAccess: supplyAccess! } : {}),
     selectionGroups: observeSelectionGroups(state, factionId),
     charters: observeCharters(state, factionId),
-    ...(rulesVersion(state) >= 35 ? { patrols: observePatrols(state, factionId) } : {}),
+    ...(rulesVersion(state) >= 35 ? {
+      patrols: observePatrols(state, factionId), siegeEstablishment: true as const,
+      strategicCommandBlocker: state.victory ? 'This campaign has ended in victory.'
+        : state.pendingCapture ? 'Resolve the settlement capture before issuing strategic commands.'
+          : state.battle ? 'Resolve the pending battle before issuing strategic commands.' : null,
+    } : {}),
     postings: observePostings(state, factionId),
     musters: state.musters.filter(muster => muster.factionId === factionId),
     supply: observeSupply(state, factionId, supplyReach),

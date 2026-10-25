@@ -1,0 +1,106 @@
+{
+  "scope": "One coherent reject+besiege batch, with actual endTurn; rejection alone loses before another Watch planning round.",
+  "quoteBefore": {
+    "armyId": "army.4",
+    "settlementId": "settlement.5",
+    "canBesiege": true,
+    "blocker": null
+  },
+  "commands": [
+    {
+      "type": "respondPeace",
+      "factionId": "faction.reedbound_council",
+      "offerId": "offer.12",
+      "accept": false
+    },
+    {
+      "type": "besiege",
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.4",
+      "settlementId": "settlement.5"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    }
+  ],
+  "results": [
+    {
+      "ok": true,
+      "events": [
+        {
+          "turn": 27,
+          "factionId": "faction.ashen_compact",
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected."
+        },
+        {
+          "turn": 27,
+          "factionId": "faction.reedbound_council",
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected."
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "factionId": "faction.reedbound_council",
+          "cell": 488,
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+        },
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "factionId": "faction.ashen_compact",
+          "cell": 488,
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "factionId": "faction.ashen_compact",
+          "cell": 488,
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "factionId": "faction.reedbound_council",
+          "cell": 488,
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+        }
+      ]
+    }
+  ],
+  "allRelevantFactsUnchangedAfterReject": true,
+  "finalHash": "0446e522",
+  "project": {
+    "id": "project.11",
+    "projectId": "project.hearth_exchange",
+    "factionId": "faction.ashen_compact",
+    "settlementId": "settlement.5",
+    "settlementName": "Ledger Hearth",
+    "cell": 488,
+    "startedTurn": 23,
+    "progress": 4,
+    "requiredTurns": 5,
+    "status": "paused",
+    "statusReason": "The host settlement is under siege."
+  },
+  "victory": null,
+  "exactReplay": true,
+  "rejectionOnly": {
+    "hash": "dcf46b24",
+    "victory": {
+      "path": "prosperity",
+      "factionId": "faction.ashen_compact",
+      "projectId": "project.11",
+      "settlementId": "settlement.5",
+      "turn": 28
+    }
+  }
+}

@@ -1,5 +1,40 @@
 # Performance measurements
 
+## Imminent project counterplay — rules 35, 2026-10-24
+
+[Ten final authored cases](development/2026-10-24-project-counterplay/counterplay-benchmark-final.json)
+measure the isolated review/public query on fresh observations, with one warmup
+and three samples. Huge/Legendary retain 196,608/307,200 charted cells,
+1,584/4,031 observed armies and 128 owned guards. One actual paid project uses
+three authored developed hearths and four ordinary Short-pace turns; final
+actor/sight deployment is explicitly authored. Current sight stays restricted.
+
+| World | New siege median ms | Hidden host | No adjacent actor | Four direct quotes | Maintain own siege |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Huge | 2.839 | 0.039 | 0.240 | 1.813 | 2.416 |
+| Legendary | 3.396 | 0.019 | 0.193 | 2.528 | 2.540 |
+
+New siege uses one quote and one accepted command. Hidden/no-adjacent controls
+use none. The four quotes execute on separate saved branches at the same host,
+not as four simultaneous sieges. Maintained-siege review uses zero queries or
+new siege commands; untimed ordinary peace rejection and endTurn preserve the
+paused project. Real unrelated posting/patrol/travel orders remain intact at
+command boundaries. Strict save, mirror and replay checks pass in every case.
+
+Source hashes and all min/median/max values are retained. The earlier active-only
+candidate's **30.600 ms** Legendary no-adjacent sample remains visible; no sample
+was trimmed or rerun to hide it. These small samples do not establish a tail
+budget. Setup, observation construction, protected-faction set construction,
+assertions, save/hash work, command/replay, full AI/turns, worker transfer and
+rendering are excluded. [Method, initial contact refusal and scope](development/2026-10-24-project-counterplay/benchmark-notes.md).
+No speedup or whole giant-scale gate is claimed.
+
+The final nine headline campaigns have identical non-timing outcomes and final
+hashes to the retirement checkpoint: Standard 219/194/201, Long 329/309/287,
+Epic 374/332/327. Functional browser/build work overlapped some campaign execution;
+those elapsed values are not performance evidence. The Long delay and two early
+Epic seeds remain open. [Comparison](development/2026-10-24-project-counterplay/pacing-maintained-comparison.json).
+
 ## Captured-hearth patrol retirement — local rules 35, 2026-10-24
 
 [Six authored cases](development/2026-10-24-patrol-retirement/retirement-benchmark.json)

@@ -34,6 +34,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (view.battle) return { commands: [{ type: 'autoResolveBattle', factionId: view.factionId }], reasons: ['Resolve the current battle through shared tactical rules.'] };
   const capture = view.pendingCapture ? planConquestDecision(view) : null;
   if (capture) return capture;
+  if (view.strategicCommandBlocker) return { commands: [], reasons: [view.strategicCommandBlocker] };
   // Promised fees also constrain paid peace terms and patronage decisions.
   // This private planning purse never mutates the permitted observation.
   const promisedSupplyFees = pendingSupplyAccessFees(view);

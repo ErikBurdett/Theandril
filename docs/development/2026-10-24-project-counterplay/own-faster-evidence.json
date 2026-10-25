@@ -1,0 +1,192 @@
+{
+  "scope": "Authored six-town infrastructure and budget; two ordinary paid projects with actual turn progress, neither fabricated.",
+  "nearHash": "626f4259",
+  "projectsBefore": [
+    {
+      "id": "project.13",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.reedbound_council",
+      "settlementId": "settlement.6",
+      "settlementName": "Reedbound Hold",
+      "cell": 1052,
+      "startedTurn": 23,
+      "progress": 4,
+      "requiredTurns": 5,
+      "status": "active",
+      "statusReason": null
+    },
+    {
+      "id": "project.14",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "settlementName": "Ledger Hearth",
+      "cell": 488,
+      "startedTurn": 24,
+      "progress": 3,
+      "requiredTurns": 5,
+      "status": "active",
+      "statusReason": null
+    }
+  ],
+  "siegeResult": {
+    "ok": true,
+    "events": [
+      {
+        "turn": 27,
+        "type": "siege_started",
+        "factionId": "faction.reedbound_council",
+        "cell": 488,
+        "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+      },
+      {
+        "turn": 27,
+        "type": "siege_started",
+        "factionId": "faction.ashen_compact",
+        "cell": 488,
+        "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+      },
+      {
+        "turn": 27,
+        "type": "victory_project_paused",
+        "factionId": "faction.ashen_compact",
+        "cell": 488,
+        "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+      },
+      {
+        "turn": 27,
+        "type": "victory_project_paused",
+        "factionId": "faction.reedbound_council",
+        "cell": 488,
+        "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+      }
+    ]
+  },
+  "plan": {
+    "commands": [
+      {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.15",
+        "accept": true
+      }
+    ],
+    "reasons": [
+      "Accept offer.15: A prolonged war favors a settlement. A longer binding peace gives time to rebuild."
+    ]
+  },
+  "commands": [
+    {
+      "type": "declareWar",
+      "factionId": "faction.reedbound_council",
+      "targetFactionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "research",
+      "factionId": "faction.reedbound_council",
+      "technologyId": "technology.civic_accounts"
+    },
+    {
+      "type": "adoptInstitution",
+      "factionId": "faction.reedbound_council",
+      "institutionId": "institution.charter_compact"
+    },
+    {
+      "type": "research",
+      "factionId": "faction.ashen_compact",
+      "technologyId": "technology.civic_accounts"
+    },
+    {
+      "type": "adoptInstitution",
+      "factionId": "faction.ashen_compact",
+      "institutionId": "institution.charter_compact"
+    },
+    {
+      "type": "startVictoryProject",
+      "factionId": "faction.reedbound_council",
+      "settlementId": "settlement.6"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "startVictoryProject",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "proposePeace",
+      "factionId": "faction.ashen_compact",
+      "targetFactionId": "faction.reedbound_council",
+      "terms": {
+        "offerCoin": 0,
+        "requestCoin": 0,
+        "truceTurns": 10
+      }
+    },
+    {
+      "type": "respondPeace",
+      "factionId": "faction.reedbound_council",
+      "offerId": "offer.15",
+      "accept": true
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    }
+  ],
+  "victory": {
+    "path": "prosperity",
+    "factionId": "faction.reedbound_council",
+    "projectId": "project.13",
+    "settlementId": "settlement.6",
+    "turn": 28
+  },
+  "finalHash": "b57bbc69",
+  "exactReplay": true
+}

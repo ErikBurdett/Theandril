@@ -1,0 +1,26 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/project-counterplay-maintenance.test.ts (3 tests | 1 failed) 186ms
+     × keeps the ordinary interruption through later full Watch rounds (initial offer true) 60ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/project-counterplay-maintenance.test.ts > maintaining imminent-project counterplay > keeps the ordinary interruption through later full Watch rounds (initial offer true)
+AssertionError: expected 'faction.ashen_compact' not to be 'faction.ashen_compact' // Object.is equality
+ ❯ packages/ai/src/project-counterplay-maintenance.test.ts:59:41
+     57|     expect(commands.some(command => command.type === 'research')).toBe…
+     58|     expect(commands.some(command => command.type === 'respondPeace' &&…
+     59|     expect(game.victory?.factionId).not.toBe(rival);
+       |                                         ^
+     60|     expect(game.projects[0]!.status).not.toBe('completed');
+     61|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 31 passed (32)
+   Start at  21:37:38
+   Duration  928ms (transform 915ms, setup 0ms, import 1.18s, tests 460ms, environment 0ms)
+

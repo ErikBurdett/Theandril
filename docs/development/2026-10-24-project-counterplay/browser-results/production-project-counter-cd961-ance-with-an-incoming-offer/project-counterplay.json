@@ -1,0 +1,484 @@
+{
+  "mode": "watch",
+  "incoming": true,
+  "initialHash": "c705fc04",
+  "finalHash": "9b036fae",
+  "coverage": "from-save",
+  "records": [
+    {
+      "sequence": 1,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "proposePeace",
+        "factionId": "faction.ashen_compact",
+        "targetFactionId": "faction.reedbound_council",
+        "terms": {
+          "offerCoin": 0,
+          "requestCoin": 0,
+          "truceTurns": 10
+        }
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "peace_proposed",
+          "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 27,
+          "type": "peace_proposed",
+          "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 2,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "develop",
+        "factionId": "faction.ashen_compact",
+        "scope": "hearth",
+        "entityId": "settlement.10",
+        "nodeId": "hearth.witness_counter"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "development_acquired",
+          "message": "Commons Reach acquired Witness counter for 28 coin and 4 civic points. Recurring upkeep rises by 1 coin.",
+          "factionId": "faction.ashen_compact",
+          "cell": 681
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 3,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "research",
+        "factionId": "faction.ashen_compact",
+        "technologyId": "technology.cinder_masonry"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "technology_researched",
+          "message": "Ashen Compact researched Cinder masonry for 24 knowledge.",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 4,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "adoptDoctrine",
+        "factionId": "faction.ashen_compact",
+        "doctrineId": "doctrine.shield_cohesion"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "doctrine_adopted",
+          "message": "Ashen Compact adopted Shield cohesion for 24 coin.",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 5,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "queue",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.10",
+        "itemId": "unit.colonist"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "production_queued",
+          "message": "Commons Reach queued Hearth caravan for 16 coin.",
+          "factionId": "faction.ashen_compact",
+          "cell": 681
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 6,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "queue",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.5",
+        "itemId": "unit.guard"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "production_queued",
+          "message": "Ledger Hearth queued Oath guard for 12 coin.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 7,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "queue",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.8",
+        "itemId": "unit.spearman"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "production_queued",
+          "message": "Kiln Ward queued Ash pike company for 10 coin.",
+          "factionId": "faction.ashen_compact",
+          "cell": 539
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 8,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "setWorkedTiles",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.5",
+        "cells": [
+          391,
+          438,
+          439,
+          440
+        ]
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "worked_tiles_changed",
+          "message": "Ledger Hearth assigned workers to 4 claimed hexes; its center remains worked.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 9,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "improveTile",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.5",
+        "cell": 391,
+        "improvementId": "improvement.timber_yard"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "land_work_started",
+          "message": "Ledger Hearth paid 38 coin for Heartwood yard at hex 391; 3 active turns of work are required.",
+          "factionId": "faction.ashen_compact",
+          "cell": 391
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 10,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "setWorkedTiles",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.8",
+        "cells": [
+          442,
+          444,
+          538
+        ]
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "worked_tiles_changed",
+          "message": "Kiln Ward assigned workers to 3 claimed hexes; its center remains worked.",
+          "factionId": "faction.ashen_compact",
+          "cell": 539
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 11,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "setWorkedTiles",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.10",
+        "cells": [
+          631,
+          632,
+          680,
+          729
+        ]
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "worked_tiles_changed",
+          "message": "Commons Reach assigned workers to 4 claimed hexes; its center remains worked.",
+          "factionId": "faction.ashen_compact",
+          "cell": 681
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 12,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "moveTo",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.2",
+        "target": 342
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "army_moved",
+          "message": "Wayfinder explored hex 439.",
+          "factionId": "faction.ashen_compact",
+          "cell": 439
+        },
+        {
+          "turn": 27,
+          "type": "army_moved",
+          "message": "Wayfinder explored hex 391.",
+          "factionId": "faction.ashen_compact",
+          "cell": 391
+        },
+        {
+          "turn": 27,
+          "type": "army_moved",
+          "message": "Wayfinder explored hex 342.",
+          "factionId": "faction.ashen_compact",
+          "cell": 342
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 13,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.12",
+        "accept": false
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 27,
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 14,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "besiege",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.4",
+        "settlementId": "settlement.5"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 15,
+      "turn": 27,
+      "afterTurn": 28,
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "settlement_grew",
+          "message": "Kiln Ward grew to population 4.",
+          "factionId": "faction.ashen_compact",
+          "cell": 539
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": "9b036fae",
+      "checkpointVersion": 35,
+      "rulesVersion": 35
+    }
+  ]
+}

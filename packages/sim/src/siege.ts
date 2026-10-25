@@ -9,6 +9,7 @@ import { indexes, updateSight } from './visibility';
 import { recordConquest } from './diplomacy';
 import { captureSettlementCharacters } from './characters';
 import { armyDomain, carriedArmyBlocker } from './naval';
+import { siegeEstablishmentBlocker } from './siege-establishment';
 import { roadMovementCost } from './roads';
 import { settlementFoodConsumption } from './growth-economy';
 
@@ -48,19 +49,22 @@ const orderedSieges = (state: GameState) => Object.values(state.sieges).sort((a,
 export function besiegeSettlement(state: GameState, factionId: string, armyId: string, settlementId: string): CommandResult {
   const army = state.armies[armyId];
   const town = state.settlements[settlementId];
-  if (!army || army.factionId !== factionId) return fail('You do not control that army.');
-  if (carriedArmyBlocker(state, army.id) || armyDomain(army) !== 'land') return fail('Disembark a land army before besieging a settlement.');
-  if (!town || !indexes(state).visible.get(factionId)?.has(town.cell)) return fail('Choose a currently visible enemy settlement.');
-  if (!atWar(state, factionId, town.factionId)) return fail('Declare war before besieging this settlement.');
-  if (!armyCanAttack(army)) return fail('Hearth caravans cannot besiege settlements.');
-  if (!neighbors(army.cell, state.world.width, state.world.height).includes(town.cell)) return fail('Move adjacent to the settlement before besieging it.');
-  if (army.movement < 1) return fail('The army needs movement to establish a siege.');
-  if (state.sieges[settlementId]) return fail('This settlement is already under siege.');
-  if (Object.values(state.sieges).some(siege => siege.armyId === armyId)) return fail('An army can maintain only one siege.');
-  state.sieges[settlementId] = { settlementId, armyId, factionId, startedTurn: state.turn, defenses: 30, supplies: rulesVersion(state) >= 20 ? storedSupplies(town) : 3, militiaStrength: Math.min(60, 10 + town.population * 10), militiaMorale: 75, militiaFatigue: 0 };
-  army.movement = 0;
+  const blocker = siegeEstablishmentBlocker({
+    factionId,
+    army: army ? { factionId: army.factionId, cell: army.cell, movement: army.movement, domain: armyDomain(army), carried: Boolean(carriedArmyBlocker(state, army.id)),
+      get canAttack() { return armyCanAttack(army); } } : undefined,
+    town,
+    get townVisible() { return Boolean(town && indexes(state).visible.get(factionId)?.has(town.cell)); },
+    get atWar() { return Boolean(town && atWar(state, factionId, town.factionId)); },
+    width: state.world.width, height: state.world.height,
+    get townBesieged() { return Boolean(state.sieges[settlementId]); },
+    get armyBesieging() { return Object.values(state.sieges).some(siege => siege.armyId === armyId); },
+  });
+  if (blocker) return fail(blocker);
+  state.sieges[settlementId] = { settlementId, armyId, factionId, startedTurn: state.turn, defenses: 30, supplies: rulesVersion(state) >= 20 ? storedSupplies(town!) : 3, militiaStrength: Math.min(60, 10 + town!.population * 10), militiaMorale: 75, militiaFatigue: 0 };
+  army!.movement = 0;
   const stores = rulesVersion(state) >= 20 ? ` Its stored food lasts ${state.sieges[settlementId]!.supplies} turns; then its militia starves.` : '';
-  return { ok: true, events: [factionId, town.factionId].map(owner => ({ turn: state.turn, type: 'siege_started', factionId: owner, cell: town.cell, message: `${town.name} is blockaded. Its food yield is cut off and other yields are halved.${stores}` })) };
+  return { ok: true, events: [factionId, town!.factionId].map(owner => ({ turn: state.turn, type: 'siege_started', factionId: owner, cell: town!.cell, message: `${town!.name} is blockaded. Its food yield is cut off and other yields are halved.${stores}` })) };
 }
 
 export function liftSettlementSiege(state: GameState, factionId: string, settlementId: string): CommandResult {

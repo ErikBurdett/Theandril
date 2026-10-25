@@ -1,0 +1,60 @@
+{
+  "scope": "Draft policy only; public capability authored and query dependency supplied by canonical command oracle in tests. No runtime cloned-state probing is proposed.",
+  "rejection": {
+    "commands": [
+      {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.12",
+        "accept": false
+      }
+    ],
+    "reasons": [
+      "Interrupt Ledger Hearth's active victory project with 1 turns remaining: Project interruption guard can legally establish a siege now; no active own project finishes sooner."
+    ]
+  },
+  "continuation": {
+    "commands": [
+      {
+        "type": "besiege",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.4",
+        "settlementId": "settlement.5"
+      }
+    ],
+    "reasons": [
+      "Interrupt Ledger Hearth's active victory project with 1 turns remaining: Project interruption guard can legally establish a siege now; no active own project finishes sooner."
+    ]
+  },
+  "finalHash": "0446e522",
+  "exactReplay": true,
+  "guardedControls": [
+    "spent",
+    "morale",
+    "fatigue",
+    "agents",
+    "direct",
+    "posting",
+    "hidden",
+    "paused",
+    "distant-deadline",
+    "binding",
+    "mission",
+    "theater",
+    "patrol"
+  ],
+  "bounded": {
+    "command": null,
+    "project": null,
+    "reason": null,
+    "consideredProjects": 1,
+    "siegeQueries": 4
+  },
+  "boundedProjects": {
+    "command": null,
+    "project": null,
+    "reason": null,
+    "consideredProjects": 8,
+    "siegeQueries": 0
+  }
+}

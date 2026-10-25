@@ -99,3 +99,13 @@ default `test-results` directory was copied byte-for-byte to `production-results
 immediately after successful completion; native captures remain unchanged.
 Rules/save, AI, prices and canonical legality are unchanged; no pacing rerun.
 This correction is authorized for its own deployment; live results follow.
+
+## Published correction
+
+Published as **`c52ce3e80402dd54ddac7d9582a513aa22b96d1b`**. Both exact
+[GitHub workflows](actions.json) succeed. [Public asset readback](live-readback/readback.json)
+matches the verified build and current commit ledger, preserving historical
+dispatch15's original source pin. All **5 passed (34.0s)** in the
+[live targeted suite](live-pages.log): three new flows plus two existing order
+controls. [Deployment record](deployment.json). This is development publication,
+not release acceptance or a claim of full live Pages coverage at this revision.

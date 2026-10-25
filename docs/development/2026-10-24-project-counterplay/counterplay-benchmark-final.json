@@ -1,0 +1,1436 @@
+{
+  "scope": "Authored fully charted Huge/Legendary stress worlds with restricted current sight, 128 owned guard companies and a remote observed foreign roster. One rival project uses three authored developed hearths, ordinary paid research/institution/project and four real Short-pace turns to 4/5; final observer/army deployment is authored after that verified setup, then ordinary war follows actual contact. Eight-project/four-query cap proofs remain separate synthetic tests. Absolute cold-observation isolated planner/public-query cost; one warmup and three samples. Four direct quotes target the same host with distinct actors and each executes on its own saved branch. Maintained-siege cases use ordinary besiege/peace-offer setup, time only zero-query policy review, then verify an untimed ordinary rejection plus endTurn keeps the actual siege/project pause; unrelated orders are unchanged at rejection while normal travel may advance at endTurn. Excludes setup, observation construction, protected-faction set construction, assertions, save/hash/command/replay, full AI/turns, campaign pacing, worker and rendering. No speedup, organic-campaign, network or whole-scale acceptance claim.",
+  "verificationOnly": false,
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "015468d1",
+  "sourceHashes": [
+    {
+      "path": "docs/development/2026-10-24-project-counterplay/benchmark-counterplay.ts",
+      "sha256": "928021af2c60fe2a19d618569ebc6400f71ce2a816d18b323bde8d7e93df04e0"
+    },
+    {
+      "path": "packages/ai/src/project-counterplay.ts",
+      "sha256": "9bf7dcf423417fa6f1dc827de673a7d74735cd8ae110f828287298ecaaaabc0b"
+    },
+    {
+      "path": "packages/ai/src/diplomacy.ts",
+      "sha256": "9be08ca4e52f7cbaa08cbef6245fc0afff19ee70164a4473770ab53aad1b4d37"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d"
+    },
+    {
+      "path": "packages/sim/src/siege-establishment.ts",
+      "sha256": "561e00534fee33fe39eb3b7bed205a65db1f254c58583460b329b719bb680167"
+    },
+    {
+      "path": "packages/sim/src/siege.ts",
+      "sha256": "1ced7a2bdb9ff4f0f24aaa699e580fc702529acd07bc62deeebe2c9e4352fe60"
+    },
+    {
+      "path": "packages/sim/src/simulation.ts",
+      "sha256": "68a208ff19af7ad1ddf0e27fa32a044fa449ff4335f20e6629ca848e4cc9dcc1"
+    },
+    {
+      "path": "packages/sim/src/progression.ts",
+      "sha256": "f9a7853503373f18799136b80f0222f0d584f1eac127c159a25c386d95f52b6a"
+    },
+    {
+      "path": "packages/sim/src/visibility.ts",
+      "sha256": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "sha256": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+    },
+    {
+      "path": "packages/test-fixtures/src/authored-land.ts",
+      "sha256": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891"
+    },
+    {
+      "path": "packages/chronicle/src/index.ts",
+      "sha256": "f50bd5b3f3632f15a1ae1d0a960e85a2d8ee427e554ba3b309c4712f10597757"
+    }
+  ],
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "accepted",
+      "hostVisible": true,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 18401009,
+      "queryCount": 1,
+      "consideredProjects": 1,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "a8070008",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.7279080000007525,
+        2.8389860000006593,
+        3.1681849999995393
+      ],
+      "minMs": 2.7279080000007525,
+      "medianMs": 2.8389860000006593,
+      "maxMs": 3.1681849999995393,
+      "commands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025",
+          "settlementId": "settlement.66"
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1025",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "b0706d74",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "huge",
+      "workload": "hidden",
+      "hostVisible": false,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 122,
+      "observationBytes": 18403788,
+      "queryCount": 0,
+      "consideredProjects": 0,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "399e8a2f",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.04009100000075705,
+        0.038807000000815606,
+        0.029752999998891028
+      ],
+      "minMs": 0.029752999998891028,
+      "medianMs": 0.038807000000815606,
+      "maxMs": 0.04009100000075705,
+      "commands": [],
+      "boundaries": [
+        {
+          "command": null,
+          "finalHash": "399e8a2f",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "active"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "huge",
+      "workload": "no-adjacent",
+      "hostVisible": true,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 18400529,
+      "queryCount": 0,
+      "consideredProjects": 1,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "50731d6b",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.23907899999903748,
+        0.24020299999938288,
+        0.2723760000008042
+      ],
+      "minMs": 0.23907899999903748,
+      "medianMs": 0.24020299999938288,
+      "maxMs": 0.2723760000008042,
+      "commands": [],
+      "boundaries": [
+        {
+          "command": null,
+          "finalHash": "50731d6b",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "active"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "huge",
+      "workload": "four-direct-quotes",
+      "hostVisible": true,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 18401009,
+      "queryCount": 4,
+      "consideredProjects": 0,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "a8070008",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        1.8131049999992683,
+        2.062519000000975,
+        1.7058850000012171
+      ],
+      "minMs": 1.7058850000012171,
+      "medianMs": 1.8131049999992683,
+      "maxMs": 2.062519000000975,
+      "commands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1057",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1089",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121",
+          "settlementId": "settlement.66"
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1025",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "b0706d74",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1057",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "e6274bb3",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1089",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "534b7eb5",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1121",
+            "settlementId": "settlement.66"
+          },
+          "finalHash": "5e3ba6ea",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "Four independent saved branches; never four simultaneous sieges or four AI proposals."
+    },
+    {
+      "size": "huge",
+      "workload": "maintained-own-siege",
+      "hostVisible": true,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "observedCells": 196608,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 18402843,
+      "queryCount": 0,
+      "consideredProjects": 1,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 0,
+      "pausedProjects": 1,
+      "initialHash": "9672da3a",
+      "setupHash": "244bda53",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "cell": 10260,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.97",
+          "firstCell": 10260,
+          "secondCell": 10262,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.993",
+          "target": 10264
+        }
+      ],
+      "caseSetupCommands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025",
+          "settlementId": "settlement.66"
+        },
+        {
+          "type": "proposePeace",
+          "factionId": "faction.reedbound_council",
+          "targetFactionId": "faction.ashen_compact",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        }
+      ],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        1.9565069999989646,
+        2.4221289999986766,
+        2.4159470000013243
+      ],
+      "minMs": 1.9565069999989646,
+      "medianMs": 2.4159470000013243,
+      "maxMs": 2.4221289999986766,
+      "commands": [
+        {
+          "type": "respondPeace",
+          "factionId": "faction.ashen_compact",
+          "offerId": "offer.1652",
+          "accept": false
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "respondPeace",
+            "factionId": "faction.ashen_compact",
+            "offerId": "offer.1652",
+            "accept": false
+          },
+          "finalHash": "a38c2b86",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": true,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "Timed review emits no command; an untimed ordinary incoming rejection preserves the siege, followed by one real end turn."
+    },
+    {
+      "size": "legendary",
+      "workload": "accepted",
+      "hostVisible": true,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "observedCells": 307200,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 29990137,
+      "queryCount": 1,
+      "consideredProjects": 1,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "0d3b3d06",
+      "setupHash": "318cb784",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.881",
+          "cell": 12820,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.921",
+          "firstCell": 12820,
+          "secondCell": 12822,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "target": 12824
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        3.395885999998427,
+        3.3568080000040936,
+        3.5444789999964996
+      ],
+      "minMs": 3.3568080000040936,
+      "medianMs": 3.395885999998427,
+      "maxMs": 3.5444789999964996,
+      "commands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1001",
+          "settlementId": "settlement.82"
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1001",
+            "settlementId": "settlement.82"
+          },
+          "finalHash": "175e7197",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "legendary",
+      "workload": "hidden",
+      "hostVisible": false,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "observedCells": 307200,
+      "currentlyVisibleCells": 122,
+      "observationBytes": 30005523,
+      "queryCount": 0,
+      "consideredProjects": 0,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "192a62ae",
+      "setupHash": "318cb784",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.881",
+          "cell": 12820,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.921",
+          "firstCell": 12820,
+          "secondCell": 12822,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "target": 12824
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.019065000000409782,
+        0.021602000000711996,
+        0.018033000000286847
+      ],
+      "minMs": 0.018033000000286847,
+      "medianMs": 0.019065000000409782,
+      "maxMs": 0.021602000000711996,
+      "commands": [],
+      "boundaries": [
+        {
+          "command": null,
+          "finalHash": "192a62ae",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "active"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "legendary",
+      "workload": "no-adjacent",
+      "hostVisible": true,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "observedCells": 307200,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 30002421,
+      "queryCount": 0,
+      "consideredProjects": 1,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "6ac7e817",
+      "setupHash": "318cb784",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.881",
+          "cell": 12820,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.921",
+          "firstCell": 12820,
+          "secondCell": 12822,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "target": 12824
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        0.18754099999932805,
+        0.2606259999956819,
+        0.19265900000027614
+      ],
+      "minMs": 0.18754099999932805,
+      "medianMs": 0.19265900000027614,
+      "maxMs": 0.2606259999956819,
+      "commands": [],
+      "boundaries": [
+        {
+          "command": null,
+          "finalHash": "6ac7e817",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "active"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "One isolated counterplay review."
+    },
+    {
+      "size": "legendary",
+      "workload": "four-direct-quotes",
+      "hostVisible": true,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "observedCells": 307200,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 29990137,
+      "queryCount": 4,
+      "consideredProjects": 0,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 1,
+      "pausedProjects": 0,
+      "initialHash": "0d3b3d06",
+      "setupHash": "318cb784",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.881",
+          "cell": 12820,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.921",
+          "firstCell": 12820,
+          "secondCell": 12822,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "target": 12824
+        }
+      ],
+      "caseSetupCommands": [],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.9535909999976866,
+        2.5280520000014803,
+        2.4604380000018864
+      ],
+      "minMs": 2.4604380000018864,
+      "medianMs": 2.5280520000014803,
+      "maxMs": 2.9535909999976866,
+      "commands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1001",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1041",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1081",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121",
+          "settlementId": "settlement.82"
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1001",
+            "settlementId": "settlement.82"
+          },
+          "finalHash": "175e7197",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1041",
+            "settlementId": "settlement.82"
+          },
+          "finalHash": "2e87799e",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1081",
+            "settlementId": "settlement.82"
+          },
+          "finalHash": "c602a15d",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        },
+        {
+          "command": {
+            "type": "besiege",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1121",
+            "settlementId": "settlement.82"
+          },
+          "finalHash": "a5d789c3",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": false,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "Four independent saved branches; never four simultaneous sieges or four AI proposals."
+    },
+    {
+      "size": "legendary",
+      "workload": "maintained-own-siege",
+      "hostVisible": true,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "observedCells": 307200,
+      "currentlyVisibleCells": 183,
+      "observationBytes": 29991900,
+      "queryCount": 0,
+      "consideredProjects": 1,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedGuardCompanies": 128,
+      "activeProjects": 0,
+      "pausedProjects": 1,
+      "initialHash": "f233dc24",
+      "setupHash": "318cb784",
+      "setupCommands": [
+        {
+          "type": "research",
+          "factionId": "faction.reedbound_council",
+          "technologyId": "technology.civic_accounts"
+        },
+        {
+          "type": "adoptInstitution",
+          "factionId": "faction.reedbound_council",
+          "institutionId": "institution.charter_compact"
+        },
+        {
+          "type": "startVictoryProject",
+          "factionId": "faction.reedbound_council",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "type": "endTurn",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "delegationCommands": [
+        {
+          "type": "declareWar",
+          "factionId": "faction.ashen_compact",
+          "targetFactionId": "faction.reedbound_council"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.881",
+          "cell": 12820,
+          "mode": "hold"
+        },
+        {
+          "type": "setPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.921",
+          "firstCell": 12820,
+          "secondCell": 12822,
+          "enabled": false
+        },
+        {
+          "type": "queueMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.961",
+          "target": 12824
+        }
+      ],
+      "caseSetupCommands": [
+        {
+          "type": "besiege",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1001",
+          "settlementId": "settlement.82"
+        },
+        {
+          "type": "proposePeace",
+          "factionId": "faction.reedbound_council",
+          "targetFactionId": "faction.ashen_compact",
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        }
+      ],
+      "setupReplayExact": true,
+      "paidInstitutionAndProjectCoin": 150,
+      "unrelatedOrders": {
+        "postings": 1,
+        "patrols": 1,
+        "routes": 1,
+        "theaters": 0
+      },
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samplesMs": [
+        2.7122119999985443,
+        2.505722000001697,
+        2.53988599999866
+      ],
+      "minMs": 2.505722000001697,
+      "medianMs": 2.53988599999866,
+      "maxMs": 2.7122119999985443,
+      "commands": [
+        {
+          "type": "respondPeace",
+          "factionId": "faction.ashen_compact",
+          "offerId": "offer.4115",
+          "accept": false
+        }
+      ],
+      "boundaries": [
+        {
+          "command": {
+            "type": "respondPeace",
+            "factionId": "faction.ashen_compact",
+            "offerId": "offer.4115",
+            "accept": false
+          },
+          "finalHash": "2b1ccf31",
+          "exactReplay": true,
+          "exactSavedBytes": true,
+          "unchangedUnrelatedOrdersAtCommand": true,
+          "followingEndTurnVerified": true,
+          "projectStatus": "paused"
+        }
+      ],
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlans": true,
+      "commandScope": "Timed review emits no command; an untimed ordinary incoming rejection preserves the siege, followed by one real end turn."
+    }
+  ]
+}

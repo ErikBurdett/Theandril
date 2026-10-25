@@ -60,3 +60,6 @@ export { MAX_SUPPLY_ACCESS_IMPORTS, MAX_SUPPLY_ACCESS_OFFERS, SUPPLY_ACCESS_COIN
 export type { SupplyAccessCommand, SupplyAccessState, SupplyAccessSource, SupplyAccessOffer, SupplyAccessAgreement, SupplyAccessObservation, SupplyAccessAssessment } from './supply-access-state';
 
 export * from './patrols';
+
+export { getBesiegePreview } from './siege-establishment';
+export type { BesiegePreview } from './siege-establishment';

@@ -1,0 +1,349 @@
+{
+  "scope": "Proposed observation query versus current ordinary human commands, strict valid state boundaries. Capability/global-blocker adapter is packet-only pending production integration.",
+  "rows": [
+    {
+      "name": "legal-adjacent-project-interruption",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": true,
+        "blocker": null
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 27,
+            "type": "siege_started",
+            "factionId": "faction.reedbound_council",
+            "cell": 488,
+            "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+          },
+          {
+            "turn": 27,
+            "type": "siege_started",
+            "factionId": "faction.ashen_compact",
+            "cell": 488,
+            "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+          },
+          {
+            "turn": 27,
+            "type": "victory_project_paused",
+            "factionId": "faction.ashen_compact",
+            "cell": 488,
+            "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+          },
+          {
+            "turn": 27,
+            "type": "victory_project_paused",
+            "factionId": "faction.reedbound_council",
+            "cell": 488,
+            "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+          }
+        ]
+      },
+      "sourceHash": "c705fc04",
+      "finalHash": "91247f35"
+    },
+    {
+      "name": "missing-army-before-missing-town",
+      "preview": {
+        "armyId": "army.999999",
+        "settlementId": "settlement.999999",
+        "canBesiege": false,
+        "blocker": "You do not control that army."
+      },
+      "result": {
+        "ok": false,
+        "error": "You do not control that army.",
+        "events": []
+      },
+      "sourceHash": "c705fc04",
+      "finalHash": "c705fc04"
+    },
+    {
+      "name": "foreign-army",
+      "preview": {
+        "armyId": "army.2",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "You do not control that army."
+      },
+      "result": {
+        "ok": false,
+        "error": "You do not control that army.",
+        "events": []
+      },
+      "sourceHash": "c705fc04",
+      "finalHash": "c705fc04"
+    },
+    {
+      "name": "missing-town",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.999999",
+        "canBesiege": false,
+        "blocker": "Choose a currently visible enemy settlement."
+      },
+      "result": {
+        "ok": false,
+        "error": "Choose a currently visible enemy settlement.",
+        "events": []
+      },
+      "sourceHash": "c705fc04",
+      "finalHash": "c705fc04"
+    },
+    {
+      "name": "binding-peace",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "Declare war before besieging this settlement."
+      },
+      "result": {
+        "ok": false,
+        "error": "Declare war before besieging this settlement.",
+        "events": []
+      },
+      "sourceHash": "84824ec9",
+      "finalHash": "84824ec9"
+    },
+    {
+      "name": "founder-composition",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "Hearth caravans cannot besiege settlements."
+      },
+      "result": {
+        "ok": false,
+        "error": "Hearth caravans cannot besiege settlements.",
+        "events": []
+      },
+      "sourceHash": "757aa1bb",
+      "finalHash": "757aa1bb"
+    },
+    {
+      "name": "visible-but-not-adjacent",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "Move adjacent to the settlement before besieging it."
+      },
+      "result": {
+        "ok": false,
+        "error": "Move adjacent to the settlement before besieging it.",
+        "events": []
+      },
+      "sourceHash": "e09d7728",
+      "finalHash": "e09d7728"
+    },
+    {
+      "name": "charted-hidden-town",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "Choose a currently visible enemy settlement."
+      },
+      "result": {
+        "ok": false,
+        "error": "Choose a currently visible enemy settlement.",
+        "events": []
+      },
+      "sourceHash": "ecc78cfd",
+      "finalHash": "ecc78cfd"
+    },
+    {
+      "name": "spent-movement",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "The army needs movement to establish a siege."
+      },
+      "result": {
+        "ok": false,
+        "error": "The army needs movement to establish a siege.",
+        "events": []
+      },
+      "sourceHash": "3a55240b",
+      "finalHash": "3a55240b"
+    },
+    {
+      "name": "fatigue-is-policy-not-command-legality",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": true,
+        "blocker": null
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 27,
+            "type": "siege_started",
+            "factionId": "faction.reedbound_council",
+            "cell": 488,
+            "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+          },
+          {
+            "turn": 27,
+            "type": "siege_started",
+            "factionId": "faction.ashen_compact",
+            "cell": 488,
+            "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves."
+          },
+          {
+            "turn": 27,
+            "type": "victory_project_paused",
+            "factionId": "faction.ashen_compact",
+            "cell": 488,
+            "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+          },
+          {
+            "turn": 27,
+            "type": "victory_project_paused",
+            "factionId": "faction.reedbound_council",
+            "cell": 488,
+            "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege."
+          }
+        ]
+      },
+      "sourceHash": "67f3bf03",
+      "finalHash": "700ab6a6"
+    },
+    {
+      "name": "movement-before-already-sieged",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "The army needs movement to establish a siege."
+      },
+      "result": {
+        "ok": false,
+        "error": "The army needs movement to establish a siege.",
+        "events": []
+      },
+      "sourceHash": "91247f35",
+      "finalHash": "91247f35"
+    },
+    {
+      "name": "existing-town-siege-after-refresh",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "This settlement is already under siege."
+      },
+      "result": {
+        "ok": false,
+        "error": "This settlement is already under siege.",
+        "events": []
+      },
+      "sourceHash": "e9ea15d5",
+      "finalHash": "e9ea15d5"
+    },
+    {
+      "name": "naval-before-hidden-town",
+      "preview": {
+        "armyId": "army.2",
+        "settlementId": "settlement.6",
+        "canBesiege": false,
+        "blocker": "Disembark a land army before besieging a settlement."
+      },
+      "result": {
+        "ok": false,
+        "error": "Disembark a land army before besieging a settlement.",
+        "events": []
+      },
+      "sourceHash": "780fe1c8",
+      "finalHash": "780fe1c8"
+    },
+    {
+      "name": "embarked-before-composition",
+      "preview": {
+        "armyId": "army.9",
+        "settlementId": "settlement.6",
+        "canBesiege": false,
+        "blocker": "Disembark a land army before besieging a settlement."
+      },
+      "result": {
+        "ok": false,
+        "error": "Disembark a land army before besieging a settlement.",
+        "events": []
+      },
+      "sourceHash": "27b5056d",
+      "finalHash": "27b5056d"
+    },
+    {
+      "name": "victory-before-invalid-identities",
+      "preview": {
+        "armyId": "army.999999",
+        "settlementId": "settlement.999999",
+        "canBesiege": false,
+        "blocker": "This campaign has ended in victory."
+      },
+      "result": {
+        "ok": false,
+        "error": "This campaign has ended in victory.",
+        "events": []
+      },
+      "sourceHash": "e95db4b9",
+      "finalHash": "e95db4b9"
+    },
+    {
+      "name": "visible-third-party-siege-with-private-record-absent",
+      "preview": {
+        "armyId": "army.4",
+        "settlementId": "settlement.5",
+        "canBesiege": false,
+        "blocker": "This settlement is already under siege."
+      },
+      "result": {
+        "ok": false,
+        "error": "This settlement is already under siege.",
+        "events": []
+      },
+      "sourceHash": "78644c0c",
+      "finalHash": "78644c0c"
+    },
+    {
+      "name": "uninvolved-battle-discloses-generic-blocker-only",
+      "preview": {
+        "armyId": "army.999999",
+        "settlementId": "settlement.999999",
+        "canBesiege": false,
+        "blocker": "Resolve the pending battle before issuing strategic commands."
+      },
+      "result": {
+        "ok": false,
+        "error": "Resolve the pending battle before issuing strategic commands.",
+        "events": []
+      },
+      "sourceHash": "845b7110",
+      "finalHash": "845b7110"
+    },
+    {
+      "name": "uninvolved-capture-discloses-generic-blocker-only",
+      "preview": {
+        "armyId": "army.999999",
+        "settlementId": "settlement.999999",
+        "canBesiege": false,
+        "blocker": "Resolve the settlement capture before issuing strategic commands."
+      },
+      "result": {
+        "ok": false,
+        "error": "Resolve the settlement capture before issuing strategic commands.",
+        "events": []
+      },
+      "sourceHash": "1ca9ab99",
+      "finalHash": "1ca9ab99"
+    }
+  ]
+}

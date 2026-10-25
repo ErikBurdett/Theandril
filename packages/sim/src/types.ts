@@ -302,6 +302,10 @@ export interface GameState {
 }
 
 export interface Observation {
+  /** Rules 35: observation-based siege establishment quotes are available. */
+  siegeEstablishment?: true;
+  /** Generic command refusal only; never exposes private battle/capture facts. */
+  strategicCommandBlocker?: string | null;
   patrols?: ObservedPatrol[];
   supplyAccess?: SupplyAccessObservation;
   theaterReinforcement?: true;

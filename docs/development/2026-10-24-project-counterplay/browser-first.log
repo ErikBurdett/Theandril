@@ -1,0 +1,15 @@
+[WebServer] (node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:62) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/project-counterplay.spec.ts:51:3 › production player interrupts a project before the first turn advance with an incoming offer (3.5s)
+  ✓  2 tests/production/project-counterplay.spec.ts:51:3 › production player interrupts a project before the first turn advance with no initial offer (2.8s)
+  ✓  3 tests/production/project-counterplay.spec.ts:51:3 › production watch interrupts a project before the first turn advance with an incoming offer (2.7s)
+  ✓  4 tests/production/project-counterplay.spec.ts:51:3 › production watch interrupts a project before the first turn advance with no initial offer (2.8s)
+
+  4 passed (12.7s)

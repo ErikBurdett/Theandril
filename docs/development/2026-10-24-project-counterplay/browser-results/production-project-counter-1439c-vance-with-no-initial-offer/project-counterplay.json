@@ -1,0 +1,106 @@
+{
+  "mode": "player",
+  "incoming": false,
+  "initialHash": "c705fc04",
+  "finalHash": "e9ea15d5",
+  "coverage": "from-save",
+  "records": [
+    {
+      "sequence": 1,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "besiege",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.4",
+        "settlementId": "settlement.5"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 35
+    },
+    {
+      "sequence": 2,
+      "turn": 27,
+      "afterTurn": 28,
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "settlement_grew",
+          "message": "Kiln Ward grew to population 4.",
+          "factionId": "faction.ashen_compact",
+          "cell": 539
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": "e9ea15d5",
+      "checkpointVersion": 35,
+      "rulesVersion": 35
+    }
+  ]
+}

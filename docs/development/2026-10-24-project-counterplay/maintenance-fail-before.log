@@ -1,0 +1,55 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/project-counterplay-maintenance.test.ts (3 tests | 3 failed) 145ms
+     × keeps the ordinary interruption through later full Watch rounds (initial offer false) 97ms
+     × keeps the ordinary interruption through later full Watch rounds (initial offer true) 44ms
+     × skips an outgoing treaty that would lift its siege and continues ordinary conquest planning 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/project-counterplay-maintenance.test.ts > maintaining imminent-project counterplay > keeps the ordinary interruption through later full Watch rounds (initial offer false)
+ FAIL  |unit| packages/ai/src/project-counterplay-maintenance.test.ts > maintaining imminent-project counterplay > keeps the ordinary interruption through later full Watch rounds (initial offer true)
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/ai/src/project-counterplay-maintenance.test.ts:58:120
+     56|     expect(commands.filter(command => command.type === 'proposePeace' …
+     57|     expect(commands.some(command => command.type === 'research')).toBe…
+     58|     expect(commands.some(command => command.type === 'respondPeace' &&…
+       |                                                                                                                        ^
+     59|     expect(game.victory?.factionId).not.toBe(rival);
+     60|     expect(game.projects[0]!.status).not.toBe('completed');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unit| packages/ai/src/project-counterplay-maintenance.test.ts > maintaining imminent-project counterplay > skips an outgoing treaty that would lift its siege and continues ordinary conquest planning
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/ai/src/project-counterplay-maintenance.test.ts:66:76
+     64|     const game = load('following-player-no-offer-after-first.theandril…
+     65|     const plan = planTurnWithReasons(getObservation(game, actor, aiObs…
+     66|     expect(plan.commands.some(command => command.type === 'proposePeac…
+       |                                                                            ^
+     67|     expect(plan.commands).toEqual([{ type: 'assault', factionId: actor…
+     68|     expect(applyCommand(game, plan.commands[0]!).ok).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  21:37:10
+   Duration  799ms (transform 466ms, setup 0ms, import 589ms, tests 145ms, environment 0ms)
+

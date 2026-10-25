@@ -1,5 +1,39 @@
 # Theandril implementation status
 
+## Interrupt and preserve imminent victory-project sieges — 2026-10-24
+
+**Locally verified; preparing its separate deployment.** AI now rejects peace
+and issues an already legal adjacent siege in the same planning pass when a
+currently visible enemy project can finish during the truce. It also preserves
+an existing own siege pausing that project: incoming peace is rejected and
+outgoing diplomacy skips that rival while ordinary conquest/economy planning
+continues. A strictly sooner active own project retains ordinary peace evaluation.
+Direct orders, delegated armies, missions and protected relationships remain
+respected. Eight project candidates and four canonical quotes bound each pass.
+
+The simulation-owned siege quote shares unchanged command predicates/refusal
+order. A generic strategic blocker discloses no hidden battle/capture actors;
+older observation capabilities retain historical AI choices. Rules/save **35**,
+content **015468d1**, canonical state and prices are unchanged. Exact pre-refactor
+rules 16/19/34/35 command seals, modern saves and replay pass.
+
+**Verification.** Typecheck, lint, build and **2,304 tests  / 280 files in 65.18 seconds**
+pass. Four production journeys pass in 17.0 seconds, including two actual five-round
+Watch branches and exact saved archives. Both reject the fresh turn 30 offer and
+hold through 31; one then captures/cancels the project, while the other genuinely
+withdraws after combat and loses at 32. This corrects treaty decisions, not battle
+outcomes. Original rejection-only, later-peace and harness failures remain in the
+[evidence packet](development/2026-10-24-project-counterplay/README.md).
+
+Ten final Huge/Legendary cases pass. New-interruption medians are 2.839/3.396 ms;
+maintaining an own siege costs 2.416/2.540 ms in the isolated review. The earlier
+30.600 ms outlier is retained, and full-turn/rendering costs are excluded.
+The nine headline final hashes and all non-timing results are identical to the
+retirement matrix. DH-021's Long/Epic gaps, R06, ACT-32/M3 and all fifteen gates
+remain open. Distant counterplay, other paused causes and wider operations are
+unfinished. Next: usable army-registry filters for postings, waiting orders and
+paused patrol policies, then organic mature-realm acceptance.
+
 ## Posting and muster destination correction — 2026-10-24
 
 The individual order forms now keep the displayed destination and submitted
@@ -9,7 +43,8 @@ and requires a fresh selection. Existing canonical arbitrary-hex postings and
 musters remain visible and clearable, including hex zero; clearing retains
 existing travel under unchanged command semantics.
 
-**Verified locally, awaiting its separate deployment.** All **2,253 tests / 277
+**Published as `c52ce3e`.** Both exact GitHub workflows succeed, public assets
+match the build, and all five targeted live order journeys pass. All **2,253 tests / 277
 files pass in 67.65 seconds**, plus typecheck, lint and the production build.
 Four development journeys pass in 20.6 seconds and five related production
 journeys pass in 25.8 seconds. The original browser failure really moved an army
