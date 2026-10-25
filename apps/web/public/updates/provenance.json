@@ -345,6 +345,44 @@
       "height": 19,
       "alt": "Theater summary: zero missing guards, four incoming, ninety-five in reserve and one direct override.",
       "caption": "Native 406 × 19 desktop text capture from the authored 100-army, two-hearth regression fixture at turn 2: zero missing guards includes four incoming armies, with 95 in reserve and one direct override. The incoming armies have not arrived. Only the summary is shown; exact PNG bytes without later transformation."
+    },
+    {
+      "id": "patrol-narrow-actions",
+      "path": "updates/patrol-narrow-actions.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "dee74cf9c4e2d153f9c5f5cfdbd9221798205481",
+      "sourcePath": "docs/development/2026-10-24-patrols/browser-results/patrols-the-last-of-one-hu-18a76-at-desktop-and-narrow-sizes/patrol-narrow-actions.png",
+      "sourceSha256": "38df829cf4c7b985246d87b23a50cf80d1a85c6da9cebe357b180c2063c7b56a",
+      "sourceWidth": 390,
+      "sourceHeight": 844,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact native Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "38df829cf4c7b985246d87b23a50cf80d1a85c6da9cebe357b180c2063c7b56a",
+      "bytes": 244112,
+      "width": 390,
+      "height": 844,
+      "alt": "Selected orders for Travel company 100, with Pause when war begins checked and Update patrol, Pause patrol and Remove patrol controls.",
+      "caption": "Authored Legendary regression with one hundred owned armies, forty owned hearths and 4,000 total armies. Native 390 by 844 viewport capture of the scrolled lower patrol form; endpoint fields are above this view. The war option is saved and the patrol remains enabled. Exact reviewed PNG bytes, with no later crop, resize or re-encoding; not an organically grown realm or proof of a whole release gate."
+    },
+    {
+      "id": "posting-templates-controls",
+      "path": "updates/posting-templates-controls.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "dee74cf9c4e2d153f9c5f5cfdbd9221798205481",
+      "sourcePath": "docs/development/2026-10-24-posting-templates/browser-results/posting-templates-a-recall-f7dd5-s-saved-recovery-and-replay/posting-templates-controls.png",
+      "sourceSha256": "05c1821de0906a53b9a88a1916f71b5e42b6ff084fc3881704e8c1dfbd9c1253",
+      "sourceWidth": 318,
+      "sourceHeight": 724,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact native Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "05c1821de0906a53b9a88a1916f71b5e42b6ff084fc3881704e8c1dfbd9c1253",
+      "bytes": 83450,
+      "width": 318,
+      "height": 724,
+      "alt": "Personal posting templates with Hold every position selected and Recall template, Save new template, Update template and Delete template controls.",
+      "caption": "Authored Legendary regression with one hundred owned armies, forty owned hearths and 4,000 total armies. Exact 318 by 724 native locator capture at a 390 by 844 viewport, after recalling Hold every position. Recall is a personal form choice; posting the selected armies remains a separate explicit action. Original reviewed PNG bytes, with no later crop, resize or re-encoding; not an organically grown realm."
     }
   ],
   "sharedMaterials": [
@@ -385,5 +423,8 @@
       "caption": "Decorative interface material, not a depiction of canonical gameplay."
     }
   ],
-  "totalJournalImageBytes": 3145521
+  "journalImageBudgetBytes": 3670016,
+  "budgetNotes": "Explicitly approved 24 October 2026 expansion from 3 MiB to 3.5 MiB for two exact reviewed native dispatch-14 screenshots: 327,562 added bytes, from 3,145,521 to 3,473,083. Historical image bytes remain unchanged; no gameplay or renderer budget changes.",
+  "loadingPolicy": "Featured and reader lead images use native eager loading. Archive thumbnails, section illustrations and image-dialog copies use native lazy loading; section images appear only in their selected article. Dialogs reuse the same source URL. Browser hints are not a measured transfer guarantee.",
+  "totalJournalImageBytes": 3473083
 }

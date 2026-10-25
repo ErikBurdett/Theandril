@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## Posting policies and patrols publication — 2026-10-24
+
+The user authorized committing and publishing the three reviewed checkpoints
+below. Their implementation is committed as **`dee74cf9`**. Dispatch 14,
+**Keep the watch moving**, and the current roadmap now describe that exact
+source, retaining historical articles and the adverse pacing results. The
+catalogue has 23 items (6 completed, 13 in progress, 4 pending), with 86 delivered
+and 49 remaining acceptance statements; these are not completion percentages.
+**ACT-32/M3, DH-021 and all fifteen release gates remain open.**
+
+Publication integration passes **2,218 tests / 275 files in 59.08 seconds**,
+typecheck, lint, content/art validation and the Pages-subpath production build.
+The two native screenshots deliberately expand the journal image inventory
+budget from 3 to 3.5 MiB: 327,562 added bytes, 3,473,083 bytes total. This changes
+no gameplay performance budget. Source/image review, browser results and exact
+deployment readback belong to the [publication packet](development/2026-10-24-patrol-publication/README.md).
+All **38 local Pages journeys pass in 1.4 minutes**, including the new patrol,
+recovery and posting-template production flows. Independent displayed-image
+review finds no blocker. Deployment remains pending at this commit's preparation;
+the packet records the subsequent exact published revision and live
+results. Earlier local/draft wording below describes historical checkpoints.
+
 ## AI review of interrupted patrols — 2026-10-24
 
 **Local verified defect correction; campaign pacing remains unresolved.** A

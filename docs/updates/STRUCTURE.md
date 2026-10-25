@@ -31,7 +31,9 @@ The script writes identical metadata to `src/updates/media.json` and `public/upd
 - `docs/art/reviews/slice25-hearth-materials.json`
 - `assets/art/source/hearth-card-ui/ASSET_LICENSE.md`
 
-Retain source and output SHA-256s, crop, encoding, dimensions, byte counts, accurate alt and captions. Captions distinguish authored regression scenes, retained organic campaigns, and the claims a screenshot does **not** establish. Image checks enforce a three-MiB journal budget. Inspect final derivatives and actual page screenshots; a passing hash is not aesthetic approval.
+Retain source and output SHA-256s, crop, encoding, dimensions, byte counts, accurate alt and captions. Captions distinguish authored regression scenes, retained organic campaigns, and the claims a screenshot does **not** establish. Image checks enforce the explicitly approved **3.5 MiB (3,670,016-byte)** journal catalogue budget. On 24 October 2026, dispatch 14 added two exact reviewed native PNGs totaling 327,562 bytes to the previous 3,145,521-byte catalogue, producing **3,473,083 bytes**. That measured imagery expansion deliberately replaces the former 3 MiB cap; it changes no gameplay or renderer budget and preserves every historical image byte. The source and downloadable provenance both record the cap and total. Inspect final derivatives and actual page screenshots; a passing hash is not aesthetic approval.
+
+Loading is scoped by the existing journal components: the featured/reader lead illustration uses `loading="eager"`; archive thumbnails, section illustrations and dialog images use native `loading="lazy"`. Section images are rendered only in the selected article, while archive thumbnails use each entry's lead image. These are browser loading hints, not a measured transfer guarantee or a claim that all catalogue bytes load on entry. Full-size dialogs reuse the same source URL rather than shipping another image variant.
 
 ## Scoped local checks
 

@@ -66,7 +66,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-28', revision: 'f33a816f3a853229695b902af007e4e3f3547275', rules: 34 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-10-24', revision: 'dee74cf9c4e2d153f9c5f5cfdbd9221798205481', rules: 35 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -88,7 +88,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.join(' ')).toContain('One final worker response');
     expect(empire.delivered.join(' ')).toContain('refused armies retained for review');
     expect(empire.remaining.join(' ')).toContain('broader theater strategy');
-    expect(empire.remaining.join(' ')).toContain('patrol/escort');
+    expect(empire.remaining.join(' ')).toContain('mobile escorts');
     expect(empire.remaining.join(' ')).toContain('representative organically developed mature campaigns');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-23-deploy-and-group-postings/README.md')).toBe(true);
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-group-travel/README.md')).toBe(true);
@@ -121,9 +121,9 @@ describe('the source-backed roadmap contract', () => {
     const delivered = empire.delivered.join(' '), remaining = empire.remaining.join(' ');
     expect(empire.status).toBe('in-progress');
     for (const claim of ['one to five existing construction/recruitment items', 'up to 128 owned hearths', 'preserves its paid prefix and leaves it selected for correction', 'at most 640 attempts', 'Up to 24 named production templates', 'Apply remains the paid action', 'never enter campaign saves or exports', 'failed preference storage leaves direct editing and production usable']) expect(delivered, claim).toContain(claim);
-    for (const claim of ['broader governor decisions', 'broader theater strategy', 'patrol/escort roles', 'reusable army order templates', 'representative organically developed mature campaigns']) expect(remaining, claim).toContain(claim);
+    for (const claim of ['broader governor decisions', 'broader theater strategy', 'mobile escorts', 'reusable army order templates', 'representative organically developed mature campaigns']) expect(remaining, claim).toContain(claim);
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/README.md')).toBe(true);
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(78);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(86);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
     expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
     expect(roadmapGates).toHaveLength(15);

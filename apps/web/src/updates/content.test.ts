@@ -2,6 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
+  it('pins posting preferences, saved patrols and explicit AI recovery without claiming pacing acceptance', () => {
+    const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'patrol-orders', sequence: 14, sourceRevision: 'dee74cf9c4e2d153f9c5f5cfdbd9221798205481', image: 'patrol-narrow-actions' });
+    expect(story.sections.some(section => section.image === 'posting-templates-controls')).toBe(true);
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['outside campaign saves and exports', 'fresh owned hearth', 'not an organically grown realm', 'travel already issued continues', 'Updating the option on a paused patrol preserves its paused state', 'does not make player patrols resume themselves', 'identical manually queued leg', 'Four path queries and four resume commands', 'Rules/save advance from 34 to 35', '2,217 tests across 275 files', 'two production journeys pass in 11.2 seconds', 'overlapping scopes are not additive', 'Standard 219/193/214, Long 336/304/286 and Epic 374/278/320', 'Two Epic seeds now finish below', 'automatic patrol queue refusal', 'automaticRefusals label counts theater failures only', 'No new gameplay obligation was added or removed', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    for (const path of ['docs/development/2026-10-24-posting-templates/README.md', 'docs/development/2026-10-24-patrols/README.md', 'docs/development/2026-10-24-patrol-recovery/README.md', 'docs/development/2026-10-24-patrol-recovery/pacing-comparison.json', 'packages/ai/src/patrol-recovery.ts']) expect(story.evidence.some(link => link.path === path), path).toBe(true);
+  });
   it('keeps paid production, personal templates and authored verification within their distinct boundaries', () => {
     const story = dispatches.find(entry => entry.id === 'production-sequences')!;
     expect(story).toMatchObject({ id: 'production-sequences', sequence: 10, sourceRevision: '420219d278ae17f42a04871c6319ecf62a4af216', image: 'production-sequence-results' });
@@ -20,7 +28,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {

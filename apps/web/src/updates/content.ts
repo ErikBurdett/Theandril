@@ -3,11 +3,13 @@ import { reinforcementLogisticsDispatch } from './reinforcement-logistics';
 import { productionSequencesDispatch } from './production-sequences';
 import { groupTravelDispatch } from './group-travel';
 import { defenseTheatersDispatch } from './defense-theaters';
+import { patrolOrdersDispatch } from './patrol-orders';
 
 /** Editorial sequence, not release dates. Historical evidence is pinned below. */
 export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
+  patrolOrdersDispatch,
   reinforcementLogisticsDispatch,
   defenseTheatersDispatch,
   groupTravelDispatch,
