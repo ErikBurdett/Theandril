@@ -2,7 +2,10 @@
 
 ## Find postings, waiting orders and paused patrols — 2026-10-24
 
-**Implementation committed as `da12978`; publication prepared separately.** The army registry now offers
+**Published as `e0d8112`, implementation `da12978`.** Both GitHub workflows
+succeed, exact public assets/source/catalogue match, and the live registry
+journey passes in 12.8 seconds. Publication checks pass 2,320 tests and all
+47 local Pages journeys. The army registry now offers
 All forces, Postings and patrols, Orders waiting and Paused patrols. Counts compose
 with existing search/domain filters before stable 25-row paging. Rows expose
 actual posting destinations/reasons, patrol-policy state and travel interruptions

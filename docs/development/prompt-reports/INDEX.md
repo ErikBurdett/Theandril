@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-24 | [Four separately deployed improvements](2026-10-24-four-deployed-improvements.md) | Patrol retirement, posting destinations, project counterplay and registry filters published separately through `e0d8112`; 2,320 final tests, 47 local Pages journeys and scoped live checks pass; all gates remain open |
 | 2026-10-24 | [Publish patrols and retire captured-hearth circuits](2026-10-24-publish-patrols-and-retire-lost-circuits.md) | Published `04d1776`; 38 live Pages journeys pass; subsequent local cleanup passes 2,242 tests, 3 production journeys, 6 scale cases and 9 campaigns; pacing/gates remain open |
 | 2026-10-24 | [AI recovery of interrupted home patrols](2026-10-24-patrol-recovery.md) | Local only; 2,217 tests and 2 production journeys pass; nine pacing comparisons retain Long delay and two early Epic finishes; DH-021 open |
 | 2026-10-24 | [Saved two-point land patrols](2026-10-24-land-patrols.md) | Local only; 2,206 tests, 11 affected gameplay and 3 production journeys pass; Long pacing regression remains open with DH-021 |

@@ -54,3 +54,14 @@ reader captures at four desktop/narrow/text layouts. Narrow inline image text
 is small; the readable caption and native inspection controls supply its scope.
 All historical entries and image bytes remain exact. These are local results;
 live workflow/readback evidence follows publication.
+
+## Published checkpoint
+
+Published as **`e0d8112c69cf8a25b417b931199e70c07615c51f`**. Both exact [GitHub workflows](actions.json)
+succeed. [Public readback](live-readback/readback.json) matches the
+[local build](frozen-build.json), current commit ledger, article/evidence source,
+exact native image and catalogue counts. The [live registry journey](live-pages.log)
+passes in **12.8 seconds**, exercising public import, filtering, explicit Resume
+and exact saved restoration. [Deployment record](deployment.json). The other
+46 local journeys were not rerun live for this checkpoint. Development publication
+does not close M3, DH-021 or any release gate.

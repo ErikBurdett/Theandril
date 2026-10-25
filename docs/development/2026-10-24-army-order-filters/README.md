@@ -47,3 +47,11 @@ The real pending group-review lock was observed on the DOM selector during a pub
 Native imagery includes a 1,440×1,000 desktop workflow view, two 390×844 enlarged-text views and an **806×66 / 8,755-byte** selector detail. The latter shows only the selected Paused patrols cohort, suitable for an honestly captioned compact journal image; the full views and archive prove the surrounding workflow. No image resizing, pixel transformation, wrapper insertion or catalogue-budget increase was used. The source owner inspected the selector and narrow captures; independent UI image review is recorded separately.
 
 Representative read-model timing, final journal integration and publication remain parent-owned. Exact exports establish state/commands, not worker query counters. No organic mature-empire, whole-world rendering/transfer budget, M3 completion or 1.0 readiness is claimed.
+
+## Subsequent publication
+
+The local checkpoint above was committed as `da12978` and published with
+dispatch 17 as `e0d8112`. [Publication evidence](../2026-10-24-registry-publication/README.md)
+records 2,320 publication tests, all 47 local Pages journeys, exact public
+readback and the one affected live journey. Earlier local statements are the
+retained implementation-stage account, not the final deployment status.

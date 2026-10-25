@@ -30,3 +30,12 @@ Retirement's six isolated Huge/Legendary planner cases pass; visible-target medi
 Final nine-campaign outcomes remain Standard **219/194/201**, Long **329/309/287**, Epic **374/332/327**. Counterplay's final hashes and all non-timing fields match retirement. All nine have zero refused submitted commands and zero automatic theater refusals; Standard seed05 retains one automatic patrol-route refusal. Long seed05 remains **18 turns later than rules34's 311** and two Epic seeds remain below 350–400. Prices and proxy bounds were not tuned. UI-only posting/registry changes require no pacing rerun. [Retirement comparison](../2026-10-24-patrol-retirement/pacing-comparison.json), [counterplay comparison](../2026-10-24-project-counterplay/pacing-maintained-comparison.json).
 
 **DH-021 stays open; ACT-32/M3 and R06 remain partial; all fifteen release gates remain open.** Authored scale workflows do not establish organic mature-realm acceptance. Distant/project-wide counterplay, other paused causes, broader delegation/escorts/long programs and wider strategic operations remain unfinished. Follow the existing [implementation status](../../IMPLEMENTATION_STATUS.md) and [1.0 plan](../../1.0-DEVELOPMENT.md), not editorial feature counts as a completion percentage.
+
+## Final registry delivery
+
+The pending registry row above is superseded by publication **`e0d8112c69cf8a25b417b931199e70c07615c51f`**:
+[deployment](deployment.json), [full publication suite](full-tests-bounded.log)
+(2,320/282, 65.90s), [complete local Pages](local-pages.log) (47/2.4m),
+[exact readback](live-readback/readback.json), [affected live journey](live-pages.log)
+(1/12.8s). The first unrestricted full run's history-check timeout is retained;
+the unchanged suite passes with the same four-worker invocation used earlier.
