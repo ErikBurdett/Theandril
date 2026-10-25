@@ -2,8 +2,17 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
-  it('pins worker stewardship, exact historical continuity and bounded AI adoption without completing governors', () => {
+  it('pins paid commissions, actual payments and bounded AI adoption without closing the governor gates', () => {
     const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'land-commissions', sequence: 22, sourceRevision: '24a710aaa8ddc49aa4ce56173ac043fe4ba1f767', image: 'land-commission-summary' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['replaces the remaining allowance rather than adding', 'other realm orders can still spend', 'matching extraction improvement', 'Ending a commission leaves already paid work underway', 'Failed direct orders retain', '8ee96751', 'final 15-record archive', '075f0687', 'Rules/save advance to 37', 'thirteen original records', 'one-job commission', '18, 22 and 29 commission commands', 'prior adverse seeds were not rerun', '3.488ms', '2.20/4.91/1.66MB', '2,461 tests across 298 files', 'All 74 local Pages cases', 'overlapping scopes are not additive', '3,655,866 bytes', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    expect(JSON.stringify(story)).not.toMatch(/PENDING|TODO|__SOURCE/);
+    for (const path of ['README.md', 'prechange-metadata.json', 'source-review.md', 'ui-source-review.md', 'ai-source-review.md', 'pacing-comparison.json', 'pacing-after.json', 'benchmark.json', 'browser-review.md', 'independent-visual-review.md']) expect(story.evidence.some(link => link.path === `docs/development/2026-10-25-land-commissions/${path}`), path).toBe(true);
+  });
+
+  it('pins worker stewardship, exact historical continuity and bounded AI adoption without completing governors', () => {
+    const story = dispatches.find(entry => entry.id === 'worker-stewardship')!;
     expect(story).toMatchObject({ id: 'worker-stewardship', sequence: 21, sourceRevision: '97b248ed596c931f01d0df66d60fcf25f819eaef', image: 'worker-policy-growth' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     for (const claim of ['for the following harvest', 'does not buy land, build improvements or cultivate biomes', 'stopping its material extraction', 'Failed direct orders retain it', 'do not create an immediate autosave', 'exact saved 31-record state', 'contains 61 records', 'Rules/save advance to 36', 'fourteen-record archive', '233/346/385', '219/329/374', 'Standard and Long install none', 'Prior adverse seeds have not been remeasured', '8.349ms', '2,432 tests across 294 files', 'six new worker-policy journeys', 'overlapping scopes are not additive', '3,641,840 bytes', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
@@ -85,7 +94,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['worker-stewardship', 'group-orders-and-receipts', 'settlement-order-filters', 'group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['land-commissions', 'worker-stewardship', 'group-orders-and-receipts', 'settlement-order-filters', 'group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {

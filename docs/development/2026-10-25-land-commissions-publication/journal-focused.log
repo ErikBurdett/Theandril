@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/updates/content.test.ts (20 tests | 1 failed) 11ms
+     × accepts only explicitly published, revision-pinned entries in newest-work-first order 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/updates/content.test.ts > public dispatch contract > accepts only explicitly published, revision-pinned entries in newest-work-first order
+AssertionError: expected [ 'land-commissions', …(21) ] to deeply equal [ 'worker-stewardship', …(20) ]
+
+- Expected
++ Received
+
+@@ -1,6 +1,7 @@
+  [
++   "land-commissions",
+    "worker-stewardship",
+    "group-orders-and-receipts",
+    "settlement-order-filters",
+    "group-patrols",
+    "registry-order-filters",
+
+ ❯ apps/web/src/updates/content.test.ts:97:47
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 37 passed (38)
+   Start at  14:44:50
+   Duration  440ms (transform 115ms, setup 0ms, import 153ms, tests 94ms, environment 0ms)
+

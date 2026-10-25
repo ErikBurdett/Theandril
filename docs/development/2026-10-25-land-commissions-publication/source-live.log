@@ -1,0 +1,76 @@
+
+Running 2 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (387ms)
+(node:178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (353ms)
+
+
+  1) tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+
+    Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/
+    Call log:
+      - navigating to "https://erikburdett.github.io/Theandril/", waiting until "load"
+
+
+      30 |
+      31 | async function loadCommissionCampaign(page: Page, scene: ReturnType<typeof commissionCampaign>) {
+    > 32 |   await page.goto('./');
+         |              ^
+      33 |   expect(await page.evaluate(() => '__THEANDRIL__' in window)).toBe(false);
+      34 |   await page.getByLabel('Import save file').setInputFiles({ name: 'generated-land-commission.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeCampaign(scene.game, scene.archive))) });
+      35 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+        at loadCommissionCampaign (/home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:32:14)
+        at /home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:63:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay 
+
+    Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/
+    Call log:
+      - navigating to "https://erikburdett.github.io/Theandril/", waiting until "load"
+
+
+      30 |
+      31 | async function loadCommissionCampaign(page: Page, scene: ReturnType<typeof commissionCampaign>) {
+    > 32 |   await page.goto('./');
+         |              ^
+      33 |   expect(await page.evaluate(() => '__THEANDRIL__' in window)).toBe(false);
+      34 |   await page.getByLabel('Import save file').setInputFiles({ name: 'generated-land-commission.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeCampaign(scene.game, scene.archive))) });
+      35 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+        at loadCommissionCampaign (/home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:32:14)
+        at /home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:118:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-lan-00366-row-width-with-exact-replay/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-lan-00366-row-width-with-exact-replay/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-lan-00366-row-width-with-exact-replay/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-25-land-commissions-publication/source-live-results/production-land-policy-lan-00366-row-width-with-exact-replay/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+    tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay 

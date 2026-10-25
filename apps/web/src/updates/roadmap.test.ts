@@ -5,6 +5,17 @@ import { roadmapGates, roadmapItems, roadmapSnapshot, roadmapStages } from './li
 import { filterRoadmap, readRoadmapFilters, roadmapCounts, roadmapItemUrl, roadmapUrl } from './roadmap';
 
 describe('the source-backed roadmap contract', () => {
+  it('records paid land commissions in existing empire scope and keeps strategic governor acceptance open', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    expect(empire.status).toBe('in-progress');
+    for (const claim of ['remaining total allowance', 'after upkeep and charters', 'matching extraction sites', 'removal retains paid work', '22+25 coin', 'Group commission assignment']) expect(empire.delivered.join(' '), claim).toContain(claim);
+    expect(empire.remaining.join(' ')).toContain('broader governor decisions');
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-10-25-land-commissions/README.md')).toBe(true);
+    expect(roadmapItems.find(item => item.id === 'victory-and-pacing')!.delivered.join(' ')).toContain('18/22/29 commission commands');
+    expect(roadmapItems.find(item => item.id === 'durable-archives')!.delivered.join(' ')).toContain('genuine thirteen-record rules 36 campaign');
+    expect(roadmapGates.every(gate => ['in-progress', 'pending'].includes(gate.status))).toBe(true);
+  });
+
   it('records free worker stewardship while retaining wider governors, adverse pacing seeds and all open gates', () => {
     const empire = roadmapItems.find(item => item.id === 'empire-management')!, pacing = roadmapItems.find(item => item.id === 'victory-and-pacing')!;
     expect(empire.status).toBe('in-progress');
@@ -52,7 +63,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.join(' ')).toContain('Where it stands resolves the latest army position');
     expect(empire.delivered.join(' ')).toContain('preserving the order and its Clear control');
     expect(pacing.status).toBe('in-progress');
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(93);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(94);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
   });
   it('records the bounded registry workflow without closing mature-realm acceptance', () => {
@@ -119,7 +130,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-10-25', revision: '97b248ed596c931f01d0df66d60fcf25f819eaef', rules: 36 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-10-25', revision: '24a710aaa8ddc49aa4ce56173ac043fe4ba1f767', rules: 37 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -177,7 +188,7 @@ describe('the source-backed roadmap contract', () => {
     for (const claim of ['one to five existing construction/recruitment items', 'up to 128 owned hearths', 'preserves its paid prefix and leaves it selected for correction', 'at most 640 attempts', 'Up to 24 named production templates', 'Apply remains the paid action', 'never enter campaign saves or exports', 'failed preference storage leaves direct editing and production usable']) expect(delivered, claim).toContain(claim);
     for (const claim of ['broader governor decisions', 'broader theater strategy', 'mobile escorts', 'reusable army order templates', 'representative organically developed mature campaigns']) expect(remaining, claim).toContain(claim);
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/README.md')).toBe(true);
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(93);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(94);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
     expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
     expect(roadmapGates).toHaveLength(15);

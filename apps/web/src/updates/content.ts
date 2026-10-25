@@ -11,11 +11,13 @@ import { groupPatrolDispatch } from './group-patrol-dispatch';
 import { settlementOrderDispatch } from './settlement-order-dispatch';
 import { groupOrderDispatch } from './group-order-dispatch';
 import { workerStewardshipDispatch } from './worker-stewardship-dispatch';
+import { landCommissionsDispatch } from './land-commissions-dispatch';
 
 /** Editorial sequence, not release dates. Historical evidence is pinned below. */
 export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
+  landCommissionsDispatch,
   workerStewardshipDispatch,
   groupOrderDispatch,
   settlementOrderDispatch,

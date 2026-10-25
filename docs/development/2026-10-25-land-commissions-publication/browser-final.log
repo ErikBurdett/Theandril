@@ -1,0 +1,31 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 19 tests using 1 worker
+
+(node:76) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (610ms)
+  ✓   2 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (481ms)
+  ✓   3 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (511ms)
+  ✓   4 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (757ms)
+  ✓   5 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (862ms)
+  ✓   6 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (757ms)
+  ✓   7 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (470ms)
+  ✓   8 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (2.6s)
+  ✓   9 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (2.5s)
+  ✓  10 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (2.1s)
+  ✓  11 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (2.7s)
+  ✓  12 tests/gameplay/updates.spec.ts:52:1 › reading surfaces retain contrast without putting texture over the text (252ms)
+  ✓  13 tests/gameplay/updates.spec.ts:83:1 › unknown dispatch links fail honestly and keyboard skip navigation works (332ms)
+  ✓  14 tests/gameplay/updates.spec.ts:94:1 › archive search combines topic filters, survives refresh and recovers from no results (435ms)
+  ✓  15 tests/gameplay/updates.spec.ts:109:1 › scope ledger links real gates and a contributor can reach authoring guidance (286ms)
+  ✓  16 tests/gameplay/updates.spec.ts:125:1 › a keyboard reader can enlarge a real image and return to the same control (242ms)
+  ✓  17 tests/gameplay/updates.spec.ts:141:1 › public journal opens a permanent, refresh-safe campaign dispatch (1.2s)
+  ✓  18 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (5.8s)
+  ✓  19 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (3.8s)
+
+  19 passed (28.0s)

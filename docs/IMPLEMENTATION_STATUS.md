@@ -20,7 +20,11 @@ Three authored paid-phase benchmarks and fifteen-turn saved mirrors pass; they
 do not establish organic empire, browser transfer or complete scale acceptance.
 All **74 local Pages cases pass in 5.3 minutes**, including two paid works in a
 generated hearth, exact saved restoration and narrow keyboard manual takeover.
-Displayed controls are reviewed; publication remains pending.
+Displayed controls are reviewed. **Published as `24a710a`**: both workflows,
+exact public readback and both live commission journeys pass. The first live
+navigation attempts failed before loading with ERR_NETWORK_CHANGED; the unchanged
+rerun passes in 14.0 seconds. Reviewed dispatch 22 publication is being verified.
+[Publication evidence](development/2026-10-25-land-commissions-publication/README.md).
 [Evidence](development/2026-10-25-land-commissions/README.md),
 [ADR0055](architecture/0055-land-commissions.md).
 
