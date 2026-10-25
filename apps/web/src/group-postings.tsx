@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ArmyView, GameCommand, Observation, PostingMode } from '@theandril/sim';
 import { MAX_GROUP_POSTING_COMMANDS, type GroupPostingResult } from './protocol';
+import { PostingTemplates } from './posting-templates';
 
 export type GroupPostingCommand = Extract<GameCommand, { type: 'setPosting' }>;
 export type { GroupPostingResult } from './protocol';
 export type GroupPostingIssue = (commands: GroupPostingCommand[]) => Promise<GroupPostingResult[]>;
 export const GROUP_POSTING_LIMIT = MAX_GROUP_POSTING_COMMANDS;
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+type PostingDestination = number | 'current' | '';
+
+/** A lost hearth requires a fresh choice, never a different order by fallback. */
+export function groupPostingDestination(points: Observation['settlements'], destination: PostingDestination): PostingDestination {
+  return destination === 'current' || points.some(town => town.cell === destination) ? destination : '';
+}
 
 /** This is a presentation selection, never a second command validator. */
 export function groupPostingArmies(view: Observation, selected?: ReadonlySet<string>): ArmyView[] {
@@ -35,9 +42,10 @@ export function GroupPostingOrders({ view, selected, matching, busy, issue, sele
   issue: GroupPostingIssue; selectMatching: () => void; clearSelection: () => void; accepted: (ids: ReadonlySet<string>) => void;
 }) {
   const points = view.settlements.filter(town => town.factionId === view.factionId);
-  const [destination, setDestination] = useState<number | 'current'>('current');
+  const [destination, setDestination] = useState<PostingDestination>('current');
   const [mode, setMode] = useState<PostingMode>('hold');
   const [pending, setPending] = useState(false);
+  const [templatesBusy, setTemplatesBusy] = useState(false);
   const [results, setResults] = useState<Array<GroupPostingResult & { name: string }>>();
   const [error, setError] = useState('');
   const mounted = useRef(true);
@@ -47,11 +55,12 @@ export function GroupPostingOrders({ view, selected, matching, busy, issue, sele
   const outside = armies.filter(army => !matching.has(army.id)).length;
   const posted = new Set(view.postings.map(posting => posting.armyId));
   const postedCount = armies.filter(army => posted.has(army.id)).length;
-  const locked = busy || pending;
-  const target = destination === 'current' || points.some(town => town.cell === destination) ? destination : 'current';
+  const locked = busy || pending || templatesBusy;
+  const target = groupPostingDestination(points, destination);
   const submit = async (nextMode: PostingMode | 'none') => {
-    if (locked) return;
-    const commands = groupPostingCommands(view, checked, target, nextMode);
+    const commandTarget = nextMode === 'none' ? 'current' : target;
+    if (locked || commandTarget === '') return;
+    const commands = groupPostingCommands(view, checked, commandTarget, nextMode);
     if (!commands.length) return;
     const names = new Map(armies.map(army => [army.id, army.name]));
     setPending(true); setError(''); setResults(undefined);
@@ -70,12 +79,15 @@ export function GroupPostingOrders({ view, selected, matching, busy, issue, sele
     <p className="group-selection-count" role="status">{checked.size} armies selected{outside ? ` · ${outside} outside this filter` : ''}</p>
     <p className="field-help">Check land armies ashore to give them a standing posting together. Select up to {GROUP_POSTING_LIMIT} at a time; page and search changes keep your selection.</p>
     {checked.size > 0 && <>
-      <div className="group-posting-fields"><label>Group destination<select value={target} disabled={locked} onChange={event => setDestination(event.target.value === 'current' ? 'current' : Number(event.target.value))}>
+      <div className="group-posting-fields"><label>Group destination<select value={target} disabled={locked} aria-invalid={target === ''} aria-describedby={target === '' ? 'group-posting-destination-error' : undefined} onChange={event => setDestination(event.target.value === 'current' ? 'current' : event.target.value === '' ? '' : Number(event.target.value))}>
+        <option value="" disabled>Choose an owned hearth</option>
         <option value="current">Where each army stands</option>
         {points.map(town => <option key={town.id} value={town.cell}>{town.name} · hex {town.cell}</option>)}
       </select></label><label>Group arrival order<select value={mode} disabled={locked} onChange={event => setMode(event.target.value as PostingMode)}><option value="hold">Hold the hex</option><option value="join">Join the force there</option></select></label></div>
+      {target === '' && <p id="group-posting-destination-error" className="group-order-error">Choose a current owned hearth or where each army stands before posting. Clearing existing postings is still available.</p>}
       <p className="field-help">Each army receives its own posting. Existing travel orders come first. Routes, arrival and joining use the ordinary army rules; a stalled posting explains its reason in selected orders.</p>
-      <div className="group-selection-actions"><button className="primary" disabled={locked} onClick={() => { void submit(mode); }}>Post selected armies ({checked.size})</button><button disabled={locked || !postedCount} onClick={() => { void submit('none'); }}>Clear selected postings ({postedCount})</button></div>
+      <PostingTemplates mode={mode} destination={target === '' ? undefined : target === 'current' ? 'current' : 'hearth'} busy={busy || pending} onPendingChange={setTemplatesBusy} recall={template => { setMode(template.mode); setDestination(template.destination === 'current' ? 'current' : ''); setResults(undefined); setError(''); }}/>
+      <div className="group-selection-actions"><button className="primary" disabled={locked || target === ''} onClick={() => { void submit(mode); }}>Post selected armies ({checked.size})</button><button disabled={locked || !postedCount} onClick={() => { void submit('none'); }}>Clear selected postings ({postedCount})</button></div>
       {postedCount < checked.size && <p className="field-help">Clearing postings leaves the {checked.size - postedCount} selected armies without postings unchanged.</p>}
     </>}
     {pending && <p role="status">Applying group orders…</p>}

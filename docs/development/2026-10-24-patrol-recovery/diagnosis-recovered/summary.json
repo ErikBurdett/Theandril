@@ -1,0 +1,6298 @@
+{
+  "configuration": {
+    "seed": 20260905,
+    "pace": "long",
+    "size": "standard",
+    "factionCount": 12,
+    "rulesVersion": 35
+  },
+  "turn": 336,
+  "winner": "faction.glass_tide",
+  "path": "prosperity",
+  "completeCampaign": true,
+  "finalHash": "bb2a4ca1",
+  "refused": 0,
+  "automaticRefusals": 0,
+  "patrolRouteAttempts": 2466,
+  "patrolRouteRefusals": 0,
+  "commandCounts": {
+    "found": 65,
+    "moveTo": 20982,
+    "endTurn": 335,
+    "queue": 648,
+    "setWorkedTiles": 3216,
+    "adoptInstitution": 12,
+    "research": 115,
+    "develop": 128,
+    "improveTile": 80,
+    "recruitCharacter": 55,
+    "terraformTile": 5,
+    "assignCharacter": 55,
+    "mergeArmies": 141,
+    "adoptDoctrine": 12,
+    "startCharacterMission": 869,
+    "accelerateRoad": 9,
+    "declareWar": 262,
+    "besiege": 103,
+    "setTheater": 12,
+    "embarkArmy": 24,
+    "searchArcane": 346,
+    "assault": 21,
+    "autoResolveBattle": 762,
+    "setPatrol": 11,
+    "proposePeace": 257,
+    "attack": 741,
+    "respondPeace": 257,
+    "promoteCharacter": 125,
+    "disembarkArmy": 14,
+    "liftSiege": 42,
+    "buildDepot": 275,
+    "sellResource": 159,
+    "proposeClient": 53,
+    "respondClient": 46,
+    "resumeMovement": 62,
+    "resolveCapture": 17,
+    "cancelCharacterMission": 12,
+    "startVictoryProject": 2,
+    "claimCell": 3
+  },
+  "eventCounts": {
+    "settlement_founded": 65,
+    "army_moved": 73725,
+    "turn_started": 4008,
+    "production_queued": 648,
+    "worked_tiles_changed": 3216,
+    "settlement_grew": 1055,
+    "building_completed": 289,
+    "institution_adopted": 12,
+    "technology_researched": 115,
+    "territory_expanded": 4268,
+    "development_acquired": 128,
+    "land_work_started": 85,
+    "unit_recruited": 356,
+    "land_work_progress": 155,
+    "land_work_completed": 82,
+    "character_recruited": 55,
+    "character_assigned": 63,
+    "road_planned": 59,
+    "road_segment_built": 280,
+    "formations_transferred": 141,
+    "doctrine_adopted": 12,
+    "character_mission_started": 869,
+    "character_mission_progress": 868,
+    "character_mission_completed": 848,
+    "road_accelerated": 9,
+    "army_command_changed": 132,
+    "war_declared": 524,
+    "siege_started": 206,
+    "siege_progress": 330,
+    "theater_saved": 12,
+    "army_embarked": 24,
+    "road_completed": 47,
+    "arcane_survey_empty": 344,
+    "fleet_resupplied": 814,
+    "battle_started": 1524,
+    "battle_ability_used": 553,
+    "army_retreated": 733,
+    "formation_experience": 1478,
+    "battle_finished": 1524,
+    "siege_lifted": 172,
+    "patrol_set": 11,
+    "movement_queued": 2467,
+    "peace_proposed": 514,
+    "peace_accepted": 514,
+    "movement_completed": 2460,
+    "character_promoted": 125,
+    "army_disembarked": 14,
+    "supply_attrition": 1192,
+    "character_battle_experience": 658,
+    "movement_interrupted": 762,
+    "army_destroyed": 21,
+    "peace_expired": 500,
+    "fleet_stores_empty": 286,
+    "arcane_site_found": 2,
+    "depot_built": 275,
+    "resource_contract": 159,
+    "client_proposed": 106,
+    "movement_paused": 77,
+    "client_refused": 34,
+    "movement_resumed": 62,
+    "client_accepted": 58,
+    "capture_pending": 17,
+    "settlement_captured": 34,
+    "character_mission_cancelled": 12,
+    "client_offer_expired": 14,
+    "depot_razed": 330,
+    "commander_rallied": 62,
+    "formation_destroyed": 33,
+    "client_ended": 54,
+    "character_recovered": 107,
+    "character_mission_interrupted": 6,
+    "road_segment_reused": 35,
+    "character_mission_failed": 1,
+    "character_died": 1,
+    "victory_project_started": 24,
+    "victory_project_progress": 948,
+    "territory_claimed": 3,
+    "campaign_victory": 12
+  },
+  "commandSequence": 30333,
+  "commandResultTraceSha256": "aa628bbf27951ba13e22b815fa634003257e7c23bbffc3b47436d04461a79167",
+  "rowCounts": {
+    "plans": 4037,
+    "patrols": 3161,
+    "readiness": 1506
+  },
+  "snapshots": [
+    {
+      "path": "snapshot-1-turn-85.json",
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.278",
+      "turn": 85,
+      "reason": "enabled-patrol-route-paused-eight-turns",
+      "stateHash": "6bff0ff2",
+      "sha256": "1cef91c126d93ac5f7d946a09aaf74587ecacb111465b3f15c25128b19fe61d8",
+      "beforePlan": 1011,
+      "permittedSafety": {
+        "source": "own-permitted-observation",
+        "patrol": {
+          "armyId": "army.278",
+          "factionId": "faction.reedbound_council",
+          "firstCell": 17638,
+          "secondCell": 18758,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 76,
+          "lastError": null,
+          "targetCell": 17638,
+          "status": "waiting",
+          "blocker": "New hostile forces or a hostile settlement were sighted nearby."
+        },
+        "armyCell": 18309,
+        "movementBlocker": null,
+        "route": {
+          "armyId": "army.278",
+          "origin": 18309,
+          "waypoints": [
+            17638
+          ],
+          "path": [
+            18086,
+            17862,
+            17638
+          ],
+          "status": "paused",
+          "pauseReason": "New hostile forces or a hostile settlement were sighted nearby.",
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "preview": {
+          "target": 17638,
+          "path": [
+            18086,
+            17862,
+            17638
+          ],
+          "cost": 4,
+          "action": "move",
+          "canMoveNow": true,
+          "canQueue": true,
+          "blocker": null,
+          "limited": false,
+          "expandedNodes": 5
+        }
+      }
+    },
+    {
+      "path": "snapshot-2-turn-86.json",
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.278",
+      "turn": 86,
+      "reason": "enabled-patrol-still-paused-during-peace",
+      "stateHash": "2f38ce66",
+      "sha256": "4b9b76a445d79f2a19d066254842d5d1fdf2bfc1dd0bc3b0e4aefb7d53fe102c",
+      "beforePlan": 1023,
+      "permittedSafety": {
+        "source": "own-permitted-observation",
+        "patrol": {
+          "armyId": "army.278",
+          "factionId": "faction.reedbound_council",
+          "firstCell": 17638,
+          "secondCell": 18758,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 76,
+          "lastError": null,
+          "targetCell": 17638,
+          "status": "waiting",
+          "blocker": "New hostile forces or a hostile settlement were sighted nearby."
+        },
+        "armyCell": 18309,
+        "movementBlocker": null,
+        "route": {
+          "armyId": "army.278",
+          "origin": 18309,
+          "waypoints": [
+            17638
+          ],
+          "path": [
+            18086,
+            17862,
+            17638
+          ],
+          "status": "paused",
+          "pauseReason": "New hostile forces or a hostile settlement were sighted nearby.",
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "preview": {
+          "target": 17638,
+          "path": [
+            18086,
+            17862,
+            17638
+          ],
+          "cost": 4,
+          "action": "move",
+          "canMoveNow": true,
+          "canQueue": true,
+          "blocker": null,
+          "limited": false,
+          "expandedNodes": 5
+        }
+      }
+    },
+    {
+      "path": "snapshot-3-turn-150.json",
+      "factionId": "faction.wardhall_remnant",
+      "armyId": "army.408",
+      "turn": 150,
+      "reason": "enabled-home-patrol-endpoint-no-longer-owned",
+      "stateHash": "4f60f2e3",
+      "sha256": "e8b68f936e8f7042f04465f879e669ef038cc27a9c927781fe368075a9e92b25",
+      "beforePlan": 1802,
+      "permittedSafety": {
+        "source": "own-permitted-observation",
+        "patrol": {
+          "armyId": "army.408",
+          "factionId": "faction.wardhall_remnant",
+          "firstCell": 8431,
+          "secondCell": 9108,
+          "target": "second",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 147,
+          "lastError": null,
+          "targetCell": 9108,
+          "status": "waiting",
+          "blocker": "New hostile forces or a hostile settlement were sighted nearby."
+        },
+        "armyCell": 8659,
+        "movementBlocker": null,
+        "route": {
+          "armyId": "army.408",
+          "origin": 8659,
+          "waypoints": [
+            9108
+          ],
+          "path": [
+            8883,
+            9108
+          ],
+          "status": "paused",
+          "pauseReason": "New hostile forces or a hostile settlement were sighted nearby.",
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "preview": {
+          "target": 9108,
+          "path": [],
+          "cost": 0,
+          "action": "besiege",
+          "canMoveNow": false,
+          "canQueue": false,
+          "blocker": "Besiege this settlement and assault its defenses; travel cannot bypass a garrison.",
+          "limited": false,
+          "expandedNodes": 0
+        }
+      }
+    }
+  ],
+  "patrolSummaries": [
+    {
+      "armyId": "army.127",
+      "maxPausedRouteTurns": 4,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.127",
+          "factionId": "faction.glass_tide",
+          "firstCell": 12875,
+          "secondCell": 12647,
+          "target": "second",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 12647,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.127",
+          "cell": 12875,
+          "strength": 37,
+          "formations": 1,
+          "morale": 70,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 3
+        },
+        "route": {
+          "armyId": "army.127",
+          "origin": 12875,
+          "waypoints": [
+            12647
+          ],
+          "path": [
+            12651,
+            12650,
+            12649,
+            12648,
+            12647
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.127",
+          "supplied": true,
+          "sourceSettlementId": "settlement.28",
+          "reason": "Supplied from Hearth 1."
+        },
+        "endpoints": [
+          {
+            "cell": 12875,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.28"
+          },
+          {
+            "cell": 12647,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.53"
+          }
+        ],
+        "visibleThreats": [
+          {
+            "id": "army.146",
+            "factionId": "faction.iron_covenant",
+            "cell": 11530,
+            "strength": 56,
+            "armyDistance": 6,
+            "withinArmySight": false,
+            "distance": 6
+          }
+        ],
+        "visibleThreatCount": 1,
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.198",
+      "maxPausedRouteTurns": 3,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.198",
+          "factionId": "faction.mire_courts",
+          "firstCell": 10368,
+          "secondCell": 10149,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 10368,
+          "status": "ready",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.198",
+          "cell": 10149,
+          "strength": 50,
+          "formations": 1,
+          "morale": 65,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 3
+        },
+        "route": null,
+        "singleWaypointMatchesPatrolTarget": false,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.198",
+          "supplied": true,
+          "sourceSettlementId": "settlement.173",
+          "reason": "Supplied from Hearth 3."
+        },
+        "endpoints": [
+          {
+            "cell": 10368,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.31"
+          },
+          {
+            "cell": 10149,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.173"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.208",
+      "maxPausedRouteTurns": 5,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.208",
+          "factionId": "faction.saltwind_remnant",
+          "firstCell": 19840,
+          "secondCell": 19619,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 19840,
+          "status": "ready",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.208",
+          "cell": 19619,
+          "strength": 40,
+          "formations": 1,
+          "morale": 60,
+          "fatigue": 0,
+          "movement": 1,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": null,
+        "singleWaypointMatchesPatrolTarget": false,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.208",
+          "supplied": true,
+          "sourceSettlementId": "settlement.55",
+          "reason": "Supplied from Hearth 2."
+        },
+        "endpoints": [
+          {
+            "cell": 19840,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.32"
+          },
+          {
+            "cell": 19619,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.55"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [
+          "faction.ashen_compact",
+          "faction.sable_steppe"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.224",
+      "maxPausedRouteTurns": 3,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.224",
+          "factionId": "faction.rimehorn_clans",
+          "firstCell": 22942,
+          "secondCell": 23835,
+          "target": "second",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 23835,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.224",
+          "cell": 22942,
+          "strength": 40,
+          "formations": 1,
+          "morale": 60,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": {
+          "armyId": "army.224",
+          "origin": 22942,
+          "waypoints": [
+            23835
+          ],
+          "path": [
+            23165,
+            23389,
+            23612,
+            23836,
+            23835
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.224",
+          "supplied": true,
+          "sourceSettlementId": "settlement.79",
+          "reason": "Supplied from Hearth 2."
+        },
+        "endpoints": [
+          {
+            "cell": 22942,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.79"
+          },
+          {
+            "cell": 23835,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.34"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.278",
+      "maxPausedRouteTurns": 15,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.278",
+          "factionId": "faction.reedbound_council",
+          "firstCell": 17638,
+          "secondCell": 18758,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 17638,
+          "status": "ready",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.278",
+          "cell": 18758,
+          "strength": 8,
+          "formations": 1,
+          "morale": 60,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": null,
+        "singleWaypointMatchesPatrolTarget": false,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.278",
+          "supplied": true,
+          "sourceSettlementId": "settlement.181",
+          "reason": "Supplied from Hearth 3."
+        },
+        "endpoints": [
+          {
+            "cell": 17638,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.26"
+          },
+          {
+            "cell": 18758,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.181"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [
+          "faction.sepulchral_synod"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.332",
+      "maxPausedRouteTurns": 6,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.332",
+          "factionId": "faction.sepulchral_synod",
+          "firstCell": 18357,
+          "secondCell": 17237,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 18357,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.332",
+          "cell": 17908,
+          "strength": 45,
+          "formations": 1,
+          "morale": 70,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 3
+        },
+        "route": {
+          "armyId": "army.332",
+          "origin": 17908,
+          "waypoints": [
+            18357
+          ],
+          "path": [
+            18133,
+            18357
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.332",
+          "supplied": true,
+          "sourceSettlementId": "settlement.54",
+          "reason": "Supplied from Hearth 2."
+        },
+        "endpoints": [
+          {
+            "cell": 18357,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.54"
+          },
+          {
+            "cell": 17237,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.30"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [
+          "faction.reedbound_council"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.293",
+      "maxPausedRouteTurns": 0,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.293",
+          "factionId": "faction.morrow_spore",
+          "firstCell": 13021,
+          "secondCell": 13239,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 13021,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.293",
+          "cell": 13017,
+          "strength": 40,
+          "formations": 1,
+          "morale": 60,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": {
+          "armyId": "army.293",
+          "origin": 13017,
+          "waypoints": [
+            13021
+          ],
+          "path": [
+            13018,
+            13019,
+            13020,
+            13021
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.293",
+          "supplied": true,
+          "sourceSettlementId": "settlement.36",
+          "reason": "Supplied from Hearth 1."
+        },
+        "endpoints": [
+          {
+            "cell": 13021,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.98"
+          },
+          {
+            "cell": 13239,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.36"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.358",
+      "maxPausedRouteTurns": 5,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.358",
+          "factionId": "faction.cinder_march",
+          "firstCell": 21777,
+          "secondCell": 22898,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 21777,
+          "status": "ready",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.358",
+          "cell": 22898,
+          "strength": 40,
+          "formations": 1,
+          "morale": 60,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": null,
+        "singleWaypointMatchesPatrolTarget": false,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.358",
+          "supplied": true,
+          "sourceSettlementId": "settlement.44",
+          "reason": "Supplied from Hearth 2."
+        },
+        "endpoints": [
+          {
+            "cell": 21777,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.27"
+          },
+          {
+            "cell": 22898,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.44"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.370",
+      "maxPausedRouteTurns": 3,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.370",
+          "factionId": "faction.iron_covenant",
+          "firstCell": 4803,
+          "secondCell": 5479,
+          "target": "second",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 5479,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.370",
+          "cell": 4803,
+          "strength": 65,
+          "formations": 1,
+          "morale": 80,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 4
+        },
+        "route": {
+          "armyId": "army.370",
+          "origin": 4803,
+          "waypoints": [
+            5479
+          ],
+          "path": [
+            4804,
+            4805,
+            5030,
+            5254,
+            5479
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.370",
+          "supplied": true,
+          "sourceSettlementId": "settlement.29",
+          "reason": "Supplied from Hearth 1."
+        },
+        "endpoints": [
+          {
+            "cell": 4803,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.29"
+          },
+          {
+            "cell": 5479,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.171"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [
+          "faction.glass_tide"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.164",
+      "maxPausedRouteTurns": 21,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.164",
+          "factionId": "faction.ashen_compact",
+          "firstCell": 22809,
+          "secondCell": 22590,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 335,
+          "lastError": null,
+          "targetCell": 22809,
+          "status": "ready",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.164",
+          "cell": 22590,
+          "strength": 47,
+          "formations": 1,
+          "morale": 65,
+          "fatigue": 0,
+          "movement": 1,
+          "movementBlocker": null,
+          "upkeep": 3
+        },
+        "route": null,
+        "singleWaypointMatchesPatrolTarget": false,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.164",
+          "supplied": true,
+          "sourceSettlementId": "settlement.25",
+          "reason": "Supplied from Hearth 1."
+        },
+        "endpoints": [
+          {
+            "cell": 22809,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.85"
+          },
+          {
+            "cell": 22590,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.25"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [
+          "faction.sable_steppe",
+          "faction.saltwind_remnant"
+        ],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    },
+    {
+      "armyId": "army.408",
+      "maxPausedRouteTurns": 21,
+      "lastSampledTurn": 335,
+      "lastObserved": {
+        "patrol": {
+          "armyId": "army.408",
+          "factionId": "faction.wardhall_remnant",
+          "firstCell": 8431,
+          "secondCell": 9108,
+          "target": "first",
+          "enabled": true,
+          "pauseOnWar": false,
+          "lastAttemptTurn": 334,
+          "lastError": null,
+          "targetCell": 8431,
+          "status": "traveling",
+          "blocker": null
+        },
+        "army": {
+          "id": "army.408",
+          "cell": 8433,
+          "strength": 12,
+          "formations": 1,
+          "morale": 75,
+          "fatigue": 0,
+          "movement": 0,
+          "movementBlocker": null,
+          "upkeep": 2
+        },
+        "route": {
+          "armyId": "army.408",
+          "origin": 8433,
+          "waypoints": [
+            8431
+          ],
+          "path": [
+            8432,
+            8431
+          ],
+          "status": "active",
+          "pauseReason": null,
+          "knownHostileIds": []
+        },
+        "singleWaypointMatchesPatrolTarget": true,
+        "atPatrolTarget": false,
+        "supply": {
+          "armyId": "army.408",
+          "supplied": true,
+          "sourceSettlementId": "settlement.356",
+          "reason": "Supplied from Hearth 3."
+        },
+        "endpoints": [
+          {
+            "cell": 8431,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.356"
+          },
+          {
+            "cell": 9108,
+            "stillOwnedHearth": true,
+            "observedTown": "settlement.517"
+          }
+        ],
+        "visibleThreats": [],
+        "visibleThreatCount": 0,
+        "wars": [],
+        "heldByOrdinaryDelegationPlanner": true,
+        "actorOrders": []
+      }
+    }
+  ],
+  "winnerReadiness": [
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 1,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Adopt an institution.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [],
+        "institutionId": null,
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [],
+        "wars": [],
+        "treasury": 60,
+        "knowledge": 0,
+        "coinCost": 32000,
+        "economy": {
+          "income": 0,
+          "upkeep": 2,
+          "net": -2,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 2,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Adopt an institution.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [],
+        "institutionId": null,
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28"
+        ],
+        "wars": [],
+        "treasury": 65,
+        "knowledge": 2,
+        "coinCost": 32000,
+        "economy": {
+          "income": 7,
+          "upkeep": 2,
+          "net": 5,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 6,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28"
+        ],
+        "wars": [],
+        "treasury": 45,
+        "knowledge": 10,
+        "coinCost": 32000,
+        "economy": {
+          "income": 12,
+          "upkeep": 2,
+          "net": 10,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 10,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28"
+        ],
+        "wars": [],
+        "treasury": 80,
+        "knowledge": 18,
+        "coinCost": 32000,
+        "economy": {
+          "income": 19,
+          "upkeep": 3,
+          "net": 16,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 12,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28"
+        ],
+        "wars": [],
+        "treasury": 74,
+        "knowledge": 22,
+        "coinCost": 32000,
+        "economy": {
+          "income": 23,
+          "upkeep": 4,
+          "net": 19,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 14,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28"
+        ],
+        "wars": [],
+        "treasury": 75,
+        "knowledge": 10,
+        "coinCost": 32000,
+        "economy": {
+          "income": 24,
+          "upkeep": 5,
+          "net": 19,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 17,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": null,
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 51,
+        "knowledge": 29,
+        "coinCost": 32000,
+        "economy": {
+          "income": 32,
+          "upkeep": 9,
+          "net": 23,
+          "queuedUpkeep": 2
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 19,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 41,
+        "knowledge": 13,
+        "coinCost": 32000,
+        "economy": {
+          "income": 37,
+          "upkeep": 12,
+          "net": 25,
+          "queuedUpkeep": 3
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 20,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 47,
+        "knowledge": 20,
+        "coinCost": 32000,
+        "economy": {
+          "income": 38,
+          "upkeep": 12,
+          "net": 26,
+          "queuedUpkeep": 3
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 24,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.stewardship"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 27,
+        "knowledge": 12,
+        "coinCost": 32000,
+        "economy": {
+          "income": 42,
+          "upkeep": 23,
+          "net": 19,
+          "queuedUpkeep": 3
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 30,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.stewardship"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 46,
+        "knowledge": 56,
+        "coinCost": 32000,
+        "economy": {
+          "income": 51,
+          "upkeep": 29,
+          "net": 22,
+          "queuedUpkeep": 2
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 33,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.stewardship"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 56,
+        "knowledge": 80,
+        "coinCost": 32000,
+        "economy": {
+          "income": 50,
+          "upkeep": 33,
+          "net": 17,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 34,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.53"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 61,
+        "knowledge": 8,
+        "coinCost": 32000,
+        "economy": {
+          "income": 51,
+          "upkeep": 34,
+          "net": 17,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 40,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.53"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 58,
+        "knowledge": 19,
+        "coinCost": 32000,
+        "economy": {
+          "income": 67,
+          "upkeep": 40,
+          "net": 27,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 41,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 85,
+        "knowledge": 33,
+        "coinCost": 32000,
+        "economy": {
+          "income": 67,
+          "upkeep": 40,
+          "net": 27,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 45,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 90,
+        "knowledge": 23,
+        "coinCost": 32000,
+        "economy": {
+          "income": 74,
+          "upkeep": 44,
+          "net": 30,
+          "queuedUpkeep": 6
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 47,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 68,
+        "knowledge": 50,
+        "coinCost": 32000,
+        "economy": {
+          "income": 82,
+          "upkeep": 50,
+          "net": 32,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 50,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 100,
+        "knowledge": 94,
+        "coinCost": 32000,
+        "economy": {
+          "income": 93,
+          "upkeep": 54,
+          "net": 39,
+          "queuedUpkeep": 3
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 51,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 116,
+        "knowledge": 109,
+        "coinCost": 32000,
+        "economy": {
+          "income": 93,
+          "upkeep": 57,
+          "net": 36,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 53,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 183,
+        "knowledge": 30,
+        "coinCost": 32000,
+        "economy": {
+          "income": 100,
+          "upkeep": 57,
+          "net": 43,
+          "queuedUpkeep": 1
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 60,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53"
+        ],
+        "wars": [],
+        "treasury": 409,
+        "knowledge": 172,
+        "coinCost": 32000,
+        "economy": {
+          "income": 115,
+          "upkeep": 60,
+          "net": 55,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 63,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 500,
+        "knowledge": 252,
+        "coinCost": 32000,
+        "economy": {
+          "income": 128,
+          "upkeep": 60,
+          "net": 68,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 65,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sable_steppe"
+        ],
+        "treasury": 571,
+        "knowledge": 306,
+        "coinCost": 32000,
+        "economy": {
+          "income": 125,
+          "upkeep": 64,
+          "net": 61,
+          "queuedUpkeep": 2
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 68,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sable_steppe",
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 647,
+        "knowledge": 383,
+        "coinCost": 32000,
+        "economy": {
+          "income": 135,
+          "upkeep": 69,
+          "net": 66,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 69,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 747,
+        "knowledge": 410,
+        "coinCost": 32000,
+        "economy": {
+          "income": 137,
+          "upkeep": 70,
+          "net": 67,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 70,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 768,
+        "knowledge": 435,
+        "coinCost": 32000,
+        "economy": {
+          "income": 139,
+          "upkeep": 72,
+          "net": 67,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 72,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 885,
+        "knowledge": 485,
+        "coinCost": 32000,
+        "economy": {
+          "income": 146,
+          "upkeep": 72,
+          "net": 74,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 76,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 1110,
+        "knowledge": 593,
+        "coinCost": 32000,
+        "economy": {
+          "income": 151,
+          "upkeep": 72,
+          "net": 79,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 77,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 1185,
+        "knowledge": 623,
+        "coinCost": 32000,
+        "economy": {
+          "income": 151,
+          "upkeep": 72,
+          "net": 79,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 80,
+      "facts": {
+        "blockers": [
+          "Research Civic accounts.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 1385,
+        "knowledge": 725,
+        "coinCost": 32000,
+        "economy": {
+          "income": 155,
+          "upkeep": 72,
+          "net": 83,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 84,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 1724,
+        "knowledge": 57,
+        "coinCost": 32000,
+        "economy": {
+          "income": 172,
+          "upkeep": 73,
+          "net": 99,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 88,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 2066,
+        "knowledge": 198,
+        "coinCost": 32000,
+        "economy": {
+          "income": 181,
+          "upkeep": 75,
+          "net": 106,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 90,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 2225,
+        "knowledge": 268,
+        "coinCost": 32000,
+        "economy": {
+          "income": 178,
+          "upkeep": 75,
+          "net": 103,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 94,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 2641,
+        "knowledge": 409,
+        "coinCost": 32000,
+        "economy": {
+          "income": 178,
+          "upkeep": 76,
+          "net": 102,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 96,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 2847,
+        "knowledge": 481,
+        "coinCost": 32000,
+        "economy": {
+          "income": 185,
+          "upkeep": 75,
+          "net": 110,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 98,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 3015,
+        "knowledge": 553,
+        "coinCost": 32000,
+        "economy": {
+          "income": 188,
+          "upkeep": 75,
+          "net": 113,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 100,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 3203,
+        "knowledge": 622,
+        "coinCost": 32000,
+        "economy": {
+          "income": 192,
+          "upkeep": 77,
+          "net": 115,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 105,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 3686,
+        "knowledge": 798,
+        "coinCost": 32000,
+        "economy": {
+          "income": 191,
+          "upkeep": 78,
+          "net": 113,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 108,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 3920,
+        "knowledge": 906,
+        "coinCost": 32000,
+        "economy": {
+          "income": 192,
+          "upkeep": 80,
+          "net": 112,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 110,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 4134,
+        "knowledge": 981,
+        "coinCost": 32000,
+        "economy": {
+          "income": 194,
+          "upkeep": 81,
+          "net": 113,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 112,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 4412,
+        "knowledge": 1053,
+        "coinCost": 32000,
+        "economy": {
+          "income": 202,
+          "upkeep": 81,
+          "net": 121,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 114,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant",
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 4646,
+        "knowledge": 1125,
+        "coinCost": 32000,
+        "economy": {
+          "income": 202,
+          "upkeep": 81,
+          "net": 121,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 118,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.saltwind_remnant",
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 5168,
+        "knowledge": 1267,
+        "coinCost": 32000,
+        "economy": {
+          "income": 206,
+          "upkeep": 81,
+          "net": 125,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 120,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 5448,
+        "knowledge": 1339,
+        "coinCost": 32000,
+        "economy": {
+          "income": 207,
+          "upkeep": 81,
+          "net": 126,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 122,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 5655,
+        "knowledge": 1411,
+        "coinCost": 32000,
+        "economy": {
+          "income": 209,
+          "upkeep": 82,
+          "net": 127,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 126,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 6174,
+        "knowledge": 1555,
+        "coinCost": 32000,
+        "economy": {
+          "income": 206,
+          "upkeep": 83,
+          "net": 123,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 128,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 6466,
+        "knowledge": 1623,
+        "coinCost": 32000,
+        "economy": {
+          "income": 210,
+          "upkeep": 83,
+          "net": 127,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 130,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 6730,
+        "knowledge": 1689,
+        "coinCost": 32000,
+        "economy": {
+          "income": 217,
+          "upkeep": 83,
+          "net": 134,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 132,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 7041,
+        "knowledge": 1757,
+        "coinCost": 32000,
+        "economy": {
+          "income": 219,
+          "upkeep": 83,
+          "net": 136,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 135,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 7480,
+        "knowledge": 1866,
+        "coinCost": 32000,
+        "economy": {
+          "income": 220,
+          "upkeep": 83,
+          "net": 137,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 136,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.reedbound_council"
+        ],
+        "treasury": 7615,
+        "knowledge": 1903,
+        "coinCost": 32000,
+        "economy": {
+          "income": 220,
+          "upkeep": 83,
+          "net": 137,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 137,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.reedbound_council"
+        ],
+        "treasury": 7824,
+        "knowledge": 1941,
+        "coinCost": 32000,
+        "economy": {
+          "income": 222,
+          "upkeep": 83,
+          "net": 139,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 138,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 7919,
+        "knowledge": 1979,
+        "coinCost": 32000,
+        "economy": {
+          "income": 222,
+          "upkeep": 83,
+          "net": 139,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 140,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 8170,
+        "knowledge": 2053,
+        "coinCost": 32000,
+        "economy": {
+          "income": 222,
+          "upkeep": 84,
+          "net": 138,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 142,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.reedbound_council"
+        ],
+        "treasury": 8510,
+        "knowledge": 2127,
+        "coinCost": 32000,
+        "economy": {
+          "income": 224,
+          "upkeep": 84,
+          "net": 140,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 145,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 8868,
+        "knowledge": 2232,
+        "coinCost": 32000,
+        "economy": {
+          "income": 229,
+          "upkeep": 85,
+          "net": 144,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 146,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 9000,
+        "knowledge": 2267,
+        "coinCost": 32000,
+        "economy": {
+          "income": 229,
+          "upkeep": 85,
+          "net": 144,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 147,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact",
+          "faction.sable_steppe"
+        ],
+        "treasury": 9175,
+        "knowledge": 2299,
+        "coinCost": 32000,
+        "economy": {
+          "income": 212,
+          "upkeep": 86,
+          "net": 126,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 150,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact",
+          "faction.sable_steppe"
+        ],
+        "treasury": 9547,
+        "knowledge": 2401,
+        "coinCost": 32000,
+        "economy": {
+          "income": 229,
+          "upkeep": 86,
+          "net": 143,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 152,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sable_steppe"
+        ],
+        "treasury": 9880,
+        "knowledge": 2468,
+        "coinCost": 32000,
+        "economy": {
+          "income": 229,
+          "upkeep": 86,
+          "net": 143,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 155,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 10214,
+        "knowledge": 2581,
+        "coinCost": 32000,
+        "economy": {
+          "income": 231,
+          "upkeep": 87,
+          "net": 144,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 156,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 10394,
+        "knowledge": 2618,
+        "coinCost": 32000,
+        "economy": {
+          "income": 233,
+          "upkeep": 87,
+          "net": 146,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 159,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 10786,
+        "knowledge": 2729,
+        "coinCost": 32000,
+        "economy": {
+          "income": 233,
+          "upkeep": 87,
+          "net": 146,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 160,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 10966,
+        "knowledge": 2766,
+        "coinCost": 32000,
+        "economy": {
+          "income": 233,
+          "upkeep": 87,
+          "net": 146,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 165,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 11685,
+        "knowledge": 2947,
+        "coinCost": 32000,
+        "economy": {
+          "income": 239,
+          "upkeep": 88,
+          "net": 151,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 167,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 11959,
+        "knowledge": 3017,
+        "coinCost": 32000,
+        "economy": {
+          "income": 240,
+          "upkeep": 88,
+          "net": 152,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 168,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sable_steppe"
+        ],
+        "treasury": 12099,
+        "knowledge": 3051,
+        "coinCost": 32000,
+        "economy": {
+          "income": 243,
+          "upkeep": 88,
+          "net": 155,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 170,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sable_steppe"
+        ],
+        "treasury": 12429,
+        "knowledge": 3118,
+        "coinCost": 32000,
+        "economy": {
+          "income": 237,
+          "upkeep": 90,
+          "net": 147,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 174,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact",
+          "faction.sable_steppe"
+        ],
+        "treasury": 12984,
+        "knowledge": 3255,
+        "coinCost": 32000,
+        "economy": {
+          "income": 237,
+          "upkeep": 91,
+          "net": 146,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 176,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact"
+        ],
+        "treasury": 13236,
+        "knowledge": 3331,
+        "coinCost": 32000,
+        "economy": {
+          "income": 237,
+          "upkeep": 91,
+          "net": 146,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 177,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact",
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 13371,
+        "knowledge": 3369,
+        "coinCost": 32000,
+        "economy": {
+          "income": 245,
+          "upkeep": 89,
+          "net": 156,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 178,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 13547,
+        "knowledge": 3407,
+        "coinCost": 32000,
+        "economy": {
+          "income": 245,
+          "upkeep": 89,
+          "net": 156,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 180,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.saltwind_remnant"
+        ],
+        "treasury": 13819,
+        "knowledge": 3484,
+        "coinCost": 32000,
+        "economy": {
+          "income": 243,
+          "upkeep": 89,
+          "net": 154,
+          "queuedUpkeep": 3
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 184,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 14416,
+        "knowledge": 3640,
+        "coinCost": 32000,
+        "economy": {
+          "income": 246,
+          "upkeep": 92,
+          "net": 154,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 185,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 14548,
+        "knowledge": 3679,
+        "coinCost": 32000,
+        "economy": {
+          "income": 246,
+          "upkeep": 92,
+          "net": 154,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 187,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sepulchral_synod",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 14804,
+        "knowledge": 3753,
+        "coinCost": 32000,
+        "economy": {
+          "income": 246,
+          "upkeep": 92,
+          "net": 154,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 190,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sepulchral_synod",
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 15210,
+        "knowledge": 3864,
+        "coinCost": 32000,
+        "economy": {
+          "income": 250,
+          "upkeep": 94,
+          "net": 156,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 193,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.sepulchral_synod"
+        ],
+        "treasury": 15676,
+        "knowledge": 3973,
+        "coinCost": 32000,
+        "economy": {
+          "income": 252,
+          "upkeep": 94,
+          "net": 158,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 195,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 15956,
+        "knowledge": 4045,
+        "coinCost": 32000,
+        "economy": {
+          "income": 253,
+          "upkeep": 95,
+          "net": 158,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 197,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 16296,
+        "knowledge": 4115,
+        "coinCost": 32000,
+        "economy": {
+          "income": 255,
+          "upkeep": 95,
+          "net": 160,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 200,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 16770,
+        "knowledge": 4221,
+        "coinCost": 32000,
+        "economy": {
+          "income": 256,
+          "upkeep": 95,
+          "net": 161,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 205,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 17494,
+        "knowledge": 4403,
+        "coinCost": 32000,
+        "economy": {
+          "income": 249,
+          "upkeep": 95,
+          "net": 154,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 210,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 18261,
+        "knowledge": 4591,
+        "coinCost": 32000,
+        "economy": {
+          "income": 259,
+          "upkeep": 96,
+          "net": 163,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 213,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 18728,
+        "knowledge": 4705,
+        "coinCost": 32000,
+        "economy": {
+          "income": 260,
+          "upkeep": 97,
+          "net": 163,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 220,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 19812,
+        "knowledge": 4965,
+        "coinCost": 32000,
+        "economy": {
+          "income": 266,
+          "upkeep": 99,
+          "net": 167,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 226,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact"
+        ],
+        "treasury": 20717,
+        "knowledge": 5182,
+        "coinCost": 32000,
+        "economy": {
+          "income": 269,
+          "upkeep": 99,
+          "net": 170,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 230,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.ashen_compact"
+        ],
+        "treasury": 21363,
+        "knowledge": 5330,
+        "coinCost": 32000,
+        "economy": {
+          "income": 269,
+          "upkeep": 100,
+          "net": 169,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 234,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.wardhall_remnant"
+        ],
+        "treasury": 22015,
+        "knowledge": 5478,
+        "coinCost": 32000,
+        "economy": {
+          "income": 269,
+          "upkeep": 100,
+          "net": 169,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 238,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 22587,
+        "knowledge": 5629,
+        "coinCost": 32000,
+        "economy": {
+          "income": 269,
+          "upkeep": 99,
+          "net": 170,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 240,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 22923,
+        "knowledge": 5705,
+        "coinCost": 32000,
+        "economy": {
+          "income": 266,
+          "upkeep": 100,
+          "net": 166,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 243,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 23374,
+        "knowledge": 5821,
+        "coinCost": 32000,
+        "economy": {
+          "income": 272,
+          "upkeep": 102,
+          "net": 170,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 247,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 24074,
+        "knowledge": 5969,
+        "coinCost": 32000,
+        "economy": {
+          "income": 266,
+          "upkeep": 102,
+          "net": 164,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 250,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 24524,
+        "knowledge": 6080,
+        "coinCost": 32000,
+        "economy": {
+          "income": 269,
+          "upkeep": 102,
+          "net": 167,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 260,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 26156,
+        "knowledge": 6447,
+        "coinCost": 32000,
+        "economy": {
+          "income": 280,
+          "upkeep": 103,
+          "net": 177,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 261,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 26309,
+        "knowledge": 6485,
+        "coinCost": 32000,
+        "economy": {
+          "income": 280,
+          "upkeep": 103,
+          "net": 177,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 265,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 26995,
+        "knowledge": 6631,
+        "coinCost": 32000,
+        "economy": {
+          "income": 283,
+          "upkeep": 104,
+          "net": 179,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 270,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 27829,
+        "knowledge": 6818,
+        "coinCost": 32000,
+        "economy": {
+          "income": 283,
+          "upkeep": 105,
+          "net": 178,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 275,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 28648,
+        "knowledge": 7004,
+        "coinCost": 32000,
+        "economy": {
+          "income": 254,
+          "upkeep": 105,
+          "net": 149,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 279,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 29316,
+        "knowledge": 7152,
+        "coinCost": 32000,
+        "economy": {
+          "income": 282,
+          "upkeep": 105,
+          "net": 177,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 280,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 29523,
+        "knowledge": 7192,
+        "coinCost": 32000,
+        "economy": {
+          "income": 282,
+          "upkeep": 105,
+          "net": 177,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 290,
+      "facts": {
+        "blockers": [
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 31186,
+        "knowledge": 7591,
+        "coinCost": 32000,
+        "economy": {
+          "income": 256,
+          "upkeep": 106,
+          "net": 150,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 296,
+      "facts": {
+        "blockers": [],
+        "eligibleSettlementIds": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "affordable": true,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 32208,
+        "knowledge": 7815,
+        "coinCost": 32000,
+        "economy": {
+          "income": 288,
+          "upkeep": 107,
+          "net": 181,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [
+          {
+            "settlementId": "settlement.532",
+            "cell": 13775,
+            "enemyPressure": 0,
+            "friendlySupport": 0,
+            "uncoveredPressure": 0,
+            "nearestThreat": 8,
+            "friendlyDepth": 12
+          },
+          {
+            "settlementId": "settlement.53",
+            "cell": 12647,
+            "enemyPressure": 0,
+            "friendlySupport": 99,
+            "uncoveredPressure": 0,
+            "nearestThreat": 7,
+            "friendlyDepth": 18
+          },
+          {
+            "settlementId": "settlement.286",
+            "cell": 11303,
+            "enemyPressure": 3,
+            "friendlySupport": 0,
+            "uncoveredPressure": 3,
+            "nearestThreat": 4,
+            "friendlyDepth": 17
+          },
+          {
+            "settlementId": "settlement.28",
+            "cell": 12875,
+            "enemyPressure": 116,
+            "friendlySupport": 50,
+            "uncoveredPressure": 66,
+            "nearestThreat": 4,
+            "friendlyDepth": 20
+          },
+          {
+            "settlementId": "settlement.365",
+            "cell": 11531,
+            "enemyPressure": 199,
+            "friendlySupport": 0,
+            "uncoveredPressure": 199,
+            "nearestThreat": 1,
+            "friendlyDepth": 18
+          }
+        ],
+        "proposedProjectOrders": [
+          {
+            "type": "startVictoryProject",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532"
+          }
+        ]
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 297,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 1,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 340,
+        "knowledge": 7846,
+        "coinCost": 32000,
+        "economy": {
+          "income": 259,
+          "upkeep": 108,
+          "net": 151,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 298,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 2,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 500,
+        "knowledge": 7882,
+        "coinCost": 32000,
+        "economy": {
+          "income": 288,
+          "upkeep": 108,
+          "net": 180,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 299,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 3,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 510,
+        "knowledge": 7920,
+        "coinCost": 32000,
+        "economy": {
+          "income": 298,
+          "upkeep": 115,
+          "net": 183,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 300,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 4,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 540,
+        "knowledge": 7958,
+        "coinCost": 32000,
+        "economy": {
+          "income": 284,
+          "upkeep": 116,
+          "net": 168,
+          "queuedUpkeep": 10
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 308,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 12,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 1086,
+        "knowledge": 8311,
+        "coinCost": 32000,
+        "economy": {
+          "income": 312,
+          "upkeep": 131,
+          "net": 181,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 310,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 14,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 1129,
+        "knowledge": 8409,
+        "coinCost": 32000,
+        "economy": {
+          "income": 287,
+          "upkeep": 135,
+          "net": 152,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 312,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 16,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 1387,
+        "knowledge": 8506,
+        "coinCost": 32000,
+        "economy": {
+          "income": 319,
+          "upkeep": 137,
+          "net": 182,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 320,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 24,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 1623,
+        "knowledge": 8906,
+        "coinCost": 32000,
+        "economy": {
+          "income": 336,
+          "upkeep": 146,
+          "net": 190,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 322,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 26,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 1764,
+        "knowledge": 9011,
+        "coinCost": 32000,
+        "economy": {
+          "income": 350,
+          "upkeep": 147,
+          "net": 203,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 325,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 29,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 1887,
+        "knowledge": 9185,
+        "coinCost": 32000,
+        "economy": {
+          "income": 334,
+          "upkeep": 153,
+          "net": 181,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 330,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.charter_forestry",
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 34,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [],
+        "treasury": 2219,
+        "knowledge": 9427,
+        "coinCost": 32000,
+        "economy": {
+          "income": 347,
+          "upkeep": 156,
+          "net": 191,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    },
+    {
+      "factionId": "faction.glass_tide",
+      "turn": 335,
+      "facts": {
+        "blockers": [
+          "This faction already has an ongoing Hearth Exchange.",
+          "Requires 32000 coin upfront; cancellation gives no refund."
+        ],
+        "eligibleSettlementIds": [],
+        "affordable": false,
+        "technologies": [
+          "technology.charter_forestry",
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institutionId": "institution.charter_compact",
+        "doctrineId": "doctrine.march_columns",
+        "projects": [
+          {
+            "id": "project.2394",
+            "projectId": "project.hearth_exchange",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.532",
+            "settlementName": "Hearth 5",
+            "cell": 13775,
+            "startedTurn": 296,
+            "progress": 39,
+            "requiredTurns": 40,
+            "status": "active",
+            "statusReason": null
+          }
+        ],
+        "ownHearths": [
+          "settlement.2416",
+          "settlement.28",
+          "settlement.286",
+          "settlement.365",
+          "settlement.53",
+          "settlement.532"
+        ],
+        "wars": [
+          "faction.iron_covenant"
+        ],
+        "treasury": 2266,
+        "knowledge": 9760,
+        "coinCost": 32000,
+        "economy": {
+          "income": 358,
+          "upkeep": 164,
+          "net": 194,
+          "queuedUpkeep": 0
+        },
+        "assessedHosts": [],
+        "proposedProjectOrders": []
+      }
+    }
+  ],
+  "finalProjectsGlobalDiagnosticOnly": [
+    {
+      "id": "project.2394",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.glass_tide",
+      "settlementId": "settlement.532",
+      "settlementName": "Hearth 5",
+      "cell": 13775,
+      "startedTurn": 296,
+      "progress": 40,
+      "requiredTurns": 40,
+      "status": "completed",
+      "statusReason": null
+    },
+    {
+      "id": "project.2397",
+      "projectId": "project.hearth_exchange",
+      "factionId": "faction.saltwind_remnant",
+      "settlementId": "settlement.55",
+      "settlementName": "Hearth 2",
+      "cell": 19619,
+      "startedTurn": 296,
+      "progress": 39,
+      "requiredTurns": 40,
+      "status": "active",
+      "statusReason": null
+    }
+  ]
+}

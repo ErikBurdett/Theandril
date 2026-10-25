@@ -1,0 +1,75 @@
+{
+  "scope": "Authored generator4 mature realms; isolated patrol allocation and all-realm patrol reports. Eight route attempts/realm; one warmup, three identical-save samples. Excludes setup, deserialize, hashing, other turn phases, worker transfer and rendering.",
+  "results": [
+    {
+      "size": "huge",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "armies": 1500,
+      "patrols": 1500,
+      "warmups": 1,
+      "samples": [
+        {
+          "advanceMs": 4.678797999999915,
+          "observeAllMs": 0.6079310000000078,
+          "attempts": 256,
+          "refused": 0,
+          "events": 768,
+          "hash": "45789882"
+        },
+        {
+          "advanceMs": 4.588234000000057,
+          "observeAllMs": 0.5911940000000868,
+          "attempts": 256,
+          "refused": 0,
+          "events": 768,
+          "hash": "45789882"
+        },
+        {
+          "advanceMs": 3.923631999999998,
+          "observeAllMs": 0.5491820000002008,
+          "attempts": 256,
+          "refused": 0,
+          "events": 768,
+          "hash": "45789882"
+        }
+      ]
+    },
+    {
+      "size": "legendary",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "armies": 4000,
+      "patrols": 4000,
+      "warmups": 1,
+      "samples": [
+        {
+          "advanceMs": 6.339706000000206,
+          "observeAllMs": 1.7851829999999609,
+          "attempts": 320,
+          "refused": 0,
+          "events": 960,
+          "hash": "a3af1267"
+        },
+        {
+          "advanceMs": 6.280776999999944,
+          "observeAllMs": 2.060801000000083,
+          "attempts": 320,
+          "refused": 0,
+          "events": 960,
+          "hash": "a3af1267"
+        },
+        {
+          "advanceMs": 6.098748999999771,
+          "observeAllMs": 1.6277399999999034,
+          "attempts": 320,
+          "refused": 0,
+          "events": 960,
+          "hash": "a3af1267"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "configuration": {
+    "seed": 20260905,
+    "pace": "standard",
+    "size": "standard",
+    "factionCount": 12,
+    "rulesVersion": 35
+  },
+  "maxRounds": 900,
+  "contentHash": "015468d1",
+  "scope": "Ordinary observation-fed AI. No counterfactual commands. Global canonical facts are labeled separately and never passed to the planner. Selected source fingerprints are not a whole-repository manifest.",
+  "bounds": {
+    "plans": 25000,
+    "patrolSamples": 20000,
+    "readinessSamples": 15000,
+    "snapshots": 3,
+    "threatsPerPatrol": 12,
+    "projectHosts": 8,
+    "patrolBlockedEvents": 64
+  },
+  "selectedSourceHashes": {
+    "scripts/diagnose-patrol-ai.ts": "17d5ecb6c628191b3b532cc37188b67e8bba47558cf25ac93e5ccbff813ca282",
+    "scripts/measure-pacing.ts": "9938ad6417b04327a922810a6b82e5ab81aa494965810cbd86eb869b29f5a1d8",
+    "packages/ai/src/index.ts": "024d7b09390089f6d91818aa1e15e2fa5c882c6b48f8fc94fd18837879ac051d",
+    "packages/ai/src/patrols.ts": "2e54a0c8fc03160c891eb475095956099eb5c9e568e546cd3569de652179f82d",
+    "packages/ai/src/theaters.ts": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d",
+    "packages/ai/src/progression.ts": "8c47c515b51d5e673a7b41fb6832e9d65c17d60c789ccf128e3df7db38541e1e",
+    "packages/sim/src/patrols.ts": "ee76ecf7cb7d2a41a71beea5a1df8af9d46842fa355f48d1f71789f0cac0cc15",
+    "packages/sim/src/simulation.ts": "f629193471e393fdffb9e73c9ec8e2d5d5fae08ef6431ca5dee815cf05dd0e6b"
+  }
+}

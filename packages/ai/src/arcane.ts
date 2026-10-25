@@ -1,7 +1,7 @@
 import { hexDistance } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
-import { heldTheaterArmyIds } from './theaters';
+import { heldDelegatedArmyIds } from './theaters';
 
 /** Rules 23. A realm cannot study Arcane Theory until it holds a surveyed seam,
  * so a realm without one pays to survey the ground it already occupies. Surveys
@@ -9,7 +9,7 @@ import { heldTheaterArmyIds } from './theaters';
 const SURVEY_TURNS = 6;
 const SURVEY_RESERVE = 60;
 
-export function planArcaneSurvey(view: Observation, heldArmyIds: ReadonlySet<string> = heldTheaterArmyIds(view)): AiPlan | null {
+export function planArcaneSurvey(view: Observation, heldArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): AiPlan | null {
   if (view.arcaneSites.some(site => site.controlled)) return null;
   if (view.treasury < view.arcaneSearchCoinCost + SURVEY_RESERVE) return null;
   const seat = view.factions.findIndex(faction => faction.id === view.factionId);

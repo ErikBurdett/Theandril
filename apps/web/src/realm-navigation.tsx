@@ -90,6 +90,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const charters = new Map(view.charters.map(charter => [charter.settlementId, charter]));
+  const patrols = new Map((view.patrols ?? []).filter(patrol => patrol.factionId === view.factionId).map(patrol => [patrol.armyId, patrol]));
   const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onTheaterCommand) : Boolean(onGroupCharter || onGroupProduction));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
   return <div className="realm-registry-content">
@@ -105,6 +106,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
       const town = 'queue' in item ? item : undefined;
       const route = routes.get(item.id);
       const charter = charters.get(item.id);
+      const patrol = patrols.get(item.id);
       return <div className={`registry-row${groupEnabled ? ' registry-row-group' : ''}`} key={item.id}>
         {groupEnabled && <label className="registry-group-check">{availableGroupIds.has(item.id) ? <input type="checkbox" aria-label={`Select ${item.name} for group orders`} checked={currentGroupIds.has(item.id)} disabled={locked || (!currentGroupIds.has(item.id) && currentGroupIds.size >= GROUP_POSTING_LIMIT)} onChange={event => {
           const checked = event.target.checked;
@@ -118,6 +120,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
             {army.commander && <small>Commander: {army.commander.name}</small>}
             {army.overCommand && <small className="registry-route-state">⚑ Over command · {army.formations.length} / {army.formationCapacity}</small>}
             {army.agents.some(agent => agent.status === 'mission') && <small className="registry-route-state">⚑ Stationary mission</small>}
+            {patrol && <small className="registry-route-state">Patrol {patrol.enabled ? `to hex ${patrol.targetCell}` : 'paused'}{patrol.blocker ? ` · ${patrol.blocker}` : ''}</small>}
             {route && <small className="registry-route-state">{route.status === 'paused' ? '⚑ Route interrupted' : '↝ Travel queued'}</small>}</>}
           {town && <><small>{town.population} people · {town.queue.length ? itemName(town.queue[0]!.itemId) : 'No production'}</small>
             {charter && <small>{CHARTER_NAMES[charter.focus]} charter · {charter.ceiling} coin per work · {charter.blocker ?? (town.queue.length ? 'Current queue comes first.' : charter.itemName ? `Next: ${charter.itemName}.` : 'Waiting for the next turn.')}</small>}</>}

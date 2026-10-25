@@ -10,6 +10,12 @@ export function heldTheaterArmyIds(view: Observation): Set<string> {
     .flatMap(theater => theater.armyIds));
 }
 
+/** Enabled standing delegation keeps an army out of competing actor planners. */
+export function heldDelegatedArmyIds(view: Observation): Set<string> {
+  return new Set([...heldTheaterArmyIds(view), ...(view.patrols ?? [])
+    .filter(patrol => patrol.factionId === view.factionId && patrol.enabled).map(patrol => patrol.armyId)]);
+}
+
 export const MAX_THEATER_ADOPTION_HEARTHS = 4;
 export const MAX_THEATER_ADOPTION_ROUTE_QUERIES = 8;
 export interface TheaterPlan extends AiPlan { heldArmyIds: Set<string>; routeQueries: number; targetSearchExpandedNodes: number }
@@ -18,7 +24,7 @@ export interface TheaterPlan extends AiPlan { heldArmyIds: Set<string>; routeQue
  * owns subsequent distribution; the AI neither duplicates its routing nor
  * rewrites a player's existing (including paused) theater configuration. */
 export function planDefenseTheater(view: Observation): TheaterPlan {
-  const heldArmyIds = heldTheaterArmyIds(view);
+  const heldArmyIds = heldDelegatedArmyIds(view);
   let routeQueries = 0, targetSearchExpandedNodes = 0;
   const result = (commands: GameCommand[] = [], reasons: string[] = []): TheaterPlan => ({ commands, reasons, heldArmyIds, routeQueries, targetSearchExpandedNodes });
   if (!view.theaters || view.theaters.some(theater => theater.factionId === view.factionId)
@@ -34,6 +40,8 @@ export function planDefenseTheater(view: Observation): TheaterPlan {
   const limit = Math.min(view.theaterReinforcement ? 3 : 2, Math.floor(military.length / 3));
   if (!limit) return result();
   const committed = new Set([
+    ...heldArmyIds,
+    ...(view.patrols ?? []).map(patrol => patrol.armyId),
     ...military.slice(0, 2).map(army => army.id),
     ...view.routes.map(route => route.armyId),
     ...view.postings.map(posting => posting.armyId),

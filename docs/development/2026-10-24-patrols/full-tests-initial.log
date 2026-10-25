@@ -1,0 +1,169 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/save.test.ts (30 tests | 6 failed) 192ms
+     × migrates explicit v0 nextEntityId snapshots without changing campaign state 17ms
+     × verifies v1 checksums and the known content pack before adding warfare defaults 6ms
+     × migrates checked v2 state into settlement provenance and diplomacy defaults 5ms
+     × continues a synthetic v2 field-battle shape with an initialized war memory 15ms
+     × migrates the recognized v3 content pack and verifies its checksum before defaults 5ms
+     × preserves a synthetic v3 siege-battle shape and its pending conquest decision 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:122:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:130:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:148:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:167:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:180:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "patrols"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"patrols\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:954:25
+    952|   let originalVersion: number;
+    953|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    954|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    955|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    956|   const data = envelope.state;
+ ❯ migrateCurrent packages/sim/src/save.test.ts:202:24
+ ❯ packages/sim/src/save.test.ts:206:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 272 passed (273)
+      Tests  6 failed | 2200 passed (2206)
+   Start at  17:43:36
+   Duration  56.58s (transform 4.90s, setup 0ms, import 28.84s, tests 178.95s, environment 13ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

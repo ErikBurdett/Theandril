@@ -13,6 +13,7 @@ const applyLegacy = (state: GameState, command: unknown) => applyCommandForVersi
 interface SaveFixture {
   version: number; gameVersion: string; contentHash: string; stateChecksum: string;
   state: {
+    patrols: GameState['patrols'];
     supplyAccess: GameState['supplyAccess'];
     theaters: GameState['theaters']; nextTheaterId: number;
     selectionGroups: GameState['selectionGroups']; nextSelectionGroupId: number;
@@ -77,6 +78,7 @@ function previousV3State(save: SaveFixture) {
   if (save.state.selectionGroups.length || save.state.nextSelectionGroupId !== 1) throw new Error('Synthetic historical projection cannot discard saved group metadata.');
   if (save.state.theaters.length || save.state.nextTheaterId !== 1) throw new Error('Synthetic historical projection cannot discard theater metadata.');
   if (save.state.supplyAccess.offers.length || save.state.supplyAccess.agreements.length || save.state.supplyAccess.nextId !== 1) throw new Error('Synthetic historical projection cannot discard supply access metadata.');
+  if (save.state.patrols.length) throw new Error('Synthetic historical projection cannot discard standing patrols.');
   const { supplyAccess: _access, theaters: _theaters, nextTheaterId: _theaterId, selectionGroups: _groups, nextSelectionGroupId: _groupId, progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
   const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
@@ -85,7 +87,7 @@ function previousV3State(save: SaveFixture) {
   };
   // Patronage exists only from rules 22; a v3 projection carries wars, offers and treaties alone.
   const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = state.diplomacy;
-  const { arcaneSurveys: _surveys, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
+  const { patrols: _patrols, arcaneSurveys: _surveys, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
   return { ...beforeSeams, diplomacy, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
 }
 

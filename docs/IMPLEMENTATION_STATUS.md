@@ -1,5 +1,132 @@
 # Theandril implementation status
 
+## AI review of interrupted patrols — 2026-10-24
+
+**Local verified defect correction; campaign pacing remains unresolved.** A
+generated Long campaign proved that an enabled patrol could remain reserved for
+284 sampled turns after its route paused, despite peace and a legal short path.
+The AI now explicitly reviews a matching single-leg home route and submits
+ordinary Resume, bounded to four path queries and four commands per pass. Both
+endpoints must remain owned hearths; actual supply, mobility, direct overrides
+and observed wartime forces/settlements within sight are checked. Stable rotation
+prevents fixed-ID starvation. Saved patrol configuration and actor reservations
+remain intact. Player-controlled canonical movement never resumes itself.
+
+**Authority and history.** This runs only when AI controls the realm. Identical
+manually queued single legs cannot be distinguished by provenance and may also
+be reviewed after AI takeover; disabled patrols, other destinations and larger
+programs stay untouched. Rules/save remain **35**, content **`015468d1`**. Original
+AI source, exact generated snapshots, the pre-change campaign trace and both
+fail-before regressions are retained. Current ordinary commands reload and
+replay exactly; no canonical schema or command semantics changed.
+
+**Verification.** Full local suite: **2,217 tests / 275 files, 61.66 seconds**,
+four workers, unchanged limits. Typecheck, lint and build pass. Two built-production
+journeys pass in 11.2 seconds with no development hooks: a real Watch round
+records the recovery, then restores its exact manual save/archive, while the
+player patrol and narrow enlarged-text flow remain intact. Independent source
+review finds no blocker. Huge/Legendary 128-patrol AI review medians are
+0.666/0.984 ms for four safe resumes and 0.255/0.667 ms when nearby threats block
+all reviews. These isolate short-route planning, not whole turns or organic scale.
+[Evidence, failures and limits](development/2026-10-24-patrol-recovery/README.md).
+
+**Pacing, including adverse results.** With fixed prices and seeds
+20260905/20260906/20260907, Standard ends at **219/193/214**, Long at
+**336/304/286**, Epic at **374/278/320**. The original Long seed is one turn
+slower than the preceding patrol checkpoint, and two Epic seeds are now below
+350–400. The original Long slowdown is not fixed. There are no refused submitted
+commands or theater routes; one Standard automatic patrol route was blocked on
+turn 81 and succeeded next turn. All nine campaigns reach prosperity. No price,
+proxy bound or release target changed. **DH-021, ACT-32/M3 and all fifteen release
+gates remain open.** Next investigate victory readiness, counterplay and funding
+across these seeds with the corrected AI before deciding any deliberate repricing.
+Obsolete circuits, escorts and broader delegation remain unfinished. Work is
+local and uncommitted; the illustrated dispatch remains draft.
+
+## Saved two-point land patrols — 2026-10-24
+
+**Local behavior checkpoint; pacing unresolved. ACT-32/M3 remains in progress.**
+Combat land armies ashore can now keep a two-point patrol through ordinary saved
+commands. The army inspector shows the next point, actual blockers and explicit
+update, pause, resume and remove controls. An optional saved policy pauses future
+assignments when the realm is at war; peace never silently resumes it. Updating
+that policy preserves an existing pause. Direct active/paused travel, postings,
+transport, missions and sieges retain priority. Pause/remove preserves travel
+already issued. No automatic attacks or declarations of war are added.
+
+**AI and scale.** During peace, the AI may assign one spare single-company force
+to a short circuit between owned hearths, retaining scouts, specialists, existing
+assignments and its two strongest field armies. AI circuits persist through war;
+the measured automatic-war-pause alternative produced worse campaign pacing.
+All actor planners preserve enabled patrol assignments. Allocation permits eight
+ordinary route attempts per realm per turn with deterministic rotation, within
+128 patrols per realm and 8,192 globally. Isolated allocation medians for authored
+Huge/Legendary workloads with 1,500/4,000 patrols are 4.588/6.281 ms; these short
+routes do not certify full turns, worst-case searches, rendering or organic scale.
+
+**History and verification.** Rules/save **35**, unchanged content **`015468d1`**.
+Six genuine pre-change rules-34 save/archive checkpoints preserve original bytes,
+replay and independent continuations. Frozen schemas reject patrol fields and
+commands; older loads initialize an empty register and populated downgrades are
+refused. Mixed history, reopened storage and portable recovery pass. The full
+local suite passes **2,206 tests across 273 files in 56.85 seconds**, four workers
+and unchanged limits. Eleven distinct affected gameplay journeys pass across
+retained runs; three built-production journeys pass in 11.3 seconds without
+development hooks. Typecheck, lint, content validation and build pass. Native
+desktop, 390px and enlarged-text captures, independent source reviews, original
+failures and exact source/image manifests are in the
+[work packet](development/2026-10-24-patrols/README.md).
+
+**Known pacing regression.** The final seed-20260905 Standard-map/twelve-realm
+campaigns end at Standard **236**, Long **335**, Epic **374**, versus frozen
+rules 34's **233/311/349**. All finish with no submitted or automatic refusals;
+the Long campaign is **24 turns slower**. Epic is within its 350–400 target, but
+Standard/Long remain above their approximate targets. The rejected wartime-pause
+AI experiment ended at 243/375/427. Prices and proxy bounds are unchanged.
+**DH-021 remains open**, now including the new Long drift; no balance acceptance
+or release gate is claimed. Next: investigate patrol opportunity cost with fixed
+prices and more headline seeds before expanding delegation. Escorts, longer
+programs, broader governors and organic mature-realm acceptance remain open.
+All fifteen release gates remain open. The dispatch stays draft; no commit,
+push, deployment or public journal change was made.
+
+## Reusable army posting policies — 2026-10-24
+
+**Local, verified checkpoint. ACT-32/M3 remains in progress.** The army registry
+now saves up to 24 named personal posting templates. Each stores hold/join and
+either each army's current position or an owned-hearth destination policy.
+Recall fills the form without changing checks or issuing orders; a hearth
+policy requires a fresh owned target before explicit application to up to 128
+armies. Templates survive browser reloads and campaign changes, remain separate
+from campaign saves/exports, and preserve active postings when edited or deleted.
+Denied, malformed or newer preference storage preserves records and leaves direct
+posting controls usable. Retry opens a fresh connection.
+
+**Destination safety.** A selected hearth becoming unavailable no longer silently
+substitutes each army's current hex. The form requires a new target while still
+allowing existing postings to be cleared. Ordinary travel, canonical legality,
+partial refusals, individual overrides and worker recovery remain unchanged.
+
+**Evidence.** The full local suite passes **2,162 tests across 268 files in
+60.69 seconds** with four workers and unchanged budgets. Ten affected Chromium
+gameplay journeys pass in 56.2 seconds; two built-production journeys pass in
+7.8 seconds without development hooks. Typecheck, lint, content validation and
+the production build pass. The authored Legendary fixture has 100 owned armies,
+40 owned hearths and 4,000 armies overall. It verifies unchanged hash/traffic
+before Apply, one final publication, real save restoration and exact 100-order
+exported replay. A different-seed campaign verifies fresh hearth selection and
+clearing while a target is unresolved. Native desktop, 390px, enlarged-text and
+keyboard controls have source-linked evidence and independent review in the
+[work packet](development/2026-10-24-posting-templates/README.md).
+
+**Scope and compatibility.** Rules/save remain **34**, content **`015468d1`**.
+No simulation, AI, worker protocol, campaign pacing or hot turn/frame path changes.
+No new pacing measurement is claimed. This is the first reusable army posting
+policy type; multi-step programs, patrol/escorts, broader governor decisions and
+organic mature-realm acceptance remain open. All fifteen release gates and
+DH-021 remain open. The [developer dispatch is draft](development/2026-10-24-posting-templates/dispatch-draft.md);
+nothing was committed, pushed or deployed.
+
 ## Reinforcement, integrated delegation and negotiated supply — 2026-09-27
 
 **Published and live-verified. ACT-32/M3 and ACT-33/M4 remain in progress.** Defensive theaters may request zero to four extra guards in response to visible wartime combat land armies within three hexes of their protected hearths. One quiet allocation retains extra coverage. Physical guard floors and direct active/paused routes, postings, voyages, missions and sieges retain priority. Threats count army containers, not combat strength; each theater retains its sixteen-attempt route budget. The registry exposes reinforcement settings and actual reports. Grouped theater exceptions open the affected watch, while delegated idle members leave generic movement prompts.

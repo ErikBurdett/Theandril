@@ -93,7 +93,7 @@ function coverageIndex(state: GameState, theaters: readonly DefenseTheater[]) {
     }
     if (theater.enabled) floors.set(key(theater.factionId, town.cell), theater.guardsPerSettlement + extraGuards);
   }
-  return { stationed, incoming, floors, reinforcements, key, count, postings: new Set(state.postings.map(item => item.armyId)), besiegers: new Set(Object.values(state.sieges).map(item => item.armyId)) };
+  return { stationed, incoming, floors, reinforcements, key, count, postings: new Set(state.postings.map(item => item.armyId)), patrols: new Set(rulesVersion(state) >= 35 ? state.patrols.filter(item => item.enabled).map(item => item.armyId) : []), besiegers: new Set(Object.values(state.sieges).map(item => item.armyId)) };
 }
 type Coverage = ReturnType<typeof coverageIndex>;
 function hearthRows(state: GameState, theater: DefenseTheater, index: Coverage): TheaterHearth[] {
@@ -109,6 +109,7 @@ function hearthRows(state: GameState, theater: DefenseTheater, index: Coverage):
 function memberBlocker(state: GameState, army: Army, index: Coverage): string | null {
   if (state.transports[army.id]) return 'This army is aboard a fleet; theater assignments resume ashore.';
   if (index.postings.has(army.id)) return 'A standing posting takes priority. Clear it to delegate this army.';
+  if (index.patrols.has(army.id)) return 'An active patrol takes priority. Pause or clear it to delegate this army.';
   if (state.routes[army.id]) return state.routes[army.id]!.status === 'paused' ? 'Paused travel takes priority. Resume or cancel it explicitly.' : 'Existing travel takes priority until it finishes.';
   if (index.besiegers.has(army.id)) return 'This army is maintaining a siege.';
   if (armyHasCharacterMission(state, army.id)) return 'This army has an active character mission.';
@@ -167,7 +168,7 @@ export function observeTheaters(state: GameState, factionId: string): ObservedDe
       if (!army || army.factionId !== factionId) return { armyId, cell: null, status: 'unavailable', targetCell: null, blocker: 'This army is no longer available.' };
       const route = state.routes[armyId], target = route?.waypoints.at(-1) ?? null;
       const blocker = memberBlocker(state, army, index);
-      const status: TheaterMember['status'] = state.transports[armyId] ? 'blocked' : route || index.postings.has(armyId) ? route?.status === 'active' && available.has(target) ? 'incoming' : 'overridden' : blocker ? 'blocked' : available.has(army.cell) ? 'garrison' : army.cell === theater.reserveCell ? 'reserve' : 'ready';
+      const status: TheaterMember['status'] = state.transports[armyId] ? 'blocked' : route || index.postings.has(armyId) || index.patrols.has(armyId) ? route?.status === 'active' && available.has(target) ? 'incoming' : 'overridden' : blocker ? 'blocked' : available.has(army.cell) ? 'garrison' : army.cell === theater.reserveCell ? 'reserve' : 'ready';
       return { armyId, cell: army.cell, status, targetCell: target, blocker };
     });
     return { ...theater, ...(theater.reinforcementHolds ? { reinforcementHolds: theater.reinforcementHolds.map(hold => ({ ...hold })) } : {}), armyIds: [...theater.armyIds], settlementIds: [...theater.settlementIds], lastDispatches: theater.lastDispatches.map(item => ({ ...item })), hearths, members, missingGuards: hearths.reduce((sum, row) => sum + row.deficit, 0),

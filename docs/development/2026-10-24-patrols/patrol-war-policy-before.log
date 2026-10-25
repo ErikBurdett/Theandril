@@ -1,0 +1,56 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/patrols.test.ts (20 tests | 2 failed | 18 skipped) 41ms
+     × can pause at war through a public saved policy while ordinary patrols continue, without silently resuming after peace 33ms
+     × a war policy pause preserves every active or paused travel field and requires an explicit saved boolean 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/patrols.test.ts > saved two-point land patrols > can pause at war through a public saved policy while ordinary patrols continue, without silently resuming after peace
+AssertionError: setPatrol: Malformed command: Unrecognized key: "pauseOnWar": expected { ok: false, …(2) } to match object { ok: true }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "ok": true,
++   "ok": false,
+  }
+
+ ❯ record packages/sim/src/patrols.test.ts:84:167
+
+ ❯ packages/sim/src/patrols.test.ts:85:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unit| packages/sim/src/patrols.test.ts > saved two-point land patrols > a war policy pause preserves every active or paused travel field and requires an explicit saved boolean
+AssertionError: {"type":"setPatrol","factionId":"faction.ashen_compact","armyId":"army.10","firstCell":495,"secondCell":510,"enabled":true,"pauseOnWar":true}: expected { ok: false, …(2) } to match object { ok: true }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "ok": true,
++   "ok": false,
+  }
+
+ ❯ issue packages/sim/src/patrols.test.ts:16:88
+     14|
+     15| const issue = (state: GameState, command: GameCommand) => {
+     16|   const result = applyCommand(state, command); expect(result, JSON.str…
+       |                                                                                        ^
+     17| };
+     18| const end = (state: GameState) => issue(state, { type: 'endTurn', fact…
+ ❯ packages/sim/src/patrols.test.ts:113:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 18 skipped (20)
+   Start at  17:36:59
+   Duration  678ms (transform 445ms, setup 0ms, import 571ms, tests 41ms, environment 0ms)
+

@@ -1,0 +1,49 @@
+{
+  "diagnostic": "diagnosis-long/summary.json",
+  "diagnosticSha256": "092fab29f003dce46be0e0871508a4ccba5797c4ee64528e963b8870784a3bb3",
+  "baseline": "docs/development/2026-10-24-patrols/pacing-final.json",
+  "baselineSha256": "d6b39175e102d070240d9ec7dd63cf20ff4be54b57468885ce3b2d9746534712",
+  "comparisons": {
+    "turn": {
+      "baselineField": "turn",
+      "equal": true
+    },
+    "finalHash": {
+      "baselineField": "stateHash",
+      "equal": true
+    },
+    "winner": {
+      "baselineField": "winner",
+      "equal": true
+    },
+    "path": {
+      "baselineField": "path",
+      "equal": true
+    },
+    "refused": {
+      "baselineField": "refused",
+      "equal": true
+    },
+    "automaticRefusals": {
+      "baselineField": "automaticRefusals",
+      "equal": true
+    },
+    "patrolRouteAttempts": {
+      "baselineField": "patrolRouteAttempts",
+      "equal": true
+    },
+    "patrolRouteRefusals": {
+      "baselineField": "patrolRouteRefusals",
+      "equal": true
+    },
+    "commandCounts": {
+      "baselineField": "commands",
+      "equal": true
+    },
+    "eventCounts": {
+      "baselineField": "events",
+      "equal": true
+    }
+  },
+  "scope": "Exact whole dictionaries for commands/events, not selected totals. Baseline does not retain a command-result trace hash; order-trace equivalence cannot be independently asserted from that artifact."
+}

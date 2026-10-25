@@ -1,6 +1,6 @@
 import type { CaptureOption, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
-import { heldTheaterArmyIds } from './theaters';
+import { heldDelegatedArmyIds } from './theaters';
 
 /** Scores supplied consequences; the simulation remains the authority for available outcomes. */
 export function chooseCaptureOption(view: Observation): CaptureOption | undefined {
@@ -15,7 +15,7 @@ export function chooseCaptureOption(view: Observation): CaptureOption | undefine
   return [...pending.options].sort((a, b) => score(b) - score(a) || (a.outcome < b.outcome ? -1 : a.outcome > b.outcome ? 1 : 0))[0];
 }
 
-export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet<string> = heldTheaterArmyIds(view)): AiPlan | null {
+export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): AiPlan | null {
   if (view.pendingCapture) {
     const option = chooseCaptureOption(view);
     if (!option) return { commands: [], reasons: ['Await the controlling faction’s capture decision.'] };

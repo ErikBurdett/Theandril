@@ -2,6 +2,9 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-24 | [AI recovery of interrupted home patrols](2026-10-24-patrol-recovery.md) | Local only; 2,217 tests and 2 production journeys pass; nine pacing comparisons retain Long delay and two early Epic finishes; DH-021 open |
+| 2026-10-24 | [Saved two-point land patrols](2026-10-24-land-patrols.md) | Local only; 2,206 tests, 11 affected gameplay and 3 production journeys pass; Long pacing regression remains open with DH-021 |
+| 2026-10-24 | [Project orientation and reusable army posting policies](2026-10-24-posting-templates.md) | Local only; ACT-32/M3 advanced; 2,162 tests, 10 affected gameplay and 2 production journeys pass; all gates remain open |
 | 2026-09-28 | [Reinforcement, supply agreements and verified deployment](2026-09-28-reinforcement-logistics.md) | Published `abb2369`; ACT-32/33 advanced; 2,146 tests, 49 affected gameplay, 35 local and 35 live Pages journeys pass |
 | 2026-09-27 | [Defensive theaters and verified deployment](2026-09-27-defense-theaters.md) | Published `bce46a1`; ACT-32 advanced; 2,075 tests, 33 affected gameplay, 34 local and 34 live Pages journeys pass |
 | 2026-09-27 | [Group travel and verified deployment](2026-09-27-group-travel.md) | Published `7dfe0c6`; ACT-32 advanced; 2,000 tests, 23 distinct affected gameplay, 33 local and 33 live Pages journeys pass |

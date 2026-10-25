@@ -1,0 +1,91 @@
+{
+  "scope": "Isolated ordinary-command branch from unchanged retained snapshot; not injected into original campaign and not a pacing measurement.",
+  "snapshot": "docs/development/2026-10-24-patrol-recovery/diagnosis-long/snapshot-1-turn-58.json",
+  "snapshotSha256": "c1c28ea92aca0919f084da92e4627984ec710924b27d98d7a4775dcd7eb55ca8",
+  "beforeHash": "17c538ce",
+  "command": {
+    "type": "resumeMovement",
+    "factionId": "faction.mire_courts",
+    "armyId": "army.198"
+  },
+  "before": {
+    "cell": 10146,
+    "movement": 6,
+    "patrol": {
+      "factionId": "faction.mire_courts",
+      "armyId": "army.198",
+      "firstCell": 10368,
+      "secondCell": 10149,
+      "enabled": true,
+      "pauseOnWar": false,
+      "target": "first",
+      "lastAttemptTurn": 50,
+      "lastError": null
+    },
+    "wars": [],
+    "supply": {
+      "armyId": "army.198",
+      "supplied": true,
+      "sourceSettlementId": "settlement.31",
+      "reason": "Supplied from Hearth 1."
+    }
+  },
+  "result": {
+    "ok": true,
+    "events": [
+      {
+        "turn": 58,
+        "factionId": "faction.mire_courts",
+        "type": "movement_resumed",
+        "message": "Charter outriders resumed its travel order after reviewing current conditions.",
+        "cell": 10146
+      },
+      {
+        "turn": 58,
+        "factionId": "faction.mire_courts",
+        "type": "army_moved",
+        "message": "Charter outriders explored hex 10145.",
+        "cell": 10145
+      },
+      {
+        "turn": 58,
+        "factionId": "faction.mire_courts",
+        "type": "army_moved",
+        "message": "Charter outriders explored hex 10144.",
+        "cell": 10144
+      },
+      {
+        "turn": 58,
+        "factionId": "faction.mire_courts",
+        "type": "army_moved",
+        "message": "Charter outriders explored hex 10368.",
+        "cell": 10368
+      },
+      {
+        "turn": 58,
+        "factionId": "faction.mire_courts",
+        "type": "movement_completed",
+        "message": "Charter outriders reached its final travel destination.",
+        "cell": 10368
+      }
+    ]
+  },
+  "after": {
+    "cell": 10368,
+    "movement": 3,
+    "route": null,
+    "patrol": {
+      "factionId": "faction.mire_courts",
+      "armyId": "army.198",
+      "firstCell": 10368,
+      "secondCell": 10149,
+      "enabled": true,
+      "pauseOnWar": false,
+      "target": "first",
+      "lastAttemptTurn": 50,
+      "lastError": null
+    },
+    "hash": "2b810730"
+  },
+  "exactRepeatAndReload": true
+}

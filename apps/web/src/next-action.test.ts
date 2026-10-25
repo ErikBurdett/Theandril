@@ -16,6 +16,27 @@ const bindings = { army: 'n', settlement: 's', turn: 'e' };
 const keyEvent = { key: 'n', shiftKey: false, ctrlKey: false, altKey: false, metaKey: false, repeat: false, isComposing: false, defaultPrevented: false };
 
 describe('observed-only next-action navigation', () => {
+  it('suppresses working patrol idleness but retains failures, paused routes and manual control after patrol pause', () => {
+    const patrol = (armyId: string, override: Partial<NonNullable<Observation['patrols']>[number]> = {}): NonNullable<Observation['patrols']>[number] => ({
+      armyId, factionId: initial.factionId, firstCell: 10, secondCell: 11, target: 'second', targetCell: 11,
+      enabled: true, pauseOnWar: false, lastAttemptTurn: null, lastError: null, status: 'ready', blocker: null, ...override,
+    });
+    const view: Observation = { ...initial, armies: ['working', 'stalled', 'paused', 'route', 'posted', 'foreign-policy'].map(id => army(id)),
+      routes: [route('route', 'paused')],
+      postings: [{ armyId: 'posted', factionId: initial.factionId, cell: 10, mode: 'hold', arrived: true, blocker: null }],
+      patrols: [patrol('working'), patrol('stalled', { status: 'waiting', blocker: 'No known route.', lastError: 'No known route.', lastAttemptTurn: 2 }),
+        patrol('paused', { enabled: false, status: 'paused', blocker: 'Patrol paused.' }), patrol('route'),
+        patrol('posted', { status: 'overridden', blocker: 'A posting comes first.' }), patrol('foreign-policy', { factionId: 'other' })],
+    };
+    const before = JSON.stringify(view), candidates = actionCandidates(view);
+    expect(candidates.armies.map(({ id, cause }) => ({ id, cause }))).toEqual([
+      { id: 'foreign-policy', cause: 'movement' }, { id: 'paused', cause: 'movement' },
+      { id: 'route', cause: 'route-interrupted' }, { id: 'stalled', cause: 'patrol-stalled' },
+    ]);
+    expect(actionGroups(candidates).find(group => group.cause === 'patrol-stalled')?.label).toBe('1 company with a stalled patrol');
+    expect(JSON.stringify(view)).toBe(before);
+  });
+
   it('reports newly unassigned households after real growth even while the town has a full production queue', () => {
     const game = growingHouseholdCampaign(), factionId = game.turnOwnerId;
     const before = getObservation(game, factionId, { landDetails: 'none' });

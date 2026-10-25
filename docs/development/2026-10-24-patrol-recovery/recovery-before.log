@@ -1,0 +1,99 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-recovery.test.ts (6 tests | 4 failed) 182ms
+     × waits for a real nearby hostile to clear, then resumes through public commands with save and journal parity 65ms
+     × rotates bounded recovery across 128 synthetic observed records without rewriting policies or losing reservations 21ms
+     × bounds unsuccessful route reviews and does not spend recovery commands on an unreachable observed target 16ms
+     × has identical recovery proposals when unseen terrain and a distant foreign force change 19ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery.test.ts > explicit AI recovery of observed interrupted patrol legs > waits for a real nearby hostile to clear, then resumes through public commands with save and journal parity
+AssertionError: expected [] to deeply equal [ { type: 'resumeMovement', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.9",
+-     "factionId": "faction.ashen_compact",
+-     "type": "resumeMovement",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-recovery.test.ts:80:27
+     78|     const view = scene.peace(), unchanged = structuredClone(view), has…
+     79|     const plan = planPatrol(view);
+     80|     expect(plan.commands).toEqual([{ type: 'resumeMovement', factionId…
+       |                           ^
+     81|     expect(plan.heldArmyIds.has(armyId)).toBe(true);
+     82|     expect(plan.routeQueries).toBe(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery.test.ts > explicit AI recovery of observed interrupted patrol legs > rotates bounded recovery across 128 synthetic observed records without rewriting policies or losing reservations
+AssertionError: expected +0 to be 4 // Object.is equality
+
+- Expected
++ Received
+
+- 4
++ 0
+
+ ❯ packages/ai/src/patrol-recovery.test.ts:143:33
+    141|     for (let turn = base.turn; turn < base.turn + 32; turn++) {
+    142|       const view = { ...structuredClone(base), turn }, before = struct…
+    143|       expect(plan.routeQueries).toBe(4); expect(plan.commands).toHaveL…
+       |                                 ^
+    144|       expect(plan.heldArmyIds.size).toBe(128);
+    145|       for (const command of plan.commands) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery.test.ts > explicit AI recovery of observed interrupted patrol legs > bounds unsuccessful route reviews and does not spend recovery commands on an unreachable observed target
+AssertionError: expected +0 to be 4 // Object.is equality
+
+- Expected
++ Received
+
+- 4
++ 0
+
+ ❯ packages/ai/src/patrol-recovery.test.ts:163:31
+    161|     view.cells.find(cell => cell.cell === 510)!.terrain = 0;
+    162|     const plan = planPatrol(view);
+    163|     expect(plan.routeQueries).toBe(4); expect(plan.commands).toEqual([…
+       |                               ^
+    164|     expect(plan.heldArmyIds.size).toBe(128);
+    165|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery.test.ts > explicit AI recovery of observed interrupted patrol legs > has identical recovery proposals when unseen terrain and a distant foreign force change
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ packages/ai/src/patrol-recovery.test.ts:181:27
+    179|     expect(changed).toEqual(view);
+    180|     expect(planPatrol(changed)).toEqual(planPatrol(view));
+    181|     expect(resumes(view)).toHaveLength(1);
+       |                           ^
+    182|   });
+    183| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 2 passed (6)
+   Start at  19:54:08
+   Duration  868ms (transform 487ms, setup 0ms, import 618ms, tests 182ms, environment 0ms)
+

@@ -44,6 +44,7 @@ function play(entry: Case, rules?: RulesVersion) {
 
 function playCampaign(state: GameState) {
   let refused = 0, automaticRefusals = 0, theaterDispatches = 0, reinforcementPhases = 0, dispatchesToThreatenedHearths = 0;
+  let patrolRouteAttempts = 0, patrolRouteRefusals = 0;
   const commands: Record<string, number> = {}, events: Record<string, number> = {};
   const issue = (command: GameCommand): void => {
     const result = applyCommand(state, command);
@@ -60,6 +61,11 @@ function playCampaign(state: GameState) {
         theaterDispatches++;
         if (heldCells.has(dispatch.targetCell)) dispatchesToThreatenedHearths++;
       }
+    }
+    if (result.ok && command.type === 'endTurn') for (const patrol of state.patrols) {
+      if (patrol.lastAttemptTurn !== state.turn) continue;
+      patrolRouteAttempts++;
+      if (patrol.lastError) patrolRouteRefusals++;
     }
     if (!result.ok) { refused++; process.stderr.write(`  refused at turn ${state.turn}: ${JSON.stringify(command)}: ${result.error}\n`); }
   };
@@ -84,7 +90,7 @@ function playCampaign(state: GameState) {
     issue({ type: 'endTurn', factionId: state.turnOwnerId });
   }
   return { rulesVersion: rulesVersion(state), turn: state.turn, path: state.victory?.path ?? 'none', winner: state.victory?.factionId ?? null,
-    refused, automaticRefusals, theaterDispatches, reinforcementPhases, dispatchesToThreatenedHearths, depots: state.depots.length, stateHash: stateHashForVersion(state, rulesVersion(state)), commands, events };
+    refused, automaticRefusals, theaterDispatches, reinforcementPhases, dispatchesToThreatenedHearths, patrolRouteAttempts, patrolRouteRefusals, depots: state.depots.length, stateHash: stateHashForVersion(state, rulesVersion(state)), commands, events };
 }
 
 const args = process.argv.slice(2);
@@ -94,7 +100,7 @@ const seeds = option('seeds')?.split(',').map(Number);
 const versions = option('rules')?.split(',').map(Number) as RulesVersion[] | undefined;
 if (args.some(arg => arg.startsWith('--') && !/^--(seeds|rules|json)=/.test(arg))
   || seeds?.some(seed => !Number.isInteger(seed) || seed < 0 || seed > 0xffff_ffff)
-  || versions?.some(version => version !== 33 && version !== 34)) throw new Error('Use --seeds=uint32,... --rules=33,34 (one or both versions) --json=path.');
+  || versions?.some(version => version !== 33 && version !== 34 && version !== 35)) throw new Error('Use --seeds=uint32,... --rules=33,34,35 (one or more versions) --json=path.');
 const selected = requested.length === 0 ? CASES.filter(entry => entry.name === 'headline')
   : requested.includes('all') ? CASES
     : CASES.filter(entry => requested.includes(entry.name) || requested.includes(entry.name.replace('headline-', '')));

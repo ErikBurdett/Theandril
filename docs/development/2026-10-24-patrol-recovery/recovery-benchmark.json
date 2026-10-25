@@ -1,0 +1,289 @@
+{
+  "scope": "Absolute isolated planPatrol recovery timing on authored Huge/Legendary mature populations. Each of128owned guard companies has an actual setPatrol and queueMovement leg, followed by canonical pauseMovement and an explicitly authored renewed movement budget. Flat land, two home hearths, many foreign armies visible through an own distant observer, ordinary declared wars. Each foreign faction occupies its own distinct cell within the distant observer's four-hex sight, optionally plus one nearby blocker: this measures indexing many observed entities and31/39distant hostile cells, not wide geographic threat distribution. One warmup and three fresh-observation samples. Excludes fixture setup, observation construction, hashing/serialization, assertions, command execution, complete AI turns, whole campaigns, worker transfer and rendering. Target expandedNodes excludes reachable-range work; each preview shares its4096-node cap between range and target search. No before-change speedup or worst-case path-search claim.",
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "015468d1",
+  "sourceHashes": [
+    {
+      "path": "scripts/benchmark-patrol-recovery.ts",
+      "sha256": "c071cb723e57b55ff554ddb254585d21bab54e87fb8925ff828223a370f72b28"
+    },
+    {
+      "path": "packages/ai/src/patrols.ts",
+      "sha256": "2e54a0c8fc03160c891eb475095956099eb5c9e568e546cd3569de652179f82d"
+    },
+    {
+      "path": "packages/ai/src/patrol-recovery.ts",
+      "sha256": "45d993c8cd8be96acb6f46729e6c8f38b224383871b640eb5b1f268e34ff17ff"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d"
+    },
+    {
+      "path": "packages/sim/src/movement.ts",
+      "sha256": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+    },
+    {
+      "path": "packages/sim/src/patrols.ts",
+      "sha256": "ee76ecf7cb7d2a41a71beea5a1df8af9d46842fa355f48d1f71789f0cac0cc15"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "sha256": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+    },
+    {
+      "path": "packages/test-fixtures/src/authored-land.ts",
+      "sha256": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891"
+    }
+  ],
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "distant-observed-hostiles",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1582,
+      "ownedPatrols": 128,
+      "observedArmies": 1582,
+      "observedHostiles": 1453,
+      "uniqueHostileCells": 31,
+      "observedCells": 507,
+      "observationBytes": 2132277,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.8009230000000116,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 0.5404129999999441,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 0.6660360000000765,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        }
+      ],
+      "medianMs": 0.6660360000000765,
+      "minMs": 0.5404129999999441,
+      "maxMs": 0.8009230000000116,
+      "commands": [
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1057"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1089"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121"
+        }
+      ],
+      "routeQueryLimit": 4,
+      "commandLimit": 4,
+      "pathNodeBudgetPerPreview": 4096,
+      "combinedRangeAndTargetNodeBound": 16384,
+      "canonicalHash": "520e012f",
+      "continuedHash": "afacba39",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryResumesAccepted": 4,
+      "untouchedPausedRoutes": 124
+    },
+    {
+      "size": "huge",
+      "workload": "nearby-observed-hostile",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1582,
+      "ownedPatrols": 128,
+      "observedArmies": 1582,
+      "observedHostiles": 1453,
+      "uniqueHostileCells": 32,
+      "observedCells": 507,
+      "observationBytes": 2132162,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.24756500000012238,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.2549220000000787,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.2645510000002105,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.2549220000000787,
+      "minMs": 0.24756500000012238,
+      "maxMs": 0.2645510000002105,
+      "commands": [],
+      "routeQueryLimit": 4,
+      "commandLimit": 4,
+      "pathNodeBudgetPerPreview": 4096,
+      "combinedRangeAndTargetNodeBound": 16384,
+      "canonicalHash": "476c6a75",
+      "continuedHash": "476c6a75",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryResumesAccepted": 0,
+      "untouchedPausedRoutes": 128
+    },
+    {
+      "size": "legendary",
+      "workload": "distant-observed-hostiles",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "globalArmies": 4029,
+      "ownedPatrols": 128,
+      "observedArmies": 4029,
+      "observedHostiles": 3900,
+      "uniqueHostileCells": 39,
+      "observedCells": 507,
+      "observationBytes": 4447101,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 1.1845839999996315,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 0.9836240000004182,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 0.9812570000003689,
+          "routeQueries": 4,
+          "targetSearchExpandedNodes": 40,
+          "commandCount": 4
+        }
+      ],
+      "medianMs": 0.9836240000004182,
+      "minMs": 0.9812570000003689,
+      "maxMs": 1.1845839999996315,
+      "commands": [
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1001"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1041"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1081"
+        },
+        {
+          "type": "resumeMovement",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121"
+        }
+      ],
+      "routeQueryLimit": 4,
+      "commandLimit": 4,
+      "pathNodeBudgetPerPreview": 4096,
+      "combinedRangeAndTargetNodeBound": 16384,
+      "canonicalHash": "79435b4a",
+      "continuedHash": "31193c1b",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryResumesAccepted": 4,
+      "untouchedPausedRoutes": 124
+    },
+    {
+      "size": "legendary",
+      "workload": "nearby-observed-hostile",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "globalArmies": 4029,
+      "ownedPatrols": 128,
+      "observedArmies": 4029,
+      "observedHostiles": 3900,
+      "uniqueHostileCells": 40,
+      "observedCells": 507,
+      "observationBytes": 4446985,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.6723959999999352,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.667475000000195,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.5413980000012089,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.667475000000195,
+      "minMs": 0.5413980000012089,
+      "maxMs": 0.6723959999999352,
+      "commands": [],
+      "routeQueryLimit": 4,
+      "commandLimit": 4,
+      "pathNodeBudgetPerPreview": 4096,
+      "combinedRangeAndTargetNodeBound": 16384,
+      "canonicalHash": "d4f9e229",
+      "continuedHash": "d4f9e229",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryResumesAccepted": 0,
+      "untouchedPausedRoutes": 128
+    }
+  ]
+}

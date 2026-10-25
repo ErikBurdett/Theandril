@@ -10,6 +10,7 @@ import { SettlementLand } from './land';
 import { MovementOrders, type MapMovement, type MapSelection } from './movement';
 import { FleetProvisions, NavalTransport, SettlementProduction } from './naval';
 import { ArmyPosting, SettlementMuster } from './postings';
+import { ArmyPatrol } from './patrols';
 import { RuinInspection, SettlementDefense, SiegeOrders } from './siege';
 import { AttackOrders } from './warfare';
 import type { LandQuery } from './use-land-query';
@@ -76,6 +77,7 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   const routes = army && <>
     <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>
     <ArmyPosting key={`posting-${army.id}`} army={army} view={view} busy={busy} issue={issue}/>
+    <ArmyPatrol key={`patrol-${army.id}`} army={army} view={view} busy={busy} issue={issue}/>
     {depot}
   </>;
   const composition = army && <ArmyComposition key={army.id} army={army} view={view} busy={busy} issue={issue} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>;

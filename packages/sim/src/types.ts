@@ -1,3 +1,4 @@
+import type { Patrol, ObservedPatrol, PatrolCommand } from './patrol-state';
 import type { DefenseTheater, ObservedDefenseTheater, TheaterCommand } from './theaters';
 import type { SupplyAccessState, SupplyAccessObservation, SupplyAccessCommand } from './supply-access-state';
 import type { SelectionGroup, SelectionGroupKind } from './selection-groups';
@@ -194,6 +195,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | PatrolCommand
   | SupplyAccessCommand
   | TheaterCommand
   | { type: 'setSelectionGroup'; factionId: string; groupId?: string; kind: SelectionGroupKind; name: string; memberIds: string[] }
@@ -252,6 +254,7 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  patrols: Patrol[];
   supplyAccess: SupplyAccessState;
   theaters: DefenseTheater[];
   nextTheaterId: number;
@@ -299,6 +302,7 @@ export interface GameState {
 }
 
 export interface Observation {
+  patrols?: ObservedPatrol[];
   supplyAccess?: SupplyAccessObservation;
   theaterReinforcement?: true;
   theaters?: ObservedDefenseTheater[];

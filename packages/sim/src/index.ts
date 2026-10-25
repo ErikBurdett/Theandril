@@ -58,3 +58,5 @@ export { observedDefenseTheaterSchema } from './theater-state';
 export { assessSupplyAccess, assessSupplyAccessOffer } from './supply-access';
 export { MAX_SUPPLY_ACCESS_IMPORTS, MAX_SUPPLY_ACCESS_OFFERS, SUPPLY_ACCESS_COIN_PER_TURN, supplyAccessAssessmentSchema, supplyAccessObservationSchema } from './supply-access-state';
 export type { SupplyAccessCommand, SupplyAccessState, SupplyAccessSource, SupplyAccessOffer, SupplyAccessAgreement, SupplyAccessObservation, SupplyAccessAssessment } from './supply-access-state';
+
+export * from './patrols';

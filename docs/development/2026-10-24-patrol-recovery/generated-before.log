@@ -1,0 +1,39 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-recovery-generated.test.ts (2 tests | 1 failed) 199ms
+     × reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly 122ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery-generated.test.ts > generated patrol interruption recovery > reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly
+AssertionError: expected [] to deeply equal [ { type: 'resumeMovement', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.198",
+-     "factionId": "faction.mire_courts",
+-     "type": "resumeMovement",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-recovery-generated.test.ts:26:27
+     24|     expect(view.patrols?.find(patrol => patrol.armyId === armyId)).toM…
+     25|     const plan = planPatrol(view);
+     26|     expect(plan.commands).toEqual([{ type: 'resumeMovement', factionId…
+       |                           ^
+     27|     expect(plan.heldArmyIds.has(armyId)).toBe(true);
+     28|     expect(view).toEqual(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  19:53:38
+   Duration  909ms (transform 514ms, setup 0ms, import 647ms, tests 199ms, environment 0ms)
+

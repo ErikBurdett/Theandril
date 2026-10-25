@@ -1,5 +1,59 @@
 # Performance measurements
 
+## AI patrol interruption review — local rules 35, 2026-10-24
+
+[Four authored cases](development/2026-10-24-patrol-recovery/recovery-benchmark.json)
+measure only `planPatrol` on permitted observations. Each has 128 paused own
+home-patrol legs and 1,453/3,900 visible foreign armies in distinct faction cells.
+One warmup precedes three fresh-observation samples. Node 26.7.0, i9-13900K.
+
+| World / review context | Global armies | Resume commands / path queries | Median ms |
+| --- | ---: | ---: | ---: |
+| Huge, threats distant | 1,582 | 4 / 4 | 0.666 |
+| Huge, threat within sight | 1,582 | 0 / 0 | 0.255 |
+| Legendary, threats distant | 4,029 | 4 / 4 | 0.984 |
+| Legendary, threat within sight | 4,029 | 0 / 0 | 0.667 |
+
+The four safe reviews expand forty target-search nodes in total; the existing
+combined range/target bound remains 16,384 across four queries. Actual resumes,
+unchanged policies, 124 remaining paused routes and exact saved continuation are
+checked outside timing. Threat cases preserve all 128 paused routes. Observed
+entities are indexed once; local sight checks avoid a patrol-by-global-enemy scan.
+
+Setup, observation construction (about 2.13/4.45 MB of authored view JSON), clone,
+hash, command execution, other AI phases, worker transfer and rendering are
+excluded. These are dense visible-force, short-path fixtures, not organically
+earned realms, worst-case searches, full-turn or sustained-memory certification.
+The initial invalid overlapping-faction fixture and corrected strict-load run
+are retained in [the packet](development/2026-10-24-patrol-recovery/README.md).
+The nine campaign configurations across three seeds expose unresolved pacing, including two
+Epic campaigns below their target; these timings do not clear any release gate.
+
+## Saved land patrols — local rules 35, 2026-10-24
+
+[Measured samples](development/2026-10-24-patrols/benchmark.json) use authored
+generator-4 mature realms, ordinary patrol commands and short explored routes.
+One discarded warmup precedes three independent identical-save samples. This
+measures only patrol allocation and, separately, patrol reports for every realm.
+
+| Authored world | Cells | Realms / patrols | Route attempts / refusals | Allocation median ms | All-realm reports median ms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Huge | 196,608 | 32 / 1,500 | 256 / 0 | 4.588 | 0.591 |
+| Legendary | 307,200 | 40 / 4,000 | 320 / 0 | 6.281 | 1.785 |
+
+All three samples per world preserve the same resulting hash and the eight-route
+attempt limit per realm. Allocation indexes patrols, postings, sieges and wars;
+each attempt uses the ordinary bounded pathfinder. Setup, deserialization,
+hashing, other turn phases, worker transfers and rendering are excluded. These
+are authored short-route workloads, not worst-case searches, organic scale,
+tail-latency or full-turn acceptance. Node 26.7.0; unchanged content `015468d1`.
+
+[The work packet](development/2026-10-24-patrols/README.md) records the separate
+headline pacing comparisons, including the adverse Long-campaign drift and the
+rejected automatic-war-pause AI experiment. Campaign-run wall times overlapped
+other integration checks and are not performance certification. DH-021 and all
+fifteen release gates remain open.
+
 ## Reinforcement and negotiated supply — local rules 34
 
 Measured on the i9-13900K development host with Node 26.7.0, rules/save 34 and

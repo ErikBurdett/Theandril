@@ -1,0 +1,59 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/reinforcement-logistics-save.test.ts (13 tests | 1 failed) 137ms
+     × hashes policy, legal holds and consumed supply identifiers, retaining exact current bytes 21ms
+ ❯ |unit| packages/persistence/src/reinforcement-logistics.test.ts (2 tests | 1 failed) 195ms
+   × modern reinforcement survives database reopen and portable export without rewriting rules33 routes or history 80ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/persistence/src/reinforcement-logistics.test.ts > modern reinforcement survives database reopen and portable export without rewriting rules33 routes or history
+AssertionError: expected { sequence: 13, turn: 2, …(9) } to match object { rulesVersion: 34, …(1) }
+(11 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "checkpointVersion": 34,
+-   "rulesVersion": 34,
++   "checkpointVersion": 35,
++   "rulesVersion": 35,
+  }
+
+ ❯ packages/persistence/src/reinforcement-logistics.test.ts:23:36
+     21|     expect(archive.initialSave).toBe(prior.archive.initialSave);
+     22|     expect(archive.records.slice(0, prior.entry.records)).toEqual(prio…
+     23|     expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 34, c…
+       |                                    ^
+     24|     const imported = deserializeCampaign(await importSave(await export…
+     25|     expect(imported.archive).toEqual(archive); expect(serializeGame(im…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unit| packages/sim/src/reinforcement-logistics-save.test.ts > strict current reinforcement and supply-access save boundary > hashes policy, legal holds and consumed supply identifiers, retaining exact current bytes
+AssertionError: expected 35 to be 34 // Object.is equality
+
+- Expected
++ Received
+
+- 34
++ 35
+
+ ❯ packages/sim/src/reinforcement-logistics-save.test.ts:30:38
+     28|     game.supplyAccess.nextId = 2; expect(stateHash(game)).not.toBe(hel…
+     29|     const save = serializeGame(game), restored = deserializeGame(save);
+     30|     expect(JSON.parse(save).version).toBe(34);
+       |                                      ^
+     31|     expect(restored.theaters).toEqual(game.theaters); expect(restored.…
+     32|     expect(serializeGame(restored)).toBe(save); expect(stateHash(resto…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  2 failed | 23 passed (25)
+   Start at  17:30:30
+   Duration  852ms (transform 1.56s, setup 0ms, import 2.15s, tests 712ms, environment 0ms)
+

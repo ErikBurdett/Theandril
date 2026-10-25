@@ -1,3 +1,4 @@
+import { assertNoPatrols, patrolStateSchema, validatePatrols } from './patrol-state';
 import { assertNoSelectionGroups, selectionGroupCounterSchema, selectionGroupStateSchema, validateSelectionGroups } from './selection-groups';
 import { assertNoTheaters, assertNoTheaterReinforcements, defenseTheaterV33StateSchema, defenseTheaterV34StateSchema, defenseTheaterStateSchema, theaterCounterSchema, validateTheaters } from './theater-state';
 import { assertNoSupplyAccess, createSupplyAccess, supplyAccessStateSchema, validateSupplyAccess } from './supply-access-state';
@@ -36,7 +37,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 34;
+export const SAVE_VERSION = 35;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -215,13 +216,15 @@ const stateV32Schema = stateV31Schema.extend({ arcaneResearch: arcaneResearchSch
 /** Rules33 records explicitly delegated defense theaters and their bounded run reports. */
 const stateV33Schema = stateV32Schema.extend({ theaters: defenseTheaterV33StateSchema, nextTheaterId: theaterCounterSchema }).strict();
 /** Current saves require explicit policy defaults; frozen33 rejects those fields. */
-const stateSchema = stateV33Schema.extend({
+const stateV34Schema = stateV33Schema.extend({
   theaters: defenseTheaterV34StateSchema,
   supplyAccess: supplyAccessStateSchema,
 }).strict();
+const stateSchema = stateV34Schema.extend({ patrols: patrolStateSchema }).strict();
+const withPatrols = <T>(state: T) => ({ ...state, patrols: [] as z.infer<typeof patrolStateSchema> });
 const withLogistics = <T extends { theaters: z.infer<typeof defenseTheaterV33StateSchema> }>(state: T) => ({ ...state,
-  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess() });
-const emptyTheaters = () => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess() });
+  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema> });
+const emptyTheaters = () => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema> });
 const withTheaters = <T>(state: T) => ({ ...state, ...emptyTheaters() });
 const withSelectionGroups = <T>(state: T) => withTheaters({ ...state, selectionGroups: [] as z.infer<typeof selectionGroupStateSchema>, nextSelectionGroupId: 1 });
 const withDepots = <T>(state: T) => withSelectionGroups({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
@@ -236,7 +239,8 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders() });
-const saveSchema = z.object({ version: z.literal(34), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(35), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV34Schema = saveSchema.extend({ version: z.literal(34), state: stateV34Schema }).strict();
 const saveV33Schema = saveSchema.extend({ version: z.literal(33), state: stateV33Schema }).strict();
 const saveV32Schema = saveSchema.extend({ version: z.literal(32), state: stateV32Schema }).strict();
 const saveV31Schema = saveSchema.extend({ version: z.literal(31), state: stateV31Schema }).strict();
@@ -416,6 +420,7 @@ function canonicalPayload(state: GameState) {
         reinforcementHolds: theater.reinforcementHolds === undefined ? [] : theater.reinforcementHolds }))),
       nextTheaterId: theaterCounterSchema.parse(state.nextTheaterId),
       supplyAccess: supplyAccessStateSchema.parse(state.supplyAccess),
+      patrols: patrolStateSchema.parse(state.patrols),
   };
   return payload;
 }
@@ -465,6 +470,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 35) assertNoPatrols(state);
   if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
   if (version < 33) assertNoTheaters(state);
   if (version < 32) assertNoSelectionGroups(state);
@@ -584,6 +590,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 35) assertNoPatrols(state);
   if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
   if (version < 33) assertNoTheaters(state);
   if (version < 32) assertNoSelectionGroups(state);
@@ -607,8 +614,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 34) return latest;
-  const { supplyAccess: _access, ...withoutAccess } = latest;
+  if (version >= 35) return latest;
+  const { patrols: _patrols, ...beforePatrols } = latest;
+  if (version >= 34) return beforePatrols;
+  const { supplyAccess: _access, ...withoutAccess } = beforePatrols;
   const beforeLogistics = { ...withoutAccess, theaters: withoutAccess.theaters.map(({ reinforcementLimit: _limit, reinforcementHolds: _holds, ...theater }) => theater) };
   if (version >= 33) return beforeLogistics;
   const { theaters: _theaters, nextTheaterId: _theaterId, ...beforeTheaters } = beforeLogistics;
@@ -860,6 +869,13 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 34) {
+    const prior = saveV34Schema.parse(raw);
+    assert(prior.contentHash === CONTENT_HASH, 'v34 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v34 snapshot checksum does not match its contents');
+    const state = withPatrols(prior.state);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+  }
   if (version === 33) {
     const prior = saveV33Schema.parse(raw);
     assert(prior.contentHash === CONTENT_HASH, 'v33 content hash is not a recognized compatible pack');
@@ -1263,7 +1279,7 @@ export function deserializeGame(text: string): GameState {
     transports: Object.fromEntries(data.transports.map(item => [item.armyId, item.fleetId])),
     selectionGroups: data.selectionGroups, nextSelectionGroupId: data.nextSelectionGroupId,
     theaters: data.theaters, nextTheaterId: data.nextTheaterId,
-    supplyAccess: data.supplyAccess,
+    supplyAccess: data.supplyAccess, patrols: data.patrols,
     charters: data.charters, postings: data.postings, musters: data.musters, depots: data.depots,
   };
   assert(Object.keys(state.sieges).length === data.sieges.length && Object.keys(state.ruins).length === data.ruins.length, 'duplicate siege or ruin records');
@@ -1277,6 +1293,7 @@ export function deserializeGame(text: string): GameState {
   validateArcaneSurveys(state);
   validateSelectionGroups(state);
   validateTheaters(state);
+  validatePatrols(state);
   validateSupplyAccess(state);
   validateCharters(state);
   validatePostings(state);

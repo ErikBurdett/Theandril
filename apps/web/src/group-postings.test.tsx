@@ -2,9 +2,23 @@ import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { applyCommand, getObservation, stateHash } from '@theandril/sim';
 import { characterCampaign } from '../../../packages/test-fixtures/src/character-fixture';
-import { addGroupSelection, groupPostingArmies, groupPostingCommands, GroupPostingOrders, GROUP_POSTING_LIMIT } from './group-postings';
+import { addGroupSelection, groupPostingArmies, groupPostingCommands, groupPostingDestination, GroupPostingOrders, GROUP_POSTING_LIMIT } from './group-postings';
 
 describe('group army postings', () => {
+  it('requires a fresh destination after the selected hearth is lost instead of silently ordering a local hold', () => {
+    const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
+    const points = view.settlements.filter(town => town.factionId === view.factionId);
+    expect(points.length).toBeGreaterThan(0);
+    const chosen = points[0]!.cell;
+    expect(groupPostingDestination(points, chosen)).toBe(chosen);
+    const remaining = points.filter(town => town.cell !== chosen);
+    expect(groupPostingDestination(remaining, chosen)).toBe('');
+    expect(groupPostingDestination(remaining, '')).toBe('');
+    expect(groupPostingDestination(remaining, 'current')).toBe('current');
+    // Cell zero is a valid choice; a truthiness fallback must not erase it.
+    expect(groupPostingDestination([{ ...points[0]!, cell: 0 }], 0)).toBe(0);
+  });
+
   it('retains cross-page selections, deduplicates matches and caps an explicit group', () => {
     const initial = new Set(['army.last-page']);
     const candidates = Array.from({ length: 200 }, (_, index) => `army.${String(index).padStart(3, '0')}`);

@@ -1,7 +1,7 @@
 import { hexDistance } from '@theandril/mapgen';
 import type { ArmyView, GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
-import { heldTheaterArmyIds } from './theaters';
+import { heldDelegatedArmyIds } from './theaters';
 
 export interface CharacterPlan extends AiPlan { coinSpent: number; heldArmyIds: Set<string> }
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
@@ -10,7 +10,7 @@ const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id >
 export const isWaykeeperBattleArmy = (army: ArmyView): boolean => army.domain === 'land' && !army.carrierId && army.canAttack && !army.canFound && army.formations.length >= 4;
 
 /** Sparse functional planner: eligibility comes from sim, priority only from observed facts. */
-export function planCharacters(view: Observation, coinBudget: number, reservedArmyIds: ReadonlySet<string> = heldTheaterArmyIds(view)): CharacterPlan {
+export function planCharacters(view: Observation, coinBudget: number, reservedArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): CharacterPlan {
   const commands: GameCommand[] = [], reasons: string[] = [];
   const heldArmyIds = new Set([...reservedArmyIds, ...view.characters.flatMap(character => character.mission ? [character.mission.armyId] : [])]);
   const initialBudget = Math.max(0, coinBudget);

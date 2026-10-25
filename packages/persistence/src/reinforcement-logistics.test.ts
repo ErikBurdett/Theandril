@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto';
 import { expect, test } from 'vitest';
-import { deserializeGame, serializeGame, type GameCommand } from '@theandril/sim';
+import { deserializeGame, serializeGame, SAVE_VERSION, type GameCommand } from '@theandril/sim';
 import { createJournal, replayArchive, resumeJournal } from '@theandril/chronicle';
 import { historical33 } from '../../chronicle/src/fixtures/reinforcement-logistics33';
 import { navalCampaign, NAVAL_FIXTURE as N } from '../../test-fixtures/src/naval-fixture';
@@ -20,7 +20,7 @@ test('modern reinforcement survives database reopen and portable export without 
     expect(serializeGame(restored.game)).toBe(saved);
     expect(archive.initialSave).toBe(prior.archive.initialSave);
     expect(archive.records.slice(0, prior.entry.records)).toEqual(prior.archive.records);
-    expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 34, checkpointVersion: 34 });
+    expect(archive.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION });
     const imported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(restored.game, archive))));
     expect(imported.archive).toEqual(archive); expect(serializeGame(imported.game)).toBe(saved);
     expect(serializeGame(replayArchive(imported.archive))).toBe(saved);

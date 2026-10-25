@@ -2,7 +2,7 @@ import { MAX_THEATERS_PER_FACTION, type Observation } from '@theandril/sim';
 
 /** Every candidate carries the cause that put it here, so a wide realm can read
  * and work one kind of exception at a time instead of cycling every entity. */
-export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'out-of-supply' | 'empty-queue' | 'charter-stalled' | 'households' | 'theater-attention';
+export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'patrol-stalled' | 'out-of-supply' | 'empty-queue' | 'charter-stalled' | 'households' | 'theater-attention';
 export interface ActionCandidate { id: string; name: string; cell: number; reason: string; cause: ActionCause }
 export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
 export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[]; theaters: ActionCandidate[] }
@@ -12,6 +12,7 @@ const CAUSE_LABELS: Readonly<Record<ActionCause, string>> = {
   'movement': 'with movement remaining',
   'route-interrupted': 'with an interrupted route',
   'posting-stalled': 'with a stalled posting',
+  'patrol-stalled': 'with a stalled patrol',
   'out-of-supply': 'out of supply',
   'empty-queue': 'with an empty production queue',
   'charter-stalled': 'with a stalled charter',
@@ -41,11 +42,12 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'supply' | 'sieges' | 'land' | 'theaters'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'patrols' | 'supply' | 'sieges' | 'land' | 'theaters'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
   const postings = new Map(view.postings.map(posting => [posting.armyId, posting] as const));
+  const patrols = new Map((view.patrols ?? []).filter(patrol => patrol.factionId === view.factionId && patrol.enabled).map(patrol => [patrol.armyId, patrol] as const));
   const enabledTheaters = (view.theaters ?? []).filter(theater => theater.factionId === view.factionId && theater.enabled).slice(0, MAX_THEATERS_PER_FACTION);
   const delegatedArmies = new Set(enabledTheaters.flatMap(theater => theater.armyIds));
   // A force wasting outside supply is the most urgent thing an army can be doing,
@@ -65,7 +67,10 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
     // Direct travel remains a decision even when a healthy posting or theater
     // will take over later. Delegation only removes ordinary idle movement.
     if (route?.status === 'paused') { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'route-interrupted', reason: `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` }); continue; }
-    if (posting || delegatedArmies.has(army.id)) continue;
+    if (posting) continue;
+    const patrol = patrols.get(army.id);
+    if (patrol?.blocker) { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'patrol-stalled', reason: `Patrol waiting: ${patrol.blocker}` }); continue; }
+    if (patrol || delegatedArmies.has(army.id)) continue;
     armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'movement', reason: `${army.movement} movement remaining` });
   }
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));

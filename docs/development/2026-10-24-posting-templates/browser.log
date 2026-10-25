@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (2.6s)
+  ✓   2 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (2.5s)
+  ✓   3 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (13.3s)
+  ✓   4 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (1.7s)
+  ✓   5 tests/gameplay/posting-templates.spec.ts:64:1 › posting template edits, recall, reload and deletion stay outside campaign history and require a fresh hearth choice (6.3s)
+  ✓   6 tests/gameplay/posting-templates.spec.ts:138:1 › a hearth template recalled in another campaign requires its own destination while existing postings remain clearable (3.5s)
+  ✓   7 tests/gameplay/posting-templates.spec.ts:187:1 › a recalled posting template applies to one hundred armies through ordinary orders and survives saved recovery and replay (20.1s)
+  ✓   8 tests/gameplay/posting-templates.spec.ts:236:3 › a denied posting library preserves stored rows and leaves direct posting orders usable (1.8s)
+  ✓   9 tests/gameplay/posting-templates.spec.ts:236:3 › a transient-denial posting library preserves stored rows and leaves direct posting orders usable (1.8s)
+  ✓  10 tests/gameplay/posting-templates.spec.ts:236:3 › a malformed posting library preserves stored rows and leaves direct posting orders usable (1.8s)
+
+  10 passed (56.2s)

@@ -15,7 +15,8 @@ import { planRoadAcceleration } from './roads';
 import { settlementSpacing, settlementSiteValue } from './expansion';
 import { isCityState } from '@theandril/sim';
 import { observedCells } from './observation-index';
-import { heldTheaterArmyIds, planDefenseTheater } from './theaters';
+import { heldDelegatedArmyIds, planDefenseTheater } from './theaters';
+import { planPatrol } from './patrols';
 import { answerSupplyAccess, pendingSupplyAccessFees, planSupplyAccess } from './supply-access';
 
 export { chooseCaptureOption } from './conquest';
@@ -44,7 +45,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const supplyAnswer = answerSupplyAccess(view);
   if (supplyAnswer) return supplyAnswer;
 
-  const siegeDecision = planConquestDecision(view, heldTheaterArmyIds(view));
+  const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view));
   if (siegeDecision) return siegeDecision;
   const oceanScoutReserve = reserveOceanScout(view);
   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
@@ -79,6 +80,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const factionId = view.factionId;
   const theater = planDefenseTheater(view);
   for (const id of supplyPurchase?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
+  const patrol = planPatrol(view, theater.heldArmyIds);
+  for (const id of patrol.heldArmyIds) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
   const patronage = proposePatronage(view);
   // An occasional paid survey of ground the realm already holds; both are bounded
@@ -91,8 +94,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

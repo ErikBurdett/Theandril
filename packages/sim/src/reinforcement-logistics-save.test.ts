@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { checksum } from '@theandril/content';
-import { applyCommand, deserializeGame, serializeGame, stateHash } from './index';
+import { applyCommand, deserializeGame, serializeGame, stateHash, SAVE_VERSION } from './index';
 import { historical33 } from '../../chronicle/src/fixtures/reinforcement-logistics33';
 
 function current() {
@@ -27,7 +27,7 @@ describe('strict current reinforcement and supply-access save boundary', () => {
     const held = stateHash(game); expect(held).not.toBe(original);
     game.supplyAccess.nextId = 2; expect(stateHash(game)).not.toBe(held);
     const save = serializeGame(game), restored = deserializeGame(save);
-    expect(JSON.parse(save).version).toBe(34);
+    expect(JSON.parse(save).version).toBe(SAVE_VERSION);
     expect(restored.theaters).toEqual(game.theaters); expect(restored.supplyAccess).toEqual(game.supplyAccess);
     expect(serializeGame(restored)).toBe(save); expect(stateHash(restored)).toBe(stateHash(game));
   });
