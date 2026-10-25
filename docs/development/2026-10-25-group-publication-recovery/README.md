@@ -54,3 +54,12 @@ controls are visibly locked. [Independent review](source-review.md) passes.
 
 [Full local suite](full-tests.log): **2,386 tests / 289 files pass**, 62.68 seconds
 with four workers. No disabled source tests, timeout increases or rule changes.
+
+## Deployment
+
+Published **47e130fc7c07a37eb8f3a1f3c46d963dc4a76e9c**. Both exact-commit
+[workflows](actions.json) pass and [public readback](public-readback/readback.json)
+matches the preserved build. The first live run passed posting then encountered
+Chromium ERR_NETWORK_CHANGED before the charter page loaded ([log](live.log));
+this is retained, not counted as a game result. The unchanged two cases both
+pass on rerun in12.9 seconds ([final log](live-final.log)).

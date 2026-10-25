@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { GroupPolicyResults } from './group-policy-results';
 import type { ArmyView, GameCommand, Observation, PostingMode } from '@theandril/sim';
 import { MAX_GROUP_POSTING_COMMANDS, type GroupPostingResult } from './protocol';
 import { PostingTemplates } from './posting-templates';
@@ -73,7 +74,6 @@ export function GroupPostingOrders({ view, hash, selected, matching, busy, issue
       if (mounted.current) setError(cause instanceof Error ? cause.message : 'The group order could not be completed. Review the armies before retrying.');
     } finally { if (mounted.current) setPending(false); }
   };
-  const refused = results?.filter(result => !result.accepted) ?? [];
   return <section className="group-postings" data-testid="group-postings" aria-label="Group army postings" aria-busy={pending}>
     <div className="group-selection-actions"><button disabled={locked || checked.size >= GROUP_POSTING_LIMIT || ![...matching].some(id => !checked.has(id))} onClick={selectMatching}>Select matching armies</button><button disabled={locked || !checked.size} onClick={clearSelection}>Clear group selection</button></div>
     <p className="group-selection-count" role="status">{checked.size} armies selected{outside ? ` · ${outside} outside this filter` : ''}</p>
@@ -92,6 +92,6 @@ export function GroupPostingOrders({ view, hash, selected, matching, busy, issue
     </>}
     {pending && <p role="status">Applying group orders…</p>}
     {error && <p className="group-order-error" role="alert">{error}</p>}
-    {results && <div data-testid="group-posting-results"><p role="status">{results.length - refused.length} orders accepted · {refused.length} refused.{refused.length > 0 ? ' Refused armies remain selected for review.' : ''}</p>{refused.length > 0 && <ul>{refused.map(result => <li key={result.armyId}><strong>{result.name}</strong> · {result.message ?? 'The army could not accept this order.'}</li>)}</ul>}</div>}
+    {results && <GroupPolicyResults kind="posting" rows={results.map(result => ({ ...result, id: result.armyId }))} busy={locked}/>}
   </section>;
 }

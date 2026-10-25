@@ -1,7 +1,23 @@
 # Theandril implementation status
 
+## Review every posting and charter result by name — 2026-10-25
+
+Round 4 adds shared, filtered 25-row result pages for group postings and charters.
+Refusals open first; accepted actors are inspectable too. Paging and filtering
+leave selections and campaign records unchanged; a new submission resets review.
+An authored 128-army capacity boundary gives 96 real successes and 32 refusals,
+retains exactly the refused checks and replays all 128 records. A thirty-hearth
+workflow grants/revokes charters with exact 60-record replay. Keyboard, last-row
+visibility, empty filters and narrow 130% layout pass. Full **2,394 tests / 290
+files**, typecheck, lint, build and eight affected Pages cases pass.
+[Evidence](development/2026-10-25-group-policy-results/README.md). No canonical
+rules, save fields, AI or pacing change; rules/save 35 and content 015468d1.
+ACT-32/M3 remains partial; DH-021, R06 and all fifteen gates stay open.
+
 ## Recover after a group policy result cannot be published — 2026-10-25
 
+**Published as `47e130f`**; both workflows and exact public readback pass. Both
+live recovery cases pass after a retained pre-load network interruption.
 Round 3 locks gameplay after posting/charter command execution begins and final
 worker publication throws. Both old-worker and production-browser regressions
 proved two accepted orders could leave End turn enabled without a recovery flag.

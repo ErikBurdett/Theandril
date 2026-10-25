@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { GroupPolicyResults } from './group-policy-results';
 import { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, CHARTER_RESERVE, type CharterFocus, type GameCommand, type Observation } from '@theandril/sim';
 import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult } from './protocol';
 import { CharterTemplates } from './charter-templates';
@@ -58,7 +59,6 @@ export function GroupCharterOrders({ view, hash, selected, matching, busy, issue
       if (mounted.current) setError(cause instanceof Error ? cause.message : 'The charter orders could not be completed. Review the hearths before retrying.');
     } finally { if (mounted.current) setPending(false); }
   };
-  const refused = results?.filter(result => !result.accepted) ?? [];
   return <section className="group-postings group-charters" data-testid="group-charters" aria-label="Group hearth charters" aria-busy={pending}>
     <div className="group-selection-actions"><button disabled={locked || checked.size >= MAX_GROUP_ORDER_COMMANDS || ![...matching].some(id => !checked.has(id))} onClick={selectMatching}>Select matching hearths</button><button disabled={locked || !checked.size} onClick={clearSelection}>Clear hearth selection</button></div>
     <p className="group-selection-count" role="status">{checked.size} {checked.size === 1 ? 'hearth' : 'hearths'} selected{outside ? ` · ${outside} outside this filter` : ''}</p>
@@ -76,6 +76,6 @@ export function GroupCharterOrders({ view, hash, selected, matching, busy, issue
     </>}
     {pending && <p role="status">Applying charter orders…</p>}
     {error && <p className="group-order-error" role="alert">{error}</p>}
-    {results && <div data-testid="group-charter-results"><p role="status">{results.length - refused.length} orders accepted · {refused.length} refused.{refused.length > 0 ? ' Refused hearths remain selected for review.' : ''}</p>{refused.length > 0 && <ul>{refused.map(result => <li key={result.settlementId}><strong>{result.name}</strong> · {result.message ?? 'The hearth could not accept this order.'}</li>)}</ul>}</div>}
+    {results && <GroupPolicyResults kind="charter" rows={results.map(result => ({ ...result, id: result.settlementId }))} busy={locked}/>}
   </section>;
 }

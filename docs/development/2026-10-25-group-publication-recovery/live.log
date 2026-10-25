@@ -1,0 +1,38 @@
+
+Running 2 tests using 1 worker
+
+(node:173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry (4.7s)
+  ✘  2 tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry (151ms)
+
+
+  1) tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry 
+
+    Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/
+    Call log:
+      - navigating to "https://erikburdett.github.io/Theandril/", waiting until "load"
+
+
+      86 |     const errors: string[] = [];
+      87 |     page.on('pageerror', error => errors.push(error.message));
+    > 88 |     await page.goto('./');
+         |                ^
+      89 |     expect(await page.evaluate(() => '__THEANDRIL__' in window)).toBe(false);
+      90 |     await page.getByLabel('Import save file').setInputFiles({ name: 'publication-two-actors.theandril', mimeType: 'application/gzip',
+      91 |       buffer: Buffer.from(await exportSave(serializeCampaign(fixture.game, fixture.archive))) });
+        at /home/telephoneheater/Work/Theandril/tests/production/group-publication-recovery.spec.ts:88:16
+
+    Error Context: docs/development/2026-10-25-group-publication-recovery/live-results/production-group-publicati-ff30e-n-and-restores-before-retry/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-publication-recovery/live-results/production-group-publicati-ff30e-n-and-restores-before-retry/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-25-group-publication-recovery/live-results/production-group-publicati-ff30e-n-and-restores-before-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry 
+  1 passed (5.5s)
