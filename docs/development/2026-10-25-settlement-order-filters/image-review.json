@@ -1,0 +1,68 @@
+{
+  "reviewedUsing": "view_image, all four final native PNG files; earlier four captures also inspected",
+  "transforms": "None: exact native Playwright captures, no resizing, re-encoding or generation",
+  "images": [
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-final-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-waiting-desktop.png",
+      "bytes": 788595,
+      "sha256": "3d0ba31ee02a3475b25ef814f257a1ee0d869a000d90b009e2e84356ab649f48",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-final-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-waiting-narrow-130.png",
+      "bytes": 166472,
+      "sha256": "54661c9351b9da18a4739a4c22fd9dcc7e05e2d76d9290759b053f4f8ca10989",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-final-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-selector-native.png",
+      "bytes": 7683,
+      "sha256": "bd8cf64276d7176b3159b8e85f621370fe347c42a999f54af565cd0b79e554c0",
+      "width": 340,
+      "height": 71
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-final-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-charters-ready-narrow-130.png",
+      "bytes": 269874,
+      "sha256": "f13da161a90f5a48d9e98cf6b3f0cf1cea51e233931b3252a233ac0a4dbe6810",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "approvedPublicationImage": {
+    "path": "docs/development/2026-10-25-settlement-order-filters/browser-final-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-selector-native.png",
+    "bytes": 7683,
+    "sha256": "bd8cf64276d7176b3159b8e85f621370fe347c42a999f54af565cd0b79e554c0",
+    "width": 340,
+    "height": 71,
+    "verdict": "Approved as a clearly captioned control detail, copied byte-for-byte from this final source",
+    "capture": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "textScale": 1.3,
+      "locator": "Settlement orders select's parent label",
+      "state": "Charters waiting (5), before the explicit six-charter application"
+    },
+    "caption": "Settlement orders selects the five waiting charters in an authored thirty-hearth campaign, at 390 px and 130% text. This native control detail does not show selection context or prove command results.",
+    "limitations": [
+      "The control is closed: other options and help text are not visible in this crop.",
+      "This is authored regression infrastructure, not an organically developed thirty-hearth campaign.",
+      "Behavior and exact save/replay proof are separate from image approval."
+    ]
+  },
+  "comparison": {
+    "selectorBytesUnchangedFromFirstRun": true,
+    "checkpointsUnchanged": true
+  },
+  "findings": [
+    "Desktop rows show the real four-coin ceiling reason and checked hearths; the default Works form above is an unsubmitted draft, while row policies are Muster.",
+    "Final narrow waiting view fits the filter, collapsed help, sort and 6 selected / 1 outside-filter explanation within the scrollable dialog.",
+    "Final narrow result view shows cleared checks and the 24-coin Muster next candidate, explicitly labelled candidate.",
+    "The dialog scrolls; a partially visible adjacent row at the viewport edge is not evidence that all thirty rows fit onscreen.",
+    "No scoped clipping, horizontal overflow or unreadable target control was found; final article display review remains separate."
+  ]
+}

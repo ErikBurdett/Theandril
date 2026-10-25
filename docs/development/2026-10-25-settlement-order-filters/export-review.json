@@ -1,0 +1,101 @@
+{
+  "scope": "Read-only strict decoding and independent exact replay of three retained public production exports; no browser rerun or fixture regeneration.",
+  "authoredTestReviewer": true,
+  "turn": 2,
+  "treasury": 3940,
+  "queuedHearths": 6,
+  "submittedIds": [
+    "settlement.65",
+    "settlement.90",
+    "settlement.91",
+    "settlement.92",
+    "settlement.93",
+    "settlement.94"
+  ],
+  "exactSixCommandJournal": true,
+  "savedRestorationExact": true,
+  "settlementsFactionsArmiesRoutesPostingsPatrolsPreserved": true,
+  "exports": [
+    {
+      "phase": "browsed",
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-browsed.theandril",
+      "bytes": 199656,
+      "sha256": "482ffa294438f273361fe6aa9970c9dc27119caa4e0e759758b2eca491cbc4aa",
+      "hash": "503329a2",
+      "records": 30,
+      "counts": {
+        "all": 30,
+        "empty": 24,
+        "unchartered": 10,
+        "waiting": 5
+      },
+      "exactReplay": true
+    },
+    {
+      "phase": "changed",
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-changed.theandril",
+      "bytes": 199797,
+      "sha256": "1f6b431a972600b99a0fd8b19934986043a8e451d7b50c8f805cbc0bdd71ec98",
+      "hash": "bb648af6",
+      "records": 36,
+      "counts": {
+        "all": 30,
+        "empty": 24,
+        "unchartered": 9,
+        "waiting": 0
+      },
+      "exactReplay": true
+    },
+    {
+      "phase": "restored",
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-restored.theandril",
+      "bytes": 199758,
+      "sha256": "03b041439a46e7b8257fc1f31a51530aa2c7cb0d7182fcee330625de139421bb",
+      "hash": "bb648af6",
+      "records": 36,
+      "counts": {
+        "all": 30,
+        "empty": 24,
+        "unchartered": 9,
+        "waiting": 0
+      },
+      "exactReplay": true
+    }
+  ],
+  "images": [
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-waiting-desktop.png",
+      "bytes": 786360,
+      "sha256": "1b914e573ae4dc4e6fa12507815da43087285fa99219e9e112be37705d6b4a18",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-waiting-narrow-130.png",
+      "bytes": 190394,
+      "sha256": "618456907315d293888e05113418b34214fd656a88b08316f67426f6a53c3a6f",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-order-selector-native.png",
+      "bytes": 7683,
+      "sha256": "bd8cf64276d7176b3159b8e85f621370fe347c42a999f54af565cd0b79e554c0",
+      "width": 340,
+      "height": 71
+    },
+    {
+      "path": "docs/development/2026-10-25-settlement-order-filters/browser-results/production-settlement-orde-82614-anges-and-saved-restoration/settlement-charters-ready-narrow-130.png",
+      "bytes": 275003,
+      "sha256": "4d7ce470313455c11a96dcc22d179fd4fde94d50c8f5c0c706d5e315d982bfad",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "sources": {
+    "tests/gameplay/settlement-order-fixture.ts": "073fa20eed7d125e8f437407b6da04d295677bd7cf7dbb42d8681e78d775fc7a",
+    "tests/production/settlement-order-filters.spec.ts": "937278820720409aff93629f14abaec9dcfaeb4b20b7e894262c0d4f4eca0d47",
+    "apps/web/src/settlement-order-status.ts": "c2dc2e9dfa16788b94e78c6fa84c3cf4b1cb1887ccb41c0857ef035770c25c27",
+    "apps/web/src/realm-navigation.tsx": "8985ba3f5a1129e6841b7b9b53ca90c4cf730411eb3e1290c5389e50f6641321"
+  }
+}

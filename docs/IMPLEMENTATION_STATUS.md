@@ -1,5 +1,32 @@
 # Theandril implementation status
 
+## Find empty queues and waiting charters — 2026-10-25
+
+**Locally verified; publication pending.** The settlement registry filters
+All hearths, No production, Without charters and Charters waiting. Overlapping
+counts follow search before stable 25-row paging. Checked hearths survive filter
+changes; group charter controls expose actors outside the current filter.
+Canonical queue precedence, waiting reasons and next-work candidates remain
+explicit. An expandable explanation and Map guide describe shared treasury and
+why a completed building program or intentional limit can be a normal wait.
+
+Full **2,362 tests / 288 files pass in 63.88 seconds**, with typecheck, lint and
+Pages build. Four distinct affected production journeys pass across the initial
+and refinement checks; the final new workflow takes 20.3 seconds. An authored
+Huge realm with 30 owned hearths, 128 armies and two wars keeps its exact
+30-record archive while browsing, then records six explicit charter changes.
+The 36-record saved/reloaded outcome preserves queues, treasury, settlements,
+armies, travel and standing army policies. Counts change from 30/24/10/5 to
+30/24/9/0; these overlapping cohorts are not additive.
+[Evidence](development/2026-10-25-settlement-order-filters/README.md).
+
+The presentation index reads existing owned observation facts only. No canonical
+rules, worker protocol, new query, saved fields, AI behavior or per-frame work
+are added. Rules/save 35 and content 015468d1 remain unchanged; no pacing run or
+new performance measurement is claimed. ACT-32/M3 advances but stays partial;
+escorts, broader governors/programs, organic mature-realm acceptance, DH-021,
+R06 and all fifteen release gates remain open.
+
 ## Correlate posting and charter results before accepting updates — 2026-10-25
 
 **Published as `912b873`.** Both GitHub workflows, exact public readback and
