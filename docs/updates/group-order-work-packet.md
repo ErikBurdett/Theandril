@@ -99,3 +99,10 @@ find no blocking defect. Full publication suite passes 2,395 tests / 290 files;
 all 66 local Pages cases pass in one 4.2-minute run. Typecheck, lint, content/art validation
 and final Pages build pass. See `docs/development/2026-10-25-four-round-publication/README.md`
 for exact logs, scope, retained corrections and public-readback follow-through.
+
+## Published result
+
+The reviewed journal is live at 1edc07f0bd45ce3d0677ced871809789f2905c2f. Both
+workflows and exact public readback pass; all ten live journal cases pass in
+27.8 seconds. The publication packet records these actual results separately
+from the 670a18a implementation pin. All 15 release gates remain open.

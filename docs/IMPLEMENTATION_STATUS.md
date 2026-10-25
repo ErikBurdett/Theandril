@@ -1,5 +1,19 @@
 # Theandril implementation status
 
+## Four-round continuation published and reviewed — 2026-10-25
+
+All four rounds were committed, deployed and read back independently: reviewed
+policy intent (`6c77de4`), group patrol assignment (`64b5d9e`), publication recovery
+(`47e130f`) and named result review (`670a18a`). Reviewed dispatch 20 is published
+as `1edc07f`, with **2,395 local tests / 290 files**, **all 66 local Pages cases**
+in one run, both workflows, exact public readback and ten live journal cases.
+Two native images preserve the existing cap and all historical records. Source
+and displayed-layout reviews pass; retained failures/corrections remain explicit.
+[Publication evidence](development/2026-10-25-four-round-publication/README.md),
+[prompt report](development/prompt-reports/2026-10-25-four-development-rounds.md).
+M3 stays partial; rules/save 35 and content 015468d1 remain unchanged. DH-021, R06
+and all fifteen release gates remain open.
+
 ## Review every posting and charter result by name — 2026-10-25
 
 **Published as `670a18a`**; both workflows, exact public readback and both live

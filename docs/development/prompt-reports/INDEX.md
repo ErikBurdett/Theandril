@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-25 | [Four development rounds individually deployed](2026-10-25-four-development-rounds.md) | Four verified gameplay deployments through `670a18a`, reviewed journal `1edc07f`; 2,395 tests, all 66 local Pages cases and ten live journal journeys pass; all gates remain open |
 | 2026-10-25 | [Settlement order filters deployed](2026-10-25-settlement-order-filters.md) | Published `4e2c678`; 2,364 tests, 58 distinct local Pages cases across corrected runs and three targeted live journeys pass; M3/gates remain open |
 | 2026-10-25 | [Group patrol controls and reply recovery](2026-10-25-group-patrols-and-response-recovery.md) | Separately deployed `5cb7dc8` and `912b873`; 2,352 tests, 57 local Pages journeys and scoped live checks pass; all gates remain open |
 | 2026-10-24 | [Four separately deployed improvements](2026-10-24-four-deployed-improvements.md) | Patrol retirement, posting destinations, project counterplay and registry filters published separately through `e0d8112`; 2,320 final tests, 47 local Pages journeys and scoped live checks pass; all gates remain open |

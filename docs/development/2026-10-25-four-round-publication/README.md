@@ -51,3 +51,14 @@ pacing threshold tuned and no performance/broader release gate claimed complete.
 Publication of the reviewed journal is authorized by the standing instruction to
 commit/deploy continued work. Exact final publication/live evidence follows here;
 the single prompt report is written after that publication has been verified.
+
+## Verified publication
+
+Published **1edc07f0bd45ce3d0677ced871809789f2905c2f**. Both exact-commit
+[GitHub workflows](actions.json) pass. [Public readback](public-readback/readback.json)
+compares all published application/journal assets, source/evidence pins, two new
+images, provenance and the current catalogue against the exact built revision.
+All ten journal journeys pass on Pages in 27.8 seconds ([log](live-journal.log)).
+Repeated live screenshot output is retained at `/tmp/theandril-journal-live-1edc07f`;
+the inspected local captures and public readback screenshots remain in this packet.
+All four gameplay revisions retain their separate live results in their packets.
