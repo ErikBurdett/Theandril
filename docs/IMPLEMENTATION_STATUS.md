@@ -2,7 +2,7 @@
 
 ## Interrupt and preserve imminent victory-project sieges — 2026-10-24
 
-**Locally verified; preparing its separate deployment.** AI now rejects peace
+**Implementation committed as `bff9889`; publication prepared separately.** AI now rejects peace
 and issues an already legal adjacent siege in the same planning pass when a
 currently visible enemy project can finish during the truce. It also preserves
 an existing own siege pausing that project: incoming peace is rejected and

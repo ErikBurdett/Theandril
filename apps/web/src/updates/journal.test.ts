@@ -32,6 +32,6 @@ describe('journal discovery', () => {
     expect(filterDispatches(dispatches, 'Vesper', 'Engineering')).toEqual([]);
     expect(filterDispatches(dispatches, '', 'All')).toEqual(dispatches);
     expect(filterDispatches(dispatches, 'no-such-dispatch', 'All')).toEqual([]);
-    expect(filterDispatches(dispatches, 'CAPTURE garrison', 'Engineering').map(story => story.id)).toEqual(['reinforcement-logistics', 'defense-theaters', 'r17-campaign-safety']);
+    expect(filterDispatches(dispatches, 'CAPTURE garrison', 'Engineering').map(story => story.id)).toEqual(['project-counterplay', 'reinforcement-logistics', 'defense-theaters', 'r17-campaign-safety']);
   });
 });

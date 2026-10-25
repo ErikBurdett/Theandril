@@ -2,8 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
-  it('pins observed retirement, real reassignment and unchanged player authority without closing pacing gates', () => {
+  it('pins bounded counterplay, genuine battle outcomes and measured limits without closing release gates', () => {
     const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'project-counterplay', sequence: 16, sourceRevision: 'bff98894992762e797daf2aa63b487b4a98c0f28', image: 'technical-ledger' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['existing own siege', 'currently visible, unoccupied host', 'four establishment queries', 'two five-round Watch cases', 'mutual withdrawal', '2,304 tests across 280 files', 'overlapping scopes are not additive', 'not a performance result', '2.839/0.039/0.240/1.813/2.416', '3.396/0.019/0.193/2.528/2.540', '30.600-millisecond sample', 'not a comparative speedup claim', 'Standard 219/194/201, Long 329/309/287 and Epic 374/332/327', 'do not establish organic activation', 'Rules/save remain 35', '21 September Short Watch regression', 'No new gameplay obligation was added or removed', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    for (const path of ['README.md', 'browser-final-review.md', 'counterplay-benchmark-final.json', 'pacing-maintained-comparison.json']) expect(story.evidence.some(link => link.path === `docs/development/2026-10-24-project-counterplay/${path}`), path).toBe(true);
+    expect(text).not.toMatch(/PENDING|The candidate|verification pending/);
+  });
+  it('pins observed retirement, real reassignment and unchanged player authority without closing pacing gates', () => {
+    const story = dispatches.find(entry => entry.id === 'patrol-retirement')!;
     expect(story).toMatchObject({ id: 'patrol-retirement', sequence: 15, sourceRevision: '68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120', image: 'patrol-narrow-actions' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     for (const claim of ['currently visible foreign hearth', 'at most six hexes apart', 'Ordinary player-controlled turns do not clear the patrol automatically', 'identical manually configured policy', 'Existing travel is preserved', 'independent theater assignment', 'All 179 records replay exactly', '2,242 tests across 276 files', 'Three production journeys pass in 19.6 seconds', 'overlapping scopes are not additive', 'Six isolated planner cases', '196,608/307,200', '1.832/0.248/0.264', '2.794/0.446/0.455', 'Standard 219/194/201, Long 329/309/287 and Epic 374/332/327', 'no new detailed trace', 'still finish before the 350–400 target', 'DH-021 remains open', 'No new gameplay scope was added or removed', 'all fifteen release gates remain open', 'previously reviewed 390-pixel authored fixture']) expect(text, claim).toContain(claim);
@@ -35,7 +43,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {
