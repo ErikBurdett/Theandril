@@ -2,7 +2,8 @@
 
 ## Correlate posting and charter results before accepting updates — 2026-10-25
 
-**Locally verified; publication pending.** Group posting and
+**Published as `912b873`.** Both GitHub workflows, exact public readback and
+all eight targeted live journeys pass (37.4 seconds). Group posting and
 charter responses now match the exact submitted faction and ordered actor IDs
 before adopting campaign state. Missing, duplicate, unrelated or malformed rows
 require saved-restoration recovery, preserve checked actors and block gameplay.

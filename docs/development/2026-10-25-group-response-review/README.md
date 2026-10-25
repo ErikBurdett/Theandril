@@ -34,3 +34,7 @@ This fix does not provide stale-hash intent protection for legacy posting/charte
 ## Final local acceptance
 
 The corrected source passes **2,352 tests across 286 files in 60.66 seconds**, four workers ([final log](full-tests-final.log)). The earlier full run passed the same count before typechecking exposed TS2345; its log and the original typecheck failure remain retained. A direct validated-record field read corrected that type error without weakening validation; focused tests, independent review, [typecheck](typecheck-corrected.log), [lint](lint.log) and [Pages build](build.log) pass. All **57 local Pages journeys pass in 2.9 minutes**. [Exact scope and identities](local-acceptance.json), [source hashes](source.json). Deployment and live acceptance are recorded separately.
+
+## Published and verified
+
+Fix **912b8736b1c417e203a30b617bc041f62659ff52** is deployed to GitHub Pages. Both [GitHub workflows](actions.json) succeed. The [exact public readback](live-readback/readback.json) matches HTML, chunks, worker, assets/provenance, generated ledger and the unchanged dispatch-18 pin/catalogue. All **eight targeted live journeys pass in 37.4 seconds** ([log](live-pages.log)): six damaged-reply recovery cases and the normal posting and charter save workflows. This is separate from the 57-case local run. [Deployment record](deployment.json). No release gate is closed.

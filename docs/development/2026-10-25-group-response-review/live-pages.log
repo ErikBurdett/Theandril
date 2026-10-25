@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (3.8s)
+  ✓  2 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (3.2s)
+  ✓  3 tests/production/group-response-recovery.spec.ts:44:5 › production group posting missing-row reply requires restoration after two real commands (5.5s)
+  ✓  4 tests/production/group-response-recovery.spec.ts:44:5 › production group posting duplicate reply requires restoration after two real commands (5.8s)
+  ✓  5 tests/production/group-response-recovery.spec.ts:44:5 › production group posting wrong-actor reply requires restoration after two real commands (5.0s)
+  ✓  6 tests/production/group-response-recovery.spec.ts:44:5 › production group charter missing-row reply requires restoration after two real commands (5.9s)
+  ✓  7 tests/production/group-response-recovery.spec.ts:44:5 › production group charter duplicate reply requires restoration after two real commands (4.1s)
+  ✓  8 tests/production/group-response-recovery.spec.ts:44:5 › production group charter wrong-actor reply requires restoration after two real commands (3.5s)
+
+  8 passed (37.4s)
