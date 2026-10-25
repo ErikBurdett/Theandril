@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-25 | [Budgeted land commissions deployed](2026-10-25-land-commissions.md) | Feature `24a710a`, reviewed journal `3ae2ba6`; 2,463 tests, 74 local Pages cases and 19 distinct live cases across retained interrupted attempts plus unchanged rerun; M3/gates remain open |
 | 2026-10-25 | [Worker stewardship deployed](2026-10-25-worker-stewardship.md) | Feature `97b248e`, reviewed journal/feedback `c026d3d`; 2,434 tests, all 72 local Pages cases and 16 live journeys pass; M3/gates remain open |
 | 2026-10-25 | [Four development rounds individually deployed](2026-10-25-four-development-rounds.md) | Four verified gameplay deployments through `670a18a`, reviewed journal `1edc07f`; 2,395 tests, all 66 local Pages cases and ten live journal journeys pass; all gates remain open |
 | 2026-10-25 | [Settlement order filters deployed](2026-10-25-settlement-order-filters.md) | Published `4e2c678`; 2,364 tests, 58 distinct local Pages cases across corrected runs and three targeted live journeys pass; M3/gates remain open |

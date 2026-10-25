@@ -64,3 +64,32 @@ or overlap is found. All four metadata records have complete images, no page
 errors and no game workers. The tiny mobile raster remains supporting imagery;
 its full caption and Inspect/Original links remain readable. Public journal
 readback is recorded separately after deployment.
+
+
+## Published journal and live verification
+
+Reviewed journal **`3ae2ba614fff451e79fc4ee6fd7903af3803934e`** is published.
+Both [exact-commit workflows](publication-actions.json) succeed:
+[Pages 40227942324](https://github.com/ErikBurdett/Theandril/actions/runs/40227942324)
+and [Verify 40227942351](https://github.com/ErikBurdett/Theandril/actions/runs/40227942351).
+[Exact public readback](public-readback/readback.json) passes against its isolated
+production build, including game/worker bytes, regenerated feed, edition 22,
+pinned source, image and catalogue expectations.
+
+The [first live run](live.log) passed sixteen of nineteen cases. One navigation
+failed with `ERR_NETWORK_CHANGED`; the generated-hearth import reported a stopped
+worker while its worker script request was aborted and the art catalogue request
+reported `ERR_NETWORK_CHANGED`; the narrow case could not load the game bundle
+with `ERR_NETWORK_CHANGED`. [Trace extracts](live-interruptions.json) and all
+three original traces/screenshots are retained in `live-results/`, together with
+four journal layout records and contrast metadata. These startup failures occurred
+before commission gameplay. The aborted worker request alone does not identify
+its underlying cause.
+
+An [unchanged focused rerun](live-retry.log) passes all three affected cases in
+14.0 seconds, including both actual commission journeys and exact saved replay.
+[Exported campaigns and captures](live-retry-results/) are retained. No application
+code, timeout or assertion changed. Thus all **nineteen distinct affected live
+cases have passing results across the two runs**, not nineteen passes in one run.
+This is scoped development deployment verification, not general network-recovery
+or full 1.0 browser acceptance.

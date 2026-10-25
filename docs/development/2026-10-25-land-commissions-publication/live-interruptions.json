@@ -1,0 +1,23 @@
+{
+  "scope": "Extracts from retained failed traces; worker request aborted during concurrent network changes. Unchanged rerun passes; this does not establish resilience to every worker-load failure.",
+  "events": [
+    {
+      "case": "production-land-policy-lan-00366-row-width-with-exact-replay",
+      "kind": "console",
+      "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+      "url": "https://erikburdett.github.io/Theandril/assets/game-CsSvStEj.js"
+    },
+    {
+      "case": "production-land-policy-a-g-f003a-ores-the-exact-saved-policy",
+      "kind": "console",
+      "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+      "url": "https://erikburdett.github.io/Theandril/art/catalog.json"
+    },
+    {
+      "case": "production-land-policy-a-g-f003a-ores-the-exact-saved-policy",
+      "kind": "request",
+      "url": "https://erikburdett.github.io/Theandril/assets/simulation.worker-CmVnbPBf.js",
+      "failure": "net::ERR_ABORTED"
+    }
+  ]
+}

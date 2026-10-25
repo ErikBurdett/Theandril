@@ -23,7 +23,12 @@ generated hearth, exact saved restoration and narrow keyboard manual takeover.
 Displayed controls are reviewed. **Published as `24a710a`**: both workflows,
 exact public readback and both live commission journeys pass. The first live
 navigation attempts failed before loading with ERR_NETWORK_CHANGED; the unchanged
-rerun passes in 14.0 seconds. Reviewed dispatch 22 publication is being verified.
+rerun passes in 14.0 seconds. Reviewed dispatch 22 is published as **`3ae2ba6`**,
+with both workflows and exact public readback passing. Publication integration
+passes **2,463 tests / 298 files** and all nineteen affected local browser cases.
+All nineteen distinct affected live cases pass across an initial sixteen-pass run
+and unchanged three-case rerun; original interrupted navigation/asset/worker-start
+traces are retained. No runtime or assertion changed for the live rerun.
 [Publication evidence](development/2026-10-25-land-commissions-publication/README.md).
 [Evidence](development/2026-10-25-land-commissions/README.md),
 [ADR0055](architecture/0055-land-commissions.md).
