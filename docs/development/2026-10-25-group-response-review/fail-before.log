@@ -1,0 +1,96 @@
+[WebServer] (node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:62) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/production/group-response-recovery.spec.ts:45:5 › production group posting duplicate reply requires restoration after two real commands (8.1s)
+(node:165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/production/group-response-recovery.spec.ts:45:5 › production group charter wrong-actor reply requires restoration after two real commands (8.1s)
+
+
+  1) tests/production/group-response-recovery.spec.ts:45:5 › production group posting duplicate reply requires restoration after two real commands 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected pattern: /restore a saved campaign/i
+    Received string:  "◆2 postings accepted; 0 refused."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+           - unexpected value "◆2 postings accepted; 0 refused."
+
+
+      106 |       await page.screenshot({ path: testInfo.outputPath(`${kind}-${fault}-reply.png`) });
+      107 |
+    > 108 |       await expect(page.getByTestId('feedback')).toContainText(/restore a saved campaign/i);
+          |                                                  ^
+      109 |       await expect(panel.getByRole('alert')).toContainText(/restore a saved campaign/i);
+      110 |       await expect(results).toHaveCount(0);
+      111 |       await expect(panel).toContainText(kind === 'posting' ? '2 armies selected' : '2 hearths selected');
+        at /home/telephoneheater/Work/Theandril/tests/production/group-response-recovery.spec.ts:108:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/group-response-recovery.spec.ts:45:5 › production group charter wrong-actor reply requires restoration after two real commands 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected pattern: /restore a saved campaign/i
+    Received string:  "◆2 charters accepted; 0 refused."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+           - unexpected value "◆2 charters accepted; 0 refused."
+
+
+      106 |       await page.screenshot({ path: testInfo.outputPath(`${kind}-${fault}-reply.png`) });
+      107 |
+    > 108 |       await expect(page.getByTestId('feedback')).toContainText(/restore a saved campaign/i);
+          |                                                  ^
+      109 |       await expect(panel.getByRole('alert')).toContainText(/restore a saved campaign/i);
+      110 |       await expect(results).toHaveCount(0);
+      111 |       await expect(panel).toContainText(kind === 'posting' ? '2 armies selected' : '2 hearths selected');
+        at /home/telephoneheater/Work/Theandril/tests/production/group-response-recovery.spec.ts:108:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/production/group-response-recovery.spec.ts:45:5 › production group posting duplicate reply requires restoration after two real commands 
+    tests/production/group-response-recovery.spec.ts:45:5 › production group charter wrong-actor reply requires restoration after two real commands 

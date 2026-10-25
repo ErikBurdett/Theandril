@@ -1,0 +1,117 @@
+{
+  "buildCommit": "5cb7dc84292bfddb876eb54e19046f7b97a77ad9",
+  "buildScope": "Parent-frozen current apps/web/dist, also copied to /tmp/theandril-group-patrol-5cb7dc8-dist; no build performed by browser task.",
+  "command": "./node_modules/.bin/playwright test --config playwright.pages.config.ts tests/production/group-response-recovery.spec.ts --grep 'posting duplicate|charter wrong-actor' --output docs/development/2026-10-25-group-response-review/fail-before-results",
+  "exitCode": 1,
+  "expectedFailures": 2,
+  "failureBoundary": "tests/production/group-response-recovery.spec.ts:108 feedback must require restoring a saved campaign",
+  "cases": [
+    {
+      "initialHash": "1a71b4f1",
+      "expectedMutatedHash": "782d91b7",
+      "commands": [
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.10",
+          "cell": 495,
+          "mode": "hold"
+        },
+        {
+          "type": "setPosting",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.9",
+          "cell": 495,
+          "mode": "hold"
+        }
+      ],
+      "originalReply": {
+        "hash": "782d91b7",
+        "results": [
+          {
+            "armyId": "army.10",
+            "accepted": true
+          },
+          {
+            "armyId": "army.9",
+            "accepted": true
+          }
+        ],
+        "damagedResults": [
+          {
+            "armyId": "army.10",
+            "accepted": true
+          },
+          {
+            "armyId": "army.10",
+            "accepted": true
+          }
+        ]
+      },
+      "actualResultsText": "2 orders accepted \u00b7 0 refused.",
+      "actualPanelText": "Select matching armiesClear group selection1 armies selectedCheck land armies ashore to give them a standing posting together. Select up to 128 at a time; page and search changes keep your selection.Group destinationChoose an owned hearthWhere each army standsWest watch \u00b7 hex 500East watch \u00b7 hex 510Group arrival orderHold the hexJoin the force thereEach army receives its own posting. Existing travel orders come first. Routes, arrival and joining use the ordinary army rules; a stalled posting explains its reason in selected orders.Posting templatesYour personal template library stays in this browser across campaigns and sessions. It stores no armies or map coordinates and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.Post selected armies (1)Clear selected postings (1)2 orders accepted \u00b7 0 refused.",
+      "endTurnDisabled": false
+    },
+    {
+      "initialHash": "1a71b4f1",
+      "expectedMutatedHash": "caafaa3d",
+      "commands": [
+        {
+          "type": "setCharter",
+          "factionId": "faction.ashen_compact",
+          "settlementId": "settlement.6",
+          "focus": "wealth",
+          "ceiling": 24
+        },
+        {
+          "type": "setCharter",
+          "factionId": "faction.ashen_compact",
+          "settlementId": "settlement.8",
+          "focus": "wealth",
+          "ceiling": 24
+        }
+      ],
+      "originalReply": {
+        "hash": "caafaa3d",
+        "results": [
+          {
+            "settlementId": "settlement.6",
+            "accepted": true
+          },
+          {
+            "settlementId": "settlement.8",
+            "accepted": true
+          }
+        ],
+        "damagedResults": [
+          {
+            "settlementId": "settlement.6",
+            "accepted": true
+          },
+          {
+            "settlementId": "not-submitted",
+            "accepted": true
+          }
+        ]
+      },
+      "actualResultsText": "2 orders accepted \u00b7 0 refused.",
+      "actualPanelText": "Select matching hearthsClear hearth selection1 hearth selectedCheck hearths to give them standing charters together. Select up to 128 at a time; page, search and registry changes keep your selection.Charter focusWorksWealthLearningMusterCoin ceiling per hearthApplying charters spends no coin now. Each hearth may spend up to its ceiling on one work whenever its queue is empty, once per turn after upkeep. All charters share your treasury and leave 40 coin in reserve.Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.Charter templatesYour personal template library stays in this browser across campaigns and sessions. It is separate from campaign saves and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.Apply charters (1)Revoke charters (1)2 orders accepted \u00b7 0 refused.",
+      "endTurnDisabled": false
+    }
+  ],
+  "sha256": {
+    "tests/production/group-response-recovery.spec.ts": "086ea909295d000665053d8d4405ac54b8c64ab0fa8cb6f4c172ac67c13118a1",
+    "docs/development/2026-10-24-group-patrol-publication/frozen-build.json": "0bcf2970f4aa743a94bcaaa3943bc7f4181eb176e9dae203a7257b84caf9192e",
+    "docs/development/2026-10-25-group-response-review/fail-before.log": "7e25d3e467c6d8e3657db4e37a87335cee35ff13b60ed266618bb854e1205145",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/error-context.md": "42734dc3ec0db03365cd23cf0c247f3fe57e4a9ffdcd23afd34cf93c9ef1bce0",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/posting-duplicate-reply.json": "a1949087b81eee04db01ef65f0dd53a866ddc92c417d367a77341ca9dcf97133",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/posting-duplicate-reply.png": "60c96a6e902f1943775f317e8b39ec7d963fa7c08482be17a7cb9e488983b959",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/test-failed-1.png": "60c96a6e902f1943775f317e8b39ec7d963fa7c08482be17a7cb9e488983b959",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--42da8-ion-after-two-real-commands/trace.zip": "4c686aee1d3d591e18ab245e8289cb926ae4b7cf2e7cc1ada7887c7fd2386b58",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/charter-wrong-actor-reply.json": "715936a6c31017b366e8ec24ddc06989c456fff8830331dcf6c0abe1bf2b26e1",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/charter-wrong-actor-reply.png": "2f4a3409a3fc743f6085fd0ef2907dabf13efe8fac7107306b8210395e5da05e",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/error-context.md": "c58708659cb69e4e3949acb15e46b24ded15c89b9e0c9690cf90691a7e3dc329",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/test-failed-1.png": "2f4a3409a3fc743f6085fd0ef2907dabf13efe8fac7107306b8210395e5da05e",
+    "docs/development/2026-10-25-group-response-review/fail-before-results/production-group-response--b7ade-ion-after-two-real-commands/trace.zip": "e21f43627ae184642bd697a09ec0b17845cbab6282f6fe940142b04e16371f03"
+  }
+}

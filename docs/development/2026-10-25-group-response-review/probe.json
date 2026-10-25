@@ -1,0 +1,461 @@
+{
+  "scope": "Exact source predicate + actual ledger probe; no production browser run and no claim that the normal worker emits malformed results.",
+  "sourceHashes": {
+    "apps/web/src/main.tsx": "1361b0b1c72a259cc1d0a70fd294c11dcac09ea4b3e7b5e5d33450ac1908700b",
+    "apps/web/src/group-posting-requests.ts": "ce1f9035a9a2153edd0cecaa29fe28a664b090bb532c07c7c8718b190abe13c5",
+    "apps/web/src/group-postings.tsx": "44f1a875b126f3bba3f5d638108d9f3e537507bd57b83e0b6d6774756b792d2f",
+    "apps/web/src/group-charters.tsx": "7109237c8274920b4e5f75ad3b50110899b8c5b79f6fec2d727147505aaef1c6"
+  },
+  "predicates": {
+    "posting": "Array.isArray(response.groupPostingResults) && response.groupPostingResults.every(result => result && typeof result.armyId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))",
+    "charter": "Array.isArray(response.groupCharterResults) && response.groupCharterResults.every(result => result && typeof result.settlementId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))"
+  },
+  "evidence": [
+    {
+      "kind": "Posting",
+      "case": "complete-correct-control",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": true
+        },
+        {
+          "armyId": "army.2",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "armyId": "army.1",
+            "accepted": true
+          },
+          {
+            "armyId": "army.2",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Posting",
+      "case": "empty-array",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": []
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 0
+    },
+    {
+      "kind": "Posting",
+      "case": "missing-one-typed-row",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "armyId": "army.1",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 1
+    },
+    {
+      "kind": "Posting",
+      "case": "duplicate-typed-row",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": true
+        },
+        {
+          "armyId": "army.1",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "armyId": "army.1",
+            "accepted": true
+          },
+          {
+            "armyId": "army.1",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Posting",
+      "case": "wrong-typed-actor",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": true
+        },
+        {
+          "armyId": "not-submitted",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "armyId": "army.1",
+            "accepted": true
+          },
+          {
+            "armyId": "not-submitted",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Posting",
+      "case": "extra-typed-actor",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": true
+        },
+        {
+          "armyId": "army.2",
+          "accepted": true
+        },
+        {
+          "armyId": "not-submitted",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "armyId": "army.1",
+            "accepted": true
+          },
+          {
+            "armyId": "army.2",
+            "accepted": true
+          },
+          {
+            "armyId": "not-submitted",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 3
+    },
+    {
+      "kind": "Posting",
+      "case": "missing-field-control",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": null,
+      "exactSourcePredicateAccepts": false,
+      "pendingAtFinally": true,
+      "result": {
+        "kind": "rejected",
+        "message": "Error: Probe cleanup: the real main finally recovery guard would still see this request."
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": null
+    },
+    {
+      "kind": "Posting",
+      "case": "malformed-row-control",
+      "submittedActorIds": [
+        "army.1",
+        "army.2"
+      ],
+      "responseRows": [
+        {
+          "armyId": "army.1",
+          "accepted": "yes"
+        }
+      ],
+      "exactSourcePredicateAccepts": false,
+      "pendingAtFinally": true,
+      "result": {
+        "kind": "rejected",
+        "message": "Error: Probe cleanup: the real main finally recovery guard would still see this request."
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": null
+    },
+    {
+      "kind": "Charter",
+      "case": "complete-correct-control",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        },
+        {
+          "settlementId": "settlement.2",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          },
+          {
+            "settlementId": "settlement.2",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Charter",
+      "case": "empty-array",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": []
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 0
+    },
+    {
+      "kind": "Charter",
+      "case": "missing-one-typed-row",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 1
+    },
+    {
+      "kind": "Charter",
+      "case": "duplicate-typed-row",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        },
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          },
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Charter",
+      "case": "wrong-typed-actor",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        },
+        {
+          "settlementId": "not-submitted",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          },
+          {
+            "settlementId": "not-submitted",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 2
+    },
+    {
+      "kind": "Charter",
+      "case": "extra-typed-actor",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": true
+        },
+        {
+          "settlementId": "settlement.2",
+          "accepted": true
+        },
+        {
+          "settlementId": "not-submitted",
+          "accepted": true
+        }
+      ],
+      "exactSourcePredicateAccepts": true,
+      "pendingAtFinally": false,
+      "result": {
+        "kind": "resolved",
+        "rows": [
+          {
+            "settlementId": "settlement.1",
+            "accepted": true
+          },
+          {
+            "settlementId": "settlement.2",
+            "accepted": true
+          },
+          {
+            "settlementId": "not-submitted",
+            "accepted": true
+          }
+        ]
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": 3
+    },
+    {
+      "kind": "Charter",
+      "case": "missing-field-control",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": null,
+      "exactSourcePredicateAccepts": false,
+      "pendingAtFinally": true,
+      "result": {
+        "kind": "rejected",
+        "message": "Error: Probe cleanup: the real main finally recovery guard would still see this request."
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": null
+    },
+    {
+      "kind": "Charter",
+      "case": "malformed-row-control",
+      "submittedActorIds": [
+        "settlement.1",
+        "settlement.2"
+      ],
+      "responseRows": [
+        {
+          "settlementId": "settlement.1",
+          "accepted": "yes"
+        }
+      ],
+      "exactSourcePredicateAccepts": false,
+      "pendingAtFinally": true,
+      "result": {
+        "kind": "rejected",
+        "message": "Error: Probe cleanup: the real main finally recovery guard would still see this request."
+      },
+      "displayedAcceptedCountByCurrentComponentFormula": null
+    }
+  ]
+}

@@ -49,3 +49,7 @@ All **51 local Pages journeys pass in one run, 2.6 minutes**
 new group patrol actions/recovery, the earlier production workflows and every
 journal/roadmap journey. Source/runtime remained frozen throughout the run.
 This is local acceptance; deployment and live readback remain separate.
+
+## Published and checked
+
+Publication **5cb7dc84292bfddb876eb54e19046f7b97a77ad9** passes both [GitHub workflows](actions.json). The [exact live readback](live-readback/) matches the preserved publication build, including worker, public image/provenance, dispatch pin, catalogue and generated ledger. All **four new live patrol journeys pass in 26.4 seconds** ([log](live-pages.log)); this live scope is separate from all 51 local Pages cases. [Deployment record](deployment.json). No release gate is closed.

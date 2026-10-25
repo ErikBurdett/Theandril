@@ -8,9 +8,9 @@ import { GENERATOR_VERSION, MAP_TYPES, RECOMMENDED_CITY_STATES, RECOMMENDED_FACT
 import type { CampaignPace, DevelopmentFocus, GameCommand, MapObservation, MovementQuery, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { WorldRenderer, type ArtStatus, type MapPointerInput, type BattleSceneView } from '@theandril/render';
 import { MovementMapHint, useMapMovement, type MapMovement, type MovementReview } from './movement';
-import type { CampaignInfo, GroupCharterResult, Request, Response, WorkerMetrics } from './protocol';
+import type { CampaignInfo, Request, Response, WorkerMetrics } from './protocol';
 import type { CampaignMode, ChronicleDocuments } from '@theandril/chronicle';
-import { GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
+import { GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
 import { GroupPatrolRequests } from './group-patrol-requests';
 import type { GroupPatrolIssue } from './group-patrols';
 import type { GroupPostingIssue } from './group-postings';
@@ -101,7 +101,7 @@ function App() {
   const sequence = useRef(0);
   const groupPostingRequests = useRef(new GroupPostingRequests());
   const groupPatrolRequests = useRef(new GroupPatrolRequests());
-  const groupCharterRequests = useRef(new GroupOrderRequests<GroupCharterResult>());
+  const groupCharterRequests = useRef(new GroupCharterRequests());
   const groupProductionRequests = useRef(new GroupProductionRequests());
   const groupMovementRequests = useRef(new GroupMovementRequests());
   const groupMovementPreviews = useRef(new GroupMovementPreviewRequests());
@@ -394,6 +394,8 @@ function App() {
         assertTheaterResponse(response.observation.theaters, response.observation.factionId);
         assertSupplyAccessResponse(response.observation.supplyAccess, response.observation.factionId);
         if (pendingTheater.current?.id === response.id) assertTheaterApplied(response.observation.theaters, pendingTheater.current.command);
+        groupPostingRequests.current.validate(response.id, response.observation.factionId, response.groupPostingResults, response.groupPostingError);
+        groupCharterRequests.current.validate(response.id, response.observation.factionId, response.groupCharterResults, response.groupCharterError);
         groupProductionRequests.current.validate(response.id, response.observation.factionId, response.groupProductionResults, response.groupProductionError);
         groupMovementRequests.current.validate(response.id, response.observation.factionId, response.groupMovementResults, response.groupMovementError);
         groupPatrolRequests.current.validate(response.id, response.observation.factionId, response.groupPatrolResults, response.groupPatrolError);
@@ -469,7 +471,7 @@ function App() {
         if (response.groupPostingError) {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupPostingRequests.current.finish(response.id, new Error(response.groupPostingError));
-        } else if (Array.isArray(response.groupPostingResults) && response.groupPostingResults.every(result => result && typeof result.armyId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupPostingRequests.current.finish(response.id, response.groupPostingResults);
+        } else if (response.groupPostingResults) groupPostingRequests.current.finish(response.id, response.groupPostingResults);
         if (response.groupPatrolError) {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupPatrolRequests.current.finish(response.id, new Error(response.groupPatrolError));
@@ -477,7 +479,7 @@ function App() {
         if (response.groupCharterError) {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupCharterRequests.current.finish(response.id, new Error(response.groupCharterError));
-        } else if (Array.isArray(response.groupCharterResults) && response.groupCharterResults.every(result => result && typeof result.settlementId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupCharterRequests.current.finish(response.id, response.groupCharterResults);
+        } else if (response.groupCharterResults) groupCharterRequests.current.finish(response.id, response.groupCharterResults);
         if (response.groupProductionError) {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupProductionRequests.current.finish(response.id, new Error(response.groupProductionError));
@@ -562,8 +564,10 @@ function App() {
   const issueGroupPosting: GroupPostingIssue = commands => {
     const instance = worker.current;
     if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!commands.length) return Promise.reject(new Error('Select armies before issuing group orders.'));
     const id = ++sequence.current;
-    const pending = groupPostingRequests.current.enqueue(id);
+    const pending = groupPostingRequests.current.enqueue(id, commands);
+    if (!groupPostingRequests.current.has(id)) return pending;
     setBusy(true); setError(false);
     try { instance.postMessage({ id, type: 'groupPosting', commands } satisfies Request); }
     catch (cause) {
@@ -575,8 +579,10 @@ function App() {
   const issueGroupCharter: GroupCharterIssue = commands => {
     const instance = worker.current;
     if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!commands.length) return Promise.reject(new Error('Select hearths before issuing group orders.'));
     const id = ++sequence.current;
-    const pending = groupCharterRequests.current.enqueue(id);
+    const pending = groupCharterRequests.current.enqueue(id, commands);
+    if (!groupCharterRequests.current.has(id)) return pending;
     setBusy(true); setError(false);
     try { instance.postMessage({ id, type: 'groupCharter', commands } satisfies Request); }
     catch (cause) {

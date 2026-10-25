@@ -1,0 +1,7 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+apps/web/src/group-posting-requests.ts(40,126): error TS2345: Argument of type 'Record<string, unknown>' is not assignable to parameter of type 'Command'.
+  'Command' could be instantiated with an arbitrary type which could be unrelated to 'Record<string, unknown>'.
+ ELIFECYCLE  Command failed with exit code 2.

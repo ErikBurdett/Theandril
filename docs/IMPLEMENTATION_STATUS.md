@@ -1,8 +1,27 @@
 # Theandril implementation status
 
+## Correlate posting and charter results before accepting updates — 2026-10-25
+
+**Locally verified; publication pending.** Group posting and
+charter responses now match the exact submitted faction and ordered actor IDs
+before adopting campaign state. Missing, duplicate, unrelated or malformed rows
+require saved-restoration recovery, preserve checked actors and block gameplay.
+Two actual old-build browser cases demonstrated false “2 accepted” results with
+one actor left checked and End turn still enabled after real command execution.
+The fix preserves the generic request primitive, worker/protocol, simulation,
+rules/save 35 and content 015468d1. It adds bounded transport checks only, with no
+new policy, world scan or pacing change. [Evidence](development/2026-10-25-group-response-review/README.md).
+**Verification:** 2,352 tests / 286 files pass in 60.66 seconds; typecheck, lint,
+Pages build and all 57 local Pages journeys pass. All twelve recovery exports
+replay exactly. Independent source/image/export reviews find no scoped blocker.
+M3, DH-021, R06 and all fifteen release gates remain open.
+
 ## Pause, resume and remove patrols together — 2026-10-24
 
-**Implementation committed as `8d880eb`; publication prepared separately.**
+**Published as `5cb7dc8`, implementation `8d880eb`.** Both GitHub workflows
+succeed; exact public assets/source/catalogue match and all four new live patrol
+journeys pass in 26.4 seconds. Publication acceptance passes 2,341 tests and all
+51 local Pages journeys.
 Group patrol controls use
 existing registry checks to pause enabled policies, resume disabled policies or
 remove policies. They preserve existing active/paused travel, armies, postings
