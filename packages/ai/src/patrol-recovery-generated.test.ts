@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
-import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash } from '@theandril/sim';
+import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, stateHashForVersion } from '@theandril/sim';
 import { createJournal, replayArchive } from '../../chronicle/src';
 import { planTurnWithReasons } from './index';
 import { planPatrol } from './patrols';
@@ -12,7 +12,7 @@ const captured = () => {
   const bytes = readFileSync(new URL('../../../docs/development/2026-10-24-patrol-recovery/diagnosis-long/snapshot-1-turn-58.json', import.meta.url), 'utf8');
   expect(createHash('sha256').update(bytes).digest('hex')).toBe('c1c28ea92aca0919f084da92e4627984ec710924b27d98d7a4775dcd7eb55ca8');
   const game = deserializeGame(bytes);
-  expect(stateHash(game)).toBe('17c538ce');
+  expect(stateHashForVersion(game, 35)).toBe('17c538ce');
   return game;
 };
 

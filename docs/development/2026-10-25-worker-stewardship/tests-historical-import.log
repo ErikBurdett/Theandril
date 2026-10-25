@@ -1,0 +1,46 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-recovery-generated.test.ts (2 tests | 2 failed) 161ms
+     × reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly 100ms
+     × keeps the player-controlled canonical route paused without an explicit AI order 61ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery-generated.test.ts > generated patrol interruption recovery > reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly
+ReferenceError: stateHashForVersion is not defined
+ ❯ captured packages/ai/src/patrol-recovery-generated.test.ts:15:3
+     13|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('c1c28…
+     14|   const game = deserializeGame(bytes);
+     15|   expect(stateHashForVersion(game, 35)).toBe('17c538ce');
+       |   ^
+     16|   return game;
+     17| };
+ ❯ packages/ai/src/patrol-recovery-generated.test.ts:21:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery-generated.test.ts > generated patrol interruption recovery > keeps the player-controlled canonical route paused without an explicit AI order
+ReferenceError: stateHashForVersion is not defined
+ ❯ captured packages/ai/src/patrol-recovery-generated.test.ts:15:3
+     13|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('c1c28…
+     14|   const game = deserializeGame(bytes);
+     15|   expect(stateHashForVersion(game, 35)).toBe('17c538ce');
+       |   ^
+     16|   return game;
+     17| };
+ ❯ packages/ai/src/patrol-recovery-generated.test.ts:49:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 293 passed (294)
+      Tests  2 failed | 2430 passed (2432)
+   Start at  13:11:48
+   Duration  64.67s (transform 5.40s, setup 0ms, import 34.24s, tests 203.23s, environment 16ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

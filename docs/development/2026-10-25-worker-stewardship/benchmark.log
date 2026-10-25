@@ -1,0 +1,129 @@
+{
+  "rules": 36,
+  "contentHash": "015468d1",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "generatedAt": "2026-10-25T18:14:03.620Z",
+  "scope": "Authored ownership/population/terrain scale fixtures, not organic empires. 3 warmup+12 measured sustained turns each, normal canonical endTurn without AI planning. Isolated policy phase, compact policy summary, full player summary and complete turn measured separately; hashes/mirrors/serialization outside timings. No browser transfer, rendering, disk or 350000-cell single-estate acceptance.",
+  "results": [
+    {
+      "name": "Huge authored32-hearth estate",
+      "generatorVersion": 4,
+      "mapCells": 196608,
+      "ownedTowns": 32,
+      "claimed": 1248,
+      "maxClaims": 39,
+      "assigned": 401,
+      "policies": 32,
+      "installMs": 2.520635000000084,
+      "policyPhase": {
+        "samples": 12,
+        "medianMs": 0.9196309999997538,
+        "p95Ms": 1.272305999999844,
+        "maxMs": 1.272305999999844
+      },
+      "policyObservation": {
+        "samples": 12,
+        "medianMs": 0.02209099999981845,
+        "p95Ms": 0.04585599999973056,
+        "maxMs": 0.04585599999973056
+      },
+      "fullPlayerSummary": {
+        "samples": 12,
+        "medianMs": 37.516779999999926,
+        "p95Ms": 42.17647399999987,
+        "maxMs": 42.17647399999987
+      },
+      "endTurn": {
+        "samples": 12,
+        "medianMs": 9.569010000000162,
+        "p95Ms": 10.12789900000007,
+        "maxMs": 10.12789900000007
+      },
+      "policyBytes": 4191,
+      "observationBytes": 2203240,
+      "reallocations": 182,
+      "finalHash": "b5f5b09a",
+      "mirroredTurns": 15
+    },
+    {
+      "name": "Legendary authored40-hearth estate",
+      "generatorVersion": 4,
+      "mapCells": 307200,
+      "ownedTowns": 40,
+      "claimed": 1560,
+      "maxClaims": 39,
+      "assigned": 521,
+      "policies": 40,
+      "installMs": 1.7956380000005083,
+      "policyPhase": {
+        "samples": 12,
+        "medianMs": 1.2938829999984591,
+        "p95Ms": 1.4926200000008976,
+        "maxMs": 1.4926200000008976
+      },
+      "policyObservation": {
+        "samples": 12,
+        "medianMs": 0.03161799999907089,
+        "p95Ms": 0.042342000000644475,
+        "maxMs": 0.042342000000644475
+      },
+      "fullPlayerSummary": {
+        "samples": 12,
+        "medianMs": 109.17006000000038,
+        "p95Ms": 110.32784100000026,
+        "maxMs": 110.32784100000026
+      },
+      "endTurn": {
+        "samples": 12,
+        "medianMs": 27.478901999998925,
+        "p95Ms": 28.954890999999407,
+        "maxMs": 28.954890999999407
+      },
+      "policyBytes": 5262,
+      "observationBytes": 4912142,
+      "reallocations": 240,
+      "finalHash": "d2e8b729",
+      "mirroredTurns": 15
+    },
+    {
+      "name": "Huge authored10000-claim128-person hearth",
+      "generatorVersion": 4,
+      "mapCells": 196608,
+      "ownedTowns": 1,
+      "claimed": 10000,
+      "maxClaims": 10000,
+      "assigned": 128,
+      "policies": 1,
+      "installMs": 9.725950000000012,
+      "policyPhase": {
+        "samples": 12,
+        "medianMs": 7.483078999997815,
+        "p95Ms": 8.349098999999114,
+        "maxMs": 8.349098999999114
+      },
+      "policyObservation": {
+        "samples": 12,
+        "medianMs": 0.010934999998426065,
+        "p95Ms": 0.012441999999282416,
+        "maxMs": 0.012441999999282416
+      },
+      "fullPlayerSummary": {
+        "samples": 12,
+        "medianMs": 2.4543550000016694,
+        "p95Ms": 3.6896919999999227,
+        "maxMs": 3.6896919999999227
+      },
+      "endTurn": {
+        "samples": 12,
+        "medianMs": 8.216363999999885,
+        "p95Ms": 9.226800000000367,
+        "maxMs": 9.226800000000367
+      },
+      "policyBytes": 133,
+      "observationBytes": 1600962,
+      "reallocations": 0,
+      "finalHash": "576cb82a",
+      "mirroredTurns": 15
+    }
+  ]
+}

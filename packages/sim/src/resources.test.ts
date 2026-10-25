@@ -4,6 +4,7 @@ import { isPassable, neighbors } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getObservation, getSettlementLandObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { createResources, resourceObservation, settlementResourceYield } from './resources';
 import { rebuildIndexes } from './visibility';
+import { applyRecordedCommand, createArchive, replayArchive } from '../../chronicle/src';
 
 const issue = (game: GameState, command: GameCommand) => { const result = applyCommand(game, command); expect(result.ok, result.error).toBe(true); return result; };
 function grainHearth() {
@@ -70,6 +71,33 @@ test('deposits stay hidden until charted and observations cannot alter stockpile
   expect(view.cells.filter(cell => cell.resourceId).length).toBeLessThan(Object.keys(game.resources.deposits).length);
   view.resources!.stockpiles[0]!.amount = 1000;
   expect(serializeGame(game)).toBe(before);
+});
+
+test('changing worker priority can stop actual paid resource extraction without removing its works', () => {
+  const { game, deposit, town, factionId } = grainHearth();
+  const archive = createArchive(game, { mode: 'player', coverage: 'from-save' });
+  const record = (command: GameCommand) => { const result = applyRecordedCommand(game, archive, command); expect(result.ok, result.error).toBe(true); return result; };
+  const beforeCoin = game.factions[0]!.treasury;
+  const quote = getSettlementLandObservation(game, factionId, town.id)!.cells.find(cell => cell.cell === deposit)!.improvementOptions.find(option => option.improvementId === 'improvement.grange')!;
+  record({ type: 'improveTile', factionId, settlementId: town.id, cell: deposit, improvementId: 'improvement.grange' });
+  expect(game.factions[0]!.treasury).toBe(beforeCoin - quote.coinCost);
+  while (game.land.settlements[town.id]!.work) record({ type: 'endTurn', factionId });
+  expect(game.land.settlements[town.id]!.improvements[deposit]).toBe('improvement.grange');
+  expect(game.resources.stockpiles[factionId]?.['resource.grain'] ?? 0).toBe(0);
+  record({ type: 'setWorkerPolicy', factionId, settlementId: town.id, focus: 'food' });
+  expect(game.land.settlements[town.id]!.worked).toContain(deposit);
+  expect(settlementResourceYield(game, town)).toEqual({ 'resource.grain': 3 });
+  record({ type: 'endTurn', factionId });
+  const grain = game.resources.stockpiles[factionId]!['resource.grain'];
+  expect(grain).toBe(3);
+  record({ type: 'setWorkerPolicy', factionId, settlementId: town.id, focus: 'coin' });
+  expect(game.land.settlements[town.id]!.worked).not.toContain(deposit);
+  expect(settlementResourceYield(game, town)).toEqual({});
+  record({ type: 'endTurn', factionId });
+  expect(game.resources.stockpiles[factionId]!['resource.grain']).toBe(grain);
+  expect(game.land.settlements[town.id]!.improvements[deposit]).toBe('improvement.grange');
+  expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
+  expect(stateHash(replayArchive(archive))).toBe(stateHash(game));
 });
 test('ordinary land cannot accept extraction without its deposit, and occupation suspends output', () => {
   const { game, town, factionId, deposit } = grainHearth();

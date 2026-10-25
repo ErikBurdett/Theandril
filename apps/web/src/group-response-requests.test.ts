@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { GameCommand } from '@theandril/sim';
-import { GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
-import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult, type GroupPostingResult } from './protocol';
+import { GroupWorkerPolicyRequests, GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
+import { MAX_GROUP_ORDER_COMMANDS, type GroupWorkerPolicyResult, type GroupCharterResult, type GroupPostingResult } from './protocol';
 
 interface Ledger<Command, Result> {
   busy: boolean;
@@ -118,3 +118,7 @@ it('preserves generic request-ID-only behavior for independent clients', async (
   generic.finish(9, []);
   await expect(pending).resolves.toEqual([]);
 });
+
+correlationCases<Extract<GameCommand, { type: 'setWorkerPolicy' }>, GroupWorkerPolicyResult>('worker policy', () => new GroupWorkerPolicyRequests(),
+  () => ['settlement.1', 'settlement.2'].map(settlementId => ({ type: 'setWorkerPolicy', factionId: 'faction.1', settlementId, focus: 'balanced' })),
+  () => ['settlement.1', 'settlement.2'].map(settlementId => ({ settlementId, accepted: true })), 'settlementId');

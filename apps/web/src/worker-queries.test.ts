@@ -994,3 +994,119 @@ describe('group posting and charter publication recovery', () => {
     });
   }
 });
+
+function workerPolicyFixture(count = 3) {
+  const base = groupCharterFixture(count);
+  const commands: Extract<GameCommand, { type: 'setWorkerPolicy' }>[] = base.commands.map(command => ({ type: 'setWorkerPolicy', factionId: command.factionId, settlementId: command.settlementId, focus: 'balanced' }));
+  return { game: base.game, commands };
+}
+
+describe('actual worker group-worker-policy boundary', () => {
+  it('publishes one final response for 30 policies with exact ordinary-command replay and no implicit autosave', async () => {
+    const { game, commands } = workerPolicyFixture(30);
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    try {
+      const batch = dispatch({ type: 'groupWorkerPolicy', expectedHash: initial.hash, commands: [...commands].reverse() }, 'state');
+      const result = await batch.response;
+      expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+      expect(result.groupWorkerPolicyResults).toEqual(commands.map(command => ({ settlementId: command.settlementId, accepted: true })));
+      expect(result.observation.workerPolicies).toHaveLength(30);
+      expect(result.metrics.groupWorkerPolicyResultBytes).toBe(new TextEncoder().encode(JSON.stringify({ groupWorkerPolicyResults: result.groupWorkerPolicyResults })).byteLength);
+      expect(saved).not.toHaveBeenCalled();
+      for (const command of commands) expect(applyCommand(game, command).ok).toBe(true);
+      expect(result.hash).toBe(stateHash(game));
+      const archive = await exported();
+      expect(archive.archive.records).toHaveLength(30);
+      expect(serializeGame(replayArchive(archive.archive))).toBe(serializeGame(game));
+      await request({ type: 'save' }, 'message');
+      await request({ type: 'groupWorkerPolicy', expectedHash: result.hash, commands: commands.map(command => ({ ...command, focus: 'none' })) }, 'state');
+      expect((await request({ type: 'load' }, 'state')).hash).toBe(result.hash);
+    } finally { saved.mockRestore(); }
+  });
+
+  it('rejects whole malformed, heterogeneous, duplicate and stale envelopes before recording; a fresh request still works', async () => {
+    const { game, commands } = workerPolicyFixture(2);
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const base = { type: 'groupWorkerPolicy' as const, expectedHash: initial.hash, commands };
+    const before = await exported(), record = vi.spyOn(CampaignJournal.prototype, 'record'), saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+    const sparse = new Array(2); sparse[1] = commands[1];
+    try {
+      const invalid = [
+        { ...base, unexpected: true }, { ...base, expectedHash: undefined }, { ...base, expectedHash: 'ABCDEF12' },
+        { ...base, expectedHash: initial.hash === '00000000' ? '11111111' : '00000000' },
+        ...[[], sparse, Object.assign([...commands], { hidden: true }), [commands[0], commands[0]],
+          [commands[0], { ...commands[1], focus: 'coin' }], [commands[0], { ...commands[1], focus: 'invalid' }],
+          [commands[0], { ...commands[1], factionId: 'foreign.faction' }],
+          [commands[0], { ...commands[1], hidden: true }],
+          Array.from({ length: 129 }, (_, index) => ({ ...commands[0], settlementId: `settlement.${index}` })),
+        ].map(commands => ({ ...base, commands })),
+      ];
+      for (const body of invalid) {
+        const result = await request(body as RequestBody, 'error');
+        expect(result.recoveryRequired).not.toBe(true);
+        expect((await exported()).text).toBe(before.text);
+      }
+      expect(record).not.toHaveBeenCalled(); expect(saved).not.toHaveBeenCalled();
+    } finally { record.mockRestore(); saved.mockRestore(); }
+    expect((await request(base, 'state')).groupWorkerPolicyResults?.every(row => row.accepted)).toBe(true);
+  });
+
+  it('records distinct foreign, missing and policy-free hearth refusals without hiding accepted removals', async () => {
+    const { game, commands } = workerPolicyFixture(2);
+    expect(applyCommand(game, commands[0]!).ok).toBe(true);
+    const foreign = Object.values(game.settlements).find(town => town.factionId !== game.turnOwnerId)!;
+    const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const removals = [...commands.map(command => ({ ...command, focus: 'none' as const })),
+      { ...commands[0]!, settlementId: foreign.id, focus: 'none' as const },
+      { ...commands[0]!, settlementId: 'settlement.missing', focus: 'none' as const }];
+    const response = await request({ type: 'groupWorkerPolicy', commands: removals.reverse(), expectedHash: initial.hash }, 'state');
+    expect(response.groupWorkerPolicyResults?.filter(row => row.accepted)).toHaveLength(1);
+    expect(response.groupWorkerPolicyResults?.filter(row => !row.accepted)).toHaveLength(3);
+    expect(response.groupWorkerPolicyResults?.every(row => row.accepted || Boolean(row.message))).toBe(true);
+    const after = await exported();
+    expect(after.archive.records).toHaveLength(4);
+    expect(stateHash(replayArchive(after.archive))).toBe(response.hash);
+  });
+
+  for (const failure of ['recording', 'publication'] as const) {
+    it(`requires restoration after worker policy ${failure} fails following mutation`, async () => {
+      const { game, commands } = workerPolicyFixture(3);
+      const initial = await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+      await request({ type: 'save' }, 'message');
+      const before = await exported(), saved = vi.spyOn(SaveStore.prototype, 'saveCampaign');
+      const originalRecord = CampaignJournal.prototype.record, originalSend = host.postMessage;
+      let acceptedCount = 0;
+      const recording = vi.spyOn(CampaignJournal.prototype, 'record').mockImplementation(function (this: CampaignJournal, ...args: Parameters<typeof originalRecord>) {
+        const result = originalRecord.apply(this, args);
+        if (args[1].type === 'setWorkerPolicy') {
+          acceptedCount++;
+          if (failure === 'recording' && acceptedCount === 2) throw new Error('Authored recorder interruption after canonical worker allocation.');
+        }
+        return result;
+      });
+      const publication = vi.spyOn(host, 'postMessage').mockImplementation((message, options) => {
+        if (failure === 'publication' && message.type === 'state' && message.groupWorkerPolicyResults) throw new Error('Authored worker policy publication interruption.');
+        originalSend(message, options);
+      });
+      const body = { type: 'groupWorkerPolicy' as const, commands, expectedHash: initial.hash };
+      try {
+        if (failure === 'recording') {
+          const result = await request(body, 'state');
+          expect(result.groupWorkerPolicyResults).toHaveLength(1);
+          expect(result.observation.workerPolicies).toHaveLength(2);
+          expect(result.groupWorkerPolicyError).toContain('Some orders may have applied');
+        } else {
+          const result = await request(body, 'error');
+          expect(result.recoveryRequired).toBe(true); expect(result.message).toContain('Some orders may have applied');
+        }
+        expect(acceptedCount).toBe(failure === 'recording' ? 2 : 3);
+        for (const next of [body, { type: 'save' }, { type: 'export' }] as RequestBody[]) expect((await request(next, 'error')).recoveryRequired).toBe(true);
+        expect(saved).not.toHaveBeenCalled();
+      } finally { recording.mockRestore(); publication.mockRestore(); saved.mockRestore(); }
+      expect((await request({ type: 'load' }, 'state')).hash).toBe(initial.hash);
+      expect((await exported()).text).toBe(before.text);
+      expect((await request(body, 'state')).groupWorkerPolicyResults).toHaveLength(3);
+    });
+  }
+});

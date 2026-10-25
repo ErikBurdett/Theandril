@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it, vi } from 'vitest';
 import * as sim from '@theandril/sim';
-import { applyCommand, deserializeGame, getBesiegePreview, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, deserializeGame, getBesiegePreview, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from '@theandril/sim';
 import { createJournal, replayArchive } from '../../chronicle/src';
 import { withRules } from '../../sim/src/rules';
 import { planTurnWithReasons } from './index';
@@ -35,7 +35,7 @@ function executeRound(game: GameState, commands: GameCommand[]) {
 
 describe('immediate project counterplay', () => {
   it.each(['white peace', 'unaffordable demand'] as const)('rejects %s and besieges in one ordinary batch before the enemy can win', kind => {
-    const game = load(); expect(stateHash(game)).toBe('c705fc04');
+    const game = load(); expect(stateHashForVersion(game, 35)).toBe('c705fc04');
     offer(game, kind === 'unaffordable demand' ? getObservation(game, actor).treasury + 1 : 0);
     const view = getObservation(game, actor), before = structuredClone(view), plan = planTurnWithReasons(view);
     expect(plan.commands).toEqual([{ type: 'respondPeace', factionId: actor, offerId: game.diplomacy.offers[0]!.id, accept: false }, siege]);

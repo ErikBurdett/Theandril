@@ -1,0 +1,8 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+tests/production/worker-policy.spec.ts(41,52): error TS18046: 'record.command' is of type 'unknown'.
+tests/production/worker-policy.spec.ts(58,49): error TS18046: 'record.command' is of type 'unknown'.
+tests/production/worker-policy.spec.ts(58,94): error TS18046: 'record.command' is of type 'unknown'.
+ ELIFECYCLE  Command failed with exit code 2.

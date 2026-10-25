@@ -1,5 +1,24 @@
 # Theandril implementation status
 
+## Standing worker stewardship — 2026-10-25
+
+Local implementation and twelve targeted production cases verified; publication pending.
+Five optional worker priorities apply now and after each turn's growth/land
+completion for the next harvest. Direct worker orders take back control;
+siege/occupation wait and capture/raze removes the policy. Registry batches use
+up to128 checked hearths, saved selections, reviewed hashes, per-hearth receipts
+and uncertain-result recovery. No paid land automation or implicit batch save.
+
+Rules/save36 migrates empty policies and preserves the captured35 archive's
+original seals. Content015468d1 is unchanged. All **2,432 tests /294files** pass
+in65.00seconds, with typecheck, lint and Pages build. Final headline twelve-realm
+Standard/Long/Epic remains219/329/374 after correcting a retained broad-adoption
+AI experiment; only Epic installs policies in these runs. Three authored scale
+samples include32/40hearths and10,000claims; every fifteen-turn saved mirror is
+exact. [Evidence](development/2026-10-25-worker-stewardship/README.md),
+[ADR0054](architecture/0054-worker-stewardship.md).
+ACT-32/M3 stays partial. DH-021, R06 and all fifteen release gates remain open.
+
 ## Four-round continuation published and reviewed — 2026-10-25
 
 All four rounds were committed, deployed and read back independently: reviewed

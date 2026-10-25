@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
-import { deserializeGame, getObservation, stateHash, type GameCommand } from '@theandril/sim';
+import { deserializeGame, getObservation, stateHash, stateHashForVersion, type GameCommand } from '@theandril/sim';
 import { createJournal, type ArchiveRecord, type CampaignMode } from '@theandril/chronicle';
 import { exportSave, serializeCampaign } from '@theandril/persistence';
 import { campaignMenu, exportedTravel } from '../gameplay/group-movement-fixture';
@@ -17,7 +17,7 @@ async function preparedImport(page: Page, mode: CampaignMode, incoming: boolean)
   const snapshot = readFileSync(new URL('../../docs/development/2026-10-24-project-counterplay/near-complete.theandril', import.meta.url), 'utf8');
   expect(createHash('sha256').update(snapshot).digest('hex')).toBe('f77d05d363e8065bbcc263632100797afd8ee1502b47df2bf9f5149413ed1a4a');
   const game = deserializeGame(snapshot);
-  expect(stateHash(game)).toBe('c705fc04');
+  expect(stateHashForVersion(game, 35)).toBe('c705fc04');
   expect(game.turnOwnerId).toBe(owner);
   expect(game.projects.find(project => project.factionId === owner)).toMatchObject({ status: 'active', progress: 4, requiredTurns: 5 });
   expect(game.armies[armyId]).toMatchObject({ cell: 489, movement: 3 });

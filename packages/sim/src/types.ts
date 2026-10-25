@@ -1,3 +1,4 @@
+import type { WorkerPolicy, WorkerPolicyCommand, ObservedWorkerPolicy } from './worker-policy-state';
 import type { Patrol, ObservedPatrol, PatrolCommand } from './patrol-state';
 import type { DefenseTheater, ObservedDefenseTheater, TheaterCommand } from './theaters';
 import type { SupplyAccessState, SupplyAccessObservation, SupplyAccessCommand } from './supply-access-state';
@@ -195,6 +196,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | WorkerPolicyCommand
   | PatrolCommand
   | SupplyAccessCommand
   | TheaterCommand
@@ -255,6 +257,7 @@ export type GameCommand =
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
   patrols: Patrol[];
+  workerPolicies: WorkerPolicy[];
   supplyAccess: SupplyAccessState;
   theaters: DefenseTheater[];
   nextTheaterId: number;
@@ -307,6 +310,8 @@ export interface Observation {
   /** Generic command refusal only; never exposes private battle/capture facts. */
   strategicCommandBlocker?: string | null;
   patrols?: ObservedPatrol[];
+  /** Rules 36: optional standing worker allocation, owned policies only. */
+  workerPolicies?: ObservedWorkerPolicy[];
   supplyAccess?: SupplyAccessObservation;
   theaterReinforcement?: true;
   theaters?: ObservedDefenseTheater[];

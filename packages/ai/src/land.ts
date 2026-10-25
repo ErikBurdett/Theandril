@@ -5,13 +5,14 @@ import { claimArcaneSeam } from './arcane';
 
 const value = (yields: LandYield, needsFood: boolean): number => yields.food * (needsFood ? 5 : 2) + yields.industry * 3 + yields.coin + yields.knowledge * 2;
 
-/** At most eight worker orders and one paid work order, using only quoted public facts. */
+/** At most eight worker/policy orders and one paid work order, using only quoted public facts. */
 export function planLand(view: Observation, budget: number, plannedProduction: ReadonlySet<string> = new Set()): { commands: GameCommand[]; reasons: string[]; coinSpent: number } {
   const commands: GameCommand[] = [], reasons: string[] = [];
   const towns = new Map(view.settlements.map(town => [town.id, town]));
   const candidates = landPlanningTowns(view.land.settlements, view.turn);
   const ecology = FACTION_ECOLOGIES[view.factions.find(faction => faction.id === view.factionId)?.definitionId ?? ''];
   const stocks = new Map(view.resources?.stockpiles.map(stock => [stock.resourceId, stock]));
+  const policies = new Map(view.workerPolicies?.map(policy => [policy.settlementId, policy]));
   const materialDemand = (resourceId: string | undefined): number => {
     const stock = resourceId ? stocks.get(resourceId) : undefined;
     return stock ? Math.floor(Math.max(0, 6 - stock.amount) * 4 / (1 + stock.perTurn)) : 0;
@@ -39,7 +40,25 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
     const workers = [...retained, ...land.cells.filter(cell => cell.claimed && cell.canWork)
       .sort((a, b) => workerValue(b.yields.total) + materialDemand(b.resourceId) - workerValue(a.yields.total) - materialDemand(a.resourceId) || a.cell - b.cell)
       .slice(0, Math.max(0, land.workerCapacity - retained.length)).map(cell => cell.cell)].sort((a, b) => a - b);
-    if (workers.join(',') !== land.worked.join(',')) commands.push({ type: 'setWorkedTiles', factionId: view.factionId, settlementId: town.id, cells: workers });
+    // A simple, fully observed hearth can delegate its ordinary allocation. Keep
+    // direct management where material extraction, fiscal project savings or an
+    // incomplete tile window requires the existing strategic worker planner.
+    // Capability-gate this so historical observations retain their exact plans.
+    const delegate = view.workerPolicies !== undefined && !fiscalWorkers
+      && land.claimed.every(cell => pageCells.has(cell)) && !land.cells.some(cell => cell.resourceId)
+      // When workers are scarce, the strategic planner must retain the choice
+      // between competing tiles. Delegate full employment, not that tradeoff.
+      && land.workerCapacity >= land.cells.filter(cell => cell.claimed && cell.canWork).length;
+    const policy = policies.get(town.id);
+    if (delegate) {
+      if (policy?.focus !== 'balanced') {
+        commands.push({ type: 'setWorkerPolicy', factionId: view.factionId, settlementId: town.id, focus: 'balanced' });
+        reasons.push(`${town.name} delegates ordinary worker allocation; resource and project-funding hearths remain directly managed.`);
+      }
+    } else if (policy || workers.join(',') !== land.worked.join(',')) {
+      commands.push({ type: 'setWorkedTiles', factionId: view.factionId, settlementId: town.id, cells: workers });
+      if (policy) reasons.push(`${town.name} returns to direct worker management for its material, funding or detailed land needs.`);
+    }
     if (coinSpent || land.work) continue;
     const worked = land.cells.filter(cell => workers.includes(cell.cell));
     // Give cultural cultivation a regular opportunity; do not burn treasury on

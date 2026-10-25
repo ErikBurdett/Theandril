@@ -63,3 +63,5 @@ export * from './patrols';
 
 export { getBesiegePreview } from './siege-establishment';
 export type { BesiegePreview } from './siege-establishment';
+
+export * from './worker-policies';

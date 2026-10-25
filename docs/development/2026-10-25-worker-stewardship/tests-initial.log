@@ -1,0 +1,581 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-retirement.test.ts (24 tests | 24 failed) 2611ms
+     × proposes only ordinary cleanup for the genuine currently observed capture and retains the batch reservation 180ms
+     × clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay 116ms
+     × allows administrative cleanup for a no-movement company without changing its route 108ms
+     × allows administrative cleanup for a exhausted company without changing its route 106ms
+     × allows administrative cleanup for a unsupplied company without changing its route 101ms
+     × preserves a separate enabled theater reservation in the cleanup batch and in the fresh observation 107ms
+     × keeps an explicitly disabled policy and the matching paused route 108ms
+     × preserves an explicit war-pause policy even when the leg still matches the captured endpoint 101ms
+     × preserves an ordinary standing posting override 118ms
+     × preserves a distinct route assigned through the ordinary queueMovement command 101ms
+     × leaves the player-controlled canonical configuration intact without an AI cleanup command 103ms
+     × leaves active direct travel alone 111ms
+     × leaves different-target direct travel alone 107ms
+     × leaves multi-waypoint direct travel alone 106ms
+     × does not infer captured-town ownership from stale charted cells or an absent own-hearth entry 105ms
+     × requires the other endpoint to remain an owned hearth 102ms
+     × requires current sight even if a foreign settlement row is supplied 99ms
+     × preserves circuits whose target remains owned 104ms
+     × does not generalize retirement to a distant owned endpoint 100ms
+     × preserves a siege override in an observation contract 101ms
+     × preserves a stationary mission override in an observation contract 98ms
+     × rotates four administrative commands across all 128 observed policies with no path queries 123ms
+     × shares one four-command cap between retirement and queried recovery in a 128-policy observation 101ms
+     × does not invent patrol controls for a historical observation capability 102ms
+ ❯ |unit| packages/ai/src/patrol-recovery-generated.test.ts (2 tests | 2 failed) 233ms
+     × reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly 134ms
+     × keeps the player-controlled canonical route paused without an explicit AI order 99ms
+ ❯ |unit| packages/sim/src/save.test.ts (30 tests | 6 failed) 217ms
+     × migrates explicit v0 nextEntityId snapshots without changing campaign state 19ms
+     × verifies v1 checksums and the known content pack before adding warfare defaults 7ms
+     × migrates checked v2 state into settlement provenance and diplomacy defaults 3ms
+     × continues a synthetic v2 field-battle shape with an initialized war memory 16ms
+     × migrates the recognized v3 content pack and verifies its checksum before defaults 5ms
+     × preserves a synthetic v3 siege-battle shape and its pending conquest decision 17ms
+ ❯ |unit| packages/ai/src/project-counterplay.test.ts (29 tests | 2 failed) 258ms
+     × rejects white peace and besieges in one ordinary batch before the enemy can win 24ms
+     × rejects unaffordable demand and besieges in one ordinary batch before the enemy can win 7ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 34 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery-generated.test.ts > generated patrol interruption recovery > reviews the genuine peace-time stalled leg, arrives through ordinary AI commands and replays exactly
+AssertionError: expected 'fd95cbf9' to be '17c538ce' // Object.is equality
+
+Expected: "17c538ce"
+Received: "fd95cbf9"
+
+ ❯ captured packages/ai/src/patrol-recovery-generated.test.ts:15:27
+     13|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('c1c28…
+     14|   const game = deserializeGame(bytes);
+     15|   expect(stateHash(game)).toBe('17c538ce');
+       |                           ^
+     16|   return game;
+     17| };
+ ❯ packages/ai/src/patrol-recovery-generated.test.ts:21:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-recovery-generated.test.ts > generated patrol interruption recovery > keeps the player-controlled canonical route paused without an explicit AI order
+AssertionError: expected 'fd95cbf9' to be '17c538ce' // Object.is equality
+
+Expected: "17c538ce"
+Received: "fd95cbf9"
+
+ ❯ captured packages/ai/src/patrol-recovery-generated.test.ts:15:27
+     13|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('c1c28…
+     14|   const game = deserializeGame(bytes);
+     15|   expect(stateHash(game)).toBe('17c538ce');
+       |                           ^
+     16|   return game;
+     17| };
+ ❯ packages/ai/src/patrol-recovery-generated.test.ts:49:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > proposes only ordinary cleanup for the genuine currently observed capture and retains the batch reservation
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:51:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:62:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a no-movement company without changing its route
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a exhausted company without changing its route
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a unsupplied company without changing its route
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:103:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves a separate enabled theater reservation in the cleanup batch and in the fresh observation
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:121:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > keeps an explicitly disabled policy and the matching paused route
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:140:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves an explicit war-pause policy even when the leg still matches the captured endpoint
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:147:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves an ordinary standing posting override
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:155:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves a distinct route assigned through the ordinary queueMovement command
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:161:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > leaves the player-controlled canonical configuration intact without an AI cleanup command
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:178:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > leaves active direct travel alone
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > leaves different-target direct travel alone
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > leaves multi-waypoint direct travel alone
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:187:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > does not infer captured-town ownership from stale charted cells or an absent own-hearth entry
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:195:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > requires the other endpoint to remain an owned hearth
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:203:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > requires current sight even if a foreign settlement row is supplied
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:209:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves circuits whose target remains owned
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:216:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > does not generalize retirement to a distant owned endpoint
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:222:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves a siege override in an observation contract
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves a stationary mission override in an observation contract
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:230:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > rotates four administrative commands across all 128 observed policies with no path queries
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ retirementRoster packages/ai/src/patrol-retirement.test.ts:32:31
+ ❯ packages/ai/src/patrol-retirement.test.ts:237:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > shares one four-command cap between retirement and queried recovery in a 128-policy observation
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ retirementRoster packages/ai/src/patrol-retirement.test.ts:32:31
+ ❯ packages/ai/src/patrol-retirement.test.ts:256:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/34]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > does not invent patrol controls for a historical observation capability
+AssertionError: expected 'b63c78cf' to be '4f60f2e3' // Object.is equality
+
+Expected: "4f60f2e3"
+Received: "b63c78cf"
+
+ ❯ captured packages/ai/src/patrol-retirement.test.ts:18:27
+     16|   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68…
+     17|   const game = deserializeGame(bytes);
+     18|   expect(stateHash(game)).toBe('4f60f2e3');
+       |                           ^
+     19|   return game;
+     20| }
+ ❯ packages/ai/src/patrol-retirement.test.ts:278:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/34]⎯
+
+ FAIL  |unit| packages/ai/src/project-counterplay.test.ts > immediate project counterplay > rejects white peace and besieges in one ordinary batch before the enemy can win
+ FAIL  |unit| packages/ai/src/project-counterplay.test.ts > immediate project counterplay > rejects unaffordable demand and besieges in one ordinary batch before the enemy can win
+AssertionError: expected '63365e31' to be 'c705fc04' // Object.is equality
+
+Expected: "c705fc04"
+Received: "63365e31"
+
+ ❯ packages/ai/src/project-counterplay.test.ts:38:50
+     36| describe('immediate project counterplay', () => {
+     37|   it.each(['white peace', 'unaffordable demand'] as const)('rejects %s…
+     38|     const game = load(); expect(stateHash(game)).toBe('c705fc04');
+       |                                                  ^
+     39|     offer(game, kind === 'unaffordable demand' ? getObservation(game, …
+     40|     const view = getObservation(game, actor), before = structuredClone…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:124:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:132:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:150:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:169:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:182:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/34]⎯
+
+ FAIL  |unit| packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "workerPolicies"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"workerPolicies\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:970:25
+    968|   let originalVersion: number;
+    969|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    970|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    971|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    972|   const data = envelope.state;
+ ❯ migrateCurrent packages/sim/src/save.test.ts:204:24
+ ❯ packages/sim/src/save.test.ts:208:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/34]⎯
+
+
+ Test Files  4 failed | 290 passed (294)
+      Tests  34 failed | 2396 passed (2430)
+   Start at  13:06:16
+   Duration  65.01s (transform 5.16s, setup 0ms, import 33.99s, tests 205.12s, environment 15ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

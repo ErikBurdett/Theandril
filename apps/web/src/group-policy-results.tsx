@@ -15,18 +15,19 @@ export function groupPolicyResultPage(rows: readonly GroupPolicyResult[], filter
 }
 
 export function GroupPolicyResults({ kind, rows, busy = false }: {
-  kind: 'posting' | 'charter'; rows: readonly GroupPolicyResult[]; busy?: boolean;
+  kind: 'posting' | 'charter' | 'worker-policy'; rows: readonly GroupPolicyResult[]; busy?: boolean;
 }) {
   const hasRefusals = rows.some(row => !row.accepted);
   const [filter, setFilter] = useState<GroupPolicyResultFilter>(hasRefusals ? 'refused' : 'all');
   const [page, setPage] = useState(0);
   const result = groupPolicyResultPage(rows, filter, page);
-  const title = kind === 'posting' ? 'Posting' : 'Charter';
+  const title = kind === 'posting' ? 'Posting' : kind === 'charter' ? 'Charter' : 'Worker policy';
+  const label = kind === 'worker-policy' ? 'worker policy' : kind;
   const actors = kind === 'posting' ? 'armies' : 'hearths';
   return <div data-testid={`group-${kind}-results`}>
     <p role="status">{result.accepted} orders accepted · {result.refused} refused.{result.refused > 0 ? ` Refused ${actors} remain selected for review.` : ''}</p>
     <details open={hasRefusals}>
-      <summary>Review {kind} results</summary>
+      <summary>Review {label} results</summary>
       <p className="field-help">This receipt shows the last submitted orders. Browsing results does not change your selection or retry any order.</p>
       <label>{title} result filter<select value={filter} disabled={busy} onChange={event => { setFilter(event.target.value as GroupPolicyResultFilter); setPage(0); }}>
         <option value="all">All results ({result.total})</option>

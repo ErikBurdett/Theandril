@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { hexDistance } from '@theandril/mapgen';
-import { applyCommand, deserializeGame, getMovementPreview, getObservation, serializeGame, stateHash, type GameCommand, type Observation } from '@theandril/sim';
+import { applyCommand, deserializeGame, getMovementPreview, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type Observation } from '@theandril/sim';
 import { createJournal, replayArchive } from '../../chronicle/src';
 import { planPatrol } from './patrols';
 import { planTurnWithReasons } from './index';
@@ -15,7 +15,7 @@ function captured() {
   const bytes = readFileSync(new URL('../../../docs/development/2026-10-24-patrol-recovery/diagnosis-recovered/snapshot-3-turn-150.json', import.meta.url), 'utf8');
   expect(createHash('sha256').update(bytes).digest('hex')).toBe('e8b68f936e8f7042f04465f879e669ef038cc27a9c927781fe368075a9e92b25');
   const game = deserializeGame(bytes);
-  expect(stateHash(game)).toBe('4f60f2e3');
+  expect(stateHashForVersion(game, 35)).toBe('4f60f2e3');
   return game;
 }
 const actorOrders = (commands: GameCommand[], view: Observation) => {
@@ -55,7 +55,7 @@ describe('observed captured home circuit retirement', () => {
     const plan = planPatrol(view);
     expect(plan.commands).toEqual([clear]); expect(plan.routeQueries).toBe(0);
     expect(plan.heldArmyIds.has(armyId)).toBe(true);
-    expect(view).toEqual(before); expect(stateHash(game)).toBe('4f60f2e3');
+    expect(view).toEqual(before); expect(stateHashForVersion(game, 35)).toBe('4f60f2e3');
   });
 
   it('clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay', () => {

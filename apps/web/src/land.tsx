@@ -4,6 +4,7 @@ import { BIOME_NAMES } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { useLandQuery, type LandQuery } from './use-land-query';
 import { SettlementRoad } from './roads';
+import { WorkerPolicy } from './worker-policy';
 
 const yields = ['food', 'industry', 'coin', 'knowledge'] as const;
 export function yieldText(value: LandYield): string {
@@ -54,6 +55,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   const town = query ? details.town ?? summary : summary;
   const settlement = view.settlements.find(item => item.id === settlementId);
   const realm = view.factions.find(item => item.id === view.factionId);
+  const workerPolicy = view.workerPolicies?.find(item => item.settlementId === settlementId && item.factionId === view.factionId);
   if (!town || !settlement) return null;
   const cell = ready ? town.cells.find(item => item.cell === selectedCell) : undefined;
   const workerFull = town.worked.length >= town.workerCapacity;
@@ -74,7 +76,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
       <p><strong>Border growth:</strong> {town.borderExpansion.progress} / {town.borderExpansion.threshold} civic progress · +{town.borderExpansion.rate} per active turn</p>
       <progress aria-label="Civic progress toward next border" value={town.borderExpansion.progress} max={town.borderExpansion.threshold}/>
       {town.borderExpansion.blocker ? <p className="field-help">{town.borderExpansion.blocker}</p> : <p className="field-help">Next expansion: hex {town.borderExpansion.nextCell}. About {Math.ceil((town.borderExpansion.threshold - town.borderExpansion.progress) / Math.max(1, town.borderExpansion.rate))} active turns at this rate. Larger populations, markets, archives and Surveyed estates support growth.</p>}
-      <p className="field-help">Expansion claims one connected, charted tile at a time. It does not assign workers or build improvements. Siege and occupation pause growth; conquest resets its progress. Buying a tile is immediate and increases the next expansion threshold.</p>
+      <p className="field-help">Expansion claims one connected, charted tile at a time. It does not build improvements. Workers remain under manual control unless you choose a worker policy. Siege and occupation pause growth; conquest resets its progress. Buying a tile is immediate and increases the next expansion threshold.</p>
     </section>
     <p className="field-help">The center is worked for free. Borders do not block travel. Only worked tiles contribute their yields; natural features remain after cultivation.</p>
     <p className="field-help">Map borders mark the realm perimeter. Select tiles to inspect this town’s individual claims. Dim land shows remembered ownership, not live information beyond sight.</p>
@@ -104,7 +106,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
       <h4>Hex {cell.cell} · {BIOME_NAMES[cell.biome]}</h4>
       <p>{cell.cell === settlement.cell ? 'Settlement center · automatically worked' : cell.claimed ? cell.worked ? 'Owned · worker assigned' : 'Owned · not worked' : cell.factionId ? `Claimed by ${view.factions.find(item => item.id === cell.factionId)?.name ?? 'another realm'}` : 'Unclaimed land'}</p>
       {compact ? <p className="land-tile-total"><strong>Per worked turn:</strong> {yieldText(cell.yields.total)}</p> : tileFacts}
-      {cell.cell !== settlement.cell && cell.claimed && <><button disabled={busy || !cell.canWork || (!cell.worked && workerFull)} onClick={() => act({ type: 'setWorkedTiles', factionId: view.factionId, settlementId, cells: cell.worked ? town.worked.filter(id => id !== cell.cell) : [...town.worked, cell.cell].sort((a, b) => a - b) })}>{cell.worked ? 'Remove worker' : 'Assign worker'}</button>{(cell.workBlocker || (!cell.worked && workerFull)) && <p className="land-blocker">{cell.workBlocker ?? 'All workers are assigned. Remove a worker from another tile first.'}</p>}</>}
+      {cell.cell !== settlement.cell && cell.claimed && <>{workerPolicy && <p className="field-help" data-testid="worker-policy-manual-warning">Changing this worker assignment returns the hearth to manual control and ends its worker policy.</p>}<button disabled={busy || !cell.canWork || (!cell.worked && workerFull)} onClick={() => act({ type: 'setWorkedTiles', factionId: view.factionId, settlementId, cells: cell.worked ? town.worked.filter(id => id !== cell.cell) : [...town.worked, cell.cell].sort((a, b) => a - b) })}>{cell.worked ? 'Remove worker' : 'Assign worker'}</button>{(cell.workBlocker || (!cell.worked && workerFull)) && <p className="land-blocker">{cell.workBlocker ?? 'All workers are assigned. Remove a worker from another tile first.'}</p>}</>}
       {!cell.claimed && <><button disabled={busy || !cell.claim.canStart} onClick={() => act({ type: 'claimCell', factionId: view.factionId, settlementId, cell: cell.cell })}>Claim hex {cell.cell} · {cell.claim.coinCost} coin</button><p className="field-help">{cell.claim.blocker ?? cell.claim.effectText}</p></>}
       {cell.improvementId && <p><strong>Improvement:</strong> {IMPROVEMENTS.find(item => item.id === cell.improvementId)?.name ?? cell.improvementId}</p>}
       <p className="field-help">Construction replaces any existing improvement only on completion. Its benefits require an assigned worker; cancelling unfinished work does not refund its cost.</p>
@@ -114,6 +116,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
     </section>;
   return <section className={`land-panel${compact ? ' land-panel-compact' : ''}`} data-testid="land-panel" data-settlement-id={settlementId} data-query-state={query ? details.status : 'ready'} data-query-hash={ready ? stateHash : undefined} aria-label="Settlement territory" aria-busy={!ready && details.status === 'loading'}>
     <h3>Land & stewardship</h3>
+    <WorkerPolicy view={view} settlementId={settlementId} busy={busy || !queryEnabled} issue={issue}/>
     {compact ? <>{queryStatus}{activeWork}{tileActions}{tilePicker}<details className="land-town-overview" data-testid="land-town-overview"><summary>Settlement overview · {town.stage}{town.isCapital ? ' · Capital' : ''}</summary>{overview}</details></>
       : <>{overview}{activeWork}{queryStatus}{tilePicker}{tileActions}</>}
   </section>;

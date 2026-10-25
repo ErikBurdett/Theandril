@@ -1,5 +1,5 @@
 import type { GameCommand } from '@theandril/sim';
-import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult, type GroupPostingResult } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, type GroupWorkerPolicyResult, type GroupCharterResult, type GroupPostingResult } from './protocol';
 
 /** Correlates one group order with its final worker state, outside React state. */
 export class GroupOrderRequests<Result> {
@@ -21,16 +21,17 @@ export class GroupOrderRequests<Result> {
 }
 
 type PostingCommand = Extract<GameCommand, { type: 'setPosting' }>;
+type WorkerPolicyCommand = Extract<GameCommand, { type: 'setWorkerPolicy' }>;
 type CharterCommand = Extract<GameCommand, { type: 'setCharter' }>;
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = (value: unknown): value is string => typeof value === 'string' && value.length <= 10_000 && Boolean(value.trim());
 const identifier = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 100;
 
 /** Correlates only transport identity. Command legality remains in simulation. */
-class CorrelatedGroupRequests<Command extends PostingCommand | CharterCommand, Result extends GroupPostingResult | GroupCharterResult> {
+class CorrelatedGroupRequests<Command extends PostingCommand | CharterCommand | WorkerPolicyCommand, Result extends GroupPostingResult | GroupCharterResult | GroupWorkerPolicyResult> {
   private readonly requests = new GroupOrderRequests<Result>();
   private submitted?: { id: number; factionId: string; entityIds: string[] };
-  constructor(private readonly kind: 'posting' | 'charter', private readonly field: 'armyId' | 'settlementId', private readonly entityId: (command: Command) => string) {}
+  constructor(private readonly kind: 'posting' | 'charter' | 'worker policy', private readonly field: 'armyId' | 'settlementId', private readonly entityId: (command: Command) => string) {}
   get busy() { return this.requests.busy; }
   has(id: number) { return this.requests.has(id); }
   enqueue(id: number, commands: readonly Command[]): Promise<Result[]> {
@@ -78,4 +79,8 @@ export class GroupPostingRequests extends CorrelatedGroupRequests<PostingCommand
 }
 export class GroupCharterRequests extends CorrelatedGroupRequests<CharterCommand, GroupCharterResult> {
   constructor() { super('charter', 'settlementId', command => command.settlementId); }
+}
+
+export class GroupWorkerPolicyRequests extends CorrelatedGroupRequests<WorkerPolicyCommand, GroupWorkerPolicyResult> {
+  constructor() { super('worker policy', 'settlementId', command => command.settlementId); }
 }

@@ -100,7 +100,7 @@ const seeds = option('seeds')?.split(',').map(Number);
 const versions = option('rules')?.split(',').map(Number) as RulesVersion[] | undefined;
 if (args.some(arg => arg.startsWith('--') && !/^--(seeds|rules|json)=/.test(arg))
   || seeds?.some(seed => !Number.isInteger(seed) || seed < 0 || seed > 0xffff_ffff)
-  || versions?.some(version => version !== 33 && version !== 34 && version !== 35)) throw new Error('Use --seeds=uint32,... --rules=33,34,35 (one or more versions) --json=path.');
+  || versions?.some(version => version !== 33 && version !== 34 && version !== 35 && version !== 36)) throw new Error('Use --seeds=uint32,... --rules=33,34,35,36 (one or more versions) --json=path.');
 const selected = requested.length === 0 ? CASES.filter(entry => entry.name === 'headline')
   : requested.includes('all') ? CASES
     : CASES.filter(entry => requested.includes(entry.name) || requested.includes(entry.name.replace('headline-', '')));

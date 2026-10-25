@@ -1,3 +1,4 @@
+import { advanceWorkerPolicies, observeWorkerPolicies, setWorkerPolicy, workerPolicyCommandSchemas, assertNoWorkerPolicies } from './worker-policies';
 import { advancePatrols, observePatrols, patrolCommandSchemas, setPatrol, setPatrolEnabled, clearPatrol, assertNoPatrols } from './patrols';
 import { advanceTheaters, assertNoTheaters, assertNoTheaterReinforcements, deleteTheater, observeTheaters, pruneTheaters, setTheater, theaterCommandSchemas, theaterV33CommandSchemas } from './theaters';
 import { assertNoSupplyAccess, createSupplyAccess, supplyAccessCommandSchemas } from './supply-access-state';
@@ -115,8 +116,9 @@ const version31CommandSchema = z.discriminatedUnion('type', [...version28Command
 export const version32CommandSchema = z.discriminatedUnion('type', [...version31CommandSchema.options, ...selectionGroupCommandSchemas]);
 export const version33CommandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterV33CommandSchemas]);
 const version34CommandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterCommandSchemas, ...supplyAccessCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version34CommandSchema.options, ...patrolCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : commandSchema;
+const version35CommandSchema = z.discriminatedUnion('type', [...version34CommandSchema.options, ...patrolCommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version35CommandSchema.options, ...workerPolicyCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -129,6 +131,7 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 36) assertNoWorkerPolicies(state);
   if (version < 35) assertNoPatrols(state);
   if (version < 34) { assertNoTheaterReinforcements(state); assertNoSupplyAccess(state); }
   if (version < 33) assertNoTheaters(state);
@@ -158,7 +161,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35)]).default(35),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36)]).default(36),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -213,7 +216,7 @@ export function createGame(options: NewGameOptions): GameState {
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
-    theaters: [], nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [],
+    theaters: [], nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [], workerPolicies: [],
     selectionGroups: [], nextSelectionGroupId: 1,
     turn: 1, nextId: 1, turnOwnerId: owner.id, world, pace: checked.pace,
     factions: selected.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: 60, knowledge: 0 })),
@@ -332,6 +335,8 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
       settlement.occupationTurns = Math.max(0, settlement.occupationTurns - 1);
     }
   }
+  // New workers and completed land work affect the following harvest.
+  advanceWorkerPolicies(state, emitted);
   advanceDevelopment(state);
   pruneDevelopment(state);
   observe('settlements', 'end');
@@ -427,7 +432,11 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   if (state.pendingCapture) affectedArmies.push(state.pendingCapture.armyId);
   const diagnostics: string[] = [];
   const index = indexes(state);
-  if (command.type === 'setPatrol' || command.type === 'setPatrolEnabled' || command.type === 'clearPatrol') {
+  if (command.type === 'setWorkerPolicy') {
+    const result = setWorkerPolicy(state, command);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'setPatrol' || command.type === 'setPatrolEnabled' || command.type === 'clearPatrol') {
     const result = command.type === 'setPatrol' ? setPatrol(state, command) : command.type === 'setPatrolEnabled' ? setPatrolEnabled(state, faction.id, command.armyId, command.enabled) : clearPatrol(state, faction.id, command.armyId);
     if (!result.ok) return result;
     emitted.push(...result.events);
@@ -696,6 +705,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     ...(rulesVersion(state) >= 34 ? { theaterReinforcement: true as const, supplyAccess: supplyAccess! } : {}),
     selectionGroups: observeSelectionGroups(state, factionId),
     charters: observeCharters(state, factionId),
+    ...(rulesVersion(state) >= 36 ? { workerPolicies: observeWorkerPolicies(state, factionId) } : {}),
     ...(rulesVersion(state) >= 35 ? {
       patrols: observePatrols(state, factionId), siegeEstablishment: true as const,
       strategicCommandBlocker: state.victory ? 'This campaign has ended in victory.'

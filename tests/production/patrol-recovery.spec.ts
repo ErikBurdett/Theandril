@@ -1,13 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { deserializeGame, stateHash } from '@theandril/sim';
+import { deserializeGame, stateHash, stateHashForVersion } from '@theandril/sim';
 import { createArchive } from '@theandril/chronicle';
 import { exportSave, serializeCampaign } from '@theandril/persistence';
 import { campaignMenu, exportedTravel } from '../gameplay/group-movement-fixture';
 
 test('production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery', async ({ page }, testInfo) => {
   const game = deserializeGame(readFileSync(new URL('../../docs/development/2026-10-24-patrol-recovery/diagnosis-long/snapshot-1-turn-58.json', import.meta.url), 'utf8'));
-  expect(stateHash(game)).toBe('17c538ce');
+  expect(stateHashForVersion(game, 35)).toBe('17c538ce');
   // The generated snapshot is captured mid-round; watch explicitly starts a new
   // full planning round from it. This is not a claim of the original full history.
   const bytes = await exportSave(serializeCampaign(game, createArchive(game, { mode: 'watch', coverage: 'from-save' })));

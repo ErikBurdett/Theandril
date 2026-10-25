@@ -1,0 +1,190 @@
+{
+  "baseline": "47174209f633a92930b8076b0b1ce7db13c3e38e",
+  "capturedAt": "2026-10-25T18:00:35.387Z",
+  "rulesVersion": 35,
+  "saveVersion": 35,
+  "description": "Generated tiny two-realm campaign. No authored state mutation, no AI commands. Ordinary founding, worker assignments, production, charter and nine end-turn commands. Complete archive independently replayed against unmodified rules 35.",
+  "initialHash": "cf953be6",
+  "initialSaveVersion": 35,
+  "finalStateHash": "b3bb5875",
+  "finalTurn": 10,
+  "victoryFinalHash": null,
+  "victoryFinalHashVersion": null,
+  "rawStateChecksum": "df93f814",
+  "contentHash": "015468d1",
+  "checkpoints": [
+    {
+      "sequence": 5,
+      "turn": 2,
+      "hash": "4624a8ee",
+      "version": 35
+    },
+    {
+      "sequence": 6,
+      "turn": 3,
+      "hash": "4eeaf210",
+      "version": 35
+    },
+    {
+      "sequence": 7,
+      "turn": 4,
+      "hash": "18655fad",
+      "version": 35
+    },
+    {
+      "sequence": 8,
+      "turn": 5,
+      "hash": "090e9aa6",
+      "version": 35
+    },
+    {
+      "sequence": 9,
+      "turn": 6,
+      "hash": "f34ea685",
+      "version": 35
+    },
+    {
+      "sequence": 10,
+      "turn": 7,
+      "hash": "0baff22a",
+      "version": 35
+    },
+    {
+      "sequence": 11,
+      "turn": 8,
+      "hash": "976b3604",
+      "version": 35
+    },
+    {
+      "sequence": 12,
+      "turn": 9,
+      "hash": "e3285fb7",
+      "version": 35
+    },
+    {
+      "sequence": 14,
+      "turn": 10,
+      "hash": "b3bb5875",
+      "version": 35
+    }
+  ],
+  "records": 14,
+  "commands": [
+    {
+      "type": "found",
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.1",
+      "name": "Pre-policy Hearth"
+    },
+    {
+      "type": "setWorkedTiles",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "cells": [
+        560
+      ]
+    },
+    {
+      "type": "queue",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "itemId": "building.granary"
+    },
+    {
+      "type": "setCharter",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "focus": "works",
+      "ceiling": 24
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    },
+    {
+      "type": "setWorkedTiles",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.5",
+      "cells": [
+        560
+      ]
+    },
+    {
+      "type": "endTurn",
+      "factionId": "faction.ashen_compact"
+    }
+  ],
+  "finalTown": {
+    "id": "settlement.5",
+    "population": 4,
+    "food": 33,
+    "buildings": [
+      "building.granary",
+      "building.workshop"
+    ],
+    "queue": [
+      {
+        "itemId": "building.market",
+        "progress": 20
+      }
+    ],
+    "land": {
+      "claimed": [
+        512,
+        560,
+        561,
+        608,
+        609,
+        610,
+        656,
+        657
+      ],
+      "worked": [
+        560
+      ],
+      "improvements": {},
+      "work": null,
+      "borderGrowth": 4
+    }
+  },
+  "files": [
+    {
+      "path": "packages/sim/src/fixtures/worker-policy-v35-archive.json",
+      "bytes": 32764,
+      "sha256": "646bb52dae5f8080dea5685277122c4d364ea059d65aa8437cd3b6098331c7ca"
+    },
+    {
+      "path": "packages/sim/src/fixtures/worker-policy-v35-save.json",
+      "bytes": 25729,
+      "sha256": "2c9e7d75913a1dfe437624b12e0687fd59f3b219db11b5573612b7af019e7315"
+    }
+  ]
+}

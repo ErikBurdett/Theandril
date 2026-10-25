@@ -55,3 +55,17 @@ test('fiscal worker orders use real claimed options and preserve exact save cont
   }
   expect(serializeGame(deserializeGame(serializeGame(game)))).toBe(serializeGame(mirror));
 });
+
+test('project funding takes a governed hearth back into direct worker management', () => {
+  const game = scene(), factionId = game.turnOwnerId;
+  const towns = Object.values(game.settlements).filter(town => town.factionId === factionId);
+  for (const town of towns) expect(applyCommand(game, { type: 'setWorkerPolicy', factionId, settlementId: town.id, focus: 'balanced' }).ok).toBe(true);
+  expect(game.workerPolicies).toHaveLength(towns.length);
+  const beforeCoin = game.factions[0]!.treasury;
+  const plan = planLand(getObservation(game, factionId), 0);
+  expect(plan.commands).toHaveLength(towns.length);
+  expect(plan.commands.every(command => command.type === 'setWorkedTiles')).toBe(true);
+  for (const command of plan.commands) expect(applyCommand(game, command).ok).toBe(true);
+  expect(game.workerPolicies).toEqual([]);
+  expect(game.factions[0]!.treasury).toBe(beforeCoin);
+});

@@ -1,0 +1,14 @@
+/home/telephoneheater/Work/Theandril/packages/mapgen/src/hydrology.ts:43
+    if (next === null || (terrain[next] !== 0 && riverSize(hydrology[next]!) === 0)) throw new RangeError('River or lake has a broken outlet.');
+                                                                                           ^
+
+RangeError: River or lake has a broken outlet.
+    at validateHydrology (/home/telephoneheater/Work/Theandril/packages/mapgen/src/hydrology.ts:43:92)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:981:3)
+    at largeTerritory (/home/telephoneheater/Work/Theandril/scripts/benchmark-worker-policies.ts:35:10)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-worker-policies.ts:64:221)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.7.0

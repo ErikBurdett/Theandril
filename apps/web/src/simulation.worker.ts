@@ -2,7 +2,7 @@ import { commandSchema, createGame, getDevelopmentEntity, getMovementPreview, ge
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupCharterResult, type GroupPatrolCommand, type GroupPatrolResult, type GroupMovementCommand, type GroupMovementResult, type GroupMovementReview, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_PRODUCTION_SETTLEMENTS, MAX_PRODUCTION_SEQUENCE_ITEMS, type GroupWorkerPolicyResult, type GroupCharterResult, type GroupPatrolCommand, type GroupPatrolResult, type GroupMovementCommand, type GroupMovementResult, type GroupMovementReview, type GroupPostingResult, type GroupProductionResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -23,9 +23,9 @@ const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transfe
 const textEncoder = new TextEncoder();
 
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
-type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' }>;
-type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' }>;
-type GroupResponse = { groupPatrolResults: GroupPatrolResult[]; groupPatrolError?: string } | { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string } | { groupMovementResults: GroupMovementResult[]; groupMovementError?: string };
+type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' | 'setWorkerPolicy' }>;
+type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' | 'groupWorkerPolicy' }>;
+type GroupResponse = { groupWorkerPolicyResults: GroupWorkerPolicyResult[]; groupWorkerPolicyError?: string } | { groupPatrolResults: GroupPatrolResult[]; groupPatrolError?: string } | { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string } | { groupProductionResults: GroupProductionResult[]; groupProductionError?: string } | { groupMovementResults: GroupMovementResult[]; groupMovementError?: string };
 
 function publish(id: number, message: string, reset = false, replaceMap = false, group?: GroupResponse): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
@@ -48,6 +48,7 @@ function publish(id: number, message: string, reset = false, replaceMap = false,
   const resultBytes = group ? textEncoder.encode(JSON.stringify(group)).byteLength : 0;
   metrics.groupPatrolResultBytes = group && 'groupPatrolResults' in group ? resultBytes : 0;
   metrics.groupPostingResultBytes = group && 'groupPostingResults' in group ? resultBytes : 0;
+  metrics.groupWorkerPolicyResultBytes = group && 'groupWorkerPolicyResults' in group ? resultBytes : 0;
   metrics.groupCharterResultBytes = group && 'groupCharterResults' in group ? resultBytes : 0;
   metrics.groupProductionResultBytes = group && 'groupProductionResults' in group ? resultBytes : 0;
   metrics.groupMovementResultBytes = group && 'groupMovementResults' in group ? resultBytes : 0;
@@ -62,16 +63,18 @@ const groupEntityId = (command: GroupCommand): string => command.type === 'setPo
 
 /** Validate the entire transport envelope before the first canonical order. */
 function groupCommands(request: GroupRequest, factionId: string): GroupCommand[] {
-  const posting = request.type === 'groupPosting', kind = posting ? 'posting' : 'charter';
+  const posting = request.type === 'groupPosting', kind = posting ? 'posting' : request.type === 'groupCharter' ? 'charter' : 'worker policy';
+  const commandType = posting ? 'setPosting' : request.type === 'groupCharter' ? 'setCharter' : 'setWorkerPolicy';
   if (!Number.isSafeInteger(request.id) || request.id < 0 || Object.keys(request).some(key => !['id', 'type', 'commands', 'expectedHash'].includes(key))
     || typeof request.expectedHash !== 'string' || !/^[a-f0-9]{8}$/.test(request.expectedHash)
-    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS) {
+    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS
+    || Object.keys(request.commands).length !== request.commands.length) {
     throw new Error(`A group ${kind} requires between 1 and ${MAX_GROUP_ORDER_COMMANDS} ${kind} orders in a valid request.`);
   }
   const ids = new Set<string>();
   const commands = Array.from<GroupCommand>(request.commands).map((input, index) => {
     const parsed = commandSchema.safeParse(input);
-    if (!parsed.success || (parsed.data.type !== 'setPosting' && parsed.data.type !== 'setCharter') || (parsed.data.type === 'setPosting') !== posting) throw new Error(`Group ${kind} item ${index + 1} is not a valid ${kind} order.`);
+    if (!parsed.success || (parsed.data.type !== 'setPosting' && parsed.data.type !== 'setCharter' && parsed.data.type !== 'setWorkerPolicy') || parsed.data.type !== commandType) throw new Error(`Group ${kind} item ${index + 1} is not a valid ${kind} order.`);
     const command = parsed.data;
     if (command.factionId !== factionId) throw new Error(`This seat does not control every faction in the group ${kind}.`);
     const id = groupEntityId(command);
@@ -79,6 +82,9 @@ function groupCommands(request: GroupRequest, factionId: string): GroupCommand[]
     ids.add(id);
     return command;
   });
+  if (request.type === 'groupWorkerPolicy' && commands.some(command => command.type !== 'setWorkerPolicy' || command.focus !== (commands[0] as Extract<GameCommand, { type: 'setWorkerPolicy' }>).focus)) {
+    throw new Error('Group worker policy orders require the same focus for every hearth.');
+  }
   return commands.sort((a, b) => groupEntityId(a) < groupEntityId(b) ? -1 : groupEntityId(a) > groupEntityId(b) ? 1 : 0);
 }
 
@@ -286,7 +292,7 @@ async function handle(request: Request): Promise<void> {
   let groupProductionStarted = false;
   let groupMovementStarted = false;
   let groupPatrolStarted = false;
-  let groupPolicyStarted: 'posting' | 'charter' | false = false;
+  let groupPolicyStarted: 'posting' | 'charter' | 'worker policy' | false = false;
   // An AI proposal can commit a paid agreement inside End turn or watchRound.
   // Remember that mutation for the entire request, including early battle/capture
   // publication, so a failed view cannot permit orders from the stale client.
@@ -473,19 +479,20 @@ async function handle(request: Request): Promise<void> {
         { groupProductionResults: results, ...(error ? { groupProductionError: error } : {}) });
       return;
     }
-    if (request.type === 'groupPosting' || request.type === 'groupCharter') {
+    if (request.type === 'groupPosting' || request.type === 'groupCharter' || request.type === 'groupWorkerPolicy') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
       const commands = groupCommands(request, state.turnOwnerId);
       if (request.expectedHash !== stateHash(state)) throw new Error('The campaign changed; review the selected armies or hearths again before issuing group orders.');
       const started = performance.now();
-      groupPolicyStarted = request.type === 'groupPosting' ? 'posting' : 'charter';
+      groupPolicyStarted = request.type === 'groupPosting' ? 'posting' : request.type === 'groupCharter' ? 'charter' : 'worker policy';
       const { results, error } = applyGroupCommands(state, commands);
       metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
-      const accepted = results.filter(result => result.accepted).length, kind = request.type === 'groupPosting' ? 'posting' : 'charter';
+      const accepted = results.filter(result => result.accepted).length, kind = groupPolicyStarted;
       const message = error ?? `${accepted} ${kind}${accepted === 1 ? '' : 's'} accepted; ${results.length - accepted} refused.`;
       const response: GroupResponse = request.type === 'groupPosting'
         ? { groupPostingResults: results.map(({ entityId, ...result }) => ({ armyId: entityId, ...result })), ...(error ? { groupPostingError: error } : {}) }
+        : request.type === 'groupWorkerPolicy' ? { groupWorkerPolicyResults: results.map(({ entityId, ...result }) => ({ settlementId: entityId, ...result })), ...(error ? { groupWorkerPolicyError: error } : {}) }
         : { groupCharterResults: results.map(({ entityId, ...result }) => ({ settlementId: entityId, ...result })), ...(error ? { groupCharterError: error } : {}) };
       publish(request.id, message, false, false, response);
       return;

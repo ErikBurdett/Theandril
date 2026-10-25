@@ -4,6 +4,7 @@ import { BIOME_NAMES, hexDistance, naturalFeatures, neighbors } from '@theandril
 import type { DomainEvent, GameState, Settlement } from './types';
 import { cellsWithin, claimSightEnabled, indexes, updateSight } from './visibility';
 import { rulesVersion } from './rules';
+import { removeWorkerPolicy, workerPolicyScore, type WorkerPolicy } from './worker-policy-state';
 
 const identifier = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const cellSchema = z.number().int().min(0).max(349_999);
@@ -265,11 +266,11 @@ function landReadContext(state: GameState, owner: GameState['factions'][number])
     missingResearch: new Set(IMPROVEMENTS.filter(item => item.requiredTechnologies?.some(id => !technologies.has(id))).map(item => item.id)),
     treasury: owner.treasury, cultivation: state.land.cultivation[owner.id] ?? 0, index: getLandIndex(state), geography: new Map() };
 }
-function cellReadContext(state: GameState, town: Settlement, cell: number, context: TownReadContext): CellReadContext {
+function cellReadContext(state: GameState, town: Settlement, cell: number, context: TownReadContext, cacheGeography = true): CellReadContext {
   let geography = context.owner.geography.get(cell);
   if (!geography) {
     geography = { biome: effectiveBiome(state, cell), features: naturalFeatures(state.world, cell), terrain: state.world.terrain[cell] ?? 0, depth: state.world.waterDepth[cell] ?? 0 };
-    context.owner.geography.set(cell, geography);
+    if (cacheGeography) context.owner.geography.set(cell, geography);
   }
   const distance = hexDistance(town.cell, cell, state.world.width);
   return { biome: geography.biome, features: geography.features, terrain: geography.terrain, depth: geography.depth, town: context, distance, costFactor: distance * 4 + context.owner.cultivation * 3, preferred: context.owner.preferredBiomes.has(geography.biome),
@@ -345,6 +346,56 @@ function workedBlocker(state: GameState, town: Settlement, cell: number, context
   return (context ? context.town.blocker : townBlocker(state, town, town.factionId)) ?? (context ? context.blocker : cellBlocker(state, town, cell)) ?? (cell === town.cell ? 'The center is worked automatically without consuming a worker.' : null) ?? ((context ? context.claimOwner : getLandIndex(state).get(cell)) !== town.id ? 'Workers must remain in this settlement’s claimed territory.' : null) ?? ((context?.depth ?? state.world.waterDepth[cell]) === 2 ? 'Settlement workers cannot exploit deep ocean.' : null);
 }
 
+export const workerAllocationBlocker = (state: GameState, town: Settlement): string | null => townBlocker(state, town, town.factionId);
+
+/** O(total claimed cells × log worker capacity), O(worker capacity) ranked entries.
+ * This never walks unclaimed geography, generates land-work quotes, or truncates
+ * to a UI page. Shared call-local owner contexts avoid per-tile registry scans. */
+export function allocatePolicyWorkers(state: GameState, policies: readonly WorkerPolicy[], events: DomainEvent[]): void {
+  const owners = new Map(state.factions.map(owner => [owner.id, owner]));
+  const contexts = new Map<string, LandReadContext>();
+  type Candidate = { cell: number; primary: number; secondary: number };
+  const better = (a: Candidate, b: Candidate): boolean => a.primary > b.primary
+    || (a.primary === b.primary && (a.secondary > b.secondary || (a.secondary === b.secondary && a.cell < b.cell)));
+  for (const policy of policies) {
+    const town = state.settlements[policy.settlementId], owner = owners.get(policy.factionId);
+    if (!town || town.factionId !== policy.factionId || !owner || workerAllocationBlocker(state, town)) continue;
+    const land = state.land.settlements[town.id]!, capacity = Math.min(settlementWorkerCapacity(town, rulesVersion(state)), land.claimed.length);
+    if (!contexts.has(owner.id)) contexts.set(owner.id, landReadContext(state, owner));
+    const context: TownReadContext = { owner: contexts.get(owner.id)!, blocker: null, radius: settlementClaimRadius(town) };
+    const needsFood = town.food < town.population * 8, heap: Candidate[] = [];
+    for (const cell of land.claimed) {
+      // Claimed cells are visited once, so retaining their geography wastes memory.
+      const derived = cellReadContext(state, town, cell, context, false);
+      if (workedBlocker(state, town, cell, derived)) continue;
+      const [primary, secondary] = workerPolicyScore(cellYields(state, town, cell, derived).total, policy.focus, needsFood);
+      const candidate = { cell, primary, secondary };
+      // The root is the least desirable selected tile. Equal scores always keep
+      // the lower numeric cell, independent of claim insertion order.
+      if (heap.length < capacity) {
+        heap.push(candidate); let at = heap.length - 1;
+        while (at > 0) {
+          const parent = Math.floor((at - 1) / 2);
+          if (!better(heap[parent]!, heap[at]!)) break;
+          [heap[parent], heap[at]] = [heap[at]!, heap[parent]!]; at = parent;
+        }
+      } else if (heap.length && better(candidate, heap[0]!)) {
+        heap[0] = candidate; let at = 0;
+        while (at * 2 + 1 < heap.length) {
+          let worse = at * 2 + 1;
+          if (worse + 1 < heap.length && better(heap[worse]!, heap[worse + 1]!)) worse++;
+          if (!better(heap[at]!, heap[worse]!)) break;
+          [heap[at], heap[worse]] = [heap[worse]!, heap[at]!]; at = worse;
+        }
+      }
+    }
+    const workers = ordered(heap.map(candidate => candidate.cell));
+    if (workers.length === land.worked.length && workers.every((cell, index) => cell === land.worked[index])) continue;
+    land.worked = workers;
+    events.push(notice(state, town, 'worker_policy_allocated', `${town.name}'s worker stewardship assigned ${workers.length} of ${settlementWorkerCapacity(town, rulesVersion(state))} workers to claimed land for the next harvest.`));
+  }
+}
+
 function addYield(target: LandYield, source: LandYield): void { for (const key of yieldKeys) target[key] += source[key]; }
 export function landCellYields(state: GameState, town: Settlement, cell: number): LandYieldBreakdown {
   return cellYields(state, town, cell);
@@ -394,6 +445,7 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
     if (command.cells.length > settlementWorkerCapacity(town, rulesVersion(state))) return `This settlement can work at most ${settlementWorkerCapacity(town, rulesVersion(state))} additional tiles.`;
     for (const cell of command.cells) { const obstruction = workedBlocker(state, town, cell); if (obstruction) return obstruction; }
     land.worked = ordered(command.cells);
+    if (rulesVersion(state) >= 36) removeWorkerPolicy(state, town.id, emitted, 'manual');
     emitted.push(notice(state, town, 'worked_tiles_changed', `${town.name} assigned workers to ${land.worked.length} claimed hexes; its center remains worked.`));
     return null;
   }
@@ -446,6 +498,7 @@ export function resolveLandTurn(state: GameState, town: Settlement, emitted: Dom
 }
 
 export function handleLandCapture(state: GameState, settlementId: string, previousOwnerId: string, emitted: DomainEvent[] = []): void {
+  if (rulesVersion(state) >= 36) removeWorkerPolicy(state, settlementId, emitted, 'lost');
   const land = state.land.settlements[settlementId], town = state.settlements[settlementId], index = getLandIndex(state);
   if (claimSightEnabled(state) && land) {
     for (const cell of land.claimed) updateSight(state, previousOwnerId, cell, 1, -1);
