@@ -440,6 +440,44 @@
       "height": 71,
       "alt": "Settlement orders selector set to Charters waiting, showing five matching hearths.",
       "caption": "Closed Settlement orders selector at Charters waiting (5) in an authored thirty-hearth regression fixture, at 390px and 130% text. Exact native control detail; other options, help, selection context and command results are outside this image."
+    },
+    {
+      "id": "group-patrol-points",
+      "path": "updates/group-patrol-points.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "670a18af843f95c80198a255e1894a708c5f1391",
+      "sourcePath": "docs/development/2026-10-25-group-patrol-assignment/browser-final-results/production-group-patrol-as-24fbe-olicies-and-existing-travel/group-patrol-points-native.png",
+      "sourceSha256": "19eadc30c2bf8229d3f9743a3a9b76ed60542497c97d78b425138f619947a8b5",
+      "sourceWidth": 784,
+      "sourceHeight": 323,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact native Playwright browser region PNG; no post-capture crop, resize or re-encoding.",
+      "sha256": "19eadc30c2bf8229d3f9743a3a9b76ed60542497c97d78b425138f619947a8b5",
+      "bytes": 62254,
+      "width": 784,
+      "height": 323,
+      "alt": "Group patrol fields show first hex 497 and second hex 495, with two owned-hearth shortcut selectors.",
+      "caption": "Native 784-by-323 endpoint detail from an authored 101-army regression fixture at 1440-by-1000 and 100% text. Shared points are 497 and 495; closed shortcut selectors offer owned hearths. Selection counts, war/replacement consequences, submission and outcomes are outside this detail."
+    },
+    {
+      "id": "group-policy-receipt-rows",
+      "path": "updates/group-policy-receipt-rows.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "670a18af843f95c80198a255e1894a708c5f1391",
+      "sourcePath": "docs/development/2026-10-25-group-policy-results/browser-final-results/production-group-policy-re-9598d--never-retry-while-browsing/posting-receipt-rows-native.png",
+      "sourceSha256": "8320696062098d0866ca2c3865146b65a879d0eda9388c4038cc35cd3e4893ff",
+      "sourceWidth": 780,
+      "sourceHeight": 201,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact native Playwright browser list element PNG; no post-capture crop, resize or re-encoding.",
+      "sha256": "8320696062098d0866ca2c3865146b65a879d0eda9388c4038cc35cd3e4893ff",
+      "bytes": 45105,
+      "width": 780,
+      "height": 201,
+      "alt": "Home guard 097 through Home guard 102 each have a refusal stating that the realm already holds as many postings as it may.",
+      "caption": "Native detail from an authored capacity-boundary fixture at 1440-by-1000 and 130% text: 96 orders accepted and 32 refused. The first six visible refusal rows, Home guard 097–102, appear inside the scrollable 25-row first Refused page. Other rows, paging, counts and selection controls are outside this image; no fabricated replies or pixel transforms."
     }
   ],
   "sharedMaterials": [
@@ -481,7 +519,8 @@
     }
   ],
   "journalImageBudgetBytes": 3670016,
-  "budgetNotes": "Explicitly approved 24 October 2026 expansion from 3 MiB to 3.5 MiB for two exact reviewed native dispatch-14 screenshots: 327,562 added bytes, from 3,145,521 to 3,473,083. Historical image bytes remain unchanged; no gameplay or renderer budget changes. Dispatch 17 adds one exact native registry selector PNG of 8,755 bytes within the same cap, bringing inventory to 3,481,838 bytes and leaving 188,178 bytes. Dispatch 18 adds one exact native group-patrol action PNG of 31,103 bytes within the same cap, bringing inventory to 3,512,941 bytes and leaving 157,075 bytes. Dispatch 19 adds one exact native settlement-order selector PNG of 7,683 bytes within the same cap, bringing inventory to 3,520,624 bytes and leaving 149,392 bytes.",
+  "budgetNotes": "Explicitly approved 24 October 2026 expansion from 3 MiB to 3.5 MiB for two exact reviewed native dispatch-14 screenshots: 327,562 added bytes, from 3,145,521 to 3,473,083. Historical image bytes remain unchanged; no gameplay or renderer budget changes. Dispatch 17 adds one exact native registry selector PNG of 8,755 bytes within the same cap, bringing inventory to 3,481,838 bytes and leaving 188,178 bytes. Dispatch 18 adds one exact native group-patrol action PNG of 31,103 bytes within the same cap, bringing inventory to 3,512,941 bytes and leaving 157,075 bytes. Dispatch 19 adds one exact native settlement-order selector PNG of 7,683 bytes within the same cap, bringing inventory to 3,520,624 bytes and leaving 149,392 bytes. Dispatch 20 adds two exact native controls/results PNGs of 62,254 and 45,105 bytes, totaling 107,359 new bytes. Inventory is 3,627,983 bytes and leaves 42,033 bytes under the unchanged cap; all historical image records and bytes remain unchanged.",
   "loadingPolicy": "Featured and reader lead images use native eager loading. Archive thumbnails, section illustrations and image-dialog copies use native lazy loading; section images appear only in their selected article. Dialogs reuse the same source URL. Browser hints are not a measured transfer guarantee.",
-  "totalJournalImageBytes": 3520624
+  "totalJournalImageBytes": 3627983,
+  "reviewNotes": " The exact 784-by-323 patrol endpoint region and 780-by-201 six-visible-row posting receipt were independently viewed from the source captures. Authored fixture boundaries, viewports, text scales, hashes and scope limits are retained in docs/development/2026-10-25-group-policy-results/image-review.json. The receipt illustrates real canonical capacity refusals, not all 25 rows or all 128 results. Publication layout review remains separate."
 }

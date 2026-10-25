@@ -46,3 +46,11 @@ Both final image-capture journeys pass in29.4 seconds ([log](browser-final.log))
 including actual last-row viewport visibility at390px/130%. These overlap the
 eight-case run. [Image review](image-review.json) records two exact native journal
 candidates totaling107,359 bytes, keeping the existing public-image cap unchanged.
+
+## Deployment
+
+Published **670a18af843f95c80198a255e1894a708c5f1391**. Both exact-commit
+[workflows](actions.json) pass and [public readback](public-readback/readback.json)
+matches the preserved build. Both result-review journeys pass on Pages in
+31.2 seconds ([live log](live.log)). All four requested implementation rounds
+now have individual verified deployments; combined journal/report work follows.

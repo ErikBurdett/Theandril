@@ -2,7 +2,9 @@
 
 ## Review every posting and charter result by name — 2026-10-25
 
-Round 4 adds shared, filtered 25-row result pages for group postings and charters.
+**Published as `670a18a`**; both workflows, exact public readback and both live
+result-review journeys pass. Round 4 adds shared, filtered 25-row result pages
+for group postings and charters.
 Refusals open first; accepted actors are inspectable too. Paging and filtering
 leave selections and campaign records unchanged; a new submission resets review.
 An authored 128-army capacity boundary gives 96 real successes and 32 refusals,

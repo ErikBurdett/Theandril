@@ -30,14 +30,14 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'Find empty queues and waiting charters' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Give the order, then review each result' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    for (const id of ['settlement-order-selector']) {
+    for (const id of ['group-patrol-points', 'group-policy-receipt-rows']) {
       await page.locator(`.illustration-${id}`).scrollIntoViewIfNeeded();
       await page.locator(`.illustration-${id} > button > img`).evaluate(image => (image as HTMLImageElement).decode());
       await page.locator(`.illustration-${id}`).screenshot({ path: testInfo.outputPath(`${id}-illustration.png`) });
     }
-    await page.getByRole('heading', { name: 'Six charters, one exact saved result' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
+    await page.getByRole('heading', { name: 'See which orders took effect' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
     const imageFacts = await page.locator('figure > button > img').evaluateAll(elements => elements.map(element => { const image = element as HTMLImageElement; return { src: image.currentSrc, width: image.naturalWidth, complete: image.complete }; }));
@@ -102,8 +102,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('19 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(19);
+  await expect(page.getByRole('status')).toHaveText('20 dispatches');
+  await expect(page.locator('.dispatch-row')).toHaveCount(20);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -115,7 +115,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
   await expect(ledger).toContainText('player travel never resumes itself');
-  await expect(ledger).toContainText('2,362');
+  await expect(ledger).toContainText('2,394');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -142,10 +142,12 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=settlement-order-filters$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Find empty queues and waiting charters' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=group-orders-and-receipts$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Give the order, then review each result' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'Find empty queues and waiting charters' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Give the order, then review each result' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Posting and charter intent checks' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/670a18af843f95c80198a255e1894a708c5f1391/docs/development/2026-10-25-group-intent/README.md');
+  await page.getByRole('link', { name: 'Find empty queues and waiting charters', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Settlement order implementation and acceptance' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/5da6b62e9d9522d973f87b0c7022ada370636dcc/docs/development/2026-10-25-settlement-order-filters/README.md');
   await page.getByRole('link', { name: 'Change patrol policies across the checked companies', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Group patrol implementation and acceptance' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/8d880eb60cdca549d5ff1086ef95e095e81feea5/docs/development/2026-10-24-group-patrols/README.md');
