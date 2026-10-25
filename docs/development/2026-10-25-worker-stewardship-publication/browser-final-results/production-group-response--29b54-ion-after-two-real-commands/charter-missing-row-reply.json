@@ -1,0 +1,42 @@
+{
+  "initialHash": "b0c95a54",
+  "expectedMutatedHash": "d30c1967",
+  "commands": [
+    {
+      "type": "setCharter",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.6",
+      "focus": "wealth",
+      "ceiling": 24
+    },
+    {
+      "type": "setCharter",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.8",
+      "focus": "wealth",
+      "ceiling": 24
+    }
+  ],
+  "originalReply": {
+    "hash": "d30c1967",
+    "results": [
+      {
+        "settlementId": "settlement.6",
+        "accepted": true
+      },
+      {
+        "settlementId": "settlement.8",
+        "accepted": true
+      }
+    ],
+    "damagedResults": [
+      {
+        "settlementId": "settlement.6",
+        "accepted": true
+      }
+    ]
+  },
+  "actualResultsText": null,
+  "actualPanelText": "Select matching hearthsClear hearth selection2 hearths selectedCheck hearths to give them standing charters together. Select up to 128 at a time; page, search and registry changes keep your selection.Charter focusWorksWealthLearningMusterCoin ceiling per hearthApplying charters spends no coin now. Each hearth may spend up to its ceiling on one work whenever its queue is empty, once per turn after upkeep. All charters share your treasury and leave 40 coin in reserve.Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.Charter templatesYour personal template library stays in this browser across campaigns and sessions. It is separate from campaign saves and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.Apply charters (2)Revoke charters (0)Revocation leaves the 2 selected hearths without charters unchanged.The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.",
+  "endTurnDisabled": true
+}

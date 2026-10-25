@@ -1,0 +1,66 @@
+{
+  "authored": "Open-terrain theaterCampaign(101) and one foreign obstruction guard; all eight setup orders canonical.",
+  "initialHash": "c06a18e8",
+  "finalHash": "8d2b9a57",
+  "counts": {
+    "all": 101,
+    "standing": 4,
+    "waiting": 2,
+    "paused": 1
+  },
+  "route": {
+    "armyId": "army.99",
+    "origin": 498,
+    "waypoints": [
+      510
+    ],
+    "path": [
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      510
+    ],
+    "status": "active",
+    "pauseReason": null,
+    "knownHostileIds": []
+  },
+  "waitingReason": "Another faction now blocks the next step.",
+  "postingReason": "No safe route to the posting is known; the army is waiting.",
+  "added": [
+    {
+      "sequence": 9,
+      "turn": 2,
+      "afterTurn": 2,
+      "command": {
+        "type": "setPatrolEnabled",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.99",
+        "enabled": true
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 2,
+          "type": "patrol_resumed",
+          "message": "Registry company 101: patrol assignments resume next turn. Existing travel continues.",
+          "factionId": "faction.ashen_compact"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 36
+    }
+  ],
+  "exactReplay": true
+}

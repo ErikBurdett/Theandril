@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { deserializeGame, getObservation, stateHash } from '@theandril/sim';
+import { deserializeGame, getObservation, stateHash, stateHashForVersion } from '@theandril/sim';
 import { createArchive, type ArchiveRecord } from '@theandril/chronicle';
 import { exportSave, serializeCampaign } from '@theandril/persistence';
 import { campaignMenu, exportedTravel } from '../gameplay/group-movement-fixture';
@@ -17,8 +17,8 @@ test('production AI watch retires a genuinely captured hearth patrol and saves i
   const snapshot = readFileSync(new URL('../../docs/development/2026-10-24-patrol-recovery/diagnosis-recovered/snapshot-3-turn-150.json', import.meta.url), 'utf8');
   const snapshotSha256 = createHash('sha256').update(snapshot).digest('hex');
   expect(snapshotSha256).toBe('e8b68f936e8f7042f04465f879e669ef038cc27a9c927781fe368075a9e92b25');
-  const game = deserializeGame(snapshot), initialHash = stateHash(game);
-  expect(initialHash).toBe('4f60f2e3');
+  const game = deserializeGame(snapshot), initialHash = stateHash(game), historicalHash = stateHashForVersion(game, 35);
+  expect(historicalHash).toBe('4f60f2e3');
   expect(game.patrols.find(patrol => patrol.armyId === armyId)).toMatchObject({ enabled: true, pauseOnWar: false, firstCell: 8431, secondCell: 9108, target: 'second' });
   expect(game.routes[armyId]).toMatchObject({ status: 'paused', waypoints: [9108] });
   const view = getObservation(game, factionId);
@@ -69,7 +69,7 @@ test('production AI watch retires a genuinely captured hearth patrol and saves i
   expect(restored.archive).toEqual(retired.archive);
   expect(stateHash(restored.game)).toBe(stateHash(retired.game));
   writeFileSync(testInfo.outputPath('production-watch-patrol-retired.theandril'), restored.bytes);
-  writeFileSync(testInfo.outputPath('production-watch-patrol-retirement.json'), `${JSON.stringify({ snapshotSha256, initialHash, initialCell,
+  writeFileSync(testInfo.outputPath('production-watch-patrol-retirement.json'), `${JSON.stringify({ snapshotSha256, historicalHash, initialHash, initialCell,
     coverage: restored.archive.coverage, rounds, clear, movement: movement(), finalHash: stateHash(restored.game), records: restored.archive.records.length }, null, 2)}\n`);
   await campaignMenu(page);
   await page.getByTestId('campaign-menu').locator(':scope > summary').click();

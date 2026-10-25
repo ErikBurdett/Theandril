@@ -1,0 +1,13 @@
+
+Running 6 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% (27.8s)
+  ✓  2 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy missing-results after real allocation preserves selection and requires restoration (6.3s)
+  ✓  3 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy wrong-hearth after real allocation preserves selection and requires restoration (3.9s)
+  ✓  4 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy worker-crash after real allocation preserves selection and requires restoration (3.9s)
+  ✓  5 tests/production/worker-policy.spec.ts:16:1 › a generated hearth automatically employs its new population and restores its standing worker policy (6.9s)
+  ✓  6 tests/production/worker-policy.spec.ts:81:1 › worker priorities and direct manual takeover use real commands at narrow width with exact saved replay (6.2s)
+
+  6 passed (55.6s)

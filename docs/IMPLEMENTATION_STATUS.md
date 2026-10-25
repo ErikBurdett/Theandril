@@ -2,7 +2,10 @@
 
 ## Standing worker stewardship — 2026-10-25
 
-Local implementation and twelve targeted production cases verified; publication pending.
+**Published as `97b248e`**: both workflows, exact public readback and all six
+new live journeys pass (55.6seconds). Twelve targeted local production cases
+pass. Reviewed dispatch21 has final local **2,434tests /294files** and
+**all72Pagescases** passing; its publication readback is pending.
 Five optional worker priorities apply now and after each turn's growth/land
 completion for the next harvest. Direct worker orders take back control;
 siege/occupation wait and capture/raze removes the policy. Registry batches use
@@ -18,6 +21,9 @@ samples include32/40hearths and10,000claims; every fifteen-turn saved mirror is
 exact. [Evidence](development/2026-10-25-worker-stewardship/README.md),
 [ADR0054](architecture/0054-worker-stewardship.md).
 ACT-32/M3 stays partial. DH-021, R06 and all fifteen release gates remain open.
+Next governor work: paid land-work choices with explicit budgets, interruptions,
+material consequences and AI use, followed by organic mature-realm acceptance.
+Keep the scarce-worker and fiscal decisions visible; do not relax pacing targets.
 
 ## Four-round continuation published and reviewed — 2026-10-25
 

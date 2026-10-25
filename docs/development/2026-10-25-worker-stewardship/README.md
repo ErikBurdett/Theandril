@@ -1,6 +1,8 @@
 # Worker stewardship — 25 October 2026
 
-Implementation verified locally; publication verification pending.
+Source published as `97b248ed596c931f01d0df66d60fcf25f819eaef`; both workflows,
+exact public readback and all six new live journeys pass. Developer dispatch
+publication is recorded separately.
 Baseline: `47174209f633a92930b8076b0b1ce7db13c3e38e`.
 
 ## Player outcome
@@ -115,7 +117,9 @@ outlet contract. Runtime validation was not relaxed.
   actual canonical allocation, preserve checks, lock End turn, and restore/retry.
 - [Browser and image review](browser-review.md) records actual displayed pixels;
   the native806×45summary illustrates only Food /2of2assigned, not a full workflow.
-- Publication/live readback are recorded separately after the source commit.
+- [Publication evidence](../2026-10-25-worker-stewardship-publication/README.md):
+  source97b248e passes both workflows, exact public readback and six live journeys
+  in55.6seconds. These live cases overlap the twelve local cases, not extra coverage.
 
 ## Retained corrections and scope
 

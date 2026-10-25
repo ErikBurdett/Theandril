@@ -489,7 +489,8 @@ async function handle(request: Request): Promise<void> {
       const { results, error } = applyGroupCommands(state, commands);
       metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
       const accepted = results.filter(result => result.accepted).length, kind = groupPolicyStarted;
-      const message = error ?? `${accepted} ${kind}${accepted === 1 ? '' : 's'} accepted; ${results.length - accepted} refused.`;
+      const label = accepted === 1 ? kind : kind === 'worker policy' ? 'worker policies' : `${kind}s`;
+      const message = error ?? `${accepted} ${label} accepted; ${results.length - accepted} refused.`;
       const response: GroupResponse = request.type === 'groupPosting'
         ? { groupPostingResults: results.map(({ entityId, ...result }) => ({ armyId: entityId, ...result })), ...(error ? { groupPostingError: error } : {}) }
         : request.type === 'groupWorkerPolicy' ? { groupWorkerPolicyResults: results.map(({ entityId, ...result }) => ({ settlementId: entityId, ...result })), ...(error ? { groupWorkerPolicyError: error } : {}) }
