@@ -44,3 +44,15 @@ changed; [scoped lint](ledger-test-lint.log) and the [corrected journey](ledger-
 pass (one test,1.5s), with runtime and built assets unchanged. The original
 failure/screenshot/trace remain intact. [Identity union and exact scope](local-acceptance.json).
 This is not a claim of one46-green run or a live deployment.
+
+## Published checkpoint
+
+Published as **`a48755bbb3b1aaf075d1a668922270365dc380f9`**. Both exact
+[GitHub workflows](actions.json) succeed. [Public readback](live-readback/readback.json)
+passes against the [preserved committed build](frozen-build.json), including
+HTML/bundles/worker, current ledger, article source/evidence, native image and
+catalogue. All **four live counterplay journeys pass in18.7s** ([log](live-pages.log)),
+including both five-round Watch outcomes and exact portable/save recovery.
+[Deployment record](deployment.json). The other42 local Pages identities were
+not rerun live at this checkpoint. This remains development publication with
+all fifteen release gates open.

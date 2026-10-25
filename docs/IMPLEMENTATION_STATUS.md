@@ -1,8 +1,42 @@
 # Theandril implementation status
 
+## Find postings, waiting orders and paused patrols — 2026-10-24
+
+**Locally verified; preparing its own deployment.** The army registry now offers
+All forces, Postings and patrols, Orders waiting and Paused patrols. Counts compose
+with existing search/domain filters before stable 25-row paging. Rows expose
+actual posting destinations/reasons, patrol-policy state and travel interruptions
+separately. Waiting does not imply a defect. Disabled policies remain findable
+when their army has no movement or already has a travel route.
+
+Filtering preserves checked armies, including those outside the new cohort, and
+uses existing pending-review locks. Opening a row reaches the existing inspector;
+reopening the registry resets its local filter to All forces. The projection
+reads only already-supplied owned order facts, performs no geographical/path
+search and issues no commands or new worker requests. It adds no canonical rule,
+save field, AI behavior or per-turn/per-frame work; rules/save 35 and content
+015468d1 remain unchanged. No campaign pacing rerun is warranted.
+
+**Evidence.** Full suite **2,318 tests / 282 files, 75.04 seconds**, typecheck, lint
+and production build pass; focused 36 tests cover new and existing registry/group
+contracts. The production journey passes in 10.5 seconds through actual controls
+on an authored 101-army fixture. Its eight ordinary setup commands genuinely
+produce exhausted movement, active travel and a blocked patrol; strict import
+and replay pass. Filter/navigation actions preserve hash `aa8eb3f5` and all eight
+records. Only explicit Resume adds sequence 9, `setPatrolEnabled(true)`, producing
+`099f7ee4`; all armies and all routes remain exact, with saved reload/replay.
+Native desktop/narrow 130% text captures and an independent export/source review
+find no scoped blocker. [Evidence](development/2026-10-24-army-order-filters/README.md).
+
+This advances ACT-32/M3 and bounded Gate I/E evidence, not organic mature-realm
+acceptance. Broader delegation, escorts, long programs, campaign pacing and all
+fifteen release gates remain open.
+
 ## Interrupt and preserve imminent victory-project sieges — 2026-10-24
 
-**Implementation committed as `bff9889`; publication prepared separately.** AI now rejects peace
+**Published as `a48755b`, implementation `bff9889`.** Both GitHub workflows
+succeed; exact public assets/source/catalogue match, and four live counterplay
+journeys pass in 18.7 seconds. AI now rejects peace
 and issues an already legal adjacent siege in the same planning pass when a
 currently visible enemy project can finish during the truce. It also preserves
 an existing own siege pausing that project: incoming peace is rejected and

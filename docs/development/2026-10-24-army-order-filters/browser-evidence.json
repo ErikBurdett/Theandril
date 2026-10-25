@@ -1,0 +1,110 @@
+{
+  "scope": "One actual local Pages-production journey; no development game hooks, no build/source edits during run. Authored101army fixture; no organic maturity or timing acceptance claim.",
+  "command": "./node_modules/.bin/playwright test --config playwright.pages.config.ts tests/production/army-order-filter.spec.ts --output docs/development/2026-10-24-army-order-filters/browser-results",
+  "result": {
+    "passed": 1,
+    "testSeconds": 9.5,
+    "runSeconds": 10.5,
+    "firstRun": true
+  },
+  "initialHash": "aa8eb3f5",
+  "finalHash": "099f7ee4",
+  "setupRecords": 8,
+  "finalRecords": 9,
+  "newCommand": {
+    "sequence": 9,
+    "turn": 2,
+    "afterTurn": 2,
+    "command": {
+      "type": "setPatrolEnabled",
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.99",
+      "enabled": true
+    },
+    "ok": true,
+    "error": null,
+    "events": [
+      {
+        "turn": 2,
+        "type": "patrol_resumed",
+        "message": "Registry company 101: patrol assignments resume next turn. Existing travel continues.",
+        "factionId": "faction.ashen_compact"
+      }
+    ],
+    "battles": [],
+    "checkpoint": null,
+    "checkpointVersion": null,
+    "rulesVersion": 35
+  },
+  "counts": {
+    "all": 101,
+    "standing": 4,
+    "waiting": 2,
+    "paused": 1
+  },
+  "browsingAndNavigationExactArchiveUnchanged": true,
+  "actualPendingReviewLockObserved": true,
+  "checkedIdsAndReviewPreservedAcrossFilter": true,
+  "armyAndActiveRouteUnchangedByResume": true,
+  "exactReplayAndManualReload": true,
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/army-order-status.ts",
+      "sha256": "185e20c505a11e93ead7f48aafb108e0a8e2cee6504a378f5c861c73c8be628d"
+    },
+    {
+      "path": "apps/web/src/realm-navigation.tsx",
+      "sha256": "814611d31790c4ac9eeddcc2219682398cab8174f5d50c812b0bf86e788f1fc0"
+    },
+    {
+      "path": "apps/web/src/army-order-status.test.ts",
+      "sha256": "55d12f99d9dfb5c0649de2b20b0ae380f220c0151773d28cf9bfcf0b4ac3ce1c"
+    },
+    {
+      "path": "apps/web/src/realm-order-filter.test.tsx",
+      "sha256": "9823c19d5e0ff62332eb2c58d0aa12023544064ae2471299e6b85ff883942d8c"
+    },
+    {
+      "path": "tests/gameplay/army-order-filter-fixture.ts",
+      "sha256": "ccd0e74296f2b083afcc46f5fff236e1f7b783e1aca556429098c3e9eca46af6"
+    },
+    {
+      "path": "tests/production/army-order-filter.spec.ts",
+      "sha256": "a4c7a2dc02dcce0b186458e19c68c40d905d78bdf153c33806889f66bab22dcc"
+    }
+  ],
+  "images": [
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-paused-policy-desktop.png",
+      "bytes": 826385,
+      "width": 1440,
+      "height": 1000,
+      "sha256": "c3dd2b4ec15681a64b7b568c37fd544c346189308a4051ccd95c4400d04ca7c3",
+      "native": true
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-paused-selector-detail.png",
+      "bytes": 8755,
+      "width": 806,
+      "height": 66,
+      "sha256": "acb57af1c12389be669b41d27ab47d6f31dd99c90573739a88514a9744bfbad8",
+      "native": true
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-to-paused-orders-narrow-130.png",
+      "bytes": 237404,
+      "width": 390,
+      "height": 844,
+      "sha256": "6de8d91fec986fb21b103e996cf5692c3fd03e37662eccaf28e13c822ee854f6",
+      "native": true
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-waiting-narrow-130.png",
+      "bytes": 245950,
+      "width": 390,
+      "height": 844,
+      "sha256": "c1ba22d39c7e2c4f19282151c356aa9d6535557fde38304cee785e7bfc111747",
+      "native": true
+    }
+  ]
+}

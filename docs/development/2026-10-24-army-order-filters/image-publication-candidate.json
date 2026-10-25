@@ -1,0 +1,82 @@
+{
+  "state": "Native pixels reviewed; publication awaits implementation pin and journal integration",
+  "asset": {
+    "id": "registry-paused-selector",
+    "path": "updates/registry-paused-selector.png",
+    "sourceRepository": "ErikBurdett/Theandril",
+    "sourceRevision": "PENDING_IMPLEMENTATION_REVISION",
+    "sourcePath": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-paused-selector-detail.png",
+    "sourceSha256": "acb57af1c12389be669b41d27ab47d6f31dd99c90573739a88514a9744bfbad8",
+    "sourceWidth": 806,
+    "sourceHeight": 66,
+    "crop": null,
+    "resize": null,
+    "encoding": "Exact native Playwright locator PNG; no transform or re-encoding",
+    "sha256": "acb57af1c12389be669b41d27ab47d6f31dd99c90573739a88514a9744bfbad8",
+    "bytes": 8755,
+    "width": 806,
+    "height": 66,
+    "alt": "Army orders selector set to Paused patrols, with one matching policy.",
+    "caption": "Native Army orders selector detail from the authored 101-army regression fixture: Paused patrols finds one company. Captured at 806 \u00d7 66 within a 1440 \u00d7 1000 desktop viewport at 100% text. This image shows the selector and count; the linked full view and command archive establish the matching company, its continuing travel and the later explicit Resume action."
+  },
+  "capture": {
+    "test": "tests/production/army-order-filter.spec.ts",
+    "locator": ".realm-registry-content > .registry-tools [first matching element]",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "textScale": 1,
+    "deviceScaleFactor": "Playwright desktop default 1; no override",
+    "observer": "Ashen Compact",
+    "fixture": "Authored theaterCampaign(101), strict canonical initial hash aa8eb3f5, eight recorded setup commands",
+    "generator": null,
+    "transform": "None",
+    "licenseNotes": "Original repository gameplay capture using existing project artwork; no external source image or generated substitute."
+  },
+  "budget": {
+    "before": 3473083,
+    "addition": 8755,
+    "after": 3481838,
+    "cap": 3670016,
+    "remaining": 188178
+  },
+  "inspectedCaptures": [
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-paused-policy-desktop.png",
+      "sha256": "c3dd2b4ec15681a64b7b568c37fd544c346189308a4051ccd95c4400d04ca7c3",
+      "bytes": 826385,
+      "width": 1440,
+      "height": 1000,
+      "bitDepth": 8,
+      "pngColorType": 2
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-paused-selector-detail.png",
+      "sha256": "acb57af1c12389be669b41d27ab47d6f31dd99c90573739a88514a9744bfbad8",
+      "bytes": 8755,
+      "width": 806,
+      "height": 66,
+      "bitDepth": 8,
+      "pngColorType": 2
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-to-paused-orders-narrow-130.png",
+      "sha256": "6de8d91fec986fb21b103e996cf5692c3fd03e37662eccaf28e13c822ee854f6",
+      "bytes": 237404,
+      "width": 390,
+      "height": 844,
+      "bitDepth": 8,
+      "pngColorType": 2
+    },
+    {
+      "path": "docs/development/2026-10-24-army-order-filters/browser-results/production-army-order-filt-8ec4b-plicitly-resumes-its-policy/registry-waiting-narrow-130.png",
+      "sha256": "c1ba22d39c7e2c4f19282151c356aa9d6535557fde38304cee785e7bfc111747",
+      "bytes": 245950,
+      "width": 390,
+      "height": 844,
+      "bitDepth": 8,
+      "pngColorType": 2
+    }
+  ]
+}

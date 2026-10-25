@@ -1,5 +1,21 @@
 # Performance measurements
 
+## Registry order filters — presentation scope, 2026-10-24
+
+The owned-order projection costs O(A + P + R + C) over supplied observed armies,
+postings, routes and patrol policies, stores only small primitive order facts,
+and is memoized by observation identity. Search/domain cohort counts precede
+filtering and stable 25-row paging. Filtering does not scan geography, request a
+path, add worker messages, execute simulation, or run per-frame/per-turn logic.
+It preserves the existing pending-query lock and checked group IDs.
+
+The actual 101-army production workflow proves a zero-movement disabled patrol
+with active travel remains findable, and filtering/navigation leave exact state
+and archive untouched. Its 10.5-second test duration is functional execution
+metadata, not a render/planner benchmark. No new FPS, giant-map timing or memory
+claim follows; no pacing rerun is required for this UI-only change.
+[Evidence and cost boundary](development/2026-10-24-army-order-filters/README.md).
+
 ## Imminent project counterplay — rules 35, 2026-10-24
 
 [Ten final authored cases](development/2026-10-24-project-counterplay/counterplay-benchmark-final.json)

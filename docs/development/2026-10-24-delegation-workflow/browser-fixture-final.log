@@ -1,0 +1,146 @@
+{
+  "authored": "theaterCampaign101 open land, two hearths and treasury; names and one foreign guard authored before archive. All orders, movement exhaustion and interrupted travel canonical.",
+  "hash": "aa8eb3f5",
+  "sha256": "eae65e1e28ec626e6acb8fd2ec2def512a62a91bcbbd0af938c4087bd954a26c",
+  "counts": {
+    "all": 101,
+    "standing": 4,
+    "waiting": 2,
+    "paused": 1
+  },
+  "actors": {
+    "posted": {
+      "id": "army.10",
+      "name": "Registry company 001"
+    },
+    "blockedPosting": {
+      "id": "army.100",
+      "name": "Registry company 002"
+    },
+    "waiting": {
+      "id": "army.98",
+      "name": "Registry company 100"
+    },
+    "paused": {
+      "id": "army.99",
+      "name": "Registry company 101"
+    }
+  },
+  "pausedMovement": 0,
+  "pausedRoute": {
+    "armyId": "army.99",
+    "origin": 498,
+    "waypoints": [
+      510
+    ],
+    "path": [
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      510
+    ],
+    "status": "active",
+    "pauseReason": null,
+    "knownHostileIds": []
+  },
+  "postingReason": "No safe route to the posting is known; the army is waiting.",
+  "waitingReason": "Another faction now blocks the next step.",
+  "coverage": "from-save",
+  "setupCommands": [
+    {
+      "command": {
+        "type": "setPatrol",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.98",
+        "firstCell": 495,
+        "secondCell": 510,
+        "enabled": true
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "queueMovement",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.98",
+        "target": 510
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "move",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.110",
+        "target": 499
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "setPosting",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.10",
+        "cell": 495,
+        "mode": "hold"
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "setPosting",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.100",
+        "cell": 0,
+        "mode": "hold"
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "setPatrol",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.99",
+        "firstCell": 495,
+        "secondCell": 497,
+        "enabled": false
+      },
+      "ok": true,
+      "error": null
+    },
+    {
+      "command": {
+        "type": "queueMovement",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.99",
+        "target": 510
+      },
+      "ok": true,
+      "error": null
+    }
+  ],
+  "strictLoadAndExactReplay": true,
+  "browserExecuted": false
+}

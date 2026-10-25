@@ -1,0 +1,17 @@
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:652
+  if (!condition) throw new Error('Invalid save: ' + message);
+                  ^
+
+Error: Invalid save: invalid runtime entity ID
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:652:25)
+    at checkEntity (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:998:5)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:1006:5)
+    at armyOrderFilterScene (/home/telephoneheater/Work/Theandril/docs/development/2026-10-24-delegation-workflow/army-order-filter-fixture.draft.ts:25:10)
+    at [eval]:2:75
+    at runScriptInThisContext (node:internal/vm:219:10)
+    at node:internal/process/execution:483:12
+    at [eval]-wrapper:6:24
+    at runScriptInContext (node:internal/process/execution:481:60)
+    at evalFunction (node:internal/process/execution:315:30)
+
+Node.js v26.7.0

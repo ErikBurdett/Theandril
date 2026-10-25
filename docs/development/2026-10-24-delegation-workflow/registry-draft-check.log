@@ -1,0 +1,9 @@
+Prepared draft only; no application mutations.
+TypeScript createSourceFile syntax checks:
+  army-order-status.ts: passed
+  realm-navigation.tsx: passed
+  army-order-status.test.ts: passed
+  realm-order-filter.test.tsx: passed
+Command: git apply --check docs/development/2026-10-24-delegation-workflow/registry-integration.patch
+Exit: 0
+No unit tests, typecheck, browser checks or timings run for this unapplied draft.

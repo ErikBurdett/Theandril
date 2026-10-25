@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { BUILDINGS, UNITS } from '@theandril/content';
-import { CHARTER_NAMES, type Observation } from '@theandril/sim';
+import { CHARTER_NAMES, POSTING_NAMES, type Observation } from '@theandril/sim';
 import { addGroupSelection, groupPostingArmies, GroupPostingOrders, GROUP_POSTING_LIMIT, type GroupPostingIssue } from './group-postings';
 import { groupCharterTowns, GroupCharterOrders, type GroupCharterIssue } from './group-charters';
 import { SelectionGroups, type SelectionGroupIssue } from './selection-groups';
 import { GroupProductionOrders, type GroupProductionIssue } from './group-production';
 import { GroupMovementOrders, type GroupMovementIssue, type GroupMovementPreviewIssue } from './group-movement';
 import { DefenseTheaters, type TheaterIssue } from './defense-theaters';
+import { ARMY_ORDER_FILTERS, armyOrderCounts, buildArmyOrderIndex, matchesArmyOrderFilter, type ArmyOrderFilter, type ArmyOrderStatus } from './army-order-status';
 import './realm-navigation.css';
 
 export type RegistryKind = 'armies' | 'settlements';
@@ -16,12 +17,17 @@ type Sort = 'id' | 'name';
 const itemName = (id: string) => [...BUILDINGS, ...UNITS].find(item => item.id === id)?.name ?? id;
 
 /** Only already-observed owned entities enter the registry; navigation issues no orders. */
-export function registryEntries(view: Observation, kind: RegistryKind, search: string, force: string, sort: Sort) {
+export function registryEntries(view: Observation, kind: RegistryKind, search: string, force: string, sort: Sort, orderFilter: ArmyOrderFilter = 'all', orderIndex?: ReadonlyMap<string, ArmyOrderStatus>) {
   const needle = search.trim().toLowerCase();
+  const index = kind === 'armies' && orderFilter !== 'all' ? orderIndex ?? buildArmyOrderIndex(view) : undefined;
   const entries = (kind === 'armies' ? view.armies : view.settlements).filter(item => item.factionId === view.factionId)
     .filter(item => `${item.name} ${item.id}`.toLowerCase().includes(needle))
     .filter(item => kind !== 'armies' || force === 'all' || ('carrierId' in item && (force === 'embarked' ? Boolean(item.carrierId) : force === 'naval' ? item.domain === 'naval' : item.domain === 'land' && !item.carrierId)));
-  return entries.sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name) || a.id.localeCompare(b.id) : a.id.localeCompare(b.id));
+  const matching = index ? entries.filter(item => {
+    const status = index.get(item.id);
+    return status !== undefined && matchesArmyOrderFilter(status, orderFilter);
+  }) : entries;
+  return matching.sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name) || a.id.localeCompare(b.id) : a.id.localeCompare(b.id));
 }
 
 export function RealmNavigation({ registry, armyCount, townCount, characterCount, choose, characters, selectionName, selectionKind, showMap, showOrders, selectionControls = true, busy = false }: {
@@ -52,6 +58,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   theaterFocus?: { id: string; nonce: number };
 }) {
   const [sort, setSort] = useState<Sort>('id');
+  const [orderFilter, setOrderFilter] = useState<ArmyOrderFilter>('all');
   const [page, setPage] = useState(0);
   const [armyGroupIds, setArmyGroupIds] = useState<ReadonlySet<string>>(() => new Set());
   const [townGroupIds, setTownGroupIds] = useState<ReadonlySet<string>>(() => new Set());
@@ -76,9 +83,16 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
     setArmyGroupIds(previous => [...previous].some(id => !availableArmyIds.has(id)) ? new Set([...previous].filter(id => availableArmyIds.has(id))) : previous);
     setTownGroupIds(previous => [...previous].some(id => !availableTownIds.has(id)) ? new Set([...previous].filter(id => availableTownIds.has(id))) : previous);
   }, [availableArmyIds, availableTownIds]);
-  const entries = useMemo(() => registryEntries(view, registry, search, force, sort), [view, registry, search, force, sort]);
+  const orderIndex = useMemo(() => registry === 'armies' ? buildArmyOrderIndex(view) : new Map<string, ArmyOrderStatus>(), [view, registry]);
+  const baseEntries = useMemo(() => registryEntries(view, registry, search, force, sort), [view, registry, search, force, sort]);
+  const orderCounts = useMemo(() => armyOrderCounts(baseEntries.map(item => item.id), orderIndex), [baseEntries, orderIndex]);
+  const entries = useMemo(() => registry === 'armies' && orderFilter !== 'all'
+    ? baseEntries.filter(item => {
+      const status = orderIndex.get(item.id);
+      return status !== undefined && matchesArmyOrderFilter(status, orderFilter);
+    }) : baseEntries, [baseEntries, registry, orderFilter, orderIndex]);
   const selectedId = registry === 'armies' ? selection.armyId : selection.settlementId;
-  useEffect(() => { setPage(0); }, [registry, search, force, sort]);
+  useEffect(() => { setPage(0); }, [registry, search, force, sort, orderFilter]);
   useEffect(() => {
     const index = entries.findIndex(item => item.id === selectedId);
     if (index >= 0) setPage(Math.floor(index / REGISTRY_PAGE_SIZE));
@@ -87,13 +101,14 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const pages = Math.max(1, Math.ceil(entries.length / REGISTRY_PAGE_SIZE));
   const current = Math.min(page, pages - 1);
   const visible = entries.slice(current * REGISTRY_PAGE_SIZE, (current + 1) * REGISTRY_PAGE_SIZE);
-  const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const charters = new Map(view.charters.map(charter => [charter.settlementId, charter]));
-  const patrols = new Map((view.patrols ?? []).filter(patrol => patrol.factionId === view.factionId).map(patrol => [patrol.armyId, patrol]));
   const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onTheaterCommand) : Boolean(onGroupCharter || onGroupProduction));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
   return <div className="realm-registry-content">
+    {registry === 'armies' && <div className="registry-tools"><label>Army orders<select value={orderFilter} disabled={locked} onChange={event => setOrderFilter(event.target.value as ArmyOrderFilter)}>
+      {ARMY_ORDER_FILTERS.map(filter => <option key={filter.value} value={filter.value}>{filter.label} ({orderCounts[filter.value]})</option>)}
+    </select></label></div>}
     <div className="registry-tools"><label>Registry order<select value={sort} disabled={locked} onChange={event => setSort(event.target.value as Sort)}><option value="id">Stable order</option><option value="name">Name A–Z</option></select></label><span>{entries.length} {registry === 'armies' ? 'forces' : 'towns'}</span></div>
     {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={pending => reportPending('selection', pending)}/>}
     {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
@@ -104,9 +119,8 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
     <div className="registry" data-testid={registry === 'armies' ? 'army-registry' : 'settlement-registry'}>{visible.map(item => {
       const army = 'formations' in item ? item : undefined;
       const town = 'queue' in item ? item : undefined;
-      const route = routes.get(item.id);
+      const orderStatus = orderIndex.get(item.id);
       const charter = charters.get(item.id);
-      const patrol = patrols.get(item.id);
       return <div className={`registry-row${groupEnabled ? ' registry-row-group' : ''}`} key={item.id}>
         {groupEnabled && <label className="registry-group-check">{availableGroupIds.has(item.id) ? <input type="checkbox" aria-label={`Select ${item.name} for group orders`} checked={currentGroupIds.has(item.id)} disabled={locked || (!currentGroupIds.has(item.id) && currentGroupIds.size >= GROUP_POSTING_LIMIT)} onChange={event => {
           const checked = event.target.checked;
@@ -120,13 +134,23 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
             {army.commander && <small>Commander: {army.commander.name}</small>}
             {army.overCommand && <small className="registry-route-state">⚑ Over command · {army.formations.length} / {army.formationCapacity}</small>}
             {army.agents.some(agent => agent.status === 'mission') && <small className="registry-route-state">⚑ Stationary mission</small>}
-            {patrol && <small className="registry-route-state">Patrol {patrol.enabled ? `to hex ${patrol.targetCell}` : 'paused'}{patrol.blocker ? ` · ${patrol.blocker}` : ''}</small>}
-            {route && <small className="registry-route-state">{route.status === 'paused' ? '⚑ Route interrupted' : '↝ Travel queued'}</small>}</>}
+            <ArmyOrderDetails status={orderStatus}/></>}
           {town && <><small>{town.population} people · {town.queue.length ? itemName(town.queue[0]!.itemId) : 'No production'}</small>
             {charter && <small>{CHARTER_NAMES[charter.focus]} charter · {charter.ceiling} coin per work · {charter.blocker ?? (town.queue.length ? 'Current queue comes first.' : charter.itemName ? `Next: ${charter.itemName}.` : 'Waiting for the next turn.')}</small>}</>}
         </span><span aria-hidden="true">›</span>
       </button></div>;
-    })}{!entries.length && <p className="empty">{search || force !== 'all' ? 'No matching entries. Clear your search or filter.' : registry === 'armies' ? 'Recruit an army or fleet from a settlement.' : 'Select your caravan to establish the first hearth.'}</p>}</div>
+    })}{!entries.length && <p className="empty">{search || force !== 'all' || (registry === 'armies' && orderFilter !== 'all') ? 'No matching entries. Clear your search or filter.' : registry === 'armies' ? 'Recruit an army or fleet from a settlement.' : 'Select your caravan to establish the first hearth.'}</p>}</div>
     {pages > 1 && <nav className="registry-pages" aria-label="Registry pages"><button disabled={locked || current === 0} onClick={() => setPage(current - 1)} aria-label="Previous registry page">←</button><span>Page {current + 1} of {pages}</span><button disabled={locked || current === pages - 1} onClick={() => setPage(current + 1)} aria-label="Next registry page">→</button></nav>}
   </div>;
+}
+
+/** Display supplied canonical facts independently; no commands or eligibility queries. */
+export function ArmyOrderDetails({ status }: { status: ArmyOrderStatus | undefined }) {
+  if (!status) return null;
+  const { posting, patrol, route } = status;
+  return <>
+    {posting && <small className="registry-route-state">Posting: {POSTING_NAMES[posting.mode]} at hex {posting.cell}{posting.arrived ? ' · Arrived' : ''}{posting.blocker ? ` · ${posting.blocker}` : ''}</small>}
+    {patrol && <small className="registry-route-state">Patrol policy: {patrol.enabled ? patrol.status : 'paused'} · target hex {patrol.targetCell}{patrol.blocker ? ` · ${patrol.blocker}` : ''}</small>}
+    {route && <small className="registry-route-state">{route.status === 'paused' ? '⚑ Route interrupted' : '↝ Travel queued'} · target hex {route.targetCell}{route.pauseReason ? ` · ${route.pauseReason}` : ''}</small>}
+  </>;
 }
