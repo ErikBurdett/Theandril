@@ -4,8 +4,10 @@
 
 **Published as `97b248e`**: both workflows, exact public readback and all six
 new live journeys pass (55.6seconds). Twelve targeted local production cases
-pass. Reviewed dispatch21 has final local **2,434tests /294files** and
-**all72Pagescases** passing; its publication readback is pending.
+pass. Reviewed dispatch21 and the group-feedback wording fix are published as
+`c026d3d`: both workflows and exact public readback pass, followed by all sixteen
+live journal/worker-policy journeys in1.4minutes. Final local **2,434tests /294files**
+and **all72Pagescases** pass. [Publication evidence](development/2026-10-25-worker-stewardship-publication/README.md).
 Five optional worker priorities apply now and after each turn's growth/land
 completion for the next harvest. Direct worker orders take back control;
 siege/occupation wait and capture/raze removes the policy. Registry batches use

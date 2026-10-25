@@ -18,9 +18,9 @@ six new individual/group/recovery cases from the twelve-case local run, not
 additive coverage. The real public game is used without development hooks.
 Live images, exported campaigns and hashes are under `source-live-results/`.
 
-Developer-dispatch publication, full local Pages coverage and final readback will
-be appended after verification. M3, DH-021, R06 and all fifteen release gates
-remain open; this is development publication.
+Developer-dispatch publication, full local Pages coverage and final readback are
+recorded below. M3, DH-021, R06 and all fifteen release gates remain open; this is
+development publication.
 
 ## Publication review and retained corrections
 
@@ -60,3 +60,24 @@ overlap; their counts are not additive. Layout review uses the first run's sixte
 journal captures, whose cases already passed; the final run repeats those four
 viewports against unchanged journal content. Source/policy behavior and editorial
 scope remain those described at97b248e, with the final feedback wording corrected.
+
+## Verified public publication
+
+Commit `c026d3dc8ac86dba9deb56d5287714e247fd04b6` publishes the reviewed
+[dispatch21](https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=worker-stewardship)
+and the feedback wording correction. Both [exact-commit workflows](publication-actions.json)
+succeed: [Pages40224906153](https://github.com/ErikBurdett/Theandril/actions/runs/40224906153)
+and [Verify40224906207](https://github.com/ErikBurdett/Theandril/actions/runs/40224906207).
+[Exact public readback](public-readback/readback.json) passes against the preserved
+c026d3d distribution, including game/worker/CSS bytes, the regenerated build feed,
+edition21, source97b248e, all15pinned evidence paths and the unchanged release gates.
+
+[All sixteen live cases](live.log) pass in1.4minutes without retries: ten journal
+cases and all six individual/group/recovery cases against the real public Pages
+build. [Live captures and exported campaigns](live-results/) retain their evidence.
+These overlap the local72cases and earlier source-live six; counts are not added.
+
+The first c026d3d push failed with `curl 55 Recv failure: Network is unreachable`.
+The unchanged push retry succeeded; no source changes, history rewrite or checks
+were bypassed to publish. The primary checkout is master at the published commit;
+the prompt report and this final proof are a documentation-only follow-up.
