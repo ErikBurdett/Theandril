@@ -1,0 +1,221 @@
+{
+  "dispatches": [
+    {
+      "id": "group-patrols",
+      "sequence": 18,
+      "sourceRevision": "8d880eb60cdca549d5ff1086ef95e095e81feea5"
+    },
+    {
+      "id": "registry-order-filters",
+      "sequence": 17,
+      "sourceRevision": "da12978fb596a73a7fddcfb8e914efb7924efbc2"
+    },
+    {
+      "id": "project-counterplay",
+      "sequence": 16,
+      "sourceRevision": "bff98894992762e797daf2aa63b487b4a98c0f28"
+    },
+    {
+      "id": "patrol-retirement",
+      "sequence": 15,
+      "sourceRevision": "68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120"
+    },
+    {
+      "id": "patrol-orders",
+      "sequence": 14,
+      "sourceRevision": "dee74cf9c4e2d153f9c5f5cfdbd9221798205481"
+    },
+    {
+      "id": "reinforcement-logistics",
+      "sequence": 13,
+      "sourceRevision": "f33a816f3a853229695b902af007e4e3f3547275"
+    },
+    {
+      "id": "defense-theaters",
+      "sequence": 12,
+      "sourceRevision": "0ecd2d1767f613942cf9f22315da624164cc4055"
+    },
+    {
+      "id": "group-travel",
+      "sequence": 11,
+      "sourceRevision": "3b0918999a166f36f6f3d51fbcb49413de549163"
+    },
+    {
+      "id": "production-sequences",
+      "sequence": 10,
+      "sourceRevision": "420219d278ae17f42a04871c6319ecf62a4af216"
+    },
+    {
+      "id": "selection-groups",
+      "sequence": 9,
+      "sourceRevision": "0d26fa3c34ac89164637f515e95671420400a841"
+    },
+    {
+      "id": "charter-templates",
+      "sequence": 8,
+      "sourceRevision": "3ed4a6c456c3e4130fddf35b44dfdf51034cc269"
+    },
+    {
+      "id": "group-charters",
+      "sequence": 7,
+      "sourceRevision": "f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9"
+    },
+    {
+      "id": "group-postings",
+      "sequence": 6,
+      "sourceRevision": "3ae1581089411a76ecfd08a8f5f811258c4f77f6"
+    },
+    {
+      "id": "fleet-provisions",
+      "sequence": 5,
+      "sourceRevision": "b623c2c91d4d852cba710f2d996c28a6b1b5d624"
+    },
+    {
+      "id": "campaign-foundation-and-development-order",
+      "sequence": 4,
+      "sourceRevision": "1e41ec24965e46e8035c57b4f54632a690b8b712"
+    },
+    {
+      "id": "r17-campaign-safety",
+      "sequence": 3,
+      "sourceRevision": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef"
+    },
+    {
+      "id": "keeping-the-record",
+      "sequence": 2,
+      "sourceRevision": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef"
+    },
+    {
+      "id": "twenty-four-cultures",
+      "sequence": 1,
+      "sourceRevision": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef"
+    }
+  ],
+  "items": 23,
+  "statusCounts": {
+    "completed": 6,
+    "in-progress": 13,
+    "pending": 4
+  },
+  "delivered": 90,
+  "remaining": 49,
+  "gates": [
+    {
+      "id": "A",
+      "title": "Clean build",
+      "status": "in-progress",
+      "remaining": "Pass the complete clean-checkout checks at the final integrated revision, including the online server."
+    },
+    {
+      "id": "B",
+      "title": "Complete campaign",
+      "status": "in-progress",
+      "remaining": "Complete epochs, several human-playable victory paths and strategically engaging long campaigns."
+    },
+    {
+      "id": "C",
+      "title": "AI competency",
+      "status": "in-progress",
+      "remaining": "Retain reviewed AI corrections, complete missing strategic systems and prove representative long soaks and disrupted logistics."
+    },
+    {
+      "id": "D",
+      "title": "Giant scale",
+      "status": "in-progress",
+      "remaining": "Verify Huge 100+ turns and Legendary stress with deterministic hashes and bounded retained memory."
+    },
+    {
+      "id": "E",
+      "title": "Save integrity",
+      "status": "in-progress",
+      "remaining": "Finish integrated replay/recovery coverage and the remaining real-browser durability proof."
+    },
+    {
+      "id": "F",
+      "title": "Combat",
+      "status": "in-progress",
+      "remaining": "Complete combat breadth and integrated player/AI land, siege and naval acceptance."
+    },
+    {
+      "id": "F2",
+      "title": "Research and magic depth",
+      "status": "in-progress",
+      "remaining": "Complete rituals, items, paths, sacred/occult play, cross-system unlocks and counterplay."
+    },
+    {
+      "id": "G",
+      "title": "Diplomacy",
+      "status": "in-progress",
+      "remaining": "Finish rule-bearing treaties, client relationships, broader negotiations and server validation."
+    },
+    {
+      "id": "H",
+      "title": "Settlement conquest",
+      "status": "in-progress",
+      "remaining": "Finish supported liberation/client outcomes and prove distinct saved consequences with AI understanding."
+    },
+    {
+      "id": "I",
+      "title": "UX at scale",
+      "status": "in-progress",
+      "remaining": "Complete delegation and verify an accessible mature realm with 100+ armies."
+    },
+    {
+      "id": "J",
+      "title": "Content",
+      "status": "in-progress",
+      "remaining": "Meet all accepted gameplay/content targets and validate references, localization and release assets."
+    },
+    {
+      "id": "K",
+      "title": "Performance",
+      "status": "in-progress",
+      "remaining": "Publish current isolated turn, AI, route, transfer, map and archive results with no severe open regression."
+    },
+    {
+      "id": "L",
+      "title": "Browser support",
+      "status": "pending",
+      "remaining": "Certify current Chromium, Firefox and Safari/WebKit where practical against the release candidate."
+    },
+    {
+      "id": "M",
+      "title": "Multiplayer",
+      "status": "pending",
+      "remaining": "Build and verify real authoritative online campaigns with two-client coverage."
+    },
+    {
+      "id": "N",
+      "title": "Release hygiene",
+      "status": "in-progress",
+      "remaining": "Finish the release-wide placeholder, license, version, error-path and production-debug audit."
+    }
+  ],
+  "stages": [
+    {
+      "id": "foundations",
+      "title": "Playable foundations delivered",
+      "description": "Checked items are bounded, implemented checkpoints. Their wider 1.0 systems still have work below."
+    },
+    {
+      "id": "current-work",
+      "title": "Complete the playable systems",
+      "description": "Client obligations and unification, magical discovery, standing orders and supply now have playable portions. Complete their remaining strategic choices, coordinated logistics and integrated verification in the order recorded by the development workflow."
+    },
+    {
+      "id": "missing-systems",
+      "title": "Build the missing release systems",
+      "description": "Accepted 1.0 work with no complete playable implementation. These are release obligations, not newly added promises."
+    },
+    {
+      "id": "release-proof",
+      "title": "Prove the release together",
+      "description": "Verify the final integrated revision. Earlier successful checkpoints and deployment do not clear these gates."
+    }
+  ],
+  "snapshot": {
+    "date": "2026-10-25",
+    "revision": "8d880eb60cdca549d5ff1086ef95e095e81feea5",
+    "rules": 35
+  }
+}

@@ -1,49 +1,110 @@
 # Change patrol policies across the checked companies
 
-**Dispatch 18 preparation — outside runtime.** Proposed ID `group-patrols`. Implementation revision, integrated acceptance, publication identity and illustration remain pending. Preserve all seventeen existing dispatches, their source pins and approved image bytes. This packet is an editorial draft, not permission to report pending browser or release results as passed.
+**Dispatch 18** · ID `group-patrols` · publication date 25 October 2026.
+Implementation revision: `8d880eb60cdca549d5ff1086ef95e095e81feea5`.
+Implementation evidence remains in `docs/development/2026-10-24-group-patrols/`;
+publication checks and live readback belong to
+`docs/development/2026-10-24-group-patrol-publication/`.
+The implementation crossed local midnight before publication preparation; stable
+evidence paths retain their original date. All seventeen historical dispatches
+and twenty approved image records/bytes remain unchanged.
 
-## Player story
+## Player story and delivered boundary
 
-The registry can now find a paused patrol, but changing a policy across many companies still requires opening each company's orders. The implemented local continuation adds a **Group patrols** disclosure using the same checked armies as existing group orders. Three explicit actions change only matching saved policies: **Pause enabled patrols**, **Resume paused patrols**, and **Remove selected patrols**, each with its current count.
+The registry can find paused policies across a large roster. Group patrols now
+uses the same checked companies to offer three explicit counted actions:
+**Pause enabled patrols**, **Resume paused patrols**, and **Remove selected
+patrols**. Checks outside the current filter remain included and disclosed.
+Armies without policies or already in the requested state receive no command
+and stay checked. Confirmed accepted armies leave the selection; refused armies
+remain with actual reasons. The existing limit is 128 owned land armies ashore;
+an oversized external selection produces no batch, not a silent prefix.
 
-Checked armies outside the current filter are included, and the panel says so. An army without a patrol, or already in the requested enabled/paused state, receives no command and stays checked. Confirmed accepted armies leave the selection; refused armies remain with their actual reasons. Existing selection limits remain at 128 owned land armies ashore. An oversized external selection produces no batch rather than silently applying its first 128 entries.
+Pause and Remove stop future assignments. Resume allows future assignments but
+does not resume a paused route. Existing issued travel remains unchanged;
+Group travel cancellation is separate. Removal discards endpoints and the war
+option. Resume preserves configuration and warns when Pause when war begins
+could pause the policy again next turn. No endpoint-creation action or automatic
+player recovery is introduced.
 
-These actions change patrol policy, not current travel. Pause and Remove stop future assignments. Resume allows future assignments and does not resume a paused route. Existing issued travel continues unchanged; Group travel cancellation is a separate action. Removal discards the saved endpoints and war option. A selected paused policy with **Pause when war begins** receives an explicit warning: resuming during war can pause it again next turn. Group controls do not rewrite that option.
+One homogeneous batch carries the current campaign hash. Main and worker validate
+that hash before ordinary canonical `setPatrolEnabled`/`clearPatrol` execution.
+Exact response identities and order must match before state display. Missing or
+damaged replies and worker failure can happen after mutation: they retain checks,
+lock further play and require saved restoration rather than automatic retry.
+Pending controls lock selection, filters, pages, other group actions and parent
+navigation. Refused results appear first with 25 rows per result page.
 
-## One bounded request, ordinary decisions
+## Executed evidence
 
-The UI snapshots the selected action with the current campaign hash. The main thread and worker check that hash before applying anything. The worker accepts one homogeneous action for up to 128 distinct army IDs from the current seat, executes ordinary `setPatrolEnabled` or `clearPatrol` commands in stable ID order, and returns one final state with per-army results. No endpoint-creation command, new canonical rule, path search or per-turn policy is added.
+The pinned implementation passes **2,339 tests across 285 files in 62.78s**, plus
+typecheck, lint and the production build. **Seven affected production journeys
+pass on their first run in 44.5s**: one normal group-patrol workflow, three new
+response-failure cases and existing registry, travel and posting journeys.
+The normal case takes 9.0s; that is functional metadata, not a speed claim.
+Focused UI/worker counts overlap the full suite and are not additive. Retained
+initial authoring failures include a UI assertion that assumed a named company
+was on the first stable-ID page; the correction checks all rendered locks.
 
-Canonical refusals are different from a damaged or missing result. Results must match the exact submitted IDs, order and faction. An interrupted recording, malformed response or worker crash may happen after commands have applied; those cases use the existing saved-restoration recovery lock. They do not silently retry or treat an uncertain outcome as a harmless refusal. The UI retains selection on rejected promises.
+The authored 101-company campaign has 99 policies, two hearths, treasury and a
+foreign obstruction guard. Its orders, movement exhaustion and route interruption
+use ordinary canonical commands. It is not an organically developed large realm.
+Pause/Resume/Remove accept **49/99/99** commands, with **52/2/2** unaffected checks.
+The archive grows **105 → 154 → 253 → 352**, with canonical hashes
+`c6f43460 → acebff08 → f89dea4d → a488bb10`. Armies, active and paused routes,
+and postings remain identical. The war option survives until removal. Public
+controls exercise actual pending locks, outside-filter selection, enlarged-text
+keyboard removal and exact per-phase replay/export/manual restoration.
 
-While a request is pending, the panel's immediate guard prevents repeat submission and the registry locks checks, filters, pagination, other group actions and parent navigation. The result summary states accepted, refused and unaffected counts. Refused rows come first with their details open; results remain paged at 25 rows. Filtering and paging do not discard still-checked companies.
+Three separate recovery cases damage the completed native worker response or
+inject its error after a real mutation. They restore the actual eight-record
+manual save before one deliberate retry to nine records. These are presentation
+fault injections, not organic refusals or physical process-kill proof. Worker
+regressions separately cover genuine canonical partial refusal and interrupted
+recording.
 
-## Actual evidence available at this draft checkpoint
+Six single samples process 128 policies per action on Huge and Legendary fixtures
+using the actual worker module in a same-thread Node host with structuredClone
+and fake IndexedDB. Huge Pause/Resume/Remove: **330.824/382.883/389.917ms**;
+Legendary: **668.912/634.563/673.485ms**. Each produces 128 ordinary records, one
+autosave and one final state, with no detail/path-query request and exact serial
+state, replay and autosave. Ordinary fog remains: only 61 cells are observed.
+These are not medians, browser Worker latency, physical storage, frame times,
+whole-turn acceptance or organic large-realm proof. Setup/import/export/replay
+are outside timing; raw component costs remain linked.
 
-The UI owner's focused run passes **34 tests across five files** in `docs/development/2026-10-24-group-patrols/ui-focused-bounded.log`; scoped lint passes. These cover the canonical hundred-policy helper, actual pause/resume/removal preserving issued routes and spent movement, strict saves, observed ownership/domain boundaries, historical absence, oversized whole-selection refusal, action counts and bounded refusal-first results. Static rendering is not asynchronous browser acceptance.
+## Exact imagery and review
 
-The first focused UI run retains one test-only failure: it assumed a specific named company appeared on the first stable-ID page. The corrected assertion checks that all 25 rendered checkboxes share the registry lock. Independent main/worker source review records its exact inspected bytes and no blocking source finding; source review is not proof that recovery scenarios have already executed.
+The approved source is
+`docs/development/2026-10-24-group-patrols/browser-first-results/production-group-patrols-p-8d403-hout-changing-issued-travel/group-patrol-actions-native.png`.
+Public copy: `apps/web/public/updates/group-patrol-actions.png`.
+**318 × 149, 31,103 bytes**, SHA-256
+`5a1a6eb8f4cfaf0b2c66fb9832887cd16faf009d70dc36185565b8c76cd921fc`.
+It is a native locator capture at 390 × 844 and 130% text, after Resume and before
+Remove: Pause 99 / disabled Resume 0 / Remove 99. The caption names the authored
+fixture and excludes selection context and outcome proof. No transformation,
+resize, re-encoding or generation applies. The original six full/detail/recovery
+images were inspected; final journal layout inspection remains separate.
 
-The simulation owner reports focused worker/request checks, while the parent is running integrated checks. Record their final file lists, counts and retained logs after completion, keeping overlapping scopes non-additive. **Do not invent full-suite counts, browser passes, source revision, final hashes, timing improvements or campaign outcomes here.** No new benchmark or pacing result is claimed by this draft. UI/transport changes do not by themselves prove whole-scale or release acceptance.
+Inventory is **3,512,941 bytes**, leaving **157,075** under the unchanged
+**3,670,016-byte (3.5 MiB)** cap. Source/public provenance match, historical
+metadata and image bytes remain unchanged, and larger context captures remain
+source-pinned evidence rather than extra journal inventory.
 
-## Planned real browser story
+## Scope, handoff and publication status
 
-The prepared normal journey uses an explicitly authored 101-company campaign with 99 saved policies, ordinary active and interrupted travel, a war-pause option and two selected companies without patrols. Infrastructure and population are authored; setup orders and movement/blockers must be real recorded commands. It is not an organically grown empire.
+One bounded delivered bullet extends the existing empire-management item:
+**90 delivered / 49 remaining**, with 23 items still 6 completed, 13 in progress
+and 4 pending. No new gameplay obligation is added or removed. Rules/save remain
+35 and content015468d1; canonical rules, AI, prices and automatic turns are
+unchanged. No new pacing run is claimed. M3, organic mature-realm acceptance,
+DH-021 and all fifteen release gates remain open.
 
-The test intends to pause 49 enabled policies, resume the resulting 99 paused policies and remove those 99 policies, while selected unaffected armies remain checked. Expected counts are fixture/test design, **not executed outcomes at this checkpoint**. Each phase must retain all army and route bytes, exact exported replay and saved restoration; 390px/130%-text keyboard interaction and result-page access must be exercised. The parent also owns separate missing-results, wrong-army and worker-crash journeys after a real batch. Report those as transport fault injections, not naturally occurring campaign refusals.
-
-Final prose should distinguish real canonical mixed-refusal worker checks from a normal player batch in which all selected current policies are valid. Never manufacture a player-facing refusal merely to make the screenshot look comprehensive. Public journey controls, actual records and final state hashes must determine the narrative.
-
-## Image plan and existing budget
-
-The normal browser journey is prepared to capture the actual three-button action row at native dimensions, plus full desktop and 390px/130%-text context. Inspect the original pixels after the coordinated run. If the control capture is readable and truthfully depicts its particular action state, prefer it as one exact copied PNG. Its caption must name the authored fixture, real viewport/text setting and locator bounds, and distinguish a pre-action view from an accepted result.
-
-Current journal inventory after dispatch 17 is **3,481,838 bytes** under the unchanged **3,670,016-byte (3.5 MiB)** cap, leaving **188,178 bytes**. Measure the actual native PNG before selection. Do not resize, re-encode, composite, crop after capture or inflate the cap routinely. If no useful new capture fits, reuse the approved `registry-paused-selector` with an explicit historical-context caption: it illustrates dispatch 17's filter, not the new three group actions. Link the actual full new captures as source-pinned evidence outside journal inventory.
-
-Required provenance: immutable implementation revision, original test/capture path, observer/fixture, viewport/device/text scale, exact locator and dimensions, source/output hash and byte identity, transform None, factual caption/alt text and visual-review record. No generator applies to real browser pixels. Passing a budget assertion does not replace native visual review or inspection of the final article at desktop/narrow sizes.
-
-## Scope and contributor handoff
-
-This extends the existing empire-management workflow without changing the agreed gameplay scope or adding a new release obligation. It does not create patrol endpoints in bulk, resume routes, remove independent postings or theaters, broaden embarked selection, or add an automatic governor. M3, organically developed mature-realm acceptance and all fifteen release gates remain open. Prior unresolved campaign pacing remains separate; this action convenience does not establish a fix for DH-021.
-
-Likely final evidence links: feature README and exact acceptance logs; `ui-implementation.md`; independent source reviews; `group-patrols.tsx`; request validation and worker batching; normal public-control journey and exported record evidence; separate recovery-test outcomes; actual native image review. Prepare publication source only after the implementation commit pin and independent factual review are available. Deployment remains a development checkpoint, not 1.0 acceptance.
+Publication source lives in `apps/web/src/updates/group-patrol-dispatch.ts` and
+the existing catalogue/media manifests. The focused publication scope passes
+34 tests across four files; scoped lint passes and 20 journal/home/roadmap
+journeys collect. Parent integration owns the complete checks/build/Pages run,
+independent final rendered review, commit/deploy and exact public readback.
+The runtime publication files are frozen; source hashes, expected public facts,
+commands and remaining review boundaries are in the publication packet.
+Deployment remains a development checkpoint, not 1.0 acceptance.

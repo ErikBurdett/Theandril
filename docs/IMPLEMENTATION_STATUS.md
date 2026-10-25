@@ -2,7 +2,8 @@
 
 ## Pause, resume and remove patrols together — 2026-10-24
 
-**Locally verified; preparing its own deployment.** Group patrol controls use
+**Implementation committed as `8d880eb`; publication prepared separately.**
+Group patrol controls use
 existing registry checks to pause enabled policies, resume disabled policies or
 remove policies. They preserve existing active/paused travel, armies, postings
 and war-pause options. Unaffected and refused actors remain checked; only confirmed
