@@ -1,0 +1,448 @@
+Preparing huge-visible-foreign-hearth; setup and observation excluded from timing.
+Preparing huge-hidden-foreign-hearth; setup and observation excluded from timing.
+Preparing huge-owned-hearth; setup and observation excluded from timing.
+Preparing legendary-visible-foreign-hearth; setup and observation excluded from timing.
+Preparing legendary-hidden-foreign-hearth; setup and observation excluded from timing.
+Preparing legendary-owned-hearth; setup and observation excluded from timing.
+{
+  "scope": "Absolute isolated planPatrol timing on fully charted authored Huge/Legendary post-capture states.128owned zero-movement guard companies receive real setPatrol and queueMovement commands between two six-hex-separated owned hearths, then canonical authored route pauses. Foreign ownership and observer relocation are explicitly authored before strict save validation; this is not a played conquest or an organically earned empire. Every world cell is explored to expose the one-pass visibility-index cost, but current sight remains restricted to actual sources: an explored hidden foreign town is absent from the permitted settlement roster. Dedicated own scouts reveal distant foreign stacks at one distinct cell per foreign faction. Visible foreign, hidden foreign and still-owned endpoints isolate cleanup while zero movement prevents existing recovery queries in the own control. One warmup and three fresh-observation samples unless --verify-only. Excludes setup, observations, serialization/hashing, assertions, command execution/replay, whole AI/turns, campaign pacing, worker transfer and rendering. No speedup, network, tail-latency or gameplay timing claim.",
+  "verificationOnly": false,
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "015468d1",
+  "sourceHashes": [
+    {
+      "path": "scripts/benchmark-patrol-retirement.ts",
+      "sha256": "f08c85379aba3c2e9779ee9820d7c41c11e66d42daf0f594312b219a93dd1288"
+    },
+    {
+      "path": "packages/ai/src/patrols.ts",
+      "sha256": "7119881ed29d16c6f1c60d45a980cbb3ba2a7871590329fedb10ff2e1fd965f0"
+    },
+    {
+      "path": "packages/ai/src/patrol-recovery.ts",
+      "sha256": "e4adc2d2f0323db4a38eb62a4cf6b77e40462bdc5386b4efc2eabf8d1bd97dc2"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d"
+    },
+    {
+      "path": "packages/sim/src/patrols.ts",
+      "sha256": "ee76ecf7cb7d2a41a71beea5a1df8af9d46842fa355f48d1f71789f0cac0cc15"
+    },
+    {
+      "path": "packages/sim/src/movement.ts",
+      "sha256": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+    },
+    {
+      "path": "packages/sim/src/visibility.ts",
+      "sha256": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a"
+    },
+    {
+      "path": "packages/chronicle/src/index.ts",
+      "sha256": "f50bd5b3f3632f15a1ae1d0a960e85a2d8ee427e554ba3b309c4712f10597757"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "sha256": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+    },
+    {
+      "path": "packages/test-fixtures/src/authored-land.ts",
+      "sha256": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891"
+    }
+  ],
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "visible-foreign-hearth",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedPatrols": 128,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "uniqueForeignCells": 31,
+      "observedCells": 196608,
+      "observationBytes": 18500811,
+      "targetVisible": true,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 1.9337319999999636,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 1.6673330000000988,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 1.8318050000000312,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        }
+      ],
+      "medianMs": 1.8318050000000312,
+      "minMs": 1.6673330000000988,
+      "maxMs": 1.9337319999999636,
+      "commands": [
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1057"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1089"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121"
+        }
+      ],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "46a68530",
+      "continuedHash": "65fd28f6",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 4,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 124,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 124,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    },
+    {
+      "size": "huge",
+      "workload": "hidden-foreign-hearth",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedPatrols": 128,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "uniqueForeignCells": 31,
+      "observedCells": 196608,
+      "observationBytes": 18500732,
+      "targetVisible": false,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.2479029999994964,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.24212600000009843,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.3190420000000813,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.2479029999994964,
+      "minMs": 0.24212600000009843,
+      "maxMs": 0.3190420000000813,
+      "commands": [],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "6c832ba4",
+      "continuedHash": "6c832ba4",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 0,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 128,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 128,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    },
+    {
+      "size": "huge",
+      "workload": "owned-hearth",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedPatrols": 128,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "uniqueForeignCells": 31,
+      "observedCells": 196608,
+      "observationBytes": 18504769,
+      "targetVisible": true,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.3373830000000453,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.25826299999971525,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.2640819999996893,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.2640819999996893,
+      "minMs": 0.25826299999971525,
+      "maxMs": 0.3373830000000453,
+      "commands": [],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "b40be962",
+      "continuedHash": "b40be962",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 0,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 128,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 128,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    },
+    {
+      "size": "legendary",
+      "workload": "visible-foreign-hearth",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedPatrols": 128,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "uniqueForeignCells": 39,
+      "observedCells": 307200,
+      "observationBytes": 30099821,
+      "targetVisible": true,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 3.529309999999896,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 2.733933999999863,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        },
+        {
+          "elapsedMs": 2.794372000000294,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 4
+        }
+      ],
+      "medianMs": 2.794372000000294,
+      "minMs": 2.733933999999863,
+      "maxMs": 3.529309999999896,
+      "commands": [
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1001"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1041"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1081"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121"
+        }
+      ],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "4e384356",
+      "continuedHash": "ff4daea4",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 4,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 124,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 124,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    },
+    {
+      "size": "legendary",
+      "workload": "hidden-foreign-hearth",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedPatrols": 128,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "uniqueForeignCells": 39,
+      "observedCells": 307200,
+      "observationBytes": 30099742,
+      "targetVisible": false,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.44599499999822,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.3782709999977669,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.46554399999877205,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.44599499999822,
+      "minMs": 0.3782709999977669,
+      "maxMs": 0.46554399999877205,
+      "commands": [],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "d2836355",
+      "continuedHash": "d2836355",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 0,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 128,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 128,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    },
+    {
+      "size": "legendary",
+      "workload": "owned-hearth",
+      "authored": true,
+      "cells": 307200,
+      "realms": 40,
+      "globalArmies": 4031,
+      "ownedPatrols": 128,
+      "observedArmies": 4031,
+      "observedForeignArmies": 3900,
+      "uniqueForeignCells": 39,
+      "observedCells": 307200,
+      "observationBytes": 30103805,
+      "targetVisible": true,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 1,
+      "measuredSamples": 3,
+      "samples": [
+        {
+          "elapsedMs": 0.45469100000264007,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.40556499999729567,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        },
+        {
+          "elapsedMs": 0.4692479999976058,
+          "routeQueries": 0,
+          "targetSearchExpandedNodes": 0,
+          "commandCount": 0
+        }
+      ],
+      "medianMs": 0.45469100000264007,
+      "minMs": 0.40556499999729567,
+      "maxMs": 0.4692479999976058,
+      "commands": [],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "7c0fa230",
+      "continuedHash": "7c0fa230",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 0,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 128,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 128,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    }
+  ]
+}

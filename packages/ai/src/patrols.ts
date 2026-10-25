@@ -2,19 +2,19 @@ import { hexDistance } from '@theandril/mapgen';
 import { getMovementPreview, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 import { heldDelegatedArmyIds } from './theaters';
-import { planPatrolRecovery } from './patrol-recovery';
+import { MAX_HOME_PATROL_DISTANCE, planPatrolRecovery } from './patrol-recovery';
 export { MAX_PATROL_RECOVERY_ROUTE_QUERIES, MAX_PATROL_RECOVERY_COMMANDS } from './patrol-recovery';
 
 export const MAX_PATROL_ADOPTION_ARMIES = 2;
 export const MAX_PATROL_ADOPTION_HEARTHS = 4;
 export const MAX_PATROL_ADOPTION_ROUTE_QUERIES = 4;
-const MAX_HOME_PATROL_DISTANCE = 6;
 const byId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 export interface PatrolPlan extends AiPlan { heldArmyIds: Set<string>; routeQueries: number; targetSearchExpandedNodes: number }
 
 /** Adopt one nearby circuit during peace and retain it through war. Subsequent
  * movement belongs to the saved canonical patrol. Review a blocked home leg
- * explicitly, without rewriting configuration or enabling a paused policy. */
+ * explicitly; a stranded persistent circuit to a visibly foreign hearth may
+ * be retired. Never enable a paused policy or replace its existing travel. */
 export function planPatrol(view: Observation, reservedArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): PatrolPlan {
   const heldArmyIds = new Set([...heldDelegatedArmyIds(view), ...reservedArmyIds]);
   let routeQueries = 0, targetSearchExpandedNodes = 0;

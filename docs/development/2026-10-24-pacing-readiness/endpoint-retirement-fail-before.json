@@ -1,0 +1,127 @@
+{
+  "scope": "Genuine corrected campaign snapshot; local clear-command branch and explicit-policy controls, not a pacing run.",
+  "snapshot": "/home/telephoneheater/Work/Theandril/docs/development/2026-10-24-patrol-recovery/diagnosis-recovered/snapshot-3-turn-150.json",
+  "sha256": "e8b68f936e8f7042f04465f879e669ef038cc27a9c927781fe368075a9e92b25",
+  "stateHash": "4f60f2e3",
+  "captureProposal": {
+    "planSequence": 1794,
+    "turn": 150,
+    "factionId": "faction.ashen_compact",
+    "phase": "capture",
+    "commands": [
+      {
+        "type": "resolveCapture",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.517",
+        "outcome": "occupy"
+      }
+    ],
+    "reasons": [
+      "Occupy: 20 devastation, 0 population lost, 3 occupation turns, 0 coin; balance ownership against recovery cost."
+    ]
+  },
+  "armyId": "army.408",
+  "factionId": "faction.wardhall_remnant",
+  "observedCapturedHearth": {
+    "id": "settlement.517",
+    "cell": 9108,
+    "factionId": "faction.ashen_compact",
+    "currentlyVisible": true
+  },
+  "patrol": {
+    "factionId": "faction.wardhall_remnant",
+    "armyId": "army.408",
+    "firstCell": 8431,
+    "secondCell": 9108,
+    "enabled": true,
+    "pauseOnWar": false,
+    "target": "second",
+    "lastAttemptTurn": 147,
+    "lastError": null,
+    "targetCell": 9108,
+    "status": "waiting",
+    "blocker": "New hostile forces or a hostile settlement were sighted nearby."
+  },
+  "route": {
+    "armyId": "army.408",
+    "origin": 8659,
+    "waypoints": [
+      9108
+    ],
+    "path": [
+      8883,
+      9108
+    ],
+    "status": "paused",
+    "pauseReason": "New hostile forces or a hostile settlement were sighted nearby.",
+    "knownHostileIds": []
+  },
+  "preview": {
+    "target": 9108,
+    "path": [],
+    "cost": 0,
+    "action": "besiege",
+    "canMoveNow": false,
+    "canQueue": false,
+    "blocker": "Besiege this settlement and assault its defenses; travel cannot bypass a garrison.",
+    "limited": false,
+    "expandedNodes": 0
+  },
+  "actualPatrolPlan": {
+    "commands": [],
+    "reasons": [],
+    "heldArmyIds": [
+      "army.243",
+      "army.408"
+    ],
+    "routeQueries": 0,
+    "targetSearchExpandedNodes": 0
+  },
+  "actualFullPlanActorCommands": [],
+  "cleanup": {
+    "command": {
+      "type": "clearPatrol",
+      "factionId": "faction.wardhall_remnant",
+      "armyId": "army.408"
+    },
+    "result": {
+      "ok": true,
+      "events": [
+        {
+          "turn": 150,
+          "factionId": "faction.wardhall_remnant",
+          "type": "patrol_cleared",
+          "message": "Cleared the patrol for Oath guard. Existing travel continues."
+        }
+      ]
+    },
+    "routeExact": true,
+    "heldAfter": false,
+    "mirrorAndReplayExact": true,
+    "hash": "567fe8e9"
+  },
+  "controls": {
+    "disabledCommands": [],
+    "pauseOnWarCommands": [],
+    "differentDirectRouteCommands": [],
+    "differentDirectRoute": {
+      "armyId": "army.408",
+      "origin": 7761,
+      "waypoints": [
+        6863
+      ],
+      "path": [
+        7536,
+        7312,
+        7087,
+        6863
+      ],
+      "status": "active",
+      "pauseReason": null,
+      "knownHostileIds": [
+        "army.675",
+        "settlement.517"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-retirement.test.ts (16 tests | 1 failed) 2117ms
+     × clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay 400ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ packages/ai/src/patrol-retirement.test.ts:57:83
+     55|     const next = planTurnWithReasons(fresh);
+     56|     expect(next).toEqual(planTurnWithReasons(getObservation(mirror, fa…
+     57|     expect(actorOrders(next.commands).some(command => command.type ===…
+       |                                                                                   ^
+     58|     const cell = game.armies[armyId]!.cell;
+     59|     for (const command of next.commands) record(command);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 33 passed (34)
+   Start at  20:27:40
+   Duration  2.85s (transform 1.44s, setup 0ms, import 1.95s, tests 3.09s, environment 0ms)
+

@@ -52,8 +52,21 @@ record the same measured total and ceiling.
   across 1440px, 1366px, 390px and 390px with 130% text. No scoped blocker remains;
   see [source-review.md](source-review.md). Native bitmap text does not itself
   scale with browser text size; the actual article and captions do.
-- GitHub deployment and live readback are pending. A local build is not proof
-  that the public site has changed.
+- **Published `04d17762033bd5d0978a117b592272e1b72ec62f`.** Both exact GitHub
+  workflows succeed. The same **38/38 journeys pass live in 1.9 minutes**:
+  [deployment](deployment.json), [Actions](actions.json),
+  [live browser log](live-pages.log), [journey identities](live-pages-identities.json).
+  Exact public HTML, linked bundles, simulation worker, source pins, catalogue,
+  provenance and native image bytes pass [live readback](live-readback-final/readback.json).
+  The local comparison build regenerates the Git ledger at the publication
+  revision, matching CI; its generated source feed was restored afterward.
+- Initial local/live readback failures identified Chromium's automatic
+  origin-root `/favicon.ico` request outside `/Theandril/`. The helper now records
+  only that exact 404 separately; all application errors still fail. Original
+  failures, CDP diagnosis, HTTP/2 reason-phrase variation and final success remain
+  in [readback-review.md](readback-review.md). No application error was concealed.
+- The primary checkout is `master` at the published revision, matching
+  `origin/master`; subsequent authorized development is local and separate.
 
 ## Continuation boundary
 

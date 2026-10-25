@@ -1,0 +1,56 @@
+{
+  "revision": "04d17762033bd5d0978a117b592272e1b72ec62f",
+  "sourceRevision": "dee74cf9c4e2d153f9c5f5cfdbd9221798205481",
+  "date": "2026-10-24",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=patrol-orders",
+  "rulesVersion": 35,
+  "contentHash": "015468d1",
+  "actions": [
+    {
+      "conclusion": "success",
+      "databaseId": 40150411660,
+      "headSha": "04d17762033bd5d0978a117b592272e1b72ec62f",
+      "name": "Verify build",
+      "status": "completed",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/40150411660"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 40150411653,
+      "headSha": "04d17762033bd5d0978a117b592272e1b72ec62f",
+      "name": "Publish development demo to Pages",
+      "status": "completed",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/40150411653"
+    }
+  ],
+  "local": {
+    "headless": 2218,
+    "files": 275,
+    "headlessDuration": "59.08s",
+    "pages": 38,
+    "pagesDuration": "1.4m"
+  },
+  "live": {
+    "pages": 38,
+    "passed": 38,
+    "duration": "1.9m",
+    "readback": "live-readback-final/readback.json",
+    "identities": "live-pages-identities.json"
+  },
+  "catalogue": {
+    "items": 23,
+    "completed": 6,
+    "inProgress": 13,
+    "pending": 4,
+    "delivered": 86,
+    "remaining": 49,
+    "openReleaseGates": 15
+  },
+  "primaryCheckout": {
+    "branch": "master",
+    "head": "04d17762033bd5d0978a117b592272e1b72ec62f",
+    "originMaster": "04d17762033bd5d0978a117b592272e1b72ec62f",
+    "note": "Next authorized development continues locally after publication; it is not part of this deployment."
+  }
+}

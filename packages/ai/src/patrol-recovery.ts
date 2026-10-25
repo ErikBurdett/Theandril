@@ -4,11 +4,14 @@ import type { PatrolPlan } from './patrols';
 
 export const MAX_PATROL_RECOVERY_ROUTE_QUERIES = 4;
 export const MAX_PATROL_RECOVERY_COMMANDS = 4;
+export const MAX_HOME_PATROL_DISTANCE = 6;
 
-/** An AI seat may explicitly review a paused home-patrol leg. This does not
- * change the saved policy or make canonical/player travel resume itself.
- * Routes have no source marker: an identical manually queued leg is reviewed
- * too when control is handed to AI; other destinations and waypoints stay put. */
+/** An AI seat may explicitly review a paused home-patrol leg through commands.
+ * Canonical/player travel never resumes itself; safe resume keeps its policy.
+ * Routes and patrols have no source marker: an identical manual home circuit
+ * is reviewed too when control is handed to AI. A stranded persistent circuit
+ * may be cleared, preserving current travel; other destinations and waypoints
+ * stay put. Retirement and safe resume share the same command budget. */
 export function planPatrolRecovery(view: Observation): Omit<PatrolPlan, 'heldArmyIds'> {
   const result: Omit<PatrolPlan, 'heldArmyIds'> = { commands: [], reasons: [], routeQueries: 0, targetSearchExpandedNodes: 0 };
   const patrols = (view.patrols ?? []).filter(patrol => patrol.factionId === view.factionId)
@@ -18,7 +21,12 @@ export function planPatrolRecovery(view: Observation): Omit<PatrolPlan, 'heldArm
   // a patrol-by-enemy Cartesian scan even at the 128-record realm limit.
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
+  const hearths = new Map(view.settlements.map(town => [town.cell, town]));
   const ownHearths = new Set(view.settlements.filter(town => town.factionId === view.factionId).map(town => town.cell));
+  // Foreign settlement rows are currently observed in canonical observations.
+  // Check explicit visibility as well, indexing cells only when a candidate
+  // actually has a foreign target. Ordinary recovery avoids this O(cells) pass.
+  let visibleCells: Set<number> | undefined;
   const supplied = new Set(view.supply.filter(item => item.supplied).map(item => item.armyId));
   const overridden = new Set([
     ...view.postings.map(posting => posting.armyId), ...view.sieges.map(siege => siege.armyId),
@@ -44,11 +52,25 @@ export function planPatrolRecovery(view: Observation): Omit<PatrolPlan, 'heldArm
     const patrol = patrols[(offset + i) % patrols.length]!;
     const army = armies.get(patrol.armyId), route = routes.get(patrol.armyId);
     if (!patrol.enabled || patrol.status !== 'waiting' || !army || army.factionId !== view.factionId
-      || army.domain !== 'land' || army.carrierId || !army.canAttack || army.canFound || army.movement <= 0 || army.movementBlocker
-      || overridden.has(army.id) || !supplied.has(army.id)
-      || !ownHearths.has(patrol.firstCell) || !ownHearths.has(patrol.secondCell)
-      || route?.status !== 'paused' || route.waypoints.length !== 1 || route.waypoints[0] !== patrol.targetCell
-      || nearbyHostile(army)) continue;
+      || army.domain !== 'land' || army.carrierId || !army.canAttack || army.canFound
+      || overridden.has(army.id)
+      || route?.status !== 'paused' || route.waypoints.length !== 1 || route.waypoints[0] !== patrol.targetCell) continue;
+    const target = hearths.get(patrol.targetCell);
+    const otherCell = patrol.target === 'first' ? patrol.secondCell : patrol.firstCell;
+    if (!patrol.pauseOnWar && target && target.factionId !== view.factionId && ownHearths.has(otherCell)
+      && hexDistance(patrol.firstCell, patrol.secondCell, view.width) <= MAX_HOME_PATROL_DISTANCE) {
+      visibleCells ??= new Set(view.cells.filter(cell => cell.visible).map(cell => cell.cell));
+      if (visibleCells.has(target.cell)) {
+        // Administrative cleanup spends no movement and issues no attack. Keep
+        // this actor reserved for the current batch; only a fresh observation
+        // may release it, including any independent theater reservation.
+        result.commands.push({ type: 'clearPatrol', factionId: view.factionId, armyId: army.id });
+        result.reasons.push(`Retire ${army.name}'s stranded home patrol: ${target.name} is visibly foreign, the other hearth remains owned, and the matching single leg is paused. Preserve current travel for a fresh decision.`);
+        continue;
+      }
+    }
+    if (army.movement <= 0 || army.movementBlocker || !supplied.has(army.id)
+      || !ownHearths.has(patrol.firstCell) || !ownHearths.has(patrol.secondCell) || nearbyHostile(army)) continue;
     if (army.cell !== patrol.targetCell) {
       const preview = getMovementPreview(view, army.id, patrol.targetCell);
       result.routeQueries++; result.targetSearchExpandedNodes += preview.expandedNodes;

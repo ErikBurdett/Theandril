@@ -1,0 +1,36 @@
+{"snapshotHash":"4f60f2e3","capturedTown":"settlement.517","currentlyVisible":true,"actualCommands":[],"held":true,"fullActorOrders":[],"cleanupHash":"567fe8e9","controlsPassed":true}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: FAIL BEFORE: an AI-controlled persistent home circuit still reserves its company after its currently visible endpoint was captured.
++ actual - expected
+
++ []
+- [
+-   {
+-     armyId: 'army.408',
+-     factionId: 'faction.wardhall_remnant',
+-     type: 'clearPatrol'
+-   }
+- ]
+
+    at <anonymous> (/home/telephoneheater/Work/Theandril/docs/development/2026-10-24-pacing-readiness/endpoint-retirement-fail-before.ts:89:8)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [],
+  expected: [
+    {
+      type: 'clearPatrol',
+      factionId: 'faction.wardhall_remnant',
+      armyId: 'army.408'
+    }
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.7.0

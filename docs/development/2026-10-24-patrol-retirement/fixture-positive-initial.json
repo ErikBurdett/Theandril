@@ -1,0 +1,112 @@
+{
+  "scope": "Absolute isolated planPatrol timing on authored Huge/Legendary post-capture states.128owned zero-movement guard companies receive real setPatrol and queueMovement commands between two six-hex-separated owned hearths, then canonical authored route pauses. Foreign ownership and observer relocation are explicitly authored before strict save validation; this is not a played conquest or an organically earned empire. Dedicated own scouts reveal distant foreign stacks at one distinct cell per foreign faction. Visible foreign, hidden foreign and still-owned endpoints isolate cleanup while zero movement prevents existing recovery queries in the own control. One warmup and three fresh-observation samples unless --verify-only. Excludes setup, observations, serialization/hashing, assertions, command execution/replay, whole AI/turns, campaign pacing, worker transfer and rendering. No speedup, network, tail-latency or gameplay timing claim.",
+  "verificationOnly": true,
+  "node": "v26.7.0",
+  "platform": "linux",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "015468d1",
+  "sourceHashes": [
+    {
+      "path": "scripts/benchmark-patrol-retirement.ts",
+      "sha256": "7841da61de76bd2f26ceb2e4da305a24e9b45356c3c91c72eb5fb1fb0f01444e"
+    },
+    {
+      "path": "packages/ai/src/patrols.ts",
+      "sha256": "7119881ed29d16c6f1c60d45a980cbb3ba2a7871590329fedb10ff2e1fd965f0"
+    },
+    {
+      "path": "packages/ai/src/patrol-recovery.ts",
+      "sha256": "2fe6d9117312370adf8bce235732d1b012b2b09a210e85b2a3ccc4f76799ef58"
+    },
+    {
+      "path": "packages/ai/src/theaters.ts",
+      "sha256": "3e3716f381728402330d3bdb26b9dedb16f1cd38a6773c39df65178f1988dd1d"
+    },
+    {
+      "path": "packages/sim/src/patrols.ts",
+      "sha256": "ee76ecf7cb7d2a41a71beea5a1df8af9d46842fa355f48d1f71789f0cac0cc15"
+    },
+    {
+      "path": "packages/sim/src/movement.ts",
+      "sha256": "f772c208c8065079d7e1ede00e4f5b580532c81a885acfa966f14be4bcbbfce3"
+    },
+    {
+      "path": "packages/sim/src/visibility.ts",
+      "sha256": "36e50155c0c262bee491e934f353013b99a74cc36226e82a94f66fbab0ffce5a"
+    },
+    {
+      "path": "packages/chronicle/src/index.ts",
+      "sha256": "f50bd5b3f3632f15a1ae1d0a960e85a2d8ee427e554ba3b309c4712f10597757"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "sha256": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+    },
+    {
+      "path": "packages/test-fixtures/src/authored-land.ts",
+      "sha256": "7a435e0ec3a787dc3b842df3006680a8218e88ca67272634f1acb98f64e2d891"
+    }
+  ],
+  "scenarios": [
+    {
+      "size": "huge",
+      "workload": "visible-foreign-hearth",
+      "authored": true,
+      "cells": 196608,
+      "realms": 32,
+      "globalArmies": 1584,
+      "ownedPatrols": 128,
+      "observedArmies": 1584,
+      "observedForeignArmies": 1453,
+      "uniqueForeignCells": 31,
+      "observedCells": 507,
+      "observationBytes": 2138696,
+      "targetVisible": true,
+      "endpointDistance": 6,
+      "actorMovement": 0,
+      "warmups": 0,
+      "measuredSamples": 0,
+      "samples": [],
+      "medianMs": null,
+      "minMs": null,
+      "maxMs": null,
+      "commands": [
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1025"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1057"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1089"
+        },
+        {
+          "type": "clearPatrol",
+          "factionId": "faction.ashen_compact",
+          "armyId": "army.1121"
+        }
+      ],
+      "commandLimit": 4,
+      "routeQueries": 0,
+      "targetSearchExpandedNodes": 0,
+      "canonicalHash": "6bd214e2",
+      "continuedHash": "7ebfa0fa",
+      "canonicalUnmutated": true,
+      "observationUnmutated": true,
+      "deterministicPlansAndResults": true,
+      "ordinaryClearsAccepted": 4,
+      "unchangedRoutes": 128,
+      "retainedPolicies": 124,
+      "sameBatchHeldActors": 128,
+      "freshObservationHeldActors": 124,
+      "journalReplayExact": true,
+      "savedBytesExact": true
+    }
+  ]
+}

@@ -34,7 +34,7 @@ const report = {
   revision, sourceRevision, roadmapSourceRevision: sourceRevision, origin: base.href, started, dist,
   scope: 'Public live readback: newest build-ledger SHA; exact local built HTML/JS/CSS/worker bytes; production game setup without development hooks; dispatch14 source/evidence/imagery; roadmap aggregate acceptance counts and open gates. No campaign, gameplay journey, deployment action or release acceptance.',
   revisionScope: 'Revision comes from the newest build-generated public ledger. Workflow/deployment identity must be verified separately; exact local asset comparison is not an independent build attestation.',
-  noRemoteWrites: true, checks: {}, requests: [], errors: [], failedRequests: [], httpErrors: [], consoleErrors: [], screenshots: [],
+  noRemoteWrites: true, checks: {}, requests: [], errors: [], failedRequests: [], httpErrors: [], consoleErrors: [], browserDiagnostics: [], screenshots: [],
   passed: false, scriptSha256: digest(await readFile(scriptPath)),
 };
 let browser, page;
@@ -115,7 +115,19 @@ try {
   page.on('pageerror', error => report.errors.push(error.message));
   page.on('requestfailed', request => report.failedRequests.push({ url: request.url(), failure: request.failure()?.errorText }));
   page.on('response', response => { if (response.status() >= 400) report.httpErrors.push({ status: response.status(), url: response.url() }); });
-  page.on('console', message => { if (message.type() === 'error') report.consoleErrors.push(message.text()); });
+  page.on('console', message => {
+    if (message.type() !== 'error') return;
+    const entry = { text: message.text(), location: message.location() };
+    // Chromium requests the origin-root favicon when the game has no icon link.
+    // Local CDP confirmation is retained in favicon-diagnostic.json. Only this
+    // exact 404 outside a subpath deployment is classified separately; favicon
+    // failures inside the project and every other console/resource error fail.
+    if (base.pathname !== '/' && entry.location.url === new URL('/favicon.ico', base).href
+      && ['Failed to load resource: the server responded with a status of 404 (Not Found)',
+        'Failed to load resource: the server responded with a status of 404 ()'].includes(entry.text)) {
+      report.browserDiagnostics.push({ kind: 'automatic-origin-favicon-404', outsideDeploymentRoot: true, ...entry });
+    } else report.consoleErrors.push(entry);
+  });
   const pageWorkers = []; page.on('worker', worker => pageWorkers.push(worker.url()));
 
   await page.goto(live('updates/'), { waitUntil: 'domcontentloaded' });

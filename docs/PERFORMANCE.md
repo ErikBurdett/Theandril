@@ -1,5 +1,35 @@
 # Performance measurements
 
+## Captured-hearth patrol retirement — local rules 35, 2026-10-24
+
+[Six authored cases](development/2026-10-24-patrol-retirement/retirement-benchmark.json)
+measure only `planPatrol`, with 128 paused owned policies and fully charted
+Huge/Legendary worlds: 196,608/307,200 observation cells and 1,584/4,031 observed
+armies. Current sight remains restricted to actual sources; explored hidden
+foreign targets are absent from the permitted settlement roster. One warmup,
+three samples, strict saved states, ordinary clears and independent replay.
+
+| World | Visible foreign target median ms | Hidden foreign target median ms | Owned target median ms |
+| --- | ---: | ---: | ---: |
+| Huge | 1.832 | 0.248 | 0.264 |
+| Legendary | 2.794 | 0.446 | 0.455 |
+
+Visible targets yield four accepted administrative clears and zero path queries;
+all 128 routes and current-batch reservations remain exact, then fresh observations
+release four patrol reservations. Negative cases issue no commands. Authored
+zero movement prevents existing safe recovery in the owned-target control.
+The foreign candidate triggers a single lazy O(observed cells) visibility index;
+ordinary recovery and negative cases avoid that scan. Foreign stacks occupy
+31/39 distinct faction cells, not thousands of dispersed fronts.
+
+Setup, observation construction, cloning/serialization, command execution,
+replay, whole AI/turns, worker transfer and rendering are excluded. These are
+absolute planner costs, not speedup, memory-tail or organic-scale acceptance.
+The initial 507-cell fixture preflight is retained separately and is not used
+for final timings. Source hashes, sample values and limitations are in the
+[packet](development/2026-10-24-patrol-retirement/README.md). The headline pacing
+comparison still leaves two early Epic seeds and the original Long delay open.
+
 ## AI patrol interruption review — local rules 35, 2026-10-24
 
 [Four authored cases](development/2026-10-24-patrol-recovery/recovery-benchmark.json)

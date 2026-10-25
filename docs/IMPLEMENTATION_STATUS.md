@@ -1,5 +1,43 @@
 # Theandril implementation status
 
+## Retire visibly obsolete home patrols — 2026-10-24
+
+**Local verified correction after the published `04d1776` checkpoint.** A genuine
+generated Long save shows Wardhall's company still reserved for a paused patrol
+after its destination hearth was captured. AI control now issues ordinary
+`clearPatrol` for an enabled persistent circuit with a matching paused single
+leg, a currently visible foreign target, and an owned other hearth within six
+hexes. Existing routes remain exact. The company stays reserved in that proposal
+batch; a fresh observation releases only its patrol reservation. Disabled or
+war-pause policies, direct overrides and other route shapes remain untouched.
+An identical manually configured circuit can also be reviewed after AI takeover;
+ordinary player turns do not retire policies automatically.
+
+**Verification and cost.** Rules/save remain **35**, content **`015468d1`**.
+The full suite passes **2,242 tests / 276 files in 60.78 seconds**, with unchanged
+limits. Typecheck, lint and production build pass. Three production journeys
+pass in 19.6 seconds; the new Watch journey records cleanup, actual movement on
+the next round, and exact recovery/replay of a 179-record partial archive.
+Independent source, factual and native-image reviews find no scoped blocker.
+Retirement shares the existing four-command cap with safe recovery and uses no
+route query. Fully charted Huge/Legendary isolated planner medians are
+**1.832/2.794 ms** for four clears among 128 policies and 1,584/4,031 observed
+armies; hidden/owned controls cost 0.248–0.455 ms and issue no commands. These
+exclude observation creation, whole turns, worker transfer and rendering.
+[Evidence and original failures](development/2026-10-24-patrol-retirement/README.md).
+
+**Balance remains open.** The unchanged three-seed headline matrix ends at
+Standard **219/194/201**, Long **329/309/287**, Epic **374/332/327**. The original
+Long seed improves seven turns but remains eighteen later than retained rules34;
+two Epic seeds remain below 350–400. All nine use ordinary cleanup, end through
+prosperity and have zero refused submitted commands/theater routes. One Standard
+run records an automatic patrol-route refusal, counted separately. Prices and
+proxy bounds are unchanged. **DH-021, ACT-32/M3 and all fifteen release gates
+remain open.** Next prove reachable victory-project counterplay using permitted
+observations, then address wider obsolete circuits, escorts and delegation.
+This correction and its evidence are local and uncommitted; the public game
+remains at `04d1776`. The follow-up dispatch is draft.
+
 ## Posting policies and patrols publication — 2026-10-24
 
 The user authorized committing and publishing the three reviewed checkpoints
@@ -18,9 +56,11 @@ no gameplay performance budget. Source/image review, browser results and exact
 deployment readback belong to the [publication packet](development/2026-10-24-patrol-publication/README.md).
 All **38 local Pages journeys pass in 1.4 minutes**, including the new patrol,
 recovery and posting-template production flows. Independent displayed-image
-review finds no blocker. Deployment remains pending at this commit's preparation;
-the packet records the subsequent exact published revision and live
-results. Earlier local/draft wording below describes historical checkpoints.
+review finds no blocker. **Published as `04d1776`**: both exact GitHub workflows
+succeed; all **38 live Pages journeys pass in 1.9 minutes**, and public HTML,
+game/worker bundles, source pins, catalogue and native imagery match the build.
+Primary `master` matches `origin/master` at that revision. Earlier local/draft
+wording below describes historical checkpoints; subsequent development is local.
 
 ## AI review of interrupted patrols — 2026-10-24
 

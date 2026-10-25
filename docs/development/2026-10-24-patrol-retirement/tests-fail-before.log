@@ -1,0 +1,121 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/ai/src/patrol-retirement.test.ts (16 tests | 6 failed) 2037ms
+     × proposes only ordinary cleanup for the genuine currently observed capture and retains the batch reservation 181ms
+     × clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay 369ms
+     × allows administrative cleanup for a no-movement company without changing its route 105ms
+     × allows administrative cleanup for a exhausted company without changing its route 112ms
+     × allows administrative cleanup for a unsupplied company without changing its route 122ms
+     × preserves a separate enabled theater reservation in the cleanup batch and in the fresh observation 101ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > proposes only ordinary cleanup for the genuine currently observed capture and retains the batch reservation
+AssertionError: expected [] to deeply equal [ { type: 'clearPatrol', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.408",
+-     "factionId": "faction.wardhall_remnant",
+-     "type": "clearPatrol",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-retirement.test.ts:31:27
+     29|     expect(view.settlements.find(town => town.cell === 8431)?.factionI…
+     30|     const plan = planPatrol(view);
+     31|     expect(plan.commands).toEqual([clear]); expect(plan.routeQueries).…
+       |                           ^
+     32|     expect(plan.heldArmyIds.has(armyId)).toBe(true);
+     33|     expect(view).toEqual(before); expect(stateHash(game)).toBe('4f60f2…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > clears in one full AI batch, preserves the direct route at that boundary, then actually moves on a fresh plan with exact replay
+AssertionError: expected [] to deeply equal [ { type: 'clearPatrol', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.408",
+-     "factionId": "faction.wardhall_remnant",
+-     "type": "clearPatrol",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-retirement.test.ts:41:41
+     39|     const route = structuredClone(game.routes[armyId]);
+     40|     const first = planTurnWithReasons(getObservation(game, factionId));
+     41|     expect(actorOrders(first.commands)).toEqual([clear]);
+       |                                         ^
+     42|     const record = (command: GameCommand) => {
+     43|       const result = journal.record(game, command);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a no-movement company without changing its route
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a exhausted company without changing its route
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > allows administrative cleanup for a unsupplied company without changing its route
+AssertionError: expected [] to deeply equal [ { type: 'clearPatrol', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.408",
+-     "factionId": "faction.wardhall_remnant",
+-     "type": "clearPatrol",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-retirement.test.ts:79:27
+     77|     const before = structuredClone(view), route = structuredClone(game…
+     78|     const plan = planPatrol(view);
+     79|     expect(plan.commands).toEqual([clear]); expect(plan.routeQueries).…
+       |                           ^
+     80|     expect(plan.targetSearchExpandedNodes).toBe(0); expect(plan.heldAr…
+     81|     expect(view).toEqual(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| packages/ai/src/patrol-retirement.test.ts > observed captured home circuit retirement > preserves a separate enabled theater reservation in the cleanup batch and in the fresh observation
+AssertionError: expected [] to deeply equal [ { type: 'clearPatrol', …(2) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "armyId": "army.408",
+-     "factionId": "faction.wardhall_remnant",
+-     "type": "clearPatrol",
+-   },
+- ]
++ []
+
+ ❯ packages/ai/src/patrol-retirement.test.ts:96:27
+     94|     expect(assigned.ok, assigned.error).toBe(true);
+     95|     const view = getObservation(game, factionId), plan = planPatrol(vi…
+     96|     expect(plan.commands).toEqual([clear]); expect(plan.heldArmyIds.ha…
+       |                           ^
+     97|     expect(applyCommand(game, clear).ok).toBe(true); expect(game.route…
+     98|     const fresh = getObservation(game, factionId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 10 passed (16)
+   Start at  20:27:04
+   Duration  2.84s (transform 562ms, setup 0ms, import 741ms, tests 2.04s, environment 0ms)
+
