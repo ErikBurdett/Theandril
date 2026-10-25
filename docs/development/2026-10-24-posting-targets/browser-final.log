@@ -1,0 +1,64 @@
+[WebServer] (node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:74) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector (6.7s)
+  ✓  2 tests/gameplay/posting-targets.spec.ts:50:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (4.2s)
+  ✓  3 tests/gameplay/posting-targets.spec.ts:81:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (5.2s)
+  ✘  4 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (45.7s)
+
+
+  1) tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('army-posting').getByRole('button', { name: 'Post army', exact: true })
+        - locator resolved to <button disabled class="primary wide" aria-describedby="posting-choice-army.2">Post army</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        82 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      45 |   await posting.getByLabel('Posted to').selectOption({ index: 0 });
+      46 |   await posting.getByLabel('On arrival').selectOption('hold');
+    > 47 |   await posting.getByRole('button', { name: 'Post army', exact: true }).click();
+         |                                                                         ^
+      48 |   await expect(posting.locator(':scope > summary')).toContainText('Hold · Muster Hearth');
+      49 |   await expect(posting).toContainText(/Standing at its posting\.|Marching to its posting\./);
+      50 |
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/postings.spec.ts:47:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-final/postings-an-army-is-posted-49890-arth-musters-what-it-raises/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-24-posting-targets/browser-final/postings-an-army-is-posted-49890-arth-musters-what-it-raises/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-final/postings-an-army-is-posted-49890-arth-musters-what-it-raises/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-24-posting-targets/browser-final/postings-an-army-is-posted-49890-arth-musters-what-it-raises/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises 
+  3 passed (1.1m)

@@ -25,6 +25,10 @@ origin-root favicon 404 remains separately reported, never broadly suppressed.
 The helper passes against the local production build ([result](helper-local/readback.json));
 that run is a pre-publication helper check, not live deployment proof.
 
-GitHub workflow results and live checks will be recorded here after the push.
+Published as **`27a44f1a228ccc14792e92c70f9b556da2da008f`**. Both exact
+[GitHub workflows succeed](actions.json). [Exact public readback](live-readback/readback.json)
+passes for HTML, bundles, worker, image provenance, source pins and catalogue.
+All **39 live Pages journeys pass in 3.5 minutes** ([log](live-pages.log)); their
+identities match the 39 local journeys ([deployment record](deployment.json)).
 This checkpoint does not close DH-021 or ACT-32/M3: the original Long delay,
 two early Epic campaigns and wider delegation/counterplay remain unresolved.

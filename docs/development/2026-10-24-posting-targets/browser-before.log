@@ -1,0 +1,139 @@
+[WebServer] (node:20) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:76) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector (9.0s)
+(node:247) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/gameplay/posting-targets.spec.ts:48:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (7.2s)
+(node:416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/gameplay/posting-targets.spec.ts:79:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (7.8s)
+
+
+  1) tests/gameplay/posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('army-posting').locator(':scope > summary')
+    Expected substring: "Hold · hex 501"
+    Received string:    "Standing postingHold · hex 500"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('army-posting').locator(':scope > summary') with timeout 5000ms
+      - waiting for getByTestId('army-posting').locator(':scope > summary')
+        14 × locator resolved to <summary>…</summary>
+           - unexpected value "Standing postingHold · hex 500"
+
+
+      39 |   await expect(posting.getByLabel('Posted to').locator('option:checked')).toHaveText(`Where it stands · hex ${fixture.initialCell + 1}`);
+      40 |   await posting.getByRole('button', { name: 'Post army', exact: true }).click();
+    > 41 |   await expect(posting.locator(':scope > summary')).toContainText(`Hold · hex ${fixture.initialCell + 1}`);
+         |                                                     ^
+      42 |   const posted = await exportedTravel(page);
+      43 |   expect(posted.game.armies[fixture.armyId]!.cell).toBe(fixture.initialCell + 1);
+      44 |   expect(posted.game.postings.find(order => order.armyId === fixture.armyId)).toMatchObject({ cell: fixture.initialCell + 1, mode: 'hold' });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/posting-targets.spec.ts:41:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-where-it-s-4484e-nt-in-the-mounted-inspector/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-24-posting-targets/browser-before/posting-targets-where-it-s-4484e-nt-in-the-mounted-inspector/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-where-it-s-4484e-nt-in-the-mounted-inspector/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-24-posting-targets/browser-before/posting-targets-where-it-s-4484e-nt-in-the-mounted-inspector/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/posting-targets.spec.ts:48:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByTestId('army-posting').getByLabel('Posted to')
+    Expected: ""
+    Received: "505"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" getByTestId('army-posting').getByLabel('Posted to') with timeout 5000ms
+      - waiting for getByTestId('army-posting').getByLabel('Posted to')
+        14 × locator resolved to <select>…</select>
+           - unexpected value "505"
+
+
+      54 |   const posting = await openPosting(page);
+      55 |   await expect(posting.locator(':scope > summary')).toContainText('Hold · hex 0');
+    > 56 |   await expect(posting.getByLabel('Posted to')).toHaveValue('');
+         |                                                 ^
+      57 |   await expect(posting.getByRole('button', { name: 'Update posting', exact: true })).toBeDisabled();
+      58 |   await expect(posting.getByLabel('Posted to')).toHaveAttribute('aria-describedby', /.+/);
+      59 |   const clear = posting.getByRole('button', { name: 'Clear posting', exact: true });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/posting-targets.spec.ts:56:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-an-unavail-ba118--route-at-narrow-text-scale/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-24-posting-targets/browser-before/posting-targets-an-unavail-ba118--route-at-narrow-text-scale/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-an-unavail-ba118--route-at-narrow-text-scale/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-24-posting-targets/browser-before/posting-targets-an-unavail-ba118--route-at-narrow-text-scale/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/posting-targets.spec.ts:79:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByTestId('settlement-muster').getByLabel('Muster at')
+    Expected: ""
+    Received: "490"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" getByTestId('settlement-muster').getByLabel('Muster at') with timeout 5000ms
+      - waiting for getByTestId('settlement-muster').getByLabel('Muster at')
+        14 × locator resolved to <select>…</select>
+           - unexpected value "490"
+
+
+      85 |   await muster.locator(':scope > summary').click();
+      86 |   await expect(muster.locator(':scope > summary')).toContainText('hex 0');
+    > 87 |   await expect(muster.getByLabel('Muster at')).toHaveValue('');
+         |                                                ^
+      88 |   await expect(muster.getByRole('button', { name: 'Move muster point', exact: true })).toBeDisabled();
+      89 |   await expect(muster.getByLabel('Muster at')).toHaveAttribute('aria-describedby', /.+/);
+      90 |   await expect(muster.getByRole('button', { name: 'Clear muster point', exact: true })).toBeEnabled();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/posting-targets.spec.ts:87:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-a-saved-mu-44c11-le-with-exact-saved-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-24-posting-targets/browser-before/posting-targets-a-saved-mu-44c11-le-with-exact-saved-history/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-24-posting-targets/browser-before/posting-targets-a-saved-mu-44c11-le-with-exact-saved-history/trace.zip
+    Usage:
+
+        npx playwright show-trace docs/development/2026-10-24-posting-targets/browser-before/posting-targets-a-saved-mu-44c11-le-with-exact-saved-history/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/gameplay/posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector 
+    tests/gameplay/posting-targets.spec.ts:48:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale 
+    tests/gameplay/posting-targets.spec.ts:79:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history 

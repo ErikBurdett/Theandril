@@ -1,0 +1,113 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/postings.test.tsx (7 tests | 5 failed) 95ms
+     × requires a fresh army destination when a chosen hearth leaves the list 38ms
+     × requires a fresh muster destination without hiding the existing arbitrary-hex order or its clear action 14ms
+     × does not silently replace a chosen muster hearth when its ownership changes 10ms
+     × resolves an explicit current-position choice against the latest army position 9ms
+     × keeps canonical arbitrary-hex postings visible and clearable while the replacement choice is unresolved 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/postings.test.tsx > individual posting destination choices > requires a fresh army destination when a chosen hearth leaves the list
+AssertionError: expected 500 to be '' // Object.is equality
+
+- Expected:
+""
+
++ Received:
+500
+
+ ❯ apps/web/src/postings.test.tsx:48:32
+     46|     current = { ...view, settlements: view.settlements.filter(item => …
+     47|     const tree = draw(), target = select(tree), apply = button(tree, '…
+     48|     expect(target.props.value).toBe('');
+       |                                ^
+     49|     expect(apply.props.disabled).toBe(true);
+     50|     expect(target.props['aria-describedby']).toBeTruthy();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |unit| apps/web/src/postings.test.tsx > individual posting destination choices > requires a fresh muster destination without hiding the existing arbitrary-hex order or its clear action
+AssertionError: expected 497 to be '' // Object.is equality
+
+- Expected:
+""
+
++ Received:
+497
+
+ ❯ apps/web/src/postings.test.tsx:64:38
+     62|     const view = getObservation(game, game.turnOwnerId), before = stat…
+     63|     const tree = render(() => SettlementMuster({ view, settlementId: p…
+     64|     expect(select(tree).props.value).toBe('');
+       |                                      ^
+     65|     expect(button(tree, 'Move muster point').props.disabled).toBe(true…
+     66|     expect(select(tree).props['aria-describedby']).toBeTruthy();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |unit| apps/web/src/postings.test.tsx > individual posting destination choices > does not silently replace a chosen muster hearth when its ownership changes
+AssertionError: expected 500 to be '' // Object.is equality
+
+- Expected:
+""
+
++ Received:
+500
+
+ ❯ apps/web/src/postings.test.tsx:83:38
+     81|     current = { ...view, settlements: view.settlements.map(item => ite…
+     82|     const tree = draw();
+     83|     expect(select(tree).props.value).toBe('');
+       |                                      ^
+     84|     expect(button(tree, 'Set muster point').props.disabled).toBe(true);
+     85|     button(tree, 'Set muster point').props.onClick!();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |unit| apps/web/src/postings.test.tsx > individual posting destination choices > resolves an explicit current-position choice against the latest army position
+AssertionError: expected 495 to be 'current' // Object.is equality
+
+- Expected:
+"current"
+
++ Received:
+495
+
+ ❯ apps/web/src/postings.test.tsx:98:38
+     96|     currentArmy = { ...army, cell: army.cell + 1 };
+     97|     const tree = draw();
+     98|     expect(select(tree).props.value).toBe('current');
+       |                                      ^
+     99|     expect(renderToStaticMarkup(tree)).toContain(`Where it stands · he…
+    100|     button(tree, 'Post army').props.onClick!();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |unit| apps/web/src/postings.test.tsx > individual posting destination choices > keeps canonical arbitrary-hex postings visible and clearable while the replacement choice is unresolved
+AssertionError: expected 497 to be '' // Object.is equality
+
+- Expected:
+""
+
++ Received:
+497
+
+ ❯ apps/web/src/postings.test.tsx:109:38
+    107|     const view = getObservation(game, game.turnOwnerId), before = stat…
+    108|     const tree = render(() => ArmyPosting({ view, army, busy: false, i…
+    109|     expect(select(tree).props.value).toBe('');
+       |                                      ^
+    110|     expect(renderToStaticMarkup(tree)).toContain(`hex ${cell}`);
+    111|     expect(button(tree, 'Update posting').props.disabled).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+   Start at  21:10:08
+   Duration  734ms (transform 437ms, setup 0ms, import 566ms, tests 95ms, environment 0ms)
+

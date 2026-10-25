@@ -1,5 +1,26 @@
 # Theandril implementation status
 
+## Posting and muster destination correction — 2026-10-24
+
+The individual order forms now keep the displayed destination and submitted
+command aligned. “Where it stands” resolves the latest army position; a named
+hearth stays fixed. A missing current choice displays an explicit explanation
+and requires a fresh selection. Existing canonical arbitrary-hex postings and
+musters remain visible and clearable, including hex zero; clearing retains
+existing travel under unchanged command semantics.
+
+**Verified locally, awaiting its separate deployment.** All **2,253 tests / 277
+files pass in 67.65 seconds**, plus typecheck, lint and the production build.
+Four development journeys pass in 20.6 seconds and five related production
+journeys pass in 25.8 seconds. The original browser failure really moved an army
+from 500 to 501, displayed 501, then posted it to 500. Retained failures, exact
+save/replay checks, narrow 130% text review and limitations are in the
+[evidence packet](development/2026-10-24-posting-targets/implementation.md).
+This changes UI intent only: rules/save **35**, content **015468d1**, AI and
+campaign prices are unchanged. No pacing rerun is required. ACT-32/M3, DH-021
+and all fifteen release gates remain open. Next: proved adjacent siege
+counterplay against an imminent public rival victory project.
+
 ## Retire visibly obsolete home patrols — 2026-10-24
 
 **Local verified correction after the published `04d1776` checkpoint.** A genuine
@@ -39,8 +60,8 @@ This correction is committed as **`68ef5fa7`**. The user has authorized deployme
 after every completed feature or fix. Dispatch 15 and the current catalogue now
 pin that implementation; publication integration passes 2,243 tests and 39 local
 Pages journeys. The [publication packet](development/2026-10-24-retirement-publication/README.md)
-records the subsequent exact deployment and live verification. This paragraph's
-publication preparation is not a claim that the live site has already changed.
+records publication **`27a44f1`**: both exact workflows succeed, public built
+assets match, and all **39 live Pages journeys pass in 3.5 minutes**.
 
 ## Posting policies and patrols publication — 2026-10-24
 

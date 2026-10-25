@@ -40,9 +40,9 @@ test('an army is posted from real controls, states where it stands, and a hearth
   await expect(posting).toContainText('A travel order you give yourself always comes first');
   await expect(posting.locator(':scope > summary')).toContainText('none');
 
-  // The company stands on the realm's only hearth, so that hex is its one rally
-  // point; the panel names it rather than showing a bare number.
-  await posting.getByLabel('Posted to').selectOption({ index: 0 });
+  // Select current-position intent explicitly. The company stands on the
+  // realm's only hearth, so the canonical summary names that hearth.
+  await posting.getByLabel('Posted to').selectOption('current');
   await posting.getByLabel('On arrival').selectOption('hold');
   await posting.getByRole('button', { name: 'Post army', exact: true }).click();
   await expect(posting.locator(':scope > summary')).toContainText('Hold · Muster Hearth');
