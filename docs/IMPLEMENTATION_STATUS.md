@@ -35,8 +35,12 @@ run records an automatic patrol-route refusal, counted separately. Prices and
 proxy bounds are unchanged. **DH-021, ACT-32/M3 and all fifteen release gates
 remain open.** Next prove reachable victory-project counterplay using permitted
 observations, then address wider obsolete circuits, escorts and delegation.
-This correction and its evidence are local and uncommitted; the public game
-remains at `04d1776`. The follow-up dispatch is draft.
+This correction is committed as **`68ef5fa7`**. The user has authorized deployment
+after every completed feature or fix. Dispatch 15 and the current catalogue now
+pin that implementation; publication integration passes 2,243 tests and 39 local
+Pages journeys. The [publication packet](development/2026-10-24-retirement-publication/README.md)
+records the subsequent exact deployment and live verification. This paragraph's
+publication preparation is not a claim that the live site has already changed.
 
 ## Posting policies and patrols publication — 2026-10-24
 

@@ -19,8 +19,10 @@ test('the roadmap is discoverable from home and shows bounded completion with ev
   const empire = page.locator('#roadmap-empire-management');
   await empire.locator('summary').click();
   await expect(empire).toContainText('Up to 24 named campaign groups');
+  await expect(empire).toContainText('currently visible foreign hearth');
+  await expect(empire.getByRole('link', { name: 'Captured-hearth retirement verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120/docs/development/2026-10-24-patrol-retirement/README.md');
   await expect(empire).toContainText('reusable army order templates');
-  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/dee74cf9c4e2d153f9c5f5cfdbd9221798205481/docs/development/2026-09-25-selection-groups/README.md');
+  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120/docs/development/2026-09-25-selection-groups/README.md');
   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
   expect(workers).toEqual([]);
   expect(errors).toEqual([]);

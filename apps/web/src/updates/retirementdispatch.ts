@@ -1,0 +1,61 @@
+import type { Dispatch } from './types';
+
+export const patrolRetirementRevision = '68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120';
+export const patrolRetirementDispatch: Dispatch = {
+  publication: 'published', sourceRevision: patrolRetirementRevision, sequence: 15,
+  id: 'patrol-retirement', edition: '15', title: 'When a home patrol loses its hearth',
+  subtitle: '24 October 2026 · Captured hearths and reassigned companies',
+  summary: 'An AI watch can now retire a home circuit whose destination has visibly changed hands, freeing its company for ordinary duties. A retained campaign shows the company moving again; the wider pacing work remains open.',
+  topic: 'Engineering', tags: ['Empire management', 'Patrols', 'AI', 'Saved campaigns', 'Performance'],
+  status: 'Reviewed checkpoint', checkpoint: 'Observed patrol retirement · rules 35', image: 'patrol-narrow-actions',
+  takeaways: [
+    'AI-controlled realms can clear a narrow obsolete home patrol when its destination is visibly foreign and its other hearth is still owned.',
+    'Existing travel survives cleanup. The current planning batch keeps the army reserved; a fresh observation can assign ordinary work.',
+    'A genuine saved campaign clears the patrol, moves the company next round and restores its exact history. Player-controlled turns do not perform this cleanup; all fifteen release gates remain open.',
+  ],
+  sections: [
+    { id: 'a-circuit-without-a-home', title: 'A company with nowhere to patrol', paragraphs: [
+      'In a retained Long campaign, the Wardhall Remnant’s Oath guard kept its two-hearth circuit after the Ashen Compact captured the destination. Wardhall could see the new owner, while the other hearth remained its own. Travel had paused. Safe patrol recovery correctly refused to march into the hostile settlement, but the enabled policy kept reserving the company for a circuit it could no longer complete.',
+      'An AI-controlled realm can now retire that specific obsolete circuit through the ordinary Clear patrol command. Existing travel is preserved. The company stays reserved for the rest of the current proposal batch; a fresh observation can release it for another task. An independent theater assignment still reserves the army. Administrative cleanup requires neither supply nor movement because it does not march the company anywhere.',
+      'The reused lead image illustrates existing patrol controls, not this captured-hearth event. It is the previously reviewed 390-pixel authored fixture showing Travel company 100’s checked war option and scrolled Update, Pause and Remove controls. Its original pixels and provenance are unchanged; no new image inventory is added. The actual retirement browser capture is linked with the evidence below.',
+    ] },
+    { id: 'keep-the-boundaries', title: 'What makes a circuit obsolete', paragraphs: [
+      'This review requires an enabled persistent patrol, an owned combat land army ashore and hearth endpoints at most six hexes apart. Its paused route must have exactly one waypoint matching the patrol target. That target must be a currently visible foreign hearth, and the other endpoint must remain owned. Remembered or hidden ownership cannot justify cleanup.',
+      'Disabled patrols and explicit Pause when war begins policies remain intact. Standing postings, sieges, stationary missions and different or multiple-waypoint routes retain priority. Missing, hidden, distant or both-lost endpoints remain outside this conservative policy. The AI consumes permitted observations and submits commands; the simulation still owns every state change.',
+      'Ordinary player-controlled turns do not clear the patrol automatically. There is no saved marker identifying who authored a circuit, so an identical manually configured policy can receive the same review after explicit AI takeover. Watch mode gives that control to AI. The change does not silently grant AI authority over a player’s ordinary turn.',
+    ] },
+    { id: 'the-company-moves-again', title: 'The company moves again', paragraphs: [
+      'The production browser journey imports the genuine turn-150 save and uses public Watch controls for two full rounds. Wardhall clears Oath guard’s patrol in the first round, then issues an ordinary move order in the next. The company travels from hex 8659 to 8879 without injected player movement or development hooks.',
+      'The archive records clearPatrol at sequence 47, turn 150, and moveTo at sequence 156, turn 151. The second round ends at turn 152 with hash 968ad111. All 179 records replay exactly, and manual save/reload preserves the entire archive and state. Coverage begins at the imported mid-round save and Watch starts a new full planning round; this does not reconstruct the campaign’s earlier history.',
+      'The linked native retirement screenshot shows the Ashen Compact observer with Watch paused and the partial-archive notice. The exported archive proves Wardhall’s orders; the image does not expose foreign order controls or certify a whole release gate. In a separate unit branch, an immediate fresh plan after the full initial batch pays for an arcane survey before later movement. The regression executes that legitimate work rather than filtering it out to force an immediate march.',
+    ] },
+    { id: 'verified-without-new-rules', title: 'Verified without new campaign rules', paragraphs: [
+      'Rules/save remain 35 and content remains 015468d1. This is an AI-client correction with unchanged canonical commands, schemas and pace prices. Retirement and safe resume share a maximum of four commands per review with stable rotation across up to 128 policies. Retirement makes no path query. A lazy index of currently visible observed cells is built only when a candidate has a foreign target.',
+      'At the pinned implementation checkpoint, 2,242 tests across 276 files pass in 60.78 seconds. The focused scope passes 42 tests in three files, including 24 retirement regressions. Three production journeys pass in 19.6 seconds: retirement, earlier recovery and player patrol controls. These overlapping scopes are not additive. Typecheck, lint and the production build pass; publication checks are recorded separately.',
+      'The retained fail-before run contains six missing-cleanup failures and ten passing controls. An initial integrated assertion incorrectly required immediate movement despite the legitimate paid survey; that failure remains recorded beside the corrected full-command regression. After a comment-only source clarification, all 32 rebuilt HTML/JavaScript/CSS files match the browser-tested build byte for byte. That comparison is not another browser run.',
+    ] },
+    { id: 'measured-cost-and-campaigns', title: 'A bounded correction, measured campaigns', paragraphs: [
+      'Six isolated planner cases use authored, fully charted Huge and Legendary worlds with 196,608/307,200 explored cells, 1,584/4,031 observed armies and 128 own paused patrols. Current sight remains restricted despite the explored world. Ownership transfer and observer positions are authored and strictly save-validated; these are stress fixtures, not played conquests or organically grown empires.',
+      'After one warmup and three samples, Huge visible/hidden/owned-target medians are 1.832/0.248/0.264 milliseconds; Legendary medians are 2.794/0.446/0.455 milliseconds. Visible cases issue four accepted clears with zero path queries, preserve all 128 routes and hold all 128 actors in the current batch; a fresh observation holds 124. Hidden and owned controls issue no commands or queries, with zero movement preventing ordinary recovery in the owned control. Exact saved bytes and journal replay pass in all six cases.',
+      'Those timings measure absolute planner cost, including the observed-cell scan. They exclude setup, observation construction, save/hash work, command execution/replay, full AI turns, worker transfer and rendering. They are neither a speedup claim nor a complete scale or frame-time gate.',
+      'With unchanged prices, Standard maps and twelve realms, seeds 20260905–20260907 finish at Standard 219/194/201, Long 329/309/287 and Epic 374/332/327. All nine reach prosperity and record one to five accepted clearPatrol commands. Submitted-command and automatic theater refusals are zero. One Standard campaign records an automatic patrol-route refusal; this candidate has no new detailed trace establishing its exact turn or cause.',
+      'The original Long seed ends seven turns earlier than the published recovery policy’s 336, but eighteen later than the retained rules-34 baseline of 311. That baseline is historical evidence, not a fresh run. The other Long seeds move from 304/286 to 309/287. Two Epic seeds improve from 278/320 to 332/327 yet still finish before the 350–400 target; the original Epic stays 374. These outcomes do not establish a single cause for every changed decision. DH-021 remains open.',
+    ] },
+    { id: 'the-work-still-ahead', title: 'The work still ahead', paragraphs: [
+      'This advances existing ACT-32/M3 delegation and supplies bounded evidence toward Gates C and E, plus narrow planner-cost evidence. No new gameplay scope was added or removed. Broader obsolete-circuit handling, mobile escorts, coordinated operations, organic mature-realm acceptance and victory-project counterplay remain unfinished. M3 and all fifteen release gates remain open; publication is a development checkpoint, not 1.0 acceptance.',
+      'The readiness investigation did not establish persistent funded-project starvation. A proposed adjacent-town choice was ruled out by canonical settlement spacing before making an invalid fixture. Further work should start from observed failing states and legal ordinary commands, preserve player control and saved history, and measure the fixed campaign matrix before changing prices or strategic policy.',
+    ] },
+  ],
+  evidence: [
+    { label: 'Retirement implementation and retained evidence', path: 'docs/development/2026-10-24-patrol-retirement/README.md', note: 'Genuine captured-hearth witness, source identity, tests, production branch and open acceptance.' },
+    { label: 'Independent retirement policy review', path: 'docs/development/2026-10-24-patrol-retirement/policy-review.md', note: 'Observed ownership, shared bounds, preserved routes and current-batch reservations.' },
+    { label: 'Retirement factual evidence review', path: 'docs/development/2026-10-24-patrol-retirement/final-review.md', note: 'Verified counts, six benchmark cases, nine campaigns and source/build equivalence.' },
+    { label: 'Production retirement browser review', path: 'docs/development/2026-10-24-patrol-retirement/browser-review.md', note: 'Public Watch controls, exact 179-record history, native captures and explicit observer boundary.' },
+    { label: 'Actual retirement viewport', path: 'docs/development/2026-10-24-patrol-retirement/browser-results/production-patrol-retireme-17ca2-ubsequent-ordinary-movement/production-watch-patrol-retired.png', note: 'Unmodified Ashen observer viewport at turn 152; Wardhall orders are established by the archive.' },
+    { label: 'Retirement campaign comparison', path: 'docs/development/2026-10-24-patrol-retirement/pacing-comparison.json', note: 'Nine unchanged-price campaigns, separate refusal counters and unresolved early Epic results.' },
+    { label: 'Six bounded planner measurements', path: 'docs/development/2026-10-24-patrol-retirement/retirement-benchmark.json', note: 'Authored fully charted Huge/Legendary observations, restricted sight and timing exclusions.' },
+    { label: 'Observed retirement command planner', path: 'packages/ai/src/patrol-recovery.ts', note: 'Ordinary clear and resume proposals over permitted observations, without canonical rule changes.' },
+    { label: 'Production retirement journey', path: 'tests/production/patrol-retirement.spec.ts', note: 'Genuine portable import, two Watch rounds, actual movement and exact saved archive recovery.' },
+    { label: 'Reused patrol image provenance', path: 'docs/development/2026-10-24-patrols/ui-review.md', note: 'Existing authored control illustration, exact reviewed pixels and original capture limitations.' },
+  ],
+};

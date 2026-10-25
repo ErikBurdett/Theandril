@@ -30,14 +30,14 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'Keep the watch moving' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'When a home patrol loses its hearth' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    for (const id of ['patrol-narrow-actions', 'posting-templates-controls']) {
+    for (const id of ['patrol-narrow-actions']) {
       await page.locator(`.illustration-${id}`).scrollIntoViewIfNeeded();
       await page.locator(`.illustration-${id} > button > img`).evaluate(image => (image as HTMLImageElement).decode());
       await page.locator(`.illustration-${id}`).screenshot({ path: testInfo.outputPath(`${id}-illustration.png`) });
     }
-    await page.getByRole('heading', { name: 'When the danger has passed' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
+    await page.getByRole('heading', { name: 'The company moves again' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
     const imageFacts = await page.locator('figure > button > img').evaluateAll(elements => elements.map(element => { const image = element as HTMLImageElement; return { src: image.currentSrc, width: image.naturalWidth, complete: image.complete }; }));
@@ -102,8 +102,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('14 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(14);
+  await expect(page.getByRole('status')).toHaveText('15 dispatches');
+  await expect(page.locator('.dispatch-row')).toHaveCount(15);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -115,7 +115,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
   await expect(ledger).toContainText('player travel never resumes itself');
-  await expect(ledger).toContainText('2,217');
+  await expect(ledger).toContainText('2,242');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -142,10 +142,12 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=patrol-orders$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Keep the watch moving' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=patrol-retirement$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'When a home patrol loses its hearth' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'Keep the watch moving' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'When a home patrol loses its hearth' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Retirement implementation and retained evidence' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/68ef5fa7e524a3cd4e7e60fd7bbdd9037a6bc120/docs/development/2026-10-24-patrol-retirement/README.md');
+  await page.getByRole('link', { name: 'Keep the watch moving', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Recovery evidence and retained failures' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/dee74cf9c4e2d153f9c5f5cfdbd9221798205481/docs/development/2026-10-24-patrol-recovery/README.md');
   await page.getByRole('link', { name: 'Hold the frontier, provision the crossing', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Implementation and retained failures' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/f33a816f3a853229695b902af007e4e3f3547275/docs/development/2026-09-27-reinforcement-logistics/README.md');
