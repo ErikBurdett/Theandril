@@ -1,0 +1,13 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+apps/web/src/group-land-policies.test.tsx(45,7): error TS2741: Property 'blocker' is missing in type '{ settlementId: string; factionId: string; improvementId: string; allowance: number; reserve: number; }' but required in type 'ObservedLandPolicy'.
+apps/web/src/group-land-policies.test.tsx(46,7): error TS2741: Property 'blocker' is missing in type '{ settlementId: string; factionId: string; improvementId: string; allowance: number; reserve: number; }' but required in type 'ObservedLandPolicy'.
+apps/web/src/group-land-policies.test.tsx(47,7): error TS2741: Property 'blocker' is missing in type '{ settlementId: string; factionId: string; improvementId: string; allowance: number; reserve: number; }' but required in type 'ObservedLandPolicy'.
+apps/web/src/group-land-policies.test.tsx(51,12): error TS18048: 'view.landPolicies' is possibly 'undefined'.
+apps/web/src/worker-group-land-policy.test.ts(115,9): error TS2322: Type '{ type: string; factionId: string; settlementId: string; improvementId: string; allowance: number; reserve: number; }[]' is not assignable to type '{ type: "setLandPolicy"; factionId: string; settlementId: string; improvementId: string; allowance: number; reserve: number; }[]'.
+  Type '{ type: string; factionId: string; settlementId: string; improvementId: string; allowance: number; reserve: number; }' is not assignable to type '{ type: "setLandPolicy"; factionId: string; settlementId: string; improvementId: string; allowance: number; reserve: number; }'.
+    Types of property 'type' are incompatible.
+      Type 'string' is not assignable to type '"setLandPolicy"'.
+ ELIFECYCLE  Command failed with exit code 2.

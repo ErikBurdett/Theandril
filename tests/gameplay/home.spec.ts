@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { dispatches } from '../../apps/web/src/updates/content';
 
 test('home provides the public routes and generated ledger', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
@@ -17,7 +18,7 @@ test('home provides the public routes and generated ledger', async ({ page }) =>
 
 test('dispatches remain refresh-safe at their new path', async ({ page }) => {
   await page.goto('updates/dispatches/');
-  await expect(page.locator('.dispatch-row')).toHaveCount(21);
+  await expect(page.locator('.dispatch-row')).toHaveCount(dispatches.length);
   await page.locator('.dispatch-row a').first().click();
   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
 });

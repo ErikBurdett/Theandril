@@ -29,12 +29,13 @@ describe('bounded posting and charter receipts', () => {
     expect(groupPolicyResultPage(rows.filter(row => row.accepted), 'refused', 4)).toMatchObject({ current: 0, pages: 1, matching: 0, rows: [] });
   });
 
-  for (const kind of ['posting', 'charter'] as const) {
+  for (const kind of ['posting', 'charter', 'worker-policy', 'land-policy'] as const) {
+    const label = kind === 'worker-policy' ? 'worker policy' : kind === 'land-policy' ? 'land commission' : kind;
     it(`opens ${kind} refusals first and bounds the rendered list to 25 rows`, () => {
       const html = renderToStaticMarkup(<GroupPolicyResults kind={kind} rows={rows}/>);
       expect(html).toContain(`data-testid="group-${kind}-results"`);
       expect(html).toContain('96 orders accepted · 32 refused.');
-      expect(html).toContain(`<details open=""><summary>Review ${kind} results</summary>`);
+      expect(html).toContain(`<details open=""><summary>Review ${label} results</summary>`);
       expect(html).toContain('<option value="refused" selected="">Refused (32)</option>');
       expect(html.match(/<li>/g)).toHaveLength(25);
       expect(html).toContain('Canonical refusal 97');
@@ -45,7 +46,7 @@ describe('bounded posting and charter receipts', () => {
 
     it(`keeps an all-success ${kind} receipt collapsed while exposing success names on demand`, () => {
       const html = renderToStaticMarkup(<GroupPolicyResults kind={kind} rows={rows.filter(row => row.accepted)}/>);
-      expect(html).toContain(`<details><summary>Review ${kind} results</summary>`);
+      expect(html).toContain(`<details><summary>Review ${label} results</summary>`);
       expect(html).toContain('96 orders accepted · 0 refused.');
       expect(html).toContain('<option value="all" selected="">All results (96)</option>');
       expect(html).toContain('<strong>Company 2</strong> · Accepted');

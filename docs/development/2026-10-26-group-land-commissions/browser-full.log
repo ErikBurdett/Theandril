@@ -1,0 +1,167 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 78 tests using 1 worker
+
+(node:74) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (1.5s)
+  ✓   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (351ms)
+  ✘   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (5.3s)
+(node:311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (350ms)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (621ms)
+  ✓   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (574ms)
+  ✓   7 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (528ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (575ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (743ms)
+  ✓  10 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (854ms)
+  ✓  11 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (774ms)
+  ✓  12 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (524ms)
+  ✓  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (2.8s)
+  ✓  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (2.6s)
+  ✓  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (2.3s)
+  ✓  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (2.8s)
+  ✓  17 tests/gameplay/updates.spec.ts:52:1 › reading surfaces retain contrast without putting texture over the text (253ms)
+  ✓  18 tests/gameplay/updates.spec.ts:83:1 › unknown dispatch links fail honestly and keyboard skip navigation works (364ms)
+  ✓  19 tests/gameplay/updates.spec.ts:94:1 › archive search combines topic filters, survives refresh and recovers from no results (417ms)
+  ✓  20 tests/gameplay/updates.spec.ts:109:1 › scope ledger links real gates and a contributor can reach authoring guidance (308ms)
+  ✓  21 tests/gameplay/updates.spec.ts:125:1 › a keyboard reader can enlarge a real image and return to the same control (297ms)
+  ✓  22 tests/gameplay/updates.spec.ts:141:1 › public journal opens a permanent, refresh-safe campaign dispatch (1.2s)
+  ✓  23 tests/production/army-order-filter.spec.ts:9:1 › production registry finds real waiting orders and a paused last-page patrol without changing travel, then explicitly resumes its policy (11.4s)
+  ✓  24 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (5.4s)
+  ✓  25 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (6.5s)
+  ✓  26 tests/production/defense-theaters.spec.ts:6:1 › generated production adopts a defensive theater through ordinary controls and restores its exact saved campaign without development hooks (5.1s)
+  ✓  27 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1.5s)
+  ✓  28 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (708ms)
+  ✓  29 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (3.7s)
+  ✓  30 tests/production/group-intent.spec.ts:11:3 › production stale group posting keeps the selection and allows a reviewed retry (4.0s)
+  ✓  31 tests/production/group-intent.spec.ts:11:3 › production stale group charter keeps the selection and allows a reviewed retry (4.0s)
+  ✘  32 tests/production/group-land-policies.spec.ts:26:1 › production land commissions share a finite purse across 30 hearths and preserve exact keyboard removal and restoration at 130% (13.5s)
+(node:1844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  33 tests/production/group-land-policies.spec.ts:144:3 › production land commission missing-results after real paid commission installation preserves selection and requires restoration (3.0s)
+  ✓  34 tests/production/group-land-policies.spec.ts:144:3 › production land commission wrong-hearth after real paid commission installation preserves selection and requires restoration (2.7s)
+  ✓  35 tests/production/group-land-policies.spec.ts:144:3 › production land commission worker-crash after real paid commission installation preserves selection and requires restoration (2.9s)
+  ✓  36 tests/production/group-movement.spec.ts:6:1 › generated production group travel moves ordinary armies and retains postings, replay and portable saved routes without development hooks (5.3s)
+  ✓  37 tests/production/group-patrol-assignment.spec.ts:11:1 › production assigns shared patrol endpoints to 101 checked armies and preserves paused policies and existing travel (7.2s)
+  ✓  38 tests/production/group-patrol-assignment.spec.ts:82:1 › a group-assigned patrol travels out and back in a generated campaign (2.7s)
+  ✓  39 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol missing-results after real policy mutation requires saved restoration before retry (5.5s)
+  ✓  40 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol wrong-army after real policy mutation requires saved restoration before retry (5.3s)
+  ✓  41 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol worker-crash after real policy mutation requires saved restoration before retry (5.4s)
+  ✓  42 tests/production/group-patrols.spec.ts:10:1 › production group patrols pause, resume and remove selected policies across filters without changing issued travel (8.8s)
+  ✓  43 tests/production/group-policy-results.spec.ts:74:1 › production posting receipts expose all 128 actual results, preserve 32 refused selections and never retry while browsing (14.4s)
+  ✓  44 tests/production/group-policy-results.spec.ts:152:1 › production charter receipts reveal the thirtieth success, handle an empty refusal filter and reset for the next submitted batch (11.7s)
+  ✓  45 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (2.4s)
+  ✓  46 tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry (5.3s)
+  ✓  47 tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry (5.2s)
+  ✓  48 tests/production/group-response-recovery.spec.ts:44:5 › production group posting missing-row reply requires restoration after two real commands (4.9s)
+  ✓  49 tests/production/group-response-recovery.spec.ts:44:5 › production group posting duplicate reply requires restoration after two real commands (4.8s)
+  ✓  50 tests/production/group-response-recovery.spec.ts:44:5 › production group posting wrong-actor reply requires restoration after two real commands (4.8s)
+  ✓  51 tests/production/group-response-recovery.spec.ts:44:5 › production group charter missing-row reply requires restoration after two real commands (5.4s)
+  ✓  52 tests/production/group-response-recovery.spec.ts:44:5 › production group charter duplicate reply requires restoration after two real commands (5.0s)
+  ✓  53 tests/production/group-response-recovery.spec.ts:44:5 › production group charter wrong-actor reply requires restoration after two real commands (5.1s)
+  ✓  54 tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% (20.2s)
+  ✓  55 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy missing-results after real allocation preserves selection and requires restoration (2.8s)
+  ✓  56 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy wrong-hearth after real allocation preserves selection and requires restoration (2.9s)
+  ✓  57 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy worker-crash after real allocation preserves selection and requires restoration (2.9s)
+  ✓  58 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (5.0s)
+  ✓  59 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (3.5s)
+  ✓  60 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (4.4s)
+  ✓  61 tests/production/patrol-recovery.spec.ts:8:1 › production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery (5.5s)
+  ✓  62 tests/production/patrol-retirement.spec.ts:16:1 › production AI watch retires a genuinely captured hearth patrol and saves its subsequent ordinary movement (11.0s)
+  ✓  63 tests/production/patrols.spec.ts:7:1 › a generated production campaign patrols, pauses and restores through real controls without development hooks (3.4s)
+  ✓  64 tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector (5.7s)
+  ✓  65 tests/production/posting-targets.spec.ts:58:1 › production unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (3.3s)
+  ✓  66 tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (4.5s)
+  ✓  67 tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration (5.3s)
+  ✓  68 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (7.6s)
+  ✓  69 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer (3.5s)
+  ✓  70 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer (3.2s)
+  ✓  71 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer (4.7s)
+  ✓  72 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer (4.4s)
+  ✓  73 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (6.4s)
+  ✓  74 tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration (21.9s)
+  ✓  75 tests/production/supply-access.spec.ts:8:1 › built production negotiates foreign harbor supply through portable import, pays once and restores the replenished agreement without development hooks (4.1s)
+  ✓  76 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.4s)
+  ✓  77 tests/production/worker-policy.spec.ts:16:1 › a generated hearth automatically employs its new population and restores its standing worker policy (5.9s)
+  ✓  78 tests/production/worker-policy.spec.ts:81:1 › worker priorities and direct manual takeover use real commands at narrow width with exact saved replay (2.7s)
+
+
+  1) tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ───────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.dispatch-row')
+    Expected: 21
+    Received: 22
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.dispatch-row') with timeout 5000ms
+      - waiting for locator('.dispatch-row')
+        14 × locator resolved to 22 elements
+           - unexpected value "22"
+
+
+      18 | test('dispatches remain refresh-safe at their new path', async ({ page }) => {
+      19 |   await page.goto('updates/dispatches/');
+    > 20 |   await expect(page.locator('.dispatch-row')).toHaveCount(21);
+         |                                               ^
+      21 |   await page.locator('.dispatch-row a').first().click();
+      22 |   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
+      23 | });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/home.spec.ts:20:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-group-land-browser-full/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/theandril-group-land-browser-full/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-group-land-browser-full/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../tmp/theandril-group-land-browser-full/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/group-land-policies.spec.ts:26:1 › production land commissions share a finite purse across 30 hearths and preserve exact keyboard removal and restoration at 130% 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      107 |       const bounds = element.getBoundingClientRect(), frame = element.closest('.campaign-window-body')!.getBoundingClientRect();
+      108 |       return bounds.height >= 44 && bounds.left >= frame.left && bounds.right <= frame.right && bounds.top >= frame.top && bounds.bottom <= frame.bottom;
+    > 109 |     })).toBe(true);
+          |         ^
+      110 |   }
+      111 |   await page.screenshot({ path: testInfo.outputPath('group-land-form-narrow-130.png') });
+      112 |   const remove = policies.getByRole('button', { name: 'End land commissions (30)', exact: true });
+        at /home/telephoneheater/Work/Theandril/tests/production/group-land-policies.spec.ts:109:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-group-land-browser-full/production-group-land-poli-a2d26-val-and-restoration-at-130-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/theandril-group-land-browser-full/production-group-land-poli-a2d26-val-and-restoration-at-130-/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-group-land-browser-full/production-group-land-poli-a2d26-val-and-restoration-at-130-/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../tmp/theandril-group-land-browser-full/production-group-land-poli-a2d26-val-and-restoration-at-130-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ────────────
+    tests/production/group-land-policies.spec.ts:26:1 › production land commissions share a finite purse across 30 hearths and preserve exact keyboard removal and restoration at 130% 
+  76 passed (5.8m)

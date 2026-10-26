@@ -10,12 +10,13 @@ import { WorldRenderer, type ArtStatus, type MapPointerInput, type BattleSceneVi
 import { MovementMapHint, useMapMovement, type MapMovement, type MovementReview } from './movement';
 import type { CampaignInfo, Request, Response, WorkerMetrics } from './protocol';
 import type { CampaignMode, ChronicleDocuments } from '@theandril/chronicle';
-import { GroupWorkerPolicyRequests, GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
+import { GroupLandPolicyRequests, GroupWorkerPolicyRequests, GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
 import { GroupPatrolRequests } from './group-patrol-requests';
 import type { GroupPatrolIssue } from './group-patrols';
 import type { GroupPostingIssue } from './group-postings';
 import type { GroupCharterIssue } from './group-charters';
 import type { GroupWorkerPolicyIssue } from './group-worker-policies';
+import type { GroupLandPolicyIssue } from './group-land-policies';
 import type { GroupProductionIssue } from './group-production';
 import { GroupProductionRequests } from './group-production-requests';
 import { GroupMovementPreviewRequests, GroupMovementRequests } from './group-movement-requests';
@@ -103,6 +104,7 @@ function App() {
   const groupPostingRequests = useRef(new GroupPostingRequests());
   const groupPatrolRequests = useRef(new GroupPatrolRequests());
   const groupWorkerPolicyRequests = useRef(new GroupWorkerPolicyRequests());
+  const groupLandPolicyRequests = useRef(new GroupLandPolicyRequests());
   const groupCharterRequests = useRef(new GroupCharterRequests());
   const groupProductionRequests = useRef(new GroupProductionRequests());
   const groupMovementRequests = useRef(new GroupMovementRequests());
@@ -281,9 +283,10 @@ function App() {
   const mapHover = (cell: number | undefined) => { movementRef.current?.hover(cell); };
   const receive = (event: MessageEvent<Response>) => {
     const response = event.data;
-    if ((groupWorkerPolicyRequests.current.has(response.id) || groupProductionRequests.current.has(response.id) || groupMovementRequests.current.has(response.id)) && !['state', 'error', 'progress'].includes(response.type)) {
+    if ((groupLandPolicyRequests.current.has(response.id) || groupWorkerPolicyRequests.current.has(response.id) || groupProductionRequests.current.has(response.id) || groupMovementRequests.current.has(response.id)) && !['state', 'error', 'progress'].includes(response.type)) {
       const message = 'The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.';
       groupWorkerPolicyRequests.current.finish(response.id, new Error(message));
+      groupLandPolicyRequests.current.finish(response.id, new Error(message));
       groupProductionRequests.current.finish(response.id, new Error(message));
       groupMovementRequests.current.finish(response.id, new Error(message));
       campaignFault.current = true; setRecoveryRequired(true); setBusy(false); setGenerating(false); setError(true); setFeedback(message); pauseWatch();
@@ -381,6 +384,7 @@ function App() {
       groupPostingRequests.current.finish(response.id, new Error(response.message));
       groupPatrolRequests.current.finish(response.id, new Error(response.message));
       groupWorkerPolicyRequests.current.finish(response.id, new Error(response.message));
+      groupLandPolicyRequests.current.finish(response.id, new Error(response.message));
       groupCharterRequests.current.finish(response.id, new Error(response.message));
       groupProductionRequests.current.finish(response.id, new Error(response.message));
       groupMovementRequests.current.finish(response.id, new Error(response.message));
@@ -400,6 +404,7 @@ function App() {
         if (pendingTheater.current?.id === response.id) assertTheaterApplied(response.observation.theaters, pendingTheater.current.command);
         groupPostingRequests.current.validate(response.id, response.observation.factionId, response.groupPostingResults, response.groupPostingError);
         groupWorkerPolicyRequests.current.validate(response.id, response.observation.factionId, response.groupWorkerPolicyResults, response.groupWorkerPolicyError);
+        groupLandPolicyRequests.current.validate(response.id, response.observation.factionId, response.groupLandPolicyResults, response.groupLandPolicyError);
         groupCharterRequests.current.validate(response.id, response.observation.factionId, response.groupCharterResults, response.groupCharterError);
         groupProductionRequests.current.validate(response.id, response.observation.factionId, response.groupProductionResults, response.groupProductionError);
         groupMovementRequests.current.validate(response.id, response.observation.factionId, response.groupMovementResults, response.groupMovementError);
@@ -409,19 +414,19 @@ function App() {
         try { cells = unpackCells(response.cells); }
         catch (cause) {
           campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
-          for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The map update could not be read. Restore a saved campaign.');
+          for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The map update could not be read. Restore a saved campaign.');
           invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
           setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
           return;
         }
-        if (campaignFault.current && !response.reset) { for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('Restore a saved campaign before issuing group orders.'); return; }
+        if (campaignFault.current && !response.reset) { for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('Restore a saved campaign before issuing group orders.'); return; }
         campaignFault.current = false; setRecoveryRequired(false);
         if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
         forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
         hash.current = response.hash; metrics.current = response.metrics;
         campaignRef.current = response.campaign; setCampaign(response.campaign);
         if (response.reset) {
-          for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The loaded campaign changed. Review its group selections.');
+          for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The loaded campaign changed. Review its group selections.');
           closeMapActions();
           setManagementWindow(undefined);
           setBattleTransfer(undefined); setBattleReview(false);
@@ -485,6 +490,10 @@ function App() {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupWorkerPolicyRequests.current.finish(response.id, new Error(response.groupWorkerPolicyError));
         } else if (response.groupWorkerPolicyResults) groupWorkerPolicyRequests.current.finish(response.id, response.groupWorkerPolicyResults);
+        if (response.groupLandPolicyError) {
+          campaignFault.current = true; setRecoveryRequired(true); setError(true);
+          groupLandPolicyRequests.current.finish(response.id, new Error(response.groupLandPolicyError));
+        } else if (response.groupLandPolicyResults) groupLandPolicyRequests.current.finish(response.id, response.groupLandPolicyResults);
         if (response.groupCharterError) {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupCharterRequests.current.finish(response.id, new Error(response.groupCharterError));
@@ -502,7 +511,7 @@ function App() {
         campaignFault.current = true; setRecoveryRequired(true); setError(true); pauseWatch();
         setFeedback(`The campaign view could not be updated: ${cause instanceof Error ? cause.message : String(cause)}. Restore a saved campaign before continuing.`);
       } finally {
-        for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) if (requests.has(response.id)) {
+        for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) if (requests.has(response.id)) {
           const message = 'The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.';
           requests.finish(response.id, new Error(message));
           campaignFault.current = true; setRecoveryRequired(true); setError(true); setFeedback(message);
@@ -524,8 +533,8 @@ function App() {
       if (worker.current !== instance) { forgetWorkerDetailRequests(instance); instance.terminate(); return; }
       // A canonical edit may have finished before the worker failed to publish it.
       // Rejecting the promise alone must not unlock a stale campaign view.
-      if ([groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current].some(requests => requests.busy)) { campaignFault.current = true; setRecoveryRequired(true); }
-      for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
+      if ([groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current].some(requests => requests.busy)) { campaignFault.current = true; setRecoveryRequired(true); }
+      for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
       invalidateDetailQueries('The campaign worker stopped. Restore a saved campaign to review land.', true);
@@ -572,7 +581,7 @@ function App() {
   }, []);
   const issueGroupPosting: GroupPostingIssue = (commands, expectedHash) => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected armies again.'));
     if (!commands.length) return Promise.reject(new Error('Select armies before issuing group orders.'));
     const id = ++sequence.current;
@@ -588,7 +597,7 @@ function App() {
   };
   const issueGroupCharter: GroupCharterIssue = (commands, expectedHash) => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected hearths again.'));
     if (!commands.length) return Promise.reject(new Error('Select hearths before issuing group orders.'));
     const id = ++sequence.current;
@@ -604,7 +613,7 @@ function App() {
   };
   const issueGroupWorkerPolicy: GroupWorkerPolicyIssue = (commands, expectedHash) => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected hearths again.'));
     if (!commands.length) return Promise.reject(new Error('Select hearths before issuing group orders.'));
     const id = ++sequence.current;
@@ -618,9 +627,25 @@ function App() {
     }
     return pending;
   };
+  const issueGroupLandPolicy: GroupLandPolicyIssue = (commands, expectedHash) => {
+    const instance = worker.current;
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupCharterRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected hearths again.'));
+    if (!commands.length) return Promise.reject(new Error('Select hearths before issuing group orders.'));
+    const id = ++sequence.current;
+    const pending = groupLandPolicyRequests.current.enqueue(id, commands);
+    if (!groupLandPolicyRequests.current.has(id)) return pending;
+    setBusy(true); setError(false);
+    try { instance.postMessage({ id, type: 'groupLandPolicy', commands, expectedHash } satisfies Request); }
+    catch (cause) {
+      groupLandPolicyRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
+      setBusy(false);
+    }
+    return pending;
+  };
   const issueGroupProduction: GroupProductionIssue = plan => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing production sequences.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing production sequences.'));
     const id = ++sequence.current;
     const pending = groupProductionRequests.current.enqueue(id, plan);
     setBusy(true); setError(false);
@@ -633,7 +658,7 @@ function App() {
   };
   const issueGroupPatrol: GroupPatrolIssue = (commands, expectedHash) => {
     const instance = worker.current;
-    if (!instance || busy || groupMovementPreviews.current.busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group patrol orders.'));
+    if (!instance || busy || groupMovementPreviews.current.busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group patrol orders.'));
     if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected armies again.'));
     if (!commands.length) return Promise.reject(new Error('Select armies before issuing group patrol orders.'));
     const id = ++sequence.current;
@@ -648,7 +673,7 @@ function App() {
   };
   const issueGroupMovement: GroupMovementIssue = (commands, expectedHash) => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group travel orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group travel orders.'));
     if (expectedHash !== hash.current) return Promise.reject(new Error('The campaign changed. Review the selected armies again.'));
     if (!commands.length) return Promise.reject(new Error('Select armies before issuing group travel orders.'));
     const id = ++sequence.current;
@@ -663,7 +688,7 @@ function App() {
   };
   const reviewGroupMovement: GroupMovementPreviewIssue = plan => {
     const instance = worker.current;
-    if (!instance || busy || groupMovementPreviews.current.busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch') return Promise.reject(new Error('Finish the current decision before reviewing group routes.'));
+    if (!instance || busy || groupMovementPreviews.current.busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch') return Promise.reject(new Error('Finish the current decision before reviewing group routes.'));
     const id = ++sequence.current;
     const pending = groupMovementPreviews.current.enqueue(id, plan, hash.current);
     groupMovementPreviewWorkers.current.set(id, instance);
@@ -676,7 +701,7 @@ function App() {
   };
   const issueSelectionGroup: SelectionGroupIssue = async order => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing saved groups.');
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing saved groups.');
     const id = ++sequence.current;
     const pending = selectionGroupRequests.current.enqueue(id);
     setBusy(true); setError(false);
@@ -691,7 +716,7 @@ function App() {
   };
   const issueTheater: TheaterIssue = async order => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing defensive theaters.');
+    if (!instance || busy || groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) throw new Error('Finish the current decision before editing defensive theaters.');
     const id = ++sequence.current;
     const pending = selectionGroupRequests.current.enqueue(id);
     pendingTheater.current = { id, command: order };
@@ -706,7 +731,7 @@ function App() {
     return { accepted: result.accepted, message: result.message };
   };
   const command = (order: GameCommand) => {
-    if (groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy) return;
+    if (groupPostingRequests.current.busy || groupPatrolRequests.current.busy || groupLandPolicyRequests.current.busy || groupWorkerPolicyRequests.current.busy || groupCharterRequests.current.busy || groupProductionRequests.current.busy || groupMovementRequests.current.busy || selectionGroupRequests.current.busy) return;
     if (campaignRef.current.mode === 'watch' || observationRef.current?.victory) return;
     if (['endTurn', 'move', 'moveTo', 'queueMovement', 'resumeMovement', 'embarkArmy', 'disembarkArmy', 'assault', 'attack', 'resolveBattle'].includes(order.type)) closeMapActions();
     const id = send({ type: 'command', command: order });
@@ -773,7 +798,7 @@ function App() {
   };
   const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
-  useEffect(() => () => { groupMovementPreviews.current.reset('The campaign view closed.'); groupMovementPreviewWorkers.current.clear(); for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
+  useEffect(() => () => { groupMovementPreviews.current.reset('The campaign view closed.'); groupMovementPreviewWorkers.current.clear(); for (const requests of [groupPostingRequests.current, groupPatrolRequests.current, groupLandPolicyRequests.current, groupWorkerPolicyRequests.current, groupCharterRequests.current, groupProductionRequests.current, groupMovementRequests.current, selectionGroupRequests.current]) requests.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
   const hasCampaign = Boolean(observation);
   const victoryKey = observation?.victory ? `${observation.seed}:${hash.current}` : '';
   useEffect(() => {
@@ -997,7 +1022,7 @@ function App() {
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
     {observation && managementWindow && !showSetup && !battleActive && !observation.pendingCapture && <CampaignWindow key={managementWindow} title={{ registry: 'Realm registry', orders: 'Selected orders', affairs: 'Realm affairs', journal: 'Campaign journal', guide: 'Map guide' }[managementWindow]} subtitle={managementWindow === 'orders' ? army?.name ?? settlement?.name ?? 'Map inspection' : realmName} close={() => setManagementWindow(undefined)} returnFocus={mapHost.current}>
-      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupPatrol={issueGroupPatrol} onGroupCharter={issueGroupCharter} onGroupWorkerPolicy={issueGroupWorkerPolicy} onGroupProduction={issueGroupProduction} hash={hash.current} onGroupMovement={issueGroupMovement} onGroupMovementPreview={reviewGroupMovement} onSelectionGroupCommand={issueSelectionGroup} onTheaterCommand={issueTheater} theaterFocus={theaterFocus} knownSelectedCell={selection.cell !== undefined && renderer.current?.isExplored(selection.cell) ? selection.cell : undefined} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
+      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupPatrol={issueGroupPatrol} onGroupCharter={issueGroupCharter} onGroupWorkerPolicy={issueGroupWorkerPolicy} onGroupLandPolicy={issueGroupLandPolicy} onGroupProduction={issueGroupProduction} hash={hash.current} onGroupMovement={issueGroupMovement} onGroupMovementPreview={reviewGroupMovement} onSelectionGroupCommand={issueSelectionGroup} onTheaterCommand={issueTheater} theaterFocus={theaterFocus} knownSelectedCell={selection.cell !== undefined && renderer.current?.isExplored(selection.cell) ? selection.cell : undefined} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
       {managementWindow === 'orders' && <section className="inspector" aria-label="Selected entity orders"><button className="window-map-link" onClick={showMap}>Show on map</button><fieldset className="strategic-orders" disabled={ordersBusy}>{panes?.sidebar}</fieldset></section>}
       {managementWindow === 'affairs' && <section data-testid="realm-affairs"><FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/><PublicProjects view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><SiegeLedger view={observation} locate={cell => { mapFocusAfterWindow.current = true; renderer.current?.focus(cell); setManagementWindow(undefined); }}/></section>}
       {managementWindow === 'journal' && <><RealmJournal view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><BattleHistory view={observation} replayId={battleTransfer?.packet.battleId} replay={() => { pauseWatch(); setManagementWindow(undefined); setBattleReview(true); }}/>{observation.victory && <button onClick={openChronicles}>Read campaign chronicles</button>}</>}

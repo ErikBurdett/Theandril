@@ -12,6 +12,7 @@ export const MAX_PRODUCTION_SEQUENCE_ITEMS = 5;
 export const MAX_GROUP_PRODUCTION_SETTLEMENTS = 128;
 export interface GroupPostingResult { armyId: string; accepted: boolean; message?: string }
 export interface GroupCharterResult { settlementId: string; accepted: boolean; message?: string }
+export interface GroupLandPolicyResult { settlementId: string; accepted: boolean; message?: string }
 export interface GroupWorkerPolicyResult { settlementId: string; accepted: boolean; message?: string }
 export interface GroupProductionResult { settlementId: string; orders: { itemId: string; accepted: boolean; message?: string }[] }
 export type GroupPatrolCommand = Extract<GameCommand, { type: 'setPatrol' | 'setPatrolEnabled' | 'clearPatrol' }>;
@@ -28,6 +29,7 @@ export type Request =
   | { id: number; type: 'groupPatrol'; commands: GroupPatrolCommand[]; expectedHash: string }
   | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[]; expectedHash: string }
   | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[]; expectedHash: string }
+  | { id: number; type: 'groupLandPolicy'; commands: Extract<GameCommand, { type: 'setLandPolicy' }>[]; expectedHash: string }
   | { id: number; type: 'groupWorkerPolicy'; commands: Extract<GameCommand, { type: 'setWorkerPolicy' }>[]; expectedHash: string }
   | { id: number; type: 'groupProduction'; factionId: string; settlementIds: string[]; itemIds: string[] }
   | ({ id: number; type: 'groupMovementPreview' } & GroupMovementPreviewPlan)
@@ -57,6 +59,7 @@ export interface WorkerMetrics {
   groupPatrolResultBytes?: number;
   groupPostingResultBytes?: number;
   groupCharterResultBytes?: number;
+  groupLandPolicyResultBytes?: number;
   groupWorkerPolicyResultBytes?: number;
   groupProductionResultBytes?: number;
   groupMovementQueryCount?: number;
@@ -77,4 +80,4 @@ export type Response =
   | { id: number; type: 'error'; message: string; recoveryRequired?: boolean }
   | { id: number; type: 'export'; bytes: Uint8Array }
   | { id: number; type: 'message'; message: string }
-  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPatrolResults?: GroupPatrolResult[]; groupPatrolError?: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupWorkerPolicyResults?: GroupWorkerPolicyResult[]; groupWorkerPolicyError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string; groupMovementResults?: GroupMovementResult[]; groupMovementError?: string };
+  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPatrolResults?: GroupPatrolResult[]; groupPatrolError?: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string; groupLandPolicyResults?: GroupLandPolicyResult[]; groupLandPolicyError?: string; groupWorkerPolicyResults?: GroupWorkerPolicyResult[]; groupWorkerPolicyError?: string; groupProductionResults?: GroupProductionResult[]; groupProductionError?: string; groupMovementResults?: GroupMovementResult[]; groupMovementError?: string };

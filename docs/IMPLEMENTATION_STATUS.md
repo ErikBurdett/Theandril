@@ -1,5 +1,40 @@
 # Theandril implementation status
 
+## Coordinated land commissions — 2026-10-26
+
+The hearth registry applies or ends existing commissions for checked or saved
+groups of up to 128 hearths. Exact total permission is allowance per hearth times
+selected count, not escrow or a shared spending pot. Each ordinary command sees
+the treasury left by earlier stable-ID orders. Accepted permission can wait for
+suitable land or money. Outside-filter selections are disclosed; paged receipts
+clear only confirmed acceptances. Removal retains paid work.
+
+Strict whole-batch validation and the reviewed hash precede mutation. Ordinary
+commands remain in the chronicle; one final worker publication has no implicit
+autosave. Mismatched replies, recorder/publication failure and worker crashes
+require saved-campaign recovery. The registry indexes existing compact policy
+metadata without requesting all hearth tile quotes. Rules/save 37, content
+015468d1 and canonical/AI behavior remain unchanged.
+
+Local **2,486 tests / 300 files pass in 127.49 seconds** with two workers, alongside
+typecheck, lint and the Pages build. The first full run passed 2,485 tests but hit
+the existing 20-second Git-history test limit during concurrent browser work;
+the unchanged isolated check and bounded-concurrency full rerun pass. No timeout
+or assertion changed. Four new production journeys pass: an authored 30-hearth,
+128-army, two-war realm spends 88 of 100 coin on four real works while 26 commissions
+wait, followed by exact 61-record replay, removal and restoration; three generated
+hearth reply-fault cases recover after actual payment. Source review passes. All 78 distinct local Pages cases have passing results
+across the 76-pass/two-failure full run and seven-case affected rerun: an old
+journal count and new capture scrolling were corrected without runtime changes,
+assertion weakening or timeout changes. Exact narrow-form bounds and original
+failures are retained. Publication follows the reviewed source checkpoint.
+[Evidence](development/2026-10-26-group-land-commissions/README.md),
+[ADR0056](architecture/0056-group-land-commissions.md).
+
+ACT-32/M3, DH-021, R06 and all fifteen gates remain open. Next: broader paid
+land/cultivation strategy and combined delegation in organically developed mature
+realms, preserving explicit budgets, material consequences and manual overrides.
+
 ## Budgeted land-work commissions — 2026-10-25
 
 Rules/save **37** adds individual commissions for an exact existing improvement,

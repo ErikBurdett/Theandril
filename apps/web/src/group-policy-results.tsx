@@ -15,14 +15,14 @@ export function groupPolicyResultPage(rows: readonly GroupPolicyResult[], filter
 }
 
 export function GroupPolicyResults({ kind, rows, busy = false }: {
-  kind: 'posting' | 'charter' | 'worker-policy'; rows: readonly GroupPolicyResult[]; busy?: boolean;
+  kind: 'posting' | 'charter' | 'worker-policy' | 'land-policy'; rows: readonly GroupPolicyResult[]; busy?: boolean;
 }) {
   const hasRefusals = rows.some(row => !row.accepted);
   const [filter, setFilter] = useState<GroupPolicyResultFilter>(hasRefusals ? 'refused' : 'all');
   const [page, setPage] = useState(0);
   const result = groupPolicyResultPage(rows, filter, page);
-  const title = kind === 'posting' ? 'Posting' : kind === 'charter' ? 'Charter' : 'Worker policy';
-  const label = kind === 'worker-policy' ? 'worker policy' : kind;
+  const title = kind === 'posting' ? 'Posting' : kind === 'charter' ? 'Charter' : kind === 'land-policy' ? 'Land commission' : 'Worker policy';
+  const label = kind === 'worker-policy' ? 'worker policy' : kind === 'land-policy' ? 'land commission' : kind;
   const actors = kind === 'posting' ? 'armies' : 'hearths';
   return <div data-testid={`group-${kind}-results`}>
     <p role="status">{result.accepted} orders accepted · {result.refused} refused.{result.refused > 0 ? ` Refused ${actors} remain selected for review.` : ''}</p>

@@ -1,0 +1,16 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:74) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/group-land-policies.spec.ts:26:1 › production land commissions share a finite purse across 30 hearths and preserve exact keyboard removal and restoration at 130% (44.5s)
+  ✓  2 tests/production/group-land-policies.spec.ts:134:3 › production land commission missing-results after real paid commission installation preserves selection and requires restoration (3.9s)
+  ✓  3 tests/production/group-land-policies.spec.ts:134:3 › production land commission wrong-hearth after real paid commission installation preserves selection and requires restoration (3.2s)
+  ✓  4 tests/production/group-land-policies.spec.ts:134:3 › production land commission worker-crash after real paid commission installation preserves selection and requires restoration (3.3s)
+
+  4 passed (56.1s)

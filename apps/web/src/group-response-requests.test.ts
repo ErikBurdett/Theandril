@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { GameCommand } from '@theandril/sim';
-import { GroupWorkerPolicyRequests, GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
-import { MAX_GROUP_ORDER_COMMANDS, type GroupWorkerPolicyResult, type GroupCharterResult, type GroupPostingResult } from './protocol';
+import { GroupLandPolicyRequests, GroupWorkerPolicyRequests, GroupCharterRequests, GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
+import { MAX_GROUP_ORDER_COMMANDS, type GroupLandPolicyResult, type GroupWorkerPolicyResult, type GroupCharterResult, type GroupPostingResult } from './protocol';
 
 interface Ledger<Command, Result> {
   busy: boolean;
@@ -121,4 +121,8 @@ it('preserves generic request-ID-only behavior for independent clients', async (
 
 correlationCases<Extract<GameCommand, { type: 'setWorkerPolicy' }>, GroupWorkerPolicyResult>('worker policy', () => new GroupWorkerPolicyRequests(),
   () => ['settlement.1', 'settlement.2'].map(settlementId => ({ type: 'setWorkerPolicy', factionId: 'faction.1', settlementId, focus: 'balanced' })),
+  () => ['settlement.1', 'settlement.2'].map(settlementId => ({ settlementId, accepted: true })), 'settlementId');
+
+correlationCases<Extract<GameCommand, { type: 'setLandPolicy' }>, GroupLandPolicyResult>('land commission', () => new GroupLandPolicyRequests(),
+  () => ['settlement.1', 'settlement.2'].map(settlementId => ({ type: 'setLandPolicy', factionId: 'faction.1', settlementId, improvementId: 'improvement.terraced_fields', allowance: 100, reserve: 40 })),
   () => ['settlement.1', 'settlement.2'].map(settlementId => ({ settlementId, accepted: true })), 'settlementId');

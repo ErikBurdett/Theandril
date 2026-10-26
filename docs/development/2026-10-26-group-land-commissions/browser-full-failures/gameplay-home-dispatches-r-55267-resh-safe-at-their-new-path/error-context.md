@@ -1,0 +1,755 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: gameplay/home.spec.ts >> dispatches remain refresh-safe at their new path
+- Location: tests/gameplay/home.spec.ts:18:1
+
+# Error details
+
+```
+Error: expect(locator).toHaveCount(expected) failed
+
+Locator:  locator('.dispatch-row')
+Expected: 21
+Received: 22
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveCount" locator('.dispatch-row') with timeout 5000ms
+  - waiting for locator('.dispatch-row')
+    14 × locator resolved to 22 elements
+       - unexpected value "22"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e5]:
+    - link "Theandril home" [ref=e6] [cursor=pointer]:
+      - /url: /Theandril/updates/
+      - generic [aria-hidden] [ref=e7]: T
+      - generic [ref=e8]:
+        - generic [ref=e9]: The age of fracture
+        - strong [ref=e10]: Theandril
+    - navigation "Main navigation" [ref=e11]:
+      - link "Home" [ref=e12] [cursor=pointer]:
+        - /url: /Theandril/updates/
+      - link "Dispatches" [ref=e13] [cursor=pointer]:
+        - /url: /Theandril/updates/dispatches/
+      - link "Roadmap" [ref=e14] [cursor=pointer]:
+        - /url: /Theandril/updates/roadmap/
+      - link "Lore" [ref=e15] [cursor=pointer]:
+        - /url: /Theandril/updates/lore/
+      - link "Compendium" [ref=e16] [cursor=pointer]:
+        - /url: /Theandril/updates/compendium/
+      - link "Play development build" [ref=e17] [cursor=pointer]:
+        - /url: /Theandril/
+        - text: Play development build ↗
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - region [ref=e20]:
+        - generic [ref=e21]:
+          - paragraph [ref=e22]: Developer journal / A world in the making
+          - heading [level=1] [ref=e23]:
+            - text: Theandril
+            - emphasis [ref=e24]: Dispatches
+        - paragraph [ref=e25]: The work. The world. The record.Substantial changes, their evidence, and the distance still to go.
+      - region [ref=e26]:
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: Featured dispatch · 22
+          - generic [ref=e30]: Reviewed checkpoint
+          - heading "Give land work a budget" [level=2] [ref=e31]
+          - paragraph [ref=e32]: 25 October 2026 · Paid land-work commissions
+          - paragraph [ref=e33]: Choose the improvement a hearth should build, set how much it may spend, and leave a treasury reserve while ordinary land work proceeds.
+          - link "Read the featured dispatch" [ref=e34] [cursor=pointer]:
+            - /url: /Theandril/updates/dispatches/?dispatch=land-commissions
+            - text: Read the dispatch
+            - generic [aria-hidden] [ref=e35]: →
+          - paragraph [ref=e36]: Source checkpoint 24a710a · Not a 1.0 release.
+        - figure [ref=e37]:
+          - button "Enlarge land-commission-summary image" [ref=e38]:
+            - img "The actual Land commission summary reads Terraced fields with 3 coin left in its allowance." [ref=e39]
+            - generic [aria-hidden] [ref=e40]: Inspect image ↗
+          - generic [ref=e41]:
+            - text: Native 806-by-45 illustrative summary from a generated Tiny two-realm campaign, seed 20260905. Its from-save browser journey completes two paid works costing 22 and 25 coin by turn 7, leaving 3 of its allowance. This strip shows only Land commission and Terraced fields with 3 coin left; it omits the hearth, turn counter, payment history and controls. The linked full panel and exact replay evidence establish those details.
+            - link "Original image ↗" [ref=e42] [cursor=pointer]:
+              - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-land-commissions/browser-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/land-commission-summary-native.png
+      - complementary "Checkpoint scope" [ref=e43]:
+        - strong [ref=e44]: A checkpoint, not a finish line.
+        - paragraph [ref=e45]: The original naval findings have reviewed corrections. Epic archive timing, M0 and all fifteen whole release gates remain open. Test sets overlap; we do not add them into a release score.
+      - region [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - paragraph [ref=e49]: Browse the record
+            - heading "From the workbench" [level=2] [ref=e50]
+          - paragraph [ref=e51]: Current review work, then the playable foundations. Not a release calendar.
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e54]: Search dispatches
+            - searchbox "Search dispatches" [ref=e55]
+          - group "Filter by topic" [ref=e56]:
+            - generic [ref=e58]:
+              - button "All" [pressed] [ref=e59] [cursor=pointer]
+              - button "Engineering" [ref=e60] [cursor=pointer]
+              - button "World & culture" [ref=e61] [cursor=pointer]
+              - button "Archives" [ref=e62] [cursor=pointer]
+        - status [ref=e64]: 22 dispatches
+        - generic [ref=e65]:
+          - article [ref=e66]:
+            - link [aria-hidden] [ref=e67] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=land-commissions
+            - generic [ref=e68]:
+              - paragraph [ref=e69]: Engineering / Land commissions · rules 37
+              - heading [level=3] [ref=e70]:
+                - link "Give land work a budget" [ref=e71] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=land-commissions
+              - paragraph [ref=e72]: Choose the improvement a hearth should build, set how much it may spend, and leave a treasury reserve while ordinary land work proceeds.
+              - generic [ref=e73]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e74]:
+              - text: "22"
+              - generic [ref=e75]: ↗
+          - article [ref=e76]:
+            - link [aria-hidden] [ref=e77] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=worker-stewardship
+            - generic [ref=e78]:
+              - paragraph [ref=e79]: Engineering / Worker stewardship · rules 36
+              - heading [level=3] [ref=e80]:
+                - link "Keep growing hearths at work" [ref=e81] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=worker-stewardship
+              - paragraph [ref=e82]: Choose what a hearth’s workers should favor, let the policy revisit assignments as it grows, and take back manual control whenever a particular tile matters more.
+              - generic [ref=e83]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e84]:
+              - text: "21"
+              - generic [ref=e85]: ↗
+          - article [ref=e86]:
+            - link [aria-hidden] [ref=e87] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=group-orders-and-receipts
+            - generic [ref=e88]:
+              - paragraph [ref=e89]: Engineering / Group order workflows · rules 35
+              - heading [level=3] [ref=e90]:
+                - link "Give the order, then review each result" [ref=e91] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=group-orders-and-receipts
+              - paragraph [ref=e92]: Assign a shared patrol circuit while keeping paused armies paused. Review accepted and refused posting and charter orders by name, with clearer boundaries when the campaign or its response changes.
+              - generic [ref=e93]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e94]:
+              - text: "20"
+              - generic [ref=e95]: ↗
+          - article [ref=e96]:
+            - link [aria-hidden] [ref=e97] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=settlement-order-filters
+            - generic [ref=e98]:
+              - paragraph [ref=e99]: Engineering / Settlement order inventory · rules 35
+              - heading [level=3] [ref=e100]:
+                - link "Find empty queues and waiting charters" [ref=e101] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=settlement-order-filters
+              - paragraph [ref=e102]: Find empty production queues, hearths without charters and policies waiting on a reported limit. Keep checked hearths across filters, then apply a policy through the existing group controls.
+              - generic [ref=e103]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e104]:
+              - text: "19"
+              - generic [ref=e105]: ↗
+          - article [ref=e106]:
+            - link [aria-hidden] [ref=e107] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=group-patrols
+            - generic [ref=e108]:
+              - paragraph [ref=e109]: Engineering / Group patrol controls · rules 35
+              - heading [level=3] [ref=e110]:
+                - link "Change patrol policies across the checked companies" [ref=e111] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=group-patrols
+              - paragraph [ref=e112]: Pause, resume or remove existing patrol policies across the companies you checked. Issued travel stays intact, unaffected armies remain selected, and every accepted order keeps its saved history.
+              - generic [ref=e113]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e114]:
+              - text: "18"
+              - generic [ref=e115]: ↗
+          - article [ref=e116]:
+            - link [aria-hidden] [ref=e117] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=registry-order-filters
+            - generic [ref=e118]:
+              - paragraph [ref=e119]: Engineering / Observed order filters · rules 35
+              - heading [level=3] [ref=e120]:
+                - link "Find waiting orders in a crowded roster" [ref=e121] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=registry-order-filters
+              - paragraph [ref=e122]: Find a paused patrol or waiting order without paging through every company. The registry keeps policy, travel and selection facts distinct; changing an order still takes an explicit action.
+              - generic [ref=e123]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e124]:
+              - text: "17"
+              - generic [ref=e125]: ↗
+          - article [ref=e126]:
+            - link [aria-hidden] [ref=e127] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=project-counterplay
+            - generic [ref=e128]:
+              - paragraph [ref=e129]: Engineering / Immediate and maintained project counterplay · rules 35
+              - heading [level=3] [ref=e130]:
+                - link "Before peace decides the race" [ref=e131] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=project-counterplay
+              - paragraph [ref=e132]: When a rival is one turn from victory, a binding peace can end the race. An available company should keep its chance to interrupt the project before that turn advances.
+              - generic [ref=e133]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e134]:
+              - text: "16"
+              - generic [ref=e135]: ↗
+          - article [ref=e136]:
+            - link [aria-hidden] [ref=e137] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=patrol-retirement
+            - generic [ref=e138]:
+              - paragraph [ref=e139]: Engineering / Observed patrol retirement · rules 35
+              - heading [level=3] [ref=e140]:
+                - link "When a home patrol loses its hearth" [ref=e141] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=patrol-retirement
+              - paragraph [ref=e142]: An AI watch can now retire a home circuit whose destination has visibly changed hands, freeing its company for ordinary duties. A retained campaign shows the company moving again; the wider pacing work remains open.
+              - generic [ref=e143]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e144]:
+              - text: "15"
+              - generic [ref=e145]: ↗
+          - article [ref=e146]:
+            - link [aria-hidden] [ref=e147] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=patrol-orders
+            - generic [ref=e148]:
+              - paragraph [ref=e149]: Engineering / Posting policies and land patrols · rules 35
+              - heading [level=3] [ref=e150]:
+                - link "Keep the watch moving" [ref=e151] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=patrol-orders
+              - paragraph [ref=e152]: Remember a familiar posting policy, give an army a returning patrol, and let an AI-controlled watch review a safe interrupted leg. Saved orders keep their boundaries, while the campaign results keep the remaining balance work visible.
+              - generic [ref=e153]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e154]:
+              - text: "14"
+              - generic [ref=e155]: ↗
+          - article [ref=e156]:
+            - link [aria-hidden] [ref=e157] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=reinforcement-logistics
+            - generic [ref=e158]:
+              - paragraph [ref=e159]: Engineering / Reinforcement and supply access · rules 34
+              - heading [level=3] [ref=e160]:
+                - link "Hold the frontier, provision the crossing" [ref=e161] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=reinforcement-logistics
+              - paragraph [ref=e162]: Let a standing watch respond to visible threats, and buy supplies from a foreign harbor. Joined empire controls keep shortages and blocked orders visible across a large realm.
+              - generic [ref=e163]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e164]:
+              - text: "13"
+              - generic [ref=e165]: ↗
+          - article [ref=e166]:
+            - link [aria-hidden] [ref=e167] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=defense-theaters
+            - generic [ref=e168]:
+              - paragraph [ref=e169]: Engineering / Defensive theaters · ACT-32
+              - heading [level=3] [ref=e170]:
+                - link "Give your hearths a standing watch" [ref=e171] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=defense-theaters
+              - paragraph [ref=e172]: Choose the hearths to protect, assign their watch companies and name a reserve. Idle members fill guard gaps on later turns while your direct routes and standing postings keep priority.
+              - generic [ref=e173]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e174]:
+              - text: "12"
+              - generic [ref=e175]: ↗
+          - article [ref=e176]:
+            - link [aria-hidden] [ref=e177] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=group-travel
+            - generic [ref=e178]:
+              - paragraph [ref=e179]: Engineering / Group travel · ACT-32
+              - heading [level=3] [ref=e180]:
+                - link "Give your armies a shared destination" [ref=e181] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=group-travel
+              - paragraph [ref=e182]: Recall a saved army group, review their separate routes and send them toward one destination. Ordinary travel keeps its costs, interruptions and individual controls, with results for every army.
+              - generic [ref=e183]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e184]:
+              - text: "11"
+              - generic [ref=e185]: ↗
+          - article [ref=e186]:
+            - link [aria-hidden] [ref=e187] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=production-sequences
+            - generic [ref=e188]:
+              - paragraph [ref=e189]: Engineering / Production sequences · ACT-32
+              - heading [level=3] [ref=e190]:
+                - link "Queue a plan across your hearths" [ref=e191] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=production-sequences
+              - paragraph [ref=e192]: Arrange a short production list, recall the hearths that need it and see which projects were paid for. Personal templates keep useful plans ready while every order still uses the existing queues.
+              - generic [ref=e193]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e194]:
+              - text: "10"
+              - generic [ref=e195]: ↗
+          - article [ref=e196]:
+            - link [aria-hidden] [ref=e197] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=selection-groups
+            - generic [ref=e198]:
+              - paragraph [ref=e199]: Engineering / Saved realm groups · rules 32
+              - heading [level=3] [ref=e200]:
+                - link "Recall a group, then give the order" [ref=e201] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=selection-groups
+              - paragraph [ref=e202]: Remember the armies guarding a frontier or the hearths sharing a policy. Named groups now travel with the campaign, ready to recall, inspect and order through the existing registry.
+              - generic [ref=e203]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e204]:
+              - text: "09"
+              - generic [ref=e205]: ↗
+          - article [ref=e206]:
+            - link [aria-hidden] [ref=e207] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=charter-templates
+            - generic [ref=e208]:
+              - paragraph [ref=e209]: Engineering / Charter templates · ACT-32
+              - heading [level=3] [ref=e210]:
+                - link "Keep a charter worth repeating" [ref=e211] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=charter-templates
+              - paragraph [ref=e212]: Save a useful charter policy by name, recall it in another campaign, then choose which hearths should receive it. A personal browser library keeps repeated setup apart from the orders already governing a realm.
+              - generic [ref=e213]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e214]:
+              - text: "08"
+              - generic [ref=e215]: ↗
+          - article [ref=e216]:
+            - link [aria-hidden] [ref=e217] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=group-charters
+            - generic [ref=e218]:
+              - paragraph [ref=e219]: Engineering / Group hearth charters · ACT-32
+              - heading [level=3] [ref=e220]:
+                - link "One charter policy for forty hearths" [ref=e221] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=group-charters
+              - paragraph [ref=e222]: Give selected hearths the same standing charter, keep their queued work intact, and inspect each result. Shared controls now explain what every hearth may spend from the realm’s treasury.
+              - generic [ref=e223]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e224]:
+              - text: "07"
+              - generic [ref=e225]: ↗
+          - article [ref=e226]:
+            - link [aria-hidden] [ref=e227] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=group-postings
+            - generic [ref=e228]:
+              - paragraph [ref=e229]: Engineering / Group postings · ACT-32
+              - heading [level=3] [ref=e230]:
+                - link "One posting for a hundred armies" [ref=e231] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=group-postings
+              - paragraph [ref=e232]: Select armies across the registry, give them standing postings together, and keep control of each member. One bounded request now returns one campaign update with a clear result for every order.
+              - generic [ref=e233]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e234]:
+              - text: "06"
+              - generic [ref=e235]: ↗
+          - article [ref=e236]:
+            - link [aria-hidden] [ref=e237] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=fleet-provisions
+            - generic [ref=e238]:
+              - paragraph [ref=e239]: Engineering / Fleet provisions · rules 31
+              - heading [level=3] [ref=e240]:
+                - link "A voyage needs stores for the way home" [ref=e241] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=fleet-provisions
+              - paragraph [ref=e242]: Fleets and their passengers now share finite stores. Sailors need a route back to harbor supply, the AI plans for that return, and a saved voyage keeps the supplies it actually has.
+              - generic [ref=e243]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e244]:
+              - text: "05"
+              - generic [ref=e245]: ↗
+          - article [ref=e246]:
+            - link [aria-hidden] [ref=e247] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=campaign-foundation-and-development-order
+            - generic [ref=e248]:
+              - paragraph [ref=e249]: Engineering / Campaign foundation · rules 17
+              - heading [level=3] [ref=e250]:
+                - link "A funded expedition and a practical route to 1.0" [ref=e251] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=campaign-foundation-and-development-order
+              - paragraph [ref=e252]: An island realm now counts the harbor it has already paid for. Fleet planning, explored land and campaign records take less repeated work, while the remaining Epic timing failure stays visible.
+              - generic [ref=e253]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e254]:
+              - text: "04"
+              - generic [ref=e255]: ↗
+          - article [ref=e256]:
+            - link [aria-hidden] [ref=e257] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=r17-campaign-safety
+            - generic [ref=e258]:
+              - paragraph [ref=e259]: Engineering / Audit remediation · rule 17
+              - heading [level=3] [ref=e260]:
+                - link "A campaign worth keeping" [ref=e261] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=r17-campaign-safety
+              - paragraph [ref=e262]: Training should not break a save. A crowded garrison should not make a town untouchable. This checkpoint repairs both, without rewriting the history of older campaigns.
+              - generic [ref=e263]: Reviewed checkpoint
+            - generic [aria-hidden] [ref=e264]:
+              - text: "01"
+              - generic [ref=e265]: ↗
+          - article [ref=e266]:
+            - link [aria-hidden] [ref=e267] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=keeping-the-record
+            - generic [ref=e268]:
+              - paragraph [ref=e269]: Archives / Archive capacity · durability follow-up
+              - heading [level=3] [ref=e270]:
+                - link "Keeping the whole record" [ref=e271] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=keeping-the-record
+              - paragraph [ref=e272]: A long campaign is more than its final snapshot. The archive work preserves the orders, battles and provenance needed to tell its history—and replay it.
+              - generic [ref=e273]: Bounded verification
+            - generic [aria-hidden] [ref=e274]:
+              - text: "02"
+              - generic [ref=e275]: ↗
+          - article [ref=e276]:
+            - link [aria-hidden] [ref=e277] [cursor=pointer]:
+              - /url: /Theandril/updates/dispatches/?dispatch=twenty-four-cultures
+            - generic [ref=e278]:
+              - paragraph [ref=e279]: World & culture / Roster 4 · slices 22–27
+              - heading [level=3] [ref=e280]:
+                - link "Twenty-four ways to keep a hearth" [ref=e281] [cursor=pointer]:
+                  - /url: /Theandril/updates/dispatches/?dispatch=twenty-four-cultures
+              - paragraph [ref=e282]: A culture is a political bargain, not a recolored banner. The current roster connects authored societies to real names, ecological choices and distinct approved art.
+              - generic [ref=e283]: Playable baseline
+            - generic [aria-hidden] [ref=e284]:
+              - text: "03"
+              - generic [ref=e285]: ↗
+      - region [ref=e286]:
+        - generic [ref=e287]:
+          - generic [ref=e288]:
+            - paragraph [ref=e289]: The promise & the remaining work
+            - heading "Road to 1.0" [level=2] [ref=e290]
+          - paragraph [ref=e291]: Selected gates and decisions. Not a complete release report or a completion percentage.
+        - paragraph [ref=e292]: The agreed scope stays put. The evidence changes. A scoped approval moves a piece of the game forward; it does not clear every gate around it.
+        - paragraph [ref=e293]:
+          - link "Open the full roadmap →" [ref=e294] [cursor=pointer]:
+            - /url: /Theandril/updates/roadmap/
+          - text: Browse checked completed checkpoints, in-progress systems and pending features with evidence and remaining acceptance. The selected decisions below use the current roadmap snapshot; historical dispatches retain their own evidence.
+        - generic [ref=e295]:
+          - generic [ref=e296]:
+            - term [ref=e297]:
+              - generic [ref=e298]: Accepted scope
+              - heading "The agreed game, not a moving finish line" [level=3] [ref=e299]
+            - definition [ref=e300]:
+              - paragraph [ref=e301]: The canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.
+              - link "Read the source for The agreed game, not a moving finish line" [ref=e302] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/GAME_1_0_SCOPE.md
+                - text: Read the source
+                - generic [ref=e303]: for The agreed game, not a moving finish line
+                - text: ↗
+          - generic [ref=e304]:
+            - term [ref=e305]:
+              - generic [ref=e306]: Current / partial
+              - heading "Gates E & F · Save integrity and combat" [level=3] [ref=e307]
+            - definition [ref=e308]:
+              - paragraph [ref=e309]: Rules/save 37 records paid land commissions, preserves a genuine thirteen-record rules 36 archive and verifies mixed 36-to-37 continuation. Remaining allowance, protected commission reserve, manual work takeover and immediate ownership cleanup survive exact saves/replay. Rules/save 36 records owned worker policies and preserves genuine rules 35 raw bytes, fourteen historical records and mixed 35→36 continuation. Earlier loads receive no policy. Manual overrides, siege waits, capture/raze cleanup and exact replay are verified locally. Hash-bound group requests reject stale intent before mutation and require saved restoration after uncertain results; these batches do not create an immediate autosave. Earlier patrol, storage and combat evidence remains historical, and all save/combat release gates remain open.
+              - link "Read the source for Gates E & F · Save integrity and combat" [ref=e310] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/IMPLEMENTATION_STATUS.md
+                - text: Read the source
+                - generic [ref=e311]: for Gates E & F · Save integrity and combat
+                - text: ↗
+          - generic [ref=e312]:
+            - term [ref=e313]:
+              - generic [ref=e314]: Current / partial
+              - heading "Gates B, F2 & J · A playable foundation" [level=3] [ref=e315]
+            - definition [ref=e316]:
+              - paragraph [ref=e317]: Twenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.
+              - link "Read the source for Gates B, F2 & J · A playable foundation" [ref=e318] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/IMPLEMENTATION_STATUS.md
+                - text: Read the source
+                - generic [ref=e319]: for Gates B, F2 & J · A playable foundation
+                - text: ↗
+          - generic [ref=e320]:
+            - term [ref=e321]:
+              - generic [ref=e322]: Open gate
+              - heading "Gate C & integration · Remaining campaign proof" [level=3] [ref=e323]
+            - definition [ref=e324]:
+              - paragraph [ref=e325]: The land-commission source checkpoint passes 2,461 tests across 298 files in 67.00 seconds and all 74 local Pages cases in 5.3 minutes. Rules 37 AI uses an exact one-job allowance only when complete worked-cell quotes and unchanged worker proposals prove the same paid improvement as its strategic planner. Standard/Long/Epic headline outcomes remain 219/329/374 at twelve-realm seed 20260905, with 18/22/29 commission commands and no submitted or automatic refusals. These are turn-outcome comparisons, not identical full states or all-seed equivalence. Earlier adverse seeds were not rerun; Long remains late. DH-021 and all fifteen release gates remain open.
+              - link "Read the source for Gate C & integration · Remaining campaign proof" [ref=e326] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/IMPLEMENTATION_STATUS.md
+                - text: Read the source
+                - generic [ref=e327]: for Gate C & integration · Remaining campaign proof
+                - text: ↗
+          - generic [ref=e328]:
+            - term [ref=e329]:
+              - generic [ref=e330]: Current / partial
+              - heading "Gate I · Orders across a large realm" [level=3] [ref=e331]
+            - definition [ref=e332]:
+              - paragraph [ref=e333]: Individual land commissions choose one improvement, a remaining total allowance and a treasury reserve. They can pay immediately, then answer after upkeep and charters; existing sites and mismatched extraction deposits stay protected. Successful direct construction/cultivation/cancellation ends a commission, while removal keeps already paid work. A generated two-worker hearth completes two paid fields by turn 7 with exact restoration. Group commissions, claims, cultivation and replacement strategy remain open. Worker stewardship adds Balanced, Food, Industry, Coin and Knowledge priorities for claimed land, immediate and post-growth allocation, explicit manual takeover and canonical waiting reasons. Up to 128 checked hearths can receive the same priority with named results; those worker priorities spend no coin and order no construction or land purchase. Checked land armies can receive shared patrol points while existing paused policies stay paused. Posting and charter requests bind to the reviewed campaign; uncertain publication requires saved restoration. Named receipts expose all accepted/refused actors through filtered 25-row pages without retrying orders or changing selection. Settlement order filters find empty queues, hearths without charters and waiting policies from supplied owned facts before 25-row paging, preserving checks outside the filter. Counts overlap; queued work comes first and a next-work candidate is not a guaranteed purchase. Six explicit charter changes restore an exact 36-record authored archive without altering queues or treasury. Group patrol controls pause, resume or remove existing policies across up to 128 checked land armies ashore, including checks outside the current filter. Issued travel is unchanged; unaffected and refused checks remain. Army registry order filters find postings, waiting reports and paused patrols before 25-row pagination while preserving checked IDs. Personal posting templates recall a policy before explicit group orders. Saved two-point land patrols respect direct routes, postings, voyages, missions and sieges. An AI seat can review a safe interrupted home leg or retire a narrowly observed captured-hearth circuit while preserving issued travel; player travel never resumes itself and ordinary player turns do not perform AI cleanup. Multi-step programs, escorts, broader governors and organic mature-empire acceptance remain unfinished.
+              - link "Read the source for Gate I · Orders across a large realm" [ref=e334] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/IMPLEMENTATION_STATUS.md
+                - text: Read the source
+                - generic [ref=e335]: for Gate I · Orders across a large realm
+                - text: ↗
+          - generic [ref=e336]:
+            - term [ref=e337]:
+              - generic [ref=e338]: Open gate
+              - heading "Gates D, K & L · Scale and browser confidence" [level=3] [ref=e339]
+            - definition [ref=e340]:
+              - paragraph [ref=e341]: Storage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.
+              - link "Read the source for Gates D, K & L · Scale and browser confidence" [ref=e342] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/review-fix-2/persistence-REPORT.md
+                - text: Read the source
+                - generic [ref=e343]: for Gates D, K & L · Scale and browser confidence
+                - text: ↗
+          - generic [ref=e344]:
+            - term [ref=e345]:
+              - generic [ref=e346]: Proposal / deferred
+              - heading "Suggested follow-ups, not new release promises" [level=3] [ref=e347]
+            - definition [ref=e348]:
+              - paragraph [ref=e349]: Promoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.
+              - link "Read the source for Suggested follow-ups, not new release promises" [ref=e350] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/post-fix-review/persistence.verdict.json
+                - text: Read the source
+                - generic [ref=e351]: for Suggested follow-ups, not new release promises
+                - text: ↗
+          - generic [ref=e352]:
+            - term [ref=e353]:
+              - generic [ref=e354]: Not this update
+              - heading "Gate M, full magic and a 1.0 announcement" [level=3] [ref=e355]
+            - definition [ref=e356]:
+              - paragraph [ref=e357]: No online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.
+              - link "Read the source for Gate M, full magic and a 1.0 announcement" [ref=e358] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/DEFINITION_OF_DONE.md
+                - text: Read the source
+                - generic [ref=e359]: for Gate M, full magic and a 1.0 announcement
+                - text: ↗
+        - link "Read all release gates →" [ref=e360] [cursor=pointer]:
+          - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/DEFINITION_OF_DONE.md
+      - region [ref=e361]:
+        - generic [ref=e362]:
+          - generic [ref=e363]:
+            - paragraph [ref=e364]: Read further
+            - heading "The reference shelf" [level=2] [ref=e365]
+          - paragraph [ref=e366]: The documents behind the dispatches. Snapshot links preserve the reviewed source revision.
+        - list [ref=e367]:
+          - listitem [ref=e368]:
+            - generic [aria-hidden] [ref=e369]: "01"
+            - generic [ref=e370]:
+              - link "Land commission verification" [ref=e371] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-land-commissions/README.md
+              - paragraph [ref=e372]: Paid improvement allowances, reserves, manual takeover, original history and bounded AI/scale evidence.
+          - listitem [ref=e373]:
+            - generic [aria-hidden] [ref=e374]: "02"
+            - generic [ref=e375]:
+              - link "Group order workflows" [ref=e376] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-group-policy-results/README.md
+              - paragraph [ref=e377]: Named accepted/refused receipts, explicit browsing, exact history and the final four-round implementation checkpoint.
+          - listitem [ref=e378]:
+            - generic [aria-hidden] [ref=e379]: "03"
+            - generic [ref=e380]:
+              - link "Shared patrol assignment" [ref=e381] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-group-patrol-assignment/README.md
+              - paragraph [ref=e382]: Shared endpoints, preserved pauses, authored scale and a separate generated out-and-back journey.
+          - listitem [ref=e383]:
+            - generic [aria-hidden] [ref=e384]: "04"
+            - generic [ref=e385]:
+              - link "Stale policy requests" [ref=e386] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-group-intent/README.md
+              - paragraph [ref=e387]: Reject old campaign intent before applying any group posting or charter.
+          - listitem [ref=e388]:
+            - generic [aria-hidden] [ref=e389]: "05"
+            - generic [ref=e390]:
+              - link "Uncertain policy publication" [ref=e391] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-group-publication-recovery/README.md
+              - paragraph [ref=e392]: Actual post-mutation publication faults lock further commands until saved restoration.
+          - listitem [ref=e393]:
+            - generic [aria-hidden] [ref=e394]: "06"
+            - generic [ref=e395]:
+              - link "Settlement order filters" [ref=e396] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-settlement-order-filters/README.md
+              - paragraph [ref=e397]: Overlapping owned cohorts, retained checked hearths, exact six-charter changes and saved restoration.
+          - listitem [ref=e398]:
+            - generic [aria-hidden] [ref=e399]: "07"
+            - generic [ref=e400]:
+              - link "Group patrol controls" [ref=e401] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-group-patrols/README.md
+              - paragraph [ref=e402]: Explicit policy batches, unchanged travel, exact saved history and damaged-response recovery.
+          - listitem [ref=e403]:
+            - generic [aria-hidden] [ref=e404]: "08"
+            - generic [ref=e405]:
+              - link "Army registry order filters" [ref=e406] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-army-order-filters/README.md
+              - paragraph [ref=e407]: Owned order facts, preserved checked IDs, authored 101-army production workflow and exact explicit-resume history.
+          - listitem [ref=e408]:
+            - generic [aria-hidden] [ref=e409]: "09"
+            - generic [ref=e410]:
+              - link "Immediate and maintained project counterplay" [ref=e411] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-project-counterplay/README.md
+              - paragraph [ref=e412]: Visible legal opportunities, fresh-offer siege maintenance, actual battle outcomes, ten isolated measurements and unchanged nine-campaign hashes.
+          - listitem [ref=e413]:
+            - generic [aria-hidden] [ref=e414]: "10"
+            - generic [ref=e415]:
+              - link "Captured-hearth patrol retirement" [ref=e416] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-patrol-retirement/README.md
+              - paragraph [ref=e417]: Observed ordinary cleanup, genuine Watch reassignment, six bounded measurements and unresolved three-seed pacing.
+          - listitem [ref=e418]:
+            - generic [aria-hidden] [ref=e419]: "11"
+            - generic [ref=e420]:
+              - link "Patrol orders and recovery" [ref=e421] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-patrol-recovery/README.md
+              - paragraph [ref=e422]: Explicit AI recovery, exact generated evidence, nine pacing comparisons and unresolved release acceptance.
+          - listitem [ref=e423]:
+            - generic [aria-hidden] [ref=e424]: "12"
+            - generic [ref=e425]:
+              - link "Reusable posting policies" [ref=e426] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-posting-templates/README.md
+              - paragraph [ref=e427]: Personal preferences, explicit group application, fresh hearth targets and saved recovery.
+          - listitem [ref=e428]:
+            - generic [aria-hidden] [ref=e429]: "13"
+            - generic [ref=e430]:
+              - link "Start playing & run locally" [ref=e431] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/README.md
+              - paragraph [ref=e432]: Controls, setup, save transfer and the actual single-player development build.
+          - listitem [ref=e433]:
+            - generic [aria-hidden] [ref=e434]: "14"
+            - generic [ref=e435]:
+              - link "Implementation status" [ref=e436] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/IMPLEMENTATION_STATUS.md
+              - paragraph [ref=e437]: Implemented, partial, blocked and historical work. The source of truth behind the headlines.
+          - listitem [ref=e438]:
+            - generic [aria-hidden] [ref=e439]: "15"
+            - generic [ref=e440]:
+              - link "Agreed 1.0 scope" [ref=e441] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/GAME_1_0_SCOPE.md
+              - paragraph [ref=e442]: The accepted game and content targets. A feature only counts when it is integrated.
+          - listitem [ref=e443]:
+            - generic [aria-hidden] [ref=e444]: "16"
+            - generic [ref=e445]:
+              - link "Definition of done" [ref=e446] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/DEFINITION_OF_DONE.md
+              - paragraph [ref=e447]: Named release gates, required evidence and the final signoff contract.
+          - listitem [ref=e448]:
+            - generic [aria-hidden] [ref=e449]: "17"
+            - generic [ref=e450]:
+              - link "Development workflow" [ref=e451] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/1.0-DEVELOPMENT.md
+              - paragraph [ref=e452]: Canonical M0–M10 development sequence, with dependencies and acceptance for the existing scope.
+          - listitem [ref=e453]:
+            - generic [aria-hidden] [ref=e454]: "18"
+            - generic [ref=e455]:
+              - link "World & faction bible" [ref=e456] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/lore/FACTION_BIBLE.md
+              - paragraph [ref=e457]: Twenty-four societies, disputed history and the boundary between lore and runtime.
+          - listitem [ref=e458]:
+            - generic [aria-hidden] [ref=e459]: "19"
+            - generic [ref=e460]:
+              - link "Art status & provenance" [ref=e461] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/art/ART_IMPLEMENTATION_STATUS.md
+              - paragraph [ref=e462]: Reviewed pixels, real bindings, animation scope and unresolved production limits.
+          - listitem [ref=e463]:
+            - generic [aria-hidden] [ref=e464]: "20"
+            - generic [ref=e465]:
+              - link "Campaign-safety architecture" [ref=e466] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0037-campaign-safety.md
+              - paragraph [ref=e467]: Canonical ownership, morale correction, reserves and historical compatibility.
+          - listitem [ref=e468]:
+            - generic [aria-hidden] [ref=e469]: "21"
+            - generic [ref=e470]:
+              - link "Reinforcement and supply architecture" [ref=e471] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0046-reinforcement-supply-access.md
+              - paragraph [ref=e472]: Visible-threat reserve guards, paid source-specific supply, participant disclosures, bounded AI and rules 33 history.
+          - listitem [ref=e473]:
+            - generic [aria-hidden] [ref=e474]: "22"
+            - generic [ref=e475]:
+              - link "Reinforcement and logistics verification" [ref=e476] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-09-27-reinforcement-logistics/README.md
+              - paragraph [ref=e477]: Joined authored mature-realm acceptance, real treaty payment and recovery, paired three-seed pacing, retained failures and explicit limits.
+          - listitem [ref=e478]:
+            - generic [aria-hidden] [ref=e479]: "23"
+            - generic [ref=e480]:
+              - link "Defensive theater architecture" [ref=e481] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0045-defense-theaters.md
+              - paragraph [ref=e482]: Canonical saved watches, bounded ordinary movement, direct overrides and observed AI adoption.
+          - listitem [ref=e483]:
+            - generic [aria-hidden] [ref=e484]: "24"
+            - generic [ref=e485]:
+              - link "Group travel architecture" [ref=e486] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0044-group-travel.md
+              - paragraph [ref=e487]: Explicit bounded route reviews and ordinary movement, retained postings, partial outcomes and recovery.
+          - listitem [ref=e488]:
+            - generic [aria-hidden] [ref=e489]: "25"
+            - generic [ref=e490]:
+              - link "Production sequences architecture" [ref=e491] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0043-production-sequences.md
+              - paragraph [ref=e492]: Explicit ordered batches over ordinary paid queues, partial prefixes and a separate personal template library.
+          - listitem [ref=e493]:
+            - generic [aria-hidden] [ref=e494]: "26"
+            - generic [ref=e495]:
+              - link "Saved groups architecture" [ref=e496] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0042-selection-groups.md
+              - paragraph [ref=e497]: Campaign-owned selection groups, explicit recall, loss reconciliation, bounded metadata and historical saves.
+          - listitem [ref=e498]:
+            - generic [aria-hidden] [ref=e499]: "27"
+            - generic [ref=e500]:
+              - link "Charter templates architecture" [ref=e501] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0041-charter-templates.md
+              - paragraph [ref=e502]: Browser-local named policies, explicit recall and assignment, bounded preferences and visible storage failures.
+          - listitem [ref=e503]:
+            - generic [aria-hidden] [ref=e504]: "28"
+            - generic [ref=e505]:
+              - link "Group charters architecture" [ref=e506] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0040-group-charters.md
+              - paragraph [ref=e507]: Shared policy controls, existing production precedence, per-work budgets and one final worker response.
+          - listitem [ref=e508]:
+            - generic [aria-hidden] [ref=e509]: "29"
+            - generic [ref=e510]:
+              - link "Group postings architecture" [ref=e511] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0039-group-postings.md
+              - paragraph [ref=e512]: Bounded ordinary-command batches, per-army results, interrupted recording and transfer measurements.
+          - listitem [ref=e513]:
+            - generic [aria-hidden] [ref=e514]: "30"
+            - generic [ref=e515]:
+              - link "Fleet provisions architecture" [ref=e516] [cursor=pointer]:
+                - /url: https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/architecture/0038-fleet-provisions.md
+              - paragraph [ref=e517]: Canonical stores, shared passenger outcomes, naval staging and versioned persistence.
+      - region [ref=e518]:
+        - paragraph [ref=e519]: Leave a useful record
+        - heading "Bring a change to the table" [level=2] [ref=e520]
+        - paragraph [ref=e521]: Start with a bounded problem, a failing regression and a player-visible result. Record the decision, the exact evidence and the work still open. A proposal is not a delivered feature.
+        - list [ref=e522]:
+          - listitem [ref=e523]:
+            - strong [ref=e524]: Draft before publishing.
+            - text: Use the template in your work branch. Drafts stay out of the public catalog until reviewed; this journal has no private draft route or CMS.
+          - listitem [ref=e525]:
+            - strong [ref=e526]: Attach evidence, not a green total.
+            - text: Link actual source and results; label authored examples versus organic campaigns. Keep blocked checks blocked.
+          - listitem [ref=e527]:
+            - strong [ref=e528]: Check the reading experience.
+            - text: Add typed content, inspect owned pixels and verify the permalink, keyboard, narrow layout and deployment base.
+        - generic [ref=e529]:
+          - link "Authoring guide" [ref=e530] [cursor=pointer]:
+            - /url: https://github.com/ErikBurdett/Theandril/blob/master/docs/updates/CONTRIBUTING.md
+          - link "Dispatch template" [ref=e531] [cursor=pointer]:
+            - /url: https://github.com/ErikBurdett/Theandril/blob/master/docs/updates/TEMPLATE.md
+          - link "Report a problem ↗" [ref=e532] [cursor=pointer]:
+            - /url: https://github.com/ErikBurdett/Theandril/issues/new?title=Journal%20feedback%3A%20
+        - paragraph [ref=e533]: "Useful next packet: document one specific player journey with source links and acceptance criteria. Propose scope changes explicitly; no paid tools, generated art or blocked AI probes are required to improve a dispatch."
+  - contentinfo [ref=e534]:
+    - paragraph [ref=e535]:
+      - strong [ref=e536]: Theandril
+      - text: · A world in the making.Single-player development build. Not Theandril 1.0.
+    - generic [ref=e537]:
+      - link "Current implementation status ↗" [ref=e538] [cursor=pointer]:
+        - /url: https://github.com/ErikBurdett/Theandril/blob/master/docs/IMPLEMENTATION_STATUS.md
+      - link "Image provenance ↗" [ref=e539] [cursor=pointer]:
+        - /url: /Theandril/updates/provenance.json
+      - link "Hearth & Card roadmap ↗" [ref=e540] [cursor=pointer]:
+        - /url: https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/
+      - link "Source repository ↗" [ref=e541] [cursor=pointer]:
+        - /url: https://github.com/ErikBurdett/Theandril
+```
+
+# Test source
+
+```ts
+  1  | import { expect, test } from '@playwright/test';
+  2  | 
+  3  | test('home provides the public routes and generated ledger', async ({ page }) => {
+  4  |   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
+  5  |   await page.goto('updates/');
+  6  |   await expect(page.getByRole('heading', { name: 'Theandril', exact: true })).toBeVisible();
+  7  |   await expect(page.getByRole('heading', { name: 'The change ledger' })).toBeVisible();
+  8  |   await expect(page.locator('.commit-entry')).toHaveCount(8);
+  9  |   await expect(page.getByRole('button', { name: /Show .* older commits/ })).toBeVisible();
+  10 |   await page.getByRole('button', { name: /Show .* older commits/ }).click();
+  11 |   expect(await page.locator('.commit-entry').count()).toBeGreaterThan(8);
+  12 |   await page.setViewportSize({ width: 390, height: 844 });
+  13 |   await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
+  14 |   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  15 |   expect(errors).toEqual([]);
+  16 | });
+  17 | 
+  18 | test('dispatches remain refresh-safe at their new path', async ({ page }) => {
+  19 |   await page.goto('updates/dispatches/');
+> 20 |   await expect(page.locator('.dispatch-row')).toHaveCount(21);
+     |                                               ^ Error: expect(locator).toHaveCount(expected) failed
+  21 |   await page.locator('.dispatch-row a').first().click();
+  22 |   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
+  23 | });
+  24 | 
+  25 | test('a permalink to a commit beyond the first page reveals it and scrolls to it', async ({ page }) => {
+  26 |   await page.goto('updates/?commit=588d79a');
+  27 |   const entry = page.locator('#commit-588d79a');
+  28 |   await expect(entry).toBeVisible();
+  29 |   await expect(entry).toBeInViewport();
+  30 |   expect(await page.locator('.commit-entry').count()).toBeGreaterThan(8);
+  31 | });
+  32 | 
+```
