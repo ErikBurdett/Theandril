@@ -1,0 +1,102 @@
+[
+  {
+    "run": "live-results",
+    "case": "production-land-policy-lan-00366-row-width-with-exact-replay",
+    "trace": "live-results/production-land-policy-lan-00366-row-width-with-exact-replay/trace.zip",
+    "errors": [
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/assets/game-C8EwoKXM.css"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/assets/game-DqpjO7AA.js"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/assets/client-RzuSRENx.js"
+      }
+    ]
+  },
+  {
+    "run": "live-results",
+    "case": "gameplay-updates-archive-s-19673-nd-recovers-from-no-results",
+    "trace": "live-results/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/trace.zip",
+    "errors": [
+      {
+        "error": "Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/dispatches/#archive\nCall log:\n\u001b[2m  - navigating to \"https://erikburdett.github.io/Theandril/updates/dispatches/#archive\", waiting until \"load\"\u001b[22m\n"
+      },
+      {
+        "error": "net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/dispatches/#archive"
+      }
+    ]
+  },
+  {
+    "run": "live-results",
+    "case": "gameplay-updates-readable-journal-at-390px-and-130-text",
+    "trace": "live-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip",
+    "errors": [
+      {
+        "error": "Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/dispatches/\nCall log:\n\u001b[2m  - navigating to \"https://erikburdett.github.io/Theandril/updates/dispatches/\", waiting until \"load\"\u001b[22m\n"
+      },
+      {
+        "error": "net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/dispatches/"
+      }
+    ]
+  },
+  {
+    "run": "live-results",
+    "case": "gameplay-updates-readable-journal-at-1440px-and-100-text",
+    "trace": "live-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip",
+    "errors": [
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/updates/group-postings-desktop.png"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/updates/fleet-provisions-saved-voyage.png"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/updates/archipelago.webp"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/updates/cultures.webp"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/updates/campaign.webp"
+      }
+    ]
+  },
+  {
+    "run": "live-results",
+    "case": "gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap",
+    "trace": "live-results/gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap/trace.zip",
+    "errors": [
+      {
+        "error": "Error: page.goto: net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/roadmap/?item=%3Cscript%3E&status=completed\nCall log:\n\u001b[2m  - navigating to \"https://erikburdett.github.io/Theandril/updates/roadmap/?item=%3Cscript%3E&status=completed\", waiting until \"load\"\u001b[22m\n"
+      },
+      {
+        "error": "net::ERR_NETWORK_CHANGED at https://erikburdett.github.io/Theandril/updates/roadmap/?item=%3Cscript%3E&status=completed"
+      }
+    ]
+  },
+  {
+    "run": "live-recovery-results",
+    "case": "gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap",
+    "trace": "live-recovery-results/gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap/trace.zip",
+    "errors": [
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/assets/roadmap-2Ulqx9aT.css"
+      },
+      {
+        "text": "Failed to load resource: net::ERR_NETWORK_CHANGED",
+        "url": "https://erikburdett.github.io/Theandril/assets/client-RzuSRENx.js"
+      }
+    ]
+  }
+]

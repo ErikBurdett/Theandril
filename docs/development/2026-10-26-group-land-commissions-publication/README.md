@@ -74,3 +74,36 @@ strip is supporting illustration with readable caption and Inspect/Original link
 it is not a mobile body-text or completed-work claim. Existing image-keyboard
 coverage uses the historical cultures image. Source-pinned article evidence and
 all historical assets remain unchanged since editorial approval.
+
+## Journal publication and live verification — 27 October
+
+Reviewed journal commit **d65b016731cb4a4f846975feafac493478a560fa** is deployed.
+[Pages 40590239425](https://github.com/ErikBurdett/Theandril/actions/runs/40590239425)
+and [Verify 40590239382](https://github.com/ErikBurdett/Theandril/actions/runs/40590239382)
+both succeeded; [workflow identities](publication-actions.json) and
+[exact public-file readback](public-readback/readback.json) match the isolated
+production build, regenerated feed, source pins and native artwork.
+
+All **26 distinct affected live cases** have passing results across retained runs:
+[initial run](live.log) passes 21 and fails five; the unchanged
+[focused recovery](live-recovery.log) passes four and fails one; the final unchanged
+[roadmap case](live-roadmap-final.log) passes in 1.7 seconds. These are not twenty-six
+passes in one uninterrupted run. No assertions, timeouts, runtime code or browser
+configuration changed between attempts.
+
+[Trace extracts](network-failures.json) document ERR_NETWORK_CHANGED for every
+failed case: document navigation, journal image requests, game modules and the
+roadmap client module. Read-only workstation diagnosis also observed newly created
+virtual network interfaces during this interval; that is a plausible source of
+Chromium network notifications, not proof of the underlying cause. No host network
+settings or other applications were changed. Original traces, failure screenshots,
+live gameplay captures, exact exported campaigns and layout metadata remain under
+[live-results](live-results/) and [live-recovery-results](live-recovery-results/).
+Passing reruns do not prove application recovery from interrupted asset loads.
+
+The four group journeys passed in the initial live run. The authored thirty-hearth
+purse, paid works, paged receipts, narrow form, removal, exact replay and saved
+restoration remain verified, as do the three generated-hearth reply-fault cases.
+The recovered individual-commission case also passes its narrow manual-work and
+exact-replay assertions. All fifteen release gates and the existing pacing issue
+remain open. This is a verified development deployment.

@@ -31,7 +31,11 @@ failures are retained. **Published as `cfd660c`**: both workflows, exact public
 readback and all four live commission journeys pass (42.4 seconds, no retries).
 Reviewed journal 23 integration passes 2,488 tests and 26 distinct affected local
 browser cases across a retained stale-link failure and corrected roadmap rerun.
-Journal publication is being verified.
+Reviewed journal **d65b016** is deployed: both workflows and exact public-file
+readback pass. All 26 distinct affected live cases have passing results across
+the retained 21-pass/five-network-failure run, four-pass/one-network-failure recovery
+and final unchanged roadmap pass. No runtime, assertions or timeouts changed;
+traces identify interrupted document/image/module loads, not a rule failure.
 [Publication evidence](development/2026-10-26-group-land-commissions-publication/README.md).
 [Evidence](development/2026-10-26-group-land-commissions/README.md),
 [ADR0056](architecture/0056-group-land-commissions.md).
