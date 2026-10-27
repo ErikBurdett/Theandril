@@ -1,5 +1,36 @@
 # Theandril implementation status
 
+## Finding land commissions that need attention — 2026-10-27
+
+A separate Land commission status filter combines with registry search and
+Settlement orders. Players can find commissions, missing commissions, zero
+allowances and reported waits before paging, retain off-filter checks, and revise
+only chosen budgets through the existing group command. Counts overlap; zero
+allowance can accompany paid work. A missing summary wait is not a promise that
+land or funds permit a job. Selecting a hearth reveals its ordinary exact detail.
+
+Detached owned-fact indexing replaces the prior policy-only map and is memoized
+per observation. Historical observations without commissions hide and bypass the
+selector. Shared pending locks and group receipts remain unchanged. No additional
+land query, canonical/AI rule, save field or content change is introduced:
+rules/save 37 and content 015468d1 remain intact.
+
+The first production journey passes: thirty authored hearths, 128 armies and two
+wars; eleven commissions, five zero allowances and eight reported waits. Browsing
+leaves hash 6c3dffa5 and the archive unchanged. Five explicit budget replacements
+spend 48 ordinary coin, preserve earlier paid work and replay/restore exactly at
+7dbe8a11. At 390px/130% text the selector is 340×44px within its window, with no
+page overflow. All 79 distinct local Pages cases pass across a retained
+78-pass/one-old-help-locator failure and corrected two-journey rerun. All 2,497
+distinct unit/campaign/repository tests pass across the full run (2,496 passes,
+one existing Git-history timeout) and unchanged isolated six-test pass. No test
+assertion or timeout was weakened. Independent code/displayed review passes;
+publication verification remains pending.
+[Evidence](development/2026-10-27-commission-filters/README.md).
+
+ACT-32/M3, DH-021, R06 and all gates remain open. Broader paid land strategy,
+whole-realm funding priorities and organic mature-realm acceptance remain next.
+
 ## Coordinated land commissions — 2026-10-26
 
 The hearth registry applies or ends existing commissions for checked or saved

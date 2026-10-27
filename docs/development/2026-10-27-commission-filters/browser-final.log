@@ -1,0 +1,14 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:1453381) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1453748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:1453781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/land-commission-filters.spec.ts:12:1 › commission filters find zero allowances beyond page one and revise only those budgets with exact paid replay and restoration (26.4s)
+  ✓  2 tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration (24.1s)
+
+  2 passed (51.7s)

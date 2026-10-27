@@ -12,6 +12,7 @@ import { GroupMovementOrders, type GroupMovementIssue, type GroupMovementPreview
 import { DefenseTheaters, type TheaterIssue } from './defense-theaters';
 import { ARMY_ORDER_FILTERS, armyOrderCounts, buildArmyOrderIndex, matchesArmyOrderFilter, type ArmyOrderFilter, type ArmyOrderStatus } from './army-order-status';
 import { SETTLEMENT_ORDER_FILTERS, buildSettlementOrderIndex, matchesSettlementOrderFilter, settlementOrderCounts, type SettlementOrderFilter, type SettlementOrderStatus } from './settlement-order-status';
+import { LAND_COMMISSION_FILTERS, buildLandCommissionIndex, filterLandCommissionEntries, landCommissionCounts, type LandCommissionFilter } from './land-commission-status';
 import './realm-navigation.css';
 
 export type RegistryKind = 'armies' | 'settlements';
@@ -64,6 +65,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const [sort, setSort] = useState<Sort>('id');
   const [orderFilter, setOrderFilter] = useState<ArmyOrderFilter>('all');
   const [settlementFilter, setSettlementFilter] = useState<SettlementOrderFilter>('all');
+  const [landCommissionFilter, setLandCommissionFilter] = useState<LandCommissionFilter>('all');
   const [page, setPage] = useState(0);
   const [armyGroupIds, setArmyGroupIds] = useState<ReadonlySet<string>>(() => new Set());
   const [townGroupIds, setTownGroupIds] = useState<ReadonlySet<string>>(() => new Set());
@@ -93,10 +95,12 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   }, [availableArmyIds, availableTownIds]);
   const orderIndex = useMemo(() => registry === 'armies' ? buildArmyOrderIndex(view) : new Map<string, ArmyOrderStatus>(), [view, registry]);
   const settlementIndex = useMemo(() => registry === 'settlements' ? buildSettlementOrderIndex(view) : new Map<string, SettlementOrderStatus>(), [view, registry]);
+  const landCommissionIndex = useMemo(() => registry === 'settlements' ? buildLandCommissionIndex(view) : undefined, [view, registry]);
+  const activeLandCommissionFilter = landCommissionIndex === undefined ? 'all' : landCommissionFilter;
   const baseEntries = useMemo(() => registryEntries(view, registry, search, force, sort), [view, registry, search, force, sort]);
   const orderCounts = useMemo(() => armyOrderCounts(baseEntries.map(item => item.id), orderIndex), [baseEntries, orderIndex]);
   const settlementCounts = useMemo(() => settlementOrderCounts(baseEntries.map(item => item.id), settlementIndex), [baseEntries, settlementIndex]);
-  const entries = useMemo(() => registry === 'armies' && orderFilter !== 'all'
+  const orderEntries = useMemo(() => registry === 'armies' && orderFilter !== 'all'
     ? baseEntries.filter(item => {
       const status = orderIndex.get(item.id);
       return status !== undefined && matchesArmyOrderFilter(status, orderFilter);
@@ -105,8 +109,10 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
         const status = settlementIndex.get(item.id);
         return status !== undefined && matchesSettlementOrderFilter(status, settlementFilter);
       }) : baseEntries, [baseEntries, registry, orderFilter, orderIndex, settlementFilter, settlementIndex]);
+  const commissionCounts = useMemo(() => landCommissionCounts(orderEntries.map(item => item.id), landCommissionIndex), [orderEntries, landCommissionIndex]);
+  const entries = useMemo(() => filterLandCommissionEntries(orderEntries, landCommissionIndex, activeLandCommissionFilter), [orderEntries, landCommissionIndex, activeLandCommissionFilter]);
   const selectedId = registry === 'armies' ? selection.armyId : selection.settlementId;
-  useEffect(() => { setPage(0); }, [registry, search, force, sort, orderFilter, settlementFilter]);
+  useEffect(() => { setPage(0); }, [registry, search, force, sort, orderFilter, settlementFilter, activeLandCommissionFilter]);
   useEffect(() => {
     const index = entries.findIndex(item => item.id === selectedId);
     if (index >= 0) setPage(Math.floor(index / REGISTRY_PAGE_SIZE));
@@ -115,7 +121,6 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
   const pages = Math.max(1, Math.ceil(entries.length / REGISTRY_PAGE_SIZE));
   const current = Math.min(page, pages - 1);
   const visible = entries.slice(current * REGISTRY_PAGE_SIZE, (current + 1) * REGISTRY_PAGE_SIZE);
-  const landPolicies = useMemo(() => new Map(registry === 'settlements' ? view.landPolicies?.filter(policy => policy.factionId === view.factionId).map(policy => [policy.settlementId, policy]) : []), [view, registry]);
   const armies = new Map(view.armies.map(army => [army.id, army]));
   const groupEnabled = Boolean(onSelectionGroupCommand) || (registry === 'armies' ? Boolean(onGroupPosting || onGroupMovement || onGroupPatrol || onTheaterCommand) : Boolean(onGroupCharter || onGroupLandPolicy || onGroupWorkerPolicy || onGroupProduction));
   const matchingGroupIds = new Set(entries.filter(item => availableGroupIds.has(item.id)).map(item => item.id));
@@ -126,7 +131,12 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
     {registry === 'settlements' && <><div className="registry-tools"><label>Settlement orders<select value={settlementFilter} disabled={locked} onChange={event => setSettlementFilter(event.target.value as SettlementOrderFilter)}>
       {SETTLEMENT_ORDER_FILTERS.map(filter => <option key={filter.value} value={filter.value}>{filter.label} ({settlementCounts[filter.value]})</option>)}
     </select></label></div>
-      <details className="registry-filter-help field-help"><summary>How these filters work</summary><p>Counts overlap and follow your search. No production includes hearths waiting for a charter’s next turn; Without charters can include queued work. Charters waiting includes budget limits and completed building programs, not just problems. Current queues come first; next-work candidates share the treasury and are not guaranteed purchases.</p></details></>}
+      {landCommissionIndex !== undefined && <div className="registry-tools"><label>Land commission status<select value={activeLandCommissionFilter} disabled={locked} onChange={event => setLandCommissionFilter(event.target.value as LandCommissionFilter)}>
+        {LAND_COMMISSION_FILTERS.map(filter => <option key={filter.value} value={filter.value}>{filter.label} ({commissionCounts[filter.value]})</option>)}
+      </select></label></div>}
+      <details className="registry-filter-help field-help"><summary>How these filters work</summary><p>Counts overlap and follow your search. No production includes hearths waiting for a charter’s next turn; Without charters can include queued work. Charters waiting includes budget limits and completed building programs, not just problems. Current queues come first; next-work candidates share the treasury and are not guaranteed purchases.</p>
+        {landCommissionIndex !== undefined && <p>Land commission counts follow your search and Settlement orders filter. Zero allowance includes hearths with paid work still underway. Reported waits includes pauses such as paid work already underway; it does not list every affordability or land-suitability limit. No reported wait does not guarantee an affordable or suitable job. Select a hearth for its exact commission details.</p>}
+      </details></>}
     <div className="registry-tools"><label>Registry order<select value={sort} disabled={locked} onChange={event => setSort(event.target.value as Sort)}><option value="id">Stable order</option><option value="name">Name A–Z</option></select></label><span>{entries.length} {registry === 'armies' ? 'forces' : 'towns'}</span></div>
     {onSelectionGroupCommand && <SelectionGroups key={registry} view={view} kind={registry} checked={currentGroupIds} busy={locked} issue={onSelectionGroupCommand} recall={setGroupIds} onPendingChange={pending => reportPending('selection', pending)}/>}
     {registry === 'armies' && onGroupPosting && <GroupPostingOrders view={view} hash={hash} selected={currentGroupIds} matching={matchingGroupIds} busy={locked} issue={onGroupPosting} selectMatching={() => setGroupIds(addGroupSelection(currentGroupIds, [...matchingGroupIds]))} clearSelection={() => setGroupIds(new Set())} accepted={ids => setGroupIds(previous => new Set([...previous].filter(id => !ids.has(id))))}/>}
@@ -142,7 +152,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
       const town = 'queue' in item ? item : undefined;
       const orderStatus = orderIndex.get(item.id);
       const settlementStatus = settlementIndex.get(item.id);
-      const landPolicy = landPolicies.get(item.id);
+      const landPolicy = landCommissionIndex?.get(item.id)?.policy;
       return <div className={`registry-row${groupEnabled ? ' registry-row-group' : ''}`} key={item.id}>
         {groupEnabled && <label className="registry-group-check">{availableGroupIds.has(item.id) ? <input type="checkbox" aria-label={`Select ${item.name} for group orders`} checked={currentGroupIds.has(item.id)} disabled={locked || (!currentGroupIds.has(item.id) && currentGroupIds.size >= GROUP_POSTING_LIMIT)} onChange={event => {
           const checked = event.target.checked;
@@ -162,7 +172,7 @@ export function RealmRegistry({ view, hash, registry, search, force, selection, 
             {landPolicy && <small>Land commission: {IMPROVEMENTS.find(improvement => improvement.id === landPolicy.improvementId)?.name ?? landPolicy.improvementId} · {landPolicy.allowance} coin left · {landPolicy.reserve} reserve{landPolicy.blocker ? ` · ${landPolicy.blocker}` : ''}</small>}</>}
         </span><span aria-hidden="true">›</span>
       </button></div>;
-    })}{!entries.length && <p className="empty">{search || force !== 'all' || (registry === 'armies' && orderFilter !== 'all') || (registry === 'settlements' && settlementFilter !== 'all') ? 'No matching entries. Clear your search or filter.' : registry === 'armies' ? 'Recruit an army or fleet from a settlement.' : 'Select your caravan to establish the first hearth.'}</p>}</div>
+    })}{!entries.length && <p className="empty">{search || force !== 'all' || (registry === 'armies' && orderFilter !== 'all') || (registry === 'settlements' && (settlementFilter !== 'all' || activeLandCommissionFilter !== 'all')) ? 'No matching entries. Clear your search or filter.' : registry === 'armies' ? 'Recruit an army or fleet from a settlement.' : 'Select your caravan to establish the first hearth.'}</p>}</div>
     {pages > 1 && <nav className="registry-pages" aria-label="Registry pages"><button disabled={locked || current === 0} onClick={() => setPage(current - 1)} aria-label="Previous registry page">←</button><span>Page {current + 1} of {pages}</span><button disabled={locked || current === pages - 1} onClick={() => setPage(current + 1)} aria-label="Next registry page">→</button></nav>}
   </div>;
 }

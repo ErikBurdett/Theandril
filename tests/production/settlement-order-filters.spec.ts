@@ -32,7 +32,10 @@ test('production settlement orders locate waiting charters across thirty hearths
   await expect(help.locator('..')).toHaveAttribute('open', '');
   await expect(help.locator('..')).toContainText('Counts overlap');
   await expect(help.locator('..')).toContainText('not guaranteed purchases');
-  await expect(help.locator('..').locator('p')).toBeVisible();
+  const helpParagraphs = help.locator('..').locator('p');
+  await expect(helpParagraphs).toHaveCount(2);
+  for (const paragraph of await helpParagraphs.all()) await expect(paragraph).toBeVisible();
+  await expect(helpParagraphs.nth(1)).toContainText('Land commission counts follow your search and Settlement orders filter.');
   await page.keyboard.press('Enter');
   await expect(help.locator('..')).not.toHaveAttribute('open', '');
   // The last five stable-ID rows really lie beyond the first registry page.

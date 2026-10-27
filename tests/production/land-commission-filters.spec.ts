@@ -1,0 +1,136 @@
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { expect, test } from '@playwright/test';
+import { createJournal, replayArchive, resumeJournal } from '@theandril/chronicle';
+import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand } from '@theandril/sim';
+import { exportSave, serializeCampaign } from '@theandril/persistence';
+import { empireDelegationCampaign } from '../../packages/test-fixtures/src/empire-delegation-fixture';
+import { campaignMenu, exportedTravel } from '../gameplay/group-movement-fixture';
+import { openRegistry, openSelectedOrders } from '../gameplay/ui-navigation';
+
+const improvementId = 'improvement.terraced_fields';
+
+test('commission filters find zero allowances beyond page one and revise only those budgets with exact paid replay and restoration', async ({ page }, testInfo) => {
+  mkdirSync(testInfo.outputDir, { recursive: true });
+  const fixture = empireDelegationCampaign(), game = fixture.game, factionId = game.turnOwnerId;
+  const towns = Object.values(game.settlements).filter(town => town.factionId === factionId).sort((a, b) => a.id.localeCompare(b.id));
+  const issue = (command: GameCommand) => expect(applyCommand(game, command).ok).toBe(true);
+  // Disclosed authored mature realm and finite purse. Every worker and policy
+  // below is installed through an ordinary command; paid works are not authored.
+  game.factions.find(faction => faction.id === factionId)!.treasury = 100;
+  for (const town of towns) issue({ type: 'setWorkerPolicy', factionId, settlementId: town.id, focus: 'food' });
+  const zeroTowns = [towns[0]!, towns[1]!, ...towns.slice(27)];
+  for (const town of zeroTowns.slice(1)) issue({ type: 'setLandPolicy', factionId, settlementId: town.id, improvementId, allowance: 0, reserve: 10 });
+  for (const town of towns.slice(21, 24)) issue({ type: 'setLandPolicy', factionId, settlementId: town.id, improvementId, allowance: 100, reserve: 100 });
+  for (const town of towns.slice(24, 27)) issue({ type: 'setLandPolicy', factionId, settlementId: town.id, improvementId, allowance: 1, reserve: 0 });
+  issue({ type: 'setLandPolicy', factionId, settlementId: towns[0]!.id, improvementId, allowance: 22, reserve: 0 });
+  expect(game.land.settlements[towns[0]!.id]!.work?.coinCost).toBe(22);
+  const initialView = getObservation(game, factionId, { landDetails: 'none', developmentCandidates: false });
+  expect(initialView.treasury).toBe(78);
+  expect(initialView.landPolicies).toHaveLength(11);
+  expect(initialView.landPolicies!.filter(policy => policy.allowance === 0)).toHaveLength(5);
+  expect(initialView.landPolicies!.filter(policy => policy.blocker !== null)).toHaveLength(8);
+  expect(initialView.landPolicies!.find(policy => policy.settlementId === towns[24]!.id)?.blocker).toBeNull();
+  const archive = createJournal(game, { mode: 'player', coverage: 'from-save' }).materialize();
+  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto('./');
+  expect(await page.evaluate(() => '__THEANDRIL__' in window)).toBe(false);
+  await page.getByLabel('Import save file').setInputFiles({ name: 'commission-filter-realm.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeCampaign(game, archive))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await openRegistry(page, 'settlements');
+  const filter = page.getByRole('combobox', { name: 'Land commission status', exact: true });
+  const production = page.getByRole('combobox', { name: 'Settlement orders', exact: true });
+  const search = page.getByRole('searchbox', { name: 'Search your realm', exact: true });
+  const registry = page.getByTestId('settlement-registry');
+  const group = page.getByTestId('group-charters'), policies = page.getByTestId('group-land-policies');
+  const counts = ['All hearths (30)', 'With commissions (11)', 'Without commissions (19)', 'Zero allowance (5)', 'Reported waits (8)'];
+  await expect(filter.locator('option')).toHaveText(counts);
+  await expect(registry.getByRole('button')).toHaveCount(25);
+  await expect(registry.getByRole('button', { name: new RegExp(towns[29]!.name) })).toHaveCount(0);
+  await registry.getByRole('checkbox', { name: `Select ${towns[24]!.name} for group orders`, exact: true }).check();
+  await filter.focus(); await page.keyboard.press('End'); await page.keyboard.press('ArrowUp'); await page.keyboard.press('Enter');
+  await expect(filter).toHaveValue('exhausted');
+  await expect(registry.getByRole('button')).toHaveCount(5);
+  await expect(registry).toContainText(towns[29]!.name);
+  await expect(registry).toContainText('Existing paid land work must finish first.');
+  await group.getByRole('button', { name: 'Select matching hearths', exact: true }).click();
+  await expect(policies).toContainText('6 hearths selected · 1 outside this filter');
+  await filter.selectOption('waiting');
+  await expect(registry.getByRole('button')).toHaveCount(8);
+  await expect(registry).toContainText('100 coin reserve');
+  await expect(registry).not.toContainText(towns[24]!.name);
+  await production.selectOption('unchartered');
+  await expect(filter.locator('option')).toHaveText(['All hearths (0)', 'With commissions (0)', 'Without commissions (0)', 'Zero allowance (0)', 'Reported waits (0)']);
+  await expect(registry).toContainText('No matching entries');
+  await expect(policies).toContainText('6 hearths selected · 6 outside this filter');
+  await production.selectOption('all'); await filter.selectOption('exhausted');
+  await search.fill(towns[29]!.name);
+  await expect(filter.locator('option')).toHaveText(['All hearths (1)', 'With commissions (1)', 'Without commissions (0)', 'Zero allowance (1)', 'Reported waits (1)']);
+  await expect(policies).toContainText('6 hearths selected · 5 outside this filter');
+  await search.fill('');
+  await filter.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  await page.screenshot({ path: testInfo.outputPath('commission-filter-desktop.png') });
+  // Browsing/filtering cannot issue orders or alter the journal.
+  const browsed = await exportedTravel(page);
+  expect(serializeGame(browsed.game)).toBe(serializeGame(game)); expect(browsed.archive).toEqual(archive);
+
+  // A null compact blocker is not an affordability promise. Inspect the ordinary
+  // selected-hearth query, including when no suitable tile currently exists.
+  await openRegistry(page, 'settlements'); await filter.selectOption('commissioned');
+  await search.fill(towns[24]!.name); await registry.getByRole('button', { name: new RegExp(towns[24]!.name) }).click();
+  await openSelectedOrders(page);
+  await expect(page.getByTestId('land-panel')).toHaveAttribute('data-query-state', 'ready');
+  const detail = page.getByTestId('land-policy'); await detail.locator(':scope > summary').click();
+  const exactReason = getObservation(game, factionId).land.settlements.find(town => town.settlementId === towns[24]!.id)!.landPolicyChoice!.blocker!;
+  expect(exactReason).toBeTruthy(); await expect(page.getByTestId('land-policy-status')).toContainText(exactReason);
+
+  await campaignMenu(page); await page.getByRole('combobox', { name: 'Text scale', exact: true }).selectOption('1.3');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openRegistry(page, 'settlements'); await search.fill(''); await filter.selectOption('exhausted');
+  await group.getByRole('button', { name: 'Select matching hearths', exact: true }).click();
+  await expect(policies).toContainText('5 hearths selected');
+  await filter.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  const bounds = await filter.evaluate(element => {
+    const control = element.getBoundingClientRect(), frame = element.closest('.campaign-window-body')!.getBoundingClientRect();
+    return { control: control.toJSON(), frame: frame.toJSON(), overflow: document.documentElement.scrollWidth - innerWidth };
+  });
+  expect(bounds.control.height).toBeGreaterThanOrEqual(44);
+  expect(bounds.control.left).toBeGreaterThanOrEqual(bounds.frame.left); expect(bounds.control.right).toBeLessThanOrEqual(bounds.frame.right);
+  expect(bounds.control.top).toBeGreaterThanOrEqual(bounds.frame.top); expect(bounds.control.bottom).toBeLessThanOrEqual(bounds.frame.bottom);
+  expect(bounds.overflow).toBeLessThanOrEqual(1);
+  await page.screenshot({ path: testInfo.outputPath('commission-filter-narrow-130.png') });
+  await policies.locator(':scope > summary').click();
+  await policies.getByRole('textbox', { name: 'Allowance per hearth · coin', exact: true }).fill('100');
+  await policies.getByRole('textbox', { name: 'Shared treasury reserve · coin', exact: true }).fill('10');
+  const pending = filter.evaluate(element => new Promise<boolean>((resolve, reject) => {
+    const control = element as HTMLSelectElement;
+    const observer = new MutationObserver(() => { if (control.disabled) { observer.disconnect(); clearTimeout(timeout); resolve(true); } });
+    const timeout = setTimeout(() => { observer.disconnect(); reject(new Error('Commission filter did not lock during paid group order.')); }, 3000);
+    observer.observe(control, { attributes: true, attributeFilter: ['disabled'] });
+  }));
+  await policies.getByRole('button', { name: 'Apply land commissions (5)', exact: true }).click();
+  expect(await pending).toBe(true);
+  await expect(page.getByTestId('group-land-policy-results')).toContainText('5 orders accepted · 0 refused');
+  await expect(filter).toBeEnabled(); await expect(registry).toContainText('No matching entries');
+  await expect(filter.locator('option[value="exhausted"]')).toHaveText('Zero allowance (0)');
+  await expect(policies).toContainText('0 hearths selected');
+  const expected = deserializeGame(serializeGame(game)), journal = resumeJournal(expected, archive);
+  for (const town of zeroTowns.sort((a, b) => a.id.localeCompare(b.id))) expect(journal.record(expected, { type: 'setLandPolicy', factionId, settlementId: town.id, improvementId, allowance: 100, reserve: 10 }).ok).toBe(true);
+  const changed = await exportedTravel(page);
+  expect(serializeGame(changed.game)).toBe(serializeGame(expected)); expect(changed.archive).toEqual(journal.materialize());
+  expect(changed.archive.records).toHaveLength(5);
+  expect(serializeGame(replayArchive(changed.archive))).toBe(serializeGame(expected));
+  expect(changed.game.land.settlements[towns[0]!.id]!.work).toEqual(game.land.settlements[towns[0]!.id]!.work);
+  expect(changed.game.land.settlements[towns[1]!.id]!.work?.coinCost).toBe(22);
+  expect(changed.game.landPolicies.find(policy => policy.settlementId === towns[24]!.id)).toEqual(game.landPolicies.find(policy => policy.settlementId === towns[24]!.id));
+  await campaignMenu(page); await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+  await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
+  await openRegistry(page, 'settlements'); await expect(filter).toHaveValue('all');
+  await expect(filter.locator('option[value="exhausted"]')).toHaveText('Zero allowance (0)');
+  const restored = await exportedTravel(page);
+  expect(serializeGame(restored.game)).toBe(serializeGame(expected)); expect(restored.archive).toEqual(changed.archive);
+  writeFileSync(testInfo.outputPath('commission-filter-restored.theandril'), restored.bytes);
+  writeFileSync(testInfo.outputPath('commission-filter-evidence.json'), JSON.stringify({ authored: fixture.authored, extraSetup: '100 coin authored purse; ordinary Food worker policies and eleven ordinary land commissions; first work paid22 before from-save archive', counts, initialHash: stateHash(game), browsedHash: stateHash(browsed.game), finalHash: stateHash(restored.game), submittedIds: zeroTowns.map(town => town.id), records: changed.archive.records.length, initialTreasury: 78, finalTreasury: getObservation(restored.game, factionId).treasury, exactReason, bounds, canonicalAndArchiveUnchangedByBrowsing: true, exactReplay: true }, null, 2) + '\n');
+  expect(errors).toEqual([]);
+});

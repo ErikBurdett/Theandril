@@ -1,0 +1,134 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:1331512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1332691) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 79 tests using 1 worker
+
+(node:1338392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (2.0s)
+  ✓   2 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (483ms)
+  ✓   3 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (443ms)
+  ✓   4 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (370ms)
+  ✓   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (749ms)
+  ✓   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (810ms)
+  ✓   7 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (731ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (677ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (1.1s)
+  ✓  10 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (1.1s)
+  ✓  11 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (929ms)
+  ✓  12 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (633ms)
+  ✓  13 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text (3.6s)
+  ✓  14 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text (2.6s)
+  ✓  15 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 100% text (2.3s)
+  ✓  16 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text (2.9s)
+  ✓  17 tests/gameplay/updates.spec.ts:53:1 › reading surfaces retain contrast without putting texture over the text (273ms)
+  ✓  18 tests/gameplay/updates.spec.ts:84:1 › unknown dispatch links fail honestly and keyboard skip navigation works (360ms)
+  ✓  19 tests/gameplay/updates.spec.ts:95:1 › archive search combines topic filters, survives refresh and recovers from no results (459ms)
+  ✓  20 tests/gameplay/updates.spec.ts:110:1 › scope ledger links real gates and a contributor can reach authoring guidance (279ms)
+  ✓  21 tests/gameplay/updates.spec.ts:126:1 › a keyboard reader can enlarge a real image and return to the same control (269ms)
+  ✓  22 tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch (1.3s)
+  ✓  23 tests/production/army-order-filter.spec.ts:9:1 › production registry finds real waiting orders and a paused last-page patrol without changing travel, then explicitly resumes its policy (11.4s)
+  ✓  24 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (5.3s)
+  ✓  25 tests/production/charter-templates.spec.ts:41:1 › production charter templates cross campaigns and browser reloads before explicit application and saved restoration (6.3s)
+  ✓  26 tests/production/defense-theaters.spec.ts:6:1 › generated production adopts a defensive theater through ordinary controls and restores its exact saved campaign without development hooks (4.9s)
+  ✓  27 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1.7s)
+  ✓  28 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (674ms)
+  ✓  29 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (3.8s)
+  ✓  30 tests/production/group-intent.spec.ts:11:3 › production stale group posting keeps the selection and allows a reviewed retry (4.2s)
+  ✓  31 tests/production/group-intent.spec.ts:11:3 › production stale group charter keeps the selection and allows a reviewed retry (4.1s)
+  ✓  32 tests/production/group-land-policies.spec.ts:26:1 › production land commissions share a finite purse across 30 hearths and preserve exact keyboard removal and restoration at 130% (21.6s)
+  ✓  33 tests/production/group-land-policies.spec.ts:150:3 › production land commission missing-results after real paid commission installation preserves selection and requires restoration (2.7s)
+  ✓  34 tests/production/group-land-policies.spec.ts:150:3 › production land commission wrong-hearth after real paid commission installation preserves selection and requires restoration (2.7s)
+  ✓  35 tests/production/group-land-policies.spec.ts:150:3 › production land commission worker-crash after real paid commission installation preserves selection and requires restoration (2.8s)
+  ✓  36 tests/production/group-movement.spec.ts:6:1 › generated production group travel moves ordinary armies and retains postings, replay and portable saved routes without development hooks (5.3s)
+  ✓  37 tests/production/group-patrol-assignment.spec.ts:11:1 › production assigns shared patrol endpoints to 101 checked armies and preserves paused policies and existing travel (6.3s)
+  ✓  38 tests/production/group-patrol-assignment.spec.ts:82:1 › a group-assigned patrol travels out and back in a generated campaign (2.5s)
+  ✓  39 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol missing-results after real policy mutation requires saved restoration before retry (6.2s)
+  ✓  40 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol wrong-army after real policy mutation requires saved restoration before retry (5.6s)
+  ✓  41 tests/production/group-patrol-recovery.spec.ts:19:3 › production group patrol worker-crash after real policy mutation requires saved restoration before retry (5.8s)
+  ✓  42 tests/production/group-patrols.spec.ts:10:1 › production group patrols pause, resume and remove selected policies across filters without changing issued travel (9.5s)
+  ✓  43 tests/production/group-policy-results.spec.ts:74:1 › production posting receipts expose all 128 actual results, preserve 32 refused selections and never retry while browsing (14.9s)
+  ✓  44 tests/production/group-policy-results.spec.ts:152:1 › production charter receipts reveal the thirtieth success, handle an empty refusal filter and reset for the next submitted batch (12.0s)
+  ✓  45 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (2.2s)
+  ✓  46 tests/production/group-publication-recovery.spec.ts:41:3 › production group posting publication failure locks after real mutation and restores before retry (6.5s)
+  ✓  47 tests/production/group-publication-recovery.spec.ts:41:3 › production group charter publication failure locks after real mutation and restores before retry (5.5s)
+  ✓  48 tests/production/group-response-recovery.spec.ts:44:5 › production group posting missing-row reply requires restoration after two real commands (5.6s)
+  ✓  49 tests/production/group-response-recovery.spec.ts:44:5 › production group posting duplicate reply requires restoration after two real commands (5.4s)
+  ✓  50 tests/production/group-response-recovery.spec.ts:44:5 › production group posting wrong-actor reply requires restoration after two real commands (4.9s)
+  ✓  51 tests/production/group-response-recovery.spec.ts:44:5 › production group charter missing-row reply requires restoration after two real commands (5.1s)
+  ✓  52 tests/production/group-response-recovery.spec.ts:44:5 › production group charter duplicate reply requires restoration after two real commands (4.9s)
+  ✓  53 tests/production/group-response-recovery.spec.ts:44:5 › production group charter wrong-actor reply requires restoration after two real commands (5.1s)
+  ✓  54 tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% (21.0s)
+  ✓  55 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy missing-results after real allocation preserves selection and requires restoration (3.0s)
+  ✓  56 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy wrong-hearth after real allocation preserves selection and requires restoration (2.8s)
+  ✓  57 tests/production/group-worker-policies.spec.ts:113:3 › production worker policy worker-crash after real allocation preserves selection and requires restoration (2.9s)
+  ✓  58 tests/production/land-commission-filters.spec.ts:12:1 › commission filters find zero allowances beyond page one and revise only those budgets with exact paid replay and restoration (21.2s)
+  ✓  59 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (5.1s)
+  ✓  60 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (3.3s)
+  ✓  61 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (4.7s)
+  ✓  62 tests/production/patrol-recovery.spec.ts:8:1 › production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery (5.7s)
+  ✓  63 tests/production/patrol-retirement.spec.ts:16:1 › production AI watch retires a genuinely captured hearth patrol and saves its subsequent ordinary movement (10.8s)
+  ✓  64 tests/production/patrols.spec.ts:7:1 › a generated production campaign patrols, pauses and restores through real controls without development hooks (3.9s)
+  ✓  65 tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector (5.8s)
+  ✓  66 tests/production/posting-targets.spec.ts:58:1 › production unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (3.3s)
+  ✓  67 tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (5.1s)
+  ✓  68 tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration (4.8s)
+  ✓  69 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (7.3s)
+  ✓  70 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer (3.4s)
+  ✓  71 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer (3.1s)
+  ✓  72 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer (4.7s)
+  ✓  73 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer (4.3s)
+  ✓  74 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (6.7s)
+  ✘  75 tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration (7.5s)
+(node:1415833) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  76 tests/production/supply-access.spec.ts:8:1 › built production negotiates foreign harbor supply through portable import, pays once and restores the replenished agreement without development hooks (6.1s)
+  ✓  77 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.5s)
+  ✓  78 tests/production/worker-policy.spec.ts:16:1 › a generated hearth automatically employs its new population and restores its standing worker policy (6.8s)
+  ✓  79 tests/production/worker-policy.spec.ts:81:1 › worker priorities and direct manual takeover use real commands at narrow width with exact saved replay (3.7s)
+
+
+  1) tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('How these filters work', { exact: true }).locator('..').locator('p')
+    Expected: visible
+    Error: strict mode violation: getByText('How these filters work', { exact: true }).locator('..').locator('p') resolved to 2 elements:
+        1) <p>Counts overlap and follow your search. No product…</p> aka getByText('Counts overlap and follow')
+        2) <p>Land commission counts follow your search and Set…</p> aka getByText('Land commission counts follow')
+
+    Call log:
+      - Expect "toBeVisible" getByText('How these filters work', { exact: true }).locator('..').locator('p') with timeout 5000ms
+      - waiting for getByText('How these filters work', { exact: true }).locator('..').locator('p')
+
+
+      33 |   await expect(help.locator('..')).toContainText('Counts overlap');
+      34 |   await expect(help.locator('..')).toContainText('not guaranteed purchases');
+    > 35 |   await expect(help.locator('..').locator('p')).toBeVisible();
+         |                                                 ^
+      36 |   await page.keyboard.press('Enter');
+      37 |   await expect(help.locator('..')).not.toHaveAttribute('open', '');
+      38 |   // The last five stable-ID rows really lie beyond the first registry page.
+        at /home/telephoneheater/Work/Theandril/tests/production/settlement-order-filters.spec.ts:35:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-commission-filter-browser-full/production-settlement-orde-82614-anges-and-saved-restoration/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/theandril-commission-filter-browser-full/production-settlement-orde-82614-anges-and-saved-restoration/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/theandril-commission-filter-browser-full/production-settlement-orde-82614-anges-and-saved-restoration/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../tmp/theandril-commission-filter-browser-full/production-settlement-orde-82614-anges-and-saved-restoration/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration 
+  78 passed (6.2m)
