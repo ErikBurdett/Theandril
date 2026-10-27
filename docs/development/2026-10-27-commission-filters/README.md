@@ -65,3 +65,23 @@ Public deployment is not inferred from a local build or push. The reviewed publi
 journal remains edition 23; a [follow-up draft](../../updates/drafts/2026-10-27-commission-filters.md)
 is prepared for later editorial/catalogue review. No historical article, public
 image or release-gate status is changed by this scoped registry follow-up.
+
+
+## Verified public feature deployment
+
+Feature **dd8736d6f89ea3115fb2836e0938f6dd292042d4** is deployed.
+[Pages 40599919581](https://github.com/ErikBurdett/Theandril/actions/runs/40599919581)
+and [Verify 40599919605](https://github.com/ErikBurdett/Theandril/actions/runs/40599919605)
+succeeded; [workflow identities](actions.json) and
+[exact public-file comparison](public-readback/readback.json) match the exact
+local production build and regenerated feed. The journal remains edition 23,
+pinned to cfd660c; it is not presented as covering this new follow-up.
+
+All [five live cases](live.log) pass on the first attempt in 48.7 seconds: public
+navigation and commit links, the new paid filter/replay/restoration journey and
+the existing charter-filter journey. [Live captures and exported campaigns](live-results/)
+retain their actual evidence. Source implementation, assertions and timeouts were
+unchanged during this public verification. Final typecheck/lint passed before
+commit, and the exact committed build passed before readback.
+
+Development deployment does not close M3, DH-021, R06 or any release gate.

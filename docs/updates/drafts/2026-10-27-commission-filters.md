@@ -4,7 +4,7 @@
 
 - Stable entry slug: commission-filters
 - Publication state: draft follow-up to edition 23; not in the public catalogue
-- Source revision: pending implementation commit; baseline 4cc8cd1
+- Source revision: dd8736d6f89ea3115fb2836e0938f6dd292042d4; baseline 4cc8cd1
 - Campaign/save/content: unchanged rules/save 37 and content 015468d1
 - Categories: realm management, accessibility, campaign safety
 
@@ -71,7 +71,9 @@ this is not a naturally developed empire or a full performance acceptance.
 actual code review, local test/build/browser results and deployment separately.
 Local integration has passing results for every test and browser case across
 the retained full runs and focused reruns; see the packet for the old locator
-correction and unchanged history-timeout recovery. Publication is still pending.
+correction and unchanged history-timeout recovery. The feature is deployed as
+`dd8736d`, with both workflows, exact public readback and five live cases passing
+on the first attempt. This editorial draft itself remains unpublished.
 This draft is not a reviewed public edition or a claim of 1.0 acceptance.
 Next work should deepen paid land decisions while preserving exact costs, manual
 overrides and shared-purse consequences.

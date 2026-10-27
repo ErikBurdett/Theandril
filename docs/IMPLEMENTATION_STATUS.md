@@ -25,7 +25,10 @@ page overflow. All 79 distinct local Pages cases pass across a retained
 distinct unit/campaign/repository tests pass across the full run (2,496 passes,
 one existing Git-history timeout) and unchanged isolated six-test pass. No test
 assertion or timeout was weakened. Independent code/displayed review passes;
-publication verification remains pending.
+**dd8736d is deployed**: both workflows, exact public-file readback and all five
+live cases pass (48.7 seconds, first attempt). Repository history reconstruction
+remains close to its existing test-time budget; batching Git reads is a tooling
+follow-up, with exact historical output preserved.
 [Evidence](development/2026-10-27-commission-filters/README.md).
 
 ACT-32/M3, DH-021, R06 and all gates remain open. Broader paid land strategy,

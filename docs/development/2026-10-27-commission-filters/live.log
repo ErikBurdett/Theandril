@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:1857876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (1.0s)
+  ✓  2 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (779ms)
+  ✓  3 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (668ms)
+  ✓  4 tests/production/land-commission-filters.spec.ts:12:1 › commission filters find zero allowances beyond page one and revise only those budgets with exact paid replay and restoration (23.6s)
+  ✓  5 tests/production/settlement-order-filters.spec.ts:10:1 › production settlement orders locate waiting charters across thirty hearths and preserve queues through explicit group changes and saved restoration (21.9s)
+
+  5 passed (48.7s)
