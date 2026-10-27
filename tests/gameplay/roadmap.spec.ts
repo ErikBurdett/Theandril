@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { roadmapGates, roadmapItems } from '../../apps/web/src/updates/library';
+import { libraryRevision, roadmapGates, roadmapItems } from '../../apps/web/src/updates/library';
 
 test('the roadmap is discoverable from home and shows bounded completion with every release gate open', async ({ page }) => {
   const workers: string[] = [];
@@ -23,12 +23,12 @@ test('the roadmap is discoverable from home and shows bounded completion with ev
   await expect(empire).toContainText('exact nine-record archive');
   await expect(empire).toContainText('exact 352-record archive');
   await expect(empire).toContainText('exact 36-record archive');
-  await expect(empire.getByRole('link', { name: 'Settlement order filter verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-settlement-order-filters/README.md');
-  await expect(empire.getByRole('link', { name: 'Group patrol verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-group-patrols/README.md');
-  await expect(empire.getByRole('link', { name: 'Army order filter verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-army-order-filters/README.md');
-  await expect(empire.getByRole('link', { name: 'Captured-hearth retirement verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-24-patrol-retirement/README.md');
+  await expect(empire.getByRole('link', { name: 'Settlement order filter verification', exact: true })).toHaveAttribute('href', `https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-10-25-settlement-order-filters/README.md`);
+  await expect(empire.getByRole('link', { name: 'Group patrol verification', exact: true })).toHaveAttribute('href', `https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-10-24-group-patrols/README.md`);
+  await expect(empire.getByRole('link', { name: 'Army order filter verification', exact: true })).toHaveAttribute('href', `https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-10-24-army-order-filters/README.md`);
+  await expect(empire.getByRole('link', { name: 'Captured-hearth retirement verification', exact: true })).toHaveAttribute('href', `https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-10-24-patrol-retirement/README.md`);
   await expect(empire).toContainText('reusable army order templates');
-  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-09-25-selection-groups/README.md');
+  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', `https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-25-selection-groups/README.md`);
   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
   expect(workers).toEqual([]);
   expect(errors).toEqual([]);

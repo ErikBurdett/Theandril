@@ -1,0 +1,57 @@
+import type { Dispatch } from './types';
+
+export const groupLandCommissionsDispatch: Dispatch = {
+  publication: 'published', sourceRevision: 'cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5', sequence: 23,
+  id: 'group-land-commissions', edition: '23', title: 'Give several hearths a land budget',
+  subtitle: '26 October 2026 · Coordinated land commissions',
+  summary: 'Choose checked hearths or recall a saved group, give each a construction allowance, and keep the shared treasury reserve explicit.',
+  topic: 'Engineering', tags: ['Empire management', 'Governors', 'Land work', 'Saved groups', 'Saves'],
+  status: 'Reviewed checkpoint', checkpoint: 'Group commissions · rules 37', image: 'group-land-budget',
+  takeaways: [
+    'Apply one improvement and allowance per hearth to up to 128 checked hearths. The total is permission, not a bill; each first order can spend immediately.',
+    'All commissions share the realm’s treasury. Accepted means permission was recorded, not that construction started. Receipts retain every accepted or refused hearth.',
+    'Ending commissions retains paid work. Uncertain results require saved-campaign restoration. Rules/save remain 37; broader governors and all fifteen release gates remain open.',
+  ],
+  sections: [
+    { id: 'one-form-many-hearths', title: 'One form for several hearths', paragraphs: [
+      'An individual land commission can develop worked tiles without a separate order for each site. Applying the same permission across a large realm still meant visiting every hearth. The Land commissions form in the settlement registry now accepts checked hearths or a recalled saved group. Choose one existing improvement, a remaining allowance per hearth and one treasury reserve, then Apply. Selected hearths outside the current search or filter remain counted.',
+      'Each allowance replaces the hearth’s remaining permission; it does not add to it or remove coin in advance. The total uses exact arithmetic even when many valid allowances sum beyond an individual order’s safe integer range. The 128-hearth limit bounds one action, not empire size. Oversized requests are rejected without silently applying a prefix.',
+    ] },
+    { id: 'permission-and-the-purse', title: 'Permission is not a purchase', paragraphs: [
+      'Applying can pay for the first eligible order immediately in stable hearth order. Each purchase must leave the chosen reserve in the shared treasury. That reserve is not multiplied by the number of hearths, and other realm orders can still spend it. Later hearths may wait after earlier purchases reduce the purse. Accepted means the commission was installed, not that work started.',
+      'The authored Huge browser fixture has thirty owned hearths, 128 armies and two wars, with a deliberately limited 100-coin treasury. Ordinary worker orders select legal claims. Thirty commissions with 100 coin each and a 10-coin reserve represent 3,000 coin of permission. Four ordinary 22-coin works begin, spending 88 and leaving 12. Twenty-six commissions retain their full allowance while waiting. This is an authored management regression, not an organically earned empire.',
+      'The native 780-by-28 image shows only “100 coin per hearth × 30 = 3000 coin total permission” before Apply, at desktop width and 130% text. It omits the reserve, payments and receipt. Linked full captures and the exported campaign establish those details. The exact 6,426-byte PNG brings twenty-seven journal images to 3,662,292 bytes, within the unchanged 3,670,016-byte cap; historical imagery is unchanged.',
+    ] },
+    { id: 'keep-the-receipt', title: 'Keep the receipt and direct control', paragraphs: [
+      'A result names every submitted hearth. Confirmed accepted hearths leave the checked set; refusals remain selected for review. Filter and page the receipt without retrying orders or changing selection. The thirty-hearth journey reaches the last five rows on its second page. Its initial selective removal affects one existing commission and leaves the other twenty-nine hearths checked. Recalling the saved group restores all thirty checks; a Frontier search explicitly reports twenty-seven outside the filter.',
+      'Ending commissions keeps paid work underway and remains available independently of invalid values in the unapplied grant form. The existing rules still protect completed sites and mismatched deposits, wait through siege or occupation, and end permission after ownership loss or successful manual construction, cultivation or cancellation. Registry rows show supplied commission facts without querying detailed prices for every hearth.',
+      'Keyboard removal at 390px and 130% text preserves the paid work. Its exact 61-record archive replays, and loading the earlier manual save restores all thirty commissions and their history. Missing results, a substituted hearth ID and a worker error are separately injected only after a native worker performs a real paid commission. Each uncertain result preserves selection, locks later orders and requires restoration. After restoring the pre-payment save, one explicit retry records one payment; the interface does not retry automatically.',
+    ] },
+    { id: 'same-rules-one-publication', title: 'The same rules, one final worker result', paragraphs: [
+      'Rules/save remain 37 and content remains 015468d1. Simulation, AI, chronicle and persistence code are unchanged. The worker validates the complete bounded request and reviewed campaign hash before mutation, sorts hearth IDs and records ordinary setLandPolicy commands sequentially. A malformed or stale request changes nothing; ordinary command refusals get individual results. The batch publishes one final permitted view and does not create an implicit autosave.',
+      'Interrupted recording or publication requires saved-campaign recovery because some commands may already have applied. This is not an atomic group purchase, a shared allowance allocator or a new construction rule. The existing AI still issues its ordinary single-job commissions. No campaign phase or AI plan changed, so no new pacing run is claimed. Earlier 219/329/374 headline results remain dated evidence; DH-021 stays open.',
+    ] },
+    { id: 'proof-and-next-work', title: 'A completed control, with broader governing still open', paragraphs: [
+      'At source cfd660c, 2,486 tests across 300 files pass in 127.49 seconds with two local test workers; typecheck, lint and the Pages build pass. The four new production browser journeys pass in 56.1 seconds. All 78 distinct local Pages cases have passing results across the full run and a corrected affected rerun, not one uninterrupted pass. These scopes overlap and are not additive. Independent code, UI and displayed gameplay reviews retain their source hashes and limits; journal layout and publication are checked separately.',
+      'The first full unit run had 2,485 passes and one changelog determinism timeout while the browser ran concurrently. Its unchanged isolated six-case rerun passed, then the whole suite passed with bounded concurrency. The first full browser run passed 76 cases: one home test expected an old dispatch count, and one nearest-scroll setup left the reserve input at the lower clipping edge. The home check now uses the actual catalogue; the harness centers the existing amount form before applying the same visibility and 44px assertions. All seven affected cases pass in 32.8 seconds. Original failures are retained; no runtime rule, assertion threshold or timeout was relaxed.',
+      'This completes group controls for existing commissions within ACT-32/M3. No new gameplay obligation was added or removed. Wider funding priorities, paid claims and cultivation strategy, combined delegation in organically developed mature realms, cross-browser certification and sustained scale proof remain unfinished. M3, DH-021, R06 and all fifteen release gates remain open. Contributors should preserve shared-purse ordering, exact history and direct control as those decisions grow. Development deployment is not 1.0 acceptance.',
+    ] },
+  ],
+  evidence: [
+    { label: 'Group commission verification', path: 'docs/development/2026-10-26-group-land-commissions/README.md', note: 'Playable scope, authored and generated scenarios, exact test scopes and retained failures.' },
+    { label: 'Group commission architecture', path: 'docs/architecture/0056-group-land-commissions.md', note: 'Bounded requests, canonical authority, shared purse and uncertain-publication recovery.' },
+    { label: 'Unchanged canonical source', path: 'docs/development/2026-10-26-group-land-commissions/canonical-unchanged.log', note: 'No simulation, AI, chronicle or persistence change; no new pacing claim.' },
+    { label: 'Independent code review', path: 'docs/development/2026-10-26-group-land-commissions/code-review.md', note: 'Exact source hashes and transport, correlation, permission and failure invariants.' },
+    { label: 'Independent UI source review', path: 'docs/development/2026-10-26-group-land-commissions/ui-source-review.md', note: 'Exact permission totals, form controls, selection, receipts and sibling locks.' },
+    { label: 'Worker transport verification', path: 'docs/development/2026-10-26-group-land-commissions/transport-review.md', note: 'Malformed batches, actual shared-purse payments, partial refusal and recovery tests.' },
+    { label: 'Final full unit results', path: 'docs/development/2026-10-26-group-land-commissions/tests-final.log', note: '2,486 tests across 300 files with two local workers.' },
+    { label: 'Whole browser run', path: 'docs/development/2026-10-26-group-land-commissions/browser-full.log', note: '76 passes and two retained test-setup failures among 78 cases.' },
+    { label: 'Corrected affected browser results', path: 'docs/development/2026-10-26-group-land-commissions/browser-final.log', note: 'All seven affected cases pass without relaxing assertions or timeouts.' },
+    { label: 'Independent gameplay image review', path: 'docs/development/2026-10-26-group-land-commissions/visual-review.md', note: 'Real desktop, narrow form/receipt, native strip and injected recovery states inspected.' },
+    { label: 'Paid batch and exact restored history', path: 'docs/development/2026-10-26-group-land-commissions/browser-final-results/production-group-land-poli-a2d26-val-and-restoration-at-130-/group-land-policies-evidence.json', note: 'Authored 100-coin purse, four starts, 26 waits and exact 61-record replay.' },
+    { label: 'Original native permission strip', path: 'docs/development/2026-10-26-group-land-commissions/browser-results/production-group-land-poli-a2d26-val-and-restoration-at-130-/group-land-budget-native.png', note: 'Exact 780-by-28 screenshot before Apply; permission total only, not payment evidence.' },
+    { label: 'Narrow form at enlarged text', path: 'docs/development/2026-10-26-group-land-commissions/browser-final-results/production-group-land-poli-a2d26-val-and-restoration-at-130-/group-land-form-narrow-130.png', note: 'Actual 390px/130% fields and wrapping total; lower actions have a separate capture.' },
+    { label: 'Production group commission journeys', path: 'tests/production/group-land-policies.spec.ts', note: 'Actual controls, shared payment, saved restoration and three damaged native replies.' },
+    { label: 'Canonical implementation status', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'Current completed and partial systems with all release gates open.' },
+  ],
+};

@@ -5,6 +5,17 @@ import { roadmapGates, roadmapItems, roadmapSnapshot, roadmapStages } from './li
 import { filterRoadmap, readRoadmapFilters, roadmapCounts, roadmapItemUrl, roadmapUrl } from './roadmap';
 
 describe('the source-backed roadmap contract', () => {
+  it('records group commissions within the existing governor item without changing catalogue or gate statuses', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    expect(empire.status).toBe('in-progress');
+    for (const claim of ['exact per-hearth permission totals', 'one shared treasury reserve', '26 commissions waiting', '61-record archive', 'require restoration']) expect(empire.delivered.join(' '), claim).toContain(claim);
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-10-26-group-land-commissions/README.md')).toBe(true);
+    expect(empire.remaining.join(' ')).toContain('broader governor decisions');
+    expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
+    expect(roadmapGates).toHaveLength(15);
+    expect(roadmapGates.every(gate => ['in-progress', 'pending'].includes(gate.status))).toBe(true);
+  });
+
   it('records paid land commissions in existing empire scope and keeps strategic governor acceptance open', () => {
     const empire = roadmapItems.find(item => item.id === 'empire-management')!;
     expect(empire.status).toBe('in-progress');
@@ -130,7 +141,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-10-25', revision: '24a710aaa8ddc49aa4ce56173ac043fe4ba1f767', rules: 37 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-10-26', revision: 'cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5', rules: 37 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');

@@ -2,8 +2,17 @@ import { describe, expect, it } from 'vitest';
 import { dispatches } from './content';
 
 describe('public dispatch contract', () => {
+  it('pins exact group permissions and paid shared-purse evidence without claiming organic or release acceptance', () => {
+    const story = dispatches.find(entry => entry.id === 'group-land-commissions')!;
+    expect(story).toMatchObject({ sequence: 23, sourceRevision: 'cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5', image: 'group-land-budget' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    for (const claim of ['not empire size', 'not that work started', 'spending 88 and leaving 12', 'Twenty-six commissions', 'not an organically earned empire', '61-record archive', 'does not retry automatically', 'Rules/save remain 37', '2,486 tests across 300 files', 'All 78 distinct local Pages cases', 'not one uninterrupted pass', 'no new pacing run is claimed', 'No new gameplay obligation was added or removed', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
+    expect(story.evidence).toHaveLength(15);
+    expect(JSON.stringify(story)).not.toMatch(/__SOURCE|PENDING FINAL|publication pending/);
+  });
+
   it('pins paid commissions, actual payments and bounded AI adoption without closing the governor gates', () => {
-    const story = dispatches[0]!;
+    const story = dispatches.find(entry => entry.id === 'land-commissions')!;
     expect(story).toMatchObject({ id: 'land-commissions', sequence: 22, sourceRevision: '24a710aaa8ddc49aa4ce56173ac043fe4ba1f767', image: 'land-commission-summary' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     for (const claim of ['replaces the remaining allowance rather than adding', 'other realm orders can still spend', 'matching extraction improvement', 'Ending a commission leaves already paid work underway', 'Failed direct orders retain', '8ee96751', 'final 15-record archive', '075f0687', 'Rules/save advance to 37', 'thirteen original records', 'one-job commission', '18, 22 and 29 commission commands', 'prior adverse seeds were not rerun', '3.488ms', '2.20/4.91/1.66MB', '2,461 tests across 298 files', 'All 74 local Pages cases', 'overlapping scopes are not additive', '3,655,866 bytes', 'all fifteen release gates remain open']) expect(text, claim).toContain(claim);
@@ -94,7 +103,7 @@ describe('public dispatch contract', () => {
   });
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['land-commissions', 'worker-stewardship', 'group-orders-and-receipts', 'settlement-order-filters', 'group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['group-land-commissions', 'land-commissions', 'worker-stewardship', 'group-orders-and-receipts', 'settlement-order-filters', 'group-patrols', 'registry-order-filters', 'project-counterplay', 'patrol-retirement', 'patrol-orders', 'reinforcement-logistics', 'defense-theaters', 'group-travel', 'production-sequences', 'selection-groups', 'charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {

@@ -1,0 +1,19 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:33) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:75) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (640ms)
+  ✓  2 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (503ms)
+  ✓  3 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (592ms)
+  ✓  4 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (858ms)
+  ✓  5 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (909ms)
+  ✓  6 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (787ms)
+  ✓  7 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (506ms)
+
+  7 passed (5.7s)

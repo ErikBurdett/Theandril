@@ -27,7 +27,12 @@ hearth reply-fault cases recover after actual payment. Source review passes. All
 across the 76-pass/two-failure full run and seven-case affected rerun: an old
 journal count and new capture scrolling were corrected without runtime changes,
 assertion weakening or timeout changes. Exact narrow-form bounds and original
-failures are retained. Publication follows the reviewed source checkpoint.
+failures are retained. **Published as `cfd660c`**: both workflows, exact public
+readback and all four live commission journeys pass (42.4 seconds, no retries).
+Reviewed journal 23 integration passes 2,488 tests and 26 distinct affected local
+browser cases across a retained stale-link failure and corrected roadmap rerun.
+Journal publication is being verified.
+[Publication evidence](development/2026-10-26-group-land-commissions-publication/README.md).
 [Evidence](development/2026-10-26-group-land-commissions/README.md),
 [ADR0056](architecture/0056-group-land-commissions.md).
 

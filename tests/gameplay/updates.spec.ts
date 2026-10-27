@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
+import { dispatches } from '../../apps/web/src/updates/content';
 
 for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 1366, height: 768, scale: 100 }, { width: 390, height: 844, scale: 100 }, { width: 390, height: 844, scale: 130 }]) {
   test(`readable journal at ${dimensions.width}px and ${dimensions.scale}% text`, async ({ page }, testInfo) => {
@@ -30,14 +31,14 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'Give land work a budget' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Give several hearths a land budget' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    for (const id of ['land-commission-summary']) {
+    for (const id of ['group-land-budget']) {
       await page.locator(`.illustration-${id}`).scrollIntoViewIfNeeded();
       await page.locator(`.illustration-${id} > button > img`).evaluate(image => (image as HTMLImageElement).decode());
       await page.locator(`.illustration-${id}`).screenshot({ path: testInfo.outputPath(`${id}-illustration.png`) });
     }
-    await page.getByRole('heading', { name: 'Watch two paid works complete' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
+    await page.getByRole('heading', { name: 'Permission is not a purchase' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
     const imageFacts = await page.locator('figure > button > img').evaluateAll(elements => elements.map(element => { const image = element as HTMLImageElement; return { src: image.currentSrc, width: image.naturalWidth, complete: image.complete }; }));
@@ -102,8 +103,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('22 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(22);
+  await expect(page.getByRole('status')).toHaveText(`${dispatches.length} dispatches`);
+  await expect(page.locator('.dispatch-row')).toHaveCount(dispatches.length);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -115,7 +116,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
   await expect(ledger).toContainText('player travel never resumes itself');
-  await expect(ledger).toContainText('2,461');
+  await expect(ledger).toContainText('2,486');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -142,10 +143,12 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=land-commissions$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Give land work a budget' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=group-land-commissions$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Give several hearths a land budget' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'Give land work a budget' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Give several hearths a land budget' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Group commission verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5/docs/development/2026-10-26-group-land-commissions/README.md');
+  await page.getByRole('link', { name: 'Give land work a budget', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Land commission verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/24a710aaa8ddc49aa4ce56173ac043fe4ba1f767/docs/development/2026-10-25-land-commissions/README.md');
   await page.getByRole('link', { name: 'Keep growing hearths at work', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Worker stewardship verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/97b248ed596c931f01d0df66d60fcf25f819eaef/docs/development/2026-10-25-worker-stewardship/README.md');

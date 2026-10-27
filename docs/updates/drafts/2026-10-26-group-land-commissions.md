@@ -3,139 +3,126 @@
 ## Identity
 
 - Title: Give several hearths a land budget
-- Stable entry slug: group-land-commissions
-- Publication state: **draft; integration and factual review pending**
+- Stable entry slug: group-land-commissions; edition 23
+- Publication state: **source-pinned structured candidate; publication review pending**
 - Publication date: not yet published
-- Source revision: pending the verified implementation commit; baseline `bc62e10`
+- Source revision: `cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5`
+- Structured candidate: `apps/web/src/updates/group-land-commissions-dispatch.ts`
 - Campaign/save/content: rules/save 37 and content 015468d1 unchanged
 - Change categories: settlement management, governors, paid land work, saves
 
 ## The player's problem
 
 A land commission can develop a hearth without ordering every tile. A realm with
-many hearths still needs the same allowance and reserve entered one settlement
-at a time. Checked hearths and saved hearth groups now provide a way to give that
-permission together, while making the total permission and shared purse explicit.
+many hearths still needed the same allowance and reserve entered separately.
+Checked hearths and saved groups now provide one explicit group order, with the
+total permission and shared treasury consequences visible.
 
 ## What changed
 
-### Give every checked hearth a bounded allowance
+### Give each checked hearth a bounded allowance
 
-**Before → now.** The settlement registry gains Land commissions. Choose an
+**Before → now.** The settlement registry gains Land commissions. Choose one
 existing improvement, an allowance per hearth and one treasury reserve, then
-apply to the checked hearths. Hidden-by-filter selections remain counted. The
-form shows exact total permission even when its sum exceeds the safe integer
-range of an individual order. Each allowance replaces that hearth's remaining
-permission; it is neither an addition nor money removed in advance.
+apply to the checked hearths. Outside-filter checks remain counted. The exact
+aggregate uses BigInt; each individual amount remains a safe nonnegative integer.
+Each allowance replaces remaining permission rather than adding to it. It is not
+escrow, a recurring budget or a purchase quote.
 
-Each first eligible order can spend immediately in stable hearth order. Every
-purchase must leave the chosen reserve in the shared treasury; it is not a
-separate reserve for each settlement. Other realm orders can still spend it.
-Later commissions may therefore wait even when the whole batch was accepted.
-Accepted means permission was recorded, not that construction started.
+**Gameplay example.** The authored Huge fixture has thirty hearths, 128 armies,
+two wars and a finite 100-coin purse. Thirty 100-coin permissions and a 10-coin
+reserve let four ordinary 22-coin works start: 88 spent, 12 left, twenty-six
+commissions waiting. All thirty policies are accepted. The 3,000 displayed total
+is not an invoice. Ordinary worker commands choose legal claims; ownership,
+infrastructure and purse are explicitly authored, not organically earned.
 
-**Gameplay example for integration review.** An explicitly authored thirty-hearth
-fixture gives the realm 100 coin. With 100 permission per hearth and a 10-coin
-reserve, four ordinary 22-coin orders start, spending 88 and leaving 12; the other
-twenty-six commissions wait. The displayed 3,000 permission is not a 3,000-coin
-invoice. The completed browser export is retained under the implementation packet’s
-`browser-results/production-group-land-poli-a2d26-val-and-restoration-at-130-/`
-directory with `group-land-policies-evidence.json` and its portable campaign. It is not an organically earned thirty-hearth campaign.
-
-**Image.** New actual Playwright element screenshot, unchanged native PNG:
+**Image.** Actual unprocessed Playwright element screenshot:
 `docs/development/2026-10-26-group-land-commissions/browser-results/production-group-land-poli-a2d26-val-and-restoration-at-130-/group-land-budget-native.png`.
-Proposed public path: `apps/web/public/updates/group-land-budget.png` (not installed
-by this draft). Width 780px, height 28px, 6,426 bytes; SHA-256
+Candidate public copy: `apps/web/public/updates/group-land-budget.png`.
+Native **780×28**, **6,426 bytes**, SHA-256
 `a26079a6ffbba7cba1f75fb945f99305d009f7b57122d13aef558313958c5876`.
-Captured directly from `.group-land-total` at the initial desktop 1440×1000
-viewport and 130% text in the thirty-hearth browser journey, before Apply. No
-crop, resize, recompression or generated imagery. It shows only “100 coin per
-hearth × 30 = 3000 coin total permission.” Caption: “Thirty checked hearths,
-100 coin each: 3,000 coin of total permission. The shared treasury still contains
-only 100 coin before Apply; this is not an invoice or an escrow balance.”
-Alt: “100 coin per hearth times 30 equals 3000 coin total permission.”
-The strip does not show the reserve, receipts or actual payments; linked full
-captures and exported campaigns supply those details. UI-author inspection sees
-a readable native strip; independent source-image and final displayed journal
-review remain separate. It adds 6,426 bytes within the remaining 14,150-byte
-journal image budget; no cap increase is proposed.
+Captured from `.group-land-total` at 1440×1000 and 130% text before Apply.
+No crop, resize, recompression or generated imagery. It shows only “100 coin per
+hearth × 30 = 3000 coin total permission.” The caption distinguishes permission
+from the authored 100-coin purse; reserve, payments and receipt require the linked
+full captures/exports. Exact provenance is in `apps/web/src/updates/media.json`
+and the public provenance copy. Independent source-image review is retained in
+`docs/development/2026-10-26-group-land-commissions/visual-review.md`.
+Twenty-seven journal images total 3,662,292 bytes, leaving 7,724 below the unchanged
+3,670,016-byte cap. All historical image records and bytes remain unchanged.
 
-**Developer note.** The worker validates one bounded request against the reviewed
-campaign hash, then records ordinary `setLandPolicy` commands. Simulation remains
-sole owner of eligibility, quotes, payments, work and interruptions. No rules,
-AI, content or save-schema change is introduced. The 128-hearth batch ceiling
-bounds one interface action; it does not limit empire size. A batch publishes
-one final result with per-hearth receipts and does not implicitly save.
+**Developer note.** Whole-request/hash validation precedes mutation. The worker
+sorts IDs and records existing `setLandPolicy` commands; simulation alone selects
+and prices work. It publishes one final state with per-hearth receipts and does
+not implicitly save. The 128-command cap bounds one UI action, not empire size.
+No canonical rule, AI, chronicle, persistence or content change is introduced.
 
-**Evidence.** UI mapping/receipt/registry checks: 25 tests across three files pass;
-full typecheck passes. These are scoped checks, not a completed integration or
-release claim. `docs/development/2026-10-26-group-land-commissions/ui-tests.log`,
-`ui-typecheck.log` and `ui-review.md` retain exact scope and source hashes.
-The initial test-fixture type errors and their correction remain recorded.
-The four new production browser cases pass in 56.1 seconds: a real shared-purse
-batch, keyboard removal/restoration at 130% text, and three injected reply/worker
-failures after real paid commission installation. `browser-initial.log` retains
-the scope. Missing results, the wrong hearth ID and a worker error require
-restoration without losing the checked selection or automatically retrying.
-The first full-suite run had 2,485 passes and a feed test timeout during concurrent
-browser work; its isolated six-case feed rerun passes. A full rerun with bounded
-parallelism and the complete Pages suite are underway; no final integrated count
-is claimed yet. All evidence will be pinned once the source commit exists.
+**Evidence.** Fifteen immutable paths are pinned in the structured candidate and
+`docs/updates/group-land-commissions-release-expectations.json`. The implementation
+packet records 2,486 tests / 300 files in 127.49 seconds with two local workers,
+typecheck, lint and the Pages build. All 78 distinct local Pages cases have passing
+results across the full 76-pass/two-failure run and seven-case affected rerun
+(32.8 seconds). The four new cases separately pass in 56.1 seconds; scopes overlap.
 
-**Limit.** A batch gives one exact improvement and the same budget values to each
-selected hearth. It does not allocate one common allowance among hearths, preview
-all future prices, coordinate paid claims/cultivation or make purchases atomic
-across the group. The policy can be accepted while waiting for suitable work.
+The first unit run had one changelog timeout alongside concurrent browser work;
+its unchanged isolated six-case rerun and then the full bounded-concurrency run
+pass. Browser corrections replace an obsolete home article count with the actual
+catalogue and center the existing form before unchanged input visibility/44px
+assertions. No assertion threshold, timeout or runtime rule changed. Original
+failures remain retained. Journal integration checks are separate from the source
+results; initial focused journal verification had 44 passes and one stale
+latest-entry test, corrected to select unchanged historical edition 22 by ID.
+The final focused journal run passes all 45 cases across four files.
 
-### Keep a receipt and retain direct control
+**Limit.** The same allowance and reserve apply to each selected hearth. This is
+not one shared allowance allocator, an atomic purchase across the group or a
+preview of every future quote. Accepted permission can wait for suitable work.
 
-Every submitted hearth has a receipt. Accepted hearths leave the checked set;
-refusals remain checked for review. The receipt can filter accepted/refused rows
-and paginate all results without retrying orders. An uncertain recording or
-worker reply requires restoration rather than an automatic retry that could
-replace permissions or spend again.
+### Keep a receipt and retain control
 
-End land commissions affects only selected hearths with existing commissions
-and does not depend on invalid values in the unapplied form. Paid work continues.
-The existing manual override, site/deposit protection, siege/occupation waits and
-ownership-loss cleanup still apply. Current registry rows show the owned
-commission, remaining permission, reserve and available summary wait reason;
-they do not request detailed prices for every hearth.
+Confirmed accepted hearths leave the checked set; refusals remain for review.
+Receipts filter and page every result without retrying orders. The thirty-hearth
+journey reaches its last five results, removes policies by keyboard at 390px/130%
+while retaining paid work, replays the exact 61-record archive and restores its
+31-record manual grant save. Initial selective removal leaves 29 checks; saved
+recall restores 30, including 27 outside a Frontier search.
+
+Three generated-campaign cases damage only a native result after an actual paid
+commission: missing results, wrong hearth ID or worker failure. All preserve
+selection, lock further orders and require restoration before a single explicit
+retry. They are injected recovery regressions, not observed spontaneous defects
+or a general network-recovery certification.
 
 ## Scope ledger
 
-- In agreed scope: ACT-32/M3 governor and coordinated empire-management controls.
-- Newly proposed: **none; no new gameplay obligation added or removed**.
-- Deferred: broader paid land/cultivation/claim decisions and combined delegation
-  in organically developed mature realms. This batch control does not supply that
-  strategic or organic-scale proof.
-- Open issues: DH-021 pacing, R06 and all fifteen release gates. No new pacing
-  result is claimed because rules and AI are unchanged; prior measurements remain
-  dated evidence, not a fresh campaign run.
+- Existing scope: ACT-32/M3 governor and coordinated empire-management controls.
+- New gameplay scope: none added or removed.
+- Deferred: broader paid land/cultivation/claim decisions, funding priorities and
+  combined delegation in organically developed mature realms.
+- Open: DH-021, R06 and all fifteen release gates. No new pacing run is claimed
+  because simulation and AI are unchanged; earlier headline data remains dated.
 
 ## Road to 1.0
 
 This advances Gate I's management workflow and exercises Gate E's saved-command
-boundaries without closing either gate. Strict transport checks and ordinary
-canonical command recording support determinism, but full acceptance includes
-more than this selected batch. The four focused browser cases verify desktop/narrow keyboard behavior, failure
-recovery and exact replay. Full integration, independent displayed review and
-public readback remain publication requirements. Deployment is development availability, not 1.0 acceptance.
+boundary without closing either. The catalogue retains 23 stable items: six
+completed, thirteen in progress and four pending, with 94 delivered and 49 remaining
+editorial statements. These are not completion percentages. Development deployment
+is not 1.0 acceptance. Full publication integration, independently inspected reader
+layouts and exact public readback remain required.
 
 ## Contributor handoff
 
-Next, measure combined worker, charter and land delegation in a naturally grown
-realm, then extend paid land/cultivation decisions with explicit consequences.
-Preserve shared-purse ordering, exact replay and manual control. Start with
-`group-land-policies.tsx`, `simulation.worker.ts`, `tests/production/group-land-policies.spec.ts` and ADR0055's canonical commission boundaries. Keep canonical status and
-the existing roadmap together; do not introduce a second completion percentage.
+Measure combined delegation in a naturally developed mature realm, then broaden
+paid land decisions while preserving shared-purse ordering, exact replay and
+manual control. Start with `group-land-policies.tsx`, `simulation.worker.ts`,
+`tests/production/group-land-policies.spec.ts` and ADR0056. Canonical status and the
+existing structured roadmap remain the only completion ledger.
 
 ## Review and publication record
 
-- UI author source review: retained; explicitly not independent visual approval.
-- Independent code review: parent packet, final hash reconciliation pending.
-- Desktop/narrow/text-scale/keyboard: four focused production journeys pass;
-  independent capture review and full-suite integration remain pending.
-- Image provenance: actual new 780×28 native budget strip inspected by UI author;
-  independent source-image and displayed journal review pending.
-- Full checks, exact source commit, Actions and Pages/public readback: pending.
+- Independent code, UI source and gameplay-image reviews: implementation packet.
+- UI author's own source review: disclosed separately in `ui-review.md`.
+- Journal editorial review: assigned independently; final verdict pending.
+- Reader desktop/narrow/text-scale/keyboard: parent publication integration pending.
+- Exact public build/image/feed readback and Actions: parent-owned publication step.

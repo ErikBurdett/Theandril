@@ -1,0 +1,37 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/updates/content.test.ts (21 tests | 1 failed) 23ms
+     × pins paid commissions, actual payments and bounded AI adoption without closing the governor gates 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/updates/content.test.ts > public dispatch contract > pins paid commissions, actual payments and bounded AI adoption without closing the governor gates
+AssertionError: expected { publication: 'published', …(15) } to match object { id: 'land-commissions', …(3) }
+(12 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "id": "land-commissions",
+-   "image": "land-commission-summary",
+-   "sequence": 22,
+-   "sourceRevision": "24a710aaa8ddc49aa4ce56173ac043fe4ba1f767",
++   "id": "group-land-commissions",
++   "image": "group-land-budget",
++   "sequence": 23,
++   "sourceRevision": "cfd660c1b20bf5e0f1966fa69c8efb4e2b1acab5",
+  }
+
+ ❯ apps/web/src/updates/content.test.ts:16:19
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 44 passed (45)
+   Start at  15:07:23
+   Duration  894ms (transform 397ms, setup 0ms, import 492ms, tests 779ms, environment 0ms)
+
