@@ -1,0 +1,51 @@
+{
+  "revision": "7c003a0c98ca87101eea0e6c736555f02b239b84",
+  "entries": 116,
+  "bytes": 91905,
+  "sha256": "57e707fd51d5a69c50ce1bf799872d8533864507e68fb2d43277a9efd303ee5d",
+  "oldSourceSha256": "a0b346d00e1aeb4fd986450316b56a355dbff62f4464cb573517112eb9237778",
+  "newSourceSha256": "44454c48b93c9b570ff87179e2f366656349beeb75dc9aa52d8deff481ba9ace",
+  "limits": {
+    "statBatchSize": 32,
+    "statWorkers": 2,
+    "statMaxBuffer": 34603008
+  },
+  "metadataMaxBuffer": 16777216,
+  "originalProcessesPerBuild": 117,
+  "newProcessesPerBuild": 5,
+  "originalQuietRuns": [
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7913.063269,
+      "exact": true
+    },
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7821.854050999998,
+      "exact": true
+    },
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7879.8161199999995,
+      "exact": true
+    }
+  ],
+  "notes": "Three final uncached reconstructions after capacity correction, compared byte-for-byte to the independent pre-edit capture. Parent paused builds/tests during measurements. Original timings are retained from the earlier quiet alternating benchmark, not rerun concurrently here. Timings include metadata, all Git numstats, note reads, parsing and JSON serialization; exclude Node startup.",
+  "runs": [
+    {
+      "algorithm": "batched-two-processes-capacity-corrected",
+      "milliseconds": 4864.758751,
+      "exact": true
+    },
+    {
+      "algorithm": "batched-two-processes-capacity-corrected",
+      "milliseconds": 4866.90886,
+      "exact": true
+    },
+    {
+      "algorithm": "batched-two-processes-capacity-corrected",
+      "milliseconds": 5025.8767579999985,
+      "exact": true
+    }
+  ]
+}

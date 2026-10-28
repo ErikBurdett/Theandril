@@ -1,0 +1,39 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| tests/changelog-builder.test.ts (2 tests | 1 failed) 446ms
+     × preserves root, binary, empty, quoted paths, renames, bodies, notes and combined merge statistics 134ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| tests/changelog-builder.test.ts > batched changelog history > preserves root, binary, empty, quoted paths, renames, bodies, notes and combined merge statistics
+AssertionError: expected { …(10) } to match object { files: +0, insertions: +0, …(1) }
+(7 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "deletions": 0,
+-   "files": 0,
+-   "insertions": 0,
++   "files": 1,
++   "insertions": 1,
+  }
+
+ ❯ tests/changelog-builder.test.ts:82:31
+     80|     expect(entry(quoted)).toMatchObject({ files: 1, insertions: 2, bod…
+     81|     expect(entry(renamed)).toMatchObject({ files: 2, insertions: 2, de…
+     82|     expect(entry(cleanMerge)).toMatchObject({ files: 0, insertions: 0,…
+       |                               ^
+     83|     expect(entry(resolvedMerge).files).toBeGreaterThan(0);
+     84|     expect(result.some(item => item.subject === 'Side only' || item.su…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 7 passed (8)
+   Start at  02:37:43
+   Duration  15.46s (transform 46ms, setup 0ms, import 60ms, tests 15.27s, environment 0ms)
+

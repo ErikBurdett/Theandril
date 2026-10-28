@@ -6,12 +6,12 @@ import { initialVisibleCommits, renderMarkdown } from './changelog';
 import { buildFeed, gitNumstatArguments } from '../../../../scripts/build-changelog';
 
 describe('master changelog feed', () => {
-  // Each build runs git show over every first-parent commit; build twice (for the
+  // Each build reads every first-parent commit in bounded git show batches; build twice (for the
   // determinism check) and share the result rather than building a third time.
-  let generated: ReturnType<typeof buildFeed>;
-  it('is deterministic and the committed feed is an exact record from its newest commit back to the root', () => {
-    generated = buildFeed();
-    expect(buildFeed()).toEqual(generated);
+  let generated: Awaited<ReturnType<typeof buildFeed>>;
+  it('is deterministic and the committed feed is an exact record from its newest commit back to the root', async () => {
+    generated = await buildFeed();
+    expect(await buildFeed()).toEqual(generated);
     // A commit cannot contain its own hash, so the committed feed may lag by the commits made after it
     // was generated; everything it does record must match Git exactly (rewritten notes/history fail here).
     const newest = generated.findIndex(entry => entry.sha === feed[0]!.sha);
@@ -19,11 +19,11 @@ describe('master changelog feed', () => {
     expect(generated.slice(newest)).toEqual(feed);
     expect(feed.at(-1)!.subject).toBe('Initial Theandril');
   });
-  it('does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift', () => {
+  it('does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift', async () => {
     // A fresh CI clone abbreviates to 8+ characters and may apply different autocrlf/attribute settings;
     // the feed must be identical from any checkout of the same history.
-    for (const entry of generated ?? buildFeed()) expect(entry.shortSha).toBe(entry.sha.slice(0, 7));
-    expect(gitNumstatArguments('abc')).toEqual(['-c', 'core.autocrlf=false', '-c', 'core.safecrlf=false', '-c', 'diff.algorithm=myers', 'show', '--format=', '--numstat', '--no-renames', '--ignore-cr-at-eol', 'abc']);
+    for (const entry of generated ?? await buildFeed()) expect(entry.shortSha).toBe(entry.sha.slice(0, 7));
+    expect(gitNumstatArguments(['abc', 'def'])).toEqual(['-c', 'core.autocrlf=false', '-c', 'core.safecrlf=false', '-c', 'diff.algorithm=myers', 'show', '--format=%x1e%H%x1f', '--numstat', '--no-renames', '--ignore-cr-at-eol', 'abc', 'def']);
   });
 });
 

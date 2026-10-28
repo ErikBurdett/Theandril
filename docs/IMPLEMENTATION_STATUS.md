@@ -1,5 +1,28 @@
 # Theandril implementation status
 
+## Faster exact history reconstruction — 2026-10-28
+
+The changelog builder now reconstructs every first-parent commit in bounded
+32-SHA batches, with at most two Git stat children in flight. Output order still
+follows Git metadata, independently of process completion. All reads are fresh;
+no history, authored notes or deterministic comparison is cached or skipped.
+Failures drain active children and reject the whole reconstruction. The reviewed
+33MiB statistics bound preserves the old per-commit output capacity plus headers.
+
+At baseline 7c003a0, all 116 entries / 91,905 bytes match the independently retained
+old implementation exactly. Three final quiet runs have a median 4.867 seconds,
+compared with the old 7.880 seconds, about 38% lower. Processes per build fall
+from 117 to five. Focused tests retain root/merge/binary/empty/quoted-path behavior,
+error propagation, exact notes and the existing 20-second history-test deadline.
+Final integration passes 2,519 tests / 305 files, typecheck, lint and the production
+build, including the unchanged history deadline. Separate tooling publication is
+being verified.
+[Evidence](development/2026-10-28-changelog-batching/README.md).
+
+No gameplay, canonical/AI rules, save, content or CI test policy changes. This
+addresses repeated local history-check timing pressure; it does not establish a
+bound for arbitrary future history or close a release gate.
+
 ## Finding land commissions that need attention — 2026-10-27
 
 A separate Land commission status filter combines with registry search and

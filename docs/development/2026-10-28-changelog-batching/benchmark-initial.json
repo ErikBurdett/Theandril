@@ -1,0 +1,46 @@
+{
+  "revision": "7c003a0c98ca87101eea0e6c736555f02b239b84",
+  "entries": 116,
+  "bytes": 91905,
+  "sha256": "57e707fd51d5a69c50ce1bf799872d8533864507e68fb2d43277a9efd303ee5d",
+  "oldSourceSha256": "a0b346d00e1aeb4fd986450316b56a355dbff62f4464cb573517112eb9237778",
+  "newSourceSha256": "e106c99d771a48f59da276a36660b2bea898ee22012a44685bc7e0ae32f30a20",
+  "maxConcurrentGitProcessesPerBuild": 2,
+  "statBatchSize": 32,
+  "originalProcessesPerBuild": 117,
+  "newProcessesPerBuild": 5,
+  "outputLimitPerProcessBytes": 16777216,
+  "notes": "Three alternating complete uncached reconstructions of identical HEAD. Parent paused builds/tests during measurement. Independent original code captured before edits; temporary baseline runner changes root resolution to process.cwd only. Timings include metadata, all Git numstats, note reads, parsing and JSON serialization; exclude Node startup.",
+  "runs": [
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7913.063269,
+      "exact": true
+    },
+    {
+      "algorithm": "batched-two-processes",
+      "milliseconds": 4885.628096,
+      "exact": true
+    },
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7821.854050999998,
+      "exact": true
+    },
+    {
+      "algorithm": "batched-two-processes",
+      "milliseconds": 4860.431496000001,
+      "exact": true
+    },
+    {
+      "algorithm": "original-per-commit",
+      "milliseconds": 7879.8161199999995,
+      "exact": true
+    },
+    {
+      "algorithm": "batched-two-processes",
+      "milliseconds": 4855.099067999996,
+      "exact": true
+    }
+  ]
+}
