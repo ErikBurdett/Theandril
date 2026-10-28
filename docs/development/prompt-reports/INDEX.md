@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-28 | [Land-budget templates and faster exact history](2026-10-28-land-budgets-and-history.md) | Separately deployed d60bdcb and 906138f; 2,519 tests, 81 local browser cases, three live history and seven live gameplay cases pass; all gates remain open |
 | 2026-10-27 | [Commission exception filters deployed](2026-10-27-commission-filters.md) | Feature `dd8736d`; 2,497 distinct tests and 79 distinct local Pages cases pass across retained runs; five live cases pass first attempt; M3/gates remain open |
 | 2026-10-27 | [Group land commissions deployed](2026-10-27-group-land-commissions.md) | Feature `cfd660c`, reviewed journal `d65b016`; 2,488 tests, 78 distinct local Pages cases and 26 distinct live cases across retained failures and focused reruns; M3/gates remain open |
 | 2026-10-25 | [Budgeted land commissions deployed](2026-10-25-land-commissions.md) | Feature `24a710a`, reviewed journal `3ae2ba6`; 2,463 tests, 74 local Pages cases and 19 distinct live cases across retained interrupted attempts plus unchanged rerun; M3/gates remain open |

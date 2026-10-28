@@ -4,7 +4,7 @@
 
 - Stable slug: land-budget-templates
 - Publication state: draft, not in the public catalogue
-- Source revision: pending verified feature commit; baseline 7c003a0
+- Source revision: 906138fe0d9de262f3186f9381b71f9b1b0774a0; baseline 7c003a0
 - Campaign/save/content: unchanged rules/save 37 and content 015468d1
 - Categories: realm management, campaign safety, release tooling
 
@@ -64,6 +64,6 @@ Presets are deliberate player inputs; they do not constitute automatic land
 strategy, cultivation planning or whole-realm funding priorities. Organic mature-
 realm acceptance, DH-021, R06 and all fifteen gates remain open.
 
-The draft awaits a source pin and editorial/catalogue review before a public
+The draft is source-pinned and awaits editorial/catalogue review before a public
 edition. Actual test, review and deployment results belong in the linked packets;
 publication alone never establishes release acceptance.

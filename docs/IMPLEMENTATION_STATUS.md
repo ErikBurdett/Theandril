@@ -21,12 +21,15 @@ campaigns, paid 22-coin work, exact save/replay, 390px/130% keyboard controls,
 delete/load isolation, native pending locks and denied-storage recovery. Full
 integration passes 2,519 tests / 305 files, typecheck, lint and production build.
 Independent code/displayed review and all 81 production browser cases pass.
-Separate feature publication is being verified.
+Feature 906138f is deployed: both workflows, exact public revision/asset readback
+and seven scoped live gameplay cases pass first attempt.
 [Evidence](development/2026-10-28-land-budget-templates/README.md).
 
 Rules/save 37 and content 015468d1 are unchanged. Existing ACT-32/M3 advances;
 broader paid land/cultivation strategy, whole-realm priorities, organic mature-
-realm acceptance, DH-021, R06 and all release gates remain open.
+realm acceptance, DH-021, R06 and all release gates remain open. Next: extend
+paid land strategy to deliberate cultivation choices with explicit budgets,
+then prove the combined governor controls in a mature generated realm.
 
 ## Faster exact history reconstruction — 2026-10-28
 

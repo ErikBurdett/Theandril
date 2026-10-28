@@ -1,6 +1,6 @@
 # Personal land budget templates — 2026-10-28
 
-Work packet, baseline 7c003a0. Local integration is complete; separate feature publication follows.
+Work packet, baseline 7c003a0. Local integration and separate feature publication are verified.
 
 ## Acceptance
 
@@ -45,7 +45,7 @@ disabling and re-enabling Apply and the registry filter, without delaying or
 mocking any game operation.
 
 [Independent review](review.md) records exact source/capture hashes and limits.
-Full integration and publication outcomes will be added below. This advances
+Full integration and publication outcomes are recorded below. This advances
 existing ACT-32/M3; every release gate, DH-021 and R06 remain open. Personal
 presets do not implement broader automatic land strategy or organic-scale proof.
 
@@ -59,4 +59,23 @@ pass. The earlier [integration run](tests.log) passes 2,518 tests before the ext
 history-capacity regression was added; these are overlapping runs, not additive.
 The [complete production browser suite](browser-full.log) passes **81 cases in
 6.1 minutes**, first attempt. The two focused cases above overlap this suite.
-Separate feature publication follows the verified tooling deployment.
+Separate feature publication follows the verified tooling deployment, as recorded below.
+
+## Published feature
+
+Feature `906138fe0d9de262f3186f9381b71f9b1b0774a0` is deployed on
+[GitHub Pages](https://erikburdett.github.io/Theandril/). Both [workflows](actions.json)
+pass: Verify 40706870535 and Pages 40706871238. The exact source was rebuilt locally
+with its regenerated history feed ([feed](feed-feature-906138f.log),
+[build](build-feature-906138f.log)); the tracked fallback feed was restored afterward.
+[Live readback](public-readback/readback.json) matches the revision and local built
+HTML/JS/CSS/worker assets. The existing journal remains edition 23/source cfd660c;
+the new feature's source-pinned developer dispatch remains an unpublished draft.
+
+All **seven scoped live gameplay cases pass first attempt in 1.1 minutes**:
+[log](public-browser.log), [native evidence](public-browser-results/). These include
+the two template journeys, all four group-commission journeys and the commission
+filter journey. Generated early campaigns prove template behavior; the 30-hearth
+commission scenarios are authored scale fixtures, not organically grown realms.
+The public results overlap the local 81-case suite and are not additive coverage.
+Rules/save 37 and content 015468d1 remain unchanged. No issue or release gate closes.
