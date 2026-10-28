@@ -1,0 +1,14 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:51269) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:51936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:53256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/production/land-policy-templates.spec.ts:41:1 › personal land budgets cross generated campaigns and reloads without orders until explicit paid application, then deletion leaves exact saved work intact (9.1s)
+  ✓  2 tests/production/land-policy-templates.spec.ts:131:1 › denied personal-template storage reports an error and an explicit retry recovers without campaign orders (3.9s)
+
+  2 passed (14.1s)

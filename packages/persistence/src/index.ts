@@ -11,6 +11,7 @@ export { CharterTemplateStore, MAX_CHARTER_TEMPLATES, CHARTER_TEMPLATE_NAME_MAX,
 export { ProductionTemplateStore, MAX_PRODUCTION_TEMPLATES, PRODUCTION_TEMPLATE_NAME_MAX, MAX_PRODUCTION_TEMPLATE_ITEMS, type ProductionTemplate } from './production-templates';
 
 export { PostingTemplateStore, MAX_POSTING_TEMPLATES, POSTING_TEMPLATE_NAME_MAX, type PostingTemplate } from './posting-templates';
+export { LandPolicyTemplateStore, MAX_LAND_POLICY_TEMPLATES, LAND_POLICY_TEMPLATE_NAME_MAX, type LandPolicyTemplate } from './land-policy-templates';
 
 const PORTABLE_V2 = new Uint8Array([84, 65, 67, 50]); // TAC2, then one gzip member.
 const utf8Bytes = (text: string) => new TextEncoder().encode(text).byteLength;

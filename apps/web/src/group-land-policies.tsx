@@ -4,6 +4,7 @@ import type { GameCommand, Observation } from '@theandril/sim';
 import { groupCharterTowns } from './group-charters';
 import { GroupPolicyResults } from './group-policy-results';
 import { landCommissionAmount } from './land-policy';
+import { LandPolicyTemplates } from './land-policy-templates';
 import { MAX_GROUP_ORDER_COMMANDS, type GroupLandPolicyResult } from './protocol';
 import './group-land-policies.css';
 
@@ -35,11 +36,20 @@ export function GroupLandPolicyOrders({ view, hash, selected, matching, busy, is
   const [allowance, setAllowance] = useState('100');
   const [reserve, setReserve] = useState('40');
   const [pending, setPending] = useState(false);
+  const [templatesPending, setTemplatesPending] = useState(false);
   const [error, setError] = useState('');
   const [results, setResults] = useState<Array<GroupLandPolicyResult & { name: string }>>();
   const mounted = useRef(true), inFlight = useRef(false), pendingCallback = useRef(onPendingChange);
+  const pendingFlags = useRef({ command: false, templates: false });
   pendingCallback.current = onPendingChange;
-  useEffect(() => { mounted.current = true; return () => { mounted.current = false; pendingCallback.current(false); }; }, []);
+  const reportPending = (kind: keyof typeof pendingFlags.current, value: boolean) => {
+    pendingFlags.current[kind] = value;
+    if (kind === 'command') setPending(value); else setTemplatesPending(value);
+    pendingCallback.current(pendingFlags.current.command || pendingFlags.current.templates);
+  };
+  useEffect(() => { mounted.current = true; return () => {
+    mounted.current = false; pendingFlags.current = { command: false, templates: false }; pendingCallback.current(false);
+  }; }, []);
   if (view.landPolicies === undefined) return null;
   const towns = groupCharterTowns(view, selected);
   const outside = towns.filter(town => !matching.has(town.id)).length;
@@ -47,13 +57,13 @@ export function GroupLandPolicyOrders({ view, hash, selected, matching, busy, is
   const invalid = allowanceValue === null || reserveValue === null;
   const assignment = invalid ? [] : groupLandPolicyCommands(view, selected, improvementId, allowanceValue, reserveValue);
   const removal = groupLandPolicyCommands(view, selected, 'none', 0, 0);
-  const locked = busy || pending;
+  const locked = busy || pending || templatesPending;
   const submit = async (next: string) => {
-    if (locked || inFlight.current || !hash || (next !== 'none' && invalid)) return;
+    if (locked || pendingFlags.current.templates || inFlight.current || !hash || (next !== 'none' && invalid)) return;
     const commands = groupLandPolicyCommands(view, selected, next, allowanceValue ?? 0, reserveValue ?? 0);
     if (!commands.length) return;
     const names = new Map(towns.map(town => [town.id, town.name]));
-    inFlight.current = true; setPending(true); pendingCallback.current(true); setError(''); setResults(undefined);
+    inFlight.current = true; reportPending('command', true); setError(''); setResults(undefined);
     try {
       const response = await issue(commands, hash);
       if (!mounted.current) return;
@@ -63,10 +73,10 @@ export function GroupLandPolicyOrders({ view, hash, selected, matching, busy, is
       if (mounted.current) setError(cause instanceof Error ? cause.message : 'Land commission orders could not be completed. Review the hearths before retrying.');
     } finally {
       inFlight.current = false;
-      if (mounted.current) { setPending(false); pendingCallback.current(false); }
+      if (mounted.current) reportPending('command', false);
     }
   };
-  return <details className="group-postings group-land-policies" data-testid="group-land-policies" aria-busy={pending}>
+  return <details className="group-postings group-land-policies" data-testid="group-land-policies" aria-busy={pending || templatesPending}>
     <summary>Land commissions</summary>
     <p className="group-selection-count">{towns.length} {towns.length === 1 ? 'hearth' : 'hearths'} selected{outside ? ` · ${outside} outside this filter` : ''}</p>
     <p className="field-help">Use checked hearths or recall a saved hearth group. Apply one improvement and budget per hearth to up to {MAX_GROUP_ORDER_COMMANDS} hearths together.</p>
@@ -75,6 +85,9 @@ export function GroupLandPolicyOrders({ view, hash, selected, matching, busy, is
       <label>Allowance per hearth · coin<input type="text" inputMode="numeric" value={allowance} disabled={locked} aria-invalid={allowanceValue === null} onChange={event => setAllowance(event.target.value)}/></label>
       <label>Shared treasury reserve · coin<input type="text" inputMode="numeric" value={reserve} disabled={locked} aria-invalid={reserveValue === null} onChange={event => setReserve(event.target.value)}/></label>
     </div>
+    <LandPolicyTemplates improvementId={improvementId} allowance={allowanceValue ?? undefined} reserve={reserveValue ?? undefined}
+      busy={busy || pending} onPendingChange={value => reportPending('templates', value)}
+      recall={template => { setImprovementId(template.improvementId); setAllowance(String(template.allowance)); setReserve(String(template.reserve)); }}/>
     {allowanceValue !== null && <p className="group-land-total" role="status">{allowanceValue} coin per hearth × {towns.length} = {groupLandAllowanceTotal(allowanceValue, towns.length)} coin total permission.</p>}
     <p className="field-help">This replaces each hearth’s remaining allowance; it does not add to it. Permission is not escrow or a payment quote. Zero allowance stops new purchases. Applying can pay for each first order immediately in stable hearth order, sharing the same treasury.</p>
     <p className="field-help">Each purchase must leave the shared treasury reserve; the reserve is not multiplied by the hearth count. Other realm orders can still spend it. Further orders begin after upkeep and production charters. Accepted means the commission was set, not that work started.</p>

@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/persistence/src/land-policy-templates.test.ts (11 tests | 1 failed) 68ms
+     × refuses newer database versions even with compatible rows and rechecks after reopening 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/persistence/src/land-policy-templates.test.ts > personal land commission template storage > refuses newer database versions even with compatible rows and rechecks after reopening
+AssertionError: expected [Function] to throw error including 'invalid or from a newer version' but got 'DatabaseClosedError Database has been…'
+
+Expected: "invalid or from a newer version"
+Received: "DatabaseClosedError Database has been closed"
+
+ ❯ packages/persistence/src/land-policy-templates.test.ts:180:27
+    178|     future.version(2).stores({ landPolicyTemplates: '&id,&nameKey' });
+    179|     await future.open(); future.close();
+    180|     await expect(db.list()).rejects.toThrow('invalid or from a newer v…
+       |                           ^
+    181|     const writing = store(db.name);
+    182|     await expect(writing.create(input('Forbidden'))).rejects.toThrow('…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 28 passed (29)
+   Start at  02:37:03
+   Duration  1.16s (transform 444ms, setup 0ms, import 810ms, tests 159ms, environment 0ms)
+

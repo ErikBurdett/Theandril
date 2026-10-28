@@ -49,6 +49,13 @@ Final work-tree integration (also containing pending land-template work) passes
 history check. [Full tests](integration-tests.log), [typecheck](integration-typecheck.log),
 [lint](integration-lint.log) and [production build](integration-build.log) pass.
 The earlier integration before the capacity correction passed 2,518 tests; the
-extra capacity regression is included in this final all-green run. Tooling files
-will be committed and deployed separately from the pending gameplay templates.
-Exact published artifact verification is recorded after completion below.
+extra capacity regression is included in this final all-green run. Tooling was committed and deployed separately as `d60bdcb05736201cf2f918d6aff7755ed4be7191`.
+Both [GitHub workflows](actions.json) passed. [Live readback](public-readback/readback.json)
+passes the exact deployed revision and assets against the downloaded artifact from
+Pages run 40703557969. This comparison uses the workflow-built artifact, not the
+mixed local worktree build. The existing public journal remains edition 23/source
+cfd660c; it does not claim to describe the new templates.
+
+All three [public home/history journeys](public-home.log) pass first attempt,
+including public routes, generated history, a commit permalink beyond the first
+page and the refresh-safe journal route.

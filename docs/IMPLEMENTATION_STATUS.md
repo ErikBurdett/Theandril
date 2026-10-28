@@ -1,5 +1,33 @@
 # Theandril implementation status
 
+## Personal land budget templates — 2026-10-28
+
+The group commission form saves named improvement/allowance/reserve presets in a
+separate browser preference library. Players can update, recall or delete them
+across campaigns and reloads. Choosing a preset does not change the form; Recall
+fills it for review; only explicit Apply issues existing paid commands. Template
+deletion leaves commissioned work intact, and campaign restoration never restores
+a deleted personal preference. Templates are excluded from campaign exports.
+
+Strict versioned rows, known improvement IDs, safe nonnegative coin amounts,
+transactional unique names and a 24-template library cap protect browser storage.
+Corrupt or newer data is rejected without hidden repair. Storage denial can be
+retried explicitly; started writes settle after unmount, and a successful write
+followed by a failed reread is distinguished from an unsaved edit. Native writes
+share the registry pending lock without self-locking the library.
+
+Two production journeys pass, including two genuinely UI-started generated
+campaigns, paid 22-coin work, exact save/replay, 390px/130% keyboard controls,
+delete/load isolation, native pending locks and denied-storage recovery. Full
+integration passes 2,519 tests / 305 files, typecheck, lint and production build.
+Independent code/displayed review and all 81 production browser cases pass.
+Separate feature publication is being verified.
+[Evidence](development/2026-10-28-land-budget-templates/README.md).
+
+Rules/save 37 and content 015468d1 are unchanged. Existing ACT-32/M3 advances;
+broader paid land/cultivation strategy, whole-realm priorities, organic mature-
+realm acceptance, DH-021, R06 and all release gates remain open.
+
 ## Faster exact history reconstruction — 2026-10-28
 
 The changelog builder now reconstructs every first-parent commit in bounded
@@ -15,8 +43,8 @@ compared with the old 7.880 seconds, about 38% lower. Processes per build fall
 from 117 to five. Focused tests retain root/merge/binary/empty/quoted-path behavior,
 error propagation, exact notes and the existing 20-second history-test deadline.
 Final integration passes 2,519 tests / 305 files, typecheck, lint and the production
-build, including the unchanged history deadline. Separate tooling publication is
-being verified.
+build, including the unchanged history deadline. Tooling commit d60bdcb is deployed;
+both workflows and exact public revision/asset readback pass.
 [Evidence](development/2026-10-28-changelog-batching/README.md).
 
 No gameplay, canonical/AI rules, save, content or CI test policy changes. This

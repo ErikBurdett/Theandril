@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (730ms)
+  ✓  2 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (586ms)
+  ✓  3 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (1.2s)
+
+  3 passed (2.9s)
