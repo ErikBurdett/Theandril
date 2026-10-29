@@ -1,5 +1,28 @@
 # Theandril implementation status
 
+## Ward breaking: the counter-rite — 2026-10-29
+
+Rules/save 41 makes seam warding contestable. A Waykeeper of the second Rune
+degree riding with a company that besieges a warded hearth breaks the ward for
+four ashglass once the realm knows Measured unbinding; the ward ends at once,
+the caster who held it is jarred for two turns so the walls cannot be re-warded
+immediately, and both realms read who broke it. The rite is quoted on the siege
+side with its target and on the defending side with its reason. A besieging AI
+realm with such a caster breaks the ward instead of lifting the siege. Save
+version 41 changes no field; v40 envelopes migrate unchanged and rules 40
+refuses the rite as unknown.
+
+Verification: new sim, AI and content tests; unit **2,300 tests / 284 files**,
+campaigns 57, lint, typecheck and build pass; headline campaigns remain
+**362/327/227** with command and event counts identical to the seam-warding
+packet, and the rules 40 projection reproduces that packet's seals exactly. The
+breaking browser journey reached its last assertions once, where only the test's
+wound count was wrong; after that fix every attempt failed before the campaign
+loaded because the desktop's headless browser kept crashing, so the fixed
+journey and the affected siege journeys are unverified in this checkpoint.
+[Evidence](development/2026-10-29-ward-breaking/README.md),
+[ADR0063](architecture/0063-ward-breaking.md).
+
 ## Seam warding: the first strategic rite — 2026-10-29
 
 Rules/save 40 adds the first strategic rite. A Rune Waykeeper lodged in a hearth

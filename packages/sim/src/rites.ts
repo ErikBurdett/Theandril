@@ -35,6 +35,16 @@ function lodgedHearth(state: GameState, character: GameState['characters'][strin
   const town = state.settlements[character.location.settlementId];
   return town && town.factionId === character.factionId ? town.id : null;
 }
+/** Rules 41: the warded hearth an army-borne caster's company besieges, or null. */
+function besiegedWardedHearth(state: GameState, character: GameState['characters'][string]): string | null {
+  if (character.dead || character.woundedTurns || character.mission || character.location?.kind !== 'army') return null;
+  const armyId = character.location.armyId;
+  const siege = Object.values(state.sieges).find(item => item.armyId === armyId && item.factionId === character.factionId);
+  return siege && wardOf(state, siege.settlementId) ? siege.settlementId : null;
+}
+/** The hearth a rite would act on: the caster's lodging for a warding, the besieged hearth for a breaking. */
+const riteTarget = (state: GameState, character: GameState['characters'][string], rite: StrategicRiteDefinition): string | null =>
+  rite.kind === 'breaking' ? besiegedWardedHearth(state, character) : lodgedHearth(state, character);
 /** Whether a hearth's borders hold a surveyed seam of the rite's path. */
 function holdsPathSeam(state: GameState, settlementId: string, factionId: string, pathId: string): boolean {
   return arcaneSites(state.world).some(site => site.pathId === pathId && controllingSettlement(state, site.cell, factionId) === settlementId);
@@ -52,6 +62,13 @@ export function riteObjection(state: GameState, factionId: string, characterId: 
   if ((character.aptitudes?.[rite.pathId] ?? 0) < rite.pathLevel) return 'This Waykeeper lacks the personal path for the rite.';
   if (character.woundedTurns) return 'This caster must recover from wounds.';
   if (character.mission) return 'Cancel this caster’s mission first.';
+  if (rite.kind === 'breaking') {
+    if (character.location?.kind !== 'army') return 'The caster must ride with a company that besieges a warded hearth.';
+    const siege = Object.values(state.sieges).find(item => item.armyId === (character.location as { armyId: string }).armyId && item.factionId === factionId);
+    if (!siege) return 'This caster’s company is not besieging a hearth.';
+    if (!wardOf(state, siege.settlementId)) return 'The besieged hearth is not warded.';
+    return resourceCostBlocker(state, factionId, { [SITE_RESOURCE_ID]: rite.ashglassCost });
+  }
   const settlementId = lodgedHearth(state, character);
   if (!settlementId) return 'The caster must be lodged in one of your hearths.';
   const town = state.settlements[settlementId]!;
@@ -64,8 +81,19 @@ export function performRite(state: GameState, factionId: string, characterId: st
   const objection = riteObjection(state, factionId, characterId, riteId);
   if (objection) return fail(objection);
   const rite = rites.get(riteId)!, character = state.characters[characterId]!;
-  const settlementId = lodgedHearth(state, character)!, town = state.settlements[settlementId]!;
+  const settlementId = riteTarget(state, character, rite)!, town = state.settlements[settlementId]!;
   spendResourceCosts(state, factionId, { [SITE_RESOURCE_ID]: rite.ashglassCost });
+  if (rite.kind === 'breaking') {
+    // The ward ends at once and the caster who held it is jarred, so the walls cannot be re-warded until it recovers.
+    const ward = wardOf(state, settlementId)!, holder = state.characters[ward.casterId];
+    state.wards = state.wards.filter(item => item.settlementId !== settlementId);
+    if (holder && !holder.dead) holder.woundedTurns = Math.max(holder.woundedTurns, 2);
+    const realm = state.factions.find(item => item.id === factionId)?.name ?? factionId;
+    return { ok: true, events: [
+      { turn: state.turn, factionId, type: 'rite_performed', cell: town.cell, message: `${character.name} performed ${rite.name} against ${town.name} for ${rite.ashglassCost} ashglass; its ward is broken${holder ? ` and ${holder.name} is jarred for two turns` : ''}.` },
+      { turn: state.turn, factionId: ward.factionId, type: 'ward_ended', cell: town.cell, message: `The warding of ${town.name} ended: it was broken by ${character.name} of ${realm}${holder ? `, and ${holder.name} is jarred for two turns` : ''}.` },
+    ] };
+  }
   state.wards.push({ settlementId, factionId, casterId: characterId, riteId, startedTurn: state.turn, expiresTurn: state.turn + rite.durationTurns });
   state.wards.sort(byHearth);
   const besieger = state.sieges[settlementId]?.factionId;
@@ -99,7 +127,7 @@ export function observeRites(state: GameState, factionId: string): RiteOption[] 
   const casters = Object.values(state.characters).filter(item => item.factionId === factionId && !item.dead && item.definitionId === 'character.waykeeper').sort((a, b) => a.id < b.id ? -1 : 1);
   return casters.flatMap(character => availableRites(state).map(rite => {
     const blocker = riteObjection(state, factionId, character.id, rite.id);
-    return { characterId: character.id, riteId: rite.id, name: rite.name, description: rite.description, ashglassCost: rite.ashglassCost, durationTurns: rite.durationTurns, settlementId: lodgedHearth(state, character), canPerform: blocker === null, blocker };
+    return { characterId: character.id, riteId: rite.id, name: rite.name, description: rite.description, ashglassCost: rite.ashglassCost, durationTurns: rite.durationTurns, settlementId: riteTarget(state, character, rite), canPerform: blocker === null, blocker };
   }));
 }
 export const hasWards = (state: GameState): boolean => (state.wards?.length ?? 0) > 0;

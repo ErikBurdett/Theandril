@@ -28,3 +28,31 @@ test('a besieged realm wards its hearth from the quoted rite and a besieger lift
   expect(besieger.commands).toEqual([{ type: 'liftSiege', factionId: rival, settlementId: host.id }]);
   expect(besieger.reasons[0]).toContain('warded');
 });
+
+test('a besieger with a qualified riding caster breaks the ward instead of lifting the siege (rules 41)', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions[1]!;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  state.resources.stockpiles[player]!['resource.ashglass'] = 20;
+  const column = Object.values(state.armies).find(army => army.factionId === rival.id)!;
+  column.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  column.movement = 3; refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'declareWar', factionId: rival.id, targetFactionId: player })).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'besiege', factionId: rival.id, armyId: column.id, settlementId: host.id })).toMatchObject({ ok: true });
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: 'rite.seam_warding' })).toMatchObject({ ok: true });
+  const hearth = Object.values(state.settlements).find(town => town.factionId === rival.id)!;
+  rival.treasury += 200; state.resources.stockpiles[rival.id] = { ...state.resources.stockpiles[rival.id], 'resource.ashglass': 10 };
+  expect(applyCommand(state, { type: 'recruitCharacter', factionId: rival.id, settlementId: hearth.id, definitionId: 'character.waykeeper' })).toMatchObject({ ok: true });
+  const breaker = Object.values(state.characters).find(item => item.factionId === rival.id && item.definitionId === 'character.waykeeper')!;
+  breaker.aptitudes = { 'path.flame': 1, 'path.rune': 2 }; breaker.location = { kind: 'army', armyId: column.id };
+  state.arcaneResearch[rival.id] = [...new Set([...(state.arcaneResearch[rival.id] ?? []), 'arcane.rune_binding', 'arcane.unbinding'])];
+  const plan = planTurnWithReasons(getObservation(state, rival.id));
+  expect(plan.commands).toEqual([{ type: 'performRite', factionId: rival.id, characterId: breaker.id, riteId: 'rite.ward_breaking' }]);
+  expect(plan.reasons[0]).toContain('the ward can be broken');
+  expect(applyCommand(state, plan.commands[0]!)).toMatchObject({ ok: true });
+  expect(state.wards).toEqual([]);
+  // (The journey reads one turn of recovery already ticked by the time the player looks.)
+  // With the ward gone, the ordinary siege judgement returns: an outmatched column holds its blockade rather than lifting it for a ward.
+  const after = planTurnWithReasons(getObservation(state, rival.id));
+  expect(after.commands.some(command => command.type === 'liftSiege' || command.type === 'performRite')).toBe(false);
+});

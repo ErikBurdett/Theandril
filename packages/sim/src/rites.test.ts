@@ -6,7 +6,7 @@ import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeG
 import { rebuildIndexes } from './visibility';
 import { isPassable, neighbors } from '@theandril/mapgen';
 
-const RITE = 'rite.seam_warding', ASHGLASS = 'resource.ashglass';
+const RITE = 'rite.seam_warding', BREAKING = 'rite.ward_breaking', ASHGLASS = 'resource.ashglass';
 const casterOf = (state: GameState) => Object.values(state.characters).find(character => character.factionId === state.turnOwnerId && character.definitionId === 'character.waykeeper')!;
 const hostOf = (state: GameState) => Object.values(state.settlements).find(town => town.factionId === state.turnOwnerId)!;
 /** The brink fixture with ashglass drawn and a rival column camped at the host's gate. */
@@ -29,7 +29,8 @@ describe('seam warding (rules 40)', () => {
     const state = besieged(), player = state.turnOwnerId, caster = casterOf(state), host = hostOf(state);
     const rite = STRATEGIC_RITES.find(item => item.id === RITE)!;
     const view = getObservation(state, player);
-    expect(view.rites).toEqual([{ characterId: caster.id, riteId: RITE, name: rite.name, description: rite.description, ashglassCost: 6, durationTurns: 10, settlementId: host.id, canPerform: true, blocker: null }]);
+    expect(view.rites).toHaveLength(STRATEGIC_RITES.length);
+    expect(view.rites).toContainEqual({ characterId: caster.id, riteId: RITE, name: rite.name, description: rite.description, ashglassCost: 6, durationTurns: 10, settlementId: host.id, canPerform: true, blocker: null });
     expect(view.wards).toEqual([]);
     expect(view.sieges[0]).toMatchObject({ settlementId: host.id, defenses: 30 });
     expect(view.sieges[0]!.warded).toBeUndefined();
@@ -39,7 +40,7 @@ describe('seam warding (rules 40)', () => {
     expect(result.events.map(event => event.factionId).sort()).toEqual([player, state.factions[1]!.id].sort());
     expect(state.resources.stockpiles[player]![ASHGLASS]).toBe(14);
     expect(state.wards).toEqual([{ settlementId: host.id, factionId: player, casterId: caster.id, riteId: RITE, startedTurn: state.turn, expiresTurn: state.turn + 10 }]);
-    expect(getObservation(state, player).rites![0]).toMatchObject({ canPerform: false, blocker: 'This hearth is already warded.' });
+    expect(getObservation(state, player).rites!.find(item => item.riteId === RITE)).toMatchObject({ canPerform: false, blocker: 'This hearth is already warded.' });
     expect(getObservation(state, state.factions[1]!.id).sieges[0]).toMatchObject({ warded: true });
     expect(getObservation(state, state.factions[1]!.id).wards).toEqual([]);
     for (let turn = 0; turn < 3; turn++) endTurn(state);
@@ -72,6 +73,59 @@ describe('seam warding (rules 40)', () => {
     expect(state.wards).toEqual([]);
     expect(state.sieges[host.id]).toMatchObject({ defenses: 10 });
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+  });
+
+  /** Rules 41: the rival's own Rune caster rides with the besieging column. */
+  function withBreaker(state: GameState): GameState {
+    const rival = state.factions[1]!, hearth = Object.values(state.settlements).find(town => town.factionId === rival.id)!;
+    rival.treasury += 200; state.resources.stockpiles[rival.id] = { ...state.resources.stockpiles[rival.id], [ASHGLASS]: 10 };
+    expect(applyCommand(state, { type: 'recruitCharacter', factionId: rival.id, settlementId: hearth.id, definitionId: 'character.waykeeper' })).toMatchObject({ ok: true });
+    const breaker = Object.values(state.characters).find(item => item.factionId === rival.id && item.definitionId === 'character.waykeeper')!;
+    breaker.aptitudes = { 'path.flame': 1, 'path.rune': 2 };
+    breaker.location = { kind: 'army', armyId: Object.values(state.sieges)[0]!.armyId };
+    state.arcaneResearch[rival.id] = [...new Set([...(state.arcaneResearch[rival.id] ?? []), 'arcane.rune_binding', 'arcane.unbinding'])];
+    return deserializeGame(serializeGame(state));
+  }
+
+  it('is broken from the siege lines by a second-degree Rune caster, which jars the holder, and is refused otherwise (rules 41)', () => {
+    let state = besieged(); const player = state.turnOwnerId, rival = state.factions[1]!.id;
+    expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: casterOf(state).id, riteId: RITE })).toMatchObject({ ok: true });
+    state = withBreaker(state);
+    const host = hostOf(state), caster = casterOf(state), breaker = Object.values(state.characters).find(item => item.factionId === rival && item.definitionId === 'character.waykeeper')!;
+    const attempt = () => applyCommand(state, { type: 'performRite', factionId: rival, characterId: breaker.id, riteId: BREAKING });
+    const option = () => getObservation(state, rival).rites!.find(rite => rite.riteId === BREAKING && rite.characterId === breaker.id)!;
+    expect(option()).toMatchObject({ settlementId: host.id, ashglassCost: 4, durationTurns: 0, canPerform: true, blocker: null });
+    // The defender's own caster cannot break (it is lodged, not riding), and the rite is unknown to rules 40.
+    expect(getObservation(state, player).rites!.find(rite => rite.riteId === BREAKING)).toMatchObject({ canPerform: false, settlementId: null });
+    expect(applyCommandForVersion(state, { type: 'performRite', factionId: rival, characterId: breaker.id, riteId: BREAKING }, 40)).toMatchObject({ ok: false, error: 'Unknown strategic rite.' });
+    const research = state.arcaneResearch[rival]!; state.arcaneResearch[rival] = research.filter(id => id !== 'arcane.unbinding');
+    expect(attempt()).toMatchObject({ ok: false, error: 'The national arcane discovery is not researched.' });
+    state.arcaneResearch[rival] = research;
+    breaker.aptitudes = { 'path.rune': 1 };
+    expect(attempt()).toMatchObject({ ok: false, error: 'This Waykeeper lacks the personal path for the rite.' });
+    breaker.aptitudes = { 'path.flame': 1, 'path.rune': 2 };
+    state.resources.stockpiles[rival]![ASHGLASS] = 3;
+    expect(attempt()).toMatchObject({ ok: false, error: 'Requires 4 Ashglass in the realm stockpile.' });
+    state.resources.stockpiles[rival]![ASHGLASS] = 10;
+    const result = attempt();
+    expect(result).toMatchObject({ ok: true });
+    expect(result.events.map(event => [event.factionId, event.type])).toEqual([[rival, 'rite_performed'], [player, 'ward_ended']]);
+    expect(result.events[1]!.message).toContain(`broken by ${breaker.name}`);
+    expect(state.wards).toEqual([]);
+    expect(state.resources.stockpiles[rival]![ASHGLASS]).toBe(6);
+    expect(state.characters[caster.id]!.woundedTurns).toBe(2);
+    expect(getObservation(state, rival).sieges[0]!.warded).toBeUndefined();
+    // Nothing left to break; the jarred holder cannot ward again until it recovers.
+    expect(attempt()).toMatchObject({ ok: false, error: 'The besieged hearth is not warded.' });
+    expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: RITE })).toMatchObject({ ok: false, error: 'This caster must recover from wounds.' });
+    endTurn(state);
+    expect(state.sieges[host.id]).toMatchObject({ defenses: 20 });
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+    // A rules-40 reading of this campaign is identical, and a v40 envelope migrates unchanged.
+    expect(stateHash(deserializeGame(serializeGameForVersion(state, 40)))).toBe(stateHash(state));
+    const older = JSON.parse(serializeGameForVersion(state, 40));
+    expect(older.version).toBe(40); expect(older.contentHash).toBe('ac80514d');
+    expect(deserializeGame(JSON.stringify(older)).wards).toEqual([]);
   });
 
   it('refuses the unresearched, the ungifted, the unlodged, the unheld and the unpaid, and stays out of older rules', () => {

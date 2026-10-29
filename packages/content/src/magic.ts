@@ -32,10 +32,12 @@ export const BATTLE_SPELLS: readonly BattleSpellDefinition[] = [
  * the national discovery and a personal path, and lasts a bounded term. */
 export const strategicRiteSchema = z.object({
   id, name: text, description: text, discoveryId: id, pathId: id, pathLevel: z.number().int().min(1).max(5),
-  kind: z.enum(['warding']), ashglassCost: z.number().int().min(1).max(100), durationTurns: z.number().int().min(1).max(60), sinceRules: z.number().int().min(40).max(99),
+  kind: z.enum(['warding', 'breaking']), ashglassCost: z.number().int().min(1).max(100), durationTurns: z.number().int().min(0).max(60), sinceRules: z.number().int().min(40).max(99),
 }).strict();
 export type StrategicRiteDefinition = z.infer<typeof strategicRiteSchema>;
 export const STRATEGIC_RITES: readonly StrategicRiteDefinition[] = [
+  // Rules 41: the counter-rite. Breaking a ward from the siege lines needs the second degree of Rune and the Unbinding theory, like the battle working it echoes.
+  { id: 'rite.ward_breaking', name: 'Ward breaking', description: 'A Waykeeper of the second Rune degree riding with an army that besieges a warded hearth unbinds the seam from its walls, paying four ashglass: the ward ends at once and the caster who held it is jarred and cannot work for two turns. The realm must know Measured unbinding.', discoveryId: 'arcane.unbinding', pathId: 'path.rune', pathLevel: 2, kind: 'breaking', ashglassCost: 4, durationTurns: 0, sinceRules: 41 },
   { id: 'rite.seam_warding', name: 'Seam warding', description: 'A Rune-gifted Waykeeper lodged in a hearth whose borders hold a Rune seam binds the seam into its walls for ten turns, paying six ashglass. While the caster stays, siege works cannot wear the defenses down and sabotage fails. A lost seam, a caster who leaves or is wounded, or a hearth that changes hands ends the ward.', discoveryId: 'arcane.rune_binding', pathId: 'path.rune', pathLevel: 1, kind: 'warding', ashglassCost: 6, durationTurns: 10, sinceRules: 40 },
 ];
 /** Rules 24: a culture trains its Waykeepers in its own tradition, so who can
@@ -63,6 +65,7 @@ export function validateMagicContent(characterIds: ReadonlySet<string>, building
   const ids = [...discoveries, ...spells, ...rites, ...MAGIC_PATHS].map(item => item.id);
   if (new Set(ids).size !== ids.length) throw new Error('Duplicate magic content ID');
   for (const rite of rites) if (!discoveries.some(item => item.id === rite.discoveryId) || !MAGIC_PATHS.some(path => path.id === rite.pathId)) throw new Error('Strategic rite names an unknown discovery or path: ' + rite.id);
+  for (const rite of rites) if ((rite.kind === 'warding') !== (rite.durationTurns > 0)) throw new Error('A warding lasts a term and a breaking is instant: ' + rite.id);
   for (const discovery of discoveries) {
     if (!buildingIds.has(discovery.requiredBuildingId) || new Set(discovery.spellIds).size !== discovery.spellIds.length) throw new Error('Invalid arcane research infrastructure or spell references');
     for (const spellId of discovery.spellIds) if (!spells.some(spell => spell.id === spellId && spell.discoveryId === discovery.id)) throw new Error('Unknown or mismatched arcane spell');

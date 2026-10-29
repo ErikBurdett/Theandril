@@ -40,7 +40,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 40;
+export const SAVE_VERSION = 41;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -56,6 +56,8 @@ export const PRE_COUNTER_CONTENT_HASH = 'f4076f55';
 export const PRE_ATTUNEMENT_CONTENT_HASH = '015468d1';
 /** Rules 38–39 content, before rules 40 added strategic rites. */
 export const PRE_RITE_CONTENT_HASH = '03ac0328';
+/** Rules 40 content, before rules 41 added the ward-breaking counter-rite. */
+export const PRE_BREAKING_CONTENT_HASH = 'ac80514d';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -257,7 +259,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(40), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(41), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 41 changes no canonical field; a v40 envelope differs only in its seal. */
+const saveV40Schema = saveSchema.extend({ version: z.literal(40), state: stateSchema }).strict();
 const saveV39Schema = saveSchema.extend({ version: z.literal(39), state: stateV39Schema }).strict();
 const saveV38Schema = saveSchema.extend({ version: z.literal(38), state: stateV38Schema }).strict();
 const saveV37Schema = saveSchema.extend({ version: z.literal(37), state: stateV37Schema }).strict();
@@ -646,7 +650,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 40) return CONTENT_HASH;
+  if (version >= 41) return CONTENT_HASH;
+  if (version >= 40) return PRE_BREAKING_CONTENT_HASH;
   if (version >= 38) return PRE_RITE_CONTENT_HASH;
   if (version >= 24) return PRE_ATTUNEMENT_CONTENT_HASH;
   if (version >= 22) return PRE_COUNTER_CONTENT_HASH;
@@ -922,6 +927,13 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 40) {
+    const prior = saveV40Schema.parse(raw);
+    assert(prior.contentHash === PRE_BREAKING_CONTENT_HASH, 'v40 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v40 snapshot checksum does not match its contents');
+    // Rules 41 adds a counter-rite as content only; the state continues unchanged under the new pack.
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 39) {
     const prior = saveV39Schema.parse(raw);
     assert(prior.contentHash === PRE_RITE_CONTENT_HASH, 'v39 content hash is not a recognized compatible pack');

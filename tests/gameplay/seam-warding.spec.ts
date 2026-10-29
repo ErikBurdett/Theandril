@@ -57,3 +57,50 @@ test('ward a besieged hearth through its lodged Waykeeper and read the held wall
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.wards?.map(ward => ward.remainingTurns))).toEqual([9]);
   expect(errors).toEqual([]);
 });
+
+/** Rules 41: the besieger's riding Rune caster breaks the ward on its turn; the
+ * player reads the broken ward, the jarred caster and the resumed works. */
+test('a besieger breaks the ward on its turn and the holder is jarred', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions[1]!;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  state.resources.stockpiles[player]!['resource.ashglass'] = 20;
+  const column = Object.values(state.armies).find(army => army.factionId === rival.id)!;
+  column.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  column.movement = 3; refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'declareWar', factionId: rival.id, targetFactionId: player })).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'besiege', factionId: rival.id, armyId: column.id, settlementId: host.id })).toMatchObject({ ok: true });
+  const hearth = Object.values(state.settlements).find(town => town.factionId === rival.id)!;
+  rival.treasury += 200; state.resources.stockpiles[rival.id] = { ...state.resources.stockpiles[rival.id], 'resource.ashglass': 10 };
+  expect(applyCommand(state, { type: 'recruitCharacter', factionId: rival.id, settlementId: hearth.id, definitionId: 'character.waykeeper' })).toMatchObject({ ok: true });
+  const breaker = Object.values(state.characters).find(item => item.factionId === rival.id && item.definitionId === 'character.waykeeper')!;
+  breaker.aptitudes = { 'path.flame': 1, 'path.rune': 2 }; breaker.location = { kind: 'army', armyId: column.id };
+  state.arcaneResearch[rival.id] = [...new Set([...(state.arcaneResearch[rival.id] ?? []), 'arcane.rune_binding', 'arcane.unbinding'])];
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'contested-ward.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await closeManagement(page);
+  await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+  await roster(page).getByRole('searchbox', { name: 'Search characters', exact: true }).fill(caster.name);
+  await roster(page).getByRole('button', { name: `Inspect ${caster.name} (${caster.id})`, exact: true }).click();
+  const rites = roster(page).getByTestId('strategic-rites');
+  await rites.getByRole('button', { name: 'Perform Seam warding', exact: true }).click();
+  await expect(rites.getByTestId(`ward-${host.id}`)).toContainText('10 turns remaining');
+  await roster(page).getByRole('button', { name: 'Close characters', exact: true }).click();
+
+  await page.getByRole('button', { name: 'End turn', exact: true }).click();
+  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.wards?.length ?? 0)).toBe(0);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.sieges.map(siege => [siege.defenses, siege.warded ?? false]))).toEqual([[20, false]]);
+  await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+  await roster(page).getByRole('searchbox', { name: 'Search characters', exact: true }).fill(caster.name);
+  await roster(page).getByRole('button', { name: `Inspect ${caster.name} (${caster.id})`, exact: true }).click();
+  await expect(roster(page).getByTestId('character-sheet')).toContainText('wounded · 1 turns');
+  await expect(rites.getByTestId(`ward-${host.id}`)).toHaveCount(0);
+  await expect(rites).toContainText('This caster must recover from wounds.');
+  await rites.screenshot({ path: testInfo.outputPath('ward-broken.png') });
+  expect(errors).toEqual([]);
+});

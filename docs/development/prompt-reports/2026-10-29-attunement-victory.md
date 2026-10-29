@@ -162,6 +162,21 @@ passing cases for low system memory and ten crash-only production cases remain
 unverified on this desktop. [Evidence](../2026-10-29-seam-warding/README.md),
 [ADR0062](../../architecture/0062-seam-warding.md).
 
+## Eighth slice: ward breaking (rules/save 41)
+
+The counter-rite: a second-degree Rune Waykeeper riding with a besieging company
+breaks a ward for four ashglass and jars its holder for two turns; a besieging
+AI realm with such a caster breaks the ward instead of lifting the siege. Rules
+40 content seal `ac80514d` is named and v40 envelopes migrate unchanged. Unit
+**2,300 tests / 284 files**, campaigns 57, lint, typecheck, build and the
+headline campaigns (362/327/227, counts identical, rules 40 seals reproduced)
+pass. The breaking journey reached its final assertions once with only a wrong
+wound count in the test; after the fix the desktop's headless browser failed
+every attempt before the campaign loaded, so that journey and the affected siege
+journeys are unverified in this checkpoint.
+[Evidence](../2026-10-29-ward-breaking/README.md),
+[ADR0063](../../architecture/0063-ward-breaking.md).
+
 ## Published
 
 Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on

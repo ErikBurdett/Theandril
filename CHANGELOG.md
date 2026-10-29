@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Added ward breaking under rules/save 41, the counter-rite to seam warding: a Waykeeper of the second Rune degree riding with a company that besieges a warded hearth breaks the ward for four ashglass once Measured unbinding is known, jarring the caster who held it for two turns so the walls cannot be re-warded at once. A besieging AI realm with such a caster breaks the ward instead of lifting the siege. No save field changes; v40 envelopes migrate unchanged.
+
 Added seam warding under rules/save 40, the first strategic rite: a Rune Waykeeper lodged in a hearth whose borders hold a Rune seam binds the seam into the walls for ten turns at six ashglass, so siege works and sabotage cannot wear the defenses down while the caster stays, the seam is held and the hearth keeps its owner. Casters read the rite with its exact blocker on the character sheet, the siege ledger marks warded walls, a besieged AI realm performs it and a besieger that cannot storm warded walls lifts the siege. Older envelopes migrate with no wards and are refused while a ward stands.
 
 Fixed the realm registry so an AI watch can still be browsed, filtered, sorted and selected from while orders stay locked. Both complete browser suites were run before publication; four stale journeys were corrected with retained evidence.

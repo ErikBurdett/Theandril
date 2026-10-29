@@ -47,10 +47,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const supplyAnswer = answerSupplyAccess(view);
   if (supplyAnswer) return supplyAnswer;
 
-  const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view));
-  if (siegeDecision) return siegeDecision;
+  // Rules 41: a ward is broken before a warded siege is judged hopeless and lifted.
   const warding = planRites(view);
   if (warding) return warding;
+  const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view));
+  if (siegeDecision) return siegeDecision;
   const oceanScoutReserve = reserveOceanScout(view);
   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
   const expansionAffordable = Boolean(view.growth && view.treasury >= view.growth.founding.coinCost + UNITS[0]!.coinCost + view.growth.founding.additionalUpkeep * 6 + 24);
