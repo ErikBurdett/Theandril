@@ -23,6 +23,8 @@ journey and the affected siege journeys are unverified in this checkpoint.
 [Evidence](development/2026-10-29-ward-breaking/README.md),
 [ADR0063](architecture/0063-ward-breaking.md).
 
+Published as `b7b99c0` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication-breaking/README.md)).
+
 ## Seam warding: the first strategic rite — 2026-10-29
 
 Rules/save 40 adds the first strategic rite. A Rune Waykeeper lodged in a hearth

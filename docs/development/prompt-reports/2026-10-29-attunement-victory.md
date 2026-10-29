@@ -183,6 +183,9 @@ Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
 [GitHub Pages](https://erikburdett.github.io/Theandril/): both workflows pass,
 the read-only live readback matches the exact local rebuild, and the scoped live
 journeys are recorded in the [publication packet](../2026-10-29-publication/README.md).
+The eighth slice is deployed as `b7b99c0`: both workflows and the live readback
+pass ([publication packet](../2026-10-29-publication-breaking/README.md)); no
+scoped live journeys ran. The tracker records 103 of 150 acceptance points.
 The seventh slice is deployed as `52b8436` (feature `e103a72` plus the packet
 trim): both workflows and the live readback pass ([publication packet](../2026-10-29-publication-rites/README.md));
 no scoped live journeys were run because the desktop's headless browser was
@@ -199,7 +202,9 @@ remains the newest.
   tree is trimmed in `52b8436`, but purging history needs an authorized rewrite
   of `master` (the force push was refused).
 - The complete gameplay suite stopped at 39 passing cases for low system memory
-  and ten crash-only production cases are unverified on this desktop.
+  and ten crash-only production cases are unverified on this desktop; the rules
+  41 breaking journey's last three assertions and the affected siege journeys
+  are likewise unverified after the desktop's headless browser kept failing.
 - The complete gameplay browser suite had not been run end to end since rules
   30. Four stale journeys were corrected with retained evidence (a victory turn,
   a roster import, a posting destination, and registry inspection in AI watch,
