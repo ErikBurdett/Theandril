@@ -70,7 +70,10 @@ projection, hashing and command refusal, v39 envelope migration),
   `arcane.rune_binding` with a Rune Waykeeper lodged at a besieged seam hearth.
   Counter-rituals, Flame rites and the AI positioning a caster in advance are
   open.
-- Playwright trace archives (eight, 63 MB) were removed from the retained browser
-  results; logs, error contexts and screenshots are kept.
+- Playwright trace archives and the raw trace material (screenshots, network
+  and action logs) that the stopped gameplay run left unzipped were removed from
+  the retained browser results in a follow-up commit; logs, error contexts,
+  evidence JSON and named screenshots are kept. The first commit of this slice
+  (`e103a72`) carries that material in history.
 - The roadmap catalogue describes the delivery but links no evidence from this
   packet, because the catalogue pins evidence to a committed revision.
