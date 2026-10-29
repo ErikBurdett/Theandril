@@ -1,5 +1,26 @@
 # Theandril implementation status
 
+## AI wardens: reaching hearth rites in organic play — 2026-10-29
+
+AI only. A realm that holds a seam now researches the discovery of the hearth
+rite its Waykeeper could use, keeps a Waykeeper lodged at a seam hearth while
+at war, and calls a riding qualified caster home when an enemy company nears
+the hearth, lodging it at the gate before a blockade refuses appointments; the
+existing rite pass then wards or kindles the moment the siege begins. The post
+yields to a battle stack that could carry a caster and to the attunement study
+post, and a warden road is ordered only through a quoted movement preview.
+
+Verification: new AI tests; unit **2,305 tests / 285 files**, campaigns 57,
+lint, typecheck and build pass; headline campaigns remain **362/327/227** with zero refusals, the Epic
+campaign now buying three Arcane Theory discoveries while no realm yet performs a
+rite. The complete gameplay suite passes 250 of 251
+with the one import timeout passing alone, and the production suite 59 of 59. Two defects
+found by the first runs were fixed before the recorded ones: the warden
+appointment swallowed ordinary Waykeeper appointments, and a warden road was
+ordered without a preview and refused on the Epic proxy.
+[Evidence](development/2026-10-29-ai-wardens/README.md),
+[ADR0065](architecture/0065-ai-wardens.md).
+
 ## Seam kindling: the Flame hearth rite — 2026-10-29
 
 Rules/save 42 gives the Flame path its own strategic rite. A Flame-gifted

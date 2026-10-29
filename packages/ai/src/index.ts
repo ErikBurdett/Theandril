@@ -6,6 +6,7 @@ import { planDepot } from './supply';
 import { planArcaneSurvey, planGlassApproach } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planRites } from './rites';
+import { planWardenReturn } from './wardens';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
@@ -85,8 +86,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const factionId = view.factionId;
   const theater = planDefenseTheater(view);
   for (const id of supplyPurchase?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
-  // A company carrying a caster home for a sealed working keeps that road.
+  // A company carrying a caster home for a sealed working keeps that road; so does one bringing a warden to a besieged seam hearth.
   for (const id of advancement.heldArmyIds) theater.heldArmyIds.add(id);
+  const wardenReturn = planWardenReturn(view);
+  for (const id of wardenReturn.heldArmyIds) theater.heldArmyIds.add(id);
   const patrol = planPatrol(view, theater.heldArmyIds);
   for (const id of patrol.heldArmyIds) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
@@ -104,8 +107,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

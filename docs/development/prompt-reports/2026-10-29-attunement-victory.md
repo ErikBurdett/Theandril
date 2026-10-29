@@ -194,6 +194,24 @@ were rerun with `TMPDIR` on the main disk; the complete gameplay suite passes
 [Evidence](../2026-10-29-seam-kindling/README.md),
 [ADR0064](../../architecture/0064-seam-kindling.md).
 
+## Tenth slice: AI wardens (AI only)
+
+The AI reaches hearth rites on its own: a realm holding a seam researches the
+rite discovery its Waykeeper could use, keeps a Waykeeper lodged at a seam
+hearth while at war, and calls a riding qualified caster home on threat,
+lodging it before a blockade closes the gate. Unit **2,305 tests / 285 files**,
+campaigns 57, lint, typecheck and build pass; headline campaigns remain **362/327/227** with zero refusals, the Epic
+campaign now buying three Arcane Theory discoveries while no realm yet performs a
+rite. The complete gameplay suite passes 250 of 251
+with the one import timeout passing alone, and the production suite 59 of 59.
+The first runs caught two defects (ordinary Waykeeper appointments swallowed;
+a warden road refused on the Epic proxy), fixed before the recorded runs; the
+first campaign run also ended the chronicle-victory proxy in Attunement, the
+first organic AI third-path victory observed, which the precedence fix
+reverted to Prosperity.
+[Evidence](../2026-10-29-ai-wardens/README.md),
+[ADR0065](../../architecture/0065-ai-wardens.md).
+
 ## Published
 
 Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on

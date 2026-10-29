@@ -5,6 +5,7 @@ import type { AiPlan } from './diplomacy';
 import { needsNavalInvestment, navalResearchChoice } from './naval';
 import { landPlanningTowns } from './observation-options';
 import { isWaykeeperBattleArmy } from './characters';
+import { planRiteResearch } from './wardens';
 
 export interface ProgressionPlan extends AiPlan { coinSpent: number; reserve: number; heldArmyIds: Set<string> }
 
@@ -146,7 +147,8 @@ export function planProgression(view: Observation, protectedCoin = 0, pursueVict
     const completing = !discovery && pursueVictory && attunement && attunement.paths.every(path => path.held) && attunement.casters.some(caster => caster.degree >= attunement.casterDegree)
       ? view.arcaneResearch.choices.find(choice => choice.canResearch) : undefined;
     if (discovery) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: discovery.id }); reasons.push(`Research ${discovery.name} for the realm’s appointed Waykeeper; personal aptitude and battlefield strain remain required.`); }
-    else if (completing) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: completing.id }); reasons.push(`Research ${completing.name} toward a sealed working: every seam path is held and a caster of the second degree serves the realm.`); }
+    else if (!completing) { const readiness = planRiteResearch(view); if (readiness) { commands.push(readiness.command); reasons.push(readiness.reason); } }
+    if (completing) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: completing.id }); reasons.push(`Research ${completing.name} toward a sealed working: every seam path is held and a caster of the second degree serves the realm.`); }
   }
   const initialBudget = Math.max(0, view.treasury - protectedCoin);
   let budget = initialBudget;

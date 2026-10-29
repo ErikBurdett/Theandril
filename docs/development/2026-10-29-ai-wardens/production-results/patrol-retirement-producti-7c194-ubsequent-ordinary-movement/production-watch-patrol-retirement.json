@@ -1,0 +1,92 @@
+{
+  "snapshotSha256": "e8b68f936e8f7042f04465f879e669ef038cc27a9c927781fe368075a9e92b25",
+  "historicalHash": "4f60f2e3",
+  "initialHash": "f04c7c3d",
+  "initialCell": 8659,
+  "coverage": "from-save",
+  "rounds": [
+    {
+      "turn": 151,
+      "cell": 8659,
+      "hash": "87d83598"
+    },
+    {
+      "turn": 152,
+      "cell": 8879,
+      "hash": "fcf259c2"
+    }
+  ],
+  "clear": {
+    "sequence": 47,
+    "turn": 150,
+    "afterTurn": 150,
+    "command": {
+      "type": "clearPatrol",
+      "factionId": "faction.wardhall_remnant",
+      "armyId": "army.408"
+    },
+    "ok": true,
+    "error": null,
+    "events": [
+      {
+        "turn": 150,
+        "type": "patrol_cleared",
+        "message": "Cleared the patrol for Oath guard. Existing travel continues.",
+        "factionId": "faction.wardhall_remnant"
+      }
+    ],
+    "battles": [],
+    "checkpoint": null,
+    "checkpointVersion": null,
+    "rulesVersion": 42
+  },
+  "movement": {
+    "sequence": 155,
+    "turn": 151,
+    "afterTurn": 151,
+    "command": {
+      "type": "moveTo",
+      "factionId": "faction.wardhall_remnant",
+      "armyId": "army.408",
+      "target": 8879
+    },
+    "ok": true,
+    "error": null,
+    "events": [
+      {
+        "turn": 151,
+        "type": "army_moved",
+        "message": "Oath guard explored hex 8658.",
+        "factionId": "faction.wardhall_remnant",
+        "cell": 8658
+      },
+      {
+        "turn": 151,
+        "type": "army_moved",
+        "message": "Oath guard explored hex 8657.",
+        "factionId": "faction.wardhall_remnant",
+        "cell": 8657
+      },
+      {
+        "turn": 151,
+        "type": "army_moved",
+        "message": "Oath guard explored hex 8656.",
+        "factionId": "faction.wardhall_remnant",
+        "cell": 8656
+      },
+      {
+        "turn": 151,
+        "type": "army_moved",
+        "message": "Oath guard explored hex 8879.",
+        "factionId": "faction.wardhall_remnant",
+        "cell": 8879
+      }
+    ],
+    "battles": [],
+    "checkpoint": null,
+    "checkpointVersion": null,
+    "rulesVersion": 42
+  },
+  "finalHash": "fcf259c2",
+  "records": 178
+}

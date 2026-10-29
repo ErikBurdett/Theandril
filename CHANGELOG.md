@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+The AI now reaches hearth rites in ordinary play: a realm holding a seam researches the rite discovery its Waykeeper could use, keeps a Waykeeper lodged at a seam hearth while at war, and calls a riding qualified caster home when an enemy company nears the hearth, lodging it before any blockade closes the gate. No rule, save field or content changes.
+
 Added seam kindling under rules/save 42, the Flame hearth rite: a Flame-gifted Waykeeper lodged in a hearth that holds a Flame seam kindles it for ten turns at six ashglass, and every company besieging the hearth loses four strength per formation each turn while the works still wear the walls. The ledger and the besieger’s siege card say the walls are kindled, a Rune breaking ends it, a besieged AI realm with a Flame caster kindles, and a besieger that cannot storm kindled walls lifts the siege. No save field changes.
 
 Added ward breaking under rules/save 41, the counter-rite to seam warding: a Waykeeper of the second Rune degree riding with a company that besieges a warded hearth breaks the ward for four ashglass once Measured unbinding is known, jarring the caster who held it for two turns so the walls cannot be re-warded at once. A besieging AI realm with such a caster breaks the ward instead of lifting the siege. No save field changes; v40 envelopes migrate unchanged.
