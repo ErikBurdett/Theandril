@@ -37,6 +37,7 @@ import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
 import { emptyArcaneResearch, observeArcaneResearch, researchArcane } from './magic';
 import { cedeSettlement, cessionCommandSchemas } from './cession';
+import { advanceWards, assertNoWards, observeRites, observeWards, performRite, riteCommandSchemas } from './rites';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
 import type { BattleFactObserver, BattlePresentationEvent, BattlePresentationObserver } from './combat/presentation';
 
@@ -126,12 +127,14 @@ const version38CommandSchema = z.discriminatedUnion('type', [...version37Command
   z.object({ type: z.literal('startAttunement'), factionId: identifier, settlementId: identifier, characterId: identifier }).strict(),
 ]);
 /** Rules 39 lets a capture decision resolve into subject rule; older schemas keep four outcomes. */
-export const commandSchema = z.discriminatedUnion('type', [
+const version39CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('resolveCapture'), factionId: identifier, settlementId: identifier, outcome: captureOutcomeSchema }).strict(),
   ...version38CommandSchema.options.filter(schema => schema.shape.type.value !== 'resolveCapture'),
   ...cessionCommandSchemas,
 ]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : version < 38 ? version37CommandSchema : version < 39 ? version38CommandSchema : commandSchema;
+/** Rules 40 adds strategic rites; historical rules never accept them. */
+export const commandSchema = z.discriminatedUnion('type', [...version39CommandSchema.options, ...riteCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : version < 38 ? version37CommandSchema : version < 39 ? version38CommandSchema : version < 40 ? version39CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -144,6 +147,7 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 40) assertNoWards(state);
   if (version < 39) assertNoSubjectRule(state);
   if (version < 38) assertNoAttunement(state);
   if (version < 37) assertNoLandPolicies(state);
@@ -178,7 +182,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39)]).default(39),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40)]).default(40),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -229,7 +233,7 @@ export function createGame(options: NewGameOptions): GameState {
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
     development: createDevelopmentState(),
-    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), charters: [], postings: [], musters: [], depots: [],
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), wards: [], charters: [], postings: [], musters: [], depots: [],
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
@@ -300,6 +304,8 @@ function addArmy(state: GameState, factionId: string, cell: number, unitId: stri
 
 function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObserver): void {
   observe('sieges', 'start');
+  // Rules 40: wards whose ground, caster or term is gone dissolve before the walls are tested.
+  advanceWards(state, emitted);
   advanceSieges(state, emitted);
   observe('sieges', 'end');
   observe('settlements', 'start');
@@ -627,6 +633,10 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const error = battleAbilityCommand(state, input, emitted, observeFact);
     if (error) return fail(error);
     if (command.type !== 'setBattleAbilityAuto') settleCampaignAbility(state, emitted, observeFact);
+  } else if (command.type === 'performRite') {
+    const result = performRite(state, faction.id, command.characterId, command.riteId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'cedeSettlement') {
     const result = cedeSettlement(state, faction.id, command.settlementId, command.recipientFactionId, emitted);
     if (!result.ok) return result;
@@ -727,7 +737,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     ...(rulesVersion(state) >= 16 ? { resources: resourceObservation(state, factionId), development: getDevelopmentObservation(state, factionId, undefined, options.developmentCandidates ?? true), growth: getGrowthObservation(state, factionId) } : {}),
     battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
     battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
-    arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
+    arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}),
+    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
     roads: observeRoads(state, factionId),
     layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),

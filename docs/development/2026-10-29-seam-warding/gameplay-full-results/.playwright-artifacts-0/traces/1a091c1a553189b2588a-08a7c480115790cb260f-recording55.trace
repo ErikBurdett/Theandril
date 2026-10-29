@@ -1,0 +1,33 @@
+{"version":9,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.63.0","options":{},"platform":"linux","wallTime":1793306189148,"monotonicTime":194293.419,"sdkLanguage":"javascript","title":"biome-variation.spec.ts:112 › a missing chosen variant uses its unchanged approved base and reports the exact missing identity"}
+{"type":"before","callId":"call@4112","startTime":194313.724,"class":"APIRequestContext","method":"fetch","params":{"url":"/art/catalog.json","method":"GET"},"stepId":"pw:api@33"}
+{"type":"log","callId":"call@4112","time":194317.284,"message":"→ GET http://127.0.0.1:4173/art/catalog.json"}
+{"type":"log","callId":"call@4112","time":194317.295,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"}
+{"type":"log","callId":"call@4112","time":194317.298,"message":"  accept: */*"}
+{"type":"log","callId":"call@4112","time":194317.3,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"call@4112","time":194319.438,"message":"← 200 OK"}
+{"type":"log","callId":"call@4112","time":194319.446,"message":"  vary: Origin"}
+{"type":"log","callId":"call@4112","time":194319.451,"message":"  content-length: 1885622"}
+{"type":"log","callId":"call@4112","time":194319.453,"message":"  content-type: application/json"}
+{"type":"log","callId":"call@4112","time":194319.455,"message":"  last-modified: Wed, 09 Sep 2026 00:07:01 GMT"}
+{"type":"log","callId":"call@4112","time":194319.457,"message":"  etag: W/\"1885622-1788912421518\""}
+{"type":"log","callId":"call@4112","time":194319.459,"message":"  cache-control: no-cache"}
+{"type":"log","callId":"call@4112","time":194319.46,"message":"  date: Thu, 29 Oct 2026 20:36:29 GMT"}
+{"type":"log","callId":"call@4112","time":194319.462,"message":"  connection: keep-alive"}
+{"type":"log","callId":"call@4112","time":194319.464,"message":"  keep-alive: timeout=5"}
+{"type":"after","callId":"call@4112","endTime":194322.713,"result":{"response":{"url":"http://127.0.0.1:4173/art/catalog.json","status":200,"statusText":"OK","headers":[{"name":"Vary","value":"Origin"},{"name":"Content-Length","value":"1885622"},{"name":"Content-Type","value":"application/json"},{"name":"Last-Modified","value":"Wed, 09 Sep 2026 00:07:01 GMT"},{"name":"ETag","value":"W/\"1885622-1788912421518\""},{"name":"Cache-Control","value":"no-cache"},{"name":"Date","value":"Thu, 29 Oct 2026 20:36:29 GMT"},{"name":"Connection","value":"keep-alive"},{"name":"Keep-Alive","value":"timeout=5"}],"serverAddr":{"ipAddress":"127.0.0.1","port":4173},"timing":{"startTime":1793306189170,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":3.243000000016764,"requestStart":3.243000000016764,"responseStart":4.2149999999965075},"responseEndTiming":6.368000000016764,"fetchUid":"ad104968a220d65488dd6db2a5ebc573"}}}
+{"type":"before","callId":"call@4115","startTime":194337.545,"class":"APIRequestContext","method":"fetch","params":{"url":"/art/foundation.json","method":"GET"},"stepId":"pw:api@35"}
+{"type":"log","callId":"call@4115","time":194338.104,"message":"→ GET http://127.0.0.1:4173/art/foundation.json"}
+{"type":"log","callId":"call@4115","time":194338.11,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"}
+{"type":"log","callId":"call@4115","time":194338.112,"message":"  accept: */*"}
+{"type":"log","callId":"call@4115","time":194338.113,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"call@4115","time":194338.714,"message":"← 200 OK"}
+{"type":"log","callId":"call@4115","time":194338.719,"message":"  vary: Origin"}
+{"type":"log","callId":"call@4115","time":194338.722,"message":"  content-length: 275608"}
+{"type":"log","callId":"call@4115","time":194338.723,"message":"  content-type: application/json"}
+{"type":"log","callId":"call@4115","time":194338.724,"message":"  last-modified: Wed, 09 Sep 2026 00:07:01 GMT"}
+{"type":"log","callId":"call@4115","time":194338.725,"message":"  etag: W/\"275608-1788912421500\""}
+{"type":"log","callId":"call@4115","time":194338.726,"message":"  cache-control: no-cache"}
+{"type":"log","callId":"call@4115","time":194338.727,"message":"  date: Thu, 29 Oct 2026 20:36:29 GMT"}
+{"type":"log","callId":"call@4115","time":194338.728,"message":"  connection: keep-alive"}
+{"type":"log","callId":"call@4115","time":194338.729,"message":"  keep-alive: timeout=5"}
+{"type":"after","callId":"call@4115","endTime":194339.119,"result":{"response":{"url":"http://127.0.0.1:4173/art/foundation.json","status":200,"statusText":"OK","headers":[{"name":"Vary","value":"Origin"},{"name":"Content-Length","value":"275608"},{"name":"Content-Type","value":"application/json"},{"name":"Last-Modified","value":"Wed, 09 Sep 2026 00:07:01 GMT"},{"name":"ETag","value":"W/\"275608-1788912421500\""},{"name":"Cache-Control","value":"no-cache"},{"name":"Date","value":"Thu, 29 Oct 2026 20:36:29 GMT"},{"name":"Connection","value":"keep-alive"},{"name":"Keep-Alive","value":"timeout=5"}],"serverAddr":{"ipAddress":"127.0.0.1","port":4173},"timing":{"startTime":1793306189193,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":-1,"secureConnectionStart":-1,"connectEnd":-1,"requestStart":0.20999999999185093,"responseStart":0.7379999999830034},"responseEndTiming":0.9149999999790452,"fetchUid":"2ee65d966d34a4c747a34eb5fdfa4294"}}}

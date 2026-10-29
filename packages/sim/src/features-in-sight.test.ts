@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 import { naturalFeatures } from '@theandril/mapgen';
 import { applyCommand, createGame, getObservation, serializeGame, deserializeGame, stateHash } from './index';
 import { withRules } from './rules';
+import { PRE_RITE_CONTENT_HASH } from './save';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 
 test('rules 39 shows natural features only on ground in sight, omitting zero masks and remembered ground', () => {
@@ -64,7 +65,7 @@ test('rules 39 remembers every surveyed hex, found or empty, bounded and oldest 
   expect(state.arcaneSearches[factionId]).toHaveLength(256);
   expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   // A rules-38 envelope migrates with an empty register.
-  const old = JSON.parse(before); old.version = 38; delete old.state.arcaneSearches;
+  const old = JSON.parse(before); old.version = 38; old.contentHash = PRE_RITE_CONTENT_HASH; delete old.state.arcaneSearches; delete old.state.wards;
   const { checksum } = await import('@theandril/content');
   old.stateChecksum = checksum(JSON.stringify(old.state));
   const migrated = deserializeGame(JSON.stringify(old));

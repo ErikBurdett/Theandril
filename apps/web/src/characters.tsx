@@ -3,7 +3,7 @@ import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS } from '@th
 import type { CharacterView, GameCommand, Observation } from '@theandril/sim';
 import { FactionArt } from './faction-art';
 import { CharacterSkills } from './character-skills';
-import { PersonalMagic } from './magic';
+import { PersonalMagic, StrategicRites } from './magic';
 import './characters.css';
 
 type Issue = (command: GameCommand) => void;
@@ -99,6 +99,7 @@ function CharacterSheet({ character, view, busy, initialArmyId, issue, locate }:
     <dl className="character-values"><div><dt>Condition</dt><dd>{character.status}{character.woundedTurns ? ` · ${character.woundedTurns} turns` : ''}</dd></div><div><dt>Available experience</dt><dd>{character.experience} · rank {character.rank}</dd></div><div><dt>Specialization</dt><dd>{character.skillId ? skillName(character.skillId) : 'Not chosen'}</dd></div></dl>
     {character.dead && <p className="character-blocker">This character has died. Their record remains; no further appointments, missions or promotions are possible.</p>}
     <PersonalMagic character={character}/>
+    {!character.dead && <StrategicRites view={view} character={character} busy={busy} issue={issue}/>}
     {character.mission && <ActiveMission character={character} busy={busy} factionId={view.factionId} issue={issue}/>}
     <CharacterSkills character={character} factionId={view.factionId} busy={busy || character.dead} issue={issue}/>
     {!character.dead && <>

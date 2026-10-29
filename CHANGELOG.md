@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Added seam warding under rules/save 40, the first strategic rite: a Rune Waykeeper lodged in a hearth whose borders hold a Rune seam binds the seam into the walls for ten turns at six ashglass, so siege works and sabotage cannot wear the defenses down while the caster stays, the seam is held and the hearth keeps its owner. Casters read the rite with its exact blocker on the character sheet, the siege ledger marks warded walls, a besieged AI realm performs it and a besieger that cannot storm warded walls lifts the siege. Older envelopes migrate with no wards and are refused while a ward stands.
+
 Fixed the realm registry so an AI watch can still be browsed, filtered, sorted and selected from while orders stay locked. Both complete browser suites were run before publication; four stale journeys were corrected with retained evidence.
 
 Added seam study under rules 39: a Waykeeper lodged in a hearth whose borders hold a surveyed seam earns one experience a turn, so every culture can deepen a path in peace, and an AI realm at peace holding a seam of every path appoints a Waykeeper to study at a hearth that could host the working. No save change; verified by new sim and AI tests.

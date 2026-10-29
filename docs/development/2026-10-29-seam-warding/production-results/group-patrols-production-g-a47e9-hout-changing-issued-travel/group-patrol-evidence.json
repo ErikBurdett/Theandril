@@ -1,0 +1,93 @@
+{
+  "authored": "Open-terrain theaterCampaign(101), two hearths, treasury, named companies and foreign obstruction guard; 105 ordinary setup records.",
+  "initialHash": "aecc89d5",
+  "counts": {
+    "armies": 101,
+    "policies": 99,
+    "enabled": 49,
+    "paused": 50,
+    "setupCommands": 105
+  },
+  "phases": [
+    {
+      "action": "paused",
+      "hash": "05878cbc",
+      "records": 154,
+      "accepted": 49,
+      "skipped": 52
+    },
+    {
+      "action": "resumed",
+      "hash": "04409dcd",
+      "records": 253,
+      "accepted": 99,
+      "skipped": 2
+    },
+    {
+      "action": "removed",
+      "hash": "6e1fd653",
+      "records": 352,
+      "accepted": 99,
+      "skipped": 2
+    }
+  ],
+  "finalHash": "6e1fd653",
+  "unchangedRoutes": {
+    "army.98": {
+      "armyId": "army.98",
+      "origin": 498,
+      "waypoints": [
+        510
+      ],
+      "path": [
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510
+      ],
+      "status": "paused",
+      "pauseReason": "Another faction now blocks the next step.",
+      "knownHostileIds": []
+    },
+    "army.99": {
+      "armyId": "army.99",
+      "origin": 498,
+      "waypoints": [
+        510
+      ],
+      "path": [
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        510
+      ],
+      "status": "active",
+      "pauseReason": null,
+      "knownHostileIds": []
+    }
+  },
+  "unchangedArmies": true,
+  "unchangedPostings": true,
+  "warPausePreservedUntilRemoval": true,
+  "exactReplayEveryPhase": true,
+  "exactReload": true,
+  "finalRecords": 352,
+  "realPendingFilterLock": true
+}

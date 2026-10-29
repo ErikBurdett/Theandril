@@ -1,0 +1,444 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 13 tests using 1 worker
+
+  ✘   1 tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% (7.0s)
+  ✘   2 tests/production/land-policy-templates.spec.ts:41:1 › personal land budgets cross generated campaigns and reloads without orders until explicit paid application, then deletion leaves exact saved work intact (1.9s)
+  ✘   3 tests/production/patrol-recovery.spec.ts:8:1 › production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery (4.9s)
+  ✘   4 tests/production/patrol-retirement.spec.ts:16:1 › production AI watch retires a genuinely captured hearth patrol and saves its subsequent ordinary movement (8.9s)
+  ✘   5 tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector (2.3s)
+  ✘   6 tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (1.8s)
+  ✘   7 tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration (2.1s)
+  ✘   8 tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks (2.0s)
+  ✘   9 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer (2.3s)
+  ✘  10 tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer (2.1s)
+  ✘  11 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer (2.2s)
+  ✘  12 tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer (2.1s)
+  ✘  13 tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import (2.1s)
+
+
+  1) tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "◆Resolving… A world of broken oaths awaits a new beginning."
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        8 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+      - Protocol error (Runtime.callFunctionOn): Page crashed.
+
+
+      38 |   expect(await page.evaluate(() => '__THEANDRIL__' in window)).toBe(false);
+      39 |   await page.getByLabel('Import save file').setInputFiles({ name: 'worker-stewardship.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeCampaign(fixture.game, archive))) });
+    > 40 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      41 |   await campaignMenu(page);
+      42 |   await page.getByRole('combobox', { name: 'Text scale', exact: true }).selectOption('1.3');
+      43 |   let policies = await recallRealm(page);
+        at /home/telephoneheater/Work/Theandril/tests/production/group-worker-policies.spec.ts:40:46
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/group-worker-policies-prod-5508d-val-and-restoration-at-130-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/group-worker-policies-prod-5508d-val-and-restoration-at-130-/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/group-worker-policies-prod-5508d-val-and-restoration-at-130-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/production/land-policy-templates.spec.ts:41:1 › personal land budgets cross generated campaigns and reloads without orders until explicit paid application, then deletion leaves exact saved work intact 
+
+    Error: locator.isVisible: Target crashed 
+    Call log:
+        - checking visibility of getByRole('dialog', { name: 'Realm registry', exact: true })
+
+
+       at ../gameplay/ui-navigation.ts:20
+
+      18 | async function openManagement(page: Page, title: string, launcher = title) {
+      19 |   const window = page.getByRole('dialog', { name: title, exact: true });
+    > 20 |   if (!await window.isVisible()) {
+         |                     ^
+      21 |     await closeManagement(page);
+      22 |     // Save/load leaves this real overlay open; dismiss it before clicking a
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:20:21)
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:31:24)
+        at selectFromRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:40:24)
+        at begin (/home/telephoneheater/Work/Theandril/tests/production/land-policy-templates.spec.ts:16:9)
+        at /home/telephoneheater/Work/Theandril/tests/production/land-policy-templates.spec.ts:45:3
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/land-policy-templates-pers-e9e1a-ves-exact-saved-work-intact/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/land-policy-templates-pers-e9e1a-ves-exact-saved-work-intact/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/land-policy-templates-pers-e9e1a-ves-exact-saved-work-intact/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/production/patrol-recovery.spec.ts:8:1 › production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('watch-controls')
+    Expected substring: "AI watch paused"
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('watch-controls') with timeout 5000ms
+      - waiting for getByTestId('watch-controls')
+      - Protocol error (Runtime.callFunctionOn): Page crashed.
+
+
+      35 |   await page.reload();
+      36 |   await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+    > 37 |   await expect(page.getByTestId('watch-controls')).toContainText('AI watch paused');
+         |                                                    ^
+      38 |   const restored = await exportedTravel(page);
+      39 |   expect(restored.archive).toEqual(resumed.archive);
+      40 |   expect(stateHash(restored.game)).toBe(stateHash(resumed.game));
+        at /home/telephoneheater/Work/Theandril/tests/production/patrol-recovery.spec.ts:37:52
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-recovery-production-1df3d-story-through-save-recovery/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-recovery-production-1df3d-story-through-save-recovery/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-recovery-production-1df3d-story-through-save-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/production/patrol-retirement.spec.ts:16:1 › production AI watch retires a genuinely captured hearth patrol and saves its subsequent ordinary movement 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('watch-controls')
+    Expected substring: "AI watch paused"
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('watch-controls') with timeout 5000ms
+      - waiting for getByTestId('watch-controls')
+      - Protocol error (Runtime.callFunctionOn): Page crashed.
+
+
+      65 |   await page.reload();
+      66 |   await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+    > 67 |   await expect(page.getByTestId('watch-controls')).toContainText('AI watch paused');
+         |                                                    ^
+      68 |   const restored = await exportedTravel(page);
+      69 |   expect(restored.archive).toEqual(retired.archive);
+      70 |   expect(stateHash(restored.game)).toBe(stateHash(retired.game));
+        at /home/telephoneheater/Work/Theandril/tests/production/patrol-retirement.spec.ts:67:52
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-retirement-producti-7c194-ubsequent-ordinary-movement/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-retirement-producti-7c194-ubsequent-ordinary-movement/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/patrol-retirement-producti-7c194-ubsequent-ordinary-movement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector 
+
+    Error: locator.click: Target crashed 
+    Call log:
+      - waiting for getByRole('button', { name: 'Armies & fleets', exact: true })
+
+
+       at ../gameplay/ui-navigation.ts:25
+
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+      24 |     await closeCampaignOptions(page);
+    > 25 |     await page.getByRole('button', { name: launcher, exact: true }).click();
+         |                                                                     ^
+      26 |   }
+      27 |   await expect(window).toBeVisible();
+      28 |   return window;
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:25:69)
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:31:18)
+        at selectFromRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:40:18)
+        at openPosting (/home/telephoneheater/Work/Theandril/tests/production/posting-targets.spec.ts:16:3)
+        at /home/telephoneheater/Work/Theandril/tests/production/posting-targets.spec.ts:37:19
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-4dda0-nt-in-the-mounted-inspector/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-4dda0-nt-in-the-mounted-inspector/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-4dda0-nt-in-the-mounted-inspector/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history 
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      100 |   await expect(muster.getByRole('button', { name: 'Clear muster point', exact: true })).toBeEnabled();
+      101 |   await muster.scrollIntoViewIfNeeded();
+    > 102 |   await page.screenshot({ path: testInfo.outputPath('muster-unavailable-desktop.png') });
+          |              ^
+      103 |   // Clearing must not require inventing a valid replacement destination.
+      104 |   await muster.getByRole('button', { name: 'Clear muster point', exact: true }).focus(); await page.keyboard.press('Enter');
+      105 |   await expect(muster.locator(':scope > summary')).toContainText('none');
+        at /home/telephoneheater/Work/Theandril/tests/production/posting-targets.spec.ts:102:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-25746-le-with-exact-saved-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-25746-le-with-exact-saved-history/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-25746-le-with-exact-saved-history/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-targets-production-25746-le-with-exact-saved-history/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration 
+
+    Error: locator.isVisible: Target crashed 
+    Call log:
+        - checking visibility of getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ })
+
+
+       at ../gameplay/ui-navigation.ts:9
+
+       7 | export async function closeManagement(page: Page) {
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+    >  9 |   if (await window.isVisible()) {
+         |                    ^
+      10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:9:20)
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:21:11)
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:31:18)
+        at chooseArmies (/home/telephoneheater/Work/Theandril/tests/production/posting-templates.spec.ts:20:3)
+        at /home/telephoneheater/Work/Theandril/tests/production/posting-templates.spec.ts:38:17
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-templates-producti-66f94-rders-and-saved-restoration/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-templates-producti-66f94-rders-and-saved-restoration/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/posting-templates-producti-66f94-rders-and-saved-restoration/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks 
+
+    Error: locator.getAttribute: Target crashed 
+    Call log:
+      - waiting for getByTestId('campaign-menu')
+
+
+       at ../gameplay/ui-navigation.ts:16
+
+      14 | export async function closeCampaignOptions(page: Page) {
+      15 |   const settings = page.getByTestId('campaign-menu');
+    > 16 |   if (await settings.getAttribute('open') !== null) await settings.locator(':scope > summary').click();
+         |                      ^
+      17 | }
+      18 | async function openManagement(page: Page, title: string, launcher = title) {
+      19 |   const window = page.getByRole('dialog', { name: title, exact: true });
+        at closeCampaignOptions (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:16:22)
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:24:11)
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:31:18)
+        at selectFromRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:40:18)
+        at begin (/home/telephoneheater/Work/Theandril/tests/production/production-sequences.spec.ts:17:3)
+        at /home/telephoneheater/Work/Theandril/tests/production/production-sequences.spec.ts:54:26
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/production-sequences-built-7d259-oration-without-debug-hooks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/production-sequences-built-7d259-oration-without-debug-hooks/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/production-sequences-built-7d259-oration-without-debug-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer 
+
+    Error: locator.isVisible: Target crashed 
+    Call log:
+        - checking visibility of getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ })
+
+
+       at ../gameplay/ui-navigation.ts:9
+
+       7 | export async function closeManagement(page: Page) {
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+    >  9 |   if (await window.isVisible()) {
+         |                    ^
+      10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:9:20)
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:21:11)
+        at /home/telephoneheater/Work/Theandril/tests/production/project-counterplay.spec.ts:54:5
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-255a6-tion-with-an-incoming-offer/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-255a6-tion-with-an-incoming-offer/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-255a6-tion-with-an-incoming-offer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer 
+
+    Error: locator.click: Target crashed 
+    Call log:
+      - waiting for getByRole('button', { name: 'Realm affairs', exact: true })
+
+
+       at ../gameplay/ui-navigation.ts:25
+
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+      24 |     await closeCampaignOptions(page);
+    > 25 |     await page.getByRole('button', { name: launcher, exact: true }).click();
+         |                                                                     ^
+      26 |   }
+      27 |   await expect(window).toBeVisible();
+      28 |   return window;
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:25:69)
+        at /home/telephoneheater/Work/Theandril/tests/production/project-counterplay.spec.ts:54:5
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-bbf1f-ption-with-no-initial-offer/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-bbf1f-ption-with-no-initial-offer/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-bbf1f-ption-with-no-initial-offer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Realm affairs', exact: true })
+    Expected: visible
+    Received: undefined
+
+    Call log:
+      - Expect "toBeVisible" getByRole('dialog', { name: 'Realm affairs', exact: true }) with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Realm affairs', exact: true })
+      - 
+
+
+       at ../gameplay/ui-navigation.ts:27
+
+      25 |     await page.getByRole('button', { name: launcher, exact: true }).click();
+      26 |   }
+    > 27 |   await expect(window).toBeVisible();
+         |                        ^
+      28 |   return window;
+      29 | }
+      30 | export async function openRegistry(page: Page, kind: RegistryKind) {
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:27:24)
+        at /home/telephoneheater/Work/Theandril/tests/production/project-counterplay.spec.ts:54:5
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-cfce4-tion-with-an-incoming-offer/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-cfce4-tion-with-an-incoming-offer/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-cfce4-tion-with-an-incoming-offer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer 
+
+    Error: locator.isVisible: Target crashed 
+    Call log:
+        - checking visibility of getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ })
+
+
+       at ../gameplay/ui-navigation.ts:9
+
+       7 | export async function closeManagement(page: Page) {
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+    >  9 |   if (await window.isVisible()) {
+         |                    ^
+      10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:9:20)
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:21:11)
+        at /home/telephoneheater/Work/Theandril/tests/production/project-counterplay.spec.ts:54:5
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-f8e78-ption-with-no-initial-offer/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-f8e78-ption-with-no-initial-offer/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/project-counterplay-produc-f8e78-ption-with-no-initial-offer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import 
+
+    Error: page.evaluate: Target crashed 
+
+      11 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
+      12 |   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
+    > 13 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+         |                     ^
+      14 | }
+      15 |
+      16 | async function settings(page: Page) {
+        at begin (/home/telephoneheater/Work/Theandril/tests/production/selection-groups.spec.ts:13:21)
+        at /home/telephoneheater/Work/Theandril/tests/production/selection-groups.spec.ts:37:3
+
+    Error Context: docs/development/2026-10-29-seam-warding/production-rerun2-results/selection-groups-productio-38126--reload-and-portable-import/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/production-rerun2-results/selection-groups-productio-38126--reload-and-portable-import/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/production-rerun2-results/selection-groups-productio-38126--reload-and-portable-import/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13 failed
+    tests/production/group-worker-policies.spec.ts:24:1 › production worker policies govern 30 hearths, preserve unaffected selections and survive keyboard removal and restoration at 130% 
+    tests/production/land-policy-templates.spec.ts:41:1 › personal land budgets cross generated campaigns and reloads without orders until explicit paid application, then deletion leaves exact saved work intact 
+    tests/production/patrol-recovery.spec.ts:8:1 › production AI watch reviews a genuinely stalled patrol and preserves the resumed history through save recovery 
+    tests/production/patrol-retirement.spec.ts:16:1 › production AI watch retires a genuinely captured hearth patrol and saves its subsequent ordinary movement 
+    tests/production/posting-targets.spec.ts:34:1 › production where it stands posts to the displayed current position after real movement in the mounted inspector 
+    tests/production/posting-targets.spec.ts:89:1 › production saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history 
+    tests/production/posting-templates.spec.ts:32:1 › production posting templates cross campaigns and reloads, with explicit orders and saved restoration 
+    tests/production/production-sequences.spec.ts:52:1 › built production sequences cross campaigns, pay ordinary queues and survive manual and portable restoration without debug hooks 
+    tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with an incoming offer 
+    tests/production/project-counterplay.spec.ts:51:3 › production player establishes project interruption with no initial offer 
+    tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with an incoming offer 
+    tests/production/project-counterplay.spec.ts:51:3 › production watch sustains project interruption with no initial offer 
+    tests/production/selection-groups.spec.ts:33:1 › production saved groups remain campaign-specific through founding, explicit orders, save, reload and portable import 

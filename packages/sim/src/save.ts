@@ -28,6 +28,7 @@ import { createDiplomacy, diplomacyStateSchema, historicalDiplomacySchema, valid
 import { clientBondSchema, clientOfferSchema } from './clients';
 import { arcaneSurveySchema, hasArcaneSurveys, validateArcaneSurveys, arcaneSearchSchema, hasArcaneSearches, validateArcaneSearches } from './arcane-sites';
 import { assertNoSubjectRule, captureDecisionSchema, captureDecisionV15Schema, captureDecisionV39Schema, ruinSchema, siegeSchema, siegeV20Schema, validateSieges } from './siege';
+import { assertNoWards, validateWards, wardStateSchema } from './rites';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -39,7 +40,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 39;
+export const SAVE_VERSION = 40;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -53,6 +54,8 @@ export const PRE_PATRONAGE_CONTENT_HASH = 'f70d99d5';
 export const PRE_COUNTER_CONTENT_HASH = 'f4076f55';
 /** Rules 24–37 content, before rules 38 added the Attunement victory and path deepening. */
 export const PRE_ATTUNEMENT_CONTENT_HASH = '015468d1';
+/** Rules 38–39 content, before rules 40 added strategic rites. */
+export const PRE_RITE_CONTENT_HASH = '03ac0328';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -230,14 +233,16 @@ const stateV37Schema = stateV36Schema.extend({ landPolicies: landPolicyStateSche
 /** Rules 38 records Attunement beside the other two paths on the public ledger. */
 const stateV38Schema = stateV37Schema.extend({ projects: z.array(victoryProjectSchema).max(MAX_FACTIONS * 3), victory: victoryV38Schema.nullable() }).strict();
 /** Rules 39 lets a pending capture quote subject rule; the content pack is unchanged. */
-const stateSchema = stateV38Schema.extend({ pendingCapture: captureDecisionV39Schema.nullable(), arcaneSearches: arcaneSearchSchema }).strict();
+const stateV39Schema = stateV38Schema.extend({ pendingCapture: captureDecisionV39Schema.nullable(), arcaneSearches: arcaneSearchSchema }).strict();
+/** Rules 40 records standing strategic wards. */
+const stateSchema = stateV39Schema.extend({ wards: wardStateSchema }).strict();
 const searchesFor = (factions: readonly { id: string }[]) => factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1);
-const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions) });
-const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions) });
-const withPatrols = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions) });
+const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
+const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
+const withPatrols = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withLogistics = <T extends { theaters: z.infer<typeof defenseTheaterV33StateSchema>; factions: { id: string }[] }>(state: T) => ({ ...state,
-  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions) });
-const emptyTheaters = (factions: readonly { id: string }[]) => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor(factions) });
+  theaters: state.theaters.map(theater => ({ ...theater, reinforcementLimit: 0, reinforcementHolds: [] })), supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
+const emptyTheaters = (factions: readonly { id: string }[]) => ({ theaters: [] as z.infer<typeof defenseTheaterV34StateSchema>, nextTheaterId: 1, supplyAccess: createSupplyAccess(), patrols: [] as z.infer<typeof patrolStateSchema>, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor(factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withTheaters = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, ...emptyTheaters(state.factions) });
 const withSelectionGroups = <T extends { factions: { id: string }[] }>(state: T) => withTheaters({ ...state, selectionGroups: [] as z.infer<typeof selectionGroupStateSchema>, nextSelectionGroupId: 1 });
 const withDepots = <T extends { factions: { id: string }[] }>(state: T) => withSelectionGroups({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
@@ -252,7 +257,8 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(39), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(40), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV39Schema = saveSchema.extend({ version: z.literal(39), state: stateV39Schema }).strict();
 const saveV38Schema = saveSchema.extend({ version: z.literal(38), state: stateV38Schema }).strict();
 const saveV37Schema = saveSchema.extend({ version: z.literal(37), state: stateV37Schema }).strict();
 const saveV36Schema = saveSchema.extend({ version: z.literal(36), state: stateV36Schema }).strict();
@@ -442,6 +448,7 @@ function canonicalPayload(state: GameState) {
       landPolicies: landPolicyStateSchema.parse(state.landPolicies),
       // Rules 39 appends surveyed ground last, matching the schema's key order that the checksum reads.
       arcaneSearches: arcaneSearchSchema.parse(state.factions.map(faction => ({ factionId: faction.id, cells: [...(state.arcaneSearches[faction.id] ?? [])] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1)),
+      wards: wardStateSchema.parse([...state.wards].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
   };
   return payload;
 }
@@ -491,6 +498,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 40) assertNoWards(state);
   if (version < 39) assertNoSubjectRule(state);
   if (version < 38) assertNoAttunement(state);
   if (version < 37) assertNoLandPolicies(state);
@@ -619,6 +627,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 40) assertNoWards(state);
   if (version < 39) assertNoSubjectRule(state);
   if (version < 38) assertNoAttunement(state);
   if (version < 37) assertNoLandPolicies(state);
@@ -637,7 +646,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 38) return CONTENT_HASH;
+  if (version >= 40) return CONTENT_HASH;
+  if (version >= 38) return PRE_RITE_CONTENT_HASH;
   if (version >= 24) return PRE_ATTUNEMENT_CONTENT_HASH;
   if (version >= 22) return PRE_COUNTER_CONTENT_HASH;
   if (version >= 21) return PRE_PATRONAGE_CONTENT_HASH;
@@ -649,8 +659,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 39) return latest;
-  const { arcaneSearches: _searches, ...beforeSearches } = latest;
+  if (version >= 40) return latest;
+  const { wards: _wards, ...beforeWards } = latest;
+  if (version >= 39) return beforeWards;
+  const { arcaneSearches: _searches, ...beforeSearches } = beforeWards;
   if (version >= 37) return beforeSearches;
   const { landPolicies: _landPolicies, ...beforeLandPolicies } = beforeSearches;
   if (version >= 36) return beforeLandPolicies;
@@ -910,20 +922,28 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 39) {
+    const prior = saveV39Schema.parse(raw);
+    assert(prior.contentHash === PRE_RITE_CONTENT_HASH, 'v39 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v39 snapshot checksum does not match its contents');
+    // Rules 40 adds standing wards no older campaign can hold.
+    const state = { ...prior.state, wards: [] as z.infer<typeof wardStateSchema> };
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+  }
   if (version === 38) {
     const prior = saveV38Schema.parse(raw);
-    assert(prior.contentHash === CONTENT_HASH, 'v38 content hash is not a recognized compatible pack');
+    assert(prior.contentHash === PRE_RITE_CONTENT_HASH, 'v38 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v38 snapshot checksum does not match its contents');
-    // Rules 39 adds surveyed-ground memory beside what a new capture decision may quote.
-    const state = { ...prior.state, arcaneSearches: searchesFor(prior.state.factions) };
-    return { ...prior, version: SAVE_VERSION, stateChecksum: checksum(JSON.stringify(state)), state };
+    // Rules 39 adds surveyed-ground memory beside what a new capture decision may quote; rules 40 adds wards.
+    const state = { ...prior.state, arcaneSearches: searchesFor(prior.state.factions), wards: [] as z.infer<typeof wardStateSchema> };
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
   }
   if (version === 37) {
     const prior = saveV37Schema.parse(raw);
     assert(prior.contentHash === PRE_ATTUNEMENT_CONTENT_HASH, 'v37 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v37 snapshot checksum does not match its contents');
-    // Rules 38 adds a victory path and skills no older campaign can hold; rules 39 adds surveyed-ground memory.
-    const state = { ...prior.state, arcaneSearches: searchesFor(prior.state.factions) };
+    // Rules 38 adds a victory path and skills no older campaign can hold; rules 39 adds surveyed-ground memory; rules 40 adds wards.
+    const state = { ...prior.state, arcaneSearches: searchesFor(prior.state.factions), wards: [] as z.infer<typeof wardStateSchema> };
     return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
   }
   if (version === 36) {
@@ -1335,6 +1355,7 @@ export function deserializeGame(text: string): GameState {
     arcaneResearch: Object.fromEntries(data.arcaneResearch.map(item => [item.factionId, item.discoveries])),
     arcaneSurveys: Object.fromEntries(data.factions.map(faction => [faction.id, [...(data.arcaneSurveys.find(item => item.factionId === faction.id)?.cells ?? [])]])),
     arcaneSearches: Object.fromEntries(data.factions.map(faction => [faction.id, [...(data.arcaneSearches.find(item => item.factionId === faction.id)?.cells ?? [])]])),
+    wards: data.wards.map(ward => ({ ...ward })),
     roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
@@ -1364,6 +1385,7 @@ export function deserializeGame(text: string): GameState {
   validateArcaneResearch(state);
   validateArcaneSurveys(state);
   validateArcaneSearches(state);
+  validateWards(state);
   validateSelectionGroups(state);
   validateTheaters(state);
   validatePatrols(state);

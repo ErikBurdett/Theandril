@@ -1,0 +1,86 @@
+
+Running 6 tests using 1 worker
+
+  ✘  1 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (5.9s)
+  ✘  2 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (45.0s)
+  ✓  3 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (10.1s)
+  ✓  4 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (2.5s)
+  ✓  5 tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (3.2s)
+  ✓  6 tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save (3.3s)
+
+
+  1) tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        2 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        12 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+
+
+      10 |   await page.goto('/');
+      11 |   await page.locator('input[type=file]').setInputFiles({ name: 'witness-company.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+    > 12 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      13 | }
+      14 | async function inspect(page: Page, id: string) {
+      15 |   if (!await roster(page).isVisible()) {
+        at loadScenario (/home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:12:46)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:223:5
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-rerun-results/characters-siege-sabotage--89365-s-through-save-and-recovery/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-rerun-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-rerun-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.setInputFiles: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for locator('input[type=file]')
+
+
+       9 |   const fixture = conquestCampaign();
+      10 |   await page.goto('/');
+    > 11 |   await page.locator('input[type=file]').setInputFiles({ name: 'reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
+         |   ^
+      12 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+      13 |   await openRealmAffairs(page);
+      14 |   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
+        at beginSiege (/home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:11:3)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:36:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-rerun-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-rerun-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-rerun-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-rerun-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+    tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes 
+  4 passed (1.2m)

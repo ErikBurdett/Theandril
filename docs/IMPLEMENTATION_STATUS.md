@@ -1,5 +1,31 @@
 # Theandril implementation status
 
+## Seam warding: the first strategic rite — 2026-10-29
+
+Rules/save 40 adds the first strategic rite. A Rune Waykeeper lodged in a hearth
+whose borders hold a surveyed Rune seam binds the seam into the walls for ten
+turns at six ashglass once the realm has researched Rune Binding: while the
+caster stays lodged, the seam is held and the hearth keeps its owner, siege
+works do not wear its defenses down and sabotage does no damage. The besieger
+reads warded walls on its siege card, and every party reads why a ward ended.
+The character sheet quotes the rite with its cost, term, host and exact blocker;
+the siege ledger marks warded walls. A besieged AI realm performs the first rite
+it can, and a besieger that cannot storm warded walls lifts the siege. Save
+version 40 adds `wards`; older envelopes migrate empty and projection refuses a
+standing ward. One rite of one path exists; counter-rituals remain open.
+
+Verification: new sim, AI and UI tests and a browser journey through the real
+character sheet and ledger; unit **2,298 tests / 284 files pass**, campaigns 57 and lint pass;
+headline campaigns remain **362/327/227** with command and event counts
+identical to the seam-study packet, and the rules 39 projection reproduces that
+packet’s seals exactly, because no AI realm reaches a warded siege in organic
+play. Browser journeys on this desktop had to be rerun around a headless browser
+that crashed with increasing frequency; every affected gameplay case has a
+passing result, the complete gameplay run was stopped by the tool at 39 passing
+cases for low system memory, and 49 of 59 production cases pass while ten
+crash-only cases stay unverified; all are classified in the packet. [Evidence](development/2026-10-29-seam-warding/README.md),
+[ADR0062](architecture/0062-seam-warding.md).
+
 ## Registry inspection in AI watch and the complete browser suites — 2026-10-29
 
 Before publication both browser suites were run end to end: the production suite

@@ -7,7 +7,7 @@ type IssueOrder = (command: GameCommand) => void;
 const factionName = (view: Observation, id: string): string => view.factions.find(faction => faction.id === id)?.name ?? id;
 
 function SiegeStrength({ siege }: { siege: Observation['sieges'][number] }) {
-  return <dl className="siege-strength"><div><dt>Defenses</dt><dd>{siege.defenses}</dd></div><div><dt>Food stores</dt><dd>{siege.supplies} {siege.supplies === 1 ? "turn" : "turns"}</dd></div><div><dt>Defending strength</dt><dd>{siege.defenderStrength}</dd></div></dl>;
+  return <dl className="siege-strength"><div><dt>Defenses</dt><dd>{siege.defenses}{siege.warded ? ' · warded' : ''}</dd></div><div><dt>Food stores</dt><dd>{siege.supplies} {siege.supplies === 1 ? "turn" : "turns"}</dd></div><div><dt>Defending strength</dt><dd>{siege.defenderStrength}</dd></div></dl>;
 }
 
 export function SiegeOrders({ army, view, busy, issue }: { army: ArmyView; view: Observation; busy: boolean; issue: IssueOrder }) {
@@ -21,6 +21,7 @@ export function SiegeOrders({ army, view, busy, issue }: { army: ArmyView; view:
       <strong>Besieging {view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}</strong>
       <SiegeStrength siege={current}/>
       <BattleDefensePreview defense={current.battleDefense}/>
+      {current.warded && <p className="field-help" data-testid="siege-warded">The walls are warded: siege works and sabotage cannot wear them down while the ward stands.</p>}
       {current.assaultBlocker && <p className="field-help" role="status">{current.assaultBlocker}</p>}
       <button className="danger wide" disabled={busy || !current.canAssault} aria-label={`Assault ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'assault', factionId: view.factionId, settlementId: current.settlementId })}>Assault settlement</button>
       <button className="wide" disabled={busy} aria-label={`Lift siege of ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'liftSiege', factionId: view.factionId, settlementId: current.settlementId })}>Lift siege</button>

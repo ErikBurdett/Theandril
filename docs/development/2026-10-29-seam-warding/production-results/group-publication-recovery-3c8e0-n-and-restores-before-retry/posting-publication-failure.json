@@ -1,0 +1,40 @@
+{
+  "initialHash": "edba71ac",
+  "expectedMutatedHash": "a2225a22",
+  "commands": [
+    {
+      "type": "setPosting",
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.10",
+      "cell": 495,
+      "mode": "hold"
+    },
+    {
+      "type": "setPosting",
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.9",
+      "cell": 495,
+      "mode": "hold"
+    }
+  ],
+  "evidence": {
+    "hash": "a2225a22",
+    "results": [
+      {
+        "armyId": "army.10",
+        "accepted": true
+      },
+      {
+        "armyId": "army.9",
+        "accepted": true
+      }
+    ]
+  },
+  "response": {
+    "message": "The posting result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. Authored publication evidence: {\"hash\":\"a2225a22\",\"results\":[{\"armyId\":\"army.10\",\"accepted\":true},{\"armyId\":\"army.9\",\"accepted\":true}]}",
+    "recoveryRequired": true
+  },
+  "actualPanelText": "Select matching armiesClear group selection2 armies selectedCheck land armies ashore to give them a standing posting together. Select up to 128 at a time; page and search changes keep your selection.Group destinationChoose an owned hearthWhere each army standsWest watch · hex 500East watch · hex 510Group arrival orderHold the hexJoin the force thereEach army receives its own posting. Existing travel orders come first. Routes, arrival and joining use the ordinary army rules; a stalled posting explains its reason in selected orders.Posting templatesYour personal template library stays in this browser across campaigns and sessions. It stores no armies or map coordinates and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.Post selected armies (2)Clear selected postings (0)Clearing postings leaves the 2 selected armies without postings unchanged.The posting result could not be displayed. Some orders may have applied; restore a saved campaign before continuing. Authored publication evidence: {\"hash\":\"a2225a22\",\"results\":[{\"armyId\":\"army.10\",\"accepted\":true},{\"armyId\":\"army.9\",\"accepted\":true}]}",
+  "actualResultsText": null,
+  "endTurnDisabled": true
+}

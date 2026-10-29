@@ -5,6 +5,7 @@ import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, ty
 import { planDepot } from './supply';
 import { planArcaneSurvey, planGlassApproach } from './arcane';
 import { planConquestDecision } from './conquest';
+import { planRites } from './rites';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
@@ -48,6 +49,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
 
   const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view));
   if (siegeDecision) return siegeDecision;
+  const warding = planRites(view);
+  if (warding) return warding;
   const oceanScoutReserve = reserveOceanScout(view);
   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
   const expansionAffordable = Boolean(view.growth && view.treasury >= view.growth.founding.coinCost + UNITS[0]!.coinCost + view.growth.founding.additionalUpkeep * 6 + 24);

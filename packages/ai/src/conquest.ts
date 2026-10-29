@@ -40,6 +40,11 @@ export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet
     if (siege.canAssault && army.morale >= 35 && army.fatigue <= 65 && assaultReady) {
       return { commands: [{ type: 'assault', factionId: view.factionId, settlementId: siege.settlementId }], reasons: [`Assault ${siege.settlementId}: defenses ${siege.defenses}, observed defender strength ${siege.defenderStrength}, army strength ${army.strength}.`] };
     }
+    // Rules 40: warded walls never wear down, so a siege that cannot storm them
+    // now only starves the army's own treasury. Lift it and seek another front.
+    if (siege.warded && army.strength < siege.defenderStrength * 3) {
+      return { commands: [{ type: 'liftSiege', factionId: view.factionId, settlementId: siege.settlementId }], reasons: [`Lift the siege of ${siege.settlementId}: its walls are warded and the army cannot storm them.`] };
+    }
   }
   return null;
 }

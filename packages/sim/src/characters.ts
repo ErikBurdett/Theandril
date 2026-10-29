@@ -9,6 +9,7 @@ import { armyDomain, carriedArmyBlocker } from './naval';
 import { factionAptitudes, WAYKEEPER_APTITUDES } from '@theandril/content';
 import { characterSpellIds, personalAptitudesSchema } from './magic';
 import { arcaneSites, controllingSettlement } from './arcane-sites';
+import { isWarded } from './rites';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (max: number) => z.number().int().min(0).max(max);
@@ -383,8 +384,9 @@ export function advanceCharacters(state: GameState, events: DomainEvent[]): void
       detail = `${changed} formation strength restored`;
     } else {
       const siege = state.sieges[mission.targetSettlementId!]!;
-      changed = Math.min(siege.defenses, definition.defenseDamage); siege.defenses -= changed;
-      detail = `${changed} settlement defense removed`;
+      const warded = isWarded(state, siege.settlementId);
+      changed = warded ? 0 : Math.min(siege.defenses, definition.defenseDamage); siege.defenses -= changed;
+      detail = warded ? 'the warded walls took no damage' : `${changed} settlement defense removed`;
     }
     const experience = changed ? definition.experience : 0; character.experience = Math.min(1_000_000, character.experience + experience);
     events.push(notice(state, character, 'character_mission_completed', `${character.name} completed ${definition.name}: ${detail}; ${experience} experience earned.`));

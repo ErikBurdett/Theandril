@@ -121,6 +121,8 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(23), false)).toBe('f4076f55');
   // Rules 24–37 content, before rules 38 added Attunement and path deepening.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(37), false)).toBe('015468d1');
+  // Rules 38–39 content, before rules 40 added strategic rites.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(39), true)).toBe('03ac0328');
   expect(CONTENT_HASH).toBe(contentPackHash());
-  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431', 'f70d99d5', 'f4076f55', '015468d1']).size).toBe(7);
+  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431', 'f70d99d5', 'f4076f55', '015468d1', '03ac0328']).size).toBe(8);
 });

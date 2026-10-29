@@ -27,6 +27,17 @@ export const BATTLE_SPELLS: readonly BattleSpellDefinition[] = [
   { id: 'spell.unbinding', name: 'Unbinding', description: 'Strip the binding from one active enemy formation and jar the Waykeeper holding it: any ward is undone and that caster loses the coming round. Requires the second degree of the Rune path. Costs five strain, once per battle.', discoveryId: 'arcane.unbinding', pathId: 'path.rune', pathLevel: 2, kind: 'counter', target: 'enemy', strainCost: 5, uses: 1, range: 4, power: 8 },
   { id: 'spell.bound_ward', name: 'Bound ward', description: 'Bind up to eight protective points around one active friendly formation. Protection is consumed by incoming damage and never restores strength or routed morale. Costs three strain, at most twice per battle.', discoveryId: 'arcane.rune_binding', pathId: 'path.rune', pathLevel: 1, kind: 'ward', target: 'friendly', strainCost: 3, uses: 2, range: 4, power: 8 },
 ];
+/** Rules 40: a strategic rite is a working performed from a hearth rather than a
+ * battlefield. It is paid in ashglass drawn from the realm's held seams, needs
+ * the national discovery and a personal path, and lasts a bounded term. */
+export const strategicRiteSchema = z.object({
+  id, name: text, description: text, discoveryId: id, pathId: id, pathLevel: z.number().int().min(1).max(5),
+  kind: z.enum(['warding']), ashglassCost: z.number().int().min(1).max(100), durationTurns: z.number().int().min(1).max(60), sinceRules: z.number().int().min(40).max(99),
+}).strict();
+export type StrategicRiteDefinition = z.infer<typeof strategicRiteSchema>;
+export const STRATEGIC_RITES: readonly StrategicRiteDefinition[] = [
+  { id: 'rite.seam_warding', name: 'Seam warding', description: 'A Rune-gifted Waykeeper lodged in a hearth whose borders hold a Rune seam binds the seam into its walls for ten turns, paying six ashglass. While the caster stays, siege works cannot wear the defenses down and sabotage fails. A lost seam, a caster who leaves or is wounded, or a hearth that changes hands ends the ward.', discoveryId: 'arcane.rune_binding', pathId: 'path.rune', pathLevel: 1, kind: 'warding', ashglassCost: 6, durationTurns: 10, sinceRules: 40 },
+];
 /** Rules 24: a culture trains its Waykeepers in its own tradition, so who can
  * reach a working — and what its theory costs — differs between realms. */
 export const FACTION_APTITUDES: Readonly<Record<string, Readonly<Record<string, number>>>> = {
@@ -45,12 +56,13 @@ export const FACTION_ARCANE_TRADITIONS: Readonly<Record<string, readonly string[
 export const factionAptitudes = (definitionId: string): Readonly<Record<string, number>> => FACTION_APTITUDES[definitionId] ?? WAYKEEPER_APTITUDES;
 export const arcaneKnowledgeCost = (definitionId: string, discoveryId: string, cost: number): number =>
   (FACTION_ARCANE_TRADITIONS[definitionId] ?? []).includes(discoveryId) ? Math.ceil(cost * 3 / 4) : cost;
-export function validateMagicContent(characterIds: ReadonlySet<string>, buildingIds: ReadonlySet<string>, discoveries = ARCANE_DISCOVERIES, spells = BATTLE_SPELLS): void {
+export function validateMagicContent(characterIds: ReadonlySet<string>, buildingIds: ReadonlySet<string>, discoveries = ARCANE_DISCOVERIES, spells = BATTLE_SPELLS, rites = STRATEGIC_RITES): void {
   INNATE_BATTLE_ABILITIES.forEach(item => innateBattleAbilitySchema.parse(item));
-  discoveries.forEach(item => arcaneDiscoverySchema.parse(item)); spells.forEach(item => battleSpellSchema.parse(item));
+  discoveries.forEach(item => arcaneDiscoverySchema.parse(item)); spells.forEach(item => battleSpellSchema.parse(item)); rites.forEach(item => strategicRiteSchema.parse(item));
   if (!characterIds.has('character.waykeeper')) throw new Error('Arcane battle magic requires its actual paid Waykeeper role.');
-  const ids = [...discoveries, ...spells, ...MAGIC_PATHS].map(item => item.id);
+  const ids = [...discoveries, ...spells, ...rites, ...MAGIC_PATHS].map(item => item.id);
   if (new Set(ids).size !== ids.length) throw new Error('Duplicate magic content ID');
+  for (const rite of rites) if (!discoveries.some(item => item.id === rite.discoveryId) || !MAGIC_PATHS.some(path => path.id === rite.pathId)) throw new Error('Strategic rite names an unknown discovery or path: ' + rite.id);
   for (const discovery of discoveries) {
     if (!buildingIds.has(discovery.requiredBuildingId) || new Set(discovery.spellIds).size !== discovery.spellIds.length) throw new Error('Invalid arcane research infrastructure or spell references');
     for (const spellId of discovery.spellIds) if (!spells.some(spell => spell.id === spellId && spell.discoveryId === discovery.id)) throw new Error('Unknown or mismatched arcane spell');

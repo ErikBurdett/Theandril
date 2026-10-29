@@ -1,0 +1,262 @@
+
+Running 13 tests using 1 worker
+
+  ✓   1 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (3.8s)
+  ✓   2 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.4s)
+  ✓   3 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (2.2s)
+  ✓   4 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (8.6s)
+  ✓   5 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (7.8s)
+  ✓   6 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (8.0s)
+  ✓   7 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (1.9s)
+  ✘   8 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (18.4s)
+  ✘   9 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (10.2s)
+  ✘  10 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (5.4s)
+  ✘  11 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (5.8s)
+  ✘  12 tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (6.4s)
+  ✘  13 tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save (5.9s)
+
+
+  1) tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Campaign restored"
+    Received string:    "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        3 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        11 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+
+
+      65 |   const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+      66 |   await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+    > 67 |   await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
+         |                                              ^
+      68 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
+      69 | }
+      70 |
+        at saveReload (/home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:67:46)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:266:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/characters-siege-sabotage--89365-s-through-save-and-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/characters-siege-sabotage--89365-s-through-save-and-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('capture-panel')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('capture-panel') with timeout 5000ms
+      - waiting for getByTestId('capture-panel')
+
+
+      49 |   await page.reload();
+      50 |   await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+    > 51 |   await expect(page.getByTestId('capture-panel')).toBeVisible();
+         |                                                   ^
+      52 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(decisionHash);
+      53 |   const before = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.treasury);
+      54 |   const loot = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.pendingCapture?.options.find(option => option.outcome === 'sack')?.coinGain);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:51:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/conquest-besiege-and-assau-8f7b7-occupation-or-sack-outcomes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('capture-panel')
+    Expected substring: "Reedwatch has fallen"
+    Received string:    ""
+
+    Call log:
+      - Expect "toContainText" getByTestId('capture-panel') with timeout 5000ms
+      - waiting for getByTestId('capture-panel')
+      - 
+
+
+      26 |   await expect(page.getByTestId('battle-panel')).toBeVisible();
+      27 |   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+    > 28 |   await expect(page.getByTestId('capture-panel')).toContainText('Reedwatch has fallen');
+         |                                                   ^
+      29 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeDisabled();
+      30 |   return fixture;
+      31 | }
+        at beginSiege (/home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:28:51)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:74:19
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        3 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        11 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+
+
+      140 |   await page.goto('/');
+      141 |   await page.locator('input[type=file]').setInputFiles({ name: 'defend-reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
+    > 142 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+          |                                              ^
+      143 |   // Modern ranks retain braced cohesion behind walls. The ordinary-strength
+      144 |   // besieger waits for three real siege ticks, then interrupts the fourth click
+      145 |   // for the human's defense before the campaign round advances.
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:142:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/conquest-defending-a-settl-eaa70-ture-after-human-withdrawal/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/conquest-defending-a-settl-eaa70-ture-after-human-withdrawal/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/conquest-defending-a-settl-eaa70-ture-after-human-withdrawal/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/conquest-defending-a-settl-eaa70-ture-after-human-withdrawal/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        3 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        11 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+
+
+      28 |   await page.waitForLoadState('networkidle');
+      29 |   await page.locator('input[type=file]').setInputFiles({ name: 'warded-hearth.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+    > 30 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      31 |   await closeManagement(page);
+      32 |
+      33 |   await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/seam-warding.spec.ts:30:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/seam-warding-ward-a-besieg-867b9-per-and-read-the-held-walls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/seam-warding-ward-a-besieg-867b9-per-and-read-the-held-walls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/seam-warding-ward-a-besieg-867b9-per-and-read-the-held-walls/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/seam-warding-ward-a-besieg-867b9-per-and-read-the-held-walls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        - locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+        - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        13 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!The campaign worker stopped: Unexpected worker error. Restore a saved campaign to recover."
+
+
+      24 |   await page.goto('/');
+      25 |   await page.locator('input[type=file]').setInputFiles({ name: 'fallen-reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+    > 26 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      27 |   const panel = page.getByTestId('capture-panel');
+      28 |   await expect(panel).toContainText('Reedwatch has fallen');
+      29 |   await expect(panel).toContainText('bind the realm as your subject');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/subject-rule.spec.ts:26:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/subject-rule-make-a-fallen-73b1f-and-the-oath-survive-a-save/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-warding/browser-results/subject-rule-make-a-fallen-73b1f-and-the-oath-survive-a-save/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-warding/browser-results/subject-rule-make-a-fallen-73b1f-and-the-oath-survive-a-save/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-warding/browser-results/subject-rule-make-a-fallen-73b1f-and-the-oath-survive-a-save/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+    tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes 
+    tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan 
+    tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal 
+    tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls 
+    tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save 
+  7 passed (1.5m)

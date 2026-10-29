@@ -37,6 +37,7 @@ interface SaveFixture {
     arcaneResearch: { factionId: string; discoveries: string[] }[];
     arcaneSurveys: { factionId: string; cells: number[] }[];
     arcaneSearches: { factionId: string; cells: number[] }[];
+    wards: { settlementId: string }[];
     charters: { settlementId: string; factionId: string; focus: string; ceiling: number }[];
     postings: { armyId: string; factionId: string; cell: number; mode: string }[];
     musters: { settlementId: string; factionId: string; cell: number }[];
@@ -74,6 +75,8 @@ function previousV3State(save: SaveFixture) {
   if (save.state.arcaneSurveys.some(item => item.cells.length)) throw new Error('Synthetic historical projection cannot discard arcane surveys.');
   // Surveyed ground is remembered only from rules 39; a v3 projection records none.
   if (save.state.arcaneSearches.some(item => item.cells.length)) throw new Error('Synthetic historical projection cannot discard surveyed ground.');
+  // Wards exist only from rules 40; a v3 projection holds none.
+  if (save.state.wards.length) throw new Error('Synthetic historical projection cannot discard standing wards.');
   // Charters exist only from rules 25; a v3 projection holds none.
   if (save.state.charters.length) throw new Error('Synthetic historical projection cannot discard standing charters.');
   // Postings and muster points exist only from rules 26; a v3 projection holds none.
@@ -94,7 +97,7 @@ function previousV3State(save: SaveFixture) {
   };
   // Patronage exists only from rules 22; a v3 projection carries wars, offers and treaties alone.
   const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = state.diplomacy;
-  const { landPolicies: _landPolicies, workerPolicies: _workerPolicies, patrols: _patrols, arcaneSurveys: _surveys, arcaneSearches: _searches, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
+  const { landPolicies: _landPolicies, workerPolicies: _workerPolicies, patrols: _patrols, arcaneSurveys: _surveys, arcaneSearches: _searches, wards: _wards, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
   return { ...beforeSeams, diplomacy, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
 }
 

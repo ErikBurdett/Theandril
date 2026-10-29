@@ -146,6 +146,22 @@ Fifth slice: headline campaigns end on 362/327/227 with zero refused orders,
 surveys 253/222/159 (from 347/303/231) and seams found 9/6/3 (from 4/3/3); the
 remaining checks are recorded in its evidence packet.
 
+## Seventh slice: seam warding (rules/save 40)
+
+After the first deployment the prompt’s “go again” continued with the first
+strategic rite: `rite.seam_warding`, performed by a lodged Rune Waykeeper at a
+hearth holding a Rune seam for six ashglass, holds the walls for ten turns
+against siege works and sabotage. It carries a fifth content-seal component,
+`performRite`, ward state with five dissolve reasons, historical refusal, AI
+warding and siege lifting, a character-sheet panel and the ledger mark. Unit
+**2,298 tests / 284 files pass**, campaigns 57, lint, typecheck and the headline campaigns
+(362/327/227, counts identical, rules 39 seals reproduced) pass; the new
+journey and thirteen affected journeys pass after reruns around a crashing
+headless browser; the complete gameplay run was stopped by the tool at 39
+passing cases for low system memory and ten crash-only production cases remain
+unverified on this desktop. [Evidence](../2026-10-29-seam-warding/README.md),
+[ADR0062](../../architecture/0062-seam-warding.md).
+
 ## Published
 
 Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
