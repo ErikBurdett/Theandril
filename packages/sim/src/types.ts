@@ -111,6 +111,8 @@ export interface Siege {
 export interface SiegeObservation extends Siege {
   /** Rules 40: the hearth's walls are warded; siege works and sabotage cannot wear them down. */
   warded?: true;
+  /** Rules 42: the hearth is kindled; every besieging company loses strength each turn. */
+  kindled?: true;
   battleDefense?: BattleDefense;
   canAssault: boolean;
   assaultBlocker: string | null;

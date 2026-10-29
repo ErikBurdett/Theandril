@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-29 | [Playwright crash mitigation](2026-10-29-playwright-reliability.md) | Local test infrastructure only; eight attempts across four distinct journeys pass; no publication |
 | 2026-10-29 | [Attunement, subject rule, political bids, cession, ground in sight and seam study](2026-10-29-attunement-victory.md) | Feature `a7a4c16` deployed after both complete browser suites; workflows, live readback and scoped live journeys pass; all gates remain open |
 | 2026-10-28 | [Land-budget templates and faster exact history](2026-10-28-land-budgets-and-history.md) | Separately deployed d60bdcb and 906138f; 2,519 tests, 81 local browser cases, three live history and seven live gameplay cases pass; all gates remain open |
 | 2026-10-27 | [Commission exception filters deployed](2026-10-27-commission-filters.md) | Feature `dd8736d`; 2,497 distinct tests and 79 distinct local Pages cases pass across retained runs; five live cases pass first attempt; M3/gates remain open |

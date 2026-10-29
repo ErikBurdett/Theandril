@@ -64,7 +64,7 @@ export * from './patrols';
 export { getBesiegePreview } from './siege-establishment';
 export { subjectUnavailable } from './siege';
 export { cessionObjection, cessionOptions } from './cession';
-export { availableRites, isWarded, riteObjection, wardOf } from './rites';
+export { availableRites, isWarded, isKindled, KINDLING_BURN, riteObjection, wardOf } from './rites';
 export type { ObservedWard, RiteOption, Ward } from './rites';
 export type { CessionOption } from './cession';
 export { subjectTerms } from './clients';

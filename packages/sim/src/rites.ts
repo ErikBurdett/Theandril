@@ -4,6 +4,7 @@ import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
 import { arcaneSites, controllingSettlement, SITE_RESOURCE_ID } from './arcane-sites';
 import { resourceCostBlocker, spendResourceCosts } from './resources';
+import { UNITS } from '@theandril/content';
 
 /** Rules 40: a strategic rite is a working performed from a hearth. The seam
  * warding binds a held Rune seam into a hearth's walls: while it holds and its
@@ -26,8 +27,30 @@ const byHearth = (a: Ward, b: Ward): number => a.settlementId < b.settlementId ?
 const rites = new Map(STRATEGIC_RITES.map(rite => [rite.id, rite]));
 export const availableRites = (state: GameState): StrategicRiteDefinition[] => STRATEGIC_RITES.filter(rite => rite.sinceRules <= rulesVersion(state));
 export const wardOf = (state: GameState, settlementId: string): Ward | undefined => state.wards.find(ward => ward.settlementId === settlementId);
-/** A hearth's walls hold while its ward stands; the ward is dissolved at the turn's start when its ground is gone. */
-export const isWarded = (state: GameState, settlementId: string): boolean => rulesVersion(state) >= 40 && wardOf(state, settlementId) !== undefined;
+const wardKind = (state: GameState, settlementId: string): StrategicRiteDefinition['kind'] | null => { const ward = wardOf(state, settlementId); return ward ? rites.get(ward.riteId)?.kind ?? null : null; };
+/** A hearth's walls hold while its warding stands; the ward is dissolved at the turn's start when its ground is gone. */
+export const isWarded = (state: GameState, settlementId: string): boolean => rulesVersion(state) >= 40 && wardKind(state, settlementId) === 'warding';
+/** Rules 42: a kindled hearth burns the companies besieging it each turn; its walls still wear. */
+export const isKindled = (state: GameState, settlementId: string): boolean => rulesVersion(state) >= 42 && wardKind(state, settlementId) === 'kindling';
+export const KINDLING_BURN = 4;
+export const KINDLING_FLOOR = 0.2;
+const units = new Map(UNITS.map(item => [item.id, item]));
+/** Burns every besieging company before kindled walls, never below a fifth of its ranks, and tells both realms. */
+export function burnBesiegers(state: GameState, events: DomainEvent[]): void {
+  if (rulesVersion(state) < 42 || !state.wards.length) return;
+  for (const siege of Object.values(state.sieges).sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)) {
+    if (!isKindled(state, siege.settlementId)) continue;
+    const army = state.armies[siege.armyId], town = state.settlements[siege.settlementId];
+    if (!army || !town) continue;
+    let burned = 0;
+    for (const formation of army.formations) {
+      const floor = Math.ceil((units.get(formation.unitId)?.strength ?? 1) * KINDLING_FLOOR);
+      const next = Math.max(floor, formation.strength - KINDLING_BURN);
+      burned += formation.strength - next; formation.strength = next;
+    }
+    for (const factionId of [siege.factionId, town.factionId]) events.push({ turn: state.turn, factionId, type: 'siege_burned', cell: town.cell, message: burned ? `${army.name} burned before the kindled walls of ${town.name} and lost ${burned} strength.` : `${army.name} stands before the kindled walls of ${town.name} at the edge of its strength.` });
+  }
+}
 
 /** The hearth a lodged, able caster could work from, or null. */
 function lodgedHearth(state: GameState, character: GameState['characters'][string]): string | null {

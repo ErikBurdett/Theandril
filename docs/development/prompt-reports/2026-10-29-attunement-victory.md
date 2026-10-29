@@ -173,9 +173,26 @@ headline campaigns (362/327/227, counts identical, rules 40 seals reproduced)
 pass. The breaking journey reached its final assertions once with only a wrong
 wound count in the test; after the fix the desktop's headless browser failed
 every attempt before the campaign loaded, so that journey and the affected siege
-journeys are unverified in this checkpoint.
+journeys were unverified at publication; after publication, with the desktop
+quiet, all seven pass and the production suite passes 59 of 59.
 [Evidence](../2026-10-29-ward-breaking/README.md),
 [ADR0063](../../architecture/0063-ward-breaking.md).
+
+## Ninth slice: seam kindling (rules/save 42)
+
+The Flame hearth rite: a lodged Flame Waykeeper kindles a held Flame seam for
+ten turns at six ashglass and every besieging company burns four strength per
+formation each turn while the works still wear the walls; the Rune breaking ends
+it, the AI kindles when besieged and lifts a siege it cannot storm before
+kindled walls. The rules 41 seal `78df970c` is named and v41 envelopes migrate
+unchanged. Unit **2,302 tests / 284 files**, campaigns 57, lint, typecheck,
+build, the headline campaigns (362/327/227, counts identical, rules 41 seals
+reproduced), the three rite journeys and the affected siege journeys pass. The
+first campaign run failed on the machine's `/tmp` quota (EDQUOT) and the suites
+were rerun with `TMPDIR` on the main disk; the complete gameplay suite passes
+251 of 251 and the production suite 59 of 59.
+[Evidence](../2026-10-29-seam-kindling/README.md),
+[ADR0064](../../architecture/0064-seam-kindling.md).
 
 ## Published
 

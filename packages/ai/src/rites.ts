@@ -13,5 +13,5 @@ export function planRites(view: Observation): AiPlan | null {
   const own = hearth?.factionId === view.factionId;
   return { commands: [{ type: 'performRite', factionId: view.factionId, characterId: option.characterId, riteId: option.riteId }],
     reasons: [own ? `${option.name} at ${hearth?.name ?? option.settlementId}: the hearth is besieged and the walls can be held for ${option.durationTurns} turns at ${option.ashglassCost} ashglass.`
-      : `${option.name} against ${hearth?.name ?? option.settlementId}: the besieged walls are warded and the ward can be broken for ${option.ashglassCost} ashglass.`] };
+      : `${option.name} against ${hearth?.name ?? option.settlementId}: the besieged walls are bound and the ward can be broken for ${option.ashglassCost} ashglass.`] };
 }

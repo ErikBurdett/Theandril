@@ -8,7 +8,7 @@ import { atWar, relocateArmy, startSettlementAssault } from './warfare';
 import { indexes, updateSight } from './visibility';
 import { imposePeace, recordConquest } from './diplomacy';
 import { imposeClient, subjectObjection, subjectTerms } from './clients';
-import { isWarded } from './rites';
+import { burnBesiegers, isKindled, isWarded } from './rites';
 import { captureSettlementCharacters } from './characters';
 import { armyDomain, carriedArmyBlocker } from './naval';
 import { siegeEstablishmentBlocker } from './siege-establishment';
@@ -148,6 +148,7 @@ export function reconcileSieges(state: GameState, events: DomainEvent[]): void {
 
 export function advanceSieges(state: GameState, events: DomainEvent[]): void {
   reconcileSieges(state, events);
+  burnBesiegers(state, events);
   for (const siege of orderedSieges(state)) {
     // Rules 40: a warded hearth's walls hold against siege works.
     if (!isWarded(state, siege.settlementId)) siege.defenses = Math.max(0, siege.defenses - 10);
@@ -246,7 +247,7 @@ export function observeSieges(state: GameState, factionId: string): SiegeObserva
     const defenders = town ? [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]) : [];
     const assaultBlocker = assaultObjection(state, factionId, siege.settlementId);
     const battleDefense = rulesVersion(state) >= 17 ? defensePreview(defenders.filter(army => army !== undefined)) : undefined;
-    return { ...siege, ...(isWarded(state, siege.settlementId) ? { warded: true as const } : {}), ...(battleDefense ? { battleDefense } : {}), canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
+    return { ...siege, ...(isWarded(state, siege.settlementId) ? { warded: true as const } : {}), ...(isKindled(state, siege.settlementId) ? { kindled: true as const } : {}), ...(battleDefense ? { battleDefense } : {}), canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
   });
 }
 

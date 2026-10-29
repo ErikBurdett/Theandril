@@ -56,3 +56,22 @@ test('a besieger with a qualified riding caster breaks the ward instead of lifti
   const after = planTurnWithReasons(getObservation(state, rival.id));
   expect(after.commands.some(command => command.type === 'liftSiege' || command.type === 'performRite')).toBe(false);
 });
+
+test('a Flame-only caster kindles its besieged hearth and a besieger that burns before kindled walls lifts the siege (rules 42)', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  state.resources.stockpiles[player]!['resource.ashglass'] = 20;
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  caster.aptitudes = { 'path.flame': 2 };
+  const column = Object.values(state.armies).find(army => army.factionId === rival)!;
+  column.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  column.movement = 3; refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'declareWar', factionId: rival, targetFactionId: player })).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'besiege', factionId: rival, armyId: column.id, settlementId: host.id })).toMatchObject({ ok: true });
+  const plan = planTurnWithReasons(getObservation(state, player));
+  expect(plan.commands).toEqual([{ type: 'performRite', factionId: player, characterId: caster.id, riteId: 'rite.seam_kindling' }]);
+  expect(applyCommand(state, plan.commands[0]!)).toMatchObject({ ok: true });
+  const besieger = planTurnWithReasons(getObservation(state, rival));
+  expect(besieger.commands).toEqual([{ type: 'liftSiege', factionId: rival, settlementId: host.id }]);
+  expect(besieger.reasons[0]).toContain('kindled');
+});

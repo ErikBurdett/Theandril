@@ -125,6 +125,8 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(39), true)).toBe('03ac0328');
   // Rules 40 content, before rules 41 added the ward-breaking counter-rite.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(40), true)).toBe('ac80514d');
+  // Rules 41 content, before rules 42 added the Flame kindling rite.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(41), true)).toBe('78df970c');
   expect(CONTENT_HASH).toBe(contentPackHash());
-  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431', 'f70d99d5', 'f4076f55', '015468d1', '03ac0328', 'ac80514d']).size).toBe(9);
+  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431', 'f70d99d5', 'f4076f55', '015468d1', '03ac0328', 'ac80514d', '78df970c']).size).toBe(10);
 });

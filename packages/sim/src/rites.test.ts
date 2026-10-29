@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { checksum, STRATEGIC_RITES } from '@theandril/content';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
-import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, type GameState } from './index';
+import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, KINDLING_BURN, serializeGame, serializeGameForVersion, stateHash, type GameState } from './index';
 import { rebuildIndexes } from './visibility';
 import { isPassable, neighbors } from '@theandril/mapgen';
 
-const RITE = 'rite.seam_warding', BREAKING = 'rite.ward_breaking', ASHGLASS = 'resource.ashglass';
+const RITE = 'rite.seam_warding', BREAKING = 'rite.ward_breaking', KINDLING = 'rite.seam_kindling', ASHGLASS = 'resource.ashglass';
 const casterOf = (state: GameState) => Object.values(state.characters).find(character => character.factionId === state.turnOwnerId && character.definitionId === 'character.waykeeper')!;
 const hostOf = (state: GameState) => Object.values(state.settlements).find(town => town.factionId === state.turnOwnerId)!;
 /** The brink fixture with ashglass drawn and a rival column camped at the host's gate. */
@@ -126,6 +126,49 @@ describe('seam warding (rules 40)', () => {
     const older = JSON.parse(serializeGameForVersion(state, 40));
     expect(older.version).toBe(40); expect(older.contentHash).toBe('ac80514d');
     expect(deserializeGame(JSON.stringify(older)).wards).toEqual([]);
+  });
+
+  it('kindles a hearth from a Flame seam so besiegers burn each turn while the walls still wear, is broken like a warding, and stays out of rules 41 (rules 42)', () => {
+    let state = besieged(); const player = state.turnOwnerId, rival = state.factions[1]!.id, caster = casterOf(state), host = hostOf(state);
+    caster.aptitudes = { 'path.flame': 2, 'path.rune': 1 };
+    const column = state.armies[Object.values(state.sieges)[0]!.armyId]!, before = column.formations.map(formation => formation.strength);
+    const option = () => getObservation(state, player).rites!.find(rite => rite.riteId === KINDLING)!;
+    expect(option()).toMatchObject({ settlementId: host.id, ashglassCost: 6, durationTurns: 10, canPerform: true, blocker: null });
+    expect(applyCommandForVersion(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: KINDLING }, 41)).toMatchObject({ ok: false, error: 'Unknown strategic rite.' });
+    const research = state.arcaneResearch[player]!; state.arcaneResearch[player] = research.filter(id => id !== 'arcane.ember_projection');
+    expect(option()).toMatchObject({ canPerform: false, blocker: 'The national arcane discovery is not researched.' });
+    state.arcaneResearch[player] = research;
+    const result = applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: KINDLING });
+    expect(result).toMatchObject({ ok: true });
+    expect(state.wards).toEqual([{ settlementId: host.id, factionId: player, casterId: caster.id, riteId: KINDLING, startedTurn: 1, expiresTurn: 11 }]);
+    expect(state.resources.stockpiles[player]![ASHGLASS]).toBe(14);
+    expect(getObservation(state, player).rites!.find(rite => rite.riteId === RITE)).toMatchObject({ canPerform: false, blocker: 'This hearth is already warded.' });
+    expect(getObservation(state, rival).sieges[0]).toMatchObject({ kindled: true });
+    expect(getObservation(state, rival).sieges[0]!.warded).toBeUndefined();
+    // The works still wear the walls; the column burns, never below a fifth of its ranks.
+    const turn = (): string[] => { const messages: string[] = []; const at = state.turn; while (state.turn === at) { const r = applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId }); expect(r).toMatchObject({ ok: true }); messages.push(...r.events.filter(e => e.type === 'siege_burned').map(e => `${e.factionId}:${e.message}`)); } return messages; };
+    const burned = turn();
+    expect(state.sieges[host.id]).toMatchObject({ defenses: 20 });
+    expect(column.formations.map(formation => formation.strength)).toEqual(before.map(strength => strength - KINDLING_BURN));
+    expect(burned.map(line => line.split(':')[0]).sort()).toEqual([player, rival].sort());
+    expect(burned[0]).toContain(`lost ${KINDLING_BURN * before.length} strength`);
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+    // Ten turns of burning, then the term lapses and the column stops losing ranks.
+    for (let i = 0; i < 20; i++) turn();
+    expect(state.wards).toEqual([]);
+    expect(column.formations.every(formation => formation.strength === before[0]! - 10 * KINDLING_BURN)).toBe(true);
+    // A kindling is a ward: the rival's riding Rune caster breaks it.
+    state.wards = []; state.resources.stockpiles[player]![ASHGLASS] = 20; caster.woundedTurns = 0;
+    expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: KINDLING })).toMatchObject({ ok: true });
+    state = withBreaker(state);
+    const breaker = Object.values(state.characters).find(item => item.factionId === rival && item.definitionId === 'character.waykeeper')!;
+    expect(applyCommand(state, { type: 'performRite', factionId: rival, characterId: breaker.id, riteId: BREAKING })).toMatchObject({ ok: true });
+    expect(state.wards).toEqual([]);
+    // A rules-41 reading is identical and a v41 envelope migrates unchanged.
+    expect(stateHash(deserializeGame(serializeGameForVersion(state, 41)))).toBe(stateHash(state));
+    const older = JSON.parse(serializeGameForVersion(state, 41));
+    expect(older.version).toBe(41); expect(older.contentHash).toBe('78df970c');
+    expect(stateHash(deserializeGame(JSON.stringify(older)))).toBe(stateHash(state));
   });
 
   it('refuses the unresearched, the ungifted, the unlodged, the unheld and the unpaid, and stays out of older rules', () => {

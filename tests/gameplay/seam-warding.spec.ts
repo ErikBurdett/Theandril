@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { isPassable, neighbors } from '@theandril/mapgen';
-import { applyCommand, serializeGame } from '@theandril/sim';
+import { applyCommand, createArmyFormation, serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { attunementCampaign } from '../../packages/test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
@@ -102,5 +102,57 @@ test('a besieger breaks the ward on its turn and the holder is jarred', async ({
   await expect(rites.getByTestId(`ward-${host.id}`)).toHaveCount(0);
   await expect(rites).toContainText('This caster must recover from wounds.');
   await rites.screenshot({ path: testInfo.outputPath('ward-broken.png') });
+  expect(errors).toEqual([]);
+});
+
+/** Rules 42: a Flame caster kindles the hearth; the besieging column burns
+ * each turn while the works still wear the walls, and the ledger says so. */
+test('kindle a besieged hearth from a Flame seam and read the burning column', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  caster.aptitudes = { 'path.flame': 2 };
+  state.resources.stockpiles[player]!['resource.ashglass'] = 20;
+  const column = Object.values(state.armies).find(army => army.factionId === rival)!;
+  column.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  // Two full guard companies, shaken: too strong to lift the siege for a kindling (three times the defenders), above the preservation threshold yet below assault morale when the AI acts, so the column stands and burns.
+  column.movement = 3; column.formations = [createArmyFormation(column.id, 'unit.guard'), createArmyFormation(`army.${state.nextId++}`, 'unit.guard')];
+  for (const formation of column.formations) formation.morale = 28;
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'declareWar', factionId: rival, targetFactionId: player })).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'besiege', factionId: rival, armyId: column.id, settlementId: host.id })).toMatchObject({ ok: true });
+  const strengthBefore = column.formations.reduce((total, formation) => total + formation.strength, 0);
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'kindled-hearth.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await closeManagement(page);
+  await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+  await roster(page).getByRole('searchbox', { name: 'Search characters', exact: true }).fill(caster.name);
+  await roster(page).getByRole('button', { name: `Inspect ${caster.name} (${caster.id})`, exact: true }).click();
+  const rites = roster(page).getByTestId('strategic-rites');
+  await expect(rites.getByTestId('rite-rite.seam_warding')).toContainText('This Waykeeper lacks the personal path for the rite.');
+  await expect(rites.getByRole('button', { name: 'Perform Seam warding', exact: true })).toBeDisabled();
+  await rites.getByRole('button', { name: 'Perform Seam kindling', exact: true }).click();
+  await expect(rites.getByTestId(`ward-${host.id}`)).toContainText('Seam kindling');
+  await rites.screenshot({ path: testInfo.outputPath('kindling-performed.png') });
+  await roster(page).getByRole('button', { name: 'Close characters', exact: true }).click();
+
+  await openRealmAffairs(page);
+  const ledger = page.getByLabel('Known sieges', { exact: true });
+  await expect(ledger).toContainText('30 · kindled');
+  await ledger.screenshot({ path: testInfo.outputPath('kindled-ledger.png') });
+  await closeManagement(page);
+  await page.getByRole('button', { name: 'End turn', exact: true }).click();
+  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
+  // The column stood before the kindled walls and burned while the works wore the walls.
+  const summary = await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return { sieges: view.sieges.map(siege => [siege.defenses, siege.kindled ?? false]), wards: view.wards?.length ?? 0, enemyStrength: view.armies.filter(army => army.factionId !== view.factionId).reduce((total, army) => total + army.strength, 0) }; });
+  expect(summary.sieges).toEqual([[20, true]]);
+  expect(summary.wards).toBe(1);
+  expect(summary.enemyStrength).toBe(strengthBefore - 8);
+  await openRealmAffairs(page);
+  await expect(page.getByLabel('Known sieges', { exact: true })).toContainText('20 · kindled');
   expect(errors).toEqual([]);
 });

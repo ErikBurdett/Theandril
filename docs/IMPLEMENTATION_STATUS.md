@@ -1,5 +1,42 @@
 # Theandril implementation status
 
+## Seam kindling: the Flame hearth rite — 2026-10-29
+
+Rules/save 42 gives the Flame path its own strategic rite. A Flame-gifted
+Waykeeper lodged in a hearth whose borders hold a surveyed Flame seam kindles
+it for ten turns at six ashglass once the realm knows Contained ember
+projection: while the caster stays, every company besieging the hearth loses
+four strength per formation at the end of each turn, never below a fifth of its
+ranks, while the siege works still wear the walls. A kindling is a ward in the
+saved sense (one per hearth, the same dissolve reasons, broken by the Rune
+breaking), the besieger's siege card and the ledger read "kindled", and both
+realms read each burn. A besieged AI realm with a Flame caster kindles; a
+besieger that cannot storm kindled walls lifts the siege. Save version 42
+changes no field; v41 envelopes migrate unchanged and rules 41 refuses the rite.
+
+Verification: new sim, AI, UI and content tests and a browser journey through
+the character sheet and ledger; unit **2,302 tests / 284 files**, campaigns 57,
+lint, typecheck and build pass; headline campaigns remain **362/327/227** with
+command and event counts identical to the ward-breaking packet, and the rules 41
+projection reproduces that packet's seals exactly. The three rite journeys and
+the affected siege journeys pass, the complete gameplay suite passes 251 of 251
+and the production suite 59 of 59 on the fresh bundle.
+[Evidence](development/2026-10-29-seam-kindling/README.md),
+[ADR0064](architecture/0064-seam-kindling.md).
+
+## Local browser-test reliability — 2026-10-29
+
+The root Playwright configs now share private disk-backed temporary storage and
+the supported full bundled Chromium headless mode, preserving explicit browser
+and temporary-directory overrides. The workstation's per-user `/tmp` quota was
+nearly exhausted while its filesystem still appeared to have space; automated
+Chromium processes redirected shared memory there. Four seam-warding attempts
+and four production save/sequence attempts now pass, including the previously
+blocked ward-breaking journey. Typecheck and scoped lint pass. This is a tested
+mitigation with four distinct repeated journeys, not a symbolized root-cause
+proof or full browser-suite acceptance. No game rules or deployed content
+changed. [Evidence and limitations](development/2026-10-29-playwright-reliability/README.md).
+
 ## Ward breaking: the counter-rite — 2026-10-29
 
 Rules/save 41 makes seam warding contestable. A Waykeeper of the second Rune
@@ -19,7 +56,9 @@ packet, and the rules 40 projection reproduces that packet's seals exactly. The
 breaking browser journey reached its last assertions once, where only the test's
 wound count was wrong; after that fix every attempt failed before the campaign
 loaded because the desktop's headless browser kept crashing, so the fixed
-journey and the affected siege journeys are unverified in this checkpoint.
+journey and the affected siege journeys were unverified at publication; once the
+desktop was quiet, all seven pass and the production suite passes 59 of 59 on a
+plain rebuild of the published commit.
 [Evidence](development/2026-10-29-ward-breaking/README.md),
 [ADR0063](architecture/0063-ward-breaking.md).
 

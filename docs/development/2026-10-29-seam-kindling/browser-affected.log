@@ -1,0 +1,56 @@
+
+Running 10 tests using 1 worker
+
+  ✓   1 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (4.7s)
+  ✓   2 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.5s)
+  ✓   3 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (15.9s)
+  ✓   4 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (7.1s)
+  ✓   5 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (10.5s)
+  ✓   6 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (4.4s)
+  ✓   7 tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (3.9s)
+  ✓   8 tests/gameplay/seam-warding.spec.ts:63:1 › a besieger breaks the ward on its turn and the holder is jarred (3.6s)
+  ✘   9 tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column (3.9s)
+  ✓  10 tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save (4.2s)
+
+
+  1) tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 6
+    + Received  + 1
+
+    - Array [
+    -   Array [
+    -     20,
+    -     true,
+    -   ],
+    - ]
+    + Array []
+
+      149 |   // The column stood before the kindled walls and burned while the works wore the walls.
+      150 |   const summary = await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return { sieges: view.sieges.map(siege => [siege.defenses, siege.kindled ?? false]), wards: view.wards?.length ?? 0, enemyStrength: view.armies.filter(army => army.factionId !== view.factionId).reduce((total, army) => total + army.strength, 0) }; });
+    > 151 |   expect(summary.sieges).toEqual([[20, true]]);
+          |                          ^
+      152 |   expect(summary.wards).toBe(1);
+      153 |   expect(summary.enemyStrength).toBe(strengthBefore - 8);
+      154 |   await openRealmAffairs(page);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/seam-warding.spec.ts:151:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-kindling/browser-results/seam-warding-kindle-a-besi-8dc73-and-read-the-burning-column/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-seam-kindling/browser-results/seam-warding-kindle-a-besi-8dc73-and-read-the-burning-column/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-seam-kindling/browser-results/seam-warding-kindle-a-besi-8dc73-and-read-the-burning-column/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-seam-kindling/browser-results/seam-warding-kindle-a-besi-8dc73-and-read-the-burning-column/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column 
+  9 passed (1.0m)

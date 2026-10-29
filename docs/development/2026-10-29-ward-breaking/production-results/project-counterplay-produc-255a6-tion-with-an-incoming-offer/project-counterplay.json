@@ -1,0 +1,192 @@
+{
+  "mode": "player",
+  "incoming": true,
+  "initialHash": "c705fc04",
+  "finalHash": "55ca5787",
+  "coverage": "from-save",
+  "rounds": [
+    {
+      "turn": 28,
+      "hash": "55ca5787",
+      "project": {
+        "id": "project.11",
+        "projectId": "project.hearth_exchange",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.5",
+        "settlementName": "Ledger Hearth",
+        "cell": 488,
+        "startedTurn": 23,
+        "progress": 4,
+        "requiredTurns": 5,
+        "status": "paused",
+        "statusReason": "The host settlement is under siege."
+      },
+      "victory": null
+    }
+  ],
+  "records": [
+    {
+      "sequence": 1,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "proposePeace",
+        "factionId": "faction.ashen_compact",
+        "targetFactionId": "faction.reedbound_council",
+        "terms": {
+          "offerCoin": 0,
+          "requestCoin": 0,
+          "truceTurns": 10
+        }
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "peace_proposed",
+          "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 27,
+          "type": "peace_proposed",
+          "message": "Peace offer offer.12 awaits a response until turn 30. Payments occur only on acceptance.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 41
+    },
+    {
+      "sequence": 2,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "respondPeace",
+        "factionId": "faction.reedbound_council",
+        "offerId": "offer.12",
+        "accept": false
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 27,
+          "type": "peace_rejected",
+          "message": "Peace offer offer.12 was rejected.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 41
+    },
+    {
+      "sequence": 3,
+      "turn": 27,
+      "afterTurn": 27,
+      "command": {
+        "type": "besiege",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.4",
+        "settlementId": "settlement.5"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_started",
+          "message": "Ledger Hearth is blockaded. Its food yield is cut off and other yields are halved. Its stored food lasts 2 turns; then its militia starves.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "victory_project_paused",
+          "message": "Hearth Exchange at Ledger Hearth paused: The host settlement is under siege.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        }
+      ],
+      "battles": [],
+      "checkpoint": null,
+      "checkpointVersion": null,
+      "rulesVersion": 41
+    },
+    {
+      "sequence": 4,
+      "turn": 27,
+      "afterTurn": 28,
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "ok": true,
+      "error": null,
+      "events": [
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.reedbound_council",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "siege_progress",
+          "message": "Ledger Hearth: defenses 20, supplies 2.",
+          "factionId": "faction.ashen_compact",
+          "cell": 488
+        },
+        {
+          "turn": 27,
+          "type": "settlement_grew",
+          "message": "Kiln Ward grew to population 4.",
+          "factionId": "faction.ashen_compact",
+          "cell": 539
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.ashen_compact"
+        },
+        {
+          "turn": 28,
+          "type": "turn_started",
+          "message": "Turn 28: orders are ready.",
+          "factionId": "faction.reedbound_council"
+        }
+      ],
+      "battles": [],
+      "checkpoint": "55ca5787",
+      "checkpointVersion": 41,
+      "rulesVersion": 41
+    }
+  ]
+}

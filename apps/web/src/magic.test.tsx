@@ -42,5 +42,9 @@ describe('strategic rites (rules 40)', () => {
     expect(warded).toContain('This hearth is already warded.');
     const ledger = renderToStaticMarkup(createElement(SiegeLedger, { view: getObservation(state, rival), locate: () => undefined }));
     expect(ledger).toContain('30 · warded');
+    // Rules 42: a kindled hearth reads as such in the same ledger.
+    state.wards = []; state.characters[caster.id]!.aptitudes = { 'path.flame': 2, 'path.rune': 1 };
+    expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: 'rite.seam_kindling' })).toMatchObject({ ok: true });
+    expect(renderToStaticMarkup(createElement(SiegeLedger, { view: getObservation(state, rival), locate: () => undefined }))).toContain('30 · kindled');
   });
 });
