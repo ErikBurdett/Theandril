@@ -200,6 +200,9 @@ Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
 [GitHub Pages](https://erikburdett.github.io/Theandril/): both workflows pass,
 the read-only live readback matches the exact local rebuild, and the scoped live
 journeys are recorded in the [publication packet](../2026-10-29-publication/README.md).
+The ninth slice is deployed as `c774ab9`: both workflows and the live readback
+pass ([publication packet](../2026-10-29-publication-kindling/README.md)). The
+tracker records 104 of 150 acceptance points.
 The eighth slice is deployed as `b7b99c0`: both workflows and the live readback
 pass ([publication packet](../2026-10-29-publication-breaking/README.md)); no
 scoped live journeys ran. The tracker records 103 of 150 acceptance points.

@@ -24,6 +24,8 @@ and the production suite 59 of 59 on the fresh bundle.
 [Evidence](development/2026-10-29-seam-kindling/README.md),
 [ADR0064](architecture/0064-seam-kindling.md).
 
+Published as `c774ab9` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication-kindling/README.md)).
+
 ## Local browser-test reliability — 2026-10-29
 
 The root Playwright configs now share private disk-backed temporary storage and
