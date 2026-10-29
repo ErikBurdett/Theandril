@@ -1,0 +1,188 @@
+
+Running 13 tests using 1 worker
+
+  ✘   1 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text (2.2s)
+  ✘   2 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text (2.0s)
+  ✓   3 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 100% text (2.5s)
+  ✘   4 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text (2.1s)
+  ✓   5 tests/gameplay/updates.spec.ts:53:1 › reading surfaces retain contrast without putting texture over the text (394ms)
+  ✓   6 tests/gameplay/updates.spec.ts:84:1 › unknown dispatch links fail honestly and keyboard skip navigation works (461ms)
+  ✓   7 tests/gameplay/updates.spec.ts:95:1 › archive search combines topic filters, survives refresh and recovers from no results (544ms)
+  ✓   8 tests/gameplay/updates.spec.ts:110:1 › scope ledger links real gates and a contributor can reach authoring guidance (390ms)
+  ✓   9 tests/gameplay/updates.spec.ts:126:1 › a keyboard reader can enlarge a real image and return to the same control (398ms)
+  ✘  10 tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch (2.6s)
+  ✓  11 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (6.0s)
+  ✘  12 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (2.8s)
+  ✓  13 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (3.4s)
+
+
+  1) tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text ─────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1440px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1440px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text ─────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1366px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1366px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text ──────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-390px-and-130-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-390px-and-130-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('heading', { name: 'A campaign worth keeping', level: 1 })
+    Expected: visible
+    Received: undefined
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'A campaign worth keeping', level: 1 }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'A campaign worth keeping', level: 1 })
+      - 
+
+
+      172 |   await expect(page.getByRole('link', { name: 'Factual evidence review' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/b623c2c91d4d852cba710f2d996c28a6b1b5d624/docs/development/2026-09-23-fleet-provisions/factual-review.md');
+      173 |   await page.getByRole('link', { name: 'A campaign worth keeping', exact: true }).click();
+    > 174 |   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
+          |                                                                                           ^
+      175 |   await expect(page.getByRole('link', { name: 'Post-fix review reconciliation' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/8b3b8c148b7e8ee3689001210033fee7a1b8a6ef/docs/development/post-fix-review/summary.json');
+      176 |   await page.getByRole('link', { name: 'All dispatches', exact: true }).click();
+      177 |   await expect(page).toHaveURL(/updates\/dispatches\/#archive$/);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:174:91
+
+    Error Context: docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-rerun2-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('land-policy').locator(':scope > summary')
+    Expected substring: "Terraced fields"
+    Received string:    ""
+
+    Call log:
+      - Expect "toContainText" getByTestId('land-policy').locator(':scope > summary') with timeout 5000ms
+      - waiting for getByTestId('land-policy').locator(':scope > summary')
+      - 
+
+
+      51 |   const apply = panel.getByRole('button', { name: 'Apply land commission', exact: true });
+      52 |   if (keyboard) { await apply.focus(); await page.keyboard.press('Enter'); } else await apply.click();
+    > 53 |   await expect(panel.locator(':scope > summary')).toContainText('Terraced fields');
+         |                                                   ^
+      54 |   await expect(page.getByTestId('land-panel')).toHaveAttribute('data-query-state', 'ready');
+      55 |   return panel;
+      56 | }
+        at setCommission (/home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:53:51)
+        at /home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:64:3
+
+    Error Context: docs/development/2026-10-29-publication/live-rerun2-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-rerun2-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-rerun2-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text ───────────────────
+    tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+    tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+  8 passed (28.6s)

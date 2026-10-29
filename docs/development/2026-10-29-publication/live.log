@@ -1,0 +1,270 @@
+
+Running 24 tests using 1 worker
+
+  ✓   1 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (484ms)
+  ✓   2 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (417ms)
+  ✓   3 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (380ms)
+  ✓   4 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (620ms)
+  ✓   5 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (566ms)
+  ✓   6 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (609ms)
+  ✓   7 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (797ms)
+  ✓   8 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (918ms)
+  ✓   9 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (805ms)
+  ✓  10 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (586ms)
+  ✘  11 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text (2.0s)
+  ✘  12 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text (2.0s)
+  ✓  13 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 100% text (2.6s)
+  ✘  14 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text (2.0s)
+  ✓  15 tests/gameplay/updates.spec.ts:53:1 › reading surfaces retain contrast without putting texture over the text (433ms)
+  ✓  16 tests/gameplay/updates.spec.ts:84:1 › unknown dispatch links fail honestly and keyboard skip navigation works (495ms)
+  ✓  17 tests/gameplay/updates.spec.ts:95:1 › archive search combines topic filters, survives refresh and recovers from no results (604ms)
+  ✓  18 tests/gameplay/updates.spec.ts:110:1 › scope ledger links real gates and a contributor can reach authoring guidance (467ms)
+  ✓  19 tests/gameplay/updates.spec.ts:126:1 › a keyboard reader can enlarge a real image and return to the same control (341ms)
+  ✘  20 tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch (3.2s)
+  ✘  21 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (4.7s)
+  ✓  22 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (1.3s)
+  ✘  23 tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy (5.9s)
+  ✓  24 tests/production/land-policy.spec.ts:115:1 › land commissions validate budgets and yield to real manual work at narrow width with exact replay (3.4s)
+
+
+  1) tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text ─────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1440px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1440px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text ─────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1366px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1366px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text ──────────────────
+
+    Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      22 |     await page.evaluate(() => window.scrollTo(0, 0));
+      23 |     await page.screenshot({ path: testInfo.outputPath('explore-top.png') });
+    > 24 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+         |                ^
+      25 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+      26 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+      27 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:24:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-390px-and-130-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-390px-and-130-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })
+    Expected: "page"
+    Received: ""
+
+    Call log:
+      - Expect "toHaveAttribute" getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' }) with timeout 5000ms
+      - waiting for getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })
+      - 
+
+
+      180 |   await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('archive');
+      181 |   await expect(page).toHaveURL(/updates\/dispatches\/\?q=archive#archive$/);
+    > 182 |   await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })).toHaveAttribute('aria-current', 'page');
+          |                                                                                                                     ^
+      183 | });
+      184 |
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/updates.spec.ts:182:117
+
+    Error Context: docs/development/2026-10-29-publication/live-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+
+    Error: locator.screenshot: Target crashed 
+    Call log:
+      - taking element screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+      - attempting scroll into view action
+        - waiting for element to be stable
+
+
+      32 |   await page.getByRole('button', { name: 'Step one battle round', exact: true }).click();
+      33 |   await expect(page.getByTestId('battle-round')).toHaveText('1');
+    > 34 |   await page.getByTestId('map-container').screenshot({ path: info.outputPath('production-battlefield.png') });
+         |                                           ^
+      35 |   const menu = page.getByTestId('campaign-menu');
+      36 |   if (!await menu.evaluate(element => (element as HTMLDetailsElement).open)) await menu.locator('summary').click();
+      37 |   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+        at /home/telephoneheater/Work/Theandril/tests/production/battlefield.spec.ts:34:43
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/tmp/playwright_chromiumdev_profile-0OAd8W --remote-debugging-pipe --no-startup-window
+    <launched> pid=2142034
+    [pid=2142034][err] [1029/144707.870092:WARNING:components/dbus/xdg/portal.cc:126] Failed to register with org.freedesktop.host.portal.Registry
+    [pid=2142034][err] [1029/144707.952768:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+    [pid=2142034][err] [1029/144708.774380:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=2142034][err] [1029/144708.855199:INFO:CONSOLE:0] "[.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://erikburdett.github.io/Theandril/ (0)
+    [pid=2142034][err] [1029/144708.857855:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=2142034][err] [1029/144708.888960:INFO:CONSOLE:0] "[.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://erikburdett.github.io/Theandril/ (0)
+    [pid=2142034][err] [1029/144708.892805:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=2142034][err] [1029/144708.920690:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=2142034][err] [1029/144708.928728:INFO:CONSOLE:0] "[.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://erikburdett.github.io/Theandril/ (0)
+    [pid=2142034][err] [1029/144708.928818:INFO:CONSOLE:0] "[.WebGL-0x1bc404679400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://erikburdett.github.io/Theandril/ (0)
+    [pid=2142034][err] Received signal 11 SEGV_MAPERR 000000000000
+    [pid=2142034][err] #0 0x55ab20388a03 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x46d1a02)
+    [pid=2142034][err] #1 0x55ab2317a6d4 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x74c36d3)
+    [pid=2142034][err] #2 0x7f3411e3e6f0 (/usr/lib/libc.so.6+0x3e6ef)
+    [pid=2142034][err] #3 0x55ab22d0cc4b (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x7055c4a)
+    [pid=2142034][err] #4 0x55ab225000c4 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x68490c3)
+    [pid=2142034][err] #5 0x55ab1db68c3e (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x1eb1c3d)
+    [pid=2142034][err] #6 0x55ab1db6d3cd (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x1eb63cc)
+    [pid=2142034][err] #7 0x55ab1efbe449 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x3307448)
+    [pid=2142034][err] #8 0x55ab1efbdb76 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x3306b75)
+    [pid=2142034][err] #9 0x55ab200ff2af (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x44482ae)
+    [pid=2142034][err] #10 0x55ab1ff1a1d6 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x42631d5)
+    [pid=2142034][err] #11 0x55ab1ff1a35a (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x4263359)
+    [pid=2142034][err] #12 0x55ab1ff1e1c3 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x42671c2)
+    [pid=2142034][err] #13 0x55ab1ff1a6e6 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x42636e5)
+    [pid=2142034][err] #14 0x55ab1ff19c59 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x4262c58)
+    [pid=2142034][err] #15 0x55ab20aa8009 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x4df1008)
+    [pid=2142034][err] #16 0x55ab20aa9072 (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x4df2071)
+    [pid=2142034][err] #17 0x7f3411e27781 (/usr/lib/libc.so.6+0x27780)
+    [pid=2142034][err] #18 0x7f3411e278b9 (/usr/lib/libc.so.6+0x278b8)
+    [pid=2142034][err] #19 0x55ab20604c3a (/home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell+0x494dc39)
+    [pid=2142034][err]   r8: 0000000000000004  r9: 0000000000000001 r10: 000038e400848fd0 r11: 000038e4003c4800
+    [pid=2142034][err]  r12: 0000000000000000 r13: 000038e4004ee6a0 r14: 000038e4003c6000 r15: 0000000000000001
+    [pid=2142034][err]   di: 0000000000000000  si: 000055ab27951a80  bp: 00007ffe0dec1310  bx: 0000000000000001
+    [pid=2142034][err]   dx: 70175b0000000000  ax: 000038e4005b1720  cx: 000055ab22b2db50  sp: 00007ffe0dec12c0
+    [pid=2142034][err]   ip: 000055ab22b2dc9c efl: 0000000000010206 cgf: 002b000000000033 erf: 0000000000000004
+    [pid=2142034][err]  trp: 000000000000000e msk: 0000000000000000 cr2: 0000000000000000
+    [pid=2142034][err] [end of stack trace]
+
+    Error Context: docs/development/2026-10-29-publication/live-results/production-battlefield-bui-0a8e0-s-without-development-hooks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+
+    Error: locator.isVisible: Target crashed 
+    Call log:
+        - checking visibility of getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ })
+
+
+       at gameplay/ui-navigation.ts:9
+
+       7 | export async function closeManagement(page: Page) {
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+    >  9 |   if (await window.isVisible()) {
+         |                    ^
+      10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:9:20)
+        at campaignMenu (/home/telephoneheater/Work/Theandril/tests/gameplay/group-movement-fixture.ts:77:9)
+        at exportedTravel (/home/telephoneheater/Work/Theandril/tests/gameplay/group-movement-fixture.ts:82:9)
+        at /home/telephoneheater/Work/Theandril/tests/production/land-policy.spec.ts:84:23
+
+    Error Context: docs/development/2026-10-29-publication/live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-publication/live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-publication/live-results/production-land-policy-a-g-f003a-ores-the-exact-saved-policy/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text ───────────────────
+    tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+    tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+    tests/production/land-policy.spec.ts:58:1 › a generated hearth spends its commission allowance on two ordinary paid works and restores the exact saved policy 
+  18 passed (39.3s)

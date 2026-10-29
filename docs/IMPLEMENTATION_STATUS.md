@@ -33,7 +33,7 @@ realm holds a seam of every path, so the third path is still unreached by any AI
 realm in organic play. [Evidence](development/2026-10-29-seam-study/README.md),
 [ADR0061](architecture/0061-seam-study.md).
 
-This checkpoint is local and unpublished.
+Published as `a7a4c16` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication/README.md)).
 
 ## Ground in sight: natural features, remembered surveys and the AI's glass — 2026-10-29
 
@@ -70,7 +70,7 @@ budget and the AI-watch chronicle.
 [ADR0060](architecture/0060-ground-in-sight.md).
 
 The map still draws no natural features; AI arcane research and the third path
-remain unreached organically. This checkpoint is local and unpublished.
+remain unreached organically. Published as `a7a4c16` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication/README.md)).
 
 ## Cession: a hearth passes between patron and client — 2026-10-29
 
@@ -94,8 +94,8 @@ the result through save and reload. [Evidence](development/2026-10-29-cession/RE
 AI issues no cession.
 
 M1's "permitted transfers between patron and client" is delivered for humans; AI
-use, and Gates G and H themselves, remain open. This checkpoint is local and
-unpublished.
+use, and Gates G and H themselves, remain open. Published as `a7a4c16`
+([publication evidence](development/2026-10-29-publication/README.md)).
 
 ## A unification bid lost to politics — 2026-10-29
 
@@ -118,8 +118,8 @@ subject-rule runs, and the seven diplomacy and attunement browser journeys pass.
 [Evidence](development/2026-10-29-bid-politics/README.md).
 
 M1's "losing a bid to politics" is delivered as counterplay over the existing
-pledge rule; patron–client hearth transfers remain. This checkpoint is local
-and unpublished.
+pledge rule; patron–client hearth transfers remain. Published as `a7a4c16` with both workflows and the live readback
+passing ([publication evidence](development/2026-10-29-publication/README.md)).
 
 ## Subject rule: a conquered capital bound rather than taken — 2026-10-29
 
@@ -156,7 +156,7 @@ diplomacy journeys. [Evidence](development/2026-10-29-subject-rule/README.md),
 
 M1's "client capture outcomes" is delivered; transfers between patron and client,
 losing a bid to politics, Gates G and H and every other release gate remain
-open. This checkpoint is local and unpublished. Next: patron–client hearth
+open. Published as `a7a4c16` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication/README.md)). Next: patron–client hearth
 transfers, then AI seam strategy for the third path.
 
 ## Attunement: the third victory path and personal path growth — 2026-10-29
@@ -216,8 +216,8 @@ it now reads 60 with retained evidence and passes. Production build passes.
 
 Gate B now has three implemented, human-playable, AI-pursued victory paths with
 complete winning fixtures; the gate itself, Gate F2 and every other release gate
-remain open. M7 begins; the M2 remainder narrows to reactive interception. This
-checkpoint is local and unpublished. Next: AI seam strategy and caster
+remain open. M7 begins; the M2 remainder narrows to reactive interception. Published as `a7a4c16` with both workflows and the live readback passing
+([publication evidence](development/2026-10-29-publication/README.md)). Next: AI seam strategy and caster
 protection for the third path, then reactive interception during an enemy cast.
 
 ## Personal land budget templates — 2026-10-28

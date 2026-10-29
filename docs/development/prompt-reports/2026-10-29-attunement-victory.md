@@ -5,8 +5,10 @@
 “Okay, continue development towards 1.0 — we have a usage reset coming soon so
 just keep working, don't ask for permission or wait for my input just continue
 development until you run out of tokens. Get familiar with the project and get
-us as close to 1.0 as possible.” No commit, publication or deployment was asked
-for in this prompt; this checkpoint is local and uncommitted.
+us as close to 1.0 as possible.” Followed by: “okay once the tests are complete,
+deploy it and then go again and deploy again.” The six slices below were built
+without a commit; after both complete browser suites ran, they were published
+as `a7a4c16` ([publication evidence](../2026-10-29-publication/README.md)).
 
 ## Delivered
 
@@ -144,13 +146,20 @@ Fifth slice: headline campaigns end on 362/327/227 with zero refused orders,
 surveys 253/222/159 (from 347/303/231) and seams found 9/6/3 (from 4/3/3); the
 remaining checks are recorded in its evidence packet.
 
+## Published
+
+Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
+[GitHub Pages](https://erikburdett.github.io/Theandril/): both workflows pass,
+the read-only live readback matches the exact local rebuild, and the scoped live
+journeys are recorded in the [publication packet](../2026-10-29-publication/README.md).
+The DHARMA tracker roadmap records 101 of 150 acceptance points with M7 in
+progress. No new developer dispatch was published; edition 23 remains the
+newest.
+
 ## Not done / blocked / caveats
 
-- Uncommitted and unpublished. The prompt asked for continued development, not
-  for a commit or deployment, so every slice sits in the working tree with its
-  evidence packet. The DHARMA tracker, a developer dispatch and the roadmap
-  catalogue's evidence links await a commit; the catalogue text describes the
-  slices without linking uncommitted files.
+- The roadmap catalogue's evidence links still pin the earlier snapshot; moving
+  them to this revision belongs in a reviewed dispatch.
 - The complete gameplay browser suite had not been run end to end since rules
   30. Four stale journeys were corrected with retained evidence (a victory turn,
   a roster import, a posting destination, and registry inspection in AI watch,
