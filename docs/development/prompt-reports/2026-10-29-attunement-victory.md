@@ -217,6 +217,13 @@ remains the newest.
 
 - The roadmap catalogue's evidence links still pin the earlier snapshot; moving
   them to this revision belongs in a reviewed dispatch.
+- Commit `c774ab9` staged `scripts/` and `docs/development/prompt-reports/`
+  wholesale and so swept in two files from another agent's concurrent,
+  uncommitted Playwright-reliability work in this checkout:
+  `scripts/playwright-runtime.ts` and
+  `prompt-reports/2026-10-29-playwright-reliability.md`. They were left in
+  place because that agent's uncommitted config edits import the module; the
+  commit message does not describe them.
 - Commit `e103a72` carries 586 MB of unzipped Playwright trace screenshots in
   history, swept in from a gameplay run the tool stopped for low memory; the
   tree is trimmed in `52b8436`, but purging history needs an authorized rewrite
