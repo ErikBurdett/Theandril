@@ -105,6 +105,31 @@ export function respondClient(state: GameState, factionId: string, offerId: stri
   return { ok: true, events: pairEvents(state, offer.patronId, offer.clientId, 'client_accepted', `${client.name} answers to ${patron.name} until turn ${state.turn + offer.terms.termTurns}. ${offer.terms.giftCoin} coin changed hands; ${offer.terms.tributeCoin} coin tribute is due each turn.`) };
 }
 
+/** Rules 39: why a fallen realm cannot be made a subject today, in the order a capturer meets them. */
+export function subjectObjection(state: GameState, patronId: string, clientId: string): string | null {
+  if (patronOf(state, patronId)) return 'A client realm cannot take subjects of its own.';
+  if (patronOf(state, clientId)) return 'That realm already answers to a patron.';
+  if (clientsOf(state, clientId).length) return 'That realm has clients of its own; they would have to be released first.';
+  if (clientsOf(state, patronId).length + state.diplomacy.clientOffers.filter(offer => offer.patronId === patronId).length >= MAX_CLIENT_RELATIONS) return 'You already hold as many clients as a realm may.';
+  return null;
+}
+/** The obligation a conquered capital imposes: no subsidy, tribute by the size of the realm, thirty turns. */
+export function subjectTerms(state: GameState, clientId: string): ClientTerms {
+  const hearths = Object.values(state.settlements).filter(town => town.factionId === clientId).length;
+  return { giftCoin: 0, tributeCoin: Math.min(200, 3 * hearths), termTurns: 30 };
+}
+/** Bind a realm whose capital fell. Peace between the pair must already hold. */
+export function imposeClient(state: GameState, patronId: string, clientId: string, terms: ClientTerms): DomainEvent[] {
+  if (atWar(state, patronId, clientId)) throw new Error('Subject rule requires peace between the realms.');
+  const objection = subjectObjection(state, patronId, clientId);
+  if (objection) throw new Error(objection);
+  state.diplomacy.clientOffers = state.diplomacy.clientOffers.filter(offer => !(offer.patronId === patronId && offer.clientId === clientId) && !(offer.patronId === clientId && offer.clientId === patronId));
+  state.diplomacy.clients.push({ id: `bond.${state.nextId++}`, patronId, clientId, startedTurn: state.turn, expiresTurn: state.turn + terms.termTurns, terms: { ...terms }, missedTribute: 0 });
+  state.diplomacy.clients.sort(byId);
+  const patron = state.factions.find(faction => faction.id === patronId), client = state.factions.find(faction => faction.id === clientId);
+  return pairEvents(state, patronId, clientId, 'client_accepted', `${client?.name ?? clientId} answers to ${patron?.name ?? patronId} as a subject until turn ${state.turn + terms.termTurns}. ${terms.tributeCoin} coin tribute is due each turn; its hearths stand behind the patron's unification bid.`);
+}
+
 export function releaseClient(state: GameState, factionId: string, clientId: string): CommandResult {
   if (rulesVersion(state) < 22) return fail('Patronage is unavailable under these historical rules.');
   const bond = state.diplomacy.clients.find(item => item.patronId === factionId && item.clientId === clientId);

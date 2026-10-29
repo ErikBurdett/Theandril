@@ -1,3 +1,4 @@
+import { cessionOptions, type CessionOption } from './cession';
 import { z } from 'zod';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, TECHNOLOGIES, resourceById, type LandYield } from '@theandril/content';
 import { BIOME_NAMES, hexDistance, naturalFeatures, neighbors } from '@theandril/mapgen';
@@ -61,6 +62,8 @@ export interface SettlementLandObservation {
   claimed: number[]; worked: number[]; work: LandWork | null; workPaused: string | null; yields: LandYield; cells: LandCellObservation[];
   capitalOption: LandOption; canCancelWork: boolean; cancelBlocker: string | null;
   borderExpansion: BorderExpansionObservation;
+  /** Rules 39: realms bound by an oath this hearth may pass to, with why it cannot today. Absent without a bond. */
+  cession?: CessionOption[];
   cellWindow?: { offset: number; limit: number; total: number };
   /** Current commission choice across all worked cells, only on requested detail. */
   landPolicyChoice?: LandPolicyChoice;
@@ -628,7 +631,7 @@ function settlementLandObservation(state: GameState, factionId: string, town: Se
     });
     const policy = includeCells && rulesVersion(state) >= 37 ? state.landPolicies.find(item => item.settlementId === town.id) : undefined;
     const obstruction = context.blocker ?? (!land.work ? 'This settlement has no land-work order.' : null);
-    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(policy ? { landPolicyChoice: commissionChoice(state, policy, context.owner) } : {}), ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };
+    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(policy ? { landPolicyChoice: commissionChoice(state, policy, context.owner) } : {}), ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town), ...(cessionOptions(state, factionId, town.id).length ? { cession: cessionOptions(state, factionId, town.id) } : {}) };
 }
 
 export function getLandObservation(state: GameState, factionId: string, visible: { has(cell: number): boolean }, details: LandDetails = 'all'): LandObservation {

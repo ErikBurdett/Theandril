@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GameCommand, Observation } from '@theandril/sim';
-import { UNIFICATION_VICTORY } from '@theandril/content';
+import { ATTUNEMENT_VICTORY, UNIFICATION_VICTORY } from '@theandril/content';
 import { ArcaneResearch, ArcaneSeams } from './magic';
 import { QueriedDevelopmentPanel } from './development-panel';
 import { ResourcePanel } from './resource-panel';
@@ -67,17 +67,48 @@ function UnificationStatus({ unification }: { unification: NonNullable<Observati
   return <section className="project-introduction" data-testid="unification-status" aria-label={unification.name}><span className="eyebrow">A second path to victory</span><h3>{unification.name}</h3><p>{unification.description}</p>
     <p>You hold {unification.held} of {unification.total} hearths{unification.pledged > 0 ? ` (${unification.own} your own and ${unification.pledged} pledged by your clients)` : ''}. More than two thirds, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
     {unification.blockers.length > 0 ? <ul>{unification.blockers.map(blocker => <li key={blocker}>{blocker}</li>)}</ul> : <p>Your realm qualifies. A public bid opens at your capital when the round ends.</p>}
+    <p className="field-help">Pledged hearths stand behind a bid only while the oath holds: a client that renounces, lapses or completes its term withdraws them, and a bid that falls below two thirds ends at the round’s close. A bid can be lost to politics as well as to arms.</p>
   </section>;
 }
 
+/** Rules 38: the sealed working rests on things rivals can take, and the
+ * section names each one — seams, theory, host and caster — so a player sees
+ * what is still missing before any knowledge is committed. */
+export function AttunementStatus({ view, attunement, blocked, issue }: { view: Observation; attunement: NonNullable<Observation['progression']['attunement']>; blocked: boolean; issue: (command: GameCommand) => void }) {
+  const [host, setHost] = useState('');
+  const [caster, setCaster] = useState('');
+  const selectedHost = attunement.eligibleSettlementIds.includes(host) ? host : attunement.eligibleSettlementIds[0] ?? '';
+  const casters = attunement.casters.filter(item => item.qualified && item.settlementId === selectedHost);
+  const selectedCaster = casters.some(item => item.characterId === caster) ? caster : casters[0]?.characterId ?? '';
+  const nameOf = (id: string) => view.settlements.find(town => town.id === id)?.name ?? id;
+  return <section className="project-introduction" data-testid="attunement-status" aria-label={attunement.name}><span className="eyebrow">A third path to victory</span><h3>{attunement.name}</h3><p>{attunement.description}</p>
+    <p>{attunement.knowledgeCost} knowledge committed on starting · {attunement.requiredTurns} active turns required.</p>
+    <ul data-testid="attunement-requirements">
+      <li>Arcane Theory: {attunement.discoveries.researched} of {attunement.discoveries.total} discoveries researched.</li>
+      {attunement.paths.map(path => <li key={path.pathId}>{path.pathName} seam: {path.held ? 'held inside your borders' : 'not held'}.</li>)}
+      <li>Host hearths with a Witness archive: {attunement.hostSettlementIds.length ? attunement.hostSettlementIds.map(nameOf).join(', ') : 'none free of siege and occupation'}.</li>
+      <li>Waykeepers: {attunement.casters.length ? attunement.casters.map(item => `${item.name} (degree ${item.degree}${item.settlementId ? `, at ${nameOf(item.settlementId)}` : ''}) — ${item.qualified ? 'ready to seal the working.' : item.blocker}`).join(' ') : 'none appointed.'}</li>
+    </ul>
+    {attunement.blockers.length > 0 && <section className="project-blockers" aria-label="Attunement requirements"><h4>Before the working can be sealed</h4><ul>{attunement.blockers.map(blocker => <li key={blocker}>{blocker}</li>)}</ul></section>}
+    <form className="project-start" onSubmit={event => { event.preventDefault(); if (selectedHost && selectedCaster) issue({ type: 'startAttunement', factionId: view.factionId, settlementId: selectedHost, characterId: selectedCaster }); }}>
+      <label>Working host<select value={selectedHost} disabled={blocked || !attunement.eligibleSettlementIds.length} onChange={event => setHost(event.target.value)}>{!attunement.eligibleSettlementIds.length && <option value="">No eligible hearth</option>}{attunement.eligibleSettlementIds.map(id => <option value={id} key={id}>{nameOf(id)}</option>)}</select></label>
+      <label>Sealing caster<select value={selectedCaster} disabled={blocked || !casters.length} onChange={event => setCaster(event.target.value)}>{!casters.length && <option value="">No qualified Waykeeper at the host</option>}{casters.map(item => <option value={item.characterId} key={item.characterId}>{item.name} · degree {item.degree}</option>)}</select></label>
+      <button className="primary" disabled={blocked || attunement.blockers.length > 0 || !selectedHost || !selectedCaster} type="submit">Seal the {attunement.name}</button>
+    </form>
+  </section>;
+}
+
+const projectName = (projectId: string): string => projectId === UNIFICATION_VICTORY.id ? UNIFICATION_VICTORY.name : projectId === ATTUNEMENT_VICTORY.id ? ATTUNEMENT_VICTORY.name : 'Prosperity';
+const projectTestId = (project: Observation['projects'][number]): string => `${project.projectId === UNIFICATION_VICTORY.id ? 'unification' : project.projectId === ATTUNEMENT_VICTORY.id ? 'attunement' : 'project'}-${project.factionId}`;
+
 export function PublicProjects({ view, locate }: { view: Observation; locate: (cell: number) => void }) {
   if (!view.projects.length) return null;
-  return <section className="public-projects" data-testid="public-projects" aria-label="Public victory projects"><h3>The race for victory</h3>{view.projects.map(project => <article key={project.id} className="public-project" data-testid={project.projectId === UNIFICATION_VICTORY.id ? `unification-${project.factionId}` : `project-${project.factionId}`}>
-    <strong>{view.factions.find(faction => faction.id === project.factionId)?.name ?? project.factionId} · {project.projectId === UNIFICATION_VICTORY.id ? UNIFICATION_VICTORY.name : 'Prosperity'}</strong><span>{project.settlementName} · hex {project.cell}</span>
+  return <section className="public-projects" data-testid="public-projects" aria-label="Public victory projects"><h3>The race for victory</h3>{view.projects.map(project => <article key={project.id} className="public-project" data-testid={projectTestId(project)}>
+    <strong>{view.factions.find(faction => faction.id === project.factionId)?.name ?? project.factionId} · {projectName(project.projectId)}</strong><span>{project.settlementName} · hex {project.cell}</span>
     <label>{project.status} · {project.progress}/{project.requiredTurns} {project.projectId === UNIFICATION_VICTORY.id ? 'turns held' : 'active turns'}<progress max={project.requiredTurns} value={project.progress}/></label>
     {project.statusReason && <p>{project.statusReason}</p>}
     <button aria-label={`Locate project ${project.settlementName}`} onClick={() => locate(project.cell)}>Locate project</button>
-  </article>)}<p className="field-help">Victory bids are public; the surrounding land stays hidden until explored. Besiege a Prosperity host to halt it and conquer it to cancel it. A Unification bid ends if its capital falls or its realm drops below two thirds of the world's hearths.</p></section>;
+  </article>)}<p className="field-help">Victory bids are public; the surrounding land stays hidden until explored. Besiege a Prosperity or Attunement host to halt it and conquer it to cancel it; taking a hearth whose borders hold a seam, or wounding the sealing Waykeeper, also halts an Attunement. A Unification bid ends if its capital falls or its realm drops below two thirds of the world's hearths.</p></section>;
 }
 
 export function CampaignProgression({ view, busy, issue, locate, close, developmentQuery, stateHash = '', queryEpoch = 0, queryEnabled = true }: { view: Observation; busy: boolean; issue: (command: GameCommand) => void; locate: (cell: number) => void; close: () => void; developmentQuery?: DevelopmentQuery; stateHash?: string; queryEpoch?: number; queryEnabled?: boolean }) {
@@ -122,6 +153,9 @@ export function CampaignProgression({ view, busy, issue, locate, close, developm
           <button className="primary" disabled={blocked || project.blockers.length > 0 || !selectedHost} type="submit">Start {project.name}</button>
         </form>
         {progression.unification && <UnificationStatus unification={progression.unification}/>}
+        {progression.attunement ? <AttunementStatus view={view} attunement={progression.attunement} blocked={blocked} issue={issue}/>
+          : progression.attunementAvailable && <section className="project-introduction" data-testid="attunement-status" aria-label={ATTUNEMENT_VICTORY.name}><span className="eyebrow">A third path to victory</span><h3>{ATTUNEMENT_VICTORY.name}</h3><p>{ATTUNEMENT_VICTORY.description}</p>
+            <p className="field-help">Your realm has not yet begun the arcane road. Survey a seam, research Arcane Theory or appoint a Waykeeper, and this section will show exactly what the working still lacks.</p></section>}
         <PublicProjects view={view} locate={cell => { close(); locate(cell); }}/>
       </>}
     </section>

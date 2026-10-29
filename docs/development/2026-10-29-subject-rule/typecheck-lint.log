@@ -1,0 +1,16 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+
+> theandril@0.1.0 lint /home/telephoneheater/Work/Theandril
+> eslint .
+
+
+/home/telephoneheater/Work/Theandril/docs/development/2026-10-29-attunement-victory/replay-watch-campaign.ts
+  1:57  error  'GameCommand' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.
+exit 1

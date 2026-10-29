@@ -85,3 +85,33 @@ test('AI preserves first-contact fighting and offers limited tribute for later e
   expect(offer.terms.offerCoin).toBeGreaterThan(0);
   expect(offer.terms.offerCoin).toBeLessThanOrEqual(Math.floor((view.treasury - 8) / 4));
 });
+
+test('rules 39: a client renounces an oath that stands behind its patron’s unification bid, and refuses to pledge to a bidding realm', async () => {
+  const { unificationCampaign } = await import('../../test-fixtures/src/victory-fixture');
+  const { answerPatronage } = await import('./diplomacy');
+  const { planTurnWithReasons } = await import('./index');
+  const state = unificationCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
+  for (const town of Object.values(state.settlements).filter(town => town.factionId === player && town.id !== state.land.capitals[player]).slice(0, 2)) town.factionId = rival;
+  state.factions[0]!.treasury = 200; state.factions[1]!.treasury = 200;
+  const offerTerms = { giftCoin: 40, tributeCoin: 2, termTurns: 20 };
+  expect(applyCommand(state, { type: 'proposeClient', factionId: player, targetFactionId: rival, terms: offerTerms })).toMatchObject({ ok: true });
+  // No bid yet: the usual bargain applies and a realm under pressure accepts.
+  const before = answerPatronage({ ...getObservation(state, rival), wars: ['faction.elsewhere'] });
+  expect(before?.commands[0]).toMatchObject({ type: 'respondClient', accept: true });
+  expect(applyCommand(state, before!.commands[0]!)).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });
+  expect(state.projects.some(project => project.factionId === player && project.status === 'active')).toBe(true);
+  // The bid is public; the client withdraws its hearths and the whole turn plan leads with it.
+  const view = getObservation(state, rival), copy = structuredClone(view);
+  const resist = answerPatronage(view);
+  expect(view).toEqual(copy);
+  expect(resist?.commands).toEqual([{ type: 'renounceClient', factionId: rival }]);
+  expect(resist?.reasons[0]).toContain('price of a breach');
+  expect(planTurnWithReasons(view).commands[0]).toEqual({ type: 'renounceClient', factionId: rival });
+  expect(applyCommand(state, resist!.commands[0]!)).toMatchObject({ ok: true });
+  // A fresh offer from the bidding realm is refused while the bid stands.
+  expect(applyCommand(state, { type: 'proposeClient', factionId: player, targetFactionId: rival, terms: offerTerms })).toMatchObject({ ok: true });
+  const refusal = answerPatronage({ ...getObservation(state, rival), wars: ['faction.elsewhere'] });
+  expect(refusal?.commands[0]).toMatchObject({ type: 'respondClient', accept: false });
+  expect(refusal?.reasons[0]).toContain('public unification bid');
+});

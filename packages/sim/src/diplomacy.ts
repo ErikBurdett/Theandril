@@ -91,8 +91,26 @@ export function recordWar(state: GameState, a: string, b: string): void {
 export function recordConquest(state: GameState, a: string, b: string, outcome: string): void {
   if (a === b) return;
   const memory = relation(state, a, b);
-  memory.grievances = clamp(memory.grievances + (outcome === 'liberate' ? -10 : outcome === 'raze' ? 40 : outcome === 'sack' ? 25 : 10), 0, 100);
-  memory.respect = clamp(memory.respect + 5, 0, 100);
+  memory.grievances = clamp(memory.grievances + (outcome === 'liberate' ? -10 : outcome === 'raze' ? 40 : outcome === 'sack' ? 25 : outcome === 'subject' ? 15 : 10), 0, 100);
+  memory.respect = clamp(memory.respect + (outcome === 'subject' ? 10 : 5), 0, 100);
+}
+
+/** Rules 39: a peace imposed by conquest. No coin moves; the war ends, a binding
+ * peace of the given length begins and standing offers between the pair lapse. */
+export function imposePeace(state: GameState, victorId: string, defeatedId: string, truceTurns: number): DomainEvent[] {
+  const parties = warPair(victorId, defeatedId);
+  state.wars = state.wars.filter(pair => !same(pair, victorId, defeatedId));
+  const dropped = state.diplomacy.offers.filter(offer => same(warPair(offer.proposerId, offer.recipientId), victorId, defeatedId));
+  state.diplomacy.offers = state.diplomacy.offers.filter(offer => !dropped.includes(offer));
+  state.diplomacy.treaties = state.diplomacy.treaties.filter(treaty => !same(treaty.parties, victorId, defeatedId));
+  state.diplomacy.treaties.push({ id: `treaty.${state.nextId++}`, parties, proposerId: victorId, startedTurn: state.turn, expiresTurn: state.turn + truceTurns, terms: { offerCoin: 0, requestCoin: 0, truceTurns } });
+  state.diplomacy.treaties.sort(byId);
+  const memory = relation(state, victorId, defeatedId);
+  memory.warStartedTurn = null;
+  return [
+    ...dropped.flatMap(offer => pairEvents(state, offer.proposerId, offer.recipientId, 'peace_offer_expired', `Peace offer ${offer.id} lapsed: the war it addressed has ended.`)),
+    ...pairEvents(state, victorId, defeatedId, 'peace_accepted', `Peace was imposed until turn ${state.turn + truceTurns}. No coin changed hands.`),
+  ];
 }
 
 function pairEvents(state: GameState, a: string, b: string, type: string, message: string): DomainEvent[] {

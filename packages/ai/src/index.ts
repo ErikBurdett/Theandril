@@ -3,7 +3,7 @@ import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planDepot } from './supply';
-import { planArcaneSurvey } from './arcane';
+import { planArcaneSurvey, planGlassApproach } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
@@ -81,6 +81,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const factionId = view.factionId;
   const theater = planDefenseTheater(view);
   for (const id of supplyPurchase?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
+  // A company carrying a caster home for a sealed working keeps that road.
+  for (const id of advancement.heldArmyIds) theater.heldArmyIds.add(id);
   const patrol = planPatrol(view, theater.heldArmyIds);
   for (const id of patrol.heldArmyIds) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
@@ -88,6 +90,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // An occasional paid survey of ground the realm already holds; both are bounded
   // orders that travel with the turn rather than replacing its ordinary work.
   const survey = planArcaneSurvey(view, theater.heldArmyIds);
+  // A company already standing on fresh glass surveys; otherwise one may walk to glass in sight.
+  const glassApproach = survey ? null : planGlassApproach(view, theater.heldArmyIds);
+  for (const id of glassApproach?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
   // A surveying company spends its movement on the ground it stands on, so nothing
   // later in this pass may march it away.
   // Rules 28: a force wasting outside supply raises a depot under itself instead.
@@ -95,8 +100,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

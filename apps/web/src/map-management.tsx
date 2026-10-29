@@ -54,8 +54,14 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   // seam. The button states the price and why a survey is refused.
   const surveyBlocker = army && (army.movement <= 0 ? 'This company has already spent its movement this turn.'
     : view.treasury < view.arcaneSearchCoinCost ? `An arcane survey costs ${view.arcaneSearchCoinCost} coin.` : null);
+  // Rules 39: the ground underfoot says whether it is worth the price — glass in
+  // sight, or a hex this realm already paid to survey.
+  const underfoot = army && renderer?.inspect(army.cell);
+  const surveyedHere = army && view.arcaneSearches?.includes(army.cell);
+  const glassHere = Boolean(underfoot && ((underfoot.featureMask ?? 0) & 64));
   const survey = army && !view.battle && !view.pendingCapture && view.arcaneSearchCoinCost > 0 && <section className="arcane-survey" data-testid="arcane-survey">
     <button className="wide" disabled={busy || Boolean(surveyBlocker)} onClick={() => issue({ type: 'searchArcane', factionId, armyId: army.id })}>Survey for an arcane seam · {view.arcaneSearchCoinCost} coin</button>
+    {view.arcaneSearches && <p className="field-help" data-testid="survey-ground">{surveyedHere ? 'Your realm has already surveyed this hex; a second survey here finds nothing new.' : glassHere ? 'Ashfall glass lies underfoot: ground worth surveying.' : 'No Ashfall glass is visible underfoot; a survey here is a bet.'}</p>}
     <p className="field-help">{surveyBlocker ?? 'Ashfall glass marks ground worth surveying. A survey spends this company\u2019s movement and reveals any seam within two hexes; holding one inside your borders draws ashglass and allows Arcane Theory.'}</p>
   </section>;
   // Rules 28: a company raises a depot where it stands, extending supply by

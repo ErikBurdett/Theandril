@@ -11,15 +11,15 @@ import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, sett
 import { z } from 'zod';
 import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
 import { BUILDINGS, CITY_STATES, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, variantFactionColor, variantFactionName, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
-import { GENERATOR_VERSION, MAP_TYPES, SeededRandom, generateWorld, isPassable, neighbors, type WorldLayout } from '@theandril/mapgen';
+import { GENERATOR_VERSION, MAP_TYPES, SeededRandom, generateWorld, isPassable, naturalFeatures, neighbors, type WorldLayout } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
 import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, settleCampaignAbility, startCampaignBattle } from './warfare';
 import { advanceDiplomacy, createDiplomacy, getDiplomacyObservation, peaceCommandSchemas, proposePeace, respondPeace } from './diplomacy';
 import { advanceClients, clientCommandSchemas, proposeClient, releaseClient, renounceClient, respondClient } from './clients';
-import { arcaneSiteCommandSchemas, emptyArcaneSurveys, observeArcaneSites, searchArcane, SITE_SEARCH_COIN } from './arcane-sites';
-import { advanceSieges, assaultSettlement, besiegeSettlement, captureOutcomeSchema, liftSettlementSiege, observeSieges, reconcileSieges, resolveSettlementCapture } from './siege';
-import { advanceProgression, chooseProgression, createFactionProgression, doctrineEffects, getProgressionObservation, progressionYields, reconcileProjects, startVictoryProject } from './progression';
+import { arcaneSiteCommandSchemas, emptyArcaneSurveys, observeArcaneSites, searchArcane, SITE_SEARCH_COIN, emptyArcaneSearches, observeArcaneSearches, hasArcaneSearches } from './arcane-sites';
+import { advanceSieges, assaultSettlement, assertNoSubjectRule, besiegeSettlement, captureOutcomeSchema, captureOutcomeV38Schema, liftSettlementSiege, observeSieges, reconcileSieges, resolveSettlementCapture, subjectUnavailable } from './siege';
+import { advanceProgression, assertNoAttunement, chooseProgression, createFactionProgression, doctrineEffects, getProgressionObservation, progressionYields, reconcileProjects, startAttunement, startVictoryProject } from './progression';
 import { advanceMovement, cancelMovement, moveTo, pauseMovement, queueMovement, reconcileMovement, resumeMovement } from './movement';
 
 import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyFormation, getArmyView, splitArmyFormations, transferArmyFormations } from './army-composition';
@@ -36,6 +36,7 @@ import { sortedExploredCells } from './canonical-cells';
 import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, landCommandV15Schemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, type LandDetails } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
 import { emptyArcaneResearch, observeArcaneResearch, researchArcane } from './magic';
+import { cedeSettlement, cessionCommandSchemas } from './cession';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
 import type { BattleFactObserver, BattlePresentationEvent, BattlePresentationObserver } from './combat/presentation';
 
@@ -57,7 +58,7 @@ const version5CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('besiege'), factionId: identifier, armyId: identifier, settlementId: identifier }).strict(),
   z.object({ type: z.literal('liftSiege'), factionId: identifier, settlementId: identifier }).strict(),
   z.object({ type: z.literal('assault'), factionId: identifier, settlementId: identifier }).strict(),
-  z.object({ type: z.literal('resolveCapture'), factionId: identifier, settlementId: identifier, outcome: captureOutcomeSchema }).strict(),
+  z.object({ type: z.literal('resolveCapture'), factionId: identifier, settlementId: identifier, outcome: captureOutcomeV38Schema }).strict(),
   z.object({ type: z.literal('research'), factionId: identifier, technologyId: identifier }).strict(),
   z.object({ type: z.literal('adoptInstitution'), factionId: identifier, institutionId: identifier }).strict(),
   z.object({ type: z.literal('adoptDoctrine'), factionId: identifier, doctrineId: identifier }).strict(),
@@ -119,8 +120,18 @@ export const version33CommandSchema = z.discriminatedUnion('type', [...version32
 const version34CommandSchema = z.discriminatedUnion('type', [...version32CommandSchema.options, ...theaterCommandSchemas, ...supplyAccessCommandSchemas]);
 const version35CommandSchema = z.discriminatedUnion('type', [...version34CommandSchema.options, ...patrolCommandSchemas]);
 const version36CommandSchema = z.discriminatedUnion('type', [...version35CommandSchema.options, ...workerPolicyCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version36CommandSchema.options, ...landPolicyCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : commandSchema;
+const version37CommandSchema = z.discriminatedUnion('type', [...version36CommandSchema.options, ...landPolicyCommandSchemas]);
+/** Rules 38 adds the sealed working; historical rules never accept it. */
+const version38CommandSchema = z.discriminatedUnion('type', [...version37CommandSchema.options,
+  z.object({ type: z.literal('startAttunement'), factionId: identifier, settlementId: identifier, characterId: identifier }).strict(),
+]);
+/** Rules 39 lets a capture decision resolve into subject rule; older schemas keep four outcomes. */
+export const commandSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('resolveCapture'), factionId: identifier, settlementId: identifier, outcome: captureOutcomeSchema }).strict(),
+  ...version38CommandSchema.options.filter(schema => schema.shape.type.value !== 'resolveCapture'),
+  ...cessionCommandSchemas,
+]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : version < 38 ? version37CommandSchema : version < 39 ? version38CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -133,6 +144,8 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 39) assertNoSubjectRule(state);
+  if (version < 38) assertNoAttunement(state);
   if (version < 37) assertNoLandPolicies(state);
   if (version < 36) assertNoWorkerPolicies(state);
   if (version < 35) assertNoPatrols(state);
@@ -149,6 +162,7 @@ export function applyCommandForVersion(state: GameState, input: unknown, version
   const historicalRoster: readonly string[] = FACTION_ROSTERS[version < 9 || state.world.generatorVersion < 4 ? 1 : 2];
   if (version < 10 && state.factions.some(faction => !historicalRoster.includes(faction.definitionId))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
   if (version < 7 && Object.keys(state.characters).length) throw new Error('Historical rules cannot execute a campaign containing characters.');
+  if (version < 39 && hasArcaneSearches(state)) throw new Error('Historical rules cannot execute a campaign that remembers surveyed ground.');
   if (version < 8 && (Object.keys(state.transports).length || Object.values(state.characters).some(character => character.learnedSkillIds.length) || Object.values(state.armies).some(army => army.formations.length > 12 || army.formations.some(formation => units.get(formation.unitId)?.movementDomain === 'naval')))) throw new Error('Historical rules cannot execute modern command trees or naval armies.');
   if (version < 6 && Object.values(state.armies).some(army => army.formations.length !== 1 || army.formations[0]?.id !== `formation.${army.id.slice(5)}` || !LEGACY_UNIT_IDS.has(army.formations[0]?.unitId ?? ''))) throw new Error('Historical rules require an unmodified singleton-army campaign.');
   return withRules(state, version, () => {
@@ -164,7 +178,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37)]).default(37),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39)]).default(39),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -215,7 +229,7 @@ export function createGame(options: NewGameOptions): GameState {
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
     development: createDevelopmentState(),
-    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), charters: [], postings: [], musters: [], depots: [],
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), charters: [], postings: [], musters: [], depots: [],
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
@@ -613,6 +627,14 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const error = battleAbilityCommand(state, input, emitted, observeFact);
     if (error) return fail(error);
     if (command.type !== 'setBattleAbilityAuto') settleCampaignAbility(state, emitted, observeFact);
+  } else if (command.type === 'cedeSettlement') {
+    const result = cedeSettlement(state, faction.id, command.settlementId, command.recipientFactionId, emitted);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'startAttunement') {
+    const result = startAttunement(state, faction.id, command.settlementId, command.characterId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'research' || command.type === 'adoptInstitution' || command.type === 'adoptDoctrine' || command.type === 'startVictoryProject') {
     if (rulesVersion(state) < 8 && command.type === 'research' && (command.technologyId === 'technology.coastal_navigation' || command.technologyId === 'technology.ocean_navigation')) return fail('Unknown progression choice.');
     const result = command.type === 'startVictoryProject' ? startVictoryProject(state, faction.id, command.settlementId)
@@ -643,17 +665,17 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   }
   // Membership changes only at entity lifecycle boundaries. Historical commands
   // never touch this register, and moves/queries/rejections never scan it.
-  if (rulesVersion(state) >= 32 && state.selectionGroups.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneSelectionGroups(state, emitted);
-  if (rulesVersion(state) >= 33 && state.theaters.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneTheaters(state, emitted);
-  if (rulesVersion(state) >= 34 && (command.type === 'declareWar' || command.type === 'resolveCapture' || emitted.some(event => event.type === 'battle_finished'))) emitted.push(...advanceSupplyAccess(state));
-  if (command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileSieges(state, emitted);
-  if (command.type === 'resolveCapture' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileCharacterMissions(state, emitted);
-  if (command.type === 'resolveCapture' || command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileProjects(state, emitted);
+  if (rulesVersion(state) >= 32 && state.selectionGroups.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'cedeSettlement', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneSelectionGroups(state, emitted);
+  if (rulesVersion(state) >= 33 && state.theaters.length && (['found', 'mergeArmies', 'transferFormations', 'resolveCapture', 'cedeSettlement', 'endTurn'].includes(command.type) || emitted.some(event => event.type === 'battle_finished'))) pruneTheaters(state, emitted);
+  if (rulesVersion(state) >= 34 && (command.type === 'declareWar' || command.type === 'resolveCapture' || command.type === 'cedeSettlement' || emitted.some(event => event.type === 'battle_finished'))) emitted.push(...advanceSupplyAccess(state));
+  if (command.type === 'respondPeace' || command.type === 'resolveCapture' && command.outcome === 'subject' || emitted.some(event => event.type === 'battle_finished')) reconcileSieges(state, emitted);
+  if (command.type === 'resolveCapture' || command.type === 'cedeSettlement' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileCharacterMissions(state, emitted);
+  if (command.type === 'resolveCapture' || command.type === 'cedeSettlement' || command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'respondPeace' || emitted.some(event => event.type === 'battle_finished')) reconcileProjects(state, emitted);
   if (state.battle) affectedArmies.push(state.battle.attackerId, ...state.battle.defenderIds);
   if (command.type === 'besiege') pauseMovement(state, command.armyId, 'This army is maintaining a siege.', emitted);
   reconcileMovement(state, emitted, affectedArmies);
-  if (rulesVersion(state) >= 12 && command.type === 'resolveCapture') reconcileRoads(state);
-  if (rulesVersion(state) >= 9 && (command.type === 'found' || command.type === 'resolveCapture' || command.type === 'claimCell' || command.type === 'endTurn')) {
+  if (rulesVersion(state) >= 12 && (command.type === 'resolveCapture' || command.type === 'cedeSettlement')) reconcileRoads(state);
+  if (rulesVersion(state) >= 9 && (command.type === 'found' || command.type === 'resolveCapture' || command.type === 'cedeSettlement' || command.type === 'claimCell' || command.type === 'endTurn')) {
     for (const party of state.factions) refreshLandKnowledge(state, party.id, index.visible.get(party.id) ?? new Map());
   }
   upgradeLandVisibility(state);
@@ -669,6 +691,13 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
 
 export interface ObservationOptions { landDetails?: LandDetails; developmentCandidates?: boolean }
 
+/** Natural features of a generated cell; authored test worlds whose terrain and
+ * depth disagree show none rather than failing the whole observation. */
+function featuresInSight(world: GameState['world'], cell: number): number {
+  const terrain = world.terrain[cell] ?? 0, depth = world.waterDepth[cell] ?? 0;
+  if ((terrain === 0) === (depth === 0) || terrain > 4 || depth > 2) return 0;
+  return naturalFeatures(world, cell);
+}
 export function getObservation(state: GameState, factionId: string, options: ObservationOptions = {}): Observation {
   const faction = state.factions.find(item => item.id === factionId);
   if (!faction) throw new Error('Unknown observation faction');
@@ -698,7 +727,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     ...(rulesVersion(state) >= 16 ? { resources: resourceObservation(state, factionId), development: getDevelopmentObservation(state, factionId, undefined, options.developmentCandidates ?? true), growth: getGrowthObservation(state, factionId) } : {}),
     battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
     battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
-    arcaneSites: observeArcaneSites(state, factionId), arcaneSearchCoinCost: SITE_SEARCH_COIN,
+    arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
     roads: observeRoads(state, factionId),
     layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),
@@ -742,6 +771,9 @@ export function getObservation(state: GameState, factionId: string, options: Obs
       observed.waterDepth = world.waterDepth[cell] ?? 0;
       observed.fertility = world.fertility[cell] ?? 0;
       observed.visible = visible.has(cell);
+      // Rules 39: ground in sight shows its natural features, as the land tiles of
+      // owned hearths always did. Remembered ground beyond sight does not.
+      if (observed.visible && rulesVersion(state) >= 39) { const features = featuresInSight(world, cell); if (features) observed.featureMask = features; }
       const hydrology = world.hydrology[cell], roadMask = knownRoads?.[cell];
       if (hydrology) observed.hydrology = hydrology;
       if (roadMask) observed.roadMask = roadMask;
@@ -755,7 +787,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     diplomacy, sieges: observeSieges(state, factionId),
     visibleSiegeSettlementIds: settlements.filter(town => visible.has(town.cell) && state.sieges[town.id]).map(town => town.id),
     progression: getProgressionObservation(state, factionId), projects: state.projects.map(project => ({ ...project })), victory: state.victory ? { ...state.victory } : null,
-    pendingCapture: state.pendingCapture?.factionId === factionId ? { ...state.pendingCapture, options: state.pendingCapture.options.map(option => ({ ...option })) } : null,
+    pendingCapture: state.pendingCapture?.factionId === factionId ? { ...state.pendingCapture, options: state.pendingCapture.options.map(option => ({ ...option })),
+      ...(state.pendingCapture.rulesVersion === 39 && !state.pendingCapture.options.some(option => option.outcome === 'subject') ? { unavailable: [{ outcome: 'subject' as const, reason: subjectUnavailable(state, state.pendingCapture) ?? 'Subject rule is not available for this capture.' }] } : {}) } : null,
     ruins: Object.values(state.ruins).filter(ruin => visible.has(ruin.cell)).sort(compareId).map(ruin => ({ ...ruin })),
   };
 }

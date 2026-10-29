@@ -8,6 +8,7 @@ import { rulesVersion } from './rules';
 import { armyDomain, carriedArmyBlocker } from './naval';
 import { factionAptitudes, WAYKEEPER_APTITUDES } from '@theandril/content';
 import { characterSpellIds, personalAptitudesSchema } from './magic';
+import { arcaneSites, controllingSettlement } from './arcane-sites';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (max: number) => z.number().int().min(0).max(max);
@@ -191,6 +192,8 @@ function promotionObjection(state: GameState, factionId: string, character: Char
     const owned = new Set(ownedSkills(character));
     if (owned.has(skillId)) return 'This character has already learned that skill.';
     if (skill.requiresAll.some(id => !owned.has(id)) || skill.requiresAny.length && !skill.requiresAny.some(id => owned.has(id))) return 'Learn the required earlier skills before this training.';
+    // Rules 38: a path deepens one degree at a time and never past the third.
+    if (skill.pathId && (character.aptitudes?.[skill.pathId] ?? 0) >= 3) return 'This path has already reached its third degree.';
   }
   if (character.experience < skill.experienceCost) return 'More field experience is required for this specialization.';
   return null;
@@ -259,7 +262,13 @@ export function promoteCharacter(state: GameState, factionId: string, characterI
   const character = state.characters[characterId]; const error = promotionObjection(state, factionId, character, skillId); if (error || !character) return fail(error ?? 'Unknown character.');
   const skill = skills.get(skillId)!; character.experience -= skill.experienceCost;
   if (skill.exclusiveGroup) character.skillId = skillId; else { character.learnedSkillIds.push(skillId); character.learnedSkillIds.sort(); }
-  const events = [notice(state, character, 'character_promoted', `${character.name} ${skill.exclusiveGroup ? 'specialized in' : 'learned'} ${skill.name}, spending ${skill.experienceCost} experience.`)];
+  let deepened = '';
+  if (skill.pathId) {
+    const aptitudes = character.aptitudes ?? (character.aptitudes = {});
+    aptitudes[skill.pathId] = Math.min(3, (aptitudes[skill.pathId] ?? 0) + 1);
+    deepened = ` Personal ${skill.pathId === 'path.flame' ? 'Flame' : 'Rune'} aptitude is now the ${['first', 'second', 'third'][aptitudes[skill.pathId]! - 1]} degree.`;
+  }
+  const events = [notice(state, character, 'character_promoted', `${character.name} ${skill.exclusiveGroup ? 'specialized in' : 'learned'} ${skill.name}, spending ${skill.experienceCost} experience.${deepened}`)];
   if (skill.commandCapacityBonus && character.location?.kind === 'army') reconcileArmyCommand(state, character.location.armyId, events, 'The marshal expanded the army’s command capacity.');
   return { ok: true, events };
 }
@@ -317,15 +326,35 @@ export function removeArmyCharacters(state: GameState, armyId: string, events: D
     else killCharacter(state, character, 'with the destroyed army', events);
   }
 }
+/** Rules 39: whether any living officer is lodged in a hearth; a cession needs them gone. */
+export const charactersLodgedIn = (state: GameState, settlementId: string): number => characterIndex(state).settlements.get(settlementId)?.size ?? 0;
 export function captureSettlementCharacters(state: GameState, settlementId: string, events: DomainEvent[]): void {
   const affected = fromIds(state, characterIndex(state).settlements.get(settlementId));
   for (const character of affected) killCharacter(state, character, 'when the settlement was conquered', events);
   for (const factionId of new Set(affected.map(item => item.factionId))) pruneDead(state, factionId);
 }
 
+/** Rules 39: the hearths whose borders hold a surveyed seam, by realm; a study
+ * needs a seam, so this is computed once a turn from the world's few seams. */
+export const SEAM_STUDY_EXPERIENCE = 1;
+function seamHearths(state: GameState): Set<string> {
+  const hearths = new Set<string>();
+  if (rulesVersion(state) < 39) return hearths;
+  for (const site of arcaneSites(state.world)) for (const faction of state.factions) {
+    const settlementId = controllingSettlement(state, site.cell, faction.id);
+    if (settlementId) hearths.add(settlementId);
+  }
+  return hearths;
+}
 export function advanceCharacters(state: GameState, events: DomainEvent[]): void {
+  const studies = seamHearths(state);
   for (const character of Object.values(state.characters).sort(byId)) {
     if (character.dead) continue;
+    // Rules 39: a Waykeeper lodged in a hearth that holds a seam studies it and earns
+    // experience toward a deeper path, even in peace. Wounds, missions and armies do not study.
+    if (studies.size && !character.woundedTurns && !character.mission && character.location?.kind === 'settlement' && studies.has(character.location.settlementId) && role(character) === 'waykeeper') {
+      character.experience = Math.min(1_000_000, character.experience + SEAM_STUDY_EXPERIENCE);
+    }
     if (character.woundedTurns) { character.woundedTurns--; if (!character.woundedTurns) {
       events.push(notice(state, character, 'character_recovered', `${character.name} recovered from wounds.`));
       if (role(character) === 'marshal' && character.location?.kind === 'army') reconcileArmyCommand(state, character.location.armyId, events, 'The army’s marshal recovered.');

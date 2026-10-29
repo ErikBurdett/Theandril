@@ -1,5 +1,6 @@
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
-import { deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+import { applyCommand, createArmyFormation, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+import { rebuildIndexes } from '../../sim/src/visibility';
 import { borderBattleCampaign } from './combat-fixture';
 import { rebaseAuthoredLand } from './authored-land';
 
@@ -50,5 +51,26 @@ export function conquestCampaign(): GameState {
   reveal(state, player.factionId, player.cell, 2);
   for (const settlement of Object.values(state.settlements)) reveal(state, settlement.factionId, settlement.cell, 3);
   rebaseAuthoredLand(state);
+  return deserializeGame(serializeGame(state));
+}
+
+/** Rules 39: the same siege, but Reedwatch is a capital with a second hearth
+ * behind it, so its fall can bind the realm as a subject. The second hearth is
+ * founded by an ordinary command from an authored caravan. */
+export function subjectCampaign(): GameState {
+  const state = conquestCampaign();
+  const rival = CONQUEST_FIXTURE.enemyFactionId;
+  const towns = Object.values(state.settlements);
+  const site = Array.from({ length: state.world.terrain.length }, (_, cell) => cell).find(cell => isPassable(state.world.terrain[cell] ?? 0)
+    && towns.every(town => hexDistance(cell, town.cell, state.world.width) >= 4) && Object.values(state.armies).every(army => army.cell !== cell)
+    && hexDistance(cell, state.settlements[CONQUEST_FIXTURE.settlementId]!.cell, state.world.width) <= 7);
+  if (site === undefined) throw new Error('Subject fixture cannot place a second rival hearth.');
+  const id = `army.${state.nextId++}`;
+  state.armies[id] = { id, factionId: rival, name: 'Reed caravan', cell: site, movement: 2, formations: [createArmyFormation(id, 'unit.colonist')] };
+  rebuildIndexes(state);
+  reveal(state, rival, site, 2);
+  const founded = applyCommand(state, { type: 'found', factionId: rival, armyId: id, name: 'Reedfold' });
+  if (!founded.ok) throw new Error('Subject fixture could not found its second hearth: ' + founded.error);
+  if (state.land.capitals[rival] !== CONQUEST_FIXTURE.settlementId) throw new Error('Subject fixture lost its capital.');
   return deserializeGame(serializeGame(state));
 }

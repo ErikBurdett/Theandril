@@ -31,14 +31,19 @@ describe('distinct development content', () => {
   });
   it('adds six earned officer continuations while preserving the exact old definition projection', () => {
     validateCharacterContent(new Set(FACTIONS.map(faction => faction.id)));
-    expect(ADVANCED_CHARACTER_SKILLS).toHaveLength(6); expect(CHARACTER_SKILLS).toHaveLength(17);
+    expect(ADVANCED_CHARACTER_SKILLS).toHaveLength(6); expect(CHARACTER_SKILLS).toHaveLength(19);
     expect(characterSkillsForRules(15)).toHaveLength(11);
+    // Rules 38 adds two Waykeeper path deepenings; every earlier projection is exact.
+    expect(characterSkillsForRules(37)).toHaveLength(17);
     expect(characterDefinitionsForRules(15)).toEqual(LEGACY_CHARACTER_DEFINITIONS);
+    expect(characterDefinitionsForRules(37).find(item => item.role === 'waykeeper')?.skillIds).toEqual([]);
+    expect(characterDefinitionsForRules(38).find(item => item.role === 'waykeeper')?.skillIds).toEqual(['skill.flame_deepening', 'skill.rune_deepening']);
     for (const old of LEGACY_CHARACTER_DEFINITIONS) {
       const current = CHARACTER_DEFINITIONS.find(item => item.id === old.id)!;
-      expect({ ...current, skillIds: current.skillIds.filter(id => !ADVANCED_CHARACTER_SKILLS.some(skill => skill.id === id)) }).toEqual(old);
+      expect({ ...current, skillIds: current.skillIds.filter(id => !ADVANCED_CHARACTER_SKILLS.some(skill => skill.id === id) && !CHARACTER_SKILLS.some(skill => skill.id === id && skill.pathId)) }).toEqual(old);
     }
     expect(ADVANCED_CHARACTER_SKILLS.every(skill => skill.introducedInRules === 16 && skill.requiresAll.length && skill.experienceCost >= 24)).toBe(true);
-    expect(CHARACTER_SKILLS.filter(skill => !ADVANCED_CHARACTER_SKILLS.includes(skill)).every(skill => !Object.hasOwn(skill, 'introducedInRules'))).toBe(true);
+    expect(CHARACTER_SKILLS.filter(skill => !ADVANCED_CHARACTER_SKILLS.includes(skill) && !skill.pathId).every(skill => !Object.hasOwn(skill, 'introducedInRules'))).toBe(true);
+    expect(CHARACTER_SKILLS.filter(skill => skill.pathId).every(skill => skill.introducedInRules === 38 && skill.branch === 'attunement')).toBe(true);
   });
 });

@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { applyCommand, createGame, getObservation, stateHash } from '@theandril/sim';
-import { CampaignProgression, ResearchTree, researchDepths } from './progression';
+import { AttunementStatus, CampaignProgression, ResearchTree, researchDepths } from './progression';
 
 function campaign() {
   const game = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'standard' });
@@ -56,5 +56,32 @@ describe('authoritative research tree presentation', () => {
     expect(html).not.toContain('Seasonal stewardship');
     expect(html).not.toContain('Navigation');
     expect(html).not.toContain('Ocean navigation');
+  });
+});
+
+describe('the third path on the Victory tab', () => {
+  it('names every requirement the sealed working rests on and offers only a qualified caster at an eligible host', async () => {
+    const { attunementCampaign } = await import('../../../packages/test-fixtures/src/victory-fixture');
+    const game = attunementCampaign(), before = stateHash(game), view = getObservation(game, game.turnOwnerId);
+    const html = renderToStaticMarkup(createElement(AttunementStatus, { view, attunement: view.progression.attunement!, blocked: false, issue: () => { throw new Error('Rendering issued an order.'); } }));
+    expect(html).toContain('data-testid="attunement-status"');
+    expect(html).toContain('A third path to victory');
+    expect(html).toContain('Arcane Theory: 3 of 3 discoveries researched.');
+    expect(html).toContain('Flame seam: held inside your borders.');
+    expect(html).toContain('Rune seam: held inside your borders.');
+    expect(html).toContain('ready to seal the working');
+    expect(html).toContain('60 knowledge committed on starting');
+    expect(html).not.toContain('Before the working can be sealed');
+    expect(html).toMatch(/<button class="primary" type="submit">Seal the Attunement<\/button>/);
+    expect(stateHash(game)).toBe(before);
+    // A caster below the second degree is listed with its reason and the form closes.
+    const caster = Object.values(game.characters).find(character => character.definitionId === 'character.waykeeper')!;
+    caster.aptitudes = { 'path.flame': 1, 'path.rune': 1 };
+    const weakView = getObservation(game, game.turnOwnerId);
+    const weak = renderToStaticMarkup(createElement(AttunementStatus, { view: weakView, attunement: weakView.progression.attunement!, blocked: false, issue: () => undefined }));
+    expect(weak).toContain('This Waykeeper has not reached the second degree of any path.');
+    expect(weak).toContain('Before the working can be sealed');
+    expect(weak).toMatch(/<button class="primary" disabled="" type="submit">Seal the Attunement<\/button>/);
+    expect(weak).toContain('No qualified Waykeeper at the host');
   });
 });

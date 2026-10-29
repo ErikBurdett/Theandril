@@ -1,0 +1,15 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 9 tests using 1 worker
+
+  ✓  1 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (10.5s)
+  ✓  2 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (9.3s)
+  ✓  3 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (2.5s)
+  ✓  4 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (4.5s)
+  ✓  5 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.7s)
+  ✓  6 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.5s)
+  ✓  7 tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (1.8s)
+  ✓  8 tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (2.8s)
+  ✓  9 tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save (3.0s)
+
+  9 passed (40.9s)

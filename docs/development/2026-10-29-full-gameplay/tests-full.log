@@ -1,0 +1,62 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |repository| apps/web/src/updates/changelog.test.ts (6 tests | 1 failed) 20070ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 20032ms
+ ❯ |repository| tests/art-factory.test.ts (8 tests | 1 failed) 35670ms
+     × retains reviewed frames, evidence and original sources with fresh exact reports 20034ms
+ ❯ |campaigns| packages/ai/src/contact.test.ts (3 tests | 1 failed) 37425ms
+     × standard / 12 seats makes player contact through legal bounded plans with save replay 24536ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |campaigns| packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 12 seats makes player contact through legal bounded plans with save replay
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ packages/ai/src/contact.test.ts:86:13
+     84|     ['standard', RECOMMENDED_FACTION_COUNTS.standard, 60],
+     85|     ['huge', RECOMMENDED_FACTION_COUNTS.huge, 60],
+     86|   ] as const)('%s / %i seats makes player contact through legal bounde…
+       |             ^
+     87|     const result = contactCampaign(size, count, limit);
+     88|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |repository| tests/art-factory.test.ts > published artwork and retained clean-checkout inputs > retains reviewed frames, evidence and original sources with fresh exact reports
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/art-factory.test.ts:133:3
+    131|   });
+    132|
+    133|   it('retains reviewed frames, evidence and original sources with fres…
+       |   ^
+    134|     expect(paletteSchema.parse(JSON.parse((await artifact('assets/pale…
+    135|     const evidence = new Set<string>();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ apps/web/src/updates/changelog.test.ts:12:3
+     10|   // determinism check) and share the result rather than building a th…
+     11|   let generated: Awaited<ReturnType<typeof buildFeed>>;
+     12|   it('is deterministic and the committed feed is an exact record from …
+       |   ^
+     13|     generated = await buildFeed();
+     14|     expect(await buildFeed()).toEqual(generated);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 309 passed (312)
+      Tests  3 failed | 2543 passed (2546)
+   Start at  14:35:57
+   Duration  52.75s (transform 72.05s, setup 0ms, import 265.66s, tests 802.49s, environment 50ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

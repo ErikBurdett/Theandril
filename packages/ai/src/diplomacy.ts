@@ -1,4 +1,5 @@
 import { evaluatePeaceOffer, isCityState, type GameCommand, type Observation } from '@theandril/sim';
+import { UNIFICATION_VICTORY } from '@theandril/content';
 import { reviewProjectCounterplay } from './project-counterplay';
 
 export interface AiPlan { commands: GameCommand[]; reasons: string[] }
@@ -72,19 +73,30 @@ const hearths = (view: Observation, factionId: string): number => view.settlemen
  * rest of the turn is planned again from the new facts. */
 export function answerPatronage(view: Observation): AiPlan | null {
   const factionId = view.factionId;
-  const bound = view.diplomacy.clients.some(bond => bond.clientId === factionId);
+  const bond = view.diplomacy.clients.find(item => item.clientId === factionId);
+  const bound = bond !== undefined;
+  // A client's hearths stand behind its patron's unification bid. An oath that
+  // would end the campaign is renounced, even at the price of a breach: the
+  // patron may answer with war, but the realm is no longer bidding against itself.
+  const biddingPatron = (patronId: string): boolean => view.projects.some(project => project.factionId === patronId && project.projectId === UNIFICATION_VICTORY.id && project.status === 'active');
+  if (bond && biddingPatron(bond.patronId) && !view.strategicCommandBlocker) return {
+    commands: [{ type: 'renounceClient', factionId }],
+    reasons: [`Renounce patronage under ${bond.patronId}: its public unification bid counts this realm's hearths, and ending the oath withdraws them${view.turn >= bond.expiresTurn ? ' lawfully' : ' at the price of a breach'}.`],
+  };
   const incoming = [...view.diplomacy.clientOffers].sort((a, b) => a.createdTurn - b.createdTurn || (a.id < b.id ? -1 : 1))
     .find(offer => offer.clientId === factionId && offer.expiresTurn > view.turn && !offer.acceptanceBlocker);
   if (incoming) {
     // Accept protection when the patron is the stronger realm and the tribute is
-    // payable out of standing income rather than out of the next caravan.
+    // payable out of standing income rather than out of the next caravan. Never
+    // pledge hearths to a realm already bidding to unite the world.
     const patronHearths = hearths(view, incoming.patronId), own = hearths(view, factionId);
     const affordable = (view.growth?.economy.net ?? 0) >= incoming.terms.tributeCoin || view.treasury >= incoming.terms.tributeCoin * 8;
     const outmatched = patronHearths > own || view.wars.length > 0 || isCityState(factionId);
-    const accept = !bound && affordable && outmatched && incoming.terms.giftCoin >= incoming.terms.tributeCoin * 4;
+    const bidding = biddingPatron(incoming.patronId);
+    const accept = !bound && !bidding && affordable && outmatched && incoming.terms.giftCoin >= incoming.terms.tributeCoin * 4;
     return {
       commands: [{ type: 'respondClient', factionId, offerId: incoming.id, accept }],
-      reasons: [`${accept ? 'Accept' : 'Refuse'} patronage ${incoming.id} from ${incoming.patronId}: ${patronHearths} hearths against ${own}, ${incoming.terms.tributeCoin} coin tribute against ${view.growth?.economy.net ?? 0} net income, ${incoming.terms.giftCoin} coin offered.`],
+      reasons: [`${accept ? 'Accept' : 'Refuse'} patronage ${incoming.id} from ${incoming.patronId}: ${patronHearths} hearths against ${own}, ${incoming.terms.tributeCoin} coin tribute against ${view.growth?.economy.net ?? 0} net income, ${incoming.terms.giftCoin} coin offered${bidding ? '; that realm holds a public unification bid' : ''}.`],
     };
   }
   return null;

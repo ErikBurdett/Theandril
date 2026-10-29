@@ -3,7 +3,10 @@ import type { Observation } from '@theandril/sim';
 
 export type ObservedCell = Observation['cells'][number];
 export interface PackedCells {
-  version: 1 | 2 | 3;
+  /** 1–3 carry feature masks in sparse metadata rows; 4–6 are the same layouts
+   * with a natural-feature mask of at most seven bits folded into spare bits of
+   * the terrain and water-depth bytes, so a featured row costs nothing extra. */
+  version: 1 | 2 | 3 | 4 | 5 | 6;
   count: number;
   cells: Uint32Array;
   /** V1: five bytes/row; v2 appends hydrology/roads; v3 appends resource code. */
@@ -18,6 +21,11 @@ const MAX_CELLS = 350_000, STRIDE = 5;
 const RESOURCE_UNDEFINED = 255;
 const VISIBLE = 1, METADATA = 2, FEATURE = 4, FEATURE_UNDEFINED = 8;
 const HYDROLOGY = 16, HYDROLOGY_UNDEFINED = 32, ROAD = 64, ROAD_UNDEFINED = 128;
+/** Packed-feature layouts: terrain byte = terrain (3 bits) | feature bits 0–4 << 3;
+ * depth byte = depth (2 bits) | feature bits 5–6 << 2 | present << 4 | undefined << 5. */
+const PACKED_FEATURE_MAX = 127, PACKED_PRESENT = 16, PACKED_UNDEFINED = 32;
+const packedFeatures = (version: number): boolean => version >= 4;
+const strideOf = (version: number): number => version === 3 || version === 6 ? 8 : version === 2 || version === 5 ? 7 : STRIDE;
 const geography = ['hydrology', 'roadMask'] as const;
 const references = ['settlementId', 'factionId', 'improvementId'] as const;
 const fields = new Set(['cell', 'terrain', 'biome', 'waterDepth', 'fertility', 'visible', 'featureMask', 'resourceId', ...references, ...geography]);
@@ -30,7 +38,7 @@ function integer(value: unknown, maximum: number): value is number {
   return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= maximum && !Object.is(value, -0);
 }
 function validString(value: unknown): value is string { return typeof value === 'string' && value.length > 0 && value.length <= 100; }
-function optionalRow(cell: ObservedCell): boolean { return owns(cell, 'featureMask') || references.some(key => owns(cell, key)); }
+function optionalRow(cell: ObservedCell, packed: boolean): boolean { return !packed && owns(cell, 'featureMask') || references.some(key => owns(cell, key)); }
 
 /** Pack only the already-filtered rows supplied by the caller, never canonical buffers. */
 export function packCells(input: readonly ObservedCell[]): PackedCells {
@@ -38,6 +46,7 @@ export function packCells(input: readonly ObservedCell[]): PackedCells {
   let optionalCount = 0;
   let hasGeography = false;
   let hasResources = false;
+  let hasFeatures = false, packable = true;
   // Validate before typed-array coercion can truncate, wrap or silently lose fields.
   for (const cell of input) {
     requirePacket(cell && typeof cell === 'object' && !Array.isArray(cell), 'invalid input row');
@@ -45,7 +54,11 @@ export function packCells(input: readonly ObservedCell[]): PackedCells {
     requirePacket(integer(cell.cell, MAX_CELLS - 1), 'cell id is out of range');
     requirePacket(integer(cell.terrain, 4) && integer(cell.biome, 11) && integer(cell.waterDepth, 2) && integer(cell.fertility, 255), 'scalar is out of range');
     requirePacket(typeof cell.visible === 'boolean', 'visibility must be boolean');
-    if (owns(cell, 'featureMask')) requirePacket(cell.featureMask === undefined || integer(cell.featureMask, 0xffff_ffff), 'feature mask is out of range');
+    if (owns(cell, 'featureMask')) {
+      requirePacket(cell.featureMask === undefined || integer(cell.featureMask, 0xffff_ffff), 'feature mask is out of range');
+      hasFeatures = true;
+      if (cell.featureMask !== undefined && cell.featureMask > PACKED_FEATURE_MAX) packable = false;
+    }
     for (const key of geography) if (owns(cell, key)) {
       requirePacket(cell[key] === undefined || integer(cell[key], 63), 'geography mask is out of range');
       hasGeography = true;
@@ -56,10 +69,14 @@ export function packCells(input: readonly ObservedCell[]): PackedCells {
       hasResources = true;
     }
     for (const key of references) if (owns(cell, key)) requirePacket(cell[key] === null || cell[key] === undefined || validString(cell[key]), 'invalid optional reference');
-    if (optionalRow(cell)) optionalCount++;
   }
+  // Natural features fit seven bits, so a packet that carries any folds them into
+  // spare scalar bits; only a mask beyond that range falls back to metadata rows.
+  const foldFeatures = hasFeatures && packable;
+  for (const cell of input) if (optionalRow(cell, foldFeatures)) optionalCount++;
   const scalarStride = hasResources ? 8 : hasGeography ? 7 : STRIDE;
-  const packed: PackedCells = { version: hasResources ? 3 : hasGeography ? 2 : 1, count: input.length, cells: new Uint32Array(input.length), scalars: new Uint8Array(input.length * scalarStride), metadata: new Uint32Array(optionalCount * STRIDE), dictionary: [] };
+  const baseVersion = hasResources ? 3 : hasGeography ? 2 : 1;
+  const packed: PackedCells = { version: (foldFeatures ? baseVersion + 3 : baseVersion) as PackedCells['version'], count: input.length, cells: new Uint32Array(input.length), scalars: new Uint8Array(input.length * scalarStride), metadata: new Uint32Array(optionalCount * STRIDE), dictionary: [] };
   const dictionary = new Map<string, number>();
   const reference = (cell: ObservedCell, key: typeof references[number]): number => {
     if (!owns(cell, key)) return 0;
@@ -76,15 +93,20 @@ export function packCells(input: readonly ObservedCell[]): PackedCells {
     packed.cells[row] = cell.cell;
     packed.scalars[offset] = cell.terrain; packed.scalars[offset + 1] = cell.biome;
     packed.scalars[offset + 2] = cell.waterDepth; packed.scalars[offset + 3] = cell.fertility;
+    if (foldFeatures && owns(cell, 'featureMask')) {
+      const mask = cell.featureMask ?? 0;
+      packed.scalars[offset] = cell.terrain | (mask & 31) << 3;
+      packed.scalars[offset + 2] = cell.waterDepth | (mask >> 5 & 3) << 2 | PACKED_PRESENT | (cell.featureMask === undefined ? PACKED_UNDEFINED : 0);
+    }
     let flags = cell.visible ? VISIBLE : 0;
     if (owns(cell, 'hydrology')) flags |= HYDROLOGY | (cell.hydrology === undefined ? HYDROLOGY_UNDEFINED : 0);
     if (owns(cell, 'roadMask')) flags |= ROAD | (cell.roadMask === undefined ? ROAD_UNDEFINED : 0);
     if (hasGeography || hasResources) { packed.scalars[offset + 5] = cell.hydrology ?? 0; packed.scalars[offset + 6] = cell.roadMask ?? 0; }
     if (hasResources) packed.scalars[offset + 7] = owns(cell, 'resourceId') ? cell.resourceId === undefined ? RESOURCE_UNDEFINED : resourceById.get(cell.resourceId)!.code : 0;
-    if (optionalRow(cell)) {
+    if (optionalRow(cell, foldFeatures)) {
       flags |= METADATA;
-      if (owns(cell, 'featureMask')) flags |= FEATURE | (cell.featureMask === undefined ? FEATURE_UNDEFINED : 0);
-      packed.metadata[metadataOffset] = row; packed.metadata[metadataOffset + 1] = cell.featureMask ?? 0;
+      if (!foldFeatures && owns(cell, 'featureMask')) flags |= FEATURE | (cell.featureMask === undefined ? FEATURE_UNDEFINED : 0);
+      packed.metadata[metadataOffset] = row; packed.metadata[metadataOffset + 1] = foldFeatures ? 0 : cell.featureMask ?? 0;
       for (let index = 0; index < references.length; index++) packed.metadata[metadataOffset + 2 + index] = reference(cell, references[index]!);
       metadataOffset += STRIDE;
     }
@@ -98,9 +120,9 @@ function packetShape(input: unknown): PackedCells {
   requirePacket(input && typeof input === 'object' && !Array.isArray(input), 'packet must be an object');
   requirePacket(Object.keys(input).length === packetFields.size && Object.keys(input).every(key => packetFields.has(key)), 'unknown or missing packet field');
   const packet = input as PackedCells;
-  requirePacket((packet.version === 1 || packet.version === 2 || packet.version === 3) && integer(packet.count, MAX_CELLS), 'unsupported version or count');
+  requirePacket(Number.isInteger(packet.version) && packet.version >= 1 && packet.version <= 6 && integer(packet.count, MAX_CELLS), 'unsupported version or count');
   requirePacket(packet.cells instanceof Uint32Array && packet.scalars instanceof Uint8Array && packet.metadata instanceof Uint32Array, 'incorrect typed-array kinds');
-  requirePacket(packet.cells.length === packet.count && packet.scalars.length === packet.count * (packet.version === 3 ? 8 : packet.version === 2 ? 7 : STRIDE) && packet.metadata.length % STRIDE === 0 && packet.metadata.length <= packet.count * STRIDE, 'array lengths disagree');
+  requirePacket(packet.cells.length === packet.count && packet.scalars.length === packet.count * strideOf(packet.version) && packet.metadata.length % STRIDE === 0 && packet.metadata.length <= packet.count * STRIDE, 'array lengths disagree');
   const arrays = [packet.cells, packet.scalars, packet.metadata];
   requirePacket(arrays.every(array => array.buffer instanceof ArrayBuffer && array.byteOffset === 0 && array.byteLength === array.buffer.byteLength), 'buffers must be dedicated, nonshared whole allocations');
   requirePacket(new Set(arrays.map(array => array.buffer)).size === arrays.length, 'buffers must not alias');
@@ -113,19 +135,25 @@ function packetShape(input: unknown): PackedCells {
 
 function validateRows(packet: PackedCells): void {
   let metadataOffset = 0;
-  const scalarStride = packet.version === 3 ? 8 : packet.version === 2 ? 7 : STRIDE;
+  const scalarStride = strideOf(packet.version), folded = packedFeatures(packet.version), geography = packet.version === 2 || packet.version === 3 || packet.version === 5 || packet.version === 6;
   for (let row = 0; row < packet.count; row++) {
     const offset = row * scalarStride, flags = packet.scalars[offset + 4]!;
     requirePacket(packet.cells[row]! < MAX_CELLS, 'cell id is out of range');
-    requirePacket(packet.scalars[offset]! <= 4 && packet.scalars[offset + 1]! <= 11 && packet.scalars[offset + 2]! <= 2, 'scalar is out of range');
-    requirePacket((packet.version >= 2 || flags <= 15) && (!(flags & FEATURE_UNDEFINED) || Boolean(flags & FEATURE)) && (!(flags & FEATURE) || Boolean(flags & METADATA)), 'invalid presence flags');
-    if (packet.version >= 2) {
+    if (folded) {
+      const terrainByte = packet.scalars[offset]!, depthByte = packet.scalars[offset + 2]!;
+      requirePacket((terrainByte & 7) <= 4 && packet.scalars[offset + 1]! <= 11 && (depthByte & 3) <= 2 && (depthByte >> 6) === 0, 'scalar is out of range');
+      const present = Boolean(depthByte & PACKED_PRESENT), undef = Boolean(depthByte & PACKED_UNDEFINED), bits = (terrainByte >> 3) | (depthByte >> 2 & 3) << 5;
+      requirePacket((!undef || present) && (present && !undef || bits === 0), 'invalid folded feature');
+      requirePacket(!(flags & (FEATURE | FEATURE_UNDEFINED)), 'folded packet carries metadata feature flags');
+    } else requirePacket(packet.scalars[offset]! <= 4 && packet.scalars[offset + 1]! <= 11 && packet.scalars[offset + 2]! <= 2, 'scalar is out of range');
+    requirePacket((geography || flags <= 15) && (!(flags & FEATURE_UNDEFINED) || Boolean(flags & FEATURE)) && (!(flags & FEATURE) || Boolean(flags & METADATA)), 'invalid presence flags');
+    if (geography) {
       for (const [presence, undef, value] of [[HYDROLOGY, HYDROLOGY_UNDEFINED, packet.scalars[offset + 5]!], [ROAD, ROAD_UNDEFINED, packet.scalars[offset + 6]!]]) {
         requirePacket(value! <= 63 && (!(flags & undef!) || Boolean(flags & presence!)), 'invalid geography presence or mask');
         requirePacket(Boolean(flags & presence!) && !(flags & undef!) || value === 0, 'absent geography has a payload');
       }
     }
-    if (packet.version === 3) {
+    if (packet.version === 3 || packet.version === 6) {
       const code = packet.scalars[offset + 7]!;
       requirePacket(code === 0 || code === RESOURCE_UNDEFINED || resourceByCode.has(code), 'invalid resource code');
     }
@@ -150,13 +178,15 @@ export function unpackCells(input: unknown): ObservedCell[] {
   const packet = packetShape(input); validateRows(packet);
   const result: ObservedCell[] = new Array(packet.count);
   let metadataOffset = 0;
-  const scalarStride = packet.version === 3 ? 8 : packet.version === 2 ? 7 : STRIDE;
+  const scalarStride = strideOf(packet.version), folded = packedFeatures(packet.version);
   for (let row = 0; row < packet.count; row++) {
     const offset = row * scalarStride, flags = packet.scalars[offset + 4]!;
-    const cell: ObservedCell = { cell: packet.cells[row]!, terrain: packet.scalars[offset]!, biome: packet.scalars[offset + 1]!, waterDepth: packet.scalars[offset + 2]!, fertility: packet.scalars[offset + 3]!, visible: Boolean(flags & VISIBLE) };
+    const terrainByte = packet.scalars[offset]!, depthByte = packet.scalars[offset + 2]!;
+    const cell: ObservedCell = { cell: packet.cells[row]!, terrain: folded ? terrainByte & 7 : terrainByte, biome: packet.scalars[offset + 1]!, waterDepth: folded ? depthByte & 3 : depthByte, fertility: packet.scalars[offset + 3]!, visible: Boolean(flags & VISIBLE) };
+    if (folded && depthByte & PACKED_PRESENT) cell.featureMask = depthByte & PACKED_UNDEFINED ? undefined : (terrainByte >> 3) | (depthByte >> 2 & 3) << 5;
     if (flags & HYDROLOGY) cell.hydrology = flags & HYDROLOGY_UNDEFINED ? undefined : packet.scalars[offset + 5]!;
     if (flags & ROAD) cell.roadMask = flags & ROAD_UNDEFINED ? undefined : packet.scalars[offset + 6]!;
-    if (packet.version === 3) {
+    if (packet.version === 3 || packet.version === 6) {
       const code = packet.scalars[offset + 7]!;
       if (code) cell.resourceId = code === RESOURCE_UNDEFINED ? undefined : resourceByCode.get(code)!.id;
     }

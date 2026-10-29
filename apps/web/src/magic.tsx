@@ -3,7 +3,7 @@ import type { CharacterView, GameCommand, Observation } from '@theandril/sim';
 
 export function PersonalMagic({ character }: { character: CharacterView }) {
   if (!character.aptitudes) return null;
-  return <section aria-label="Personal magical aptitude"><h4>Personal paths</h4><p>{Object.entries(character.aptitudes).map(([id, level]) => `${MAGIC_PATHS.find(path => path.id === id)?.name ?? id} ${level}`).join(' · ')}</p><p>National research does not grant these personal paths.</p><p>Known workings: {character.spellIds?.map(id => BATTLE_SPELLS.find(spell => spell.id === id)?.name ?? id).join(', ') || 'None researched for this practitioner.'}</p></section>;
+  return <section aria-label="Personal magical aptitude"><h4>Personal paths</h4><p>{Object.entries(character.aptitudes).map(([id, level]) => `${MAGIC_PATHS.find(path => path.id === id)?.name ?? id} ${level}`).join(' · ')}</p><p>National research does not grant these personal paths. A Waykeeper lodged in a hearth whose borders hold a surveyed seam studies it for one experience a turn; twenty-four experience deepens a path by a degree.</p><p>Known workings: {character.spellIds?.map(id => BATTLE_SPELLS.find(spell => spell.id === id)?.name ?? id).join(', ') || 'None researched for this practitioner.'}</p></section>;
 }
 
 /** Rules 23: Arcane Theory is studied from a seam the realm holds, so the panel

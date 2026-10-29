@@ -20,6 +20,20 @@ describe('realm navigation presentation', () => {
     expect(JSON.stringify(view)).toBe(before); expect(stateHash(game)).toBe(hash);
   });
 
+  it('locks orders but not inspection when only orders are busy, as in AI watch', () => {
+    const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
+    const render = (props: { busy?: boolean; inspectBusy?: boolean }) => renderToStaticMarkup(<RealmRegistry view={view} registry="armies" search="" force="all" selection={{}} select={() => undefined} onGroupPosting={() => Promise.reject(new Error('never'))} {...props}/>);
+    const ordersOnly = render({ busy: true, inspectBusy: false });
+    expect(ordersOnly).not.toMatch(/<button class="registry-item [^"]*" disabled/);
+    expect(ordersOnly).toContain('<button disabled="">Select matching armies</button>');
+    expect(ordersOnly).toMatch(/<input type="checkbox" aria-label="Select [^"]+ for group orders" disabled=""\/>/);
+    expect(ordersOnly).toContain('<label>Army orders<select>');
+    const everything = render({ busy: true });
+    expect(everything).toMatch(/<button class="registry-item [^"]*" disabled/);
+    const free = render({ busy: false });
+    expect(free).not.toMatch(/<button class="registry-item [^"]*" disabled/);
+  });
+
   it('does not admit an observed foreign army or town into any registry search', () => {
     const game = characterCampaign(), view = getObservation(game, game.turnOwnerId);
     const foreign = game.factions.find(faction => faction.id !== view.factionId)!.id;

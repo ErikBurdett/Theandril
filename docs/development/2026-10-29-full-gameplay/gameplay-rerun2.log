@@ -1,0 +1,59 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 4 tests using 1 worker
+
+  ✘  1 tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog (46.4s)
+  ✓  2 tests/gameplay/patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay (13.3s)
+  ✓  3 tests/gameplay/patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route (8.8s)
+  ✓  4 tests/gameplay/patrols.spec.ts:124:1 › the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes (13.5s)
+
+
+  1) tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('army-registry').getByRole('button').first()
+        - locator resolved to <button disabled class="registry-item ">…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        67 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      121 |   // overview without retaining the remote spectator geography or giant ring.
+      122 |   await openRegistry(page, 'armies');
+    > 123 |   await page.getByTestId('army-registry').getByRole('button').first().click();
+          |                                                                       ^
+      124 |   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
+      125 |   const restored = await sample('restored-faction-sight-focused');
+      126 |   expect(restored.overview).toBe(false);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:123:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun2-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-full-gameplay/rerun2-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun2-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-full-gameplay/rerun2-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+  3 passed (1.4m)

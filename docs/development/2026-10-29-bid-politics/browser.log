@@ -1,0 +1,13 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 7 tests using 1 worker
+
+  ✓  1 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (4.3s)
+  ✓  2 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.5s)
+  ✓  3 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (4.6s)
+  ✓  4 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.6s)
+  ✓  5 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.5s)
+  ✓  6 tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (1.9s)
+  ✓  7 tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (2.9s)
+
+  7 passed (20.0s)

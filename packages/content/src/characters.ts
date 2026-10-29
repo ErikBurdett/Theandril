@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ADVANCED_CHARACTER_SKILLS } from './development';
+import { MAGIC_PATHS } from './magic';
 
 const id = z.string().regex(/^[a-z]+\.[a-z_]+$/);
 const text = z.string().min(1).max(320);
@@ -25,9 +26,11 @@ export const characterSkillSchema = z.object({
   experienceCost: z.number().int().min(1).max(1000), leadership,
   rallyBonus: bounded(20), surveyRadiusBonus: bounded(2), refitBonus: bounded(10), sabotageRiskReduction: bounded(25),
   requiresAll: z.array(id).max(8), requiresAny: z.array(id).max(8),
-  branch: z.enum(['specialization', 'command', 'battlecraft', 'survey', 'engineering']), tier: z.number().int().min(1).max(4),
+  branch: z.enum(['specialization', 'command', 'battlecraft', 'survey', 'engineering', 'attunement']), tier: z.number().int().min(1).max(4),
   exclusiveGroup: z.enum(['marshal_specialization', 'field_specialization']).nullable(), commandCapacityBonus: bounded(4),
-  introducedInRules: z.literal(16).optional(),
+  introducedInRules: z.union([z.literal(16), z.literal(38)]).optional(),
+  /** Rules 38: learning this deepens the Waykeeper's personal aptitude in one path by a degree. */
+  pathId: id.optional(),
 }).strict();
 export type CharacterSkillDefinition = z.infer<typeof characterSkillSchema>;
 export const commanderAbilitySchema = z.object({
@@ -41,10 +44,25 @@ export const LEGACY_CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = [
   { id: 'character.engineer', role: 'engineer', name: 'March engineer', description: 'A field specialist who must travel with an army. Refits replenish real formation losses; siege sabotage trades coin and exposure for damage to defenses.', coinCost: 28, upkeep: 2, leadership: { attack: 0, armor: 0 }, missionIds: ['mission.refit', 'mission.sabotage'], skillIds: ['skill.fieldcraft', 'skill.siegecraft', 'skill.column_workshops', 'skill.sapper_watch'] },
   { id: 'character.waykeeper', role: 'waykeeper', name: 'Waykeeper', description: 'A paid travelling practitioner with personal Flame and Rune aptitude. Researched Cinder thread and Bound ward consume limited battle strain. Occupies a companion slot, not an army command.', coinCost: 40, upkeep: 3, leadership: { attack: 0, armor: 0 }, missionIds: [], skillIds: [] },
 ];
-export const CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = LEGACY_CHARACTER_DEFINITIONS.map(definition => ({ ...definition,
+/** Rules 38: a Waykeeper's personal paths grow with earned practice, one degree
+ * per path and never past the third. National research still does not grant
+ * them; the second degree of any path is what qualifies a caster to seal an
+ * Attunement. */
+const pathDeepening = (pathId: string, pathName: string): CharacterSkillDefinition => ({
+  id: `skill.${pathName.toLowerCase()}_deepening`, name: `${pathName} deepening`,
+  description: `Earned practice deepens this Waykeeper’s personal ${pathName} aptitude by one degree, to at most the third. Deeper paths reach workings that national research alone cannot, and the second degree of any path lets a caster seal an Attunement.`,
+  roles: ['waykeeper'], experienceCost: 24, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 0, sabotageRiskReduction: 0,
+  requiresAll: [], requiresAny: [], branch: 'attunement', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0, introducedInRules: 38, pathId,
+});
+export const WAYKEEPER_PATH_SKILLS: readonly CharacterSkillDefinition[] = [pathDeepening('path.flame', 'Flame'), pathDeepening('path.rune', 'Rune')];
+/** Rules 16–37 definitions, before rules 38 let Waykeepers deepen their paths. */
+export const SCHEMA37_CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = LEGACY_CHARACTER_DEFINITIONS.map(definition => ({ ...definition,
   skillIds: [...definition.skillIds, ...ADVANCED_CHARACTER_SKILLS.filter(skill => skill.roles.includes(definition.role)).map(skill => skill.id)],
 }));
-export const characterDefinitionsForRules = (version: number): readonly CharacterDefinition[] => version >= 16 ? CHARACTER_DEFINITIONS : LEGACY_CHARACTER_DEFINITIONS;
+export const CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = SCHEMA37_CHARACTER_DEFINITIONS.map(definition => ({ ...definition,
+  skillIds: [...definition.skillIds, ...WAYKEEPER_PATH_SKILLS.filter(skill => skill.roles.includes(definition.role)).map(skill => skill.id)],
+}));
+export const characterDefinitionsForRules = (version: number): readonly CharacterDefinition[] => version >= 38 ? CHARACTER_DEFINITIONS : version >= 16 ? SCHEMA37_CHARACTER_DEFINITIONS : LEGACY_CHARACTER_DEFINITIONS;
 export const CHARACTER_MISSIONS: readonly CharacterMissionDefinition[] = [
   { id: 'mission.survey', kind: 'survey', name: 'Survey the frontier', description: 'Hold the escort in place for two turns to chart terrain within six hexes. Unseen armies remain hidden. Moving or fighting interrupts the work without a refund.', duration: 2, coinCost: 4, experience: 4, radius: 6, strengthRestore: 0, defenseDamage: 0, woundTurns: 0, failureChance: 0 },
   { id: 'mission.refit', kind: 'refit', name: 'Refit the column', description: 'Hold the column for two turns to restore up to five missing strength per formation. Refit cannot exceed a formation’s normal capacity or recreate a destroyed formation.', duration: 2, coinCost: 12, experience: 4, radius: 0, strengthRestore: 5, defenseDamage: 0, woundTurns: 0, failureChance: 0 },
@@ -66,6 +84,7 @@ export const CHARACTER_SKILLS: readonly CharacterSkillDefinition[] = [
   { id: 'skill.column_workshops', name: 'Column workshops', description: 'Build on Patient fieldcraft: organized repair parties restore three additional missing strength per formation, for ten in a completed refit. Lost formations cannot be recreated.', roles: ['engineer'], experienceCost: 18, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 3, sabotageRiskReduction: 0, requiresAll: ['skill.fieldcraft'], requiresAny: [], branch: 'engineering', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0 },
   { id: 'skill.sapper_watch', name: 'Sapper watch', description: 'Build on Siege craft: guarded working parties remove the remaining ten percentage points of sabotage-failure risk. Enemy relief or displacement can still interrupt the operation.', roles: ['engineer'], experienceCost: 18, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 0, sabotageRiskReduction: 10, requiresAll: ['skill.siegecraft'], requiresAny: [], branch: 'engineering', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0 },
   ...ADVANCED_CHARACTER_SKILLS,
+  ...WAYKEEPER_PATH_SKILLS,
 ];
 export const characterSkillsForRules = (version: number): readonly CharacterSkillDefinition[] => CHARACTER_SKILLS.filter(skill => (skill.introducedInRules ?? (skill.exclusiveGroup ? 7 : 8)) <= version);
 export const COMMANDER_ABILITIES: readonly CommanderAbilityDefinition[] = [
@@ -129,8 +148,10 @@ export function validateCharacterContent(
       const prerequisite = skillById.get(reference);
       if (!prerequisite || !skill.roles.every(role => prerequisite.roles.includes(role)) || prerequisite.tier >= skill.tier) throw new Error('Unknown, incompatible or cyclic character skill prerequisite');
     }
-    if (skill.exclusiveGroup && references.length || !skill.exclusiveGroup && !references.length) throw new Error('Character tree roots must be specializations and later nodes require prerequisites');
+    // A path deepening is a root of its own: Waykeepers have no specialization to branch from.
+    if (skill.exclusiveGroup && references.length || !skill.exclusiveGroup && !skill.pathId && !references.length) throw new Error('Character tree roots must be specializations and later nodes require prerequisites');
     if (skill.commandCapacityBonus && !skill.roles.every(role => role === 'marshal')) throw new Error('Only marshals can expand command capacity');
+    if (skill.pathId && (!MAGIC_PATHS.some(path => path.id === skill.pathId) || skill.exclusiveGroup || references.length || !skill.roles.every(role => role === 'waykeeper') || skill.branch !== 'attunement')) throw new Error('Path deepening must name a real path and belong only to Waykeepers: ' + skill.id);
   }
   for (const definition of definitions) {
     if (new Set(definition.missionIds).size !== definition.missionIds.length || new Set(definition.skillIds).size !== definition.skillIds.length) throw new Error('Duplicate character capability');
@@ -138,7 +159,7 @@ export function validateCharacterContent(
     for (const reference of definition.skillIds) if (!skillById.get(reference)?.roles.includes(definition.role)) throw new Error('Unknown or incompatible character skill: ' + reference);
     const available = definition.skillIds.map(id => skillById.get(id)!);
     const reachable = new Set<string>();
-    for (const root of available.filter(skill => skill.exclusiveGroup)) {
+    for (const root of available.filter(skill => skill.exclusiveGroup || skill.pathId)) {
       const branch = new Set([root.id]);
       for (const skill of [...available].sort((a, b) => a.tier - b.tier)) if (!skill.exclusiveGroup && skill.requiresAll.every(id => branch.has(id)) && (!skill.requiresAny.length || skill.requiresAny.some(id => branch.has(id)))) branch.add(skill.id);
       for (const id of branch) reachable.add(id);

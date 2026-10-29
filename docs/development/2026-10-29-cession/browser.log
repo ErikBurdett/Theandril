@@ -1,0 +1,53 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 7 tests using 1 worker
+
+  ✘  1 tests/gameplay/cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save (12.4s)
+  ✓  2 tests/gameplay/charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel (3.8s)
+  ✓  3 tests/gameplay/hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion (7.5s)
+  ✓  4 tests/gameplay/hearth-development.spec.ts:162:1 › a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales (2.9s)
+  ✓  5 tests/gameplay/hearth-development.spec.ts:199:1 › remembered foreign land never exposes unseen construction or newly completed district art (1.4s)
+  ✓  6 tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width (8.9s)
+  ✓  7 tests/gameplay/land.spec.ts:117:1 › capital designation is paid and independent of colony, settlement and city size (3.2s)
+
+
+  1) tests/gameplay/cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('hearth-cession')
+    Expected substring: "Under the oath"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('hearth-cession') with timeout 5000ms
+      - waiting for getByTestId('hearth-cession')
+
+
+      17 |   await selectFromRegistry(page, 'settlements', new RegExp(town.name));
+      18 |   const cession = page.getByTestId('hearth-cession');
+    > 19 |   await expect(cession).toContainText('Under the oath');
+         |                         ^
+      20 |   const cede = page.getByRole('button', { name: `Cede ${town.name} to Reedbound Council`, exact: true });
+      21 |   await expect(cede).toBeEnabled();
+      22 |   await cession.screenshot({ path: testInfo.outputPath('cession-offer.png') });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/cession.spec.ts:19:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-cession/browser-results/cession-cede-a-hearth-to-a-6ded9-p-the-result-through-a-save/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-cession/browser-results/cession-cede-a-hearth-to-a-6ded9-p-the-result-through-a-save/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-cession/browser-results/cession-cede-a-hearth-to-a-6ded9-p-the-result-through-a-save/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-cession/browser-results/cession-cede-a-hearth-to-a-6ded9-p-the-result-through-a-save/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save 
+  6 passed (43.7s)

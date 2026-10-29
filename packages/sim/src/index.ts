@@ -18,7 +18,7 @@ export { getSpectatorObservation } from './spectator';
 export type { MapObservation } from './spectator';
 export { observeRoads, hasRoadEdge, roadDirection } from './roads';
 export type { RoadState, RoadObservation } from './roads';
-export type { FactionProgression, ProgressionObservation, VictoryProject, Victory } from './progression';
+export type { AttunementCaster, AttunementObservation, FactionProgression, ProgressionObservation, VictoryProject, Victory } from './progression';
 export { getProgressionObservation } from './progression';
 export type { MovementRoute, MovementPreview, MovementQuery } from './movement';
 export { isCityState } from './seats';
@@ -30,14 +30,14 @@ export { FLEET_PROVISION_TURNS, HARBOR_BUILDING_ID, SUPPLY_ATTRITION, SUPPLY_BUD
 export type { ArmySupply } from './supply';
 export { DEPOT_BUDGET, DEPOT_COIN, DEPOT_SPACING, DEPOT_UPKEEP, MAX_REALM_DEPOTS, depotObjection, depotsOf } from './depots';
 export type { Depot } from './depots';
-export { arcaneSites, observeArcaneSites, searchObjection, SITE_EXTRACTION, SITE_SEARCH_COIN, SITE_SEARCH_RADIUS } from './arcane-sites';
+export { arcaneSites, observeArcaneSites, searchObjection, GLASS_SHARDS, SITE_EXTRACTION, SITE_SEARCH_COIN, SITE_SEARCH_RADIUS } from './arcane-sites';
 export type { ArcaneSite, ObservedArcaneSite } from './arcane-sites';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';
 export { previewPeace, evaluatePeaceOffer } from './diplomacy';
 export type { RulesVersion } from './rules';
 export type { Character, CharacterMission, CharacterSummary, CharacterView, CharacterRole, CharacterStatus, CharacterMissionOption, CharacterRecruitmentOption, CommanderAbilityOption, CharacterBattleSnapshot, CharacterAftermath } from './characters';
-export { getCharacterObservation, MAX_LIVING_CHARACTERS, MAX_DEAD_CHARACTERS } from './characters';
+export { getCharacterObservation, MAX_LIVING_CHARACTERS, MAX_DEAD_CHARACTERS, SEAM_STUDY_EXPERIENCE } from './characters';
 export { MAX_ARMY_FORMATIONS, armyStrength, armyMaxStrength, armyMorale, armyFatigue, armyUnitId, armyMovement, armySight, armyUpkeep, armyCanFound, armyCanAttack, getArmyView, createArmyFormation } from './army-composition';
 export { effectiveArmyMovement } from './army-composition';
 export { armyCommandCapacity, armyCommandStatus } from './characters';
@@ -62,6 +62,10 @@ export type { SupplyAccessCommand, SupplyAccessState, SupplyAccessSource, Supply
 export * from './patrols';
 
 export { getBesiegePreview } from './siege-establishment';
+export { subjectUnavailable } from './siege';
+export { cessionObjection, cessionOptions } from './cession';
+export type { CessionOption } from './cession';
+export { subjectTerms } from './clients';
 export type { BesiegePreview } from './siege-establishment';
 
 export * from './worker-policies';

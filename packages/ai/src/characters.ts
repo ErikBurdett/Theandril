@@ -26,6 +26,10 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
   const exposed = (army: ArmyView): boolean => threats.some(enemy => hexDistance(enemy.cell, army.cell, view.width) <= 3 && enemy.strength >= army.strength);
   const marshals = new Set(own.filter(army => army.commander).map(army => army.id));
   const companions = new Map(own.map(army => [army.id, army.agents.length]));
+  // Rules 39: a realm holding a seam of every path keeps a Waykeeper lodged where
+  // the working would be sealed, studying the seam, unless a war calls it out.
+  const attunement = view.progression.attunement;
+  const studiesCaster = view.wars.length === 0 && Boolean(attunement && attunement.paths.every(path => path.held) && attunement.hostSettlementIds.length);
   const useful = (army: ArmyView): boolean => !reservedArmyIds.has(army.id) && !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
   const priority = (army: ArmyView, role: string): number => role === 'marshal' || role === 'waykeeper'
     ? army.formations.length * 100 + army.strength
@@ -56,6 +60,7 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
       continue; // Mission effects must be assessed from the upgraded read model.
     }
     if (!carrier) {
+      if (character.role === 'waykeeper' && studiesCaster && character.location?.kind === 'settlement' && attunement!.hostSettlementIds.includes(character.location.settlementId)) continue;
       const targets = character.assignmentOptions.filter(option => option.canAssign).flatMap(option => {
         const army = armies.get(option.armyId);
         return army && useful(army) && (character.role === 'marshal' || army.domain === 'land') && (character.role !== 'waykeeper' || isWaykeeperBattleArmy(army)) && !heldArmyIds.has(army.id) && !besiegers.has(army.id)
@@ -89,13 +94,21 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
   const counts = new Map(['marshal', 'surveyor', 'engineer', 'waykeeper'].map(role => [role, living.filter(character => character.role === role).length]));
   const fieldArmies = own.filter(army => useful(army) && army.formations.length >= 2);
   const needsCaster = view.wars.length > 0 && fieldArmies.some(isWaykeeperBattleArmy) && view.arcaneResearch.choices.some(choice => choice.canResearch || choice.researched);
-  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster ? 1 : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
+  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster || studiesCaster ? 1 : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
   const rolePriority = ['marshal', 'waykeeper', 'engineer', 'surveyor'];
   const opportunities = view.characterRecruitment.filter(option => option.canRecruit && option.coinCost <= budget && (counts.get(option.role) ?? 0) < (desired.get(option.role) ?? 0))
     .sort((a, b) => rolePriority.indexOf(a.role) - rolePriority.indexOf(b.role) || (a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0));
   for (const option of opportunities) {
     const town = view.settlements.find(town => town.id === option.settlementId);
     if (!town) continue;
+    if (option.role === 'waykeeper' && studiesCaster && attunement) {
+      // Lodged, not attached: the caster studies the seam from a hearth that could host the working.
+      if (!attunement.hostSettlementIds.includes(town.id)) continue;
+      commands.push({ type: 'recruitCharacter', factionId: view.factionId, settlementId: option.settlementId, definitionId: option.definitionId });
+      budget -= option.coinCost;
+      reasons.push(`Appoint ${option.name} at ${town.name} to study the realm's seams toward a sealed working; pay ${option.coinCost} coin and ${option.upkeep} recurring upkeep.`);
+      break;
+    }
     const candidate = own.filter(army => army.cell === town.cell && army.domain === 'land' && useful(army) && (option.role !== 'waykeeper' || isWaykeeperBattleArmy(army)) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
       && (option.role === 'marshal' ? army.formations.length >= 2 && !marshals.has(army.id) : (companions.get(army.id) ?? 0) < 2))
       .sort((a, b) => priority(b, option.role) - priority(a, option.role) || byId(a, b))[0];

@@ -18,7 +18,7 @@ const markup = (game: ReturnType<typeof characterCampaign>) => renderToStaticMar
 }));
 
 describe('real character skill trees', () => {
-  it('covers exactly seventeen earned skills through three compatible roles and no invented Waykeeper nodes', () => {
+  it('covers exactly nineteen earned skills through four roles, including the two Waykeeper path deepenings', () => {
     const shown = new Set<string>();
     for (const definition of CHARACTER_DEFINITIONS) {
       const { game } = appointed(definition.id), before = stateHash(game), html = markup(game);
@@ -27,12 +27,13 @@ describe('real character skill trees', () => {
         else expect(html).not.toContain(`aria-label="Inspect skill ${skill.name}"`);
       }
       expect(html.match(/aria-label="Inspect skill /g) ?? []).toHaveLength(definition.skillIds.length);
-      if (definition.skillIds.length) expect(html).toContain('Root skill · no learned prerequisite.');
-      else { expect(definition.id).toBe('character.waykeeper'); expect(html).not.toContain('Promote'); }
+      expect(html).toContain('Root skill · no learned prerequisite.');
+      // Rules 38: a Waykeeper's only tree is the two path deepenings, each a root of its own.
+      if (definition.id === 'character.waykeeper') { expect(definition.skillIds).toEqual(['skill.flame_deepening', 'skill.rune_deepening']); expect(html).toContain('Attunement'); }
       expect(stateHash(game)).toBe(before);
     }
     expect([...shown].sort()).toEqual(CHARACTER_SKILLS.map(skill => skill.id).sort());
-    expect(shown.size).toBe(17);
+    expect(shown.size).toBe(19);
   });
   it('distinguishes actual prerequisite locks, permanent exclusions and learned nodes', () => {
     const { game, character } = appointed();

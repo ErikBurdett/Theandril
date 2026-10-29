@@ -24,26 +24,33 @@ export function rebaseAuthoredLand(state: GameState): void {
  * seam and holding the ground it lies on. The survey command, its cost and the
  * claim itself are proved by ordinary commands in the sim's own tests; scenes
  * that only need the resulting capability say so here instead of replaying it. */
-export function holdSurveyedSeam(state: GameState, factionId: string): number {
+export function holdSurveyedSeam(state: GameState, factionId: string, pathId?: string): number {
   const town = Object.values(state.settlements).find(item => item.factionId === factionId);
   if (!town) throw new Error('A surveyed seam needs a hearth to hold it.');
   const land = state.land.settlements[town.id];
   if (!land) throw new Error('A surveyed seam needs settled land.');
-  const seam = arcaneSites(state.world).reduce((closest, site) =>
+  const candidates = arcaneSites(state.world).filter(site => !pathId || site.pathId === pathId);
+  if (!candidates.length) throw new Error('This world holds no seam of that path.');
+  const seam = candidates.reduce((closest, site) =>
     hexDistance(site.cell, town.cell, state.world.width) < hexDistance(closest.cell, town.cell, state.world.width) ? site : closest);
   // Borders reach the seam the way they would in play: one connected step at a
-  // time, each claimed hex seen. The survey command and its cost are proved by
-  // ordinary commands in the sim's own tests.
+  // time along the shortest passable ground, each claimed hex seen. The survey
+  // command and its cost are proved by ordinary commands in the sim's own tests.
   const claimed = new Set(land.claimed);
   const taken = new Set(Object.entries(state.land.settlements).flatMap(([id, other]) => id === town.id ? [] : other.claimed));
-  let from = town.cell;
-  for (let step = 0; step < 400 && !claimed.has(seam.cell); step++) {
-    const next = neighbors(from, state.world.width, state.world.height)
-      .filter(cell => isPassable(state.world.terrain[cell] ?? 0) && !taken.has(cell))
-      .sort((a, b) => hexDistance(a, seam.cell, state.world.width) - hexDistance(b, seam.cell, state.world.width))[0];
-    if (next === undefined) throw new Error('No connected ground reaches this arcane seam.');
-    claimed.add(next);
-    from = next;
+  if (!claimed.has(seam.cell)) {
+    const parents = new Map<number, number | null>([...claimed].map(cell => [cell, null]));
+    const queue = [...claimed].sort((a, b) => a - b);
+    let reached = false;
+    for (let index = 0; index < queue.length && !reached; index++) {
+      for (const next of neighbors(queue[index]!, state.world.width, state.world.height)) {
+        if (parents.has(next) || !isPassable(state.world.terrain[next] ?? 0) || taken.has(next)) continue;
+        parents.set(next, queue[index]!); queue.push(next);
+        if (next === seam.cell) { reached = true; break; }
+      }
+    }
+    if (!reached) throw new Error('No connected ground reaches this arcane seam.');
+    for (let cell: number | null = seam.cell; cell !== null && !claimed.has(cell); cell = parents.get(cell) ?? null) claimed.add(cell);
   }
   land.claimed = [...claimed].sort((a, b) => a - b);
   // The land index is the engine's own map of who holds each hex; an authored

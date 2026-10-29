@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, IMPROVEMENTS, NATURAL_FEATURES, UNITS, type LandYield } from '@theandril/content';
+import { FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, IMPROVEMENTS, NATURAL_FEATURES, UNITS } from '@theandril/content';
 import { BIOME_NAMES } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { useLandQuery, type LandQuery } from './use-land-query';
@@ -7,10 +7,8 @@ import { SettlementRoad } from './roads';
 import { WorkerPolicy } from './worker-policy';
 import { LandPolicy } from './land-policy';
 
-const yields = ['food', 'industry', 'coin', 'knowledge'] as const;
-export function yieldText(value: LandYield): string {
-  return yields.filter(key => value[key] !== 0).map(key => `${value[key] > 0 ? '+' : '−'}${Math.abs(value[key])} ${key}`).join(', ') || 'No change';
-}
+import { yieldText } from './land-text';
+export { yieldText };
 
 export function FactionSelection({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   const faction = FACTIONS.find(item => item.id === value) ?? FACTIONS[0]!;
@@ -61,6 +59,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   if (!town || !settlement) return null;
   const cell = ready ? town.cells.find(item => item.cell === selectedCell) : undefined;
   const workerFull = town.worked.length >= town.workerCapacity;
+  const [cessionTarget, setCessionTarget] = useState<string | null>(null);
   const locked = busy || !ready;
   const act = (command: GameCommand) => { if (!locked) issue(command); };
   const overview = <>
@@ -86,6 +85,17 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
     <p className="field-help">Includes the center, assigned tiles and any capital bonus; buildings and other economy effects are separate.</p>
     {realm && <details className="realm-culture" data-testid="realm-culture"><summary>Culture & economy · {realm.name}</summary><FactionIdentity definitionId={realm.definitionId}/></details>}
     {!town.isCapital && <><button disabled={locked || !town.capitalOption.canStart} onClick={() => act({ type: 'setCapital', factionId: view.factionId, settlementId })}>Designate capital · {town.capitalOption.coinCost} coin</button><p className="field-help">{town.capitalOption.blocker ?? town.capitalOption.effectText}</p></>}
+    {town.cession && <section className="hearth-cession" data-testid="hearth-cession" aria-label="Cede this hearth"><h4>Under the oath</h4>
+      <p className="field-help">A hearth may pass between a patron and its client without a war. Its people, buildings and land are kept; production orders, charters and your policies on it end. Nothing is paid, and the hearth does not come back.</p>
+      {town.cession.map(option => <div key={option.factionId}>
+        {cessionTarget === option.factionId
+          ? <div role="group" aria-label={`Confirm ceding ${settlement.name} to ${option.name}`}><p role="alert">Cede {settlement.name} to {option.name}, your {option.relation}? This cannot be undone.</p>
+            <button className="danger" disabled={locked} onClick={() => { setCessionTarget(null); act({ type: 'cedeSettlement', factionId: view.factionId, settlementId, recipientFactionId: option.factionId }); }}>Confirm cession to {option.name}</button>
+            <button disabled={locked} onClick={() => setCessionTarget(null)}>Keep {settlement.name}</button></div>
+          : <button disabled={locked || option.blocker !== null} aria-label={`Cede ${settlement.name} to ${option.name}`} aria-describedby={option.blocker ? `cession-blocker-${option.factionId}` : undefined} onClick={() => setCessionTarget(option.factionId)}>Cede to {option.name} · your {option.relation}</button>}
+        {option.blocker && <p className="field-help" id={`cession-blocker-${option.factionId}`}>{option.blocker}</p>}
+      </div>)}
+    </section>}
   </>;
   const activeWork = town.work && <ActiveLandWork town={town} busy={locked} commissioned={!!landPolicy} cancel={() => act({ type: 'cancelLandWork', factionId: view.factionId, settlementId })}/>;
   const queryStatus = !ready && <div data-testid="land-query-status">{details.status === 'error' ? <p role="alert">Land details could not be loaded: {details.error}</p> : details.status === 'ready' ? <p role="status">This settlement’s land details are no longer available. Select an owned settlement or retry.</p> : <p role="status">Loading current land details… Tile quotes and land orders are unavailable until this review finishes.</p>}{(details.status === 'error' || details.status === 'ready') && <button type="button" disabled={busy || !queryEnabled} onClick={details.retry}>Retry land details</button>}</div>;

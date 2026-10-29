@@ -9,7 +9,10 @@ export function chooseCaptureOption(view: Observation): CaptureOption | undefine
   const score = (option: CaptureOption): number => {
     const recoveryCost = option.devastation + option.populationLoss * 24 + option.buildingsLost * 18 + option.occupationTurns * 4;
     const incomeWeight = view.treasury < 10 ? 3 : view.treasury < 30 ? 1 : 0;
-    const ownership = option.recipientFactionId === view.factionId ? 100 : option.outcome === 'liberate' ? 50 : 0;
+    // Rules 39: a subject pays for the whole term and ends one war. Worth more
+    // than holding the capital when the realm is already fighting on another front.
+    const bond = option.outcome === 'subject' ? 55 + (view.wars.length > 1 ? 45 : 0) : 0;
+    const ownership = option.recipientFactionId === view.factionId ? 100 : option.outcome === 'liberate' ? 50 : bond;
     return ownership + option.coinGain * incomeWeight - recoveryCost;
   };
   return [...pending.options].sort((a, b) => score(b) - score(a) || (a.outcome < b.outcome ? -1 : a.outcome > b.outcome ? 1 : 0))[0];

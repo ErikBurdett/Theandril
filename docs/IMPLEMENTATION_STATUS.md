@@ -1,5 +1,225 @@
 # Theandril implementation status
 
+## Registry inspection in AI watch and the complete browser suites — 2026-10-29
+
+Before publication both browser suites were run end to end: the production suite
+passes 59 cases on the rebuilt bundle, and the complete gameplay suite passes
+242 of 248 on its first run, with four timeouts under concurrent load passing
+alone and two pre-existing drifts corrected. One correction is a real fix: the
+realm registry's browse, filter, sort and select controls were locked by the
+same flag that locks orders, so nothing could be inspected during an AI watch.
+`RealmRegistry` and `RealmRoster` now separate `inspectBusy` from `busy`; group
+orders stay locked in watch. All 2,546 distinct vitest tests have passing
+results. [Evidence](development/2026-10-29-full-gameplay/README.md).
+
+## Seam study: a road to the third path for every culture — 2026-10-29
+
+Rules/save 39 also lets a Waykeeper lodged in a hearth whose borders hold a
+surveyed seam study it for one experience a turn, so a culture born without the
+second degree can deepen a path in peace; a caster riding with an army, wounded
+or on a mission does not study, and a hearth that loses its seam stops it. The
+AI, at peace and holding a seam of every path, now appoints a Waykeeper at a
+hearth that could host the working and keeps it lodged there instead of handing
+it to a co-located battle army; the existing planners then deepen, finish Arcane
+Theory and seal the working as each requirement is met. The personal-magic panel
+says how study works. No save field changes; historical rules grant nothing.
+
+Verification: new sim tests cover the study under rules 38 and 39, attachment,
+wounds, a lost seam and exact save round trips; a new AI test covers the
+peacetime appointment and the lodged caster left in place. Unit **2,292 tests /
+281 files** and lint pass; headline campaigns remain **362/327/227** with
+command and event counts identical to the previous slice, because no headline
+realm holds a seam of every path, so the third path is still unreached by any AI
+realm in organic play. [Evidence](development/2026-10-29-seam-study/README.md),
+[ADR0061](architecture/0061-seam-study.md).
+
+This checkpoint is local and unpublished.
+
+## Ground in sight: natural features, remembered surveys and the AI's glass — 2026-10-29
+
+Rules/save 39 also lets a realm see the natural features of ground in sight and
+remember where it surveyed. Every explored cell currently in sight carries its
+feature mask (zero masks and remembered ground omitted; historical readings
+unchanged); the worker packet folds a seven-bit mask into spare terrain and
+depth bits (packet versions 4–6) so a featured row costs no extra bytes; and
+`arcaneSearches` records each realm's surveyed hexes, found or empty, oldest
+first, bounded at 256, saved, validated, stripped from older projections and
+migrated as empty from v38. The survey panel now says whether the hex underfoot
+was already surveyed, shows Ashfall glass, or is a bet. The AI never pays twice
+for the same ground, surveys further only when a free company already stands on
+fresh glass, and marches at most one small company a turn up to four hexes to
+glass it can see, only when the movement preview allows the order.
+
+Two corrections are retained: the first glass march ignored the movement
+preview and produced 176 refused orders on the Epic headline; and a per-world
+feature cache returned stale bits for worlds mutated during generation and
+broke the historical feature seals. Both were removed before measurement. A
+third finding is the Huge starting-map packet: its 20,000-byte budget had 72
+bytes of headroom and the rules-38 attunement standing had silently taken it
+over, so the standing now travels only once a realm has begun the arcane road
+(19,203 bytes against 19,156 under rules 37).
+
+Verification: typecheck, lint, the full unit suite and campaign tests pass;
+headline campaigns end on **362/327/227** with zero refused orders, surveys
+down from 347/303/231 to 253/222/159, seams found up from 4/3/3 to 9/6/3 and
+29/23/14 glass marches. No AI realm researched Arcane Theory or sealed a working
+in those campaigns. Unit **2,290 tests / 281 files**, 57 campaign tests, the
+production build and ten browser journeys pass, including the Huge starting-map
+budget and the AI-watch chronicle.
+[Evidence](development/2026-10-29-glass-in-sight/README.md),
+[ADR0060](architecture/0060-ground-in-sight.md).
+
+The map still draws no natural features; AI arcane research and the third path
+remain unreached organically. This checkpoint is local and unpublished.
+
+## Cession: a hearth passes between patron and client — 2026-10-29
+
+Rules/save 39 also adds `cedeSettlement`: a realm gives one of its hearths to
+its patron or one of its clients, in either direction, with nothing paid and no
+consent asked, since the oath is the permission. The giver keeps its capital; a
+besieged or occupied hearth, one hosting the giver's victory project, one with a
+lodged officer or one with any army on its hex cannot pass until they leave.
+The hearth keeps its people, buildings and land; production orders are cancelled
+and its charter and muster end. Ownership, sight, policies, capitals, groups,
+theaters, supply agreements, missions, roads and every realm's land memory follow
+the capture reconciliation. The hearth panel lists each bound realm with the
+first failing reason and confirms before ceding. No AI realm cedes a hearth.
+
+Verification: new sim tests cover both directions, the exact kept population,
+buildings and land, ended charters, unchanged treasuries, save round trips, every
+refusal and the command's absence from older rules; a new browser journey cedes a
+hearth through the real panel with a declined and then confirmed step and keeps
+the result through save and reload. [Evidence](development/2026-10-29-cession/README.md),
+[ADR0059](architecture/0059-cession.md). No pacing measurement was needed: the
+AI issues no cession.
+
+M1's "permitted transfers between patron and client" is delivered for humans; AI
+use, and Gates G and H themselves, remain open. This checkpoint is local and
+unpublished.
+
+## A unification bid lost to politics — 2026-10-29
+
+Under the existing rules a client's hearths stand behind its patron's bid, and a
+bid that falls below two thirds ends at the round's close, so an oath withdrawn
+by renunciation, lapse or expiry can end a bid without a battle. This checkpoint
+verifies that outcome, states it in the Victory tab, and gives the AI the
+counterplay: a client realm renounces an oath whose patron holds a public active
+unification bid, even at the price of a breach, and refuses a new patronage
+offer from a bidding realm. The whole turn plan leads with the renunciation. No
+canonical rule, save field, content or price changes; the AI reads only the
+public ledger and its own oath.
+
+Verification: a new sim test opens a bid carried by three pledged hearths and
+ends it after the client renounces; a new AI test shows the acceptance,
+renunciation and refusal decisions with an unchanged observation. Typecheck,
+lint and the full unit suite (**2,283 tests / 278 files**) pass; headline
+campaigns remain **219/329/374** with command and event counts identical to the
+subject-rule runs, and the seven diplomacy and attunement browser journeys pass.
+[Evidence](development/2026-10-29-bid-politics/README.md).
+
+M1's "losing a bid to politics" is delivered as counterplay over the existing
+pledge rule; patron–client hearth transfers remain. This checkpoint is local
+and unpublished.
+
+## Subject rule: a conquered capital bound rather than taken — 2026-10-29
+
+Rules/save **39** adds **Make subject**, a fifth settlement-capture outcome. When a
+realm's capital falls and the realm still holds another hearth, the capturer may
+hand the capital back under an imposed oath: the war ends in a binding peace of
+thirty turns, the defeated realm becomes the capturer's client with no subsidy
+and tribute of three coin per hearth it holds, and its hearths stand behind the
+patron's Unification bid. The hearth keeps its population and buildings with 10
+devastation and one turn of recovery; other sieges between the pair lift. The
+oath is an ordinary rules-22 bond, so tribute, lapse, release, lawful expiry and
+early renunciation as a breach all follow the existing rules. The rules-22
+patronage chain still applies, and when the outcome is absent the capture panel
+names the reason (not a capital, no other hearth, an existing patron or clients,
+the client limit). The AI keeps a capital it takes while fighting one war and
+binds the realm instead when it is already at war elsewhere.
+
+Rules 39 decisions carry `rulesVersion: 39` and five quoted outcomes; rules 16–38
+decisions keep their frozen quote, so a v38 save with a pending capture loads
+unchanged. Every older command schema keeps four outcomes. Projection to ≤38 is
+refused only while a rules-39 decision is pending; a sworn bond projects as
+ordinary state. Content **03ac0328** is unchanged, so no seal changes.
+
+Verification: typecheck, lint and the production build pass; unit **2,281 tests /
+278 files** pass with three new sim, one new AI and two new UI tests; campaign
+tests pass. Headline twelve-realm campaigns end on **219/329/374** with command
+and event counts identical to the rules 38 runs: no AI realm chose subject rule
+there, so the outcome is proven by its fixture (the conquest fixture with a
+second founded rival hearth) and real controls, not by organic AI play. Nine
+browser journeys pass: the new subject journey (real capture panel, lifted war,
+sworn oath in Realm affairs, exact save/reload) and the existing conquest and
+diplomacy journeys. [Evidence](development/2026-10-29-subject-rule/README.md),
+[ADR0058](architecture/0058-subject-rule.md).
+
+M1's "client capture outcomes" is delivered; transfers between patron and client,
+losing a bid to politics, Gates G and H and every other release gate remain
+open. This checkpoint is local and unpublished. Next: patron–client hearth
+transfers, then AI seam strategy for the third path.
+
+## Attunement: the third victory path and personal path growth — 2026-10-29
+
+Rules/save **38** adds **Attunement**, a victory mechanically distinct from
+Prosperity and Unification. A realm that has researched every Arcane Theory
+discovery, holds a surveyed seam of every magical path inside its borders and
+keeps a Waykeeper of the second degree at an unoccupied, unbesieged hearth with
+a Witness archive may seal a working there through the ordinary
+`startAttunement` command. The pace's knowledge price (60/600/1,200/2,400) is
+spent on starting and never refunded; the working advances one turn per round
+through the pace's public window and ends the campaign with
+`victory.path = 'attunement'`. It pauses while the host is occupied or besieged,
+while any path's seam is no longer held, or while no qualified caster stands at
+the host; it is cancelled when the host is conquered or razed. The project uses
+the existing public ledger, so rivals see it as they see the other paths, and
+the bounded immediate counterplay review already besieges an imminent working.
+
+Two Waykeeper skills, Flame deepening and Rune deepening (24 experience, once
+each, branch *Attunement*), raise a personal path by one degree to at most the
+third. Cultures without a tradition can now reach Unbinding through practice;
+a save recording a deepening below its second degree is rejected. The AI seals a
+ready working at the safest eligible host, sends a qualified caster riding with a
+land army home when the caster is all it lacks, finishes uncastable Arcane Theory
+once every seam path is held, surveys further only from unsurveyed Ashfall glass
+while a path is missing, and claims seams of paths it lacks.
+
+Content **03ac0328** replaces **015468d1**: rules 24–37 envelopes keep their
+original seal, load under the current pack and re-seal; `contentPackHash(…,
+attunement = false)` reproduces the old seal exactly. Projecting a campaign to
+version ≤37 refuses an attunement victory, project or learned deepening, and
+historical command execution refuses the same; the new command is absent from
+every older schema. Chronicle archives accept rules 38 and the epilogue names the
+path.
+
+Verification: typecheck, lint and content validation pass. Unit **2,275 tests /
+276 files** pass with five new sim, four new AI and one new UI test; the campaign
+project passes **57 tests / 10 files** including the unchanged pacing proxies.
+The complete run has **2,528 of 2,529 tests / 306 of 307 files** passing; the
+one failure is the existing Git-history changelog test timing out under full
+concurrency, which passes unchanged in isolation, so all 2,529 distinct tests
+have passing results.
+Paired headline twelve-realm campaigns at seed 20260905 end on **219/329/374**
+under both frozen rules 37 and current rules 38 with identical command and event
+counts and zero refused orders; the rules 37 seals (`cfb8ef59`/`61983fb7`/
+`fc0228a5`) match the 2026-10-25 evidence exactly. No AI realm reaches
+Attunement in those campaigns: none holds a seam of both paths, so the third path
+is proven by its authored brink fixture, not by organic AI play. Two new
+Chromium journeys pass: a real seal through the Victory tab's host/caster
+controls, five end turns to victory, the banner and the chronicle epilogue; and a
+390px/130% unqualified-caster refusal. Of 22 affected existing journeys, 21 pass
+and the AI-watch chronicle journey's turn-59 expectation proved stale on the
+unchanged code (it ends on turn 60 under frozen rules 37 and current 38 alike);
+it now reads 60 with retained evidence and passes. Production build passes.
+[Evidence](development/2026-10-29-attunement-victory/README.md),
+[ADR0057](architecture/0057-attunement-victory.md).
+
+Gate B now has three implemented, human-playable, AI-pursued victory paths with
+complete winning fixtures; the gate itself, Gate F2 and every other release gate
+remain open. M7 begins; the M2 remainder narrows to reactive interception. This
+checkpoint is local and unpublished. Next: AI seam strategy and caster
+protection for the third path, then reactive interception during an enemy cast.
+
 ## Personal land budget templates — 2026-10-28
 
 The group commission form saves named improvement/allowance/reserve presets in a

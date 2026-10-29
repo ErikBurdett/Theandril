@@ -1,0 +1,10 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (3.2s)
+  ✓  2 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.2s)
+  ✓  3 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (23.0s)
+  ✓  4 tests/gameplay/chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.2s)
+
+  4 passed (31.9s)

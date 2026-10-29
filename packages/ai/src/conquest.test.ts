@@ -81,3 +81,25 @@ test('AI lifts a hopeless siege and keeps exhausted field guards from attacking'
   view.sieges = [];
   expect(planTurn(view).some(command => ['attack', 'besiege'].includes(command.type))).toBe(false);
 });
+
+test('rules 39: the AI makes a fallen capital a subject when it fights on another front, and occupies it otherwise', async () => {
+  const { subjectCampaign } = await import('../../test-fixtures/src/conquest-fixture');
+  const state = subjectCampaign(), player = CONQUEST_FIXTURE.playerFactionId, rival = CONQUEST_FIXTURE.enemyFactionId;
+  const issue = (command: Parameters<typeof applyCommand>[1]) => expect(applyCommand(state, command)).toMatchObject({ ok: true });
+  issue({ type: 'declareWar', factionId: player, targetFactionId: rival });
+  issue({ type: 'besiege', factionId: player, armyId: CONQUEST_FIXTURE.playerArmyId, settlementId: CONQUEST_FIXTURE.settlementId });
+  for (let turn = 0; turn < 3; turn++) issue({ type: 'endTurn', factionId: player });
+  issue({ type: 'assault', factionId: player, settlementId: CONQUEST_FIXTURE.settlementId });
+  issue({ type: 'autoResolveBattle', factionId: player });
+  const single = getObservation(state, player);
+  expect(single.pendingCapture?.options.some(option => option.outcome === 'subject')).toBe(true);
+  expect(chooseCaptureOption(single)?.outcome).toBe('occupy');
+  // A second war makes the peace dividend worth more than the capital itself.
+  const pressed = { ...single, wars: [...single.wars, 'faction.elsewhere'] };
+  expect(chooseCaptureOption(pressed)?.outcome).toBe('subject');
+  const plan = planTurnWithReasons(pressed);
+  expect(plan.commands).toEqual([{ type: 'resolveCapture', factionId: player, settlementId: CONQUEST_FIXTURE.settlementId, outcome: 'subject' }]);
+  expect(plan.reasons[0]).toContain('Make subject');
+  expect(applyCommand(state, plan.commands[0]!)).toMatchObject({ ok: true });
+  expect(state.diplomacy.clients).toHaveLength(1);
+});

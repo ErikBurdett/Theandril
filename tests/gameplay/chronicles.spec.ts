@@ -39,7 +39,10 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
   const finalHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   const victory = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.victory);
-  expect(victory?.turn).toBe(59); // Current rules-30 AI on generator 8; genuine historical archive seals remain separately tested.
+  // Current rules-38 AI on generator 8 (the rules 30 figure was 59; the unchanged pre-change
+  // code already ends on 60 under rules 37 and 38, see docs/development/2026-10-29-attunement-victory/
+  // chronicle-expectation.md). Genuine historical archive seals remain separately tested.
+  expect(victory?.turn).toBe(60);
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { arcaneKnowledgeCost, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS } from '@theandril/content';
+import { arcaneKnowledgeCost, ARCANE_DISCOVERIES, BATTLE_SPELLS, CHARACTER_SKILLS, MAGIC_PATHS } from '@theandril/content';
 import type { CommandResult, GameState } from './types';
 import { rulesVersion } from './rules';
 import { holdsArcaneSite } from './arcane-sites';
@@ -71,5 +71,7 @@ export function validateArcaneResearch(state: GameState): void {
     if (character.aptitudes === undefined) { if (character.definitionId === 'character.waykeeper') throw new Error('A Waykeeper requires an explicit personal aptitude profile.'); continue; }
     if (character.definitionId !== 'character.waykeeper' || Object.keys(character.aptitudes).some(id => !MAGIC_PATHS.some(path => path.id === id))) throw new Error('Invalid personal magical aptitude profile.');
     personalAptitudesSchema.parse(character.aptitudes);
+    // Rules 38: a learned deepening always leaves its path at the second degree or beyond.
+    for (const skill of CHARACTER_SKILLS) if (skill.pathId && character.learnedSkillIds.includes(skill.id) && (character.aptitudes[skill.pathId] ?? 0) < 2) throw new Error('A deepened path cannot rest below its second degree.');
   }
 }

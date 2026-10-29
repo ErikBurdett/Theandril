@@ -1,0 +1,14 @@
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+tests/gameplay/attunement.spec.ts(31,54): error TS2339: Property '__THEANDRIL__' does not exist on type '0 | 5'.
+  Property '__THEANDRIL__' does not exist on type '0'.
+tests/gameplay/attunement.spec.ts(33,54): error TS2339: Property '__THEANDRIL__' does not exist on type '0 | 5'.
+  Property '__THEANDRIL__' does not exist on type '0'.
+tests/gameplay/attunement.spec.ts(34,43): error TS2339: Property '__THEANDRIL__' does not exist on type '0 | 5'.
+  Property '__THEANDRIL__' does not exist on type '0'.
+tests/gameplay/attunement.spec.ts(47,43): error TS2339: Property '__THEANDRIL__' does not exist on type '0 | 5'.
+  Property '__THEANDRIL__' does not exist on type '0'.
+ ELIFECYCLE  Command failed with exit code 2.
+exit 2

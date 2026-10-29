@@ -91,7 +91,7 @@ test('standing postings override patrols and removing a patrol retains its alrea
   const patrol = await panel(page);
   const posting = page.getByTestId('army-posting');
   await posting.locator(':scope > summary').click();
-  await posting.getByRole('combobox', { name: 'Posted to', exact: true }).selectOption('495');
+  await posting.getByRole('combobox', { name: 'Posted to', exact: true }).selectOption('current');
   await posting.getByRole('combobox', { name: 'On arrival', exact: true }).selectOption('hold');
   await posting.getByRole('button', { name: 'Post army', exact: true }).click();
   await patrol.getByRole('spinbutton', { name: 'Second patrol point', exact: true }).fill('510');

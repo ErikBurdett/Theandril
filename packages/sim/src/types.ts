@@ -17,7 +17,7 @@ import type { Charter, CharterFocus, ObservedCharter } from './charters';
 import type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
 import type { ArmySupply } from './supply';
 import type { Depot } from './depots';
-import type { ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
+import type { ArcaneSearchState, ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -114,7 +114,7 @@ export interface SiegeObservation extends Siege {
   defenderStrength: number;
 }
 
-export type CaptureOutcome = 'occupy' | 'sack' | 'raze' | 'liberate';
+export type CaptureOutcome = 'occupy' | 'sack' | 'raze' | 'liberate' | 'subject';
 export interface CaptureOption {
   outcome: CaptureOutcome;
   label: string;
@@ -127,8 +127,9 @@ export interface CaptureOption {
   recipientFactionId: string | null;
 }
 export interface CaptureDecision {
-  /** Missing on preserved older decisions, whose quoted consequences stay frozen. */
-  rulesVersion?: 16;
+  /** Missing on preserved older decisions, whose quoted consequences stay frozen.
+   * Rules 39 decisions may quote the subject outcome. */
+  rulesVersion?: 16 | 39;
   settlementId: string;
   armyId: string;
   factionId: string;
@@ -254,6 +255,8 @@ export type GameCommand =
   | { type: 'adoptInstitution'; factionId: string; institutionId: string }
   | { type: 'adoptDoctrine'; factionId: string; doctrineId: string }
   | { type: 'startVictoryProject'; factionId: string; settlementId: string }
+  | { type: 'startAttunement'; factionId: string; settlementId: string; characterId: string }
+  | { type: 'cedeSettlement'; factionId: string; settlementId: string; recipientFactionId: string }
   | { type: 'endTurn'; factionId: string };
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
@@ -271,6 +274,8 @@ export interface GameState {
   arcaneResearch: ArcaneResearchState;
   /** Rules 23: the seams each realm has paid to survey. The seams themselves are geography. */
   arcaneSurveys: ArcaneSurveyState;
+  /** Rules 39: every hex each realm has surveyed, found or not, oldest first. */
+  arcaneSearches: ArcaneSearchState;
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -328,6 +333,8 @@ export interface Observation {
   battleAbilities: BattleAbilityOption[];
   arcaneResearch: ArcaneResearchObservation;
   arcaneSites: ObservedArcaneSite[];
+  /** Rules 39: own surveyed ground, oldest first; absent under historical rules. */
+  arcaneSearches?: number[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;
@@ -367,7 +374,8 @@ export interface Observation {
   sieges: SiegeObservation[];
   /** Visible blockade presence only; third-party siege participants and statistics stay private. */
   visibleSiegeSettlementIds: string[];
-  pendingCapture: CaptureDecision | null;
+  /** The capturer also learns why the subject outcome is not on offer, when it is not. */
+  pendingCapture: (CaptureDecision & { unavailable?: { outcome: CaptureOutcome; reason: string }[] }) | null;
   ruins: Ruin[];
   diplomacy: DiplomacyObservation;
   progression: ProgressionObservation;

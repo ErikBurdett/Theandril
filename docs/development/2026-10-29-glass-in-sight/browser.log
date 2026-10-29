@@ -1,0 +1,17 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 10 tests using 1 worker
+
+  ✓   1 tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (3.5s)
+  ✓   2 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (3.9s)
+  ✓   3 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (6.8s)
+  ✓   4 tests/gameplay/campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign (11.6s)
+  ✓   5 tests/gameplay/campaign.spec.ts:59:1 › compressed export/import and corrupt-save handling use the real controls (1.8s)
+Huge starting-map measurements: {"generationMs":270.7999999523163,"commandMs":0,"aiMs":0,"transferBytes":19975,"totalTransferBytes":19975,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":82,"frameMs":16.699999999999818,"frameP95Ms":16.800000000000182,"renderCpuMs":0.20000004768371582,"visibleCells":61,"visibleChunks":2,"cachedChunks":2,"chunkRebuilds":8,"visibleEntities":2,"zoom":0.9999999999999996,"highlightedCells":36,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":239.79999995231628,"artFirstRenderCpuMs":48.89999997615814,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":63,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":48,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":233,"cachedTextureBytesEstimate":1048576}
+  ✓   6 tests/gameplay/campaign.spec.ts:80:1 › Huge map pans and zooms with bounded visible geometry; layout remains usable (2.7s)
+  ✓   7 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (25.3s)
+  ✓   8 tests/gameplay/chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.8s)
+  ✓   9 tests/gameplay/progression-tree.spec.ts:24:1 › research dependencies support keyboard inspection, exact purchases and permanent policy choices across a save (3.5s)
+  ✓  10 tests/gameplay/progression-tree.spec.ts:76:1 › narrow research keeps every real branch and its linked purchase reachable without horizontal scrolling (2.0s)
+
+  10 passed (1.1m)

@@ -2,7 +2,7 @@ import { useId, useLayoutEffect, useRef, useState } from 'react';
 import type { CharacterView, GameCommand } from '@theandril/sim';
 import './character-skills.css';
 
-const branchNames: Record<string, string> = { specialization: 'Specialization', command: 'Command', battlecraft: 'Battlecraft', survey: 'Survey', engineering: 'Engineering' };
+const branchNames: Record<string, string> = { specialization: 'Specialization', command: 'Command', battlecraft: 'Battlecraft', survey: 'Survey', engineering: 'Engineering', attunement: 'Attunement' };
 type Skill = CharacterView['promotions'][number];
 
 /** Labels describe the observed choices; only canPromote authorizes a purchase. */

@@ -1,0 +1,118 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 11 tests using 1 worker
+
+  ✓   1 tests/gameplay/army.spec.ts:53:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (7.7s)
+  ✓   2 tests/gameplay/army.spec.ts:94:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (8.5s)
+  ✓   3 tests/gameplay/army.spec.ts:124:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (3.7s)
+Fully explored Huge art measurements: {"workload":"Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.","homeCell":50497,"canvas":{"x":0,"y":110,"width":1440,"height":584},"mapAtlases":[{"id":"foundation","imageUrl":"/art/foundation.png","jsonUrl":"/art/foundation.json","width":2048,"height":2048,"sha256":"e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de"},{"id":"map-works","imageUrl":"/art/map-works.png","jsonUrl":"/art/map-works.json","width":512,"height":512,"sha256":"bbf53f6d34b2208ca9c645def54bdd0269b73eb910be816d46495b2d836f4cfc"}],"expectedResidency":17825792,"cells":196608,"stateHash":"81a59708","samples":[{"stage":"fully-explored-static","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585691,"totalTransferBytes":2585691,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":131,"frameMs":16.599999999999454,"frameP95Ms":33.40000000000009,"renderCpuMs":0.20000004768371582,"visibleCells":1536,"visibleChunks":6,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":490.8000000715256,"artFirstRenderCpuMs":89.09999990463257,"visibleSprites":2,"terrainSpriteCells":1536,"pooledSprites":1603,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":25165824}},{"stage":"near-static-faction-poses","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585691,"totalTransferBytes":2585691,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":268,"frameMs":16.699999999999818,"frameP95Ms":33.30000000000018,"renderCpuMs":0.30000007152557373,"visibleCells":1024,"visibleChunks":4,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1.25,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":490.8000000715256,"artFirstRenderCpuMs":89.09999990463257,"visibleSprites":2,"terrainSpriteCells":1024,"pooledSprites":1603,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":25165824}},{"stage":"six-camera-drags","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585691,"totalTransferBytes":2585691,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":559,"frameMs":16.600000000000364,"frameP95Ms":16.700000000000728,"renderCpuMs":0,"visibleCells":1024,"visibleChunks":4,"cachedChunks":10,"chunkRebuilds":16,"visibleEntities":0,"zoom":1.25,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":490.8000000715256,"artFirstRenderCpuMs":89.09999990463257,"visibleSprites":0,"terrainSpriteCells":1024,"pooledSprites":2666,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":41943040}},{"stage":"far-strategic","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585691,"totalTransferBytes":2585691,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":717,"frameMs":16.69999999999891,"frameP95Ms":16.700000000000728,"renderCpuMs":0.20000004768371582,"visibleCells":3840,"visibleChunks":15,"cachedChunks":15,"chunkRebuilds":33,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":490.8000000715256,"artFirstRenderCpuMs":89.09999990463257,"visibleSprites":2,"terrainSpriteCells":3840,"pooledSprites":3997,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":62914560}},{"stage":"far-strategic-home-aggregates","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585691,"totalTransferBytes":2585691,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":852,"frameMs":16.700000000000728,"frameP95Ms":16.700000000000728,"renderCpuMs":0.19999992847442627,"visibleCells":3072,"visibleChunks":12,"cachedChunks":18,"chunkRebuilds":36,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":490.8000000715256,"artFirstRenderCpuMs":89.09999990463257,"visibleSprites":2,"terrainSpriteCells":3072,"pooledSprites":4794,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":75497472}}]}
+  ✓   4 tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD (19.0s)
+BATTLE_RENDER {"originHash":"e7631be8","commandHash":"f834e4c8","frameMs":{"p50":50,"p95":66.70000000000073,"max":83.40000000000146},"maxActors":46,"maxEffects":12,"atlasBytes":55574528}
+  ✓   5 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (21.9s)
+  ✘   6 tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog (46.2s)
+  ✓   7 tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides (16.9s)
+  ✓   8 tests/gameplay/group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit (6.2s)
+  ✓   9 tests/gameplay/patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay (13.0s)
+  ✘  10 tests/gameplay/patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route (50.8s)
+  ✓  11 tests/gameplay/patrols.spec.ts:124:1 › the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes (14.0s)
+
+
+  1) tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Realm registry', exact: true }).getByRole('tab', { name: /^Armies/ })
+        - locator resolved to <button disabled role="tab" tabindex="0" aria-selected="true" id="realm-tab-armies" aria-controls="realm-registry-panel">…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        67 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+       at ui-navigation.ts:32
+
+      30 | export async function openRegistry(page: Page, kind: RegistryKind) {
+      31 |   const window = await openManagement(page, 'Realm registry', kind === 'armies' ? 'Armies & fleets' : 'Settlements');
+    > 32 |   await window.getByRole('tab', { name: kind === 'armies' ? /^Armies/ : /^Settlements/ }).click();
+         |                                                                                           ^
+      33 |   return window;
+      34 | }
+      35 | /** Search literal names; regex callers traverse real pages, never a debug selector. */
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:32:91)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:122:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-full-gameplay/rerun-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-full-gameplay/rerun-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('army-posting').getByRole('combobox', { name: 'Posted to', exact: true })
+        - locator resolved to <select>…</select>
+      - attempting select option action
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+        - waiting 20ms
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+          - waiting 100ms
+        90 × waiting for element to be visible and enabled
+           - did not find some options
+         - retrying select option action
+           - waiting 500ms
+
+
+      92 |   const posting = page.getByTestId('army-posting');
+      93 |   await posting.locator(':scope > summary').click();
+    > 94 |   await posting.getByRole('combobox', { name: 'Posted to', exact: true }).selectOption('495');
+         |                                                                           ^
+      95 |   await posting.getByRole('combobox', { name: 'On arrival', exact: true }).selectOption('hold');
+      96 |   await posting.getByRole('button', { name: 'Post army', exact: true }).click();
+      97 |   await patrol.getByRole('spinbutton', { name: 'Second patrol point', exact: true }).fill('510');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/patrols.spec.ts:94:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun-results/patrols-standing-postings--396f3-ed-route-until-Cancel-route/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-full-gameplay/rerun-results/patrols-standing-postings--396f3-ed-route-until-Cancel-route/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-full-gameplay/rerun-results/patrols-standing-postings--396f3-ed-route-until-Cancel-route/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-full-gameplay/rerun-results/patrols-standing-postings--396f3-ed-route-until-Cancel-route/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+    tests/gameplay/patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route 
+  9 passed (3.6m)

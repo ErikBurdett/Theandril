@@ -6,7 +6,7 @@ import { needsNavalInvestment, navalResearchChoice } from './naval';
 import { landPlanningTowns } from './observation-options';
 import { isWaykeeperBattleArmy } from './characters';
 
-export interface ProgressionPlan extends AiPlan { coinSpent: number; reserve: number }
+export interface ProgressionPlan extends AiPlan { coinSpent: number; reserve: number; heldArmyIds: Set<string> }
 
 export const MAX_PROJECT_HOSTS = 64;
 export const MAX_PROJECT_THREATS = 64;
@@ -45,8 +45,8 @@ function sampleGeography<T extends { id: string; cell: number }>(items: T[], lim
 }
 
 /** Heuristic safety, not a promise of unreachable terrain or knowledge of unseen armies. */
-export function assessProjectHosts(view: Observation): ProjectHostAssessment[] {
-  const eligible = new Set(view.progression.project.eligibleSettlementIds);
+export function assessProjectHosts(view: Observation, eligibleIds: readonly string[] = view.progression.project.eligibleSettlementIds): ProjectHostAssessment[] {
+  const eligible = new Set(eligibleIds);
   const ownTowns = view.settlements.filter(town => town.factionId === view.factionId);
   const hosts = sampleGeography(ownTowns.filter(town => eligible.has(town.id)), MAX_PROJECT_HOSTS);
   if (!hosts.length) return [];
@@ -90,9 +90,37 @@ export function planProgression(view: Observation, protectedCoin = 0, pursueVict
   const ownTowns = view.settlements.filter(town => town.factionId === view.factionId);
   const progression = view.progression;
   const project = progression.project;
+  const heldArmyIds = new Set<string>();
   const host = pursueVictory && project.blockers.length === 0 && project.eligibleSettlementIds.length ? assessProjectHosts(view)[0] : undefined;
   if (host && project.blockers.length === 0 && project.coinCost <= view.treasury) {
-    return { commands: [{ type: 'startVictoryProject', factionId: view.factionId, settlementId: host.settlementId }], reasons: [`Begin ${project.name} at ${host.settlementId}: infrastructure, progression and ${project.coinCost} coin are ready. Prefer observed safety: ${host.uncoveredPressure} uncovered nearby enemy strength, friendly support ${host.friendlySupport}, known hostile distance ${host.nearestThreat}, friendly depth ${host.friendlyDepth}.`], coinSpent: project.coinCost, reserve: 0 };
+    return { commands: [{ type: 'startVictoryProject', factionId: view.factionId, settlementId: host.settlementId }], reasons: [`Begin ${project.name} at ${host.settlementId}: infrastructure, progression and ${project.coinCost} coin are ready. Prefer observed safety: ${host.uncoveredPressure} uncovered nearby enemy strength, friendly support ${host.friendlySupport}, known hostile distance ${host.nearestThreat}, friendly depth ${host.friendlyDepth}.`], coinSpent: project.coinCost, reserve: 0, heldArmyIds };
+  }
+  // Rules 38: a sealed working is the third path. The observation says exactly
+  // what it lacks; the planner only chooses the safest host a qualified caster
+  // already stands in, or brings a riding caster home when that is all it lacks.
+  const attunement = pursueVictory ? progression.attunement : undefined;
+  if (attunement && !attunement.blockers.length && attunement.eligibleSettlementIds.length) {
+    const casters = attunement.casters.filter(caster => caster.qualified);
+    const seat = assessProjectHosts(view, attunement.eligibleSettlementIds).find(item => casters.some(caster => caster.settlementId === item.settlementId));
+    const caster = seat && casters.find(item => item.settlementId === seat.settlementId);
+    if (seat && caster) return { commands: [{ type: 'startAttunement', factionId: view.factionId, settlementId: seat.settlementId, characterId: caster.characterId }], reasons: [`Seal an ${attunement.name} at ${seat.settlementId} through ${caster.name}: every seam path is held, Arcane Theory is complete and ${attunement.knowledgeCost} knowledge is ready. Prefer observed safety: ${seat.uncoveredPressure} uncovered nearby enemy strength, friendly support ${seat.friendlySupport}, known hostile distance ${seat.nearestThreat}.`], coinSpent: 0, reserve: 0, heldArmyIds };
+  }
+  const casterIsAllThatIsMissing = attunement && attunement.blockers.length === 1 && attunement.blockers[0]!.startsWith('A Waykeeper of the second degree');
+  if (attunement && casterIsAllThatIsMissing && attunement.hostSettlementIds.length) {
+    const hosts = view.settlements.filter(town => attunement.hostSettlementIds.includes(town.id));
+    const routed = new Set(view.routes.map(route => route.armyId));
+    for (const caster of attunement.casters.filter(item => item.degree >= attunement.casterDegree && !item.settlementId)) {
+      const character = view.characters.find(item => item.id === caster.characterId);
+      if (!character || character.dead || character.woundedTurns || character.mission || character.location?.kind !== 'army') continue;
+      const armyId = character.location.armyId, army = view.armies.find(item => item.id === armyId);
+      if (!army || army.domain !== 'land' || army.carrierId || army.movementBlocker || routed.has(army.id) || view.sieges.some(siege => siege.armyId === army.id)) continue;
+      const home = [...hosts].sort((a, b) => hexDistance(a.cell, army.cell, view.width) - hexDistance(b.cell, army.cell, view.width) || byId(a, b))[0];
+      if (!home) break;
+      commands.push({ type: 'queueMovement', factionId: view.factionId, armyId: army.id, target: home.cell });
+      heldArmyIds.add(army.id);
+      reasons.push(`Bring ${caster.name} home to ${home.name} with ${army.name}: a sealed working is otherwise ready and only its caster is away.`);
+      break;
+    }
   }
   const maritimeGoal = navalResearchChoice(view);
   const technology = progression.technologyChoices.find(choice => choice.id === 'technology.cinder_masonry' && choice.available)
@@ -113,7 +141,12 @@ export function planProgression(view: Observation, protectedCoin = 0, pursueVict
       const aptitudes = casters.get(caster.characterId)?.aptitudes;
       return choice.spellIds.some(id => { const spell = spellsById.get(id); return spell && (aptitudes?.[spell.pathId] ?? 0) >= spell.pathLevel; });
     }));
+    // Rules 38: a realm holding a seam of every path with a caster of the second
+    // degree finishes Arcane Theory for the working itself, castable or not.
+    const completing = !discovery && pursueVictory && attunement && attunement.paths.every(path => path.held) && attunement.casters.some(caster => caster.degree >= attunement.casterDegree)
+      ? view.arcaneResearch.choices.find(choice => choice.canResearch) : undefined;
     if (discovery) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: discovery.id }); reasons.push(`Research ${discovery.name} for the realm’s appointed Waykeeper; personal aptitude and battlefield strain remain required.`); }
+    else if (completing) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: completing.id }); reasons.push(`Research ${completing.name} toward a sealed working: every seam path is held and a caster of the second degree serves the realm.`); }
   }
   const initialBudget = Math.max(0, view.treasury - protectedCoin);
   let budget = initialBudget;
@@ -164,5 +197,5 @@ export function planProgression(view: Observation, protectedCoin = 0, pursueVict
     }
   }
   if (developed && !projectUnderway && budget < project.coinCost) reasons.push(`Reserve coin for ${project.name}: ${budget}/${project.coinCost}; retain a bounded operating purse until the final funding gap.`);
-  return { commands, reasons, coinSpent: initialBudget - budget, reserve };
+  return { commands, reasons, coinSpent: initialBudget - budget, reserve, heldArmyIds };
 }

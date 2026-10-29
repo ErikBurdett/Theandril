@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { BUILDINGS, FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS } from '@theandril/content';
 import { deserializeCampaign, importSave } from '@theandril/persistence';
 import { stateHash } from '@theandril/sim';
-import { yieldText } from '../../apps/web/src/land';
+import { yieldText } from '../../apps/web/src/land-text';
 
 const newCultures = FACTIONS.slice(6);
 const menu = (page: Page) => page.getByTestId('campaign-menu');

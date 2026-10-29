@@ -1,0 +1,63 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 24 tests using 1 worker
+
+  ✓   1 tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (3.4s)
+  ✓   2 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (3.6s)
+  ✓   3 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.3s)
+  ✓   4 tests/gameplay/characters-tree.spec.ts:25:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects (4.3s)
+  ✓   5 tests/gameplay/characters-tree.spec.ts:78:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit (2.3s)
+  ✓   6 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (1.8s)
+  ✓   7 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (7.2s)
+  ✓   8 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (6.5s)
+  ✓   9 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (6.8s)
+  ✓  10 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (1.8s)
+  ✓  11 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (11.8s)
+  ✘  12 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (22.5s)
+  ✓  13 tests/gameplay/chronicles.spec.ts:89:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.1s)
+  ✓  14 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (3.7s)
+  ✓  15 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.5s)
+  ✓  16 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.5s)
+  ✓  17 tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (1.7s)
+  ✓  18 tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (2.7s)
+  ✓  19 tests/gameplay/next-action.spec.ts:49:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders (8.8s)
+  ✓  20 tests/gameplay/next-action.spec.ts:97:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped (6.2s)
+  ✓  21 tests/gameplay/next-action.spec.ts:138:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width (3.4s)
+  ✓  22 tests/gameplay/progression-tree.spec.ts:24:1 › research dependencies support keyboard inspection, exact purchases and permanent policy choices across a save (3.2s)
+  ✓  23 tests/gameplay/progression-tree.spec.ts:76:1 › narrow research keeps every real branch and its linked purchase reachable without horizontal scrolling (1.8s)
+  ✓  24 tests/gameplay/specialist-roster.spec.ts:20:1 › research and paid specialist recruits survive save/load with honest shared silhouettes at desktop and narrow sizes (8.6s)
+
+
+  1) tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 59
+    Received: 60
+
+      40 |   const finalHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+      41 |   const victory = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.victory);
+    > 42 |   expect(victory?.turn).toBe(59); // Current rules-30 AI on generator 8; genuine historical archive seals remain separately tested.
+         |                         ^
+      43 |   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
+      44 |   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
+      45 |   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/chronicles.spec.ts:42:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-attunement-victory/browser-affected-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-attunement-victory/browser-affected-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-attunement-victory/browser-affected-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-attunement-victory/browser-affected-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+  23 passed (2.0m)

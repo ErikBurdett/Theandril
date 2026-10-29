@@ -29,7 +29,10 @@ async function openManagement(page: Page, title: string, launcher = title) {
 }
 export async function openRegistry(page: Page, kind: RegistryKind) {
   const window = await openManagement(page, 'Realm registry', kind === 'armies' ? 'Armies & fleets' : 'Settlements');
-  await window.getByRole('tab', { name: kind === 'armies' ? /^Armies/ : /^Settlements/ }).click();
+  const tab = window.getByRole('tab', { name: kind === 'armies' ? /^Armies/ : /^Settlements/ });
+  // The launcher already lands on its own tab; in AI watch the tabs are locked, so never click a tab that is selected.
+  if (await tab.getAttribute('aria-selected') !== 'true') await tab.click();
+  await expect(tab).toHaveAttribute('aria-selected', 'true');
   return window;
 }
 /** Search literal names; regex callers traverse real pages, never a debug selector. */

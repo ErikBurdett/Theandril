@@ -62,7 +62,7 @@ export function CapturePanel({ view, busy, issue }: { view: Observation; busy: b
   if (!capture) return null;
   const town = view.settlements.find(item => item.id === capture.settlementId);
   const raze = capture.options.find(option => option.outcome === 'raze');
-  const actions = { occupy: 'Occupy settlement', sack: 'Sack settlement', raze: 'Raze settlement', liberate: 'Liberate settlement' } as const;
+  const actions = { occupy: 'Occupy settlement', sack: 'Sack settlement', raze: 'Raze settlement', liberate: 'Liberate settlement', subject: 'Make subject realm' } as const;
   return <section className="battle-panel capture-panel" data-testid="capture-panel" aria-labelledby="capture-heading">
     <span className="eyebrow">The fate of a hearth</span><h2 id="capture-heading" ref={heading} tabIndex={-1}>{town?.name ?? 'Captured settlement'} has fallen</h2>
     <p className="battle-context">Choose what follows the victory. Campaign orders pause until this decision is resolved.</p>
@@ -80,6 +80,7 @@ export function CapturePanel({ view, busy, issue }: { view: Observation; busy: b
       <dl><div><dt>Coin gained</dt><dd>{option.coinGain}</dd></div><div><dt>Population lost</dt><dd>{option.populationLoss}</dd></div><div><dt>Buildings lost</dt><dd>{option.buildingsLost}</dd></div><div><dt>Devastation after capture</dt><dd>{option.devastation}/100</dd></div><div><dt>Occupation</dt><dd>{option.occupationTurns} turns</dd></div></dl>
       {option.recipientFactionId && <p className="capture-recipient">Governing faction: {factionName(view, option.recipientFactionId)}</p>}
     </article>)}</div>}
+    {capture.unavailable?.map(item => <p className="field-help" key={item.outcome} data-testid={`capture-unavailable-${item.outcome}`}>Subject rule is not on offer: {item.reason}</p>)}
   </section>;
 }
 

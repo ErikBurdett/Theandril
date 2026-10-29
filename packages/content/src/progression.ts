@@ -122,17 +122,35 @@ export const UNIFICATION_VICTORY: UnificationVictoryDefinition = {
   minimumSettlements: 8,
 };
 
+/** Rules 38: the third victory path. A realm that has finished Arcane Theory,
+ * holds a surveyed seam of every magical path and keeps a Waykeeper of the
+ * second degree at a hearth with a Witness archive may seal a working there.
+ * It is paid in knowledge and held through the pace's public window, and it
+ * rests on things rivals can take: the host, the seams and the caster. */
+export const attunementVictorySchema = z.object({
+  id, name, description, requiredBuildings: z.array(id).min(1).max(20), casterDegree: z.number().int().min(1).max(3),
+  knowledgeCost: z.object({ short: cost, standard: cost, long: cost, epic: cost }).strict(),
+}).strict();
+export type AttunementVictoryDefinition = z.infer<typeof attunementVictorySchema>;
+export const ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
+  id: 'victory.attunement', name: 'Attunement',
+  description: 'Seal a working that binds the Ashfall’s seams to your realm. Finish every Arcane Theory discovery, hold a surveyed seam of every magical path inside your borders, and keep a Waykeeper of the second degree at an unoccupied hearth with a Witness archive. The working costs knowledge on starting and must be sustained through the pace’s public response window: a siege, a lost seam or an absent caster pauses it, and losing the host ends it without refund.',
+  requiredBuildings: ['building.archive'], casterDegree: 2,
+  knowledgeCost: { short: 60, standard: 600, long: 1200, epic: 2400 },
+};
+
 export function validateProgressionContent(
   buildingIds: ReadonlySet<string>, technologies = TECHNOLOGIES, institutions = INSTITUTIONS,
-  doctrines = DOCTRINES, project = PROSPERITY_PROJECT,
+  doctrines = DOCTRINES, project = PROSPERITY_PROJECT, attunement = ATTUNEMENT_VICTORY,
 ): void {
   technologies.forEach(item => technologySchema.parse(item));
   institutions.forEach(item => institutionSchema.parse(item));
   doctrines.forEach(item => doctrineSchema.parse(item));
   prosperityProjectSchema.parse(project);
   unificationVictorySchema.parse(UNIFICATION_VICTORY);
+  attunementVictorySchema.parse(attunement);
   for (const pace of campaignPaceSchema.options) campaignPaceProfileSchema.parse(CAMPAIGN_PACES[pace]);
-  const definitions = [...technologies, ...institutions, ...doctrines, project];
+  const definitions = [...technologies, ...institutions, ...doctrines, project, UNIFICATION_VICTORY, attunement];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate progression ID');
   const technologyById = new Map(technologies.map(item => [item.id, item]));
   const checked = new Set<string>();
@@ -150,6 +168,6 @@ export function validateProgressionContent(
   };
   technologies.forEach(item => visit(item.id));
   for (const technologyId of project.requiredTechnologies) visit(technologyId);
-  for (const buildingId of project.requiredBuildings) if (!buildingIds.has(buildingId)) throw new Error('Unknown project building: ' + buildingId);
+  for (const buildingId of [...project.requiredBuildings, ...attunement.requiredBuildings]) if (!buildingIds.has(buildingId)) throw new Error('Unknown project building: ' + buildingId);
   for (const institutionId of project.requiredInstitutions) if (!institutions.some(item => item.id === institutionId)) throw new Error('Unknown project institution');
 }

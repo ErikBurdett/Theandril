@@ -13,24 +13,24 @@ import type { GroupMovementIssue, GroupMovementPreviewIssue } from './group-move
 import type { GroupPatrolIssue } from './group-patrols';
 import type { TheaterIssue } from './defense-theaters';
 
-export function RealmRoster({ view, hash, registry, search, force, selection, choose, setSearch, setForce, select, characters, busy = false, onGroupPosting, onGroupLandPolicy, onGroupWorkerPolicy, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onGroupPatrol, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, theaterFocus }: {
+export function RealmRoster({ view, hash, registry, search, force, selection, choose, setSearch, setForce, select, characters, busy = false, inspectBusy, onGroupPosting, onGroupLandPolicy, onGroupWorkerPolicy, onGroupCharter, onGroupProduction, onGroupMovement, onGroupMovementPreview, onGroupPatrol, onSelectionGroupCommand, onTheaterCommand, knownSelectedCell, theaterFocus }: {
   view: Observation; registry: 'armies' | 'settlements'; search: string; force: string; selection: MapSelection;
   choose: (kind: 'armies' | 'settlements') => void; setSearch: (value: string) => void; setForce: (value: string) => void;
   select: (selection: MapSelection) => void; characters: () => void;
-  hash?: string; busy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupWorkerPolicy?: GroupWorkerPolicyIssue; onGroupLandPolicy?: GroupLandPolicyIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onGroupPatrol?: GroupPatrolIssue; onSelectionGroupCommand?: SelectionGroupIssue;
+  hash?: string; busy?: boolean; inspectBusy?: boolean; onGroupPosting?: GroupPostingIssue; onGroupCharter?: GroupCharterIssue; onGroupWorkerPolicy?: GroupWorkerPolicyIssue; onGroupLandPolicy?: GroupLandPolicyIssue; onGroupProduction?: GroupProductionIssue; onGroupMovement?: GroupMovementIssue; onGroupMovementPreview?: GroupMovementPreviewIssue; onGroupPatrol?: GroupPatrolIssue; onSelectionGroupCommand?: SelectionGroupIssue;
   onTheaterCommand?: TheaterIssue; knownSelectedCell?: number;
   theaterFocus?: { id: string; nonce: number };
 }) {
   const [registryPending, setRegistryPending] = useState(false);
-  const locked = busy || registryPending;
+  const inspectLocked = (inspectBusy ?? busy) || registryPending;
   const realm = view.factions.find(faction => faction.id === view.factionId);
   return <section className="realm-roster">
     <div className="realm-heading faction-art-heading"><FactionArt contentId="ui.crest" definitionId={realm?.definitionId} label={`${realm?.name} crest`} compact/><div><span className="eyebrow">Your people</span><h3>{realm?.name}</h3></div></div>
-    <RealmNavigation registry={registry} armyCount={view.armies.filter(item => item.factionId === view.factionId).length} townCount={view.settlements.filter(item => item.factionId === view.factionId).length} characterCount={view.characters.length} choose={choose} characters={characters} showMap={() => undefined} showOrders={() => undefined} selectionControls={false} busy={locked}/>
-    <label className="search-label">Search your realm<input type="search" value={search} disabled={locked} placeholder="Find a name or stable ID" onChange={event => setSearch(event.target.value)}/></label>
+    <RealmNavigation registry={registry} armyCount={view.armies.filter(item => item.factionId === view.factionId).length} townCount={view.settlements.filter(item => item.factionId === view.factionId).length} characterCount={view.characters.length} choose={choose} characters={characters} showMap={() => undefined} showOrders={() => undefined} selectionControls={false} busy={inspectLocked}/>
+    <label className="search-label">Search your realm<input type="search" value={search} disabled={inspectLocked} placeholder="Find a name or stable ID" onChange={event => setSearch(event.target.value)}/></label>
     <section id="realm-registry-panel" role="tabpanel" aria-labelledby={`realm-tab-${registry}`}>
-      {registry === 'armies' && <label className="force-filter">Force type<select value={force} disabled={locked} onChange={event => setForce(event.target.value)}><option value="all">All armies & fleets</option><option value="land">Land armies ashore</option><option value="naval">Fleets</option><option value="embarked">Embarked armies</option></select></label>}
-      <RealmRegistry view={view} hash={hash} registry={registry} search={search} force={force} selection={selection} select={select} busy={busy} onGroupPosting={onGroupPosting} onGroupCharter={onGroupCharter} onGroupWorkerPolicy={onGroupWorkerPolicy} onGroupLandPolicy={onGroupLandPolicy} onGroupProduction={onGroupProduction} onGroupMovement={onGroupMovement} onGroupMovementPreview={onGroupMovementPreview} onGroupPatrol={onGroupPatrol} onSelectionGroupCommand={onSelectionGroupCommand} onTheaterCommand={onTheaterCommand} knownSelectedCell={knownSelectedCell} theaterFocus={theaterFocus} onPendingChange={setRegistryPending}/>
+      {registry === 'armies' && <label className="force-filter">Force type<select value={force} disabled={inspectLocked} onChange={event => setForce(event.target.value)}><option value="all">All armies & fleets</option><option value="land">Land armies ashore</option><option value="naval">Fleets</option><option value="embarked">Embarked armies</option></select></label>}
+      <RealmRegistry view={view} hash={hash} registry={registry} search={search} force={force} selection={selection} select={select} busy={busy} inspectBusy={inspectBusy} onGroupPosting={onGroupPosting} onGroupCharter={onGroupCharter} onGroupWorkerPolicy={onGroupWorkerPolicy} onGroupLandPolicy={onGroupLandPolicy} onGroupProduction={onGroupProduction} onGroupMovement={onGroupMovement} onGroupMovementPreview={onGroupMovementPreview} onGroupPatrol={onGroupPatrol} onSelectionGroupCommand={onSelectionGroupCommand} onTheaterCommand={onTheaterCommand} knownSelectedCell={knownSelectedCell} theaterFocus={theaterFocus} onPendingChange={setRegistryPending}/>
     </section>
     <p className="field-help">Choose an entry to locate it on the map. Use the bottom command tray for its orders.</p>
   </section>;

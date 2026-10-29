@@ -10870,7 +10870,10 @@
         "armor": 0
       },
       "missionIds": [],
-      "skillIds": []
+      "skillIds": [
+        "skill.flame_deepening",
+        "skill.rune_deepening"
+      ]
     }
   ],
   "missions": [
@@ -11342,6 +11345,56 @@
       ],
       "branch": "engineering",
       "tier": 3
+    },
+    {
+      "id": "skill.flame_deepening",
+      "name": "Flame deepening",
+      "description": "Earned practice deepens this Waykeeper’s personal Flame aptitude by one degree, to at most the third. Deeper paths reach workings that national research alone cannot, and the second degree of any path lets a caster seal an Attunement.",
+      "roles": [
+        "waykeeper"
+      ],
+      "experienceCost": 24,
+      "leadership": {
+        "attack": 0,
+        "armor": 0
+      },
+      "rallyBonus": 0,
+      "surveyRadiusBonus": 0,
+      "refitBonus": 0,
+      "sabotageRiskReduction": 0,
+      "requiresAll": [],
+      "requiresAny": [],
+      "branch": "attunement",
+      "tier": 2,
+      "exclusiveGroup": null,
+      "commandCapacityBonus": 0,
+      "introducedInRules": 38,
+      "pathId": "path.flame"
+    },
+    {
+      "id": "skill.rune_deepening",
+      "name": "Rune deepening",
+      "description": "Earned practice deepens this Waykeeper’s personal Rune aptitude by one degree, to at most the third. Deeper paths reach workings that national research alone cannot, and the second degree of any path lets a caster seal an Attunement.",
+      "roles": [
+        "waykeeper"
+      ],
+      "experienceCost": 24,
+      "leadership": {
+        "attack": 0,
+        "armor": 0
+      },
+      "rallyBonus": 0,
+      "surveyRadiusBonus": 0,
+      "refitBonus": 0,
+      "sabotageRiskReduction": 0,
+      "requiresAll": [],
+      "requiresAny": [],
+      "branch": "attunement",
+      "tier": 2,
+      "exclusiveGroup": null,
+      "commandCapacityBonus": 0,
+      "introducedInRules": 38,
+      "pathId": "path.rune"
     }
   ],
   "magicPaths": [

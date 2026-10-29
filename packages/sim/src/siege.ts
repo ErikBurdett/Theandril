@@ -6,7 +6,8 @@ import { isPassable, neighbors } from '@theandril/mapgen';
 import type { CaptureDecision, CaptureOption, CaptureOutcome, CommandResult, DomainEvent, GameState, SiegeObservation } from './types';
 import { atWar, relocateArmy, startSettlementAssault } from './warfare';
 import { indexes, updateSight } from './visibility';
-import { recordConquest } from './diplomacy';
+import { imposePeace, recordConquest } from './diplomacy';
+import { imposeClient, subjectObjection, subjectTerms } from './clients';
 import { captureSettlementCharacters } from './characters';
 import { armyDomain, carriedArmyBlocker } from './naval';
 import { siegeEstablishmentBlocker } from './siege-establishment';
@@ -27,9 +28,12 @@ function storedSupplies(town: { food: number; population: number }): number {
   const need = settlementFoodConsumption(town.population);
   return need > 0 ? Math.min(SIEGE_SUPPLY_CAP, Math.floor(town.food / need)) : SIEGE_SUPPLY_CAP;
 }
-export const captureOutcomeSchema = z.enum(['occupy', 'sack', 'raze', 'liberate']);
+/** Rules ≤38 outcomes; frozen command and decision schemas keep this exact set. */
+export const captureOutcomeV38Schema = z.enum(['occupy', 'sack', 'raze', 'liberate']);
+/** Rules 39 adds subject rule: a fallen capital returned under an imposed obligation. */
+export const captureOutcomeSchema = z.enum(['occupy', 'sack', 'raze', 'liberate', 'subject']);
 const captureOptionSchema = z.object({
-  outcome: captureOutcomeSchema, label: z.string().min(1).max(40), description: z.string().min(1).max(400),
+  outcome: captureOutcomeV38Schema, label: z.string().min(1).max(40), description: z.string().min(1).max(400),
   coinGain: bounded(1_000_000_000), populationLoss: bounded(20), buildingsLost: bounded(1000),
   devastation: bounded(100), occupationTurns: bounded(5), recipientFactionId: id.nullable(),
 }).strict();
@@ -40,6 +44,15 @@ export const captureDecisionSchema = captureDecisionV15Schema.extend({
   options: z.array(captureOptionSchema.extend({ coinGain: z.number().int().nonnegative().safe(), populationLoss: z.number().int().nonnegative().safe() }).strict()).min(3).max(4),
   rulesVersion: z.literal(16).optional(),
 }).strict();
+/** Rules 39 decisions may quote five outcomes; older decisions keep their frozen shape. */
+export const captureDecisionV39Schema = captureDecisionV15Schema.extend({
+  options: z.array(captureOptionSchema.extend({ outcome: captureOutcomeSchema, coinGain: z.number().int().nonnegative().safe(), populationLoss: z.number().int().nonnegative().safe() }).strict()).min(3).max(5),
+  rulesVersion: z.union([z.literal(16), z.literal(39)]).optional(),
+}).strict();
+/** Historical envelopes and rules never carry a decision that could quote subject rule. */
+export function assertNoSubjectRule(state: GameState): void {
+  if (state.pendingCapture?.rulesVersion === 39) throw new Error('This campaign has a capture decision unavailable in historical rules.');
+}
 export const ruinSchema = z.object({
   id, name: z.string().min(1).max(40), cell: bounded(349_999), founderFactionId: id, razedByFactionId: id, turn: bounded(1_000_000).min(1),
 }).strict();
@@ -124,7 +137,7 @@ export function reconcileSieges(state: GameState, events: DomainEvent[]): void {
           for (const factionId of [siege.factionId, town.factionId]) events.push({ turn: state.turn, factionId, type: 'siege_contested', cell: town.cell, message: `Reserve formations still defend ${town.name}. The siege continues until they are defeated.` });
           continue;
         }
-        state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [], ...(rulesVersion(state) >= 16 ? { rulesVersion: 16 as const } : {}) };
+        state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [], ...(rulesVersion(state) >= 39 ? { rulesVersion: 39 as const } : rulesVersion(state) >= 16 ? { rulesVersion: 16 as const } : {}) };
         state.pendingCapture.options = captureOptions(state, state.pendingCapture);
         events.push({ turn: state.turn, factionId: siege.factionId, type: 'capture_pending', cell: town.cell, message: `${town.name} has fallen. Choose its fate.` });
       }
@@ -151,7 +164,7 @@ export function captureOptions(state: GameState, decision: Omit<CaptureDecision,
   const victim = state.factions.find(faction => faction.id === decision.previousOwnerId);
   const capturer = state.factions.find(faction => faction.id === decision.factionId);
   // Preserve old pending quotes even when their choice is resumed today.
-  const coinLimit = decision.rulesVersion === 16 ? Number.MAX_SAFE_INTEGER : 1_000_000_000;
+  const coinLimit = decision.rulesVersion !== undefined ? Number.MAX_SAFE_INTEGER : 1_000_000_000;
   const loot = Math.max(0, Math.min(victim?.treasury ?? 0, 20 + town.population * 10, coinLimit - (capturer?.treasury ?? 0)));
   const populationLoss = Math.min(town.population - 1, Math.ceil(town.population / 3));
   const buildingsLost = Math.ceil(town.buildings.length / 2);
@@ -164,7 +177,17 @@ export function captureOptions(state: GameState, decision: Omit<CaptureDecision,
     const founder = state.factions.find(faction => faction.id === town.founderFactionId);
     if (founder) options.push({ outcome: 'liberate', label: 'Liberate', description: `Return the settlement to ${founder.name}. Keep its population and buildings, add 10 devastation and 1 turn of recovery. Existing production orders are cancelled.`, coinGain: 0, populationLoss: 0, buildingsLost: 0, devastation: Math.min(100, town.devastation + 10), occupationTurns: 1, recipientFactionId: founder.id });
   }
+  if (decision.rulesVersion === 39 && victim && subjectUnavailable(state, decision) === null) {
+    const terms = subjectTerms(state, victim.id);
+    options.push({ outcome: 'subject', label: 'Make subject', description: `Return the fallen capital to ${victim.name} and bind the realm as your subject: peace is imposed for ${terms.termTurns} turns, it pays ${terms.tributeCoin} coin tribute each turn and its hearths stand behind your unification bid. Keep its population and buildings, add 10 devastation and 1 turn of recovery. Existing production orders are cancelled.`, coinGain: 0, populationLoss: 0, buildingsLost: 0, devastation: Math.min(100, town.devastation + 10), occupationTurns: 1, recipientFactionId: victim.id });
+  }
   return options;
+}
+/** Rules 39: why subject rule is not on offer for this capture, or null when it is. */
+export function subjectUnavailable(state: GameState, decision: Omit<CaptureDecision, 'options'>): string | null {
+  if (state.land.capitals[decision.previousOwnerId] !== decision.settlementId) return 'Only a fallen capital can bind its realm as a subject.';
+  if (!Object.values(state.settlements).some(town => town.factionId === decision.previousOwnerId && town.id !== decision.settlementId)) return 'The realm holds no other hearth to rule as a subject.';
+  return subjectObjection(state, decision.factionId, decision.previousOwnerId);
 }
 
 export function resolveSettlementCapture(state: GameState, factionId: string, settlementId: string, outcome: CaptureOutcome): CommandResult {
@@ -204,12 +227,15 @@ export function resolveSettlementCapture(state: GameState, factionId: string, se
     if (town.factionId === factionId) relocateArmy(state, army, town.cell);
   }
   victim.treasury -= option.coinGain;
-  capturer.treasury = Math.min(decision.rulesVersion === 16 ? Number.MAX_SAFE_INTEGER : 1_000_000_000, capturer.treasury + option.coinGain);
+  capturer.treasury = Math.min(decision.rulesVersion !== undefined ? Number.MAX_SAFE_INTEGER : 1_000_000_000, capturer.treasury + option.coinGain);
   recordConquest(state, factionId, decision.previousOwnerId, outcome);
   delete state.sieges[settlementId];
   state.pendingCapture = null;
   const recipients = new Set([factionId, victim.id, ...(option.recipientFactionId ? [option.recipientFactionId] : [])]);
-  return { ok: true, events: [...characterEvents, ...[...recipients].map(owner => ({ turn: state.turn, factionId: owner, type: 'settlement_captured', cell: town.cell, message: `${oldName}: ${option.label.toLowerCase()}. ${option.description}` }))] };
+  const captured = [...recipients].map(owner => ({ turn: state.turn, factionId: owner, type: 'settlement_captured', cell: town.cell, message: `${oldName}: ${option.label.toLowerCase()}. ${option.description}` }));
+  // Rules 39: the capital goes back under an obligation. Peace must hold before the bond is sworn.
+  const subject = outcome === 'subject' ? (() => { const terms = subjectTerms(state, victim.id); return [...imposePeace(state, factionId, victim.id, terms.termTurns), ...imposeClient(state, factionId, victim.id, terms)]; })() : [];
+  return { ok: true, events: [...characterEvents, ...captured, ...subject] };
 }
 
 export function observeSieges(state: GameState, factionId: string): SiegeObservation[] {
@@ -249,7 +275,7 @@ export function validateSieges(state: GameState): void {
     require(!state.battle && town && army && siege && siege.armyId === army.id && army.factionId === decision.factionId && town.factionId === decision.previousOwnerId, 'invalid pending capture references');
     require(JSON.stringify(decision.options) === JSON.stringify(captureOptions(state, decision)), 'capture choices differ from canonical consequences');
     const report = state.battleReports.at(-1);
-    require(!report || report.rulesVersion < 10 || decision.rulesVersion === 16, 'modern capture omitted its quoted rules');
+    require(!report || report.rulesVersion < 10 || decision.rulesVersion === 16 || decision.rulesVersion === 39 && rulesVersion(state) >= 39, 'modern capture omitted its quoted rules');
     require(report?.settlementId === decision.settlementId && report.turn === state.turn && report.attackerId === decision.armyId && report.combat.result?.winner === 'attacker' && report.attackerFactionId === decision.factionId && report.defenderFactionId === decision.previousOwnerId, 'capture requires a victorious assault');
     if (town && army && report) {
       require(report.defenderCell === town.cell && report.attackerCell === army.cell && army.movement === 0 && !Object.values(state.armies).some(other => other.cell === town.cell), 'captured town must be cleared and capturer must remain in assault position');

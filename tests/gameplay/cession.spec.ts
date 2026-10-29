@@ -1,0 +1,44 @@
+import { expect, test } from '@playwright/test';
+import { serializeGame } from '@theandril/sim';
+import { exportSave } from '@theandril/persistence';
+import { patronageCampaign } from '../../packages/test-fixtures/src/victory-fixture';
+import { closeManagement, openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
+
+/** Rules 39: a patron cedes a hearth to its client through the hearth panel, with confirmation. */
+test('cede a hearth to a client under the oath, confirm it, and keep the result through a save', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = patronageCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
+  const town = Object.values(state.settlements).filter(item => item.factionId === player && item.id !== state.land.capitals[player]).sort((a, b) => a.id < b.id ? -1 : 1)[0]!;
+  await page.goto('/');
+  await page.locator('input[type=file]').setInputFiles({ name: 'oath-bound.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(town.name));
+  await openSelectedOrders(page);
+  const cession = page.getByTestId('hearth-cession');
+  await expect(cession).toContainText('Under the oath');
+  const cede = page.getByRole('button', { name: `Cede ${town.name} to Reedbound Council`, exact: true });
+  await expect(cede).toBeEnabled();
+  await cession.screenshot({ path: testInfo.outputPath('cession-offer.png') });
+  await cede.click();
+  await expect(cession.getByRole('alert')).toContainText('This cannot be undone');
+  await page.getByRole('button', { name: `Keep ${town.name}`, exact: true }).click();
+  await expect(cede).toBeVisible();
+  expect(await page.evaluate((id) => window.__THEANDRIL__!.getSummary()!.settlements.find(item => item.id === id)?.factionId, town.id)).toBe(player);
+  await cede.click();
+  await page.getByRole('button', { name: 'Confirm cession to Reedbound Council', exact: true }).click();
+  await expect.poll(() => page.evaluate((id) => window.__THEANDRIL__!.getSummary()!.settlements.find(item => item.id === id)?.factionId, town.id)).toBe(rival);
+  await expect(page.getByTestId('feedback')).toContainText('passed from');
+  await page.screenshot({ path: testInfo.outputPath('cession-done.png'), fullPage: true });
+  await closeManagement(page);
+  await page.getByText('Campaign & settings', { exact: true }).click();
+  await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+  const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+  await page.reload();
+  await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
+  expect(await page.evaluate((id) => window.__THEANDRIL__!.getSummary()!.settlements.find(item => item.id === id)?.factionId, town.id)).toBe(rival);
+  expect(errors).toEqual([]);
+});

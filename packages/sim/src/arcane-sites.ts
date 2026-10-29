@@ -26,6 +26,29 @@ export const arcaneSurveySchema = z.array(z.object({
   factionId: id, cells: z.array(z.number().int().min(0).max(349_999)).max(MAX_ARCANE_SITES),
 }).strict()).max(64);
 export type ArcaneSurveyState = Record<string, number[]>;
+/** Rules 39: the ground each realm has paid to survey, found or not, in the
+ * order it was surveyed. A realm remembers where it looked, so neither player
+ * nor AI pays twice for the same empty ground; the oldest record gives way. */
+export const MAX_ARCANE_SEARCHES = 256;
+export const arcaneSearchSchema = z.array(z.object({
+  factionId: id, cells: z.array(z.number().int().min(0).max(349_999)).max(MAX_ARCANE_SEARCHES),
+}).strict()).max(64);
+export type ArcaneSearchState = Record<string, number[]>;
+export const emptyArcaneSearches = (factionIds: readonly string[]): ArcaneSearchState =>
+  Object.fromEntries(factionIds.map(factionId => [factionId, [] as number[]]));
+export const hasArcaneSearches = (state: GameState): boolean => Object.values(state.arcaneSearches ?? {}).some(cells => cells.length);
+export function observeArcaneSearches(state: GameState, factionId: string): number[] {
+  return rulesVersion(state) < 39 ? [] : [...(state.arcaneSearches[factionId] ?? [])];
+}
+export function validateArcaneSearches(state: GameState): void {
+  const assert = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: surveyed ground ' + message); };
+  const factions = new Set(state.factions.map(faction => faction.id));
+  assert(Object.keys(state.arcaneSearches).every(factionId => factions.has(factionId)), 'names a realm this campaign does not seat');
+  for (const cells of Object.values(state.arcaneSearches)) {
+    assert(cells.length <= MAX_ARCANE_SEARCHES && new Set(cells).size === cells.length, 'must list each hex once within its bound');
+    assert(cells.every(cell => Number.isInteger(cell) && cell >= 0 && cell < state.world.terrain.length && isPassable(state.world.terrain[cell] ?? 0)), 'must lie on passable ground of this world');
+  }
+}
 
 export const arcaneSiteCommandSchemas = [
   z.object({ type: z.literal('searchArcane'), factionId: id, armyId: id }).strict(),
@@ -117,6 +140,13 @@ export function searchArcane(state: GameState, factionId: string, armyId: string
   const record = state.arcaneSurveys[factionId] ?? (state.arcaneSurveys[factionId] = []);
   for (const site of found) record.push(site.cell);
   record.sort((a, b) => a - b);
+  if (rulesVersion(state) >= 39) {
+    const searched = state.arcaneSearches[factionId] ?? (state.arcaneSearches[factionId] = []);
+    const existing = searched.indexOf(army.cell);
+    if (existing >= 0) searched.splice(existing, 1);
+    searched.push(army.cell);
+    if (searched.length > MAX_ARCANE_SEARCHES) searched.splice(0, searched.length - MAX_ARCANE_SEARCHES);
+  }
   return { ok: true, events: [{
     turn: state.turn, factionId, type: found.length ? 'arcane_site_found' : 'arcane_survey_empty', cell: army.cell,
     message: found.length
