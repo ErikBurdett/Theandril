@@ -26,6 +26,8 @@ cases for low system memory, and 49 of 59 production cases pass while ten
 crash-only cases stay unverified; all are classified in the packet. [Evidence](development/2026-10-29-seam-warding/README.md),
 [ADR0062](architecture/0062-seam-warding.md).
 
+Published as `52b8436` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication-rites/README.md)).
+
 ## Registry inspection in AI watch and the complete browser suites — 2026-10-29
 
 Before publication both browser suites were run end to end: the production suite

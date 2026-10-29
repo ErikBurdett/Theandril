@@ -168,14 +168,23 @@ Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
 [GitHub Pages](https://erikburdett.github.io/Theandril/): both workflows pass,
 the read-only live readback matches the exact local rebuild, and the scoped live
 journeys are recorded in the [publication packet](../2026-10-29-publication/README.md).
-The DHARMA tracker roadmap records 101 of 150 acceptance points with M7 in
-progress. No new developer dispatch was published; edition 23 remains the
-newest.
+The seventh slice is deployed as `52b8436` (feature `e103a72` plus the packet
+trim): both workflows and the live readback pass ([publication packet](../2026-10-29-publication-rites/README.md));
+no scoped live journeys were run because the desktop's headless browser was
+crashing. The DHARMA tracker roadmap records 102 of 150 acceptance points with
+M2 and M7 in progress. No new developer dispatch was published; edition 23
+remains the newest.
 
 ## Not done / blocked / caveats
 
 - The roadmap catalogue's evidence links still pin the earlier snapshot; moving
   them to this revision belongs in a reviewed dispatch.
+- Commit `e103a72` carries 586 MB of unzipped Playwright trace screenshots in
+  history, swept in from a gameplay run the tool stopped for low memory; the
+  tree is trimmed in `52b8436`, but purging history needs an authorized rewrite
+  of `master` (the force push was refused).
+- The complete gameplay suite stopped at 39 passing cases for low system memory
+  and ten crash-only production cases are unverified on this desktop.
 - The complete gameplay browser suite had not been run end to end since rules
   30. Four stale journeys were corrected with retained evidence (a victory turn,
   a roster import, a posting destination, and registry inspection in AI watch,
