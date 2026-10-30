@@ -23,7 +23,7 @@ ordered without a preview and refused on the Epic proxy.
 [Evidence](development/2026-10-29-ai-wardens/README.md),
 [ADR0065](architecture/0065-ai-wardens.md).
 
-Published as `f747c50` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication-wardens/README.md)).
+Published as `f747c50` with both workflows and the live readback passing ([publication evidence](development/2026-10-29-publication-wardens/README.md)). The fallback follow-up is published as `d10c243` the same way ([publication evidence](development/2026-10-29-publication-wardens-fallback/README.md)).
 
 ## Seam kindling: the Flame hearth rite — 2026-10-29
 
