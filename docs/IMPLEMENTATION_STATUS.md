@@ -37,6 +37,8 @@ and build pass; headline campaigns remain **385/343/229** with command and event
 counts identical to the AI-wardens packet, and the rules 42 projection
 reproduces that packet's seals exactly. No headline realm fields two opposing
 casters with Unbinding, so organic interception is unobserved in AI play.
+Deployed as `e2f74d0`: both workflows and the live readback pass
+([publication packet](development/2026-10-29-publication-interception/README.md)).
 [Evidence](development/2026-10-29-reactive-interception/README.md),
 [ADR0066](architecture/0066-reactive-interception.md).
 

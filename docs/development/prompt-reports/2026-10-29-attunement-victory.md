@@ -239,6 +239,11 @@ one journey that had failed twice, passes alone in 11 s. Under
 
 ## Published
 
+The eleventh slice is deployed as `e2f74d0`, after the testing-methodology
+commit `1703221`: both workflows and the live readback pass
+([publication packet](../2026-10-29-publication-interception/README.md)); no
+browser suite ran for the deploy, per `docs/TESTING.md`. The tracker records
+106 of 150 acceptance points.
 Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
 [GitHub Pages](https://erikburdett.github.io/Theandril/): both workflows pass,
 the read-only live readback matches the exact local rebuild, and the scoped live
