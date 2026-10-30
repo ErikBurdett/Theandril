@@ -1,0 +1,1512 @@
+
+Running 252 tests using 4 workers
+
+  ✓    3 tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (6.5s)
+  ✓    1 tests/gameplay/army-size.spec.ts:27:1 › actual one, three and twelve-formation armies use capped representative groups and update after a saved split (10.5s)
+  ✓    4 tests/gameplay/army.spec.ts:53:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (20.8s)
+  ✓    6 tests/gameplay/army-size.spec.ts:102:1 › fleet representatives count real hull formations without drawing embarked passengers twice (17.1s)
+  ✘    2 tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus (48.5s)
+  ✘    5 tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD (43.6s)
+  ✓    7 tests/gameplay/army.spec.ts:94:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (31.2s)
+  ✓   10 tests/gameplay/battle-camera.spec.ts:8:1 › 390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks (10.2s)
+  ✓    8 tests/gameplay/art.spec.ts:18:1 › approved native assets power the map while Art Lab inspects real animations, rectangles, palette and tile repetition without changing the campaign (34.9s)
+  ✓   11 tests/gameplay/army.spec.ts:124:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (11.6s)
+  ✓    9 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (11.7s)
+  ✓   15 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (7.5s)
+  ✓   13 tests/gameplay/art.spec.ts:110:1 › actual guards, towns and far-zoom markers use observed entities rather than future-ready catalog content (11.9s)
+  ✓   12 tests/gameplay/battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (18.0s)
+  ✓   17 tests/gameplay/art.spec.ts:137:1 › a failed approved-art load is reported and retains playable procedural fallbacks (13.3s)
+  ✓   19 tests/gameplay/art.spec.ts:153:1 › Art Lab refuses stale, mismatched and oversized atlas images before reporting pixel measurements (15.2s)
+  ✓   16 tests/gameplay/battle-interception.spec.ts:20:1 › an enemy Waykeeper holding Unbinding intercepts the player’s working as it is made (31.7s)
+  ✓   18 tests/gameplay/battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture (27.7s)
+  ✓   22 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls (14.5s)
+  ✓   21 tests/gameplay/battlefield.spec.ts:97:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (29.0s)
+  ✓   23 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text (12.0s)
+  ✓   14 tests/gameplay/battle-individuals.spec.ts:36:36 › land role sprites follow exact canonical members, actions and deaths at desktop and 390px (1.4m)
+  ✘   20 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (44.9s)
+  ✘   26 tests/gameplay/battle-individuals.spec.ts:36:36 › naval role sprites follow exact canonical members, actions and deaths at desktop and 390px (12.7s)
+  ✓   27 tests/gameplay/campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu (18.6s)
+  ✓   28 tests/gameplay/campaign-menu.spec.ts:110:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (12.0s)
+  ✓   25 tests/gameplay/biome-variation.spec.ts:56:1 › all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration (40.2s)
+  ✘   24 tests/gameplay/battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (46.4s)
+  ✓   29 tests/gameplay/campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate (12.5s)
+  ✓   30 tests/gameplay/campaign-menu.spec.ts:166:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign (13.3s)
+  ✓   31 tests/gameplay/biome-variation.spec.ts:112:1 › a missing chosen variant uses its unchanged approved base and reports the exact missing identity (13.9s)
+  ✓   33 tests/gameplay/campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection (9.0s)
+  ✓   35 tests/gameplay/biome-variation.spec.ts:133:1 › generated watched terrain retains variants, fog privacy and exact river joins through spectator reveal and restore (7.3s)
+  ✓   34 tests/gameplay/campaign-menu.spec.ts:245:1 › new campaign generation can be cancelled without losing the existing worker or campaign (16.1s)
+  ✓   32 tests/gameplay/battlefield.spec.ts:204:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (25.1s)
+  ✓   36 tests/gameplay/campaign-seed.spec.ts:34:1 › default campaigns choose different random worlds, and saved random worlds retain their seed (20.3s)
+  ✓   40 tests/gameplay/campaign-seed.spec.ts:65:3 › explicit seed 0 recreates the exact same campaign after New campaign (9.7s)
+  ✓   41 tests/gameplay/campaign-seed.spec.ts:65:3 › explicit seed 4294967295 recreates the exact same campaign after New campaign (9.3s)
+  ✓   38 tests/gameplay/cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save (33.8s)
+  ✓   42 tests/gameplay/campaign-seed.spec.ts:76:1 › an invalid custom seed leaves the existing campaign intact (7.7s)
+  ✘   37 tests/gameplay/campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign (50.1s)
+  ✓   44 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (10.5s)
+  ✘   39 tests/gameplay/battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (48.0s)
+  ✓   46 tests/gameplay/campaign.spec.ts:59:1 › compressed export/import and corrupt-save handling use the real controls (10.1s)
+  ✓   43 tests/gameplay/characters-tree.spec.ts:25:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects (23.0s)
+  ✓   49 tests/gameplay/characters-tree.spec.ts:78:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit (13.5s)
+Huge starting-map measurements: {"generationMs":340.39999997615814,"commandMs":0,"aiMs":0,"transferBytes":19997,"totalTransferBytes":19997,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":97,"frameMs":150,"frameP95Ms":266.5619999999999,"renderCpuMs":0.2999999523162842,"visibleCells":61,"visibleChunks":2,"cachedChunks":2,"chunkRebuilds":8,"visibleEntities":2,"zoom":0.9999999999999996,"highlightedCells":36,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":1823,"artFirstRenderCpuMs":157.70000004768372,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":63,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":48,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":233,"cachedTextureBytesEstimate":1048576}
+  ✓   48 tests/gameplay/campaign.spec.ts:80:1 › Huge map pans and zooms with bounded visible geometry; layout remains usable (15.9s)
+  ✓   50 tests/gameplay/charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel (22.9s)
+  ✘   45 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (46.9s)
+  ✘   47 tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable (48.5s)
+  ✘   52 tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled (15.1s)
+  ✘   51 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (38.9s)
+  ✓   54 tests/gameplay/charter-templates.spec.ts:173:3 › a denied template library reports failure without blocking ordinary charter orders or overwriting stored rows (8.6s)
+  ✓   57 tests/gameplay/charter-templates.spec.ts:173:3 › a transient-denial template library reports failure without blocking ordinary charter orders or overwriting stored rows (11.6s)
+  ✓   56 tests/gameplay/chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (13.0s)
+  ✓   53 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (37.3s)
+  ✓   55 tests/gameplay/city-growth.spec.ts:101:1 › all five research-gated sites display their approved pixel assets and stable idle chunks (21.6s)
+  ✓   58 tests/gameplay/charter-templates.spec.ts:173:3 › a malformed template library reports failure without blocking ordinary charter orders or overwriting stored rows (10.4s)
+  ✓   61 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (6.1s)
+  ✓   63 tests/gameplay/contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload (13.0s)
+  ✓   59 tests/gameplay/combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round (35.4s)
+  ✓   62 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (30.5s)
+  ✓   64 tests/gameplay/contact.spec.ts:35:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch (23.5s)
+  ✓   65 tests/gameplay/combat.spec.ts:56:1 › withdrawal applies strategic retreat and pursuit through the player order (19.8s)
+  ✘   60 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (47.8s)
+  ✓   68 tests/gameplay/combat.spec.ts:71:1 › an AI attack pauses for the human defender to choose an order (12.8s)
+  ✓   69 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (12.4s)
+  ✓   67 tests/gameplay/defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls (25.5s)
+  ✓   72 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry (12.9s)
+  ✘   66 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (47.3s)
+  ✓   70 tests/gameplay/defense-theaters.spec.ts:34:1 › a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override (26.4s)
+  ✓   73 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry (12.7s)
+  ✓   74 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (18.4s)
+  ✓   76 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry (16.0s)
+  ✓   77 tests/gameplay/development-trees.spec.ts:71:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (13.8s)
+  ✘   71 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (1.1m)
+  ✓   75 tests/gameplay/defense-theaters.spec.ts:129:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater (40.7s)
+  ✓   78 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (23.0s)
+  ✓   82 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (4.0s)
+  ✓   79 tests/gameplay/development-trees.spec.ts:104:1 › survivors spend experience earned in a saved real battle and preserve training after reload (24.0s)
+  ✓   84 tests/gameplay/development-trees.spec.ts:126:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (6.7s)
+  ✓   83 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (10.8s)
+  ✓   86 tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (10.1s)
+  ✓   87 tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (13.8s)
+  ✓   85 tests/gameplay/faction-roster.spec.ts:52:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves (26.9s)
+  ✘   81 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (48.6s)
+  ✘   80 tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (48.8s)
+  ✓   88 tests/gameplay/faction-selection.spec.ts:4:1 › a selected new culture owns the actual player seat and persists through save/load (9.6s)
+  ✓   91 tests/gameplay/faction-ui.spec.ts:33:1 › 24 public culture crests are reference art, while campaign heraldry follows only observed faction definitions (13.1s)
+  ✓   89 tests/gameplay/faction-roster.spec.ts:52:36 › Saltwind Remnant is a real chosen culture through founding, paid construction and portable saves (23.6s)
+  ✓   90 tests/gameplay/generals.spec.ts:62:1 › a real marshal assignment and prerequisite skill branches expand command from twelve through sixteen to twenty (36.9s)
+  ✓   94 tests/gameplay/faction-roster.spec.ts:52:36 › Wardhall Remnant is a real chosen culture through founding, paid construction and portable saves (27.5s)
+  ✘   92 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (48.1s)
+  ✓   95 tests/gameplay/generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair (17.1s)
+  ✓   93 tests/gameplay/faction-ui.spec.ts:83:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private (40.9s)
+  ✓   99 tests/gameplay/faction-ui.spec.ts:159:1 › missing approved faction art is visibly generic without broken images or blocked campaign controls (10.3s)
+  ✓   96 tests/gameplay/faction-roster.spec.ts:52:36 › Rimehorn Clans is a real chosen culture through founding, paid construction and portable saves (28.7s)
+  ✓   98 tests/gameplay/generals.spec.ts:132:1 › twenty general-led formations enter a saved four-rank battle and resolve through the same kernel (38.0s)
+  ✘   97 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (50.1s)
+  ✓  102 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign (18.5s)
+  ✓  101 tests/gameplay/faction-roster.spec.ts:52:36 › Sable Steppe is a real chosen culture through founding, paid construction and portable saves (40.8s)
+  ✘  100 tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog (47.9s)
+  ✓  104 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign (22.3s)
+  ✓  105 tests/gameplay/faction-roster.spec.ts:52:36 › Morrow Spore is a real chosen culture through founding, paid construction and portable saves (39.0s)
+  ✓  107 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel missing-results after real movement locks orders until the actual manual save is restored (21.8s)
+  ✘  103 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (47.9s)
+  ✓  106 tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides (42.9s)
+  ✓  110 tests/gameplay/faction-art.spec.ts:224:1 › a missing approved culture variant uses its generic role and explicit warning, never a different culture (16.9s)
+  ✓  111 tests/gameplay/group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit (15.8s)
+  ✓  108 tests/gameplay/faction-roster.spec.ts:52:36 › Cistern Assembly is a real chosen culture through founding, paid construction and portable saves (28.7s)
+  ✓  109 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel wrong-army after real movement locks orders until the actual manual save is restored (26.9s)
+  ✓  113 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (16.6s)
+  ✓  114 tests/gameplay/faction-roster.spec.ts:52:36 › Unsealed Companies is a real chosen culture through founding, paid construction and portable saves (31.3s)
+  ✓  115 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel worker-crash after real movement locks orders until the actual manual save is restored (31.2s)
+  ✓  116 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (21.2s)
+  ✘  112 tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch (47.0s)
+  ✓  118 tests/gameplay/group-movement-recovery.spec.ts:58:1 › a superseded route review cannot fault a restored campaign when its late reply claims recovery is required (18.8s)
+  ✓  117 tests/gameplay/faction-roster.spec.ts:52:36 › Lantern Hospices is a real chosen culture through founding, paid construction and portable saves (30.1s)
+  ✓  119 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (35.8s)
+  ✓  123 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (12.4s)
+  ✘  120 tests/gameplay/group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves (47.0s)
+  ✘  121 tests/gameplay/hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion (42.1s)
+  ✓  124 tests/gameplay/hearth-harbor.spec.ts:67:1 › a paid Charter harbor uses its approved coastal sprite at desktop and narrow near zoom without changing naval rules (16.2s)
+  ✓  122 tests/gameplay/faction-roster.spec.ts:52:36 › Cairnwing Concord is a real chosen culture through founding, paid construction and portable saves (36.8s)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-2-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-3-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-4-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"failed-import","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  125 tests/gameplay/group-movement.spec.ts:212:1 › canonical destination refusals retain only the unavailable army for correction (30.6s)
+  ✓  127 tests/gameplay/hearth-development.spec.ts:162:1 › a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales (28.0s)
+{"stage":"after-battle","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  130 tests/gameplay/hearth-development.spec.ts:199:1 › remembered foreign land never exposes unseen construction or newly completed district art (8.2s)
+  ✓  131 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (873ms)
+  ✓  128 tests/gameplay/faction-roster.spec.ts:52:36 › Red Sluice Directorate is a real chosen culture through founding, paid construction and portable saves (37.3s)
+  ✓  132 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (843ms)
+  ✓  126 tests/gameplay/hermes-ui-slices.spec.ts:23:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (39.6s)
+  ✓  134 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (533ms)
+  ✓  129 tests/gameplay/group-movement.spec.ts:241:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting (20.4s)
+  ✓  136 tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order (16.9s)
+  ✓  135 tests/gameplay/hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (18.7s)
+  ✓  138 tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px (9.1s)
+  ✓  140 tests/gameplay/household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px (6.4s)
+  ✓  133 tests/gameplay/faction-roster.spec.ts:52:36 › Velvet Meridian is a real chosen culture through founding, paid construction and portable saves (35.0s)
+  ✓  139 tests/gameplay/hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (15.8s)
+  ✓  141 tests/gameplay/household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px (8.5s)
+  ✓  144 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (3.8s)
+  ✓  137 tests/gameplay/land-query.spec.ts:71:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (44.6s)
+  ✓  145 tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (18.4s)
+  ✓  142 tests/gameplay/faction-roster.spec.ts:52:36 › Brine Choir is a real chosen culture through founding, paid construction and portable saves (43.3s)
+  ✘  143 tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width (48.0s)
+  ✓  147 tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (23.3s)
+  ✓  150 tests/gameplay/map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (10.6s)
+  ✘  146 tests/gameplay/land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (47.1s)
+  ✓  149 tests/gameplay/land.spec.ts:117:1 › capital designation is paid and independent of colony, settlement and city size (25.6s)
+  ✓  148 tests/gameplay/faction-roster.spec.ts:52:36 › Emberwake Convocation is a real chosen culture through founding, paid construction and portable saves (35.1s)
+  ✓  151 tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (20.3s)
+  ✓  153 tests/gameplay/map-readability.spec.ts:39:1 › realm perimeters and contextual names stay quiet while real selection, hover, range and land inspection remain clear (29.5s)
+  ✓  155 tests/gameplay/movement.spec.ts:70:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (30.5s)
+  ✘  152 tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (49.1s)
+  ✓  154 tests/gameplay/faction-roster.spec.ts:52:36 › Underhush Exchange is a real chosen culture through founding, paid construction and portable saves (44.8s)
+  ✓  157 tests/gameplay/movement.spec.ts:103:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (22.0s)
+  ✘  156 tests/gameplay/naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers (49.0s)
+  ✓  159 tests/gameplay/faction-roster.spec.ts:52:36 › Vesper Court is a real chosen culture through founding, paid construction and portable saves (36.3s)
+  ✘  158 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (48.1s)
+  ✓  160 tests/gameplay/movement.spec.ts:130:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (33.2s)
+  ✓  162 tests/gameplay/naval-art.spec.ts:148:1 › an absent approved naval variant falls back to a ship marker, never another culture or a land unit (11.6s)
+  ✓  161 tests/gameplay/faction-roster.spec.ts:52:36 › Manytrack Moot is a real chosen culture through founding, paid construction and portable saves (33.3s)
+  ✓  164 tests/gameplay/movement.spec.ts:170:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (23.6s)
+  ✓  165 tests/gameplay/next-action.spec.ts:49:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders (37.1s)
+  ✓  167 tests/gameplay/movement.spec.ts:194:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (17.5s)
+  ✓  169 tests/gameplay/movement.spec.ts:217:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (8.1s)
+  ✘  163 tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply (48.2s)
+  ✓  166 tests/gameplay/faction-roster.spec.ts:52:36 › Margin Observance is a real chosen culture through founding, paid construction and portable saves (27.2s)
+  ✓  172 tests/gameplay/faction-roster.spec.ts:117:1 › twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms (6.3s)
+  ✓  168 tests/gameplay/next-action.spec.ts:97:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped (19.2s)
+  ✓  173 tests/gameplay/faction-roster.spec.ts:147:1 › all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width (9.2s)
+  ✓  174 tests/gameplay/next-action.spec.ts:138:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width (18.4s)
+  ✓  171 tests/gameplay/naval.spec.ts:173:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (29.2s)
+  ✓  175 tests/gameplay/posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector (34.9s)
+  ✘  170 tests/gameplay/patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay (50.8s)
+  ✓  178 tests/gameplay/posting-targets.spec.ts:50:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale (15.7s)
+  ✘  176 tests/gameplay/posting-templates.spec.ts:64:1 › posting template edits, recall, reload and deletion stay outside campaign history and require a fresh hearth choice (48.5s)
+  ✘  177 tests/gameplay/naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (47.9s)
+  ✓  180 tests/gameplay/posting-targets.spec.ts:81:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history (24.2s)
+  ✓  179 tests/gameplay/patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route (43.3s)
+  ✓  181 tests/gameplay/posting-templates.spec.ts:138:1 › a hearth template recalled in another campaign requires its own destination while existing postings remain clearable (21.5s)
+  ✓  183 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with missing-results ends pending work, locks orders and restores the actual manual save (19.3s)
+  ✓  182 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (34.6s)
+  ✓  184 tests/gameplay/patrols.spec.ts:124:1 › the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes (27.4s)
+  ✓  186 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-item ends pending work, locks orders and restores the actual manual save (15.8s)
+  ✓  188 tests/gameplay/production-template-recovery.spec.ts:9:3 › a denied production-template library preserves stored rows and keeps explicit paid production usable (13.3s)
+  ✓  185 tests/gameplay/posting-templates.spec.ts:187:1 › a recalled posting template applies to one hundred armies through ordinary orders and survives saved recovery and replay (39.2s)
+  ✓  189 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with map-revision ends pending work, locks orders and restores the actual manual save (16.2s)
+  ✓  191 tests/gameplay/posting-templates.spec.ts:238:3 › a denied posting library preserves stored rows and leaves direct posting orders usable (18.3s)
+  ✓  190 tests/gameplay/production-template-recovery.spec.ts:9:3 › a transient-denial production-template library preserves stored rows and keeps explicit paid production usable (21.8s)
+  ✓  192 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-type ends pending work, locks orders and restores the actual manual save (18.5s)
+  ✘  187 tests/gameplay/production-sequences.spec.ts:117:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues (48.2s)
+  ✓  193 tests/gameplay/posting-templates.spec.ts:238:3 › a transient-denial posting library preserves stored rows and leaves direct posting orders usable (10.1s)
+  ✓  194 tests/gameplay/production-template-recovery.spec.ts:9:3 › a malformed production-template library preserves stored rows and keeps explicit paid production usable (16.1s)
+  ✓  197 tests/gameplay/posting-templates.spec.ts:238:3 › a malformed posting library preserves stored rows and leaves direct posting orders usable (14.0s)
+  ✓  195 tests/gameplay/production-sequence-response-recovery.spec.ts:7:3 › a production batch with worker-crash ends pending work, locks orders and restores the actual manual save (25.4s)
+  ✓  196 tests/gameplay/production-sequences.spec.ts:286:1 › shared coin and ordinary duplicate, full-queue and prerequisite refusals retain paid prefixes in stable hearth order (26.6s)
+  ✓  201 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (1.5s)
+  ✓  198 tests/gameplay/progression-tree.spec.ts:24:1 › research dependencies support keyboard inspection, exact purchases and permanent policy choices across a save (20.2s)
+  ✓  202 tests/gameplay/roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (2.3s)
+  ✓  204 tests/gameplay/roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (1.9s)
+  ✓  205 tests/gameplay/roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence (3.2s)
+  ✓  203 tests/gameplay/progression-tree.spec.ts:76:1 › narrow research keeps every real branch and its linked purchase reachable without horizontal scrolling (5.9s)
+  ✓  206 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text (2.4s)
+  ✓  208 tests/gameplay/roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text (2.5s)
+  ✓  209 tests/gameplay/roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap (2.4s)
+  ✓  207 tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (18.8s)
+  ✓  199 tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders (40.3s)
+  ✓  200 tests/gameplay/resources-overview.spec.ts:40:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market (41.3s)
+  ✓  211 tests/gameplay/seam-warding.spec.ts:63:1 › a besieger breaks the ward on its turn and the holder is jarred (12.3s)
+  ✓  212 tests/gameplay/realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration (14.2s)
+  ✓  210 tests/gameplay/selected-asset.spec.ts:29:1 › only the selected artwork has a quiet faction contour and slow glints, with steady reduced motion and preserved map actions (27.2s)
+  ✓  213 tests/gameplay/resources-overview.spec.ts:92:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend (9.1s)
+  ✓  216 tests/gameplay/selected-asset.spec.ts:77:1 › unavailable selected artwork uses small honest glyph brackets without restoring a whole-tile outline (8.0s)
+  ✓  214 tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column (12.9s)
+  ✓  217 tests/gameplay/resources-overview.spec.ts:129:1 › political mode and a selected realm filter persist while an actual battle temporarily hides the map controls (14.4s)
+  ✓  220 tests/gameplay/storage.spec.ts:50:1 › incremental browser saves share journal chunks and recover an older manifest with exact exported replay (16.0s)
+  ✓  221 tests/gameplay/strategic-picking.spec.ts:43:1 › clicking a displaced garrison badge and foreign banner inspects the rendered entity without moving the selected army (10.3s)
+  ✘  222 tests/gameplay/strategic-picking.spec.ts:73:1 › shift-clicking the displaced badge deliberately follows a route to its actual hearth cell (6.0s)
+  ✓  219 tests/gameplay/specialist-roster.spec.ts:20:1 › research and paid specialist recruits survive save/load with honest shared silhouettes at desktop and narrow sizes (38.8s)
+  ✘  218 tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback (40.4s)
+  ✘  215 tests/gameplay/selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths (47.9s)
+  ✓  225 tests/gameplay/supply.spec.ts:27:1 › a force outside supply says what it costs, is named in the turn list, and can raise a depot to feed itself (15.8s)
+  ✓  224 tests/gameplay/subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save (16.6s)
+  ✘  227 tests/gameplay/terrain-art.spec.ts:45:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites (7.9s)
+  ✓  229 tests/gameplay/terrain-art.spec.ts:76:1 › missing approved terrain art keeps explicit physical hill and mountain fallbacks without pretending tiles loaded (9.0s)
+  ✓  223 tests/gameplay/supply-access.spec.ts:27:1 › negotiate foreign harbor service, sustain the convoy and field force, interrupt it and recover with a saved agreement (35.6s)
+  ✓  226 tests/gameplay/selection-groups.spec.ts:163:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign (41.0s)
+  ✓  230 tests/gameplay/terrain-art.spec.ts:111:39 › all five completed land works retain approved prop artwork and borders (9.7s)
+  ✓  231 tests/gameplay/supply-access.spec.ts:78:1 › a provider reviews a real incoming request and receives exactly one payment through keyboard acceptance (11.8s)
+  ✓  233 tests/gameplay/terrain-art.spec.ts:111:39 › all five completed land works retain distinct explicit fallback glyphs and borders (7.3s)
+  ✓  234 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1440px and 100% text (6.1s)
+  ✓  236 tests/gameplay/updates.spec.ts:6:3 › readable journal at 1366px and 100% text (5.7s)
+  ✓  237 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 100% text (6.4s)
+  ✓  232 tests/gameplay/selection-groups.spec.ts:231:1 › recalling a carried army skips it without rewriting the saved group, while explicit empty replacement is canonical (23.1s)
+  ✘  228 tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies (47.9s)
+  ✓  238 tests/gameplay/updates.spec.ts:6:3 › readable journal at 390px and 130% text (9.3s)
+  ✓  241 tests/gameplay/updates.spec.ts:53:1 › reading surfaces retain contrast without putting texture over the text (1.9s)
+  ✓  242 tests/gameplay/updates.spec.ts:84:1 › unknown dispatch links fail honestly and keyboard skip navigation works (1.3s)
+  ✓  235 tests/gameplay/world-geography.spec.ts:46:1 › AI-watch fog is a reversible UI/console presentation and saves retain only genuine faction sight (25.7s)
+  ✓  243 tests/gameplay/updates.spec.ts:95:1 › archive search combines topic filters, survives refresh and recovers from no results (2.2s)
+  ✓  245 tests/gameplay/updates.spec.ts:110:1 › scope ledger links real gates and a contributor can reach authoring guidance (1.6s)
+  ✓  246 tests/gameplay/updates.spec.ts:126:1 › a keyboard reader can enlarge a real image and return to the same control (1.0s)
+  ✓  239 tests/gameplay/selection-groups.spec.ts:263:1 › a damaged saved-group response ends pending work, locks uncertain orders and recovers from a real manual save (21.1s)
+  ✓  240 tests/gameplay/tile-footprints.spec.ts:126:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog (20.9s)
+  ✓  247 tests/gameplay/updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch (7.0s)
+  ✓  244 tests/gameplay/world-geography.spec.ts:87:73 › continents geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (12.2s)
+  ✓  248 tests/gameplay/world-geography.spec.ts:87:73 › islands geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (3.8s)
+  ✓  249 tests/gameplay/world-geography.spec.ts:87:73 › archipelago geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (7.0s)
+  ✓  250 tests/gameplay/world-geography.spec.ts:132:1 › Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport (3.6s)
+  ✓  251 tests/gameplay/world-geography.spec.ts:198:1 › player campaigns reject both public fog commands and expose no reveal button (3.6s)
+  ✓  252 tests/gameplay/world-geography.spec.ts:216:1 › a paid road segment has joined map geometry, preserves progress in a save and is suppressed only at far zoom (8.2s)
+
+
+  1) tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.waitForFunction: Test timeout of 45000ms exceeded.
+
+      61 |   const sample = async (stage: string) => {
+      62 |     const frame = (await counters(page)).frameCount ?? 0;
+    > 63 |     await page.waitForFunction(frame => (window.__THEANDRIL__!.getPerformanceCounters().frameCount ?? 0) >= frame + 75, frame);
+         |                ^
+      64 |     const metrics = await counters(page);
+      65 |     const rendered = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleEntityArt
+      66 |       .filter(entity => entity.formationCount !== null)
+        at sample (/home/telephoneheater/Work/Theandril/tests/gameplay/army-size-performance.spec.ts:63:16)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/army-size-performance.spec.ts:136:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 481
+    Received:   454
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      35 |   const sample = async (stage: string) => {
+      36 |     const frame = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters().frameCount ?? 0);
+    > 37 |     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters().frameCount ?? 0)).toBeGreaterThan(frame + 60);
+         |                                                                                                                  ^
+      38 |     const metrics = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters());
+      39 |     const art = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
+      40 |     expect(metrics?.cachedChunks).toBeLessThanOrEqual(64);
+        at sample (/home/telephoneheater/Work/Theandril/tests/gameplay/art-performance.spec.ts:37:114)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/art-performance.spec.ts:78:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/art-performance-fully-expl-e784a-poses-pan-and-strategic-LOD/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/art-performance-fully-expl-e784a-poses-pan-and-strategic-LOD/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/art-performance-fully-expl-e784a-poses-pan-and-strategic-LOD/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/art-performance-fully-expl-e784a-poses-pan-and-strategic-LOD/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/battle-individuals.spec.ts:36:36 › naval role sprites follow exact canonical members, actions and deaths at desktop and 390px 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      59 |   expect(initial.soldiers.map(soldier => soldier.id).sort()).toEqual(deployment.soldiers!.map(soldier => soldier.id).sort());
+      60 |   expect(new Set(initial.soldiers.map(soldier => soldier.assetId))).toEqual(new Set((naval ? hullRoles : landRoles).map(role => `battle.unit.${role}`)));
+    > 61 |   expect(initial.soldiers.every(soldier => soldier.frameId?.startsWith(soldier.assetId) && soldier.hull === naval)).toBe(true);
+         |                                                                                                                     ^
+      62 |   expect(initial.missingArt).toEqual([]);
+      63 |   await page.getByTestId('map-container').screenshot({ path: info.outputPath('roles-deployment.png') });
+      64 |   await page.setViewportSize({ width: 390, height: 844 });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-individuals.spec.ts:61:117
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battle-individuals-naval-r-e5ef7-deaths-at-desktop-and-390px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/battle-individuals-naval-r-e5ef7-deaths-at-desktop-and-390px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battle-individuals-naval-r-e5ef7-deaths-at-desktop-and-390px/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/battle-individuals-naval-r-e5ef7-deaths-at-desktop-and-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    Call Log:
+    - Timeout 15000ms exceeded while waiting on the predicate
+
+      35 |   await page.getByRole('button', { name: 'Brace', exact: true }).click();
+      36 |   await expect(page.getByTestId('battle-round')).toHaveText('1');
+    > 37 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()?.effects.some(effect => effect.assetId === 'effect.battle_melee' || effect.assetId === 'effect.battle_projectile')), { timeout: 15000 }).toBe(true);
+         |                                                                                                                                                                                                                                     ^
+      38 |   const commandHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+      39 |   const sample = await page.evaluate(async () => {
+      40 |     const frames: number[] = [], cpu: number[] = [], effects = new Set<string>(), frameIds = new Set<string>(), soldierFrames = new Set<string>(), soldierStates = new Set<string>();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-performance.spec.ts:37:229
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/gameplay/battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "c0a3c91d"
+    Received: "6b9c2d58"
+
+      86 |   expect(evidence.visibleFrames).toBeGreaterThan(1);
+      87 |   expect(held.actors.find(item => item.id === casterId)?.frameId).toMatch(/character\.waykeeper\/cast\/se\/[2-5]$/);
+    > 88 |   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(evidence.hash);
+         |                                                                           ^
+      89 |   await page.getByTestId('map-container').screenshot({ path: info.outputPath(filename + '.png') });
+      90 |   const raw = JSON.stringify({ ...evidence, held }, null, 2);
+      91 |   await writeFile(info.outputPath(filename + '-frames.json'), raw);
+        at captureLiveCast (/home/telephoneheater/Work/Theandril/tests/gameplay/battlefield.spec.ts:88:75)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battlefield.spec.ts:180:3
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-paid-personal--557e8-et-controls-at-narrow-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-paid-personal--557e8-et-controls-at-narrow-width/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-paid-personal--557e8-et-controls-at-narrow-width/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-paid-personal--557e8-et-controls-at-narrow-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/gameplay/battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('battle-replay')
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('battle-replay') with timeout 15000ms
+      - waiting for getByTestId('battle-replay')
+      - Test timeout of 45000ms exceeded.
+
+
+      260 |   // This authored modern hull fight takes eight actual rounds, including the
+      261 |   // watch scheduler between packets, rather than the old immediate hull result.
+    > 262 |   await expect(page.getByTestId('battle-replay')).toBeVisible({ timeout: 15000 });
+          |                                                   ^
+      263 |   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.battle)).toBeNull();
+      264 |   const finished = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), scene: window.__THEANDRIL__!.getBattleDiagnostics() }));
+      265 |   await info.attach('naval-battle-presentation.json', { body: JSON.stringify(finished, null, 2), contentType: 'application/json' });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battlefield.spec.ts:262:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-naval-battlefi-72b28-and-excludes-embarked-cargo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-naval-battlefi-72b28-and-excludes-embarked-cargo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-naval-battlefi-72b28-and-excludes-embarked-cargo/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/battlefield-naval-battlefi-72b28-and-excludes-embarked-cargo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/gameplay/campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/campaign-settle-grow-build-6c589-nd-resume-the-same-campaign/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/campaign-settle-grow-build-6c589-nd-resume-the-same-campaign/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/campaign-settle-grow-build-6c589-nd-resume-the-same-campaign/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/campaign-settle-grow-build-6c589-nd-resume-the-same-campaign/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-named-appointme-2d514-ey-across-save-and-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/characters-named-appointme-2d514-ey-across-save-and-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-named-appointme-2d514-ey-across-save-and-recovery/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/characters-named-appointme-2d514-ey-across-save-and-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Campaign restored"
+    Received string:    ""
+
+
+      65 |   const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+      66 |   await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+    > 67 |   await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
+         |                                              ^
+      68 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
+      69 | }
+      70 |
+        at saveReload (/home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:67:46)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:172:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-a-named-marshal-ce0ef--the-exact-battle-aftermath/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/characters-a-named-marshal-ce0ef--the-exact-battle-aftermath/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-a-named-marshal-ce0ef--the-exact-battle-aftermath/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/characters-a-named-marshal-ce0ef--the-exact-battle-aftermath/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Show selected orders', exact: true })
+        - locator resolved to <button aria-haspopup="dialog">Show selected orders</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+
+
+       at ui-navigation.ts:25
+
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+      24 |     await closeCampaignOptions(page);
+    > 25 |     await page.getByRole('button', { name: launcher, exact: true }).click();
+         |                                                                     ^
+      26 |   }
+      27 |   await expect(window).toBeVisible();
+      28 |   return window;
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:25:69)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/characters.spec.ts:237:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-siege-sabotage--89365-s-through-save-and-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/characters-siege-sabotage--89365-s-through-save-and-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/characters-siege-sabotage--89365-s-through-save-and-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('group-charter-results')
+    Expected substring: "40 orders accepted · 0 refused"
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('group-charter-results') with timeout 5000ms
+      - waiting for getByTestId('group-charter-results')
+      - Protocol error (Runtime.callFunctionOn): Internal server error, session closed.
+
+
+      128 |
+      129 |   await group.getByRole('button', { name: 'Apply charters (40)', exact: true }).click();
+    > 130 |   await expect(page.getByTestId('group-charter-results')).toContainText('40 orders accepted · 0 refused');
+          |                                                           ^
+      131 |   const applied = await snapshot(page);
+      132 |   expect(applied.view.charters).toHaveLength(40);
+      133 |   expect(applied.view.charters.every(charter => charter.focus === 'learning' && charter.ceiling === 32)).toBe(true);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/charter-templates.spec.ts:130:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/charter-templates-a-saved--88d87-hs-individually-overridable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/charter-templates-a-saved--88d87-hs-individually-overridable/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/charter-templates-a-saved--88d87-hs-individually-overridable/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/charter-templates-a-saved--88d87-hs-individually-overridable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Campaign chronicles', exact: true })
+    Expected: visible
+    Timeout: 25000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('dialog', { name: 'Campaign chronicles', exact: true }) with timeout 25000ms
+      - waiting for getByRole('dialog', { name: 'Campaign chronicles', exact: true })
+
+
+      34 |   // Real worker rounds with a 250ms UI yield between rounds; current mixed-army AI is active.
+      35 |   const dialog = page.getByRole('dialog', { name: 'Campaign chronicles', exact: true });
+    > 36 |   await expect(dialog).toBeVisible({ timeout: 25000 });
+         |                        ^
+      37 |   const watchMs = Date.now() - started;
+      38 |   await expect(dialog).toContainText('Complete record: generated start on turn 1');
+      39 |   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/chronicles.spec.ts:36:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled 
+
+    Error: page.evaluate: TypeError: Cannot read properties of null (reading 'coinCost')
+        at eval (eval at evaluate (:311:30), <anonymous>:1:65)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:311:30), <anonymous>:1:65)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/city-growth.spec.ts:64:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ }).locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / })
+        - locator resolved to <button type="button" aria-label="Close Selected orders">×</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+
+
+       at ui-navigation.ts:10
+
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+       9 |   if (await window.isVisible()) {
+    > 10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+         |                                                                                                       ^
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+      13 | }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:10:103)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/conquest.spec.ts:114:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/conquest-confirm-razing-an-c0d2e--normally-recruited-caravan/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByTestId('defense-theaters').getByRole('combobox', { name: 'Defensive theater', exact: true })
+    Expected: "theater.1"
+    Received: ""
+
+    Call log:
+      - Expect "toHaveValue" getByTestId('defense-theaters').getByRole('combobox', { name: 'Defensive theater', exact: true }) with timeout 5000ms
+      - waiting for getByTestId('defense-theaters').getByRole('combobox', { name: 'Defensive theater', exact: true })
+      - Protocol error (Runtime.callFunctionOn): Internal server error, session closed.
+
+
+      239 |   await disclose(page, 'next-action-causes');
+      240 |   await page.getByTestId('next-action-causes').getByRole('button', { name: 'Defensive theaters need attention · 1', exact: true }).click();
+    > 241 |   await expect(theater.getByRole('combobox', { name: 'Defensive theater', exact: true })).toHaveValue(created.id);
+          |                                                                                           ^
+      242 |   await page.getByTestId('theater-report').getByRole('heading', { name: 'Northern watch · Enabled', exact: true }).scrollIntoViewIfNeeded();
+      243 |   await page.screenshot({ path: testInfo.outputPath('joined-watch-report-narrow.png') });
+      244 |   await theater.locator('.theater-dispatches > summary').click();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:241:91
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.screenshot: Test timeout of 45000ms exceeded.
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      176 |     for (const id of near?.visibleAssetIds ?? []) allNearAssets.add(id);
+      177 |     inspections.push({ label, near, framing });
+    > 178 |     await page.screenshot({ path: testInfo.outputPath(`${label}-near.png`), fullPage: true });
+          |                ^
+      179 |   };
+      180 |   await inspectNear(`${cohort.label}-units-and-villages`, cohort.families.flatMap(family => [...ROLES, TOWN_ROLES[0]!].map(role => `${role}.${family}`)));
+      181 |   if (index === 0) {
+        at inspectNear (/home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:178:16)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-7c11c-ging-canonical-input-or-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-7c11c-ging-canonical-input-or-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-7c11c-ging-canonical-input-or-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-7c11c-ging-canonical-input-or-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: mouse.move: Test timeout of 45000ms exceeded.
+
+      133 |     await page.mouse.move(start.x, start.y);
+      134 |     await page.mouse.down();
+    > 135 |     await page.mouse.move(start.x + 275, start.y, { steps: 10 });
+          |                      ^
+      136 |     await page.mouse.up();
+      137 |     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expected));
+      138 |     const framing = await page.evaluate(expectedIds => {
+        at inspectNear (/home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:135:22)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-73f14-ging-canonical-input-or-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-73f14-ging-canonical-input-or-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-73f14-ging-canonical-input-or-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-73f14-ging-canonical-input-or-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  18) tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.evaluate: Test timeout of 45000ms exceeded.
+
+      135 |     await page.mouse.move(start.x + 275, start.y, { steps: 10 });
+      136 |     await page.mouse.up();
+    > 137 |     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expected));
+          |                                  ^
+      138 |     const framing = await page.evaluate(expectedIds => {
+      139 |       const diagnostics = window.__THEANDRIL__?.getArtDiagnostics(), view = window.__THEANDRIL__?.getSummary();
+      140 |       const canvas = document.querySelector('[data-testid="map-container"] canvas')?.getBoundingClientRect();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:137:34
+        at inspectNear (/home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:137:5)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-56d41-ging-canonical-input-or-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-56d41-ging-canonical-input-or-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-56d41-ging-canonical-input-or-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-56d41-ging-canonical-input-or-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  19) tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.screenshot: Test timeout of 45000ms exceeded.
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      176 |     for (const id of near?.visibleAssetIds ?? []) allNearAssets.add(id);
+      177 |     inspections.push({ label, near, framing });
+    > 178 |     await page.screenshot({ path: testInfo.outputPath(`${label}-near.png`), fullPage: true });
+          |                ^
+      179 |   };
+      180 |   await inspectNear(`${cohort.label}-units-and-villages`, cohort.families.flatMap(family => [...ROLES, TOWN_ROLES[0]!].map(role => `${role}.${family}`)));
+      181 |   if (index === 0) {
+        at inspectNear (/home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:178:16)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-art.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-e8783-ging-canonical-input-or-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-e8783-ging-canonical-input-or-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-e8783-ging-canonical-input-or-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/faction-art-culture-cohort-e8783-ging-canonical-input-or-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  20) tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.evaluate: Test timeout of 45000ms exceeded.
+
+      4 | import { generateWorld, riverSize } from '@theandril/mapgen';
+      5 |
+    > 6 | const counters = (page: Page) => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
+        |                                       ^
+      7 |
+      8 | test('Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog', async ({ page }, testInfo) => {
+      9 |   // Independent read-only geography identifies an actual river to click. It is
+        at counters (/home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:6:39)
+        at sample (/home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:43:27)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:95:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  21) tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-s-bcb23--replayable-canonical-batch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-s-bcb23--replayable-canonical-batch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-s-bcb23--replayable-canonical-batch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-s-bcb23--replayable-canonical-batch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  22) tests/gameplay/group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-e-d28b2-t-manual-and-portable-saves/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-e-d28b2-t-manual-and-portable-saves/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-e-d28b2-t-manual-and-portable-saves/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/group-movement-a-hundred-e-d28b2-t-manual-and-portable-saves/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  23) tests/gameplay/hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "cultivation"
+
+      157 |   await page.getByRole('button', { name: 'Cancel land work · no refund', exact: true }).click();
+      158 |   expect((await terrain(page, cultivate))?.biome).toBe(1);
+    > 159 |   expect((await terrain(page, cultivate))?.district?.kind).not.toBe('cultivation');
+          |                                                                ^
+      160 | });
+      161 |
+      162 | test('a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales', async ({ page }, info) => {
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hearth-development.spec.ts:159:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/hearth-development-paid-he-e375a--restoration-and-completion/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/hearth-development-paid-he-e375a--restoration-and-completion/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/hearth-development-paid-he-e375a--restoration-and-completion/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/hearth-development-paid-he-e375a--restoration-and-completion/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  24) tests/gameplay/land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-same-turn-land--bf3c0-rk-restores-at-narrow-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-same-turn-land--bf3c0-rk-restores-at-narrow-width/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-same-turn-land--bf3c0-rk-restores-at-narrow-width/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-same-turn-land--bf3c0-rk-restores-at-narrow-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  25) tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Inspect land hex 121325', exact: true })
+        - locator resolved to <button type="button" aria-pressed="false" aria-label="Inspect land hex 121325">…</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+      48 |   const button = page.getByRole('button', { name: 'Select tiles', exact: true });
+      49 |   if (await button.getAttribute('aria-expanded') !== 'true') await button.click();
+    > 50 |   await page.getByRole('button', { name: `Inspect land hex ${cell}`, exact: true }).click();
+         |                                                                                     ^
+      51 |   await expect(page.getByTestId('land-cell')).toContainText(`Hex ${cell}`);
+      52 | }
+      53 | async function openImprovements(page: Page) {
+        at selectTile (/home/telephoneheater/Work/Theandril/tests/gameplay/land-query.spec.ts:50:85)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/land-query.spec.ts:203:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  26) tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: /^(Realm registry|Selected orders|Realm affairs|Campaign journal|Map guide)$/ }).locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / })
+
+
+       at ui-navigation.ts:10
+
+       8 |   const window = page.getByRole('dialog', { name: managementNames });
+       9 |   if (await window.isVisible()) {
+    > 10 |     await window.locator(':scope > .campaign-window-header').getByRole('button', { name: /^Close / }).click();
+         |                                                                                                       ^
+      11 |     await expect(window).toHaveCount(0);
+      12 |   }
+      13 | }
+        at closeManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:10:103)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/land.spec.ts:85:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-territory-clicks-paid-d0929-in-playable-at-narrow-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/land-territory-clicks-paid-d0929-in-playable-at-narrow-width/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/land-territory-clicks-paid-d0929-in-playable-at-narrow-width/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/land-territory-clicks-paid-d0929-in-playable-at-narrow-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  27) tests/gameplay/naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: mouse.move: Test timeout of 45000ms exceeded.
+
+      70 |     if (Math.hypot(pan.x, pan.y) > 5) {
+      71 |       await page.mouse.move(start.x, start.y); await page.mouse.down();
+    > 72 |       await page.mouse.move(start.x + pan.x, start.y + pan.y, { steps: 10 }); await page.mouse.up();
+         |                        ^
+      73 |     }
+      74 |     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expected));
+      75 |     const near = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/naval-art.spec.ts:72:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-art-all-twenty-four--3ae37-ithout-duplicate-passengers/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/naval-art-all-twenty-four--3ae37-ithout-duplicate-passengers/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-art-all-twenty-four--3ae37-ithout-duplicate-passengers/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/naval-art-all-twenty-four--3ae37-ithout-duplicate-passengers/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28) tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker 
+
+    Error: Test timeout of 45000ms exceeded
+
+      26 |   await closeManagement(page);
+      27 |   await page.getByRole('button', { name: 'End turn', exact: true }).click();
+    > 28 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getTurn())).toBe(turn + 1);
+         |                                                                                 ^
+      29 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
+      30 | }
+      31 | async function research(page: Page, name: string) {
+        at endTurn (/home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:28:81)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:87:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-an-embarked-expediti-7ea64--duplicate-passenger-marker/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/naval-an-embarked-expediti-7ea64--duplicate-passenger-marker/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-an-embarked-expediti-7ea64--duplicate-passenger-marker/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/naval-an-embarked-expediti-7ea64--duplicate-passenger-marker/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  29) tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.isVisible: Test timeout of 45000ms exceeded.
+    Call log:
+        - checking visibility of getByRole('dialog', { name: 'Selected orders', exact: true })
+
+
+       at ui-navigation.ts:20
+
+      18 | async function openManagement(page: Page, title: string, launcher = title) {
+      19 |   const window = page.getByRole('dialog', { name: title, exact: true });
+    > 20 |   if (!await window.isVisible()) {
+         |                     ^
+      21 |     await closeManagement(page);
+      22 |     // Save/load leaves this real overlay open; dismiss it before clicking a
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:20:21)
+        at openSelectedOrders (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:52:10)
+        at selectArmy (/home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:16:76)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:149:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  30) tests/gameplay/naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Campaign journal', exact: true })
+        - locator resolved to <button aria-haspopup="dialog">…</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+       at ui-navigation.ts:25
+
+      23 |     // potentially covered HUD launcher. Never synthesize Escape or a map click.
+      24 |     await closeCampaignOptions(page);
+    > 25 |     await page.getByRole('button', { name: launcher, exact: true }).click();
+         |                                                                     ^
+      26 |   }
+      27 |   await expect(window).toBeVisible();
+      28 |   return window;
+        at openManagement (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:25:69)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:246:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-naval-battle-ac1c7-ing-its-passengers-as-ships/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-naval-battle-ac1c7-ing-its-passengers-as-ships/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-naval-battle-ac1c7-ing-its-passengers-as-ships/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/naval-a-saved-naval-battle-ac1c7-ing-its-passengers-as-ships/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  31) tests/gameplay/patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('army-patrol').locator(':scope > summary')
+
+
+      14 |   await selectFromRegistry(page, 'armies', name); await openSelectedOrders(page);
+      15 |   const patrol = page.getByTestId('army-patrol');
+    > 16 |   if (await patrol.getAttribute('open') === null) await patrol.locator(':scope > summary').click();
+         |                                                                                            ^
+      17 |   return patrol;
+      18 | }
+      19 | async function nextTurn(page: Page) {
+        at panel (/home/telephoneheater/Work/Theandril/tests/gameplay/patrols.spec.ts:16:92)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/patrols.spec.ts:81:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/patrols-a-two-point-patrol-29be2--recovery-with-exact-replay/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/patrols-a-two-point-patrol-29be2--recovery-with-exact-replay/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/patrols-a-two-point-patrol-29be2--recovery-with-exact-replay/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/patrols-a-two-point-patrol-29be2--recovery-with-exact-replay/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  32) tests/gameplay/posting-templates.spec.ts:64:1 › posting template edits, recall, reload and deletion stay outside campaign history and require a fresh hearth choice 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/posting-templates-posting--ea085-quire-a-fresh-hearth-choice/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/posting-templates-posting--ea085-quire-a-fresh-hearth-choice/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/posting-templates-posting--ea085-quire-a-fresh-hearth-choice/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/posting-templates-posting--ea085-quire-a-fresh-hearth-choice/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  33) tests/gameplay/production-sequences.spec.ts:117:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByTestId('group-production').getByTestId('production-sequence-item')
+    Expected: 3
+    Received: undefined
+
+    Call log:
+      - Expect "toHaveCount" getByTestId('group-production').getByTestId('production-sequence-item') with timeout 5000ms
+      - waiting for getByTestId('group-production').getByTestId('production-sequence-item')
+      - Protocol error (Runtime.callFunctionOn): Internal server error, session closed.
+
+
+      168 |   await expect(rows).toHaveCount(0);
+      169 |   await templates.getByRole('button', { name: 'Recall production template', exact: true }).click();
+    > 170 |   await expect(rows).toHaveCount(3);
+          |                      ^
+      171 |   expect((await snapshot(page)).hash).toBe(beforePreferences.hash);
+      172 |   expect((await snapshot(page)).view.ownSettlements.map(town => town.queue)).toEqual(beforePreferences.view.ownSettlements.map(town => town.queue));
+      173 |   expect(await traffic(page)).toEqual(preferenceTraffic);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/production-sequences.spec.ts:170:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/production-sequences-forty-c8795-ol-and-restore-saved-queues/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/production-sequences-forty-c8795-ol-and-restore-saved-queues/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/production-sequences-forty-c8795-ol-and-restore-saved-queues/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/production-sequences-forty-c8795-ol-and-restore-saved-queues/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  34) tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback 
+
+    Error: Actual live capture of unit.scout.ashen_compact/idle/se/2
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      148 |       captured = true;
+      149 |     }
+    > 150 |     expect(captured, `Actual live capture of ${frame.id}`).toBe(true);
+          |                                                            ^
+      151 |   }
+      152 |   const art = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
+      153 |   expect(art.visibleEntityArt.find(entity => entity.entityId === scout.id)).toMatchObject({ assetId: asset.id, tint: 0xffffff });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/selected-asset.spec.ts:150:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  35) tests/gameplay/selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByTestId('selection-groups').getByRole('option', { name: 'Hearth watch', exact: true })
+    Expected: 0
+    Received: 1
+
+    Call log:
+      - Expect "toHaveCount" getByTestId('selection-groups').getByRole('option', { name: 'Hearth watch', exact: true }) with timeout 5000ms
+      - waiting for getByTestId('selection-groups').getByRole('option', { name: 'Hearth watch', exact: true })
+        3 × locator resolved to 1 element
+          - unexpected value "1"
+      - Test timeout of 45000ms exceeded.
+
+
+      155 |   // Removing the saved selection is independent of the orders already issued.
+      156 |   await hearthGroups.getByRole('button', { name: 'Delete group', exact: true }).click();
+    > 157 |   await expect(hearthGroups.getByRole('option', { name: 'Hearth watch', exact: true })).toHaveCount(0);
+          |                                                                                         ^
+      158 |   expect((await snapshot(page)).view.charters).toEqual(applied.view.charters);
+      159 |   expect((await snapshot(page)).view.selectionGroups.map(group => group.name)).toEqual(['Watch company']);
+      160 |   expect(errors).toEqual([]);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/selection-groups.spec.ts:157:89
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/selection-groups-saved-gro-77ae3-s-and-charter-forty-hearths/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  36) tests/gameplay/strategic-picking.spec.ts:73:1 › shift-clicking the displaced badge deliberately follows a route to its actual hearth cell 
+
+    Error: expect(received).toBeUndefined()
+
+    Received: {"armyId": "army.5", "knownHostileIds": [], "origin": 688, "path": [736], "pauseReason": null, "status": "active", "waypoints": [736]}
+
+      84 |   expect((await selection(page)).armyId).toBe(fixture.travelerId);
+      85 |   expect((await summary(page)).ownArmies.find(army => army.id === fixture.travelerId)?.movement).toBe(0);
+    > 86 |   expect((await summary(page)).routes.find(route => route.armyId === fixture.travelerId)).toBeUndefined();
+         |                                                                                           ^
+      87 | });
+      88 |
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/strategic-picking.spec.ts:86:91
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/strategic-picking-shift-cl-11d30-e-to-its-actual-hearth-cell/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/strategic-picking-shift-cl-11d30-e-to-its-actual-hearth-cell/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/strategic-picking-shift-cl-11d30-e-to-its-actual-hearth-cell/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/strategic-picking-shift-cl-11d30-e-to-its-actual-hearth-cell/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  37) tests/gameplay/terrain-art.spec.ts:45:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 6
+    + Received  + 1
+
+    - Array [
+    -   Object {
+    -     "contentId": "unit.scout.ashen_compact",
+    -     "frameId": StringMatching /^unit\.scout\.ashen_compact\/idle\/se\/[0-3]$/,
+    -   },
+    - ]
+    + Array []
+
+      62 |   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+      63 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.lod)).toBe('near-sprites');
+    > 64 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAnimationFrames)).toEqual([{ contentId: 'unit.scout.ashen_compact', frameId: expect.stringMatching(/^unit\.scout\.ashen_compact\/idle\/se\/[0-3]$/) }]);
+         |                                                                                                        ^
+      65 |   await page.screenshot({ path: testInfo.outputPath('biome-hills-and-alpine.png'), fullPage: true });
+      66 |   await page.setViewportSize({ width: 390, height: 844 });
+      67 |   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/terrain-art.spec.ts:64:104
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/terrain-art-all-twelve-app-09626-ef-and-actual-troop-sprites/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/terrain-art-all-twelve-app-09626-ef-and-actual-troop-sprites/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/terrain-art-all-twelve-app-09626-ef-and-actual-troop-sprites/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/terrain-art-all-twelve-app-09626-ef-and-actual-troop-sprites/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  38) tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.screenshot: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('map-container')
+        - locator resolved to visible <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div>
+
+
+      86 |     for (let step = 0; step < 8 && await mapZoom(page) < 2.2; step++) await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+      87 |     expect(await mapZoom(page)).toBe(2.2);
+    > 88 |     await page.getByTestId('map-container').screenshot({ path: info.outputPath(`${town.name.replaceAll(' ', '-').toLowerCase()}-near.png`) });
+         |                                             ^
+      89 |   }
+      90 |   // Stop at the first genuine far-marker step instead of accidentally reaching
+      91 |   // Tiny's fit-to-world raster, where omission of all entities is intentional.
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/tile-footprints.spec.ts:88:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/tile-footprints-all-ten-pa-4d3e6-with-untinted-opaque-bodies/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-full-results/tile-footprints-all-ten-pa-4d3e6-with-untinted-opaque-bodies/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-full-results/tile-footprints-all-ten-pa-4d3e6-with-untinted-opaque-bodies/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-full-results/tile-footprints-all-ten-pa-4d3e6-with-untinted-opaque-bodies/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: tests/gameplay/faction-roster.spec.ts (10.4m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  38 failed
+    tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus 
+    tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD 
+    tests/gameplay/battle-individuals.spec.ts:36:36 › naval role sprites follow exact canonical members, actions and deaths at desktop and 390px 
+    tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX 
+    tests/gameplay/battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width 
+    tests/gameplay/battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo 
+    tests/gameplay/campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign 
+    tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery 
+    tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath 
+    tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery 
+    tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable 
+    tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+    tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled 
+    tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan 
+    tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+    tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+    tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+    tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+    tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog 
+    tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+    tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch 
+    tests/gameplay/group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves 
+    tests/gameplay/hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion 
+    tests/gameplay/land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width 
+    tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail 
+    tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width 
+    tests/gameplay/naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers 
+    tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker 
+    tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply 
+    tests/gameplay/naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships 
+    tests/gameplay/patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay 
+    tests/gameplay/posting-templates.spec.ts:64:1 › posting template edits, recall, reload and deletion stay outside campaign history and require a fresh hearth choice 
+    tests/gameplay/production-sequences.spec.ts:117:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues 
+    tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback 
+    tests/gameplay/selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths 
+    tests/gameplay/strategic-picking.spec.ts:73:1 › shift-clicking the displaced badge deliberately follows a route to its actual hearth cell 
+    tests/gameplay/terrain-art.spec.ts:45:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites 
+    tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies 
+  214 passed (24.9m)
+exit 1

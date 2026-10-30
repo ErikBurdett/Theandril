@@ -4,7 +4,7 @@ import { createArchive, applyRecordedCommand, replayArchive, createJournal } fro
 import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
 import { conquestCampaign } from '../../test-fixtures/src/conquest-fixture';
 import { refreshAuthoredSight, holdSurveyedSeam } from '../../test-fixtures/src/authored-land';
-import { applyCommand, createArmyFormation, deserializeGame, getBattleScene, getObservation, serializeGame, stateHash, type BattlePresentation, type GameCommand, type GameState } from './index';
+import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getBattleScene, getObservation, serializeGame, stateHash, type BattlePresentation, type GameCommand, type GameState } from './index';
 import { chooseBattleOrder } from './combat';
 import { relocateArmy } from './warfare';
 
@@ -299,4 +299,78 @@ test('a culture trains its Waykeepers in its own tradition and prices its own th
   const unbinding = view.arcaneResearch.choices.find(choice => choice.id === 'arcane.unbinding')!;
   expect(unbinding.casters.every(caster => !caster.canCast)).toBe(true);
   expect(unbinding.casters[0]?.blocker).toContain('path');
+});
+
+/** Rules 43: an enemy Waykeeper riding with the foe, Rune-trained to the second
+ * degree and holding Unbinding automatic, answers a working as it is made. */
+function enemyCaster(game: GameState, aptitudes: Record<string, number>, discoveries: string[]): string {
+  const town = Object.values(game.settlements).find(item => item.factionId === enemy)!;
+  game.factions.find(item => item.id === enemy)!.treasury = 200;
+  const keeperId = `character.${game.nextId}`;
+  issue(game, { type: 'recruitCharacter', factionId: enemy, settlementId: town.id, definitionId: 'character.waykeeper' });
+  const keeper = game.characters[keeperId]!;
+  keeper.aptitudes = aptitudes; keeper.location = { kind: 'army', armyId: 'army.4' };
+  game.arcaneResearch[enemy] = [...discoveries].sort();
+  return keeperId;
+}
+
+test('a held Unbinding intercepts an enemy working as it is made, costing both casters and nothing else', () => {
+  const { game, casterId } = prepare();
+  const keeperId = enemyCaster(game, { 'path.flame': 1, 'path.rune': 2 }, ['arcane.unbinding']);
+  const restored = deserializeGame(serializeGame(game)); begin(restored);
+  const archive = createArchive(restored, { mode: 'player', coverage: 'from-save' });
+  const held = getObservation(restored, enemy).battleAbilities.find(item => item.sourceId === keeperId && item.abilityId === 'spell.unbinding')!;
+  expect(held.intercepts).toBe(true); expect(held.description).toContain('as it is made');
+  expect(getObservation(restored, owner).battleAbilities.find(item => item.abilityId === 'spell.cinder_thread')?.intercepts).toBe(false);
+  const target = restored.battle!.combat.defender.find(item => item.strength > 0)!, strength = target.strength, morale = target.morale;
+  const packets: BattlePresentation[] = [];
+  const result = applyRecordedCommand(restored, archive, use(restored, casterId, 'spell.cinder_thread', target.id), undefined, packet => packets.push(packet));
+  expect(result.ok).toBe(true);
+  expect(result.events.map(event => [event.type, event.factionId])).toEqual([['battle_ability_used', owner], ['battle_cast_intercepted', enemy]]);
+  expect(result.events[1]!.message).toContain('undone as it was made');
+  const after = restored.battle!.combat.defender.find(item => item.id === target.id)!;
+  expect([after.strength, after.morale]).toEqual([strength, morale]);
+  const casters = restored.battle!.abilityState!.casters, sources = restored.battle!.abilityState!.sources;
+  expect(casters.find(item => item.characterId === casterId)).toMatchObject({ strain: 4, lastActedRound: 1 });
+  expect(casters.find(item => item.characterId === keeperId)).toMatchObject({ strain: 5, lastActedRound: 1 });
+  expect(sources.find(item => item.sourceId === casterId && item.abilityId === 'spell.cinder_thread')!.usesRemaining).toBe(1);
+  expect(sources.find(item => item.sourceId === keeperId)!.usesRemaining).toBe(0);
+  expect(getObservation(restored, enemy).battleAbilities.find(item => item.sourceId === keeperId)!.intercepts).toBe(false);
+  expect(packets[0]!.events.some(event => event.type === 'ability' && event.abilityId === 'spell.unbinding' && event.sourceId === keeperId && event.attackKind === 'counter')).toBe(true);
+  // The counter is spent: after the next round the same working lands.
+  issue(restored, { type: 'battleOrder', factionId: owner, order: 'brace' });
+  const standing = restored.battle!.combat.defender.filter(item => item.strength > 0).sort((a, b) => b.strength - a.strength)[0]!;
+  const guarded = standing.strength + (standing.ward ?? 0);
+  const landed = issue(restored, use(restored, casterId, 'spell.cinder_thread', standing.id));
+  expect(landed.events.map(event => event.type)).toEqual(['battle_ability_used']);
+  const struck = restored.battle!.combat.defender.find(item => item.id === standing.id)!;
+  expect(struck.strength + (struck.ward ?? 0)).toBeLessThan(guarded);
+  expect(stateHash(deserializeGame(serializeGame(restored)))).toBe(stateHash(restored));
+  // Rules 42 knows no interception: the same held counter lets the working land.
+  const frozen = deserializeGame(serializeGame(game)); begin(frozen);
+  const victim = frozen.battle!.combat.defender.find(item => item.strength > 0)!, before = victim.strength;
+  const older = applyCommandForVersion(frozen, use(frozen, casterId, 'spell.cinder_thread', victim.id), 42);
+  expect(older.ok).toBe(true); expect(older.events.map(event => event.type)).toEqual(['battle_ability_used']);
+  expect(frozen.battle!.combat.defender.find(item => item.id === victim.id)!.strength).toBeLessThan(before);
+  expect(frozen.battle!.abilityState!.sources.find(item => item.sourceId === keeperId)!.usesRemaining).toBe(1);
+});
+
+test('a held counter waits for an enemy caster and answers an automatic working inside the round', () => {
+  const { game, casterId } = prepare();
+  // The player's Waykeeper is Rune-trained to the second degree and holds Unbinding by default; the foe's Flame caster works automatically.
+  game.characters[casterId]!.aptitudes = { 'path.flame': 1, 'path.rune': 2 };
+  const keeperId = enemyCaster(game, { 'path.flame': 1, 'path.rune': 1 }, ['arcane.ember_projection']);
+  const restored = deserializeGame(serializeGame(game)); begin(restored);
+  const archive = createArchive(restored, { mode: 'player', coverage: 'from-save' });
+  const result = applyRecordedCommand(restored, archive, { type: 'battleOrder', factionId: owner, order: 'brace' });
+  expect(result.ok).toBe(true);
+  const intercepted = result.events.filter(event => event.type === 'battle_cast_intercepted');
+  expect(intercepted).toHaveLength(1); expect(intercepted[0]!.factionId).toBe(owner);
+  expect(result.events.some(event => event.type === 'battle_ability_used' && event.factionId === enemy && event.message.includes('intercepted'))).toBe(true);
+  const battle = restored.battle ?? restored.battleReports.at(-1)!;
+  expect(battle.abilityState!.sources.find(item => item.sourceId === casterId && item.abilityId === 'spell.unbinding')!.usesRemaining).toBe(0);
+  expect(battle.abilityState!.sources.find(item => item.sourceId === keeperId && item.abilityId === 'spell.cinder_thread')!.usesRemaining).toBe(1);
+  expect(battle.abilityState!.casters.find(item => item.characterId === keeperId)).toMatchObject({ strain: 4 });
+  expect(serializeGame(replayArchive(archive))).toBe(serializeGame(restored));
+  expect(serializeGame(deserializeGame(serializeGame(restored)))).toBe(serializeGame(restored));
 });

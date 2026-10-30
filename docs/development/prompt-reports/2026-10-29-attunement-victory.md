@@ -214,6 +214,29 @@ reverted to Prosperity.
 [Evidence](../2026-10-29-ai-wardens/README.md),
 [ADR0065](../../architecture/0065-ai-wardens.md).
 
+## Eleventh slice: reactive interception (rules/save 43)
+
+The M2 remainder: a Waykeeper whose Unbinding is held automatic answers an
+enemy working as it is made when the two escorts lie within the counter's
+reach; the working has no effect, both casters pay their strain, use and round,
+the held counter waits while an enemy caster could still work, the battle panel
+says it is holding, both realms read who answered, and a counter set to manual
+never intercepts. No content or save field change; v42 envelopes migrate
+unchanged and rules 42 archives replay without the rule. Unit **2,309 tests /
+285 files**, campaigns 57, lint, typecheck and build pass; headline campaigns
+remain **385/343/229** with identical command and event counts, and the rules
+42 projection reproduces the wardens packet's seals exactly. The journey
+`battle-interception.spec.ts` passes. Two journey drafts were corrected on the
+unchanged rule: the player's event feed is faction-filtered, so it reads the
+answer on its own ability event and the feedback line, and the round counter
+reads 0 before the first order. A complete gameplay run at four workers under
+a load average of about fifteen passed 214 of 252 with 38 load failures; its
+reruns were stopped when the owner cut the methodology, and city-growth, the
+one journey that had failed twice, passes alone in 11 s. Under
+[`docs/TESTING.md`](../../TESTING.md) the slice is verified without a full run.
+[Evidence](../2026-10-29-reactive-interception/README.md),
+[ADR0066](../../architecture/0066-reactive-interception.md).
+
 ## Published
 
 Feature `a7a4c164abb0ae86915a5ae2d2b0e9299aa97eb2` is deployed on
@@ -267,5 +290,5 @@ remains the newest.
   caster protection, and no organic AI Attunement has been observed.
 - The fixture's seams lie beyond ordinary claim reach; connected ground is
   authored to them. Only two magical paths exist.
-- Reactive interception during an enemy cast (the last M2 remainder) and all
-  fifteen release gates remain open.
+- All fifteen release gates remain open. Reactive interception closed the M2
+  remainder in the eleventh slice.

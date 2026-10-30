@@ -1,0 +1,10 @@
+Mem:           31767       25715         882          29        6919        6051
+ 01:27:43 up 11 days,  4:05,  1 user,  load average: 14.95, 17.11, 13.46
+
+Running 10 tests using 1 worker
+
+BATTLE_RENDER {"originHash":"8b59ee72","commandHash":"bdb7a4fd","frameMs":{"p50":50,"p95":66.69999999999709,"max":66.70000000000073},"maxActors":46,"maxEffects":12,"atlasBytes":55574528}
+  ✓   1 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (22.4s)
+undefined
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command was killed with SIGTERM (Termination): playwright test tests/gameplay/battle-performance.spec.ts tests/gameplay/charter-templates.spec.ts tests/gameplay/chronicles.spec.ts tests/gameplay/city-growth.spec.ts tests/gameplay/empire-delegation.spec.ts --workers=1 --output=docs/development/2026-10-29-reactive-interception/browser-rerun-alone-results
+exit 1

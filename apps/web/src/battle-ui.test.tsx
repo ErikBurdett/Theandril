@@ -25,6 +25,14 @@ describe('authoritative battlefield controls', () => {
     for (const ability of view.battleAbilities) { expect(html).toContain(ability.name); expect(ability.automatic).toBe(true); }
     expect(commands).toEqual([]);
   });
+  it('shows a held counter as intercepting only when the observation says so', () => {
+    const view = battleView();
+    const render = () => renderToStaticMarkup(createElement(BattlefieldPanel, { view, busy: false, error: false, replay: false, issue: () => undefined, setScene: () => undefined, keepReview: () => undefined, closeReview: () => undefined }));
+    expect(view.battleAbilities.every(ability => ability.intercepts === false)).toBe(true);
+    expect(render()).not.toContain('Holding to intercept');
+    view.battleAbilities[0]!.intercepts = true;
+    expect(render()).toContain(`intercepting-${view.battleAbilities[0]!.sourceId}`);
+  });
   it('labels national Arcane Theory separately from personal aptitude and uses real blockers', () => {
     const view = getObservation(borderBattleCampaign(), 'faction.ashen_compact');
     const html = renderToStaticMarkup(createElement(ArcaneResearch, { view, blocked: false, issue: () => undefined }));

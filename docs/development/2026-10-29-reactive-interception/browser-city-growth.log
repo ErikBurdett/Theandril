@@ -1,0 +1,11 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/city-growth.spec.ts --output=docs/development/2026-10-29-reactive-interception/browser-city-growth-results
+
+
+Running 2 tests using 1 worker
+
+  ✓  1 [gameplay] › tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled (7.2s)
+  ✓  2 [gameplay] › tests/gameplay/city-growth.spec.ts:101:1 › all five research-gated sites display their approved pixel assets and stable idle chunks (3.0s)
+
+  2 passed (11.0s)

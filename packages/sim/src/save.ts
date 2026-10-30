@@ -40,7 +40,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 42;
+export const SAVE_VERSION = 43;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -261,8 +261,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(42), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
-/** Rules 41 and 42 change no canonical field; v40 and v41 envelopes differ only in their seals. */
+const saveSchema = z.object({ version: z.literal(43), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 41, 42 and 43 change no canonical field; v40 and v41 envelopes differ only in their seals and a v42 envelope only in its version. */
+const saveV42Schema = saveSchema.extend({ version: z.literal(42), state: stateSchema }).strict();
 const saveV41Schema = saveSchema.extend({ version: z.literal(41), state: stateSchema }).strict();
 const saveV40Schema = saveSchema.extend({ version: z.literal(40), state: stateSchema }).strict();
 const saveV39Schema = saveSchema.extend({ version: z.literal(39), state: stateV39Schema }).strict();
@@ -931,6 +932,13 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 42) {
+    const prior = saveV42Schema.parse(raw);
+    assert(prior.contentHash === CONTENT_HASH, 'v42 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v42 snapshot checksum does not match its contents');
+    // Rules 43 changes how a battle working is answered, not the pack or any field; the state continues unchanged.
+    return { ...prior, version: SAVE_VERSION };
+  }
   if (version === 41) {
     const prior = saveV41Schema.parse(raw);
     assert(prior.contentHash === PRE_KINDLING_CONTENT_HASH, 'v41 content hash is not a recognized compatible pack');

@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Added reactive interception under rules/save 43: a Waykeeper whose Unbinding is held automatic answers an enemy battle working as it is made when the two casters’ escorts lie within the counter’s reach, so the working has no effect while both casters pay their strain, use and round. The held counter waits during the automatic pass while an enemy caster could still work, the battle panel says when a counter is holding to intercept, both realms read who answered, and a counter set to manual never intercepts. No content or save field changes; v42 envelopes migrate unchanged.
+
 The AI now reaches hearth rites in ordinary play: a realm holding a seam researches the rite discovery its Waykeeper could use, keeps a Waykeeper lodged at a seam hearth while at war, and calls a riding qualified caster home when an enemy company nears the hearth, lodging it before any blockade closes the gate. No rule, save field or content changes.
 
 Added seam kindling under rules/save 42, the Flame hearth rite: a Flame-gifted Waykeeper lodged in a hearth that holds a Flame seam kindles it for ten turns at six ashglass, and every company besieging the hearth loses four strength per formation each turn while the works still wear the walls. The ledger and the besieger’s siege card say the walls are kindled, a Rune breaking ends it, a besieged AI realm with a Flame caster kindles, and a besieger that cannot storm kindled walls lifts the siege. No save field changes.

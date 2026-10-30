@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { BATTLE_SPELLS, COMMANDER_ABILITIES, FACTIONS, MAGIC_PATHS, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, UNITS } from '@theandril/content';
 import type { CampaignBattle, DomainEvent, GameState } from './types';
 import { characterSpellIds } from './magic';
+import { rulesVersion } from './rules';
 import { battleStatChange, type BattleFormation } from './combat';
 import type { BattleFactObserver, BattleSceneSnapshot, BattleSide } from './combat/presentation';
 
@@ -18,6 +19,8 @@ export interface BattleAbilityOption {
   sourceId: string; sourceKind: 'formation' | 'character'; armyId: string | null; abilityId: string;
   name: string; description: string; automatic: boolean; usesRemaining: number; strainCost: number; currentStrain: number;
   canUse: boolean; blocker: string | null;
+  /** Rules 43: this counter is held automatic and answers an enemy working as it is made. */
+  intercepts: boolean;
   targets: { targetId: string; label: string; side: BattleSide; canTarget: boolean; blocker: string | null }[];
 }
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
@@ -30,6 +33,36 @@ const sourceFaction = (battle: CampaignBattle, source: Source): string => source
 const escortingCasters = (battle: CampaignBattle, formationId: string): Source[] =>
   (battle.abilityState?.sources ?? []).filter(source => source.sourceKind === 'character'
     && sourceFormations(battle, source).some(item => item.id === formationId));
+const unbinding = BATTLE_SPELLS.find(item => item.id === 'spell.unbinding')!;
+const INTERCEPTION_RULES = 43;
+/** Rules 43: a working crosses the field between the two casters' escorts. */
+const casterDistance = (a: BattleFormation, b: BattleFormation): number => a.row + b.row + 1 + Math.floor(Math.abs(a.column - b.column) / 2);
+const sourceName = (battle: CampaignBattle, source: Source): string =>
+  battle.characterSnapshots.find(item => item.characterId === source.sourceId)?.name ?? units.get(sourceFormations(battle, source)[0]?.unitId ?? '')?.name ?? source.sourceId;
+/** Rules 43: a Rune caster who holds Unbinding automatic answers an enemy working
+ * as it is made. The first such caster in source order whose escort lies within
+ * the counter's reach of the working caster's escort intercepts; the ordinary
+ * strain, use and round limits decide whether it can. */
+function interceptor(battle: CampaignBattle, source: Source, actionRound: number): { source: Source; escort: BattleFormation } | null {
+  const anchor = sourceFormations(battle, source).filter(active)[0];
+  if (!anchor) return null;
+  const side = sideOf(battle, anchor.id);
+  for (const candidate of battle.abilityState?.sources ?? []) {
+    if (candidate.abilityId !== unbinding.id || !candidate.automatic || sourceObjection(battle, candidate, actionRound)) continue;
+    const escort = sourceFormations(battle, candidate).filter(active)[0];
+    if (!escort || sideOf(battle, escort.id) === side || casterDistance(anchor, escort) > unbinding.range) continue;
+    return { source: candidate, escort };
+  }
+  return null;
+}
+/** Whether an enemy caster could still work a spell this round, so a held counter waits for it. */
+function enemyWorkingPending(battle: CampaignBattle, source: Source, actionRound: number): boolean {
+  const anchor = sourceFormations(battle, source).filter(active)[0];
+  if (!anchor) return false;
+  const side = sideOf(battle, anchor.id);
+  return (battle.abilityState?.sources ?? []).some(other => other.sourceKind === 'character' && BATTLE_SPELLS.some(spell => spell.id === other.abilityId)
+    && !sourceObjection(battle, other, actionRound) && sourceFormations(battle, other).filter(active).some(item => sideOf(battle, item.id) !== side));
+}
 const sourceFormations = (battle: CampaignBattle, source: Source): BattleFormation[] => {
   if (source.sourceKind === 'formation') return formations(battle).filter(item => item.id === source.sourceId);
   const ids = new Set(battle.formationBindings.filter(item => item.armyId === source.armyId).map(item => item.battleFormationId));
@@ -93,12 +126,26 @@ function targetObjection(battle: CampaignBattle, source: Source, targetId: strin
   if (spell.kind === 'counter' && !(target.ward ?? 0) && !escortingCasters(battle, target.id).length) return 'Nothing binds this formation: choose a warded formation or one escorting a caster.';
   return null;
 }
-function execute(battle: CampaignBattle, source: Source, targetId: string | undefined, actionRound: number, events: DomainEvent[], turn: number, observe?: BattleFactObserver): void {
+function execute(battle: CampaignBattle, source: Source, targetId: string | undefined, actionRound: number, events: DomainEvent[], turn: number, observe?: BattleFactObserver, reactive = false): void {
   const targets = source.abilityId === 'ability.rally' ? sourceFormations(battle, source).filter(active) : formations(battle).filter(item => item.id === targetId);
   const killedSoldierIds: string[] = [], interrupted: string[] = [];
   let unbound = 0;
   const before = observe ? targets.map(item => ({ ...item })) : [];
   const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
+  const answer = spell && reactive ? interceptor(battle, source, actionRound) : null;
+  if (spell && answer) {
+    // The working is undone as it is made: both casters pay their strain, use
+    // and round, the target is untouched, and both realms read who answered.
+    const casters = battle.abilityState!.casters;
+    source.usesRemaining--; answer.source.usesRemaining--;
+    const caster = casters.find(item => item.characterId === source.sourceId)!; caster.strain += spell.strainCost; caster.lastActedRound = actionRound;
+    const keeper = casters.find(item => item.characterId === answer.source.sourceId)!; keeper.strain += unbinding.strainCost; keeper.lastActedRound = actionRound;
+    const actor = sourceName(battle, source), watcher = sourceName(battle, answer.source);
+    events.push({ turn, factionId: sourceFaction(battle, source), type: 'battle_ability_used', cell: battle.defenderCell, message: `${actor} used ${spell.name}${targetId ? ` on ${targetId}` : ''}, but ${watcher} intercepted the working with ${unbinding.name} as it was made.` });
+    events.push({ turn, factionId: sourceFaction(battle, answer.source), type: 'battle_cast_intercepted', cell: battle.defenderCell, message: `${watcher} intercepted ${actor}’s ${spell.name} with ${unbinding.name}: the working was undone as it was made.` });
+    observe?.({ ...(battle.rulesVersion >= 10 ? { killedSoldierIds } : {}), round: battle.combat.round, type: 'ability', sourceId: answer.source.sourceId, sourceKind: 'character', targetIds: [sourceFormations(battle, source).filter(active)[0]!.id], abilityId: unbinding.id, attackKind: 'counter', changes: [], winner: null, reason: null });
+    return;
+  }
   let restored = 0;
   for (const target of targets) {
     if (source.abilityId === 'ability.rally') {
@@ -126,7 +173,7 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
   source.usesRemaining--;
   if (spell) { const caster = battle.abilityState!.casters.find(item => item.characterId === source.sourceId)!; caster.strain += spell.strainCost; caster.lastActedRound = actionRound; }
   if (source.abilityId === 'ability.rally') battle.usedAbilities.push({ characterId: source.sourceId, abilityId: source.abilityId });
-  const actor = battle.characterSnapshots.find(item => item.characterId === source.sourceId)?.name ?? units.get(sourceFormations(battle, source)[0]?.unitId ?? '')?.name ?? source.sourceId;
+  const actor = sourceName(battle, source);
   const abilityName = spell?.name ?? (source.abilityId === 'ability.rally' ? 'Rally' : 'Set shields');
   events.push({ turn, factionId: sourceFaction(battle, source), type: source.abilityId === 'ability.rally' ? 'commander_rallied' : 'battle_ability_used', cell: battle.defenderCell,
     message: source.abilityId === 'ability.rally' ? `${actor} rallied the army, restoring ${restored} formation morale in total.` : spell?.kind === 'counter' ? `${actor} used ${abilityName} on ${targetId}, undoing ${unbound} protection${interrupted.length ? ' and jarring its caster for the coming round' : ''}.` : `${actor} used ${abilityName}${targetId ? ` on ${targetId}` : ''}.` });
@@ -138,14 +185,17 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
   }
 }
 export function automaticBattleAbilities(state: GameState, battle: CampaignBattle, events: DomainEvent[], observe?: BattleFactObserver): void {
+  const reactive = rulesVersion(state) >= INTERCEPTION_RULES;
   for (const source of battle.abilityState?.sources ?? []) {
     if (!source.automatic || !source.usesRemaining) continue;
     if (!battle.combat.attacker.some(active) || !battle.combat.defender.some(active)) break;
     if (sourceObjection(battle, source, battle.combat.round)) continue;
     if (source.abilityId === 'ability.rally') {
-      if (sourceFormations(battle, source).some(item => active(item) && item.morale < COMMANDER_ABILITIES[0]!.threshold)) execute(battle, source, undefined, battle.combat.round, events, state.turn, observe);
+      if (sourceFormations(battle, source).some(item => active(item) && item.morale < COMMANDER_ABILITIES[0]!.threshold)) execute(battle, source, undefined, battle.combat.round, events, state.turn, observe, reactive);
       continue;
     }
+    // Rules 43: a held counter waits while an enemy caster could still work this round.
+    if (reactive && source.abilityId === unbinding.id && enemyWorkingPending(battle, source, battle.combat.round)) continue;
     // Shield drill can only target its own formation; do not re-scan the whole
     // battlefield inside a legality check for every impossible foreign target.
     const candidates = source.abilityId === shieldDrill.id ? sourceFormations(battle, source) : formations(battle);
@@ -156,7 +206,7 @@ export function automaticBattleAbilities(state: GameState, battle: CampaignBattl
     targets.sort((a, b) => (spell?.kind === 'counter' ? (b.ward ?? 0) - (a.ward ?? 0) || b.strength - a.strength
       : spell?.kind === 'ward' ? a.row - b.row || b.strength - a.strength
       : a.strength - b.strength) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-    if (targets[0]) execute(battle, source, targets[0].id, battle.combat.round, events, state.turn, observe);
+    if (targets[0]) execute(battle, source, targets[0].id, battle.combat.round, events, state.turn, observe, reactive);
   }
 }
 export function battleAbilityCommand(state: GameState, command: { factionId: string; battleId: string; sourceId: string; abilityId: string; targetId?: string; automatic?: boolean }, events: DomainEvent[], observe?: BattleFactObserver): string | null {
@@ -170,16 +220,18 @@ export function battleAbilityCommand(state: GameState, command: { factionId: str
     return null;
   }
   const objection = sourceObjection(battle, source, battle.combat.round + 1) ?? targetObjection(battle, source, command.targetId); if (objection) return objection;
-  execute(battle, source, command.targetId, battle.combat.round + 1, events, state.turn, observe);
+  execute(battle, source, command.targetId, battle.combat.round + 1, events, state.turn, observe, rulesVersion(state) >= INTERCEPTION_RULES);
   return null;
 }
 export function observeBattleAbilities(state: GameState, factionId: string): BattleAbilityOption[] {
   const battle = state.battle; if (!battle?.abilityState || battle.rulesVersion < 9) return [];
+  const reactive = rulesVersion(state) >= INTERCEPTION_RULES;
   return battle.abilityState.sources.filter(source => sourceFaction(battle, source) === factionId).map(source => {
     const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
+    const counter = reactive && spell?.id === unbinding.id;
     const targets = source.abilityId === 'ability.rally' ? [] : formations(battle).map(target => { const blocker = targetObjection(battle, source, target.id); return { targetId: target.id, label: `${units.get(target.unitId)?.name ?? target.unitId} (${target.id})`, side: sideOf(battle, target.id), canTarget: blocker === null, blocker }; });
     const blocker = controlObjection(state, factionId, battle.id) ?? sourceObjection(battle, source, battle.combat.round + 1) ?? (targets.length && !targets.some(item => item.canTarget) ? 'No legal battlefield target is available.' : null);
-    return { ...source, name: spell?.name ?? (source.abilityId === 'ability.rally' ? 'Rally' : 'Set shields'), description: spell?.description ?? (source.abilityId === 'ability.rally' ? 'Restore morale to the marshal’s own active formations once per battle.' : 'Once per battle, pay eight fatigue for six damage-absorbing protection. This is shield drill, not magic.'), strainCost: spell?.strainCost ?? 0, currentStrain: battle.abilityState!.casters.find(item => item.characterId === source.sourceId)?.strain ?? 0, canUse: blocker === null, blocker, targets };
+    return { ...source, name: spell?.name ?? (source.abilityId === 'ability.rally' ? 'Rally' : 'Set shields'), description: (spell?.description ?? (source.abilityId === 'ability.rally' ? 'Restore morale to the marshal’s own active formations once per battle.' : 'Once per battle, pay eight fatigue for six damage-absorbing protection. This is shield drill, not magic.')) + (counter ? ' Held automatic, it answers the first enemy working cast within its reach as it is made, undoing it before it lands, and waits while an enemy caster could still work.' : ''), strainCost: spell?.strainCost ?? 0, currentStrain: battle.abilityState!.casters.find(item => item.characterId === source.sourceId)?.strain ?? 0, canUse: blocker === null, blocker, intercepts: counter && source.automatic && !sourceObjection(battle, source, battle.combat.round + 1), targets };
   });
 }
 /** Battlefield participants are public to their two sides; passenger identities are omitted. */

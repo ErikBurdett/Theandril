@@ -17,6 +17,29 @@ rather than rerun to green; deploys are proven by the live readback.
 `.gitignore` refuses Playwright traces under `docs/development/`. No journey
 was removed or weakened. [Evidence](development/2026-10-30-testing-methodology/README.md).
 
+## Reactive interception: a held counter answers a working as it is made — 2026-10-29
+
+Rules/save 43 closes the M2 remainder. A Waykeeper whose Unbinding is held
+automatic answers an enemy battle working — ember, ward or counter — as it is
+made, when the two casters' escorts lie within the counter's reach: the working
+has no effect, both casters pay their strain, use and round, the caster's realm
+reads its working intercepted on its own ability event and the watcher's realm
+reads the answer. A held counter waits during the automatic pass while an enemy
+caster could still work this round, the battle panel says when a counter is
+holding to intercept, and a counter set to manual never intercepts. The spell
+text and the content pack are unchanged; save version 43 changes no field and
+v42 envelopes migrate unchanged. Chronicle replay of a rules 42 archive resolves
+its battles without the rule.
+
+Verification: two sim cases, a UI case and a browser journey through the real
+battle panel; unit **2,309 tests / 285 files**, campaigns 57, lint, typecheck
+and build pass; headline campaigns remain **385/343/229** with command and event
+counts identical to the AI-wardens packet, and the rules 42 projection
+reproduces that packet's seals exactly. No headline realm fields two opposing
+casters with Unbinding, so organic interception is unobserved in AI play.
+[Evidence](development/2026-10-29-reactive-interception/README.md),
+[ADR0066](architecture/0066-reactive-interception.md).
+
 ## AI wardens: reaching hearth rites in organic play — 2026-10-29
 
 AI only. A realm that holds a seam now researches the discovery of the hearth

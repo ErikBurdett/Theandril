@@ -1,0 +1,403 @@
+Mem:           31767       22108         758         119       10812        9658
+ 01:09:59 up 11 days,  3:47,  1 user,  load average: 1.26, 1.35, 2.70
+
+Running 252 tests using 2 workers
+
+  ✓    2 tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (4.7s)
+  ✓    3 tests/gameplay/army-size.spec.ts:27:1 › actual one, three and twelve-formation armies use capped representative groups and update after a saved split (8.8s)
+  ✓    4 tests/gameplay/army-size.spec.ts:102:1 › fleet representatives count real hull formations without drawing embarked passengers twice (8.0s)
+Synthetic Huge composed-army measurements: {"workload":"Synthetic gen4 Huge mature fixture: 32 factions and32 towns retained; all1500 existing army containers explicitly reassigned to the player, moved onto nearby passable cells, and filled with12 legal guard formations each. Fully explored terrain. Strict save/import, no runtime state mutation or turn advancement.","comparison":"Retains the gen4 physical world and authored near-home placement workload of docs/performance/0030-army-stacks-before.json (historical seal 436e19c5): 1,500 visible containers and 18,000 actual formations, previously 4,500 near figures. Current schema/content and the approved publication differ from that historical checkpoint, so this is NOT a byte-identical saved fixture; the report hash field records the current run seal. Co-located grouping draws 273 figures for 91 groups; stack metadata still totals every army/formation. NOT a matched comparison to art-performance.spec.ts, which uses 1,500 global singleton armies with ordinary ownership/fog.","measurementNotes":"Each phase waits at least75 renderer frames. frameP95Ms is the rolling240-frame metric, not a fresh independent percentile. renderCpuMs is one sampled frame, not GPU duration. Actual worker packed and total transfer bytes are recorded; no claim that the enlarged roster payload matches the singleton byte budget. Cached chunk/POT estimates, map atlas and retained overview texture are distinct allocations; DOM atlas decoding and other GPU allocations are not included.","seed":20260905,"generatorVersion":4,"cellCount":196608,"armyCount":1500,"formationCount":18000,"occupiedCells":91,"home":50497,"selectedId":"army.10","hash":"5ea671e7","observed":{"armies":1500,"ownArmies":1500,"formations":18000,"exploredCells":196608,"reactCells":0,"turn":1},"saveBytes":5259812,"compressedSaveBytes":490424,"samples":[{"stage":"all-1500-composed-armies-near","warmedFrames":77,"metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":11291024,"totalTransferBytes":11291024,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":198,"frameMs":33.399999999999636,"frameP95Ms":50,"renderCpuMs":0.30000007152557373,"visibleCells":1024,"visibleChunks":4,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":1501,"zoom":1.25,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":586.6999999284744,"artFirstRenderCpuMs":97.70000004768372,"visibleSprites":274,"terrainSpriteCells":1024,"pooledSprites":1875,"stackBadges":91,"pooledStackBadges":91,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":25165824},"renderedArmyGroups":91,"representedArmies":1500,"representedFormations":18000,"armySprites":273},{"stage":"same-neighborhood-strategic-aggregation","warmedFrames":77,"metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":11291024,"totalTransferBytes":11291024,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":346,"frameMs":16.700000000000728,"frameP95Ms":50,"renderCpuMs":0.19999992847442627,"visibleCells":3072,"visibleChunks":12,"cachedChunks":12,"chunkRebuilds":26,"visibleEntities":1501,"zoom":0.5120000000000001,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":586.6999999284744,"artFirstRenderCpuMs":97.70000004768372,"visibleSprites":92,"terrainSpriteCells":3072,"pooledSprites":3470,"stackBadges":0,"pooledStackBadges":91,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":50331648},"renderedArmyGroups":91,"representedArmies":1500,"representedFormations":18000,"armySprites":91},{"stage":"normal-minus-zoom-whole-world-fit","warmedFrames":77,"metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":11291024,"totalTransferBytes":11291024,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":564,"frameMs":16.599999999998545,"frameP95Ms":50,"renderCpuMs":0.10000002384185791,"visibleCells":196608,"visibleChunks":0,"cachedChunks":24,"chunkRebuilds":38,"visibleEntities":0,"zoom":0.033524904214559385,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":586.6999999284744,"artFirstRenderCpuMs":97.70000004768372,"visibleSprites":1,"terrainSpriteCells":0,"pooledSprites":6633,"stackBadges":0,"pooledStackBadges":91,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":true,"overviewTextureBytes":3148800,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":100663296},"renderedArmyGroups":0,"representedArmies":0,"representedFormations":0,"armySprites":0},{"stage":"restored-selection-composed-armies","warmedFrames":77,"metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":11291024,"totalTransferBytes":11291024,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":665,"frameMs":33.29999999999927,"frameP95Ms":50,"renderCpuMs":0.20000004768371582,"visibleCells":1536,"visibleChunks":6,"cachedChunks":24,"chunkRebuilds":44,"visibleEntities":1501,"zoom":1,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":586.6999999284744,"artFirstRenderCpuMs":97.70000004768372,"visibleSprites":274,"terrainSpriteCells":1536,"pooledSprites":6633,"stackBadges":91,"pooledStackBadges":91,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":3148800,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":100663296},"renderedArmyGroups":91,"representedArmies":1500,"representedFormations":18000,"armySprites":273}]}
+  ✓    1 tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus (24.2s)
+  ✓    5 tests/gameplay/army.spec.ts:53:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (12.8s)
+  ✓    7 tests/gameplay/army.spec.ts:94:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (15.2s)
+Fully explored Huge art measurements: {"workload":"Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.","homeCell":50497,"canvas":{"x":0,"y":110,"width":1440,"height":584},"mapAtlases":[{"id":"foundation","imageUrl":"/art/foundation.png","jsonUrl":"/art/foundation.json","width":2048,"height":2048,"sha256":"e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de"},{"id":"map-works","imageUrl":"/art/map-works.png","jsonUrl":"/art/map-works.json","width":512,"height":512,"sha256":"bbf53f6d34b2208ca9c645def54bdd0269b73eb910be816d46495b2d836f4cfc"}],"expectedResidency":17825792,"cells":196608,"stateHash":"a18b1a92","samples":[{"stage":"fully-explored-static","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585713,"totalTransferBytes":2585713,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":94,"frameMs":50,"frameP95Ms":66.70000000000073,"renderCpuMs":0.2999999523162842,"visibleCells":1536,"visibleChunks":6,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":506.7999999523163,"artFirstRenderCpuMs":86,"visibleSprites":2,"terrainSpriteCells":1536,"pooledSprites":1603,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":25165824}},{"stage":"near-static-faction-poses","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585713,"totalTransferBytes":2585713,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":226,"frameMs":16.700000000000728,"frameP95Ms":66.70000000000027,"renderCpuMs":0.19999992847442627,"visibleCells":1024,"visibleChunks":4,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1.25,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":506.7999999523163,"artFirstRenderCpuMs":86,"visibleSprites":2,"terrainSpriteCells":1024,"pooledSprites":1603,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":25165824}},{"stage":"six-camera-drags","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585713,"totalTransferBytes":2585713,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":514,"frameMs":33.30000000000291,"frameP95Ms":83.39999999999964,"renderCpuMs":0.10000002384185791,"visibleCells":1024,"visibleChunks":4,"cachedChunks":10,"chunkRebuilds":16,"visibleEntities":0,"zoom":1.25,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":506.7999999523163,"artFirstRenderCpuMs":86,"visibleSprites":0,"terrainSpriteCells":1024,"pooledSprites":2666,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":41943040}},{"stage":"far-strategic","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585713,"totalTransferBytes":2585713,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":645,"frameMs":66.70000000000073,"frameP95Ms":83.39999999999782,"renderCpuMs":15,"visibleCells":3840,"visibleChunks":15,"cachedChunks":15,"chunkRebuilds":33,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":506.7999999523163,"artFirstRenderCpuMs":86,"visibleSprites":2,"terrainSpriteCells":3840,"pooledSprites":3997,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":62914560}},{"stage":"far-strategic-home-aggregates","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":2585713,"totalTransferBytes":2585713,"cellTransferBytes":2359519,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":766,"frameMs":33.29999999999927,"frameP95Ms":83.39999999999782,"renderCpuMs":8.399999976158142,"visibleCells":3072,"visibleChunks":12,"cachedChunks":18,"chunkRebuilds":36,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"suppliedCells":61,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":506.7999999523163,"artFirstRenderCpuMs":86,"visibleSprites":2,"terrainSpriteCells":3072,"pooledSprites":4794,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":75497472}}]}
+  ✓    6 tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD (27.6s)
+  ✓    8 tests/gameplay/army.spec.ts:124:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (5.2s)
+  ✓   10 tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (8.3s)
+  ✓   11 tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.9s)
+  ✓    9 tests/gameplay/art.spec.ts:18:1 › approved native assets power the map while Art Lab inspects real animations, rectangles, palette and tile repetition without changing the campaign (17.6s)
+  ✓   12 tests/gameplay/battle-camera.spec.ts:8:1 › 390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks (4.8s)
+  ✓   13 tests/gameplay/art.spec.ts:110:1 › actual guards, towns and far-zoom markers use observed entities rather than future-ready catalog content (6.5s)
+  ✓   14 tests/gameplay/battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (6.2s)
+  ✓   15 tests/gameplay/art.spec.ts:137:1 › a failed approved-art load is reported and retains playable procedural fallbacks (3.8s)
+  ✓   16 tests/gameplay/battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture (12.7s)
+  ✓   17 tests/gameplay/art.spec.ts:153:1 › Art Lab refuses stale, mismatched and oversized atlas images before reporting pixel measurements (9.5s)
+  ✓   18 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls (5.3s)
+  ✓   20 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text (5.9s)
+  ✓   21 tests/gameplay/battle-interception.spec.ts:20:1 › an enemy Waykeeper holding Unbinding intercepts the player’s working as it is made (13.0s)
+  ✓   19 tests/gameplay/battle-individuals.spec.ts:36:36 › land role sprites follow exact canonical members, actions and deaths at desktop and 390px (39.6s)
+  ✘   22 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (41.2s)
+  ✓   23 tests/gameplay/battle-individuals.spec.ts:36:36 › naval role sprites follow exact canonical members, actions and deaths at desktop and 390px (27.6s)
+  ✓   24 tests/gameplay/biome-variation.spec.ts:56:1 › all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration (17.4s)
+  ✓   25 tests/gameplay/battlefield.spec.ts:97:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (20.9s)
+  ✓   26 tests/gameplay/biome-variation.spec.ts:112:1 › a missing chosen variant uses its unchanged approved base and reports the exact missing identity (4.9s)
+  ✓   28 tests/gameplay/biome-variation.spec.ts:133:1 › generated watched terrain retains variants, fog privacy and exact river joins through spectator reveal and restore (4.8s)
+  ✓   29 tests/gameplay/campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu (13.4s)
+  ✓   27 tests/gameplay/battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (26.6s)
+  ✓   30 tests/gameplay/campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate (7.5s)
+  ✓   32 tests/gameplay/campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection (5.1s)
+  ✓   31 tests/gameplay/battlefield.spec.ts:204:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (11.9s)
+  ✓   33 tests/gameplay/campaign-menu.spec.ts:110:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (9.7s)
+  ✓   35 tests/gameplay/campaign-menu.spec.ts:166:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign (6.0s)
+  ✓   36 tests/gameplay/campaign-menu.spec.ts:245:1 › new campaign generation can be cancelled without losing the existing worker or campaign (5.4s)
+  ✓   37 tests/gameplay/campaign-seed.spec.ts:34:1 › default campaigns choose different random worlds, and saved random worlds retain their seed (5.1s)
+  ✓   38 tests/gameplay/campaign-seed.spec.ts:65:3 › explicit seed 0 recreates the exact same campaign after New campaign (4.0s)
+  ✓   39 tests/gameplay/campaign-seed.spec.ts:65:3 › explicit seed 4294967295 recreates the exact same campaign after New campaign (4.0s)
+  ✓   34 tests/gameplay/battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (28.2s)
+  ✓   40 tests/gameplay/campaign-seed.spec.ts:76:1 › an invalid custom seed leaves the existing campaign intact (3.4s)
+  ✓   42 tests/gameplay/cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save (11.6s)
+  ✓   41 tests/gameplay/campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign (19.1s)
+  ✓   44 tests/gameplay/campaign.spec.ts:59:1 › compressed export/import and corrupt-save handling use the real controls (3.4s)
+  ✓   43 tests/gameplay/characters-tree.spec.ts:25:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects (10.4s)
+Huge starting-map measurements: {"generationMs":328.89999997615814,"commandMs":0,"aiMs":0,"transferBytes":19997,"totalTransferBytes":19997,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":73,"frameMs":16.699999999999818,"frameP95Ms":100.10000000000014,"renderCpuMs":0.2999999523162842,"visibleCells":61,"visibleChunks":2,"cachedChunks":2,"chunkRebuilds":8,"visibleEntities":2,"zoom":0.9999999999999996,"highlightedCells":36,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":579.1000000238419,"artFirstRenderCpuMs":193.10000002384186,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":63,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":48,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":233,"cachedTextureBytesEstimate":1048576}
+  ✓   45 tests/gameplay/campaign.spec.ts:80:1 › Huge map pans and zooms with bounded visible geometry; layout remains usable (4.2s)
+  ✓   46 tests/gameplay/characters-tree.spec.ts:78:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit (4.5s)
+  ✓   47 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (3.8s)
+  ✓   49 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (24.2s)
+  ✓   50 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (13.9s)
+  ✘   48 tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable (51.6s)
+  ✓   51 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (19.9s)
+  ✓   52 tests/gameplay/charter-templates.spec.ts:173:3 › a denied template library reports failure without blocking ordinary charter orders or overwriting stored rows (4.4s)
+  ✓   53 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (3.2s)
+  ✓   54 tests/gameplay/charter-templates.spec.ts:173:3 › a transient-denial template library reports failure without blocking ordinary charter orders or overwriting stored rows (5.3s)
+  ✓   56 tests/gameplay/charter-templates.spec.ts:173:3 › a malformed template library reports failure without blocking ordinary charter orders or overwriting stored rows (5.1s)
+  ✓   57 tests/gameplay/charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel (8.4s)
+  ✓   55 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (30.9s)
+  ✘   59 tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled (7.1s)
+  ✓   60 tests/gameplay/city-growth.spec.ts:101:1 › all five research-gated sites display their approved pixel assets and stable idle chunks (9.3s)
+  ✘   58 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (33.8s)
+  ✓   61 tests/gameplay/combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round (13.5s)
+  ✓   62 tests/gameplay/chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (8.2s)
+  ✓   64 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (2.4s)
+  ✓   63 tests/gameplay/combat.spec.ts:56:1 › withdrawal applies strategic retreat and pursuit through the player order (6.6s)
+  ✓   66 tests/gameplay/combat.spec.ts:71:1 › an AI attack pauses for the human defender to choose an order (7.6s)
+  ✓   67 tests/gameplay/contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload (5.8s)
+  ✓   65 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (19.1s)
+  ✓   68 tests/gameplay/contact.spec.ts:35:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch (12.9s)
+  ✓   70 tests/gameplay/defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls (11.2s)
+  ✓   69 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (27.2s)
+  ✓   71 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry (5.3s)
+  ✓   72 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (6.7s)
+  ✓   73 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry (7.1s)
+  ✓   75 tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry (7.2s)
+  ✓   74 tests/gameplay/defense-theaters.spec.ts:34:1 › a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override (15.7s)
+  ✓   76 tests/gameplay/development-trees.spec.ts:71:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (8.4s)
+  ✓   78 tests/gameplay/development-trees.spec.ts:104:1 › survivors spend experience earned in a saved real battle and preserve training after reload (11.1s)
+  ✓   79 tests/gameplay/development-trees.spec.ts:126:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (4.1s)
+  ✓   77 tests/gameplay/defense-theaters.spec.ts:129:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater (18.8s)
+  ✓   80 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (7.4s)
+  ✓   82 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (3.4s)
+  ✓   83 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (3.4s)
+  ✓   84 tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (5.7s)
+  ✓   85 tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (6.6s)
+  ✓   86 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (24.4s)
+  ✘   81 tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation (56.4s)
+  ✓   87 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (31.9s)
+  ✓   88 tests/gameplay/faction-roster.spec.ts:52:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves (19.2s)
+  ✓   90 tests/gameplay/faction-roster.spec.ts:52:36 › Saltwind Remnant is a real chosen culture through founding, paid construction and portable saves (23.1s)
+  ✓   91 tests/gameplay/faction-roster.spec.ts:52:36 › Wardhall Remnant is a real chosen culture through founding, paid construction and portable saves (15.3s)
+  ✓   89 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (41.7s)
+  ✓   92 tests/gameplay/faction-roster.spec.ts:52:36 › Rimehorn Clans is a real chosen culture through founding, paid construction and portable saves (13.9s)
+  ✓   94 tests/gameplay/faction-roster.spec.ts:52:36 › Sable Steppe is a real chosen culture through founding, paid construction and portable saves (15.0s)
+  ✓   95 tests/gameplay/faction-roster.spec.ts:52:36 › Morrow Spore is a real chosen culture through founding, paid construction and portable saves (14.6s)
+  ✓   93 tests/gameplay/faction-art.spec.ts:108:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (41.8s)
+  ✓   97 tests/gameplay/faction-art.spec.ts:224:1 › a missing approved culture variant uses its generic role and explicit warning, never a different culture (10.0s)
+  ✓   98 tests/gameplay/faction-selection.spec.ts:4:1 › a selected new culture owns the actual player seat and persists through save/load (5.3s)
+  ✓   96 tests/gameplay/faction-roster.spec.ts:52:36 › Cistern Assembly is a real chosen culture through founding, paid construction and portable saves (16.5s)
+  ✓   99 tests/gameplay/faction-ui.spec.ts:33:1 › 24 public culture crests are reference art, while campaign heraldry follows only observed faction definitions (7.6s)
+  ✓  100 tests/gameplay/faction-roster.spec.ts:52:36 › Unsealed Companies is a real chosen culture through founding, paid construction and portable saves (15.4s)
+  ✓  101 tests/gameplay/faction-ui.spec.ts:83:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private (20.9s)
+  ✓  102 tests/gameplay/faction-roster.spec.ts:52:36 › Lantern Hospices is a real chosen culture through founding, paid construction and portable saves (16.6s)
+  ✓  103 tests/gameplay/faction-ui.spec.ts:159:1 › missing approved faction art is visibly generic without broken images or blocked campaign controls (4.8s)
+  ✓  104 tests/gameplay/faction-roster.spec.ts:52:36 › Cairnwing Concord is a real chosen culture through founding, paid construction and portable saves (16.4s)
+  ✓  105 tests/gameplay/generals.spec.ts:62:1 › a real marshal assignment and prerequisite skill branches expand command from twelve through sixteen to twenty (18.1s)
+  ✓  107 tests/gameplay/generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair (8.8s)
+  ✓  106 tests/gameplay/faction-roster.spec.ts:52:36 › Red Sluice Directorate is a real chosen culture through founding, paid construction and portable saves (23.3s)
+  ✓  108 tests/gameplay/generals.spec.ts:132:1 › twenty general-led formations enter a saved four-rank battle and resolve through the same kernel (27.1s)
+  ✓  109 tests/gameplay/faction-roster.spec.ts:52:36 › Velvet Meridian is a real chosen culture through founding, paid construction and portable saves (23.2s)
+  ✓  111 tests/gameplay/faction-roster.spec.ts:52:36 › Brine Choir is a real chosen culture through founding, paid construction and portable saves (18.1s)
+Huge generated geography measurements: {"workload":"Real new-game worker; Huge archipelago, seed 74, 32 factions, Short pace, paused AI watch, 1440×1000. No turn advancement, imports or canonical mutations.","measurementNotes":"Each sampled phase waits at least 75 renderer frames. frameP95Ms is the renderer rolling 240-frame percentile, not an independent phase percentile. Acknowledgement timings include worker projection, transfer and main-thread handling, not completed GPU presentation. Packed transfer bytes are the actual worker metric. Chunk cache estimates are separate from the map atlas, overview texture, DOM atlas decoder and other GPU allocations. Timing is reported rather than asserted against host-dependent thresholds.","seed":74,"factionCount":32,"cellCount":51840,"normalCells":61,"hash":"15f377a9","river":17716,"canvas":{"x":0,"y":221.140625,"width":1440,"height":473},"reveal":{"enabled":false,"hash":"15f377a9","acknowledgementMs":134.79999995231628},"restore":{"enabled":true,"hash":"15f377a9","acknowledgementMs":37.10000002384186},"revealedTransfer":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":655729,"totalTransferBytes":675710,"cellTransferBytes":622123,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":108,"frameMs":33.30000000000018,"frameP95Ms":166.69999999999982,"renderCpuMs":0.40000009536743164,"visibleCells":1536,"visibleChunks":6,"cachedChunks":6,"chunkRebuilds":10,"visibleEntities":2,"zoom":1,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":1536,"pooledSprites":1588,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":30,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":0,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":712,"cachedTextureBytesEstimate":25165824},"restoredOverview":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":19981,"totalTransferBytes":695691,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":592,"frameMs":50,"frameP95Ms":166.59999999999854,"renderCpuMs":0.10000002384185791,"visibleCells":61,"visibleChunks":0,"cachedChunks":0,"chunkRebuilds":32,"visibleEntities":0,"zoom":0.05734355044699872,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":0,"pooledSprites":4099,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":true,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":0,"selectedCells":0,"hoveredCells":0,"maxCachedChunkWidth":0,"maxCachedChunkHeight":0,"cachedTextureBytesEstimate":0},"samples":[{"stage":"normal-faction-sight","warmedFrames":75,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":19981,"totalTransferBytes":19981,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":98,"frameMs":16.699999999999818,"frameP95Ms":166.69999999999982,"renderCpuMs":0.2999999523162842,"visibleCells":61,"visibleChunks":2,"cachedChunks":2,"chunkRebuilds":4,"visibleEntities":2,"zoom":1,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":67,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":2,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":0,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":365,"cachedTextureBytesEstimate":1179648}},{"stage":"revealed-river-near","warmedFrames":76,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":655729,"totalTransferBytes":675710,"cellTransferBytes":622123,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":201,"frameMs":16.80000000000109,"frameP95Ms":150,"renderCpuMs":0.10000002384185791,"visibleCells":1536,"visibleChunks":6,"cachedChunks":8,"chunkRebuilds":12,"visibleEntities":2,"zoom":1,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":1536,"pooledSprites":2105,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":35,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":712,"cachedTextureBytesEstimate":33554432}},{"stage":"three-local-camera-drags","warmedFrames":75,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":655729,"totalTransferBytes":675710,"cellTransferBytes":622123,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":380,"frameMs":16.69999999999891,"frameP95Ms":100,"renderCpuMs":0.10000002384185791,"visibleCells":1536,"visibleChunks":6,"cachedChunks":10,"chunkRebuilds":14,"visibleEntities":2,"zoom":1,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":1536,"pooledSprites":2631,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":36,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":41943040}},{"stage":"revealed-strategic-zoom","warmedFrames":77,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":655729,"totalTransferBytes":675710,"cellTransferBytes":622123,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":488,"frameMs":166.70000000000073,"frameP95Ms":166.59999999999854,"renderCpuMs":108.60000002384186,"visibleCells":4608,"visibleChunks":18,"cachedChunks":18,"chunkRebuilds":32,"visibleEntities":6,"zoom":0.40960000000000013,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":3,"terrainSpriteCells":4608,"pooledSprites":4700,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":67,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":75497472}},{"stage":"revealed-whole-world-overview","warmedFrames":75,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":655729,"totalTransferBytes":675710,"cellTransferBytes":622123,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":577,"frameMs":16.700000000000728,"frameP95Ms":166.59999999999854,"renderCpuMs":0.20000004768371582,"visibleCells":51840,"visibleChunks":0,"cachedChunks":18,"chunkRebuilds":32,"visibleEntities":0,"zoom":0.05734355044699872,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":0,"pooledSprites":4700,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":true,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":716,"cachedTextureBytesEstimate":75497472}},{"stage":"restored-faction-sight-focused","warmedFrames":75,"metrics":{"generationMs":494.2000000476837,"commandMs":0,"aiMs":0,"transferBytes":19981,"totalTransferBytes":695691,"cellTransferBytes":772,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"developmentQueryCount":0,"developmentQueryBytes":0,"totalDevelopmentQueryBytes":0,"groupMovementQueryCount":0,"groupMovementQueryBytes":0,"totalGroupMovementQueryBytes":0,"groupMovementQueryMs":0,"groupPatrolResultBytes":0,"groupPostingResultBytes":0,"groupLandPolicyResultBytes":0,"groupWorkerPolicyResultBytes":0,"groupCharterResultBytes":0,"groupProductionResultBytes":0,"groupMovementResultBytes":0,"renderer":"webgl","frameCount":687,"frameMs":66.60000000000218,"frameP95Ms":183.29999999999927,"renderCpuMs":0.20000004768371582,"visibleCells":61,"visibleChunks":2,"cachedChunks":2,"chunkRebuilds":34,"visibleEntities":2,"zoom":1,"highlightedCells":0,"suppliedCells":0,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":936.9000000953674,"artFirstRenderCpuMs":180.20000004768372,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":4099,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":2,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":830880,"rangePerimeterEdges":0,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":365,"cachedTextureBytesEstimate":1179648}}]}
+  ✓  110 tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog (30.7s)
+  ✓  113 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign (7.7s)
+  ✓  112 tests/gameplay/faction-roster.spec.ts:52:36 › Emberwake Convocation is a real chosen culture through founding, paid construction and portable saves (18.4s)
+  ✓  114 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign (6.8s)
+  ✓  115 tests/gameplay/faction-roster.spec.ts:52:36 › Underhush Exchange is a real chosen culture through founding, paid construction and portable saves (12.7s)
+  ✓  116 tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides (23.5s)
+  ✓  117 tests/gameplay/faction-roster.spec.ts:52:36 › Vesper Court is a real chosen culture through founding, paid construction and portable saves (13.4s)
+  ✓  118 tests/gameplay/group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit (9.6s)
+  ✓  119 tests/gameplay/faction-roster.spec.ts:52:36 › Manytrack Moot is a real chosen culture through founding, paid construction and portable saves (15.4s)
+  ✓  120 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel missing-results after real movement locks orders until the actual manual save is restored (12.7s)
+  ✓  122 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel wrong-army after real movement locks orders until the actual manual save is restored (8.7s)
+  ✓  121 tests/gameplay/faction-roster.spec.ts:52:36 › Margin Observance is a real chosen culture through founding, paid construction and portable saves (18.3s)
+  ✓  124 tests/gameplay/faction-roster.spec.ts:117:1 › twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms (3.8s)
+  ✓  123 tests/gameplay/group-movement-recovery.spec.ts:6:3 › group travel worker-crash after real movement locks orders until the actual manual save is restored (11.2s)
+  ✓  125 tests/gameplay/faction-roster.spec.ts:147:1 › all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width (5.9s)
+  ✓  126 tests/gameplay/group-movement-recovery.spec.ts:58:1 › a superseded route review cannot fault a restored campaign when its late reply claims recovery is required (8.0s)
+  ✓  128 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (10.0s)
+  ✓  129 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (7.7s)
+  ✓  127 tests/gameplay/group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch (31.3s)
+  ✓  130 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (16.2s)
+  ✓  132 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (3.4s)
+  ✓  133 tests/gameplay/hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion (16.6s)
+  ✓  131 tests/gameplay/group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves (31.0s)
+  ✓  134 tests/gameplay/hearth-development.spec.ts:162:1 › a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales (4.2s)
+  ✓  136 tests/gameplay/hearth-development.spec.ts:199:1 › remembered foreign land never exposes unseen construction or newly completed district art (2.5s)
+  ✓  135 tests/gameplay/group-movement.spec.ts:212:1 › canonical destination refusals retain only the unavailable army for correction (9.6s)
+  ✓  137 tests/gameplay/hearth-harbor.spec.ts:67:1 › a paid Charter harbor uses its approved coastal sprite at desktop and narrow near zoom without changing naval rules (7.6s)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  138 tests/gameplay/group-movement.spec.ts:241:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting (7.8s)
+{"stage":"import-2-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  140 tests/gameplay/home.spec.ts:4:1 › home provides the public routes and generated ledger (438ms)
+{"stage":"import-3-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-4-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"failed-import","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  141 tests/gameplay/home.spec.ts:19:1 › dispatches remain refresh-safe at their new path (519ms)
+  ✓  142 tests/gameplay/home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (367ms)
+{"stage":"after-battle","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":20,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  139 tests/gameplay/hermes-ui-slices.spec.ts:23:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (11.9s)
+  ✓  143 tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order (4.1s)
+  ✓  145 tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px (3.6s)
+  ✓  144 tests/gameplay/hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (5.2s)
+  ✓  146 tests/gameplay/household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px (2.7s)
+  ✓  148 tests/gameplay/household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px (3.8s)
+  ✓  147 tests/gameplay/hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (7.1s)
+  ✓  149 tests/gameplay/land-query.spec.ts:71:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (17.6s)
+  ✓  150 tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width (23.3s)
+  ✓  151 tests/gameplay/land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (15.4s)
+  ✓  152 tests/gameplay/land.spec.ts:117:1 › capital designation is paid and independent of colony, settlement and city size (9.7s)
+  ✓  154 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (899ms)
+  ✓  155 tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (7.8s)
+  ✘  156 tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (942ms)
+  ✘  153 tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (12.9s)
+
+
+  1) tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      53 |     return { frames: frames.length, frameMs: { p50: quantile(frames, .5), p95: quantile(frames, .95), max: Math.max(...frames) }, renderCpuMs: { p50: quantile(cpu, .5), p95: quantile(cpu, .95) }, activeFrames, maxEffects, maxActors, maxPool, maxSoldiers, maxSoldierPool, soldierFrames: [...soldierFrames], soldierStates: [...soldierStates], effects: [...effects], frameIds: [...frameIds], scene: window.__THEANDRIL__!.getBattleDiagnostics()!, metrics: window.__THEANDRIL__!.getPerformanceCounters() };
+      54 |   });
+    > 55 |   expect(sample.frames).toBeGreaterThanOrEqual(120); expect(sample.activeFrames).toBeGreaterThan(0);
+         |                                                                                  ^
+      56 |   expect(sample.maxActors).toBe(46); expect(sample.maxEffects).toBeGreaterThan(0); expect(sample.maxEffects).toBeLessThanOrEqual(12); expect(sample.maxPool).toBeLessThanOrEqual(12);
+      57 |   expect(sample.scene.pooledActors).toBe(46); expect(sample.frameIds.length).toBeGreaterThan(1);
+      58 |   expect(sample.metrics.chunkRebuilds).toBe(initial.metrics.chunkRebuilds);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-performance.spec.ts:55:82
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable 
+
+    Test timeout of 45000ms exceeded.
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/charter-templates-a-saved--88d87-hs-individually-overridable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/charter-templates-a-saved--88d87-hs-individually-overridable/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/charter-templates-a-saved--88d87-hs-individually-overridable/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/charter-templates-a-saved--88d87-hs-individually-overridable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Campaign chronicles', exact: true })
+    Expected: visible
+    Timeout: 25000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('dialog', { name: 'Campaign chronicles', exact: true }) with timeout 25000ms
+      - waiting for getByRole('dialog', { name: 'Campaign chronicles', exact: true })
+
+
+      34 |   // Real worker rounds with a 250ms UI yield between rounds; current mixed-army AI is active.
+      35 |   const dialog = page.getByRole('dialog', { name: 'Campaign chronicles', exact: true });
+    > 36 |   await expect(dialog).toBeVisible({ timeout: 25000 });
+         |                        ^
+      37 |   const watchMs = Date.now() - started;
+      38 |   await expect(dialog).toContainText('Complete record: generated start on turn 1');
+      39 |   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/chronicles.spec.ts:36:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled 
+
+    Error: page.evaluate: TypeError: Cannot read properties of null (reading 'coinCost')
+        at eval (eval at evaluate (:311:30), <anonymous>:1:65)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:311:30), <anonymous>:1:65)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/city-growth.spec.ts:64:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/city-growth-city-borders-e-680cb--paid-and-worker-controlled/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: page.waitForEvent: Test timeout of 45000ms exceeded.
+    =========================== logs ===========================
+    waiting for event "download"
+    ============================================================
+
+      41 | async function exported(page: Page) {
+      42 |   await menu(page);
+    > 43 |   const download = page.waitForEvent('download');
+         |                         ^
+      44 |   await page.getByRole('button', { name: 'Export campaign', exact: true }).click();
+      45 |   const path = await (await download).path(); expect(path).toBeTruthy();
+      46 |   const bytes = await readFile(path!), campaign = deserializeCampaign(await importSave(bytes));
+        at exported (/home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:43:25)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/empire-delegation.spec.ts:280:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/empire-delegation-a-mature-c8113--through-saved-continuation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/empire-delegation-a-mature-c8113--through-saved-continuation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/empire-delegation-a-mature-c8113--through-saved-continuation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail 
+
+    Test was interrupted.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for getByRole('navigation', { name: 'Territory tile pages', exact: true }).getByRole('button', { name: 'Next tiles', exact: true })
+        - locator resolved to <button type="button">Next tiles</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+      197 |     const detail = pages[index]!;
+      198 |     if (index) {
+    > 199 |       await navigation.getByRole('button', { name: 'Next tiles', exact: true }).click();
+          |                                                                                 ^
+      200 |       queryCount++;
+      201 |       await checkPage(detail);
+      202 |     }
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/land-query.spec.ts:199:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/land-query-a-mature-thirty-46f56-ly-the-searched-town-detail/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders 
+
+    Test was interrupted.
+
+    Error: page.goto: Test ended.
+    Call log:
+      - navigating to "http://127.0.0.1:4173/", waiting until "load"
+
+
+       8 |
+       9 | async function load(page: Page, game: GameState) {
+    > 10 |   await page.goto('/');
+         |              ^
+      11 |   await page.locator('input[type=file]').setInputFiles({ name: 'map-actions.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(game))) });
+      12 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+      13 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().frameCount ?? 0)).toBeGreaterThan(2);
+        at load (/home/telephoneheater/Work/Theandril/tests/gameplay/map-actions.spec.ts:10:14)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/map-actions.spec.ts:98:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/map-actions-a-hundred-co-l-ef9c9-us-across-paid-saved-orders/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/2026-10-29-reactive-interception/browser-rerun-results/map-actions-a-hundred-co-l-ef9c9-us-across-paid-saved-orders/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/2026-10-29-reactive-interception/browser-rerun-results/map-actions-a-hundred-co-l-ef9c9-us-across-paid-saved-orders/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/2026-10-29-reactive-interception/browser-rerun-results/map-actions-a-hundred-co-l-ef9c9-us-across-paid-saved-orders/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: tests/gameplay/faction-roster.spec.ts (5.3m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  5 failed
+    tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX 
+    tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable 
+    tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory 
+    tests/gameplay/city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled 
+    tests/gameplay/empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation 
+  2 interrupted
+    tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail 
+    tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders 
+  96 did not run
+  149 passed (16.9m)
+exit 130
