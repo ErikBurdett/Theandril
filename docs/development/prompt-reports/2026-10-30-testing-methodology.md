@@ -65,7 +65,8 @@ Development process only; nothing a player sees changed.
   the e103a72 history purge: both owner decisions.
 - `tests/production` (34 files, 36 journeys) was left whole as a checkpoint
   suite; thirteen of its files mirror gameplay specs and could be thinned.
-- The reactive interception slice (rules/save 43) is verified under the new
-  policy and still uncommitted in this checkout.
-- Publication: none. The local branch state is recorded in the commit that
-  carries this report.
+- Publication of this change: `1703221`, both workflows pass. The reactive
+  interception slice followed as `e2f74d0` under the new policy, with the
+  deploy proven by the live readback
+  ([publication packet](../2026-10-29-publication-interception/README.md)).
+  This checkout is the primary one and sits on the published commits.
