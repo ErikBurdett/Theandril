@@ -49,7 +49,13 @@ async function reachable(locator: Locator) {
   })).toBe(true);
 }
 
-for (const faction of newCultures) test(`${faction.name} is a real chosen culture through founding, paid construction and portable saves`, { tag: '@scale' }, async ({ page }, testInfo) => {
+// One founding journey stands for the eighteen later cultures: the flow is the
+// same for each, every culture's profile, ecology and rationale are checked by
+// the content tests and by the narrow sweep below, and the chosen definition is
+// carried through founding, saves and imports by the roster, not by the UI.
+const witness = newCultures[newCultures.length - 1]!;
+test(`${witness.name} is a real chosen culture through founding, paid construction and portable saves`, async ({ page }, testInfo) => {
+  const faction = witness;
   await setup(page, faction.id);
   const identity = page.getByRole('region', { name: 'Player culture', exact: true }).getByTestId('faction-identity');
   await expect(identity).toHaveAttribute('data-definition-id', faction.id);
@@ -158,11 +164,14 @@ test('all twenty-four profiles and actual drawbacks remain readable by touch and
       await reachable(selector); await selector.selectOption(faction.id);
       const identity = page.getByTestId('faction-identity');
       await expect(identity).toHaveAttribute('data-definition-id', faction.id);
+      await expect(identity).toContainText(FACTION_PROFILES[faction.id]!.description);
+      for (const affinity of FACTION_ECOLOGIES[faction.id]!.affinities) await expect(identity.getByRole('list', { name: 'Biome affinities' })).toContainText(yieldText(affinity.yields));
       await reachable(identity.locator('.faction-profile'));
       expect((await identity.boundingBox())!.width).toBeGreaterThan(200);
       const affinities = identity.getByRole('list', { name: 'Biome affinities' });
       for (const row of await affinities.getByRole('listitem').all()) await reachable(row);
       await identity.locator('summary').focus(); await page.keyboard.press('Enter');
+      await expect(identity).toContainText(FACTION_PROFILES[faction.id]!.recruitmentRationale);
       const preferences = identity.getByRole('list', { name: 'AI land recruitment preferences' });
       await expect(preferences.getByRole('listitem')).toHaveCount(Object.keys(FACTION_RECRUITMENT_WEIGHTS[faction.id]!).length);
       await reachable(preferences.getByRole('listitem').last());

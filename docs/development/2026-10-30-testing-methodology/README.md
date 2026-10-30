@@ -54,13 +54,23 @@ time). The campaigns project runs in 20 s.
   specs pass under the `gameplay` project in 16.8 s against the warm
   development server; `browser-results/` holds their screenshots only.
 
+## Second pass, same day
+
+- `tests/gameplay/faction-roster.spec.ts`: the eighteen parametrised founding
+  journeys became one founding journey for a witness culture (Margin
+  Observance); the narrow all-cultures sweep now also checks each culture's
+  profile description, biome affinities and recruitment rationale, which the
+  content tests already prove for every culture. The file runs in 15.4 s
+  instead of 621 s ([log](browser-roster.log)). Projects now list 203 ordinary
+  and 32 scale journeys.
+- The 52 `trace.zip` archives (about 405 MB) committed by earlier packets were
+  removed from the tree with `git rm`; history keeps them.
+
 ## Not done
 
-- No journey was deleted or consolidated. The faction-roster sweep is the first
-  candidate for consolidation into a content unit test plus one founding
-  journey; that is the owner's call.
-- The 52 `trace.zip` archives (about 405 MB) committed in earlier packets stay
-  in the tree; removing them is an owner decision, as is purging the e103a72
-  history.
+- The art cohort sweeps (faction art, naval art, biome variation, terrain art,
+  tile footprints) stay as `@scale` journeys: they verify rendered approved
+  pixels, which no unit test can.
+- Purging the e103a72 history remains an owner decision.
 - `tests/production` (34 files) was not split; it is a checkpoint suite as a
   whole.

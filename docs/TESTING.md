@@ -16,8 +16,8 @@ the expensive part, and they are not a per-change gate.
 | Build | `pnpm build` | about a minute | every change, before commit |
 | Pacing | `pnpm measure:pacing` | about 90 s per run | a rules or AI change that could move how a campaign ends; judged on the headline twelve-realm campaign only |
 | Covering journeys | `pnpm test:gameplay tests/gameplay/<spec>.spec.ts …` | seconds to a minute per spec | a player-facing change: the specs that exercise the changed behaviour, plus a new or extended journey when the behaviour is new |
-| Ordinary journeys | `pnpm test:gameplay` | 202 journeys in 79 files, about 70 worker-minutes | batch checkpoints only |
-| Scale journeys | `pnpm test:scale` | 50 journeys in 27 files, about 30 worker-minutes | on demand and at batch checkpoints |
+| Ordinary journeys | `pnpm test:gameplay` | 203 journeys in 80 files, about 70 worker-minutes | batch checkpoints only |
+| Scale journeys | `pnpm test:scale` | 32 journeys in 27 files, about 20 worker-minutes | on demand and at batch checkpoints |
 | Production bundle | `pnpm build && pnpm test:production` | 36 journeys against the built bundle | before a release checkpoint, not per deploy |
 | Pages build | `VITE_BASE_PATH=/Theandril/ pnpm build && pnpm exec playwright test --config playwright.pages.config.ts` | the multi-page site and its worker | before a release checkpoint; the live-URL form after a publication when a page-level change shipped |
 
@@ -79,9 +79,9 @@ Tag with the Playwright details argument, which keeps the title intact:
 test('a hundred armies receive one group posting …', { tag: '@scale' }, async ({ page }) => {
 ```
 
-These are a fifth of the journeys and a third of the run, and they produce most
-of the load failures because each imports a large campaign and drives a long
-loop. They still matter: run `pnpm test:scale` when the renderer, map geometry,
+These are an eighth of the journeys and a fifth of the run, and they produce
+most of the load failures because each imports a large campaign and drives a
+long loop. They still matter: run `pnpm test:scale` when the renderer, map geometry,
 registry paging, batch orders or art coverage change, and at a checkpoint.
 
 ## Evidence packets
@@ -91,9 +91,9 @@ the journey's own screenshots, and any failure screenshot or `error-context.md`
 worth reading. It never keeps `trace.zip` or raw trace parts (`*.trace`,
 `*.network`, `*.jpeg`, `*.webm`, `resources/`); `.gitignore` now refuses them
 under `docs/development/`. Stage a packet explicitly (`git add
-docs/development/<packet>`) and read `git show --stat` before pushing. The
-packets committed before this rule still carry 52 trace archives totalling
-about 405 MB; removing them from the tree is an owner decision.
+docs/development/<packet>`) and read `git show --stat` before pushing. The 52
+trace archives (about 405 MB) that earlier packets had committed were removed
+from the tree on 2026-10-30; they remain in history.
 
 ## Writing tests
 
@@ -105,7 +105,9 @@ about 405 MB; removing them from the tree is an owner decision.
   adding a file.
 - Coverage of content (every culture, every biome) belongs in a unit test over
   the content tables with one representative browser journey, not in a
-  parametrised browser sweep. The faction roster sweep (eighteen founding
-  journeys, ten minutes) is the standing example to consolidate.
+  parametrised browser sweep. The faction roster spec is the worked example:
+  eighteen founding journeys (ten minutes) became one founding journey for a
+  witness culture plus profile, ecology and rationale checks inside the
+  existing all-cultures sweep (fifteen seconds for the file).
 - Keep the forty-five-second journey timeout; a journey that needs longer is
   doing too much.
