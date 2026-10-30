@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+AI realms now survey for arcane seams only where they can find one: a company pays for a survey when fresh Ashfall glass lies within the survey's reach, a free company marches to glass in sight, and a realm that has found a seam of every path stops paying. The headline campaigns find twice the seams for half the surveys, and campaign length moves to 354/316/224 turns. Two save defects are repaired: a campaign could not be loaded during the last round of a seam rite ("ward has an invalid rite or term"), nor while or after a Waykeeper who had deepened a path fought a battle ("invalid learned character skill").
+
 Added reactive interception under rules/save 43: a Waykeeper whose Unbinding is held automatic answers an enemy battle working as it is made when the two casters’ escorts lie within the counter’s reach, so the working has no effect while both casters pay their strain, use and round. The held counter waits during the automatic pass while an enemy caster could still work, the battle panel says when a counter is holding to intercept, both realms read who answered, and a counter set to manual never intercepts. No content or save field changes; v42 envelopes migrate unchanged.
 
 The AI now reaches hearth rites in ordinary play: a realm holding a seam researches the rite discovery its Waykeeper could use, keeps a Waykeeper lodged at a seam hearth while at war, and calls a riding qualified caster home when an enemy company nears the hearth, lodging it before any blockade closes the gate. No rule, save field or content changes.

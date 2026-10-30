@@ -166,6 +166,6 @@ export function validateWards(state: GameState): void {
     const town = state.settlements[ward.settlementId], caster = state.characters[ward.casterId], rite = rites.get(ward.riteId);
     assert(town && town.factionId === ward.factionId, 'names a hearth the realm does not hold');
     assert(caster && caster.factionId === ward.factionId && !caster.dead && caster.location?.kind === 'settlement' && caster.location.settlementId === ward.settlementId, 'names a caster not lodged in its hearth');
-    assert(rite && rite.sinceRules <= rulesVersion(state) && ward.startedTurn <= state.turn && ward.expiresTurn === ward.startedTurn + rite.durationTurns && ward.expiresTurn > state.turn, 'has an invalid rite or term');
+    assert(rite && rite.sinceRules <= rulesVersion(state) && ward.startedTurn <= state.turn && ward.expiresTurn === ward.startedTurn + rite.durationTurns && ward.expiresTurn >= state.turn, 'has an invalid rite or term');
   });
 }

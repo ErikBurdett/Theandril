@@ -6,7 +6,7 @@ import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { planTurnWithReasons } from './index';
 import { planProgression } from './progression';
 import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach } from './arcane';
-import { hexDistance } from '@theandril/mapgen';
+import { hexDistance, isPassable } from '@theandril/mapgen';
 import { SITE_SEARCH_RADIUS } from '@theandril/sim';
 
 const casterOf = (state: GameState) => Object.values(state.characters).find(character => character.factionId === state.turnOwnerId && character.definitionId === 'character.waykeeper')!;
@@ -78,6 +78,10 @@ test('further surveys and seam claims pursue only the paths the realm still lack
   const lacking = getObservation(state, player);
   expect(lacking.arcaneSites.find(site => site.pathId === 'path.flame')!.controlled).toBe(true);
   expect(lacking.arcaneSites.find(site => site.pathId === 'path.rune')!.controlled).toBe(false);
+  // Having found a seam of every path, the realm pays for no further survey and
+  // marches nowhere: holding the Rune seam is a matter of claims or conquest.
+  expect(planArcaneSurvey({ ...lacking, treasury: 1000 })).toBeNull();
+  expect(planGlassApproach({ ...lacking, treasury: 1000 })).toBeNull();
   // The authored seam lies beyond a hearth's ordinary claim reach, so the quote
   // the planner reads is a frontier quote moved onto the seam: the planner only
   // chooses among quotes the observation says can start.
@@ -88,24 +92,80 @@ test('further surveys and seam claims pursue only the paths the realm still lack
   expect(claim?.command).toMatchObject({ type: 'claimCell', factionId: player, cell: rune.cell });
   expect(claim?.coinCost).toBe(frontier.claim.coinCost);
   expect(claimArcaneSeam(lacking, frontier.claim.coinCost - 1)).toBeNull();
-  // A further survey waits for its longer cadence and a richer purse, then needs unsurveyed glass underfoot.
-  const seat = lacking.factions.findIndex(faction => faction.id === player);
-  const surveys: ReturnType<typeof planArcaneSurvey>[] = [];
-  for (let turn = state.turn; turn < state.turn + 12; turn++) surveys.push(planArcaneSurvey({ ...lacking, treasury: 1000, turn: turn - seat }));
-  expect(surveys.filter(Boolean).length).toBeLessThanOrEqual(1);
-  for (const survey of surveys) if (survey) {
+  // A realm that has yet to find a Rune seam surveys further, from a richer
+  // purse, where fresh glass lies within the survey's reach of the company that
+  // pays; once that ground is remembered as surveyed the same company is not
+  // sent to pay again.
+  const unfound = { ...lacking, arcaneSites: lacking.arcaneSites.filter(site => site.pathId !== 'path.rune') };
+  expect(planArcaneSurvey({ ...unfound, treasury: unfound.arcaneSearchCoinCost + 100 })).toBeNull();
+  const seat = unfound.factions.findIndex(faction => faction.id === player);
+  const cadence = unfound.turn + ((6 - (unfound.turn + seat) % 6) % 6);
+  const survey = planArcaneSurvey({ ...unfound, treasury: 1000, turn: cadence });
+  if (survey) {
     const armyId = (survey.commands[0] as { armyId: string }).armyId;
-    const cell = lacking.armies.find(army => army.id === armyId)!.cell;
-    expect((lacking.cells.find(item => item.cell === cell)!.featureMask ?? 0) & 64).toBe(64);
+    const cell = unfound.armies.find(army => army.id === armyId)!.cell;
+    const covered = new Set([...unfound.arcaneSites.map(site => site.cell), ...(unfound.arcaneSearches ?? [])]);
+    expect(unfound.cells.some(item => item.visible && ((item.featureMask ?? 0) & 64) === 64 && hexDistance(item.cell, cell, unfound.width) <= SITE_SEARCH_RADIUS
+      && [...covered].every(seam => hexDistance(seam, item.cell, unfound.width) > SITE_SEARCH_RADIUS))).toBe(true);
+    expect(survey.reasons[0]).toContain('lacks one');
+    const remembered = planArcaneSurvey({ ...unfound, treasury: 1000, turn: cadence, arcaneSearches: [...(unfound.arcaneSearches ?? []), cell] });
+    expect(remembered?.commands.some(command => command.type === 'searchArcane' && command.armyId === armyId)).toBeFalsy();
   }
+});
+
+test('a realm with no seam pays for a survey only where fresh glass lies within its reach, and otherwise marches a company to glass in sight', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId;
+  state.arcaneSurveys[player] = []; state.arcaneSearches[player] = [];
+  state.factions[0]!.treasury = 1000;
+  const view = getObservation(state, player);
+  expect(view.arcaneSites).toEqual([]);
+  // With no glass in sight nothing is paid for and nothing marches, whatever the turn.
+  const bare = structuredClone(view);
+  for (const cell of bare.cells) cell.featureMask = (cell.featureMask ?? 0) & ~64;
+  for (let turn = 0; turn < 8; turn++) {
+    expect(planArcaneSurvey({ ...bare, turn: bare.turn + turn })).toBeNull();
+    expect(planGlassApproach({ ...bare, turn: bare.turn + turn })).toBeNull();
+  }
+  const company = bare.armies.find(army => army.factionId === player && army.domain === 'land' && army.canAttack && !army.canFound)!;
+  // Visible passable ground at an exact distance from the company that no other company could survey.
+  const groundAt = (distance: number) => bare.cells.find(cell => cell.visible && cell.waterDepth === 0 && isPassable(cell.terrain)
+    && hexDistance(cell.cell, company.cell, bare.width) === distance
+    && bare.armies.every(army => army.id === company.id || army.factionId !== player || hexDistance(army.cell, cell.cell, bare.width) > SITE_SEARCH_RADIUS))!;
+  // Glass two hexes away lies within a survey's reach: the company surveys where
+  // it stands on the realm's survey cadence, and never from a thin purse.
+  const seat = bare.factions.findIndex(faction => faction.id === player);
+  const cadence = bare.turn + ((6 - (bare.turn + seat) % 6) % 6);
+  const within = { ...structuredClone(bare), turn: cadence };
+  const reach = within.cells.find(cell => cell.cell === groundAt(SITE_SEARCH_RADIUS).cell)!;
+  reach.featureMask = (reach.featureMask ?? 0) | 64;
+  expect(planArcaneSurvey(within)?.commands).toEqual([{ type: 'searchArcane', factionId: player, armyId: company.id }]);
+  expect(planArcaneSurvey(within)?.reasons[0]).toContain('holds no arcane seam');
+  expect(planArcaneSurvey({ ...within, turn: cadence + 1 })).toBeNull();
+  expect(planArcaneSurvey({ ...within, treasury: within.arcaneSearchCoinCost + 10 })).toBeNull();
+  // Glass underfoot was marched to for this: it is surveyed at once, whatever the turn.
+  const underfoot = { ...structuredClone(bare), turn: cadence + 1 };
+  const standing = underfoot.cells.find(cell => cell.cell === company.cell)!;
+  standing.featureMask = (standing.featureMask ?? 0) | 64;
+  expect(planArcaneSurvey(underfoot)?.commands).toEqual([{ type: 'searchArcane', factionId: player, armyId: company.id }]);
+  // Glass three hexes away is beyond reach: no survey, a march to it instead, with the company held.
+  const beyond = structuredClone(bare);
+  const far = beyond.cells.find(cell => cell.cell === groundAt(SITE_SEARCH_RADIUS + 1).cell)!;
+  far.featureMask = (far.featureMask ?? 0) | 64;
+  expect(planArcaneSurvey(beyond)).toBeNull();
+  const march = planGlassApproach(beyond);
+  expect(march?.commands).toEqual([{ type: 'queueMovement', factionId: player, armyId: company.id, target: far.cell }]);
+  expect([...march!.heldArmyIds]).toEqual([company.id]);
+  expect(march?.reasons[0]).toContain('holds no arcane seam');
 });
 
 test('a realm holding one seam path marches a free company to fresh glass in sight and surveys when it stands there', () => {
   const state = attunementCampaign(), player = state.turnOwnerId;
-  // Lose the Rune seam's ground so the realm lacks a path, keep the purse rich.
+  // Lose the Rune seam's ground and forget the seam itself, so the realm lacks a
+  // path it has not yet found; keep the purse rich.
   const land = state.land.settlements[hostOf(state).id]!;
   const rune = getObservation(state, player).arcaneSites.find(site => site.pathId === 'path.rune')!;
   land.claimed = land.claimed.filter(cell => cell !== rune.cell);
+  state.arcaneSurveys[player] = state.arcaneSurveys[player]!.filter(cell => cell !== rune.cell);
   state.factions[0]!.treasury = 1000;
   const view = getObservation(state, player);
   expect(view.progression.attunement!.paths.find(path => path.pathId === 'path.rune')!.held).toBe(false);
@@ -133,6 +193,7 @@ test('rules 39: a realm never pays to survey ground it remembers surveying, and 
   const land = state.land.settlements[hostOf(state).id]!;
   const rune = getObservation(state, player).arcaneSites.find(site => site.pathId === 'path.rune')!;
   land.claimed = land.claimed.filter(cell => cell !== rune.cell);
+  state.arcaneSurveys[player] = state.arcaneSurveys[player]!.filter(cell => cell !== rune.cell);
   state.factions[0]!.treasury = 1000;
   const view = getObservation(state, player);
   const company = view.armies.find(army => army.factionId === player && army.domain === 'land' && army.canAttack && !army.canFound)!;

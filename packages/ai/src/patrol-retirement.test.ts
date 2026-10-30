@@ -78,19 +78,18 @@ describe('observed captured home circuit retirement', () => {
     expect(heldDelegatedArmyIds(fresh).has(armyId)).toBe(false);
     expect(fresh.patrols!.some(patrol => patrol.armyId === armyId)).toBe(false);
     const cell = game.armies[armyId]!.cell;
-    // This genuine full batch first makes the released company do a paid
-    // survey. Do not suppress that legitimate work to demand immediate travel.
+    // No fresh Ashfall glass lies within a survey's reach of the released
+    // company, so this genuine full batch pays for no survey; the company is
+    // free for ordinary travel in this batch or the next.
     const next = planTurnWithReasons(fresh);
     expect(next).toEqual(planTurnWithReasons(getObservation(mirror, factionId)));
-    expect(actorOrders(next.commands, fresh)).toContainEqual({ type: 'searchArcane', factionId, armyId });
-    const purse = game.factions.find(faction => faction.id === factionId)!.treasury;
+    expect(actorOrders(next.commands, fresh).some(command => command.type === 'searchArcane')).toBe(false);
     for (const command of next.commands) record(command);
-    expect(game.factions.find(faction => faction.id === factionId)!.treasury).toBe(purse - fresh.arcaneSearchCoinCost);
     record({ type: 'endTurn', factionId: game.turnOwnerId });
     const continuing = getObservation(game, factionId), movement = planTurnWithReasons(continuing);
     expect(movement).toEqual(planTurnWithReasons(getObservation(mirror, factionId)));
-    expect(actorOrders(movement.commands, continuing).some(command => command.type === 'moveTo')).toBe(true);
     for (const command of movement.commands) record(command);
+    expect([...actorOrders(next.commands, fresh), ...actorOrders(movement.commands, continuing)].some(command => command.type === 'moveTo')).toBe(true);
     expect(game.armies[armyId]!.cell).not.toBe(cell);
     expect(stateHash(mirror)).toBe(stateHash(game));
     expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));

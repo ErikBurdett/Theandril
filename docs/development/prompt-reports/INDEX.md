@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-30 | [Testing second pass, AI glass surveys and two save repairs](2026-10-30-glass-surveys-and-save-repairs.md) | Roster sweep consolidated and trace archives dropped (`4a06420`); AI surveys target glass, two save-load defects repaired; publication recorded in the report |
 | 2026-10-30 | [Testing methodology cut to proportionate verification](2026-10-30-testing-methodology.md) | Local process only: gameplay suite split into 202 ordinary and 50 `@scale` journeys, `docs/TESTING.md` written, traces gitignored; no publication |
 | 2026-10-29 | [Playwright crash mitigation](2026-10-29-playwright-reliability.md) | Local test infrastructure only; eight attempts across four distinct journeys pass; no publication |
 | 2026-10-29 | [Attunement, subject rule, political bids, cession, ground in sight and seam study](2026-10-29-attunement-victory.md) | Feature `a7a4c16` deployed after both complete browser suites; workflows, live readback and scoped live journeys pass; all gates remain open |

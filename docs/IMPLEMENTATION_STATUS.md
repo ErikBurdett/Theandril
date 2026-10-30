@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## AI surveys the glass, and two save repairs — 2026-10-30
+
+AI only, with two `packages/sim` validation repairs; no rules, content or save
+format change. AI realms now pay for an arcane survey only where fresh Ashfall
+glass lies within the survey's reach of the paying company, march a free
+company to glass in sight, and stop once a seam of every path is found. The
+headline campaigns find 19/21/14 seams for 170/172/151 surveys against 12/9/5
+for 312/271/146, and run **354/316/224** turns against 385/343/229. An
+intermediate version ended the proxy Epic campaign with an AI realm sealing an
+Attunement at turn 332, the first organic third-path seal observed; the final
+version's campaigns still resolve by Prosperity, and the measured gap is now
+holding a found seam that lies in another realm's borders.
+
+Repaired: a save made in the last round of a seam rite could not be loaded
+("ward has an invalid rite or term"), and a save made during or after a battle
+fought by a Waykeeper with a learned path deepening could not be loaded
+("invalid learned character skill", validated against rules 16). Both carry
+regression tests. Verification: unit **2,311 tests / 285 files**, campaigns 57,
+lint, typecheck, build, six covering journeys and three headline pacing runs.
+[Evidence](development/2026-10-30-ai-glass-surveys/README.md),
+[ADR0067](architecture/0067-ai-glass-surveys.md).
+
 ## Testing methodology: proportionate verification — 2026-10-30
 
 Development process only; no game change. The browser suite is split into two

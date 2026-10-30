@@ -74,7 +74,7 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.join(' ')).toContain('Where it stands resolves the latest army position');
     expect(empire.delivered.join(' ')).toContain('preserving the order and its Clear control');
     expect(pacing.status).toBe('in-progress');
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(106);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(107);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
   });
   it('records the bounded registry workflow without closing mature-realm acceptance', () => {
@@ -199,7 +199,7 @@ describe('the source-backed roadmap contract', () => {
     for (const claim of ['one to five existing construction/recruitment items', 'up to 128 owned hearths', 'preserves its paid prefix and leaves it selected for correction', 'at most 640 attempts', 'Up to 24 named production templates', 'Apply remains the paid action', 'never enter campaign saves or exports', 'failed preference storage leaves direct editing and production usable']) expect(delivered, claim).toContain(claim);
     for (const claim of ['broader governor decisions', 'broader theater strategy', 'mobile escorts', 'reusable army order templates', 'representative organically developed mature campaigns']) expect(remaining, claim).toContain(claim);
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-26-production-sequences/README.md')).toBe(true);
-    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(106);
+    expect(roadmapItems.reduce((count, item) => count + item.delivered.length, 0)).toBe(107);
     expect(roadmapItems.reduce((count, item) => count + item.remaining.length, 0)).toBe(49);
     expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
     expect(roadmapGates).toHaveLength(15);

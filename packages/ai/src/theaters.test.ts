@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementPreview, getObservation, serializeGame, stateHash, type GameCommand, type GameState, type Observation } from '@theandril/sim';
-import { neighbors } from '@theandril/mapgen';
+import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementPreview, getObservation, GLASS_SHARDS, serializeGame, SITE_SEARCH_RADIUS, stateHash, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { hexDistance, neighbors } from '@theandril/mapgen';
 import { createJournal, replayArchive } from '../../chronicle/src';
 import { withRules } from '../../sim/src/rules';
 import { rebaseAuthoredLand, refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
@@ -211,8 +211,16 @@ describe('theater members remain reserved across actor planners', () => {
     const view = getObservation(game, factionId);
     expect(planCharacters(view, 100).commands).toEqual([]);
     expect(armyCommands(planTurnWithReasons(view).commands, new Set(members), view)).toEqual([]);
-    const surveyView = { ...view, turn: 6, treasury: 1000, arcaneSites: [] };
-    expect(planArcaneSurvey({ ...surveyView, theaters: [] })).not.toBeNull();
+    // Author fresh Ashfall glass within a survey's reach of the theater's members
+    // and of no free company: without the theater one of them surveys; with it none may.
+    const reserved = new Set(members);
+    const glass = view.cells.find(cell => cell.visible && cell.cell === game.armies[armyId]!.cell
+      && view.armies.every(army => army.factionId !== factionId || reserved.has(army.id) || army.canFound || hexDistance(army.cell, cell.cell, view.width) > SITE_SEARCH_RADIUS))!;
+    const cells = view.cells.map(cell => cell.cell === glass.cell ? { ...cell, featureMask: (cell.featureMask ?? 0) | GLASS_SHARDS } : cell);
+    const surveyView = { ...view, cells, turn: 6, treasury: 1000, arcaneSites: [] };
+    const free = planArcaneSurvey({ ...surveyView, theaters: [] });
+    expect(free?.commands).toHaveLength(1);
+    expect(reserved.has((free!.commands[0] as { armyId: string }).armyId)).toBe(true);
     expect(planArcaneSurvey(surveyView)).toBeNull();
   });
 

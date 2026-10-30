@@ -1228,9 +1228,15 @@ export function deserializeGame(text: string): GameState {
       const definition = CHARACTER_DEFINITIONS.find(item => item.id === snapshot.definitionId);
       const skill = CHARACTER_SKILLS.find(item => item.id === snapshot.skillId);
       assert(definition && (snapshot.skillId === null || skill && definition.skillIds.includes(skill.id) && skill.roles.includes(definition.role)) && name.safeParse(snapshot.name).success, 'invalid battle character definition, skill or name');
-      validateCharacterTraining(snapshot, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion >= 9 ? 14 : battle.rulesVersion);
-      const leadership = characterLeadership({ ...snapshot, dead: false }, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion);
-      const rallyRestore = definition.role === 'marshal' && !snapshot.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(snapshot, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion).rallyBonus : 0;
+      // A format-10 battle snapshot was taken under the campaign's rules, which
+      // the save version tracks: skills introduced after rules 16, such as a
+      // Waykeeper's path deepening (rules 38), are as valid in it as in the
+      // living character. Older battle formats keep their frozen versions.
+      const trainingVersion = battle.rulesVersion >= 10 ? Math.max(16, originalVersion) : battle.rulesVersion >= 9 ? 14 : battle.rulesVersion;
+      const effectsVersion = battle.rulesVersion >= 10 ? Math.max(16, originalVersion) : battle.rulesVersion;
+      validateCharacterTraining(snapshot, trainingVersion);
+      const leadership = characterLeadership({ ...snapshot, dead: false }, effectsVersion);
+      const rallyRestore = definition.role === 'marshal' && !snapshot.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(snapshot, effectsVersion).rallyBonus : 0;
       assert(leadership.attack === snapshot.leadership.attack && leadership.armor === snapshot.leadership.armor && snapshot.rallyRestore === rallyRestore, 'battle character effects differ from frozen content');
       const leader = leaders.get(snapshot.armyId) ?? { attack: 0, armor: 0, marshals: 0, companions: 0 };
       leader.attack += leadership.attack; leader.armor += leadership.armor; leader.marshals += Number(definition.role === 'marshal'); leader.companions += Number(definition.role !== 'marshal'); leaders.set(snapshot.armyId, leader);

@@ -374,3 +374,22 @@ test('a held counter waits for an enemy caster and answers an automatic working 
   expect(serializeGame(replayArchive(archive))).toBe(serializeGame(restored));
   expect(serializeGame(deserializeGame(serializeGame(restored)))).toBe(serializeGame(restored));
 });
+
+test('a Waykeeper who deepened a path survives a save made during and after a battle', () => {
+  const { game, casterId } = prepare();
+  // Earned practice: the deepening is a learned skill introduced in rules 38,
+  // bought through the ordinary promotion command.
+  game.characters[casterId]!.experience = 24;
+  issue(game, { type: 'promoteCharacter', factionId: owner, characterId: casterId, skillId: 'skill.flame_deepening' });
+  expect(game.characters[casterId]!.learnedSkillIds).toEqual(['skill.flame_deepening']);
+  begin(game);
+  expect(game.battle!.characterSnapshots.find(item => item.characterId === casterId)?.learnedSkillIds).toEqual(['skill.flame_deepening']);
+  // The pending battle's snapshot carries the learned skill through a save.
+  const pending = deserializeGame(serializeGame(game));
+  expect(stateHash(pending)).toBe(stateHash(game));
+  issue(game, { type: 'autoResolveBattle', factionId: owner });
+  expect(game.battle).toBeNull();
+  expect(game.battleReports.at(-1)!.characterSnapshots.find(item => item.characterId === casterId)?.learnedSkillIds).toEqual(['skill.flame_deepening']);
+  // So does the finished battle's report.
+  expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
+});

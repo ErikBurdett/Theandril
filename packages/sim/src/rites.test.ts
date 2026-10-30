@@ -51,6 +51,8 @@ describe('seam warding (rules 40)', () => {
     for (let turn = 0; turn < 7; turn++) endTurn(state);
     expect(state.sieges[host.id]).toMatchObject({ defenses: 30 });
     expect(getObservation(state, player).wards![0]).toMatchObject({ remainingTurns: 0 });
+    // A ward in its last round, with no turns remaining, is still a valid save.
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
     endTurn(state);
     expect(state.wards).toEqual([]);
     expect(state.sieges[host.id]?.defenses ?? 0).toBeLessThan(30);
