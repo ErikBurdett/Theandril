@@ -66,6 +66,21 @@ time). The campaigns project runs in 20 s.
 - The 52 `trace.zip` archives (about 405 MB) committed by earlier packets were
   removed from the tree with `git rm`; history keeps them.
 
+## Scale checkpoint, same day
+
+`pnpm test:scale --workers=2` on the quiet machine (load under two, no other
+browser run): **27 of 32 passed in 5.8 min** ([log](browser-scale.log);
+`browser-scale-results/` keeps only the five failure screenshots and contexts).
+Classification: charter-templates and production-sequences timed out at 45 s,
+the forty-hearth journeys that also timed out in the loaded full run, recorded
+once; naval-art (a 24-culture sweep) timed out and terrain-art failed a
+one-shot sample of the rendered scout frame, and both passed alone
+([log](browser-scale-rerun-alone.log)); chronicles' AI-watch campaign now ends
+on turn 55 rather than the pinned 60 because the AI surveys glass since
+`ae88204`. terrain-art now waits for the frame with `expect.poll`, chronicles is
+re-pinned to 55 with its history in the comment, and both pass
+([log](browser-scale-repinned.log)). No timeout was raised.
+
 ## Not done
 
 - The art cohort sweeps (faction art, naval art, biome variation, terrain art,

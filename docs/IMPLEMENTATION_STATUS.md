@@ -19,6 +19,8 @@ fought by a Waykeeper with a learned path deepening could not be loaded
 ("invalid learned character skill", validated against rules 16). Both carry
 regression tests. Verification: unit **2,311 tests / 285 files**, campaigns 57,
 lint, typecheck, build, six covering journeys and three headline pacing runs.
+Deployed as `ae88204`: both workflows and the live readback pass
+([publication packet](development/2026-10-30-publication-glass-surveys/README.md)).
 [Evidence](development/2026-10-30-ai-glass-surveys/README.md),
 [ADR0067](architecture/0067-ai-glass-surveys.md).
 

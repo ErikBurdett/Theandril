@@ -1,0 +1,461 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: charter-templates.spec.ts >> a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable
+- Location: tests/gameplay/charter-templates.spec.ts:41:1
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f2e3]:
+  - button "Import save file"
+  - generic [ref=f2e4]:
+    - banner [ref=f2e5]:
+      - heading "Theandril" [level=1] [ref=f2e8]
+      - generic [ref=f2e9]:
+        - generic [ref=f2e10]:
+          - generic [ref=f2e11]: TREASURY
+          - strong [ref=f2e12]: 251008 coin
+        - generic [ref=f2e13]:
+          - generic [ref=f2e14]: KNOWLEDGE
+          - strong [ref=f2e15]: "0"
+    - navigation "Campaign navigation" [ref=f2e16]:
+      - generic [ref=f2e17]:
+        - text: Standard pace ·
+        - generic [ref=f2e18]: 40 realms
+    - group [ref=f2e19]:
+      - generic "Campaign & settings" [ref=f2e20] [cursor=pointer]
+  - main [ref=f2e21]:
+    - region "Strategic map" [ref=f2e22]:
+      - generic "World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls." [ref=f2e23]
+      - navigation "Map management" [ref=f2e25]:
+        - button "Armies & fleets" [ref=f2e26] [cursor=pointer]
+        - button "Settlements" [ref=f2e30] [cursor=pointer]
+        - button "Characters & agents" [ref=f2e34] [cursor=pointer]:
+          - generic [ref=f2e37]: Characters
+        - button "Realm progression" [ref=f2e38] [cursor=pointer]:
+          - generic [ref=f2e41]: Research
+        - button "Realm affairs" [ref=f2e42] [cursor=pointer]:
+          - generic [ref=f2e45]: Diplomacy
+        - button "Campaign journal" [ref=f2e46] [cursor=pointer]
+        - button "World overview" [ref=f2e50] [cursor=pointer]
+      - generic [ref=f2e54]:
+        - button "Zoom in" [ref=f2e55] [cursor=pointer]: +
+        - button "Zoom out" [ref=f2e56] [cursor=pointer]: −
+        - button "Focus selection" [ref=f2e57] [cursor=pointer]
+        - button "Open map actions" [ref=f2e58] [cursor=pointer]
+        - button "Map guide" [ref=f2e59] [cursor=pointer]: "?"
+      - group:
+        - generic "World map · Terrain" [ref=f2e60] [cursor=pointer]
+  - dialog [ref=f2e61]:
+    - banner [ref=f2e62]:
+      - generic [ref=f2e63]:
+        - generic [ref=f2e64]: The realm's ledgers
+        - heading "Realm registry" [level=2] [ref=f2e65]
+        - paragraph [ref=f2e66]: Ashen Compact
+      - button "Close Realm registry" [ref=f2e67] [cursor=pointer]: ×
+    - generic [ref=f2e69]:
+      - generic [ref=f2e70]:
+        - img "Ashen Compact crest · approved faction artwork" [ref=f2e71]
+        - generic [ref=f2e72]:
+          - generic [ref=f2e73]: Your people
+          - heading "Ashen Compact" [level=3] [ref=f2e74]
+      - generic [ref=f2e76]:
+        - tablist "Realm registry" [ref=f2e77]:
+          - tab "Armies 100" [ref=f2e78] [cursor=pointer]
+          - tab "Settlements 40" [selected] [ref=f2e79] [cursor=pointer]
+        - button "Characters & agents" [ref=f2e80] [cursor=pointer]: Characters 0
+      - generic [ref=f2e81]:
+        - text: Search your realm
+        - searchbox "Search your realm" [ref=f2e82]
+      - tabpanel "Settlements 40" [ref=f2e83]:
+        - generic [ref=f2e84]:
+          - generic [ref=f2e86]:
+            - text: Settlement orders
+            - combobox "Settlement orders" [ref=f2e87]:
+              - option "All hearths (40)" [selected]
+              - option "No production (39)"
+              - option "Without charters (0)"
+              - option "Charters waiting (0)"
+          - generic [ref=f2e89]:
+            - text: Land commission status
+            - combobox "Land commission status" [ref=f2e90]:
+              - option "All hearths (40)" [selected]
+              - option "With commissions (0)"
+              - option "Without commissions (40)"
+              - option "Zero allowance (0)"
+              - option "Reported waits (0)"
+          - group [ref=f2e91]:
+            - generic "How these filters work" [ref=f2e92] [cursor=pointer]
+          - generic [ref=f2e93]:
+            - generic [ref=f2e94]:
+              - text: Registry order
+              - combobox "Registry order" [ref=f2e95]:
+                - option "Stable order" [selected]
+                - option "Name A–Z"
+            - generic [ref=f2e96]: 40 towns
+          - group [ref=f2e97]:
+            - generic "Saved hearth groups" [ref=f2e98] [cursor=pointer]
+            - option "Choose a saved hearth group" [selected]
+          - region "Group hearth charters" [ref=f2e99]:
+            - generic [ref=f2e100]:
+              - button "Select matching hearths" [disabled] [ref=f2e101]
+              - button "Clear hearth selection" [ref=f2e102] [cursor=pointer]
+            - status [ref=f2e103]: 40 hearths selected
+            - paragraph [ref=f2e104]: Check hearths to give them standing charters together. Select up to 128 at a time; page, search and registry changes keep your selection.
+            - generic [ref=f2e105]:
+              - generic [ref=f2e106]:
+                - text: Charter focus
+                - combobox "Charter focus" [ref=f2e107]:
+                  - option "Works" [selected]
+                  - option "Wealth"
+                  - option "Learning"
+                  - option "Muster"
+              - generic [ref=f2e108]:
+                - text: Coin ceiling per hearth
+                - spinbutton "Coin ceiling per hearth" [ref=f2e109]: "24"
+            - paragraph [ref=f2e110]: Applying charters spends no coin now. Each hearth may spend up to its ceiling on one work whenever its queue is empty, once per turn after upkeep. All charters share your treasury and leave 40 coin in reserve.
+            - paragraph [ref=f2e111]: Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.
+            - paragraph [ref=f2e112]: 1 selected hearth already has production queued; those orders come first.
+            - group [ref=f2e113]:
+              - generic "Charter templates" [active] [ref=f2e114] [cursor=pointer]
+              - paragraph [ref=f2e115]: Your personal template library stays in this browser across campaigns and sessions. It is separate from campaign saves and is not included in campaign exports. Saving, recalling or deleting a template issues no game orders.
+              - generic [ref=f2e116]:
+                - generic [ref=f2e117]:
+                  - text: Saved charter template
+                  - combobox "Saved charter template" [ref=f2e118]:
+                    - option "Choose a saved template" [selected]
+                - generic [ref=f2e119]:
+                  - text: Template name
+                  - textbox "Template name" [ref=f2e120]
+                - paragraph [ref=f2e121]: Save or update using the current charter focus and coin ceiling. Choose a unique name, up to 40 characters. Up to 24 templates fit in this library.
+                - generic [ref=f2e122]:
+                  - button "Save new template" [disabled] [ref=f2e123]
+                  - button "Update template" [disabled] [ref=f2e124]
+                  - button "Recall template" [disabled] [ref=f2e125]
+                  - button "Delete template" [disabled] [ref=f2e126]
+                - status [ref=f2e127]: No charter templates saved yet.
+            - generic [ref=f2e128]:
+              - button "Apply charters (40)" [ref=f2e129] [cursor=pointer]
+              - button "Revoke charters (40)" [ref=f2e130] [cursor=pointer]
+          - group [ref=f2e131]:
+            - generic "Worker policies" [ref=f2e132]
+            - option "Balanced" [selected]
+            - option "Food"
+            - option "Industry"
+            - option "Coin"
+            - option "Knowledge"
+          - group [ref=f2e133]:
+            - generic "Land commissions" [ref=f2e134] [cursor=pointer]
+            - option "Terraced fields" [selected]
+            - option "Managed woodlot"
+            - option "Measured quarry"
+            - option "Reedworks"
+            - option "Shore fishery"
+            - option "Spring garden"
+            - option "Polder"
+            - option "Grove archive"
+            - option "Oreworks"
+            - option "Tide observatory"
+            - option "Hearthgrain grange"
+            - option "Ironstone mine"
+            - option "Copper mine"
+            - option "Salt house"
+            - option "Heartwood yard"
+            - option "Remount yard"
+            - option "Silver mine"
+            - option "Ashglass refinery"
+          - group [ref=f2e135]:
+            - generic "Production sequences" [ref=f2e136] [cursor=pointer]
+            - option "Root cellar · 8 coin" [selected]
+            - option "Cinder workshop · 12 coin"
+            - option "Charter market · 10 coin"
+            - option "Witness archive · 12 coin"
+            - option "Charter harbor · 20 coin"
+            - option "Hearth caravan · 16 coin"
+            - option "Wayfinder · 8 coin"
+            - option "Oath guard · 12 coin"
+            - option "Ash pike company · 10 coin"
+            - option "Cinder plate cohort · 22 coin"
+            - option "Charter outriders · 18 coin"
+            - option "Charter transport · 24 coin"
+            - option "Coastwatch galley · 30 coin"
+            - option "Deepwake warship · 48 coin"
+            - option "Reed skirmishers · 14 coin"
+            - option "Witness arbalesters · 22 coin"
+            - option "Kiln halberdiers · 28 coin"
+            - option "Road lancers · 32 coin"
+          - generic [ref=f2e137]:
+            - generic [ref=f2e138]:
+              - checkbox "Select Template hearth 001 for group orders" [checked] [ref=f2e140]
+              - button "Template hearth 001 8 people · Root cellar Learning charter · 32 coin per work · Current queue comes first." [ref=f2e141] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f2e142]: ⌂
+                - generic [ref=f2e143]:
+                  - strong [ref=f2e144]: Template hearth 001
+                  - generic [ref=f2e145]: 8 people · Root cellar
+                  - generic [ref=f2e146]: Learning charter · 32 coin per work · Current queue comes first.
+                - generic [aria-hidden] [ref=f2e147]: ›
+            - generic [ref=f2e148]:
+              - checkbox "Select Template hearth 002 for group orders" [checked] [ref=f2e150]
+              - 'button "Template hearth 002 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e151] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e152]: ⌂
+                - generic [ref=f2e153]:
+                  - strong [ref=f2e154]: Template hearth 002
+                  - generic [ref=f2e155]: 8 people · No production
+                  - generic [ref=f2e156]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e157]: ›
+            - generic [ref=f2e158]:
+              - checkbox "Select Template hearth 003 for group orders" [checked] [ref=f2e160]
+              - 'button "Template hearth 003 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e161] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e162]: ⌂
+                - generic [ref=f2e163]:
+                  - strong [ref=f2e164]: Template hearth 003
+                  - generic [ref=f2e165]: 8 people · No production
+                  - generic [ref=f2e166]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e167]: ›
+            - generic [ref=f2e168]:
+              - checkbox "Select Template hearth 004 for group orders" [checked] [ref=f2e170]
+              - 'button "Template hearth 004 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e171] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e172]: ⌂
+                - generic [ref=f2e173]:
+                  - strong [ref=f2e174]: Template hearth 004
+                  - generic [ref=f2e175]: 8 people · No production
+                  - generic [ref=f2e176]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e177]: ›
+            - generic [ref=f2e178]:
+              - checkbox "Select Template hearth 005 for group orders" [checked] [ref=f2e180]
+              - 'button "Template hearth 005 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e181] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e182]: ⌂
+                - generic [ref=f2e183]:
+                  - strong [ref=f2e184]: Template hearth 005
+                  - generic [ref=f2e185]: 8 people · No production
+                  - generic [ref=f2e186]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e187]: ›
+            - generic [ref=f2e188]:
+              - checkbox "Select Template hearth 006 for group orders" [checked] [ref=f2e190]
+              - 'button "Template hearth 006 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e191] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e192]: ⌂
+                - generic [ref=f2e193]:
+                  - strong [ref=f2e194]: Template hearth 006
+                  - generic [ref=f2e195]: 8 people · No production
+                  - generic [ref=f2e196]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e197]: ›
+            - generic [ref=f2e198]:
+              - checkbox "Select Template hearth 007 for group orders" [checked] [ref=f2e200]
+              - 'button "Template hearth 007 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e201] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e202]: ⌂
+                - generic [ref=f2e203]:
+                  - strong [ref=f2e204]: Template hearth 007
+                  - generic [ref=f2e205]: 8 people · No production
+                  - generic [ref=f2e206]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e207]: ›
+            - generic [ref=f2e208]:
+              - checkbox "Select Template hearth 008 for group orders" [checked] [ref=f2e210]
+              - 'button "Template hearth 008 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e211] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e212]: ⌂
+                - generic [ref=f2e213]:
+                  - strong [ref=f2e214]: Template hearth 008
+                  - generic [ref=f2e215]: 8 people · No production
+                  - generic [ref=f2e216]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e217]: ›
+            - generic [ref=f2e218]:
+              - checkbox "Select Template hearth 009 for group orders" [checked] [ref=f2e220]
+              - 'button "Template hearth 009 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e221] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e222]: ⌂
+                - generic [ref=f2e223]:
+                  - strong [ref=f2e224]: Template hearth 009
+                  - generic [ref=f2e225]: 8 people · No production
+                  - generic [ref=f2e226]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e227]: ›
+            - generic [ref=f2e228]:
+              - checkbox "Select Template hearth 010 for group orders" [checked] [ref=f2e230]
+              - 'button "Template hearth 010 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e231] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e232]: ⌂
+                - generic [ref=f2e233]:
+                  - strong [ref=f2e234]: Template hearth 010
+                  - generic [ref=f2e235]: 8 people · No production
+                  - generic [ref=f2e236]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e237]: ›
+            - generic [ref=f2e238]:
+              - checkbox "Select Template hearth 011 for group orders" [checked] [ref=f2e240]
+              - 'button "Template hearth 011 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e241] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e242]: ⌂
+                - generic [ref=f2e243]:
+                  - strong [ref=f2e244]: Template hearth 011
+                  - generic [ref=f2e245]: 8 people · No production
+                  - generic [ref=f2e246]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e247]: ›
+            - generic [ref=f2e248]:
+              - checkbox "Select Template hearth 012 for group orders" [checked] [ref=f2e250]
+              - 'button "Template hearth 012 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e251] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e252]: ⌂
+                - generic [ref=f2e253]:
+                  - strong [ref=f2e254]: Template hearth 012
+                  - generic [ref=f2e255]: 8 people · No production
+                  - generic [ref=f2e256]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e257]: ›
+            - generic [ref=f2e258]:
+              - checkbox "Select Template hearth 013 for group orders" [checked] [ref=f2e260]
+              - 'button "Template hearth 013 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e261] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e262]: ⌂
+                - generic [ref=f2e263]:
+                  - strong [ref=f2e264]: Template hearth 013
+                  - generic [ref=f2e265]: 8 people · No production
+                  - generic [ref=f2e266]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e267]: ›
+            - generic [ref=f2e268]:
+              - checkbox "Select Template hearth 014 for group orders" [checked] [ref=f2e270]
+              - 'button "Template hearth 014 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e271] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e272]: ⌂
+                - generic [ref=f2e273]:
+                  - strong [ref=f2e274]: Template hearth 014
+                  - generic [ref=f2e275]: 8 people · No production
+                  - generic [ref=f2e276]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e277]: ›
+            - generic [ref=f2e278]:
+              - checkbox "Select Template hearth 015 for group orders" [checked] [ref=f2e280]
+              - 'button "Template hearth 015 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e281] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e282]: ⌂
+                - generic [ref=f2e283]:
+                  - strong [ref=f2e284]: Template hearth 015
+                  - generic [ref=f2e285]: 8 people · No production
+                  - generic [ref=f2e286]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e287]: ›
+            - generic [ref=f2e288]:
+              - checkbox "Select Template hearth 016 for group orders" [checked] [ref=f2e290]
+              - 'button "Template hearth 016 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e291] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e292]: ⌂
+                - generic [ref=f2e293]:
+                  - strong [ref=f2e294]: Template hearth 016
+                  - generic [ref=f2e295]: 8 people · No production
+                  - generic [ref=f2e296]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e297]: ›
+            - generic [ref=f2e298]:
+              - checkbox "Select Template hearth 017 for group orders" [checked] [ref=f2e300]
+              - 'button "Template hearth 017 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e301] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e302]: ⌂
+                - generic [ref=f2e303]:
+                  - strong [ref=f2e304]: Template hearth 017
+                  - generic [ref=f2e305]: 8 people · No production
+                  - generic [ref=f2e306]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e307]: ›
+            - generic [ref=f2e308]:
+              - checkbox "Select Template hearth 018 for group orders" [checked] [ref=f2e310]
+              - 'button "Template hearth 018 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e311] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e312]: ⌂
+                - generic [ref=f2e313]:
+                  - strong [ref=f2e314]: Template hearth 018
+                  - generic [ref=f2e315]: 8 people · No production
+                  - generic [ref=f2e316]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e317]: ›
+            - generic [ref=f2e318]:
+              - checkbox "Select Template hearth 019 for group orders" [checked] [ref=f2e320]
+              - 'button "Template hearth 019 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e321] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e322]: ⌂
+                - generic [ref=f2e323]:
+                  - strong [ref=f2e324]: Template hearth 019
+                  - generic [ref=f2e325]: 8 people · No production
+                  - generic [ref=f2e326]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e327]: ›
+            - generic [ref=f2e328]:
+              - checkbox "Select Template hearth 020 for group orders" [checked] [ref=f2e330]
+              - 'button "Template hearth 020 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e331] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e332]: ⌂
+                - generic [ref=f2e333]:
+                  - strong [ref=f2e334]: Template hearth 020
+                  - generic [ref=f2e335]: 8 people · No production
+                  - generic [ref=f2e336]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e337]: ›
+            - generic [ref=f2e338]:
+              - checkbox "Select Template hearth 021 for group orders" [checked] [ref=f2e340]
+              - 'button "Template hearth 021 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e341] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e342]: ⌂
+                - generic [ref=f2e343]:
+                  - strong [ref=f2e344]: Template hearth 021
+                  - generic [ref=f2e345]: 8 people · No production
+                  - generic [ref=f2e346]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e347]: ›
+            - generic [ref=f2e348]:
+              - checkbox "Select Template hearth 022 for group orders" [checked] [ref=f2e350]
+              - 'button "Template hearth 022 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e351] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e352]: ⌂
+                - generic [ref=f2e353]:
+                  - strong [ref=f2e354]: Template hearth 022
+                  - generic [ref=f2e355]: 8 people · No production
+                  - generic [ref=f2e356]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e357]: ›
+            - generic [ref=f2e358]:
+              - checkbox "Select Template hearth 023 for group orders" [checked] [ref=f2e360]
+              - 'button "Template hearth 023 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e361] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e362]: ⌂
+                - generic [ref=f2e363]:
+                  - strong [ref=f2e364]: Template hearth 023
+                  - generic [ref=f2e365]: 8 people · No production
+                  - generic [ref=f2e366]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e367]: ›
+            - generic [ref=f2e368]:
+              - checkbox "Select Template hearth 024 for group orders" [checked] [ref=f2e370]
+              - 'button "Template hearth 024 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e371] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e372]: ⌂
+                - generic [ref=f2e373]:
+                  - strong [ref=f2e374]: Template hearth 024
+                  - generic [ref=f2e375]: 8 people · No production
+                  - generic [ref=f2e376]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e377]: ›
+            - generic [ref=f2e378]:
+              - checkbox "Select Template hearth 025 for group orders" [checked] [ref=f2e380]
+              - 'button "Template hearth 025 8 people · No production Learning charter · 32 coin per work · Next candidate: Witness archive." [ref=f2e381] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f2e382]: ⌂
+                - generic [ref=f2e383]:
+                  - strong [ref=f2e384]: Template hearth 025
+                  - generic [ref=f2e385]: 8 people · No production
+                  - generic [ref=f2e386]: "Learning charter · 32 coin per work · Next candidate: Witness archive."
+                - generic [aria-hidden] [ref=f2e387]: ›
+          - navigation "Registry pages" [ref=f2e388]:
+            - button "Previous registry page" [disabled] [ref=f2e389]: ←
+            - generic [ref=f2e390]: Page 1 of 2
+            - button "Next registry page" [ref=f2e391] [cursor=pointer]: →
+      - paragraph [ref=f2e392]: Choose an entry to locate it on the map. Use the bottom command tray for its orders.
+  - contentinfo [ref=f2e393]:
+    - generic [ref=f2e395]:
+      - generic [ref=f2e396]: Selected army
+      - strong [ref=f2e397]: Oath guard
+      - generic [ref=f2e398]: 1 / 12 formations · 60 strength · 3 movement
+      - button "Show selected orders" [ref=f2e400] [cursor=pointer]
+    - region "Next-action navigation" [ref=f2e401]:
+      - generic [ref=f2e402]:
+        - button "Previous army needing orders" [ref=f2e403] [cursor=pointer]: ‹
+        - button "Next army needing orders" [ref=f2e404] [cursor=pointer]: Next army N
+        - button "Previous idle settlement" [disabled] [ref=f2e405]: ‹
+        - button "Next idle settlement" [disabled] [ref=f2e406]: Next town S
+      - paragraph [ref=f2e407]: "Labor: 134 unassigned households · 40 settlements"
+      - generic [ref=f2e408]:
+        - button "Previous settlement with unassigned households" [ref=f2e409] [cursor=pointer]: ‹
+        - button "Next settlement with unassigned households" [ref=f2e410] [cursor=pointer]: Review households
+      - group [ref=f2e411]:
+        - generic "What wants a decision 2 kinds" [ref=f2e412] [cursor=pointer]:
+          - text: What wants a decision
+          - generic [ref=f2e413]: 2 kinds
+    - generic [ref=f2e414]:
+      - strong [ref=f2e416]: Turn 1
+      - button "End turn" [ref=f2e417] [cursor=pointer]:
+        - text: End turn
+        - generic [ref=f2e418]: E
+    - status [ref=f2e419]:
+      - generic [aria-hidden] [ref=f2e420]: ◆
+      - text: "Campaign restored. Partial archive: earlier campaign history was not recorded in this save."
+  - generic [ref=f2e421]:
+    - button "Art Lab" [ref=f2e422] [cursor=pointer]
+    - generic [ref=f2e423]: Development asset inspector
+```

@@ -82,7 +82,9 @@ test('a hundred armies receive one group posting …', { tag: '@scale' }, async 
 These are an eighth of the journeys and a fifth of the run, and they produce
 most of the load failures because each imports a large campaign and drives a
 long loop. They still matter: run `pnpm test:scale` when the renderer, map geometry,
-registry paging, batch orders or art coverage change, and at a checkpoint.
+registry paging, batch orders or art coverage change, and at a checkpoint. The
+first checkpoint run (2026-10-30, two workers, quiet machine) took 5.8 minutes
+for 32 journeys, with the two forty-hearth journeys timing out.
 
 ## Evidence packets
 

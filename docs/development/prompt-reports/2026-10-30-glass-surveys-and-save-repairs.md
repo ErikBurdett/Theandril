@@ -56,4 +56,20 @@ fixed in the testing"
 - Standard pacing above its 200-turn target, as since rules 38; not tuned.
 - Purging the e103a72 history; the other session's uncommitted edits to the
   pages and production Playwright configs and its reliability packet.
-- Publication: recorded below once the deploy is verified.
+- Publication: `ae88204` is deployed; both workflows and the live readback
+  pass ([publication packet](../2026-10-30-publication-glass-surveys/README.md)).
+  The follow-up commit carrying this report also carries the `@scale`
+  checkpoint below.
+
+## Scale checkpoint
+
+`pnpm test:scale --workers=2` ran once on the quiet machine as a checkpoint of
+the split: 27 of 32 passed in 5.8 min. Of the five failures, charter-templates
+and production-sequences timed out (forty-hearth journeys, load class, recorded
+once); naval-art timed out and terrain-art failed a one-shot sprite sample, and
+both passed alone; terrain-art now waits for the sprite with `expect.poll`
+instead of sampling once; chronicles' pinned AI-watch victory turn moved from
+60 to 55 with the glass surveys and is re-pinned with its history noted. Logs:
+[scale run](../2026-10-30-testing-methodology/browser-scale.log),
+[alone](../2026-10-30-testing-methodology/browser-scale-rerun-alone.log),
+[after the fixes](../2026-10-30-testing-methodology/browser-scale-repinned.log).

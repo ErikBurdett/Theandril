@@ -39,10 +39,12 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
   const finalHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   const victory = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.victory);
-  // Current rules-38 AI on generator 8 (the rules 30 figure was 59; the unchanged pre-change
-  // code already ends on 60 under rules 37 and 38, see docs/development/2026-10-29-attunement-victory/
-  // chronicle-expectation.md). Genuine historical archive seals remain separately tested.
-  expect(victory?.turn).toBe(60);
+  // Current AI on generator 8 (the rules 30 figure was 59; rules 37 and 38 ended on 60, see
+  // docs/development/2026-10-29-attunement-victory/chronicle-expectation.md; since the AI
+  // surveyed Ashfall glass instead of blind ground on 2026-10-30 this seed ends on 55, see
+  // docs/development/2026-10-30-ai-glass-surveys/). Genuine historical archive seals remain
+  // separately tested.
+  expect(victory?.turn).toBe(55);
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });

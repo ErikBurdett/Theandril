@@ -1,0 +1,46 @@
+
+Running 8 tests using 1 worker
+
+  ✓  1 [gameplay] › tests/gameplay/chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.3s)
+  ✓  2 [gameplay] › tests/gameplay/naval-art.spec.ts:148:1 › an absent approved naval variant falls back to a ship marker, never another culture or a land unit (2.9s)
+  ✓  3 [gameplay] › tests/gameplay/terrain-art.spec.ts:76:1 › missing approved terrain art keeps explicit physical hill and mountain fallbacks without pretending tiles loaded (2.2s)
+  ✓  4 [gameplay] › tests/gameplay/terrain-art.spec.ts:111:39 › all five completed land works retain approved prop artwork and borders (1.8s)
+  ✓  5 [gameplay] › tests/gameplay/terrain-art.spec.ts:111:39 › all five completed land works retain distinct explicit fallback glyphs and borders (1.4s)
+  ✘  6 [scale] › tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory @scale (21.3s)
+  ✓  7 [scale] › tests/gameplay/naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers @scale (16.9s)
+  ✓  8 [scale] › tests/gameplay/terrain-art.spec.ts:45:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites @scale (2.9s)
+
+
+  1) [scale] › tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory @scale 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 60
+    Received: 55
+
+      43 |   // code already ends on 60 under rules 37 and 38, see docs/development/2026-10-29-attunement-victory/
+      44 |   // chronicle-expectation.md). Genuine historical archive seals remain separately tested.
+    > 45 |   expect(victory?.turn).toBe(60);
+         |                         ^
+      46 |   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
+      47 |   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
+      48 |   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/chronicles.spec.ts:45:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/claude-1000/-home-telephoneheater-Work-Theandril/41762beb-fdd8-4b37-9549-371a59ac3a1e/scratchpad/pw-rerun/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory-scale/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/claude-1000/-home-telephoneheater-Work-Theandril/41762beb-fdd8-4b37-9549-371a59ac3a1e/scratchpad/pw-rerun/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory-scale/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/claude-1000/-home-telephoneheater-Work-Theandril/41762beb-fdd8-4b37-9549-371a59ac3a1e/scratchpad/pw-rerun/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory-scale/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../tmp/claude-1000/-home-telephoneheater-Work-Theandril/41762beb-fdd8-4b37-9549-371a59ac3a1e/scratchpad/pw-rerun/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory-scale/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [scale] › tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory @scale 
+  7 passed (55.2s)
