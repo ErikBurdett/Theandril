@@ -35,6 +35,29 @@ aptitudes and the rites quoted under rules 40+ (`rites`) — and acts on them:
 The existing `planRites` pass then performs the rite the moment the siege
 begins, and the besieger's reading of warded or kindled walls follows.
 
+## Why the post is gated on war, and why it needs a fallback
+
+A diagnostic run of the Epic headline before the fallback counted the readiness
+funnel per realm-turn: seams held 508, at war 309, a rite discovery known 60
+(one realm, from turn 302), seam hearths besieged 10, never with the rite
+known. The discovery came late because no seam-holding realm at war had a
+Waykeeper at all: the ordinary appointment rule only appoints a caster where a
+battle stack stands to receive it, and at war that rule outranked the warden
+post, which then found no stack at any hearth and appointed nothing. With a
+fallback — when the realm wants a battle caster but no hearth has a stack to
+take one, the seam hearth still gets its warden — the same run shows a caster
+lodged at a seam hearth for 520 realm-turns and a rite performable for 512.
+
+Gating the post on a visible threat instead of on war was tried at eight and
+fourteen hexes and appointed nobody: fog hides a besieger until it stands at
+the gate, and the blockade then refuses the appointment. The post must already
+be filled when the war begins, so war is the trigger.
+
+Seam hearths are besieged on only a handful of realm-turns per headline
+campaign, so even a ready realm rarely performs a rite in measured play; the
+readiness is what this slice delivers, and the pacing cost of the appointed
+casters is recorded in the packet.
+
 ## Limits
 
 Wardens are called only while the realm is at war and only for hearths that

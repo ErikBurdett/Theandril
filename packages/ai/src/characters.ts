@@ -131,5 +131,16 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
     reasons.push(`Appoint ${option.name} at ${town.name} for the waiting ${candidate.name}; pay ${option.coinCost} coin and ${option.upkeep} recurring upkeep.`);
     break; // A fresh view supplies the new stable character ID.
   }
+  // A battle stack that could carry a caster outranks the warden post, but when no
+  // stack stands at any hearth to receive one, the seam hearth still gets its warden.
+  if (wardens && (counts.get('waykeeper') ?? 0) === 0 && !commands.some(command => command.type === 'recruitCharacter' && command.definitionId === 'character.waykeeper')) {
+    const post = opportunities.find(option => option.role === 'waykeeper' && seamHearths.has(option.settlementId) && option.coinCost <= budget);
+    const town = post && view.settlements.find(item => item.id === post.settlementId);
+    if (post && town) {
+      commands.push({ type: 'recruitCharacter', factionId: view.factionId, settlementId: post.settlementId, definitionId: post.definitionId });
+      budget -= post.coinCost;
+      reasons.push(`Appoint ${post.name} at ${town.name} to work its seam's rite while the realm is at war; pay ${post.coinCost} coin and ${post.upkeep} recurring upkeep.`);
+    }
+  }
   return result();
 }

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { isPassable, neighbors } from '@theandril/mapgen';
-import { applyCommand, getObservation, type GameState } from '@theandril/sim';
+import { applyCommand, createArmyFormation, getObservation, type GameState } from '@theandril/sim';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { planTurnWithReasons } from './index';
@@ -79,4 +79,20 @@ test('a threatened seam hearth calls its riding qualified caster home and lodges
   const column = Object.values(state.armies).find(army => army.factionId === rival)!;
   expect(applyCommand(state, { type: 'besiege', factionId: rival, armyId: column.id, settlementId: hostId })).toMatchObject({ ok: true });
   expect(planWardenReturn(getObservation(state, player)).commands).toEqual([]);
+});
+
+test('when a battle stack could carry a caster but none stands at a hearth, the seam hearth still gets its warden', () => {
+  const { state, player, hostId } = threatenedAtWar();
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  caster.dead = true;
+  // A four-company field army far from any hearth makes the realm want a battle caster it cannot appoint anywhere.
+  const escort = Object.values(state.armies).find(army => army.factionId === player)!;
+  const host = state.settlements[hostId]!;
+  escort.cell = [...Array(state.world.terrain.length).keys()].find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.settlements).every(town => town.cell !== cell) && Object.values(state.armies).every(army => army.cell !== cell) && neighbors(host.cell, state.world.width, state.world.height).some(near => neighbors(near, state.world.width, state.world.height).includes(cell)))!;
+  escort.formations = [0, 1, 2, 3].map(() => createArmyFormation(`army.${state.nextId++}`, 'unit.guard'));
+  refreshAuthoredSight(state);
+  const plan = planCharacters(getObservation(state, player), 500);
+  const appointment = plan.commands.find(command => command.type === 'recruitCharacter' && command.definitionId === 'character.waykeeper');
+  expect(appointment).toMatchObject({ settlementId: hostId });
+  expect(plan.reasons.some(reason => reason.includes("work its seam's rite"))).toBe(true);
 });

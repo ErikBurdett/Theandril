@@ -39,7 +39,9 @@ export function planRiteResearch(view: Observation): { command: GameCommand; rea
   return null;
 }
 
-/** Whether a hearth rite could be performed from a held seam once a caster is lodged there. */
+/** Whether a hearth rite could be performed from a held seam once a caster is lodged there.
+ * Gated on war, not on a visible threat: fog hides a besieger until it stands at the
+ * gate, and a blockade then refuses the appointment, so the warden must already be there. */
 export function wardensWanted(view: Observation): boolean {
   if (!view.wars.length) return false;
   const paths = new Set([...wardenHearths(view).values()].flatMap(set => [...set]));

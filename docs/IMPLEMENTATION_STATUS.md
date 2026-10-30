@@ -10,11 +10,13 @@ existing rite pass then wards or kindles the moment the siege begins. The post
 yields to a battle stack that could carry a caster and to the attunement study
 post, and a warden road is ordered only through a quoted movement preview.
 
-Verification: new AI tests; unit **2,305 tests / 285 files**, campaigns 57,
-lint, typecheck and build pass; headline campaigns remain **362/327/227** with zero refusals, the Epic
-campaign now buying three Arcane Theory discoveries while no realm yet performs a
-rite. The complete gameplay suite passes 250 of 251
-with the one import timeout passing alone, and the production suite 59 of 59. Two defects
+Verification: new AI tests; unit **2,306 tests / 285 files**, campaigns 57,
+lint, typecheck and build pass; headline campaigns measure **385/343/229** with zero refusals (362/327/227
+before the warden fallback): realms now keep a rite ready for hundreds of
+realm-turns, buy nine Arcane Theory discoveries on Epic and Long, and still
+perform no rite because their seam hearths are besieged on only a few turns;
+Epic stays in band, Standard near target, Long drifts from 327 to 343. The complete gameplay suite passes 249 of 251
+with two timeouts passing alone, and the production suite 59 of 59. Two defects
 found by the first runs were fixed before the recorded ones: the warden
 appointment swallowed ordinary Waykeeper appointments, and a warden road was
 ordered without a preview and refused on the Epic proxy.

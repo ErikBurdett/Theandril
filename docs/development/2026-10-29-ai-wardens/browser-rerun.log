@@ -1,7 +1,9 @@
 
-Running 2 tests using 1 worker
+Running 4 tests using 1 worker
 
-  ✓  1 tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies (12.1s)
-  ✓  2 tests/gameplay/tile-footprints.spec.ts:126:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog (2.6s)
+  ✓  1 tests/gameplay/charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable (33.4s)
+  ✓  2 tests/gameplay/charter-templates.spec.ts:173:3 › a denied template library reports failure without blocking ordinary charter orders or overwriting stored rows (2.3s)
+  ✓  3 tests/gameplay/charter-templates.spec.ts:173:3 › a transient-denial template library reports failure without blocking ordinary charter orders or overwriting stored rows (3.3s)
+  ✓  4 tests/gameplay/charter-templates.spec.ts:173:3 › a malformed template library reports failure without blocking ordinary charter orders or overwriting stored rows (2.2s)
 
-  2 passed (15.5s)
+  4 passed (41.8s)

@@ -199,11 +199,13 @@ were rerun with `TMPDIR` on the main disk; the complete gameplay suite passes
 The AI reaches hearth rites on its own: a realm holding a seam researches the
 rite discovery its Waykeeper could use, keeps a Waykeeper lodged at a seam
 hearth while at war, and calls a riding qualified caster home on threat,
-lodging it before a blockade closes the gate. Unit **2,305 tests / 285 files**,
-campaigns 57, lint, typecheck and build pass; headline campaigns remain **362/327/227** with zero refusals, the Epic
-campaign now buying three Arcane Theory discoveries while no realm yet performs a
-rite. The complete gameplay suite passes 250 of 251
-with the one import timeout passing alone, and the production suite 59 of 59.
+lodging it before a blockade closes the gate. Unit **2,306 tests / 285 files**,
+campaigns 57, lint, typecheck and build pass; headline campaigns measure **385/343/229** with zero refusals (362/327/227
+before the warden fallback): realms now keep a rite ready for hundreds of
+realm-turns, buy nine Arcane Theory discoveries on Epic and Long, and still
+perform no rite because their seam hearths are besieged on only a few turns;
+Epic stays in band, Standard near target, Long drifts from 327 to 343. The complete gameplay suite passes 249 of 251
+with two timeouts passing alone, and the production suite 59 of 59.
 The first runs caught two defects (ordinary Waykeeper appointments swallowed;
 a warden road refused on the Epic proxy), fixed before the recorded runs; the
 first campaign run also ended the chronicle-victory proxy in Attunement, the
