@@ -97,15 +97,27 @@ await window.theandril.toggleFogOfWar()
 
 Local DB2 saves append new history chunks instead of re-encoding the full campaign on every turn. Retained generations share verified immutable history with three payload replicas and atomic recovery. Existing DB1 saves still load; portable exports keep the same complete format. The 64 MiB logical archive limit remains explicit, and large current snapshots/full exports still have measurable costs. See [storage measurements](docs/performance/0009-incremental-storage.md).
 
+Verification is tiered; [docs/TESTING.md](docs/TESTING.md) says which tier a
+change needs. Every change runs the first block. The browser suites in the
+second block run at agreed checkpoints, not per change or per deploy.
+
 ```sh
 pnpm typecheck
 pnpm lint
 pnpm content:validate
-pnpm test
+pnpm test:unit        # 2,309 tests, under 30 s
+pnpm test:campaigns   # generated AI campaigns, when rules, AI or content change
+pnpm measure:pacing   # when a rules or AI change could move how a campaign ends
 pnpm build
+pnpm test:gameplay tests/gameplay/<spec>.spec.ts   # the journeys that cover the change
+```
+
+```sh
 pnpm exec playwright install chromium
-pnpm test:gameplay
-pnpm test:production # run after pnpm build; uses the actual production bundle
+pnpm test:gameplay    # ordinary journeys, batch checkpoints
+pnpm test:scale       # @scale journeys: content sweeps, hundred-army empires, Huge maps, render budgets
+pnpm test:production  # run after pnpm build; uses the actual production bundle
+pnpm test:repository
 pnpm bench
 pnpm bench:chronicles
 pnpm bench:characters

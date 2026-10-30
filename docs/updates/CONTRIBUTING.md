@@ -40,7 +40,7 @@ VITE_BASE_PATH=/Theandril/ pnpm build
 pnpm exec playwright test --config playwright.pages.config.ts
 ```
 
-The Pages suite covers the actual multi-page production build; the usual gameplay suite remains an independent gate. On this Arch workstation the installed Chromium can be selected with `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium`. CI installs its locked Playwright browser. Do not disguise a missing browser as a product failure.
+The Pages suite covers the actual multi-page production build; it and the gameplay suites run at the checkpoints described in [TESTING.md](../TESTING.md), not per deploy. On this Arch workstation the installed Chromium can be selected with `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium`. CI installs its locked Playwright browser. Do not disguise a missing browser as a product failure.
 
 To review the built journal locally, run `VITE_BASE_PATH=/Theandril/ pnpm --filter @theandril/web exec vite preview --host 127.0.0.1 --port 4175 --strictPort` and open `/Theandril/updates/`. Stop that preview before running the Pages suite, which owns its own server. Keep the user's existing development server untouched.
 

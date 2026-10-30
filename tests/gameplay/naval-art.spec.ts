@@ -19,7 +19,7 @@ async function loadGallery(page: Page): Promise<void> {
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');
 }
 
-test('all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers', async ({ page }, testInfo) => {
+test('all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers', { tag: '@scale' }, async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page);
   const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());

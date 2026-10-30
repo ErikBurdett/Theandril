@@ -24,7 +24,7 @@ async function reimport(page: Page, state: GameState, name: string) {
   await expect(feedback).toContainText('Imported campaign');
 }
 
-test('unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders', async ({ page }, testInfo) => {
+test('unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary'); await load(page, game);
   const view = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
   const armies = [...view.ownArmies].sort((a, b) => a.id.localeCompare(b.id));

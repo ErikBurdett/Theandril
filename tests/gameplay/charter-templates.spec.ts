@@ -38,7 +38,7 @@ async function snapshot(page: Page) {
   return page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()!, metrics: window.__THEANDRIL__!.getPerformanceCounters() }));
 }
 
-test('a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable', async ({ page }, testInfo) => {
+test('a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   const towns = Object.values(game.settlements).filter(town => town.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);
   towns.forEach((town, index) => { town.name = `Template hearth ${String(index + 1).padStart(3, '0')}`; });

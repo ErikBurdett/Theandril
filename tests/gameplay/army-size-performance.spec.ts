@@ -33,7 +33,7 @@ function stackedCampaign() {
 
 const counters = (page: Page) => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
 
-test('synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus', async ({ page }, testInfo) => {
+test('synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus', { tag: '@scale' }, async ({ page }, testInfo) => {
   const { state, serialized, positions, selectedId, home } = stackedCampaign();
   const hash = stateHash(state), cellCount = state.world.terrain.length;
   const armyCount = Object.keys(state.armies).length, formationCount = Object.values(state.armies).reduce((sum, army) => sum + army.formations.length, 0);

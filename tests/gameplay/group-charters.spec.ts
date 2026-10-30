@@ -5,7 +5,7 @@ import { cellTransferBytes, packCells } from '../../apps/web/src/cell-transfer';
 import { empireLandCampaign } from '../../packages/test-fixtures/src/empire-land-fixture';
 import { closeManagement, openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
-test('forty hearths receive shared charters across pages, preserve queues, and restore individual overrides', async ({ page }, testInfo) => {
+test('forty hearths receive shared charters across pages, preserve queues, and restore individual overrides', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   const towns = Object.values(game.settlements).filter(town => town.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);
   towns.forEach((town, index) => { town.name = `Registry hearth ${String(index + 1).padStart(3, '0')}`; });

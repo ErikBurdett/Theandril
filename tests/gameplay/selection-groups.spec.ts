@@ -51,7 +51,7 @@ async function createGroup(page: Page, kind: Kind, name: string) {
   return details;
 }
 
-test('saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths', async ({ page }, testInfo) => {
+test('saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   const armies = Object.values(game.armies).filter(army => army.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);
   const towns = Object.values(game.settlements).filter(town => town.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);

@@ -6,7 +6,7 @@ import { exportSave } from '@theandril/persistence';
 import { fullBattlefieldCampaign } from './battlefield-fixture';
 import { openRealmAffairs, openSelectedOrders } from './ui-navigation';
 
-test('authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX', async ({ page }, info) => {
+test('authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX', { tag: '@scale' }, async ({ page }, info) => {
   const state = fullBattlefieldCampaign(), serialized = serializeGame(state), originHash = stateHash(state);
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');

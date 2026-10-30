@@ -91,16 +91,24 @@ Keep source/candidate/rejected/reviewed/runtime boundaries explicit. Passing pix
 
 ## Testing
 
-A change is not complete until relevant tests pass.
+A change is not complete until the checks that cover it pass.
+[`docs/TESTING.md`](docs/TESTING.md) is the canonical guide: which tier runs
+for which change, how the browser suite is split, and what an evidence packet
+keeps.
 
-Expected checks:
-- typecheck;
-- lint;
-- unit tests;
-- property/determinism tests when rules change;
-- Playwright gameplay scenario when player-facing behavior changes;
-- benchmark when a hot path changes;
+Every change: typecheck, lint, the unit project (`pnpm test:unit`) and the build.
+Add, by what changed:
+- property/determinism tests and the campaigns project when rules, AI or content change;
+- the Playwright journeys that cover the changed behaviour, and a new or extended journey when player-facing behaviour is new;
+- a benchmark when a hot path changes;
 - pacing measurement when a rules or AI change can affect how a campaign ends.
+
+The complete browser suites — `pnpm test:gameplay`, `pnpm test:scale`,
+`pnpm test:production` and the Pages smoke — are not per-change or per-deploy
+gates. They run at batch checkpoints the owner agrees to, one suite at a time
+at two workers on a quiet machine, and a load failure is recorded once rather
+than rerun to green. A deploy is proven by the live readback in
+`docs/DEPLOYMENT.md`. Never weaken an assertion or raise a timeout to pass.
 
 **Deep testing is local. CI only proves the project builds.** GitHub Actions runs
 install, typecheck and the production build, and the Pages workflow publishes it.

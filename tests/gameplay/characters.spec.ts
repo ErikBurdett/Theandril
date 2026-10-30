@@ -172,7 +172,7 @@ test('a named marshal rallies real formations once, saves its used ability, and 
   await saveReload(page);
 });
 
-test('a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits', async ({ page }, testInfo) => {
+test('a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits', { tag: '@scale' }, async ({ page }, testInfo) => {
   let state = characterCampaign(100);
   for (let index = 0; index < 30; index++) {
     const result = applyCommand(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: FIXTURE.homeId, definitionId: index === 29 ? 'character.engineer' : 'character.surveyor' });

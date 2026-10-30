@@ -42,7 +42,7 @@ async function inspectCell(page: Page, cell: number): Promise<void> {
   await page.mouse.click(point.x, point.y);
 }
 
-test('all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites', async ({ page }, testInfo) => {
+test('all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites', { tag: '@scale' }, async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page);
   await expect(page.getByTestId('art-runtime-status')).toContainText('approved pixel pack');

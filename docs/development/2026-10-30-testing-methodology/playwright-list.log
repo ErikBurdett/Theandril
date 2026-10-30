@@ -1,0 +1,270 @@
+# pnpm test:gameplay --list
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay --list
+
+Listing tests:
+  [gameplay] › arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save
+  [gameplay] › army-size.spec.ts:27:1 › actual one, three and twelve-formation armies use capped representative groups and update after a saved split
+  [gameplay] › army-size.spec.ts:102:1 › fleet representatives count real hull formations without drawing embarked passengers twice
+  [gameplay] › army.spec.ts:53:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts
+  [gameplay] › army.spec.ts:94:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round
+  [gameplay] › army.spec.ts:124:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster
+  [gameplay] › art.spec.ts:18:1 › approved native assets power the map while Art Lab inspects real animations, rectangles, palette and tile repetition without changing the campaign
+  [gameplay] › art.spec.ts:110:1 › actual guards, towns and far-zoom markers use observed entities rather than future-ready catalog content
+  [gameplay] › art.spec.ts:137:1 › a failed approved-art load is reported and retains playable procedural fallbacks
+  [gameplay] › art.spec.ts:153:1 › Art Lab refuses stale, mismatched and oversized atlas images before reporting pixel measurements
+  [gameplay] › attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle
+  [gameplay] › attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text
+  [gameplay] › battle-camera.spec.ts:8:1 › 390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks
+  [gameplay] › battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map
+  [gameplay] › battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture
+  [gameplay] › battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls
+  [gameplay] › battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text
+  [gameplay] › battle-individuals.spec.ts:36:36 › land role sprites follow exact canonical members, actions and deaths at desktop and 390px
+  [gameplay] › battle-individuals.spec.ts:36:36 › naval role sprites follow exact canonical members, actions and deaths at desktop and 390px
+  [gameplay] › battle-interception.spec.ts:20:1 › an enemy Waykeeper holding Unbinding intercepts the player’s working as it is made
+  [gameplay] › battlefield.spec.ts:97:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations
+  [gameplay] › battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width
+  [gameplay] › battlefield.spec.ts:204:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit
+  [gameplay] › battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo
+  [gameplay] › biome-variation.spec.ts:112:1 › a missing chosen variant uses its unchanged approved base and reports the exact missing identity
+  [gameplay] › biome-variation.spec.ts:133:1 › generated watched terrain retains variants, fog privacy and exact river joins through spectator reveal and restore
+  [gameplay] › campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu
+  [gameplay] › campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate
+  [gameplay] › campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection
+  [gameplay] › campaign-menu.spec.ts:110:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls
+  [gameplay] › campaign-menu.spec.ts:166:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign
+  [gameplay] › campaign-menu.spec.ts:245:1 › new campaign generation can be cancelled without losing the existing worker or campaign
+  [gameplay] › campaign-seed.spec.ts:34:1 › default campaigns choose different random worlds, and saved random worlds retain their seed
+  [gameplay] › campaign-seed.spec.ts:65:3 › explicit seed 0 recreates the exact same campaign after New campaign
+  [gameplay] › campaign-seed.spec.ts:65:3 › explicit seed 4294967295 recreates the exact same campaign after New campaign
+  [gameplay] › campaign-seed.spec.ts:76:1 › an invalid custom seed leaves the existing campaign intact
+  [gameplay] › campaign.spec.ts:21:1 › settle, grow, build, recruit, explore and resume the same campaign
+  [gameplay] › campaign.spec.ts:59:1 › compressed export/import and corrupt-save handling use the real controls
+  [gameplay] › cession.spec.ts:8:1 › cede a hearth to a client under the oath, confirm it, and keep the result through a save
+  [gameplay] › characters-tree.spec.ts:25:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects
+  [gameplay] › characters-tree.spec.ts:78:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit
+  [gameplay] › characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map
+  [gameplay] › characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery
+  [gameplay] › characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission
+  [gameplay] › characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath
+  [gameplay] › characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery
+  [gameplay] › charter-templates.spec.ts:173:3 › a denied template library reports failure without blocking ordinary charter orders or overwriting stored rows
+  [gameplay] › charter-templates.spec.ts:173:3 › a transient-denial template library reports failure without blocking ordinary charter orders or overwriting stored rows
+  [gameplay] › charter-templates.spec.ts:173:3 › a malformed template library reports failure without blocking ordinary charter orders or overwriting stored rows
+  [gameplay] › charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel
+  [gameplay] › chronicles.spec.ts:92:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history
+  [gameplay] › city-growth.spec.ts:37:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled
+  [gameplay] › city-growth.spec.ts:101:1 › all five research-gated sites display their approved pixel assets and stable idle chunks
+  [gameplay] › combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round
+  [gameplay] › combat.spec.ts:56:1 › withdrawal applies strategic retreat and pursuit through the player order
+  [gameplay] › combat.spec.ts:71:1 › an AI attack pauses for the human defender to choose an order
+  [gameplay] › compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence
+  [gameplay] › conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes
+  [gameplay] › conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan
+  [gameplay] › conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal
+  [gameplay] › contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload
+  [gameplay] › contact.spec.ts:35:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch
+  [gameplay] › defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls
+  [gameplay] › defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry
+  [gameplay] › defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry
+  [gameplay] › defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry
+  [gameplay] › defense-theaters.spec.ts:129:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater
+  [gameplay] › development-trees.spec.ts:71:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px
+  [gameplay] › development-trees.spec.ts:104:1 › survivors spend experience earned in a saved real battle and preserve training after reload
+  [gameplay] › development-trees.spec.ts:126:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders
+  [gameplay] › diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty
+  [gameplay] › diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment
+  [gameplay] › diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable
+  [gameplay] › diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it
+  [gameplay] › diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save
+  [gameplay] › empire-delegation.spec.ts:74:1 › a mature realm resolves joined budget and frontier exceptions while preserving delegated work through saved continuation
+  [gameplay] › faction-art.spec.ts:224:1 › a missing approved culture variant uses its generic role and explicit warning, never a different culture
+  [gameplay] › faction-selection.spec.ts:4:1 › a selected new culture owns the actual player seat and persists through save/load
+  [gameplay] › faction-ui.spec.ts:33:1 › 24 public culture crests are reference art, while campaign heraldry follows only observed faction definitions
+  [gameplay] › faction-ui.spec.ts:83:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private
+  [gameplay] › faction-ui.spec.ts:159:1 › missing approved faction art is visibly generic without broken images or blocked campaign controls
+  [gameplay] › generals.spec.ts:62:1 › a real marshal assignment and prerequisite skill branches expand command from twelve through sixteen to twenty
+  [gameplay] › generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair
+  [gameplay] › generals.spec.ts:132:1 › twenty general-led formations enter a saved four-rank battle and resolve through the same kernel
+  [gameplay] › group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign
+  [gameplay] › group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign
+  [gameplay] › group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit
+  [gameplay] › group-movement-recovery.spec.ts:6:3 › group travel missing-results after real movement locks orders until the actual manual save is restored
+  [gameplay] › group-movement-recovery.spec.ts:6:3 › group travel wrong-army after real movement locks orders until the actual manual save is restored
+  [gameplay] › group-movement-recovery.spec.ts:6:3 › group travel worker-crash after real movement locks orders until the actual manual save is restored
+  [gameplay] › group-movement-recovery.spec.ts:58:1 › a superseded route review cannot fault a restored campaign when its late reply claims recovery is required
+  [gameplay] › group-movement.spec.ts:212:1 › canonical destination refusals retain only the unavailable army for correction
+  [gameplay] › group-movement.spec.ts:241:1 › a real interrupted route stays paused when extended and explicitly resumes without clearing its posting
+  [gameplay] › group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign
+  [gameplay] › group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign
+  [gameplay] › group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies
+  [gameplay] › hearth-development.spec.ts:93:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion
+  [gameplay] › hearth-development.spec.ts:162:1 › a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales
+  [gameplay] › hearth-development.spec.ts:199:1 › remembered foreign land never exposes unseen construction or newly completed district art
+  [gameplay] › hearth-harbor.spec.ts:67:1 › a paid Charter harbor uses its approved coastal sprite at desktop and narrow near zoom without changing naval rules
+  [gameplay] › hermes-ui-slices.spec.ts:23:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas
+  [gameplay] › hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact
+  [gameplay] › hermes-ui-slices.spec.ts:126:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council
+  [gameplay] › home.spec.ts:4:1 › home provides the public routes and generated ledger
+  [gameplay] › home.spec.ts:19:1 › dispatches remain refresh-safe at their new path
+  [gameplay] › home.spec.ts:26:1 › a permalink to a commit beyond the first page reveals it and scrolls to it
+  [gameplay] › household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order
+  [gameplay] › household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px
+  [gameplay] › household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px
+  [gameplay] › household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px
+  [gameplay] › land-query.spec.ts:71:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options
+  [gameplay] › land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width
+  [gameplay] › land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width
+  [gameplay] › land.spec.ts:117:1 › capital designation is paid and independent of colony, settlement and city size
+  [gameplay] › lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors
+  [gameplay] › map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders
+  [gameplay] › map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command
+  [gameplay] › map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer
+  [gameplay] › map-readability.spec.ts:39:1 › realm perimeters and contextual names stay quiet while real selection, hover, range and land inspection remain clear
+  [gameplay] › movement.spec.ts:70:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders
+  [gameplay] › movement.spec.ts:103:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders
+  [gameplay] › movement.spec.ts:130:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls
+  [gameplay] › movement.spec.ts:170:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome
+  [gameplay] › movement.spec.ts:194:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume
+  [gameplay] › movement.spec.ts:217:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover
+  [gameplay] › naval-art.spec.ts:148:1 › an absent approved naval variant falls back to a ship marker, never another culture or a land unit
+  [gameplay] › naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker
+  [gameplay] › naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply
+  [gameplay] › naval.spec.ts:173:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet
+  [gameplay] › naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships
+  [gameplay] › next-action.spec.ts:97:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped
+  [gameplay] › next-action.spec.ts:138:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width
+  [gameplay] › patrols.spec.ts:36:1 › a two-point patrol makes both legs through End turn and survives manual and portable recovery with exact replay
+  [gameplay] › patrols.spec.ts:88:1 › standing postings override patrols and removing a patrol retains its already-issued route until Cancel route
+  [gameplay] › posting-targets.spec.ts:26:1 › where it stands posts to the displayed current position after real movement in the mounted inspector
+  [gameplay] › posting-targets.spec.ts:50:1 › an unavailable saved posting stays explicit and clearable without changing its existing route at narrow text scale
+  [gameplay] › posting-targets.spec.ts:81:1 › a saved muster at an unavailable hex requires a fresh owned choice and remains clearable with exact saved history
+  [gameplay] › posting-templates.spec.ts:64:1 › posting template edits, recall, reload and deletion stay outside campaign history and require a fresh hearth choice
+  [gameplay] › posting-templates.spec.ts:138:1 › a hearth template recalled in another campaign requires its own destination while existing postings remain clearable
+  [gameplay] › posting-templates.spec.ts:238:3 › a denied posting library preserves stored rows and leaves direct posting orders usable
+  [gameplay] › posting-templates.spec.ts:238:3 › a transient-denial posting library preserves stored rows and leaves direct posting orders usable
+  [gameplay] › posting-templates.spec.ts:238:3 › a malformed posting library preserves stored rows and leaves direct posting orders usable
+  [gameplay] › postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises
+  [gameplay] › production-sequence-response-recovery.spec.ts:7:3 › a production batch with missing-results ends pending work, locks orders and restores the actual manual save
+  [gameplay] › production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-item ends pending work, locks orders and restores the actual manual save
+  [gameplay] › production-sequence-response-recovery.spec.ts:7:3 › a production batch with map-revision ends pending work, locks orders and restores the actual manual save
+  [gameplay] › production-sequence-response-recovery.spec.ts:7:3 › a production batch with wrong-type ends pending work, locks orders and restores the actual manual save
+  [gameplay] › production-sequence-response-recovery.spec.ts:7:3 › a production batch with worker-crash ends pending work, locks orders and restores the actual manual save
+  [gameplay] › production-sequences.spec.ts:286:1 › shared coin and ordinary duplicate, full-queue and prerequisite refusals retain paid prefixes in stable hearth order
+  [gameplay] › production-template-recovery.spec.ts:9:3 › a denied production-template library preserves stored rows and keeps explicit paid production usable
+  [gameplay] › production-template-recovery.spec.ts:9:3 › a transient-denial production-template library preserves stored rows and keeps explicit paid production usable
+  [gameplay] › production-template-recovery.spec.ts:9:3 › a malformed production-template library preserves stored rows and keeps explicit paid production usable
+  [gameplay] › progression-tree.spec.ts:24:1 › research dependencies support keyboard inspection, exact purchases and permanent policy choices across a save
+  [gameplay] › progression-tree.spec.ts:76:1 › narrow research keeps every real branch and its linked purchase reachable without horizontal scrolling
+  [gameplay] › realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration
+  [gameplay] › resources-overview.spec.ts:40:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market
+  [gameplay] › resources-overview.spec.ts:92:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend
+  [gameplay] › resources-overview.spec.ts:129:1 › political mode and a selected realm filter persist while an actual battle temporarily hides the map controls
+  [gameplay] › roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open
+  [gameplay] › roadmap.spec.ts:37:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check
+  [gameplay] › roadmap.spec.ts:58:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record
+  [gameplay] › roadmap.spec.ts:75:1 › same-document Back and Forward restore filters and linked-item evidence
+  [gameplay] › roadmap.spec.ts:106:3 › roadmap keyboard and layout at 1440px / 100% text
+  [gameplay] › roadmap.spec.ts:106:3 › roadmap keyboard and layout at 390px / 130% text
+  [gameplay] › roadmap.spec.ts:133:1 › unknown item links recover honestly and dispatches link to the full roadmap
+  [gameplay] › seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls
+  [gameplay] › seam-warding.spec.ts:63:1 › a besieger breaks the ward on its turn and the holder is jarred
+  [gameplay] › seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column
+  [gameplay] › selected-asset.spec.ts:29:1 › only the selected artwork has a quiet faction contour and slow glints, with steady reduced motion and preserved map actions
+  [gameplay] › selected-asset.spec.ts:77:1 › unavailable selected artwork uses small honest glyph brackets without restoring a whole-tile outline
+  [gameplay] › selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback
+  [gameplay] › selection-groups.spec.ts:163:1 › campaign groups prune a consumed caravan, survive canonical save and export, and never leak into another campaign
+  [gameplay] › selection-groups.spec.ts:231:1 › recalling a carried army skips it without rewriting the saved group, while explicit empty replacement is canonical
+  [gameplay] › selection-groups.spec.ts:263:1 › a damaged saved-group response ends pending work, locks uncertain orders and recovers from a real manual save
+  [gameplay] › specialist-roster.spec.ts:20:1 › research and paid specialist recruits survive save/load with honest shared silhouettes at desktop and narrow sizes
+  [gameplay] › storage.spec.ts:50:1 › incremental browser saves share journal chunks and recover an older manifest with exact exported replay
+  [gameplay] › strategic-picking.spec.ts:43:1 › clicking a displaced garrison badge and foreign banner inspects the rendered entity without moving the selected army
+  [gameplay] › strategic-picking.spec.ts:73:1 › shift-clicking the displaced badge deliberately follows a route to its actual hearth cell
+  [gameplay] › subject-rule.spec.ts:20:1 › make a fallen capital a subject realm: peace, tribute and the oath survive a save
+  [gameplay] › supply-access.spec.ts:27:1 › negotiate foreign harbor service, sustain the convoy and field force, interrupt it and recover with a saved agreement
+  [gameplay] › supply-access.spec.ts:78:1 › a provider reviews a real incoming request and receives exactly one payment through keyboard acceptance
+  [gameplay] › supply.spec.ts:27:1 › a force outside supply says what it costs, is named in the turn list, and can raise a depot to feed itself
+  [gameplay] › terrain-art.spec.ts:76:1 › missing approved terrain art keeps explicit physical hill and mountain fallbacks without pretending tiles loaded
+  [gameplay] › terrain-art.spec.ts:111:39 › all five completed land works retain approved prop artwork and borders
+  [gameplay] › terrain-art.spec.ts:111:39 › all five completed land works retain distinct explicit fallback glyphs and borders
+  [gameplay] › tile-footprints.spec.ts:126:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog
+  [gameplay] › updates.spec.ts:6:3 › readable journal at 1440px and 100% text
+  [gameplay] › updates.spec.ts:6:3 › readable journal at 1366px and 100% text
+  [gameplay] › updates.spec.ts:6:3 › readable journal at 390px and 100% text
+  [gameplay] › updates.spec.ts:6:3 › readable journal at 390px and 130% text
+  [gameplay] › updates.spec.ts:53:1 › reading surfaces retain contrast without putting texture over the text
+  [gameplay] › updates.spec.ts:84:1 › unknown dispatch links fail honestly and keyboard skip navigation works
+  [gameplay] › updates.spec.ts:95:1 › archive search combines topic filters, survives refresh and recovers from no results
+  [gameplay] › updates.spec.ts:110:1 › scope ledger links real gates and a contributor can reach authoring guidance
+  [gameplay] › updates.spec.ts:126:1 › a keyboard reader can enlarge a real image and return to the same control
+  [gameplay] › updates.spec.ts:142:1 › public journal opens a permanent, refresh-safe campaign dispatch
+  [gameplay] › world-geography.spec.ts:46:1 › AI-watch fog is a reversible UI/console presentation and saves retain only genuine faction sight
+  [gameplay] › world-geography.spec.ts:87:73 › continents geography renders actual lakes and joined rivers and can be inspected from the whole-world overview
+  [gameplay] › world-geography.spec.ts:87:73 › islands geography renders actual lakes and joined rivers and can be inspected from the whole-world overview
+  [gameplay] › world-geography.spec.ts:87:73 › archipelago geography renders actual lakes and joined rivers and can be inspected from the whole-world overview
+  [gameplay] › world-geography.spec.ts:198:1 › player campaigns reject both public fog commands and expose no reveal button
+  [gameplay] › world-geography.spec.ts:216:1 › a paid road segment has joined map geometry, preserves progress in a save and is suppressed only at far zoom
+Total: 202 tests in 79 files
+
+# pnpm test:scale --list
+
+> theandril@0.1.0 test:scale /home/telephoneheater/Work/Theandril
+> playwright test --project=scale --list
+
+Listing tests:
+  [scale] › army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus
+  [scale] › art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD
+  [scale] › battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX
+  [scale] › biome-variation.spec.ts:56:1 › all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration
+  [scale] › campaign.spec.ts:80:1 › Huge map pans and zooms with bounded visible geometry; layout remains usable
+  [scale] › characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits
+  [scale] › charter-templates.spec.ts:41:1 › a saved charter template survives reload, changes no campaign until applied, and keeps forty hearths individually overridable
+  [scale] › chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory
+  [scale] › defense-theaters.spec.ts:34:1 › a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override
+  [scale] › faction-art.spec.ts:108:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog
+  [scale] › faction-art.spec.ts:108:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog
+  [scale] › faction-art.spec.ts:108:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog
+  [scale] › faction-art.spec.ts:108:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog
+  [scale] › faction-roster.spec.ts:52:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Saltwind Remnant is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Wardhall Remnant is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Rimehorn Clans is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Sable Steppe is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Morrow Spore is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Cistern Assembly is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Unsealed Companies is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Lantern Hospices is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Cairnwing Concord is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Red Sluice Directorate is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Velvet Meridian is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Brine Choir is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Emberwake Convocation is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Underhush Exchange is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Vesper Court is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Manytrack Moot is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:52:36 › Margin Observance is a real chosen culture through founding, paid construction and portable saves
+  [scale] › faction-roster.spec.ts:117:1 › twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms
+  [scale] › faction-roster.spec.ts:147:1 › all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width
+  [scale] › geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog
+  [scale] › group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides
+  [scale] › group-movement.spec.ts:64:1 › a hundred saved companies review compact routes and move through one exactly replayable canonical batch
+  [scale] › group-movement.spec.ts:167:1 › a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves
+  [scale] › group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save
+  [scale] › land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail
+  [scale] › map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders
+  [scale] › naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers
+  [scale] › next-action.spec.ts:49:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders
+  [scale] › patrols.spec.ts:124:1 › the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes
+  [scale] › posting-templates.spec.ts:187:1 › a recalled posting template applies to one hundred armies through ordinary orders and survives saved recovery and replay
+  [scale] › production-sequences.spec.ts:117:1 › forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues
+  [scale] › realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders
+  [scale] › selection-groups.spec.ts:54:1 › saved groups replace paged selections without orders, then explicitly post armies and charter forty hearths
+  [scale] › terrain-art.spec.ts:45:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites
+  [scale] › tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies
+  [scale] › world-geography.spec.ts:132:1 › Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport
+Total: 50 tests in 27 files
+
+# pnpm test:gameplay:all --list
+Total: 252 tests in 84 files

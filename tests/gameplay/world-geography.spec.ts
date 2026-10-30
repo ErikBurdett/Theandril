@@ -129,7 +129,7 @@ for (const layout of ['continents', 'islands', 'archipelago'] as const) test(`${
   expect(serializeGame(saved.game)).toBe(serializeGame(expected));
 });
 
-test('Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport', async ({ page }, testInfo) => {
+test('Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport', { tag: '@scale' }, async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await begin(page, 'watch', 'archipelago', 'huge');
   const initial = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), cells: window.__THEANDRIL__!.getSummary()!.exploredCells }));

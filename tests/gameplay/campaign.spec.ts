@@ -77,7 +77,7 @@ test('compressed export/import and corrupt-save handling use the real controls',
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
 });
 
-test('Huge map pans and zooms with bounded visible geometry; layout remains usable', async ({ page }, testInfo) => {
+test('Huge map pans and zooms with bounded visible geometry; layout remains usable', { tag: '@scale' }, async ({ page }, testInfo) => {
   await begin(page, 'huge');
   const canvas = page.locator('canvas');
   const bounds = await canvas.boundingBox();

@@ -41,7 +41,7 @@ async function dragToCell(page: Page, cell: number) {
   throw new Error('Actual pointer drags did not center the footprint review.');
 }
 
-test('all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies', async ({ page }, info) => {
+test('all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies', { tag: '@scale' }, async ({ page }, info) => {
   await page.setViewportSize({ width: 1680, height: 1120 });
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   const fixture = await load(page);

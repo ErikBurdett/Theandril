@@ -15,3 +15,11 @@ assets/art/review-previews/
 
 # Local-only oversized QA trace; provenance: docs/development/github-checkpoint-a936fc3.json
 /docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip
+
+# Playwright traces and their raw parts never belong in a docs/development evidence packet.
+docs/development/**/trace.zip
+docs/development/**/*.trace
+docs/development/**/*.network
+docs/development/**/*.jpeg
+docs/development/**/*.webm
+docs/development/**/resources/

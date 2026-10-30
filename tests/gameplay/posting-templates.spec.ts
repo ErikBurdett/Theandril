@@ -184,7 +184,7 @@ test('a hearth template recalled in another campaign requires its own destinatio
   await expect.poll(async () => (await snapshot(page)).view.postings).toMatchObject([{ armyId: army.id, cell: secondTown.cell, mode: 'join' }]);
 });
 
-test('a recalled posting template applies to one hundred armies through ordinary orders and survives saved recovery and replay', async ({ page }, testInfo) => {
+test('a recalled posting template applies to one hundred armies through ordinary orders and survives saved recovery and replay', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   expect(Object.values(game.armies).filter(army => army.factionId === game.turnOwnerId)).toHaveLength(100);
   const errors: string[] = [];

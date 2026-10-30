@@ -61,7 +61,7 @@ async function recallHundred(page: Page, keyboard = false) {
   await page.getByRole('searchbox', { name: 'Search your realm' }).fill('');
 }
 
-test('a hundred saved companies review compact routes and move through one exactly replayable canonical batch', async ({ page }, testInfo) => {
+test('a hundred saved companies review compact routes and move through one exactly replayable canonical batch', { tag: '@scale' }, async ({ page }, testInfo) => {
   const fixture = matureTravel(), { game, own, target, appendTarget } = fixture;
   const serial = deserializeGame(serializeGame(game));
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
@@ -164,7 +164,7 @@ test('a hundred saved companies review compact routes and move through one exact
   expect(errors).toEqual([]);
 });
 
-test('a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves', async ({ page }) => {
+test('a hundred existing journeys append waypoints, retain individual overrides and restore exact manual and portable saves', { tag: '@scale' }, async ({ page }) => {
   const { game, own, target, appendTarget } = matureTravel();
   // Independent continuation fixture: canonical initial queue commands create
   // the import origin. The preceding journey proves those same100 orders

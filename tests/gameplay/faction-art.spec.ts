@@ -105,7 +105,7 @@ async function loadGallery(page: Page, cohortLabel = COHORTS[0]!.label): Promise
 // Each case starts from the same complete validated 24-culture world. A cohort
 // is one independent native-camera review, not a relaxed timeout or reduced
 // world fixture; the partition assertion below guarantees all24 are exercised.
-for (const [index, cohort] of COHORTS.entries()) test(`${cohort.label}: six of all ${FACTION_ART_FAMILIES.length} observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog`, async ({ page }, testInfo) => {
+for (const [index, cohort] of COHORTS.entries()) test(`${cohort.label}: six of all ${FACTION_ART_FAMILIES.length} observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog`, { tag: '@scale' }, async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page, cohort.label);
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();

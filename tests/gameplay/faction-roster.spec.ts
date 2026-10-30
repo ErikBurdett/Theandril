@@ -49,7 +49,7 @@ async function reachable(locator: Locator) {
   })).toBe(true);
 }
 
-for (const faction of newCultures) test(`${faction.name} is a real chosen culture through founding, paid construction and portable saves`, async ({ page }, testInfo) => {
+for (const faction of newCultures) test(`${faction.name} is a real chosen culture through founding, paid construction and portable saves`, { tag: '@scale' }, async ({ page }, testInfo) => {
   await setup(page, faction.id);
   const identity = page.getByRole('region', { name: 'Player culture', exact: true }).getByTestId('faction-identity');
   await expect(identity).toHaveAttribute('data-definition-id', faction.id);
@@ -114,7 +114,7 @@ for (const faction of newCultures) test(`${faction.name} is a real chosen cultur
   await page.screenshot({ path: testInfo.outputPath(`${faction.id}-saved-economy.png`) });
 });
 
-test('twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms', async ({ page }) => {
+test('twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms', { tag: '@scale' }, async ({ page }) => {
   await setup(page, 'faction.vesper_court', 24);
   const selector = page.getByRole('combobox', { name: 'Player faction', exact: true });
   await reachable(selector);
@@ -144,7 +144,7 @@ test('twenty-four unique authored choices include accessible Vesper in a real tw
   for (const definition of FACTIONS) expect(definitions.filter(id => id === definition.id)).toHaveLength(1);
 });
 
-test('all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width', async ({ browser }, testInfo) => {
+test('all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width', { tag: '@scale' }, async ({ browser }, testInfo) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   const page = await context.newPage();
   try {

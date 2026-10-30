@@ -5,7 +5,7 @@ import { cellTransferBytes, packCells } from '../../apps/web/src/cell-transfer';
 import { empireLandCampaign } from '../../packages/test-fixtures/src/empire-land-fixture';
 import { closeManagement, openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
-test('a hundred armies receive one group posting, retain individual overrides and restore through a real save', async ({ page }, testInfo) => {
+test('a hundred armies receive one group posting, retain individual overrides and restore through a real save', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   const own = Object.values(game.armies).filter(army => army.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);
   own.forEach((army, index) => { army.name = `Registry company ${String(index + 1).padStart(3, '0')}`; });

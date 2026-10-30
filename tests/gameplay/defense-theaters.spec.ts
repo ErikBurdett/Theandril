@@ -31,7 +31,7 @@ async function nextTurn(page: Page, turn: number) {
 }
 async function painted(page: Page) { await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))); }
 
-test('a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override', async ({ page }, testInfo) => {
+test('a hundred recalled armies create a defensive theater through keyboard controls and fill next-turn coverage while postings override', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = theaterCampaign(100), owner = game.turnOwnerId;
   const own = Object.values(game.armies).filter(army => army.factionId === owner).sort((a, b) => a.id < b.id ? -1 : 1);
   order(game, { type: 'setSelectionGroup', factionId: owner, kind: 'armies', name: 'Defense hundred', memberIds: own.map(army => army.id) });

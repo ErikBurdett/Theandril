@@ -145,7 +145,7 @@ test('same-turn land orders refresh quotes, cancellation spends honestly and sav
   await expect(page.getByTestId('land-work')).toContainText(`${otherInitialPrice + 3} coin paid`);
 });
 
-test('a mature thirty-two-town empire transfers summaries and opens only the searched town detail', async ({ page }, testInfo) => {
+test('a mature thirty-two-town empire transfers summaries and opens only the searched town detail', { tag: '@scale' }, async ({ page }, testInfo) => {
   const state = empireLandCampaign('huge'), towns = Object.values(state.settlements).filter(town => town.factionId === state.turnOwnerId);
   const target = towns.at(-1)!;
   const anchored = getSettlementLandObservation(state, state.turnOwnerId, target.id, { offset: 0, limit: 24, cell: target.cell })!;

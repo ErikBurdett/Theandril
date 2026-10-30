@@ -46,7 +46,7 @@ function routeCampaign(paused: boolean): GameState {
   return deserializeGame(serializeGame(state));
 }
 
-test('hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders', async ({ page }, testInfo) => {
+test('hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders', { tag: '@scale' }, async ({ page }, testInfo) => {
   const state = empireLandCampaign('legendary');
   await importCampaign(page, state);
   const view = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);

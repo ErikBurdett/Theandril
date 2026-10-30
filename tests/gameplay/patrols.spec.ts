@@ -121,7 +121,7 @@ test('standing postings override patrols and removing a patrol retains its alrea
   expect((await snapshot(page)).armies.find(item => item.id === army.id)!.cell).toBe(stopped);
 });
 
-test('the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes', async ({ page }, testInfo) => {
+test('the last of one hundred armies can receive a patrol from the registry at desktop and narrow sizes', { tag: '@scale' }, async ({ page }, testInfo) => {
   const { game, own, origin } = matureTravel(), selected = own.at(-1)!;
   await load(page, game);
   const patrol = await panel(page, selected.name);

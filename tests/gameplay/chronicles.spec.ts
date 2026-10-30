@@ -5,7 +5,7 @@ import { exportSave } from '@theandril/persistence';
 import { replayArchive, type ArchiveRecord, type ArchiveRulesVersion } from '@theandril/chronicle';
 import { prosperityCampaign } from '../../packages/test-fixtures/src/victory-fixture';
 
-test('AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory', async ({ page }, testInfo) => {
+test('AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory', { tag: '@scale' }, async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');

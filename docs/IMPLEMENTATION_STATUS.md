@@ -1,5 +1,22 @@
 # Theandril implementation status
 
+## Testing methodology: proportionate verification — 2026-10-30
+
+Development process only; no game change. The browser suite is split into two
+Playwright projects over one `tests/gameplay` tree: `gameplay` holds 202
+ordinary journeys and `scale` holds the 50 tagged `@scale` (every-culture and
+every-biome sweeps, hundred-army and forty-hearth empires, Huge maps, render
+budgets, the whole-campaign chronicle journey), which are a third of a full run
+and most of its load failures. `pnpm test:gameplay` runs the ordinary project,
+`pnpm test:scale` the scale project on demand. [`docs/TESTING.md`](TESTING.md)
+is now the canonical guide: a slice is verified by typecheck, lint, the unit
+project, the build and whichever of campaigns, pacing and covering journeys the
+change touches; the complete browser suites run only at owner-agreed batch
+checkpoints at two workers on a quiet machine, with load failures recorded
+rather than rerun to green; deploys are proven by the live readback.
+`.gitignore` refuses Playwright traces under `docs/development/`. No journey
+was removed or weakened. [Evidence](development/2026-10-30-testing-methodology/README.md).
+
 ## AI wardens: reaching hearth rites in organic play — 2026-10-29
 
 AI only. A realm that holds a seam now researches the discovery of the hearth

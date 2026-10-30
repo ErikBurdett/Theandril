@@ -114,7 +114,7 @@ async function removeAll(panel: Locator) {
   await expect(rows).toHaveCount(0);
 }
 
-test('forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues', async ({ page }, testInfo) => {
+test('forty hearths recall a personal ordered sequence, pay for one batch, retain individual control and restore saved queues', { tag: '@scale' }, async ({ page }, testInfo) => {
   const game = empireLandCampaign('legendary');
   const towns = Object.values(game.settlements).filter(town => town.factionId === game.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1);
   towns.forEach((town, index) => { town.name = `Sequence hearth ${String(index + 1).padStart(3, '0')}`; });

@@ -90,7 +90,7 @@ test('a real canvas caravan founds, builds and continues in the same full-orders
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(stateHash(game));
 });
 
-test('a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders', async ({ page }, info) => {
+test('a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders', { tag: '@scale' }, async ({ page }, info) => {
   const game = characterCampaign(100), view = getObservation(game, game.turnOwnerId);
   const army = game.armies[CHARACTER_FIXTURE.armyId]!, home = game.settlements[CHARACTER_FIXTURE.homeId]!;
   const armies = Object.values(game.armies).filter(item => item.factionId === game.turnOwnerId && item.cell === home.cell);

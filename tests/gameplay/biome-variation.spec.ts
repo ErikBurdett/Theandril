@@ -53,7 +53,7 @@ async function settings(page: Page) {
   if (await menu.getAttribute('open') === null) await menu.locator('summary').click();
 }
 
-test('all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration', async ({ page }, testInfo) => {
+test('all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration', { tag: '@scale' }, async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   const game = await importGallery(page), hash = stateHash(game);
   const catalog = parseRuntimeCatalog(await (await page.request.get('/art/catalog.json')).json());

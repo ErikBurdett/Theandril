@@ -5,7 +5,7 @@ import { generateWorld, riverSize } from '@theandril/mapgen';
 
 const counters = (page: Page) => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
 
-test('Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog', async ({ page }, testInfo) => {
+test('Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog', { tag: '@scale' }, async ({ page }, testInfo) => {
   // Independent read-only geography identifies an actual river to click. It is
   // never imported, injected into the worker, or included in frame measurements.
   const world = generateWorld(74, 'huge', 32, undefined, { layout: 'archipelago' });

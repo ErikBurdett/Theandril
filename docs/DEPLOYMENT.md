@@ -15,7 +15,7 @@ VITE_BASE_PATH=/Theandril/ pnpm exec playwright test --config playwright.pages.c
 
 Install Playwright Chromium first with `pnpm exec playwright install chromium`, or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium` to use a local executable. The isolated preview uses port 4175; it does not stop the development server on 5173.
 
-The same tests can verify the actual published site without a local server:
+The same tests can verify the actual published site without a local server. They are a release-checkpoint check, not a per-deploy one; an ordinary deploy is proven by the live readback below (see [TESTING.md](TESTING.md)):
 
 ```sh
 PAGES_SMOKE_URL=https://erikburdett.github.io/Theandril/ pnpm exec playwright test --config playwright.pages.config.ts
@@ -38,3 +38,24 @@ For a transient deployment failure, rerun the workflow in Actions, or use its **
 Browser storage is origin-specific: localhost and github.io do not share IndexedDB. Use **Campaign & settings → Export campaign** on the old site and import that file on the new site. Clearing browser data can remove local saves; portable exports are the backup.
 
 Implementation follows [Vite's static deployment guidance](https://vite.dev/guide/static-deploy.html) and [GitHub's custom Pages workflow requirements](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Proving a deploy
+
+An ordinary deploy is proven by a read-only readback of the published site, not
+by a browser suite. After the Pages workflow finishes, build the same bundle
+locally and compare it with what the site serves:
+
+```sh
+pnpm changelog:build && VITE_BASE_PATH=/Theandril/ pnpm build
+node scripts/verify-pages.mjs <publication-SHA> https://erikburdett.github.io/Theandril/ \
+  --expect=docs/updates/<slice>-release-expectations.json \
+  --out=docs/development/<date>-<slice>-publication --dist=apps/web/dist
+git checkout -- apps/web/src/updates/changelog/feed.json
+```
+
+The script checks that the served HTML, JS, CSS and worker bytes equal the
+local build, that the home page, journal, dispatch and roadmap show the
+expected commit and counts from the expectations file, and that the game
+setup page loads without development hooks. It writes its evidence to the new
+output directory. See
+[TESTING.md](TESTING.md) for when the Pages and production suites run instead.

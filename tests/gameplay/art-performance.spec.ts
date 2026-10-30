@@ -5,7 +5,7 @@ import { exportSave } from '@theandril/persistence';
 import { matureCampaign } from '../../packages/test-fixtures/src/index';
 import { FACTION_ART_IDS, factionArtId, parseRuntimeCatalog } from '@theandril/art-pipeline/runtime';
 
-test('fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD', async ({ page }, testInfo) => {
+test('fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD', { tag: '@scale' }, async ({ page }, testInfo) => {
   const fixture = matureCampaign('huge');
   const cells = fixture.world.width * fixture.world.height;
   // Synthetic knowledge only, imported through the real validated save boundary.
