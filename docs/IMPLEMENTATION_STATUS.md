@@ -19,6 +19,8 @@ fires on Epic for one realm on three turns, taking nothing. Verification: a
 new AI test; unit, campaigns, lint, typecheck, build and the chronicles
 journey. The measured gap is unchanged in practice: realms that hold both
 paths still fail to seal on Epic, where the scaled 9,600 price is unmeasured.
+Deployed as `5f7c041`: both workflows and the live readback pass
+([publication packet](development/2026-10-31-publication-seam-objective/README.md)).
 [Evidence](development/2026-10-31-ai-seam-objective/README.md),
 [ADR0070](architecture/0070-ai-seam-objective.md).
 
