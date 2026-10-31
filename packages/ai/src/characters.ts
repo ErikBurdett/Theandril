@@ -35,6 +35,13 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
   // A battle stack that could carry a caster outranks the warden post.
   const battleCaster = view.wars.length > 0 && own.some(isWaykeeperBattleArmy);
   const studiesCaster = view.wars.length === 0 && Boolean(attunement && attunement.paths.every(path => path.held) && attunement.hostSettlementIds.length);
+  // A study earns experience only where the borders hold a seam (rules 39), so
+  // the post is a seam hearth: one that could also host the working if there is
+  // one, else the seam hearth with the most paths. A caster lodged elsewhere
+  // learns nothing, and the realm raises a second to study if its only one is.
+  const studyHearth = studiesCaster && attunement ? [...seamHearths.keys()].filter(id => view.settlements.some(town => town.id === id && town.factionId === view.factionId))
+    .sort((a, b) => Number(attunement.hostSettlementIds.includes(b)) - Number(attunement.hostSettlementIds.includes(a)) || (seamHearths.get(b)?.size ?? 0) - (seamHearths.get(a)?.size ?? 0) || (a < b ? -1 : 1))[0] : undefined;
+  const casterStudies = living.some(character => character.role === 'waykeeper' && character.location?.kind === 'settlement' && seamHearths.has(character.location.settlementId));
   const useful = (army: ArmyView): boolean => !reservedArmyIds.has(army.id) && !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
   const priority = (army: ArmyView, role: string): number => role === 'marshal' || role === 'waykeeper'
     ? army.formations.length * 100 + army.strength
@@ -65,7 +72,7 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
       continue; // Mission effects must be assessed from the upgraded read model.
     }
     if (!carrier) {
-      if (character.role === 'waykeeper' && studiesCaster && character.location?.kind === 'settlement' && attunement!.hostSettlementIds.includes(character.location.settlementId)) continue;
+      if (character.role === 'waykeeper' && studiesCaster && character.location?.kind === 'settlement' && seamHearths.has(character.location.settlementId)) continue;
       if (character.role === 'waykeeper' && wardens && !battleCaster && character.location?.kind === 'settlement' && seamHearths.has(character.location.settlementId)) continue;
       const targets = character.assignmentOptions.filter(option => option.canAssign).flatMap(option => {
         const army = armies.get(option.armyId);
@@ -100,7 +107,7 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
   const counts = new Map(['marshal', 'surveyor', 'engineer', 'waykeeper'].map(role => [role, living.filter(character => character.role === role).length]));
   const fieldArmies = own.filter(army => useful(army) && army.formations.length >= 2);
   const needsCaster = view.wars.length > 0 && fieldArmies.some(isWaykeeperBattleArmy) && view.arcaneResearch.choices.some(choice => choice.canResearch || choice.researched);
-  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster || studiesCaster || wardens ? 1 : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
+  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster || wardens ? 1 : studiesCaster ? (casterStudies ? 1 : Math.min(2, (counts.get('waykeeper') ?? 0) + 1)) : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
   const rolePriority = ['marshal', 'waykeeper', 'engineer', 'surveyor'];
   const opportunities = view.characterRecruitment.filter(option => option.canRecruit && option.coinCost <= budget && (counts.get(option.role) ?? 0) < (desired.get(option.role) ?? 0))
     .sort((a, b) => rolePriority.indexOf(a.role) - rolePriority.indexOf(b.role) || (a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0));
@@ -115,8 +122,8 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
       break;
     }
     if (option.role === 'waykeeper' && studiesCaster && attunement) {
-      // Lodged, not attached: the caster studies the seam from a hearth that could host the working.
-      if (!attunement.hostSettlementIds.includes(town.id)) continue;
+      // Lodged, not attached: the caster studies at the seam hearth chosen above.
+      if (town.id !== studyHearth) continue;
       commands.push({ type: 'recruitCharacter', factionId: view.factionId, settlementId: option.settlementId, definitionId: option.definitionId });
       budget -= option.coinCost;
       reasons.push(`Appoint ${option.name} at ${town.name} to study the realm's seams toward a sealed working; pay ${option.coinCost} coin and ${option.upkeep} recurring upkeep.`);

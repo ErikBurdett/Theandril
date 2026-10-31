@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## AI study post: a Waykeeper studies where a seam is held — 2026-10-31
+
+AI only. A trace of the Epic headline campaign showed Glass Tide holding both
+paths from turn 80 with two of three discoveries and a first-degree Waykeeper
+lodged at its capital for 270 turns at zero experience: seam study (rules 39)
+pays only at a hearth whose borders hold a seam, and the study post chose an
+archive hearth. The post is now a seam hearth (a host too if one exists), a
+caster lodged at any seam hearth stays, one lodged elsewhere is released, and
+a second Waykeeper (at most two) is raised while none studies. Traced after:
+second degree of Flame by turn 120 and Rune by 160, Arcane Theory complete by
+110, the working ready but for its price, then the Rune seam hearth lost to
+war before the price is met on turn 330. Headline pacing **369 / 300 / 203**,
+unchanged. Verification: a new AI test; unit, campaigns, lint, typecheck,
+build, two covering journeys and the chronicles journey. The measured gap is
+now keeping or retaking a seam hearth through a long campaign's wars.
+[Evidence](development/2026-10-31-ai-seam-study-post/README.md),
+[ADR0071](architecture/0071-ai-seam-study-post.md).
+
 ## AI seam objective: a war for the missing path — 2026-10-31
 
 AI only. A realm one seam short of the third path — it holds a seam, has a

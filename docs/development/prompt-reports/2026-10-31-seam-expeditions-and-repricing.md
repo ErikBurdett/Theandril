@@ -32,6 +32,12 @@ then continue development".
   the headline at 368 / 300 / 203 and fires once on Epic, taking nothing.
   Evidence packet [docs/development/2026-10-31-ai-seam-objective/](../2026-10-31-ai-seam-objective/README.md).
 
+- AI study post ([ADR 0071](../../architecture/0071-ai-seam-study-post.md)):
+  the studying Waykeeper is lodged at a seam hearth, where study pays; Glass
+  Tide's caster qualifies and the realm finishes Arcane Theory by turn 110 of
+  the Epic headline, then loses its Rune seam hearth to war. Pacing unchanged.
+  Evidence packet [docs/development/2026-10-31-ai-seam-study-post/](../2026-10-31-ai-seam-study-post/README.md).
+
 ## Verified
 
 Typecheck, lint, unit 2,318 / 285 files, campaigns 57 (after re-deriving the

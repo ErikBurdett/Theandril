@@ -8,6 +8,8 @@ import { planTurnWithReasons } from './index';
 import { planProgression } from './progression';
 import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, SEAM_OBJECTIVE_RANGE, seamExpeditionSite, seamObjective } from './arcane';
 import { protectedFactions } from './diplomacy';
+import { planCharacters } from './characters';
+import { deserializeGame, serializeGame } from '@theandril/sim';
 import { hexDistance, isPassable } from '@theandril/mapgen';
 import { SITE_SEARCH_RADIUS } from '@theandril/sim';
 
@@ -403,4 +405,48 @@ test('a seam of a lacking path inside another realm\'s borders is an objective o
   // Nor does a realm already at war, or one without a caster who could seal the working.
   expect(seamObjective({ ...view, wars: ['faction.elsewhere'] }, protectedFactions(view))).toBeNull();
   expect(seamObjective({ ...view, progression: { ...view.progression, attunement: { ...view.progression.attunement!, casters: [] } } }, protectedFactions(view))).toBeNull();
+});
+
+test('rules 39: the study post is a hearth whose borders hold a seam, so a lodged Waykeeper actually studies; a caster lodged at a seamless archive hearth gets a studying colleague', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId, host = hostOf(state);
+  for (const [id, character] of Object.entries(state.characters)) if (character.factionId === player) delete state.characters[id];
+  host.buildings = host.buildings.filter(building => building !== 'building.archive');
+  // A second hearth carries the archive but holds no seam.
+  const site = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, host.cell, state.world.width) === 4
+    && state.explored[player]!.has(cell) && Object.values(state.settlements).every(town => hexDistance(town.cell, cell, state.world.width) > 2)
+    && arcaneSites(state.world).every(seam => hexDistance(seam.cell, cell, state.world.width) > 1));
+  expect(site).toBeGreaterThan(0);
+  const id = 'army.archive_caravan';
+  state.armies[id] = { id, factionId: player, name: 'Archive caravan', cell: site, movement: 3, formations: [createArmyFormation(id, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'found', factionId: player, armyId: id, name: 'Archive Hold' })).toMatchObject({ ok: true });
+  const hold = Object.values(state.settlements).find(town => town.name === 'Archive Hold')!;
+  hold.buildings.push('building.archive');
+  state.factions[0]!.treasury = 400;
+  const loaded = deserializeGame(serializeGame(state));
+  let view = getObservation(loaded, player);
+  expect(view.progression.attunement!.paths.every(path => path.held)).toBe(true);
+  expect(view.progression.attunement!.hostSettlementIds).toEqual([hold.id]);
+  expect(view.arcaneSites.every(seam => seam.settlementId === host.id)).toBe(true);
+  const plan = planCharacters(view, 400);
+  expect(plan.commands).toContainEqual({ type: 'recruitCharacter', factionId: player, settlementId: host.id, definitionId: 'character.waykeeper' });
+  expect(plan.commands.some(command => command.type === 'recruitCharacter' && command.settlementId === hold.id)).toBe(false);
+  expect(plan.reasons.join(' ')).toContain('study');
+  // A caster already lodged at the seamless archive hearth learns nothing there; a second is raised at the seam hearth and the first is not held in place.
+  expect(applyCommand(loaded, { type: 'recruitCharacter', factionId: player, settlementId: hold.id, definitionId: 'character.waykeeper' })).toMatchObject({ ok: true });
+  view = getObservation(loaded, player);
+  const second = planCharacters(view, 400);
+  expect(second.commands).toContainEqual({ type: 'recruitCharacter', factionId: player, settlementId: host.id, definitionId: 'character.waykeeper' });
+  expect(applyCommand(loaded, second.commands.find(command => command.type === 'recruitCharacter')!)).toMatchObject({ ok: true });
+  // With a caster studying at the seam hearth, no third is wanted and the student stays lodged.
+  view = getObservation(loaded, player);
+  const third = planCharacters(view, 400);
+  expect(third.commands.some(command => command.type === 'recruitCharacter' && command.definitionId === 'character.waykeeper')).toBe(false);
+  expect(third.commands.some(command => command.type === 'assignCharacter' && view.characters.find(character => character.id === command.characterId)?.location?.kind === 'settlement' && (view.characters.find(character => character.id === command.characterId)!.location as { settlementId: string }).settlementId === host.id)).toBe(false);
+  // The student earns experience each turn; the colleague at the archive does not.
+  for (let seat = 0; seat < loaded.factions.length * 3; seat++) expect(applyCommand(loaded, { type: 'endTurn', factionId: loaded.turnOwnerId })).toMatchObject({ ok: true });
+  const student = Object.values(loaded.characters).find(character => character.factionId === player && character.location?.kind === 'settlement' && character.location.settlementId === host.id)!;
+  const idle = Object.values(loaded.characters).find(character => character.factionId === player && character.location?.kind === 'settlement' && character.location.settlementId === hold.id)!;
+  expect(student.experience).toBeGreaterThanOrEqual(3);
+  expect(idle.experience).toBe(0);
 });
