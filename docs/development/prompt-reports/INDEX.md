@@ -2,7 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
-| 2026-10-31 | [AI seam column, seam hearth watch and rules 45](2026-10-31-seam-column.md) | Seam column deployed (`68f4f5b`, pacing 379/300/203); seam hearth watch and rules 45 re-pricing (pacing 352/306/201) verified locally; deployments recorded in the publication packets |
+| 2026-10-31 | [AI seam column, seam hearth watch, rules 45 and hearth events](2026-10-31-seam-column.md) | Seam column (`68f4f5b`), seam hearth watch and rules 45 (`0e3c26b`) deployed; hearth events (rules 46) verified locally with pacing 393/301/210; deployments recorded in the publication packets |
 | 2026-10-31 | [AI seam expeditions and rules 44 re-pricing](2026-10-31-seam-expeditions-and-repricing.md) | Status report page; seam expeditions and re-pricing verified locally; deployment recorded in the publication packet |
 | 2026-10-30 | [Testing second pass, AI glass surveys and two save repairs](2026-10-30-glass-surveys-and-save-repairs.md) | Roster sweep consolidated and trace archives dropped (`4a06420`); AI surveys target glass, two save-load defects repaired; publication recorded in the report |
 | 2026-10-30 | [Testing methodology cut to proportionate verification](2026-10-30-testing-methodology.md) | Local process only: gameplay suite split into 202 ordinary and 50 `@scale` journeys, `docs/TESTING.md` written, traces gitignored; no publication |

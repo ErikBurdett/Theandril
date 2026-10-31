@@ -19,6 +19,7 @@ import type { ArmySupply } from './supply';
 import type { Depot } from './depots';
 import type { ArcaneSearchState, ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { ObservedWard, RiteOption, Ward } from './rites';
+import type { HearthEventState, ObservedHearthEvent } from './hearth-events';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -263,6 +264,7 @@ export type GameCommand =
   | { type: 'startAttunement'; factionId: string; settlementId: string; characterId: string }
   | { type: 'cedeSettlement'; factionId: string; settlementId: string; recipientFactionId: string }
   | { type: 'performRite'; factionId: string; characterId: string; riteId: string }
+  | { type: 'resolveHearthEvent'; factionId: string; eventId: string; choiceId: string }
   | { type: 'endTurn'; factionId: string };
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
@@ -284,6 +286,8 @@ export interface GameState {
   arcaneSearches: ArcaneSearchState;
   /** Rules 40: standing strategic wards, one per hearth, ordered by hearth. */
   wards: Ward[];
+  /** Rules 46: pending hearth events, one per realm, and when each realm last drew for one. */
+  hearthEvents: HearthEventState;
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -346,6 +350,8 @@ export interface Observation {
   /** Rules 40: own standing wards and every Waykeeper's rite options with exact blockers. */
   wards?: ObservedWard[];
   rites?: RiteOption[];
+  /** Rules 46: own pending hearth events with every answer quoted; absent under historical rules. */
+  hearthEvents?: ObservedHearthEvent[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

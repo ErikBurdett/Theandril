@@ -65,7 +65,7 @@ test('rules 39 remembers every surveyed hex, found or empty, bounded and oldest 
   expect(state.arcaneSearches[factionId]).toHaveLength(256);
   expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   // A rules-38 envelope migrates with an empty register.
-  const old = JSON.parse(before); old.version = 38; old.contentHash = PRE_RITE_CONTENT_HASH; delete old.state.arcaneSearches; delete old.state.wards;
+  const old = JSON.parse(before); old.version = 38; old.contentHash = PRE_RITE_CONTENT_HASH; delete old.state.arcaneSearches; delete old.state.wards; delete old.state.hearthEvents;
   const { checksum } = await import('@theandril/content');
   old.stateChecksum = checksum(JSON.stringify(old.state));
   const migrated = deserializeGame(JSON.stringify(old));

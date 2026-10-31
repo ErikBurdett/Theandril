@@ -1,5 +1,32 @@
 # Theandril implementation status
 
+## Hearth events (rules/save 46); ferry landings on the ferry's own water — 2026-10-31
+
+The first slice of M6. Eight original event templates seal into the content
+pack; at the end of a turn, from turn forty, a realm with no pending event and
+no draw in ten turns is drawn for one (thirty-five in a hundred) at an
+unbesieged, unoccupied hearth of its own, from a seeded stream keyed by the
+campaign seed, the turn and the realm's seat; the realm answers with one of
+two or three quoted answers that move only existing fields (stored food,
+people, devastation, coin, knowledge); an unanswered event takes its first
+affordable answer after five turns; an unaffordable answer is refused, never
+paid short. A new register and command, observation, journal entries, the AI's
+answer (by quoted value, its cost taken off the purse first) and a Realm
+affairs panel with a HUD count. Save 46: the rules 45 pack is frozen as
+`1f0c41ca`, every older envelope upgrades to an empty register, sealing
+events under older rules is refused. The slice's tests exposed a naval gap:
+a loaded ferry in a proved-enclosed basin spent its route budget on
+unreachable landings; shores on water known to be a separate basin are no
+longer ranked. Headline pacing **393 / 301 / 210**, all Attunement, in band;
+proxies 385 / 412 / 270 / 182. Verification: new sim, AI, content and UI
+tests and a new journey; unit 2,329 / 288 files, campaigns 57, lint,
+typecheck, build, three covering journeys and the chronicles journey. Not
+built: the catalogue beyond eight, epochs, escalation, crises, migration,
+collapse.
+[Evidence](development/2026-10-31-hearth-events/README.md),
+[ADR0075](architecture/0075-hearth-events.md),
+[ADR0076](architecture/0076-ferry-landings-on-own-water.md).
+
 ## AI seam hearth watch; rules/save 45 re-prices the third path — 2026-10-31
 
 AI, then content prices. A replay of every siege of a seam hearth in the Epic

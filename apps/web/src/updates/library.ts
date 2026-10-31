@@ -216,9 +216,9 @@ export const roadmapItems: RoadmapItem[] = [
     gates: ['B', 'C', 'I'], evidence: [reinforcementEvidence, fleetEvidence, statusEvidence, scopeEvidence],
   },
   {
-    id: 'world-epochs', stage: 'missing-systems', status: 'pending', title: 'Bring epochs, crises and a changing world into play',
-    summary: 'Campaign epochs and world crises remain accepted scope without a complete playable system.',
-    delivered: [], remaining: ['After logistics and political actors, build visible epoch progression and contextual crises with meaningful prevention, response and recovery.', 'Integrate migration/refugees, regional upheaval, rebellion, monster activity and controlled faction collapse/emergence with AI response and persistence.', 'Prove different eligible crises, saved mid-crisis continuation and factual history through short labelled regressions and representative long campaigns.'],
+    id: 'world-epochs', stage: 'missing-systems', status: 'in-progress', title: 'Bring epochs, crises and a changing world into play',
+    summary: 'Hearth events are the first slice of a living campaign; epochs and world crises remain accepted scope without a complete playable system.',
+    delivered: ['Rules 46 hearth events: from turn forty a realm\u2019s hearth may meet a small turn of fortune drawn from the campaign seed, answered from Realm affairs with one of its quoted answers or taken by its first affordable answer when it lapses; eight original templates seal into the pack, AI realms answer by quoted value, and older campaigns load unchanged with no events.'], remaining: ['After logistics and political actors, build visible epoch progression and contextual crises with meaningful prevention, response and recovery.', 'Integrate migration/refugees, regional upheaval, rebellion, monster activity and controlled faction collapse/emergence with AI response and persistence.', 'Prove different eligible crises, saved mid-crisis continuation and factual history through short labelled regressions and representative long campaigns.'],
     gates: ['B', 'C', 'J'], evidence: [statusEvidence, scopeEvidence],
   },
   {

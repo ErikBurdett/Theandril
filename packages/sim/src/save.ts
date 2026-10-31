@@ -29,6 +29,7 @@ import { clientBondSchema, clientOfferSchema } from './clients';
 import { arcaneSurveySchema, hasArcaneSurveys, validateArcaneSurveys, arcaneSearchSchema, hasArcaneSearches, validateArcaneSearches } from './arcane-sites';
 import { assertNoSubjectRule, captureDecisionSchema, captureDecisionV15Schema, captureDecisionV39Schema, ruinSchema, siegeSchema, siegeV20Schema, validateSieges } from './siege';
 import { assertNoWards, validateWards, wardStateSchema } from './rites';
+import { assertNoHearthEvents, emptyHearthEvents, hearthEventStateSchema, validateHearthEvents } from './hearth-events';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -40,7 +41,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 45;
+export const SAVE_VERSION = 46;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -64,6 +65,8 @@ export const PRE_KINDLING_CONTENT_HASH = '78df970c';
 export const PRE_SEAM_PRICING_CONTENT_HASH = 'f738e917';
 /** Rules 44 content, before rules 45 re-priced Attunement once AI realms guarded their seam hearths. */
 export const PRE_SEAM_WATCH_PRICING_CONTENT_HASH = '88b0823d';
+/** Rules 45 content, before rules 46 added hearth events. */
+export const PRE_EVENTS_CONTENT_HASH = '1f0c41ca';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -243,7 +246,9 @@ const stateV38Schema = stateV37Schema.extend({ projects: z.array(victoryProjectS
 /** Rules 39 lets a pending capture quote subject rule; the content pack is unchanged. */
 const stateV39Schema = stateV38Schema.extend({ pendingCapture: captureDecisionV39Schema.nullable(), arcaneSearches: arcaneSearchSchema }).strict();
 /** Rules 40 records standing strategic wards. */
-const stateSchema = stateV39Schema.extend({ wards: wardStateSchema }).strict();
+const stateV45Schema = stateV39Schema.extend({ wards: wardStateSchema }).strict();
+/** Rules 46 records pending hearth events and each realm's last draw for one. */
+const stateSchema = stateV45Schema.extend({ hearthEvents: hearthEventStateSchema }).strict();
 const searchesFor = (factions: readonly { id: string }[]) => factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1);
 const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
@@ -265,13 +270,16 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(45), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(46), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Every envelope through v45 carries the rules 40–45 state; the wrapper below adds what rules 46 records. */
+type Through45 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV45Schema> };
+const saveV45Schema = saveSchema.extend({ version: z.literal(45), state: stateV45Schema }).strict();
 /** Rules 41 through 45 change no canonical field; v40 and v41 envelopes differ only in their seals, a v42 envelope only in its version, and rules 44 and 45 each re-price the pack earlier envelopes were sealed under. */
-const saveV44Schema = saveSchema.extend({ version: z.literal(44), state: stateSchema }).strict();
-const saveV43Schema = saveSchema.extend({ version: z.literal(43), state: stateSchema }).strict();
-const saveV42Schema = saveSchema.extend({ version: z.literal(42), state: stateSchema }).strict();
-const saveV41Schema = saveSchema.extend({ version: z.literal(41), state: stateSchema }).strict();
-const saveV40Schema = saveSchema.extend({ version: z.literal(40), state: stateSchema }).strict();
+const saveV44Schema = saveSchema.extend({ version: z.literal(44), state: stateV45Schema }).strict();
+const saveV43Schema = saveSchema.extend({ version: z.literal(43), state: stateV45Schema }).strict();
+const saveV42Schema = saveSchema.extend({ version: z.literal(42), state: stateV45Schema }).strict();
+const saveV41Schema = saveSchema.extend({ version: z.literal(41), state: stateV45Schema }).strict();
+const saveV40Schema = saveSchema.extend({ version: z.literal(40), state: stateV45Schema }).strict();
 const saveV39Schema = saveSchema.extend({ version: z.literal(39), state: stateV39Schema }).strict();
 const saveV38Schema = saveSchema.extend({ version: z.literal(38), state: stateV38Schema }).strict();
 const saveV37Schema = saveSchema.extend({ version: z.literal(37), state: stateV37Schema }).strict();
@@ -320,7 +328,7 @@ const saveV1Schema = saveSchema.extend({ version: z.literal(1), state: stateV1Sc
 const legacyStateSchema = stateV1Schema.omit({ nextId: true }).extend({ nextEntityId: integer.positive() }).strict();
 const legacySchema = z.object({ version: z.literal(0), gameVersion: z.literal('0.0.0'), contentHash: z.string(), state: legacyStateSchema }).strict();
 
-function upgradePatronage(prior: z.infer<typeof saveV21Schema> | z.infer<typeof saveV20Schema> | z.infer<typeof saveV19Schema> | z.infer<typeof saveV18Schema> | z.infer<typeof saveV17Schema>, label: string): z.infer<typeof saveSchema> {
+function upgradePatronage(prior: z.infer<typeof saveV21Schema> | z.infer<typeof saveV20Schema> | z.infer<typeof saveV19Schema> | z.infer<typeof saveV18Schema> | z.infer<typeof saveV17Schema>, label: string): Through45 {
   assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), `${label} snapshot checksum does not match its contents`);
   const state = withPatronage(prior.state);
   return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
@@ -463,6 +471,8 @@ function canonicalPayload(state: GameState) {
       // Rules 39 appends surveyed ground last, matching the schema's key order that the checksum reads.
       arcaneSearches: arcaneSearchSchema.parse(state.factions.map(faction => ({ factionId: faction.id, cells: [...(state.arcaneSearches[faction.id] ?? [])] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1)),
       wards: wardStateSchema.parse([...state.wards].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
+      // Rules 46 appends hearth events last, in id and realm order.
+      hearthEvents: hearthEventStateSchema.parse({ pending: [...state.hearthEvents.pending].sort(compareId), recent: [...state.hearthEvents.recent].sort((a, b) => a.factionId < b.factionId ? -1 : a.factionId > b.factionId ? 1 : 0) }),
   };
   return payload;
 }
@@ -531,6 +541,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 19) assertNoUnification(state);
+  if (version < 46) assertNoHearthEvents(state);
   if (version < 39) assertNoArcaneSearches(state);
   const latest = canonicalPayload(state);
   const beforePatronage = payloadForVersion(state, version, latest);
@@ -659,8 +670,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
+  if (version < 46) assertNoHearthEvents(state);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 45) return CONTENT_HASH;
+  if (version >= 46) return CONTENT_HASH;
+  if (version >= 45) return PRE_EVENTS_CONTENT_HASH;
   if (version >= 44) return PRE_SEAM_WATCH_PRICING_CONTENT_HASH;
   if (version >= 42) return PRE_SEAM_PRICING_CONTENT_HASH;
   if (version >= 41) return PRE_KINDLING_CONTENT_HASH;
@@ -677,8 +690,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 40) return latest;
-  const { wards: _wards, ...beforeWards } = latest;
+  if (version >= 46) return latest;
+  const { hearthEvents: _events, ...beforeEvents } = latest;
+  if (version >= 40) return beforeEvents;
+  const { wards: _wards, ...beforeWards } = beforeEvents;
   if (version >= 39) return beforeWards;
   const { arcaneSearches: _searches, ...beforeSearches } = beforeWards;
   if (version >= 37) return beforeSearches;
@@ -767,49 +782,50 @@ function assertPreDevelopmentContent(state: z.infer<typeof stateV15Schema>): voi
   assert(Object.values(state.land.settlements).every(land => Object.values(land.improvements).every(id => works.has(id)) && (!land.work || land.work.kind !== 'improve' || works.has(land.work.improvementId))) && Object.values(state.land.known).every(cells => Object.values(cells).every(cell => !cell.improvementId || works.has(cell.improvementId))), 'resource works unavailable in the frozen pre-development pack');
 }
 
-function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+/** Every branch below seals the rules 40–45 state; rules 46 is added by parseSave. */
+function parseSaveThrough45(raw: unknown): Through45 {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
-  const migrateV15 = (prior: z.infer<typeof saveV15Schema>): z.infer<typeof saveSchema> => {
+  const migrateV15 = (prior: z.infer<typeof saveV15Schema>): Through45 => {
     assert(prior.contentHash === PRE_DEVELOPMENT_CONTENT_HASH, 'v15 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
     assertPreDevelopmentContent(prior.state);
-    const state = stateSchema.parse({ ...withPatronage(prior.state), land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
+    const state = stateV45Schema.parse({ ...withPatronage(prior.state), land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
     return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   };
-  const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
+  const migrateV14 = (prior: z.infer<typeof saveV14Schema>): Through45 => {
     assert(prior.contentHash === PRE_SPECIALIST_CONTENT_HASH, 'v14 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v14 snapshot checksum does not match its contents');
     assertPreSpecialistContent(prior.state);
     return migrateV15({ ...prior, version: 15, contentHash: PRE_DEVELOPMENT_CONTENT_HASH });
   };
-  const migrateV13 = (prior: z.infer<typeof saveV13Schema>): z.infer<typeof saveSchema> => {
+  const migrateV13 = (prior: z.infer<typeof saveV13Schema>): Through45 => {
     assert(prior.contentHash === PRE_BATTLE_CONTENT_HASH, 'v13 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v13 snapshot checksum does not match its contents');
     assert([...prior.state.characters, ...[...(prior.state.battle ? [prior.state.battle] : []), ...prior.state.battleReports].flatMap(battle => battle.characterSnapshots)].every(character => v9Characters.has(character.definitionId)), 'v13 references a character absent from its frozen pack');
     const state = stateV15Schema.parse({ ...prior.state, arcaneResearch: prior.state.factions.map(faction => ({ factionId: faction.id, discoveries: [] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
     return migrateV14({ ...prior, version: 14, contentHash: PRE_SPECIALIST_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV12 = (prior: z.infer<typeof saveV12Schema>): z.infer<typeof saveSchema> => {
+  const migrateV12 = (prior: z.infer<typeof saveV12Schema>): Through45 => {
     assert(prior.contentHash === PRE_EXPANDED_ROSTER_CONTENT_HASH, 'v12 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v12 snapshot checksum does not match its contents');
     assertLegacyRoster(prior.state);
     return migrateV13({ ...prior, version: 13, contentHash: PRE_BATTLE_CONTENT_HASH });
   };
-  const migrateV11 = (prior: z.infer<typeof saveV11Schema>): z.infer<typeof saveSchema> => {
+  const migrateV11 = (prior: z.infer<typeof saveV11Schema>): Through45 => {
     assert(prior.contentHash === PRE_GEOGRAPHY_CONTENT_HASH, 'v11 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v11 snapshot checksum does not match its contents');
     assertLegacyRoster(prior.state);
     const state = stateV12Schema.parse({ ...prior.state, world: { ...prior.state.world, layout: 'legacy', hydrology: Array<number>(prior.state.world.terrain.length).fill(0) }, roads: emptyRoadState(prior.state.factions.map(faction => faction.id)) });
     return migrateV12({ version: 12, gameVersion: '0.1.0', contentHash: PRE_EXPANDED_ROSTER_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV10 = (prior: z.infer<typeof saveV10Schema>): z.infer<typeof saveSchema> => {
+  const migrateV10 = (prior: z.infer<typeof saveV10Schema>): Through45 => {
     assert(prior.contentHash === PRE_CITY_RESEARCH_CONTENT_HASH, 'v10 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v10 snapshot checksum does not match its contents');
     assertV9Content(prior.state, 10);
     const state = stateV11Schema.parse({ ...prior.state, land: { ...prior.state.land, settlements: Object.fromEntries(Object.entries(prior.state.land.settlements).map(([id, land]) => [id, { ...land, borderGrowth: 0 }])) } });
     return migrateV11({ version: 11, gameVersion: '0.1.0', contentHash: PRE_GEOGRAPHY_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV9 = (prior: z.infer<typeof saveV9Schema>): z.infer<typeof saveSchema> => {
+  const migrateV9 = (prior: z.infer<typeof saveV9Schema>): Through45 => {
     assert(prior.contentHash === PRE_ROSTER_CONTENT_HASH, 'v9 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v9 snapshot checksum does not match its contents');
     assertV9Content(prior.state);
@@ -818,7 +834,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     const state = stateV10Schema.parse({ ...prior.state, rosterVersion: prior.state.world.generatorVersion < 4 ? 1 : 2 });
     return migrateV10({ version: 10, gameVersion: '0.1.0', contentHash: PRE_CITY_RESEARCH_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV8 = (prior: z.infer<typeof saveV8Schema>): z.infer<typeof saveSchema> => {
+  const migrateV8 = (prior: z.infer<typeof saveV8Schema>): Through45 => {
     assert(prior.contentHash === PRE_TERRITORY_CONTENT_HASH, 'v8 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v8 snapshot checksum does not match its contents');
     assert(prior.state.factions.every(faction => FACTIONS.slice(0, 4).some(definition => definition.id === faction.definitionId)), 'v8 references a faction absent from its frozen pack');
@@ -826,7 +842,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     const state = stateV9Schema.parse({ ...prior.state, land });
     return migrateV9({ version: 9, gameVersion: '0.1.0', contentHash: PRE_ROSTER_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV7 = (prior: z.infer<typeof saveV7Schema>): z.infer<typeof saveSchema> => {
+  const migrateV7 = (prior: z.infer<typeof saveV7Schema>): Through45 => {
     assert(prior.contentHash === PRE_NAVAL_CONTENT_HASH, 'v7 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v7 snapshot checksum does not match its contents');
     const oldUnits = new Set(['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry']);
@@ -844,14 +860,14 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     const state = stateV8Schema.parse({ ...prior.state, world: { ...world, waterDepth: [...deriveWaterDepth(world.width, world.height, Uint8Array.from(world.terrain))] }, transports: [], characters: prior.state.characters.map(character => ({ ...character, learnedSkillIds: [] })), battle: prior.state.battle ? migrateBattle(prior.state.battle) : null, battleReports: prior.state.battleReports.map(migrateBattle) });
     return migrateV8({ version: 8, gameVersion: '0.1.0', contentHash: PRE_TERRITORY_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV6 = (prior: z.infer<typeof saveV6Schema>): z.infer<typeof saveSchema> => {
+  const migrateV6 = (prior: z.infer<typeof saveV6Schema>): Through45 => {
     assert(prior.contentHash === PRE_CHARACTER_CONTENT_HASH, 'v6 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v6 snapshot checksum does not match its contents');
     const migrateBattle = (battle: z.infer<typeof schema6CampaignBattleSchema>) => ({ ...battle, characterSnapshots: [], characterAftermath: [], usedAbilities: [] });
     const state = stateV7Schema.parse({ ...prior.state, characters: [], battle: prior.state.battle ? migrateBattle(prior.state.battle) : null, battleReports: prior.state.battleReports.map(migrateBattle) });
     return migrateV7({ version: 7, gameVersion: '0.1.0', contentHash: PRE_NAVAL_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV5 = (prior: z.infer<typeof saveV5Schema>): z.infer<typeof saveSchema> => {
+  const migrateV5 = (prior: z.infer<typeof saveV5Schema>): Through45 => {
     assert(prior.contentHash === PRE_ARMY_CONTENT_HASH, 'v5 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v5 snapshot checksum does not match its contents');
     const migrateBattle = (battle: z.infer<typeof legacyCampaignBattleSchema>): z.infer<typeof schema6CampaignBattleSchema> => {
@@ -869,14 +885,14 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     });
     return migrateV6({ version: 6, gameVersion: '0.1.0', contentHash: PRE_CHARACTER_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV4 = (prior: z.infer<typeof saveV4Schema>): z.infer<typeof saveSchema> => {
+  const migrateV4 = (prior: z.infer<typeof saveV4Schema>): Through45 => {
     assert(prior.contentHash === PRE_TRAVEL_CONTENT_HASH, 'v4 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v4 snapshot checksum does not match its contents');
     const world = prior.state.world;
     const state = stateV5Schema.parse({ ...prior.state, world: { ...world, biome: [...deriveBiomes(world.seed, world.width, world.height, Uint8Array.from(world.terrain), 1)], generatorVersion: 1 }, routes: [] });
     return migrateV5({ version: 5, gameVersion: '0.1.0', contentHash: PRE_ARMY_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV3 = (prior: z.infer<typeof saveV3Schema>): z.infer<typeof saveSchema> => {
+  const migrateV3 = (prior: z.infer<typeof saveV3Schema>): Through45 => {
     assert(prior.contentHash === PRE_PROGRESSION_CONTENT_HASH, 'v3 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v3 snapshot checksum does not match its contents');
     const migrateBattle = (battle: z.infer<typeof campaignBattleV3Schema>) => ({ ...battle, attackerDoctrineId: null, defenderDoctrineId: null });
@@ -886,7 +902,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     });
     return migrateV4({ version: 4, gameVersion: '0.1.0', contentHash: PRE_TRAVEL_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrateV2 = (prior: z.infer<typeof saveV2Schema>): z.infer<typeof saveSchema> => {
+  const migrateV2 = (prior: z.infer<typeof saveV2Schema>): Through45 => {
     assert(prior.contentHash === PRE_PROGRESSION_CONTENT_HASH, 'v2 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v2 snapshot checksum does not match its contents');
     // A v2 state predates patronage; its registers are added once it reaches rules 22.
@@ -901,7 +917,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     });
     return migrateV3({ version: 3, gameVersion: '0.1.0', contentHash: PRE_PROGRESSION_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
-  const migrate = (prior: z.infer<typeof saveV1Schema>): z.infer<typeof saveSchema> => {
+  const migrate = (prior: z.infer<typeof saveV1Schema>): Through45 => {
     assert(prior.contentHash === PRE_COMBAT_CONTENT_HASH, 'v1 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v1 snapshot checksum does not match its contents');
     const state = stateV2Schema.parse({
@@ -1085,8 +1101,21 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     assert(prior.contentHash === PRE_PACING_CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
     return upgradePatronage(prior, `v${version}`);
   }
-  if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
-  return saveSchema.parse(raw);
+  if (version === 45) {
+    const prior = saveV45Schema.parse(raw);
+    assert(prior.contentHash === PRE_EVENTS_CONTENT_HASH, 'v45 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v45 snapshot checksum does not match its contents');
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
+  throw new Error(`Unsupported save version ${version}.`);
+}
+/** The current envelope loads as it is; every older one is upgraded through its own branch and then given the hearth events no older campaign can hold. */
+function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+  const version = z.object({ version: z.number().int() }).parse(raw).version;
+  if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  const prior = parseSaveThrough45(raw);
+  const state = { ...prior.state, hearthEvents: emptyHearthEvents() };
+  return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
 }
 
 export function deserializeGame(text: string): GameState {
@@ -1414,6 +1443,7 @@ export function deserializeGame(text: string): GameState {
     arcaneSurveys: Object.fromEntries(data.factions.map(faction => [faction.id, [...(data.arcaneSurveys.find(item => item.factionId === faction.id)?.cells ?? [])]])),
     arcaneSearches: Object.fromEntries(data.factions.map(faction => [faction.id, [...(data.arcaneSearches.find(item => item.factionId === faction.id)?.cells ?? [])]])),
     wards: data.wards.map(ward => ({ ...ward })),
+    hearthEvents: { pending: data.hearthEvents.pending.map(item => ({ ...item })), recent: data.hearthEvents.recent.map(item => ({ ...item })) },
     roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
@@ -1444,6 +1474,7 @@ export function deserializeGame(text: string): GameState {
   validateArcaneSurveys(state);
   validateArcaneSearches(state);
   validateWards(state);
+  validateHearthEvents(state);
   validateSelectionGroups(state);
   validateTheaters(state);
   validatePatrols(state);

@@ -550,7 +550,14 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
         // the bounded observed component is an expedition candidate, not proof of an island.
         && (!colonizing || !homeLand.has(cell) || enclosed)
         && !foreign.some(enemy => enemy.domain !== 'naval' && hexDistance(cell, enemy.cell, view.width) <= 2);
-      const viableShores = shoreline().shores.filter(shore => viableLanding(shore.cell));
+      // A landing the ferry's own water does not reach is not a landing: a shore
+      // whose water is known to lie in a separate basin is left out before the
+      // bounded route budget is spent, so a ferry in a proved-enclosed basin
+      // tries that basin's own shores instead of the best-scored shores of the
+      // whole known land. Unknown relations are kept; only proved separation drops one.
+      const sameWater = (cell: number): boolean => neighbors(cell, view.width, view.height)
+        .some(next => isSea(cells.get(next)) && seaKnowledge.basinRelation(fleet.cell, next) !== 'separate');
+      const viableShores = shoreline().shores.filter(shore => viableLanding(shore.cell) && sameWater(shore.cell));
       const landingScore = (cell: number): number => (homeLand.has(cell) ? 0 : 200) + (colonizing ? Math.min(8, nearest(cell, view.settlements)) * 10 : enemyTowns.length ? -nearest(cell, enemyTowns) * 30 : 0)
         + (cells.get(cell)?.fertility ?? 0) - hexDistance(fleet.cell, cell, view.width) * 15;
       const landings = [...viableShores].sort((a, b) => landingScore(b.cell) - landingScore(a.cell) || a.cell - b.cell);

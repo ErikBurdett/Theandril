@@ -53,7 +53,7 @@ describe('schema-6 archives retain genuine schema-5 evidence', () => {
     for (const record of captured.battle.archive.records.slice(firstTactical)) {
       recordWithVersion(game, archive, record.command, SAVE_VERSION);
       const actual = archive.records.at(-1)!;
-      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience') }).toMatchObject({ ok: record.ok, events: record.events, rulesVersion: SAVE_VERSION });
+      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience' && event.type !== 'hearth_event_offered') }).toMatchObject({ ok: record.ok, events: record.events, rulesVersion: SAVE_VERSION });
     }
     expect(battleReportForVersion(game.battleReports.at(-1)!, 5)).toEqual(captured.battle.archive.records.flatMap(record => record.battles)[0]);
     // The historical combat is frozen, but the following modern end turn earns

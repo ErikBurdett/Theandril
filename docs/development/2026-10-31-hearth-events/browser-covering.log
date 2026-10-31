@@ -1,0 +1,17 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/hearth-events.spec.ts tests/gameplay/diplomacy.spec.ts tests/gameplay/attunement.spec.ts --workers=2 --output=docs/development/2026-10-31-hearth-events/browser-results
+
+
+Running 8 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (4.4s)
+  ✓  2 [gameplay] › tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (5.6s)
+  ✓  3 [gameplay] › tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.6s)
+  ✓  4 [gameplay] › tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.9s)
+  ✓  5 [gameplay] › tests/gameplay/hearth-events.spec.ts:10:1 › answer a hearth event from Realm affairs and read its effect in the treasury and the journal (3.5s)
+  ✓  6 [gameplay] › tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (2.1s)
+  ✓  7 [gameplay] › tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (1.9s)
+  ✓  8 [gameplay] › tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (3.2s)
+
+  8 passed (15.5s)

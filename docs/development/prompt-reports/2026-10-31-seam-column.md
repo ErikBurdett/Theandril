@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch and rules 45
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45 and hearth events
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -27,6 +27,15 @@
   352 / 306 / 201, all by Attunement. Evidence packet
   [docs/development/2026-10-31-ai-seam-watch/](../2026-10-31-ai-seam-watch/README.md);
   roadmap library 114 delivered.
+- Three-seed pacing matrix under rules 45 (Standard 201/184/181, Long
+  306/269/251, Epic 352/360/315), recorded in that packet.
+- Hearth events, rules/save 46 ([ADR 0075](../../architecture/0075-hearth-events.md)):
+  the first slice of M6 — eight original templates, a seeded per-realm draw
+  from turn forty, quoted answers, a lapse rule, the AI's answer, a Realm
+  affairs panel and journal entries, save 46 with the rules 45 pack frozen.
+  Its tests exposed a naval gap fixed in [ADR 0076](../../architecture/0076-ferry-landings-on-own-water.md).
+  Evidence packet [docs/development/2026-10-31-hearth-events/](../2026-10-31-hearth-events/README.md);
+  roadmap library 115 delivered, the epochs item now in progress.
 
 ## Verified
 
@@ -35,7 +44,9 @@ gameplay journeys (6 of 6) and the `@scale` chronicles journey alone (1 of 1).
 Pacing: headline **379 / 300 / 203**, every campaign in band; Long and Standard
 unchanged. Seam watch and rules 45: unit 2,323, campaigns 57, build, the
 covering journeys and the chronicles journey; headline **352 / 306 / 201**,
-proxies 372 / 393 / 307 / 199. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
+proxies 372 / 393 / 307 / 199. Hearth events: unit 2,329 / 288 files, campaigns
+57, build, three covering journeys (one new) and the chronicles journey;
+headline **393 / 301 / 210**, proxies 385 / 412 / 270 / 182. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
@@ -44,6 +55,9 @@ first on 379.
 - A warden for every seam hearth (rites 40–42) is not built; the watch does
   not garrison every seam hearth at once.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
+- Hearth events: eight templates against a target of one hundred and fifty; no
+  epochs, escalation or crises yet. Deployment of the events commit is recorded
+  in its publication packet once the workflows finish.
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.
 - Commit `68f4f5b` is deployed: both workflows succeeded and the live readback
   matched the build ([publication packet](../2026-10-31-publication-seam-column/README.md)).

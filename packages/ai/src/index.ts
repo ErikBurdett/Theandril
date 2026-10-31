@@ -18,6 +18,7 @@ import { settlementSpacing, settlementSiteValue } from './expansion';
 import { isCityState } from '@theandril/sim';
 import { observedCells } from './observation-index';
 import { heldDelegatedArmyIds, planDefenseTheater, planSeamWatch } from './theaters';
+import { planHearthEvents } from './hearth-events';
 import { planPatrol } from './patrols';
 import { answerSupplyAccess, pendingSupplyAccessFees, planSupplyAccess } from './supply-access';
 
@@ -41,6 +42,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // This private planning purse never mutates the permitted observation.
   const promisedSupplyFees = pendingSupplyAccessFees(view);
   if (promisedSupplyFees) view = { ...view, treasury: Math.max(0, view.treasury - promisedSupplyFees) };
+  // Rules 46: hearth events are answered with the turn's other orders, and an
+  // answer that costs coin or knowledge is paid before the rest of the turn is
+  // planned, so no later order is budgeted on coin the answer spends.
+  const hearthAnswers = planHearthEvents(view);
+  if (hearthAnswers) view = { ...view, treasury: Math.max(0, view.treasury - hearthAnswers.coinSpent), knowledge: Math.max(0, view.knowledge - hearthAnswers.knowledgeSpent) };
   // The seam of the missing path, the last gap before the working, is one
   // objective for the whole turn: diplomacy holds the war for it, the siege
   // planner keeps or hands over the siege of its hearth, and the field
@@ -119,8 +125,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...(hearthAnswers?.commands ?? []), ...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

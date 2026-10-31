@@ -56,7 +56,7 @@ describe('immutable real schema-6 mixed-army archives', () => {
     for (const record of captured.battle.archive.records.slice(after)) {
       const command = record.command as Parameters<typeof applyRecordedCommand>[2];
       const actual = applyRecordedCommand(game, archive, command);
-      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience' && event.type !== 'supply_attrition') }).toMatchObject({ ok: record.ok, events: record.events });
+      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience' && event.type !== 'supply_attrition' && event.type !== 'hearth_event_offered') }).toMatchObject({ ok: record.ok, events: record.events });
       expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
     }
     const report = game.battleReports.at(-1)!;

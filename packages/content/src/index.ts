@@ -9,12 +9,14 @@ import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, validateEcologyContent } from './ecology';
 import { FACTIONS, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, factionSchema, validateFactionContent } from './factions';
 import { ARCANE_DISCOVERIES, BATTLE_SPELLS, FACTION_APTITUDES, FACTION_ARCANE_TRADITIONS, MAGIC_PATHS, STRATEGIC_RITES, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, validateMagicContent } from './magic';
+import { HEARTH_EVENTS, validateHearthEventContent } from './events';
 export * from './progression';
 export * from './city-states';
 export * from './characters';
 export * from './ecology';
 export * from './factions';
 export * from './magic';
+export * from './events';
 
 const id = z.string().regex(/^[a-z]+\.[a-z_]+$/);
 const nonnegative = z.number().int().nonnegative();
@@ -79,11 +81,12 @@ export const magicPackForRules = (rules: number): MagicPack => {
 };
 /** Rules 38 added the Attunement victory and Waykeeper path deepening; packs
  * sealed before it carry neither, so their seals omit both. */
-export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES, unification: typeof UNIFICATION_VICTORY | null = UNIFICATION_VICTORY, cityStates = true, magic: MagicPack = CURRENT_MAGIC, attunement = true, attunementVictory: typeof ATTUNEMENT_VICTORY = ATTUNEMENT_VICTORY): string => checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS: attunement ? CHARACTER_DEFINITIONS : characterDefinitionsForRules(37), CHARACTER_MISSIONS, CHARACTER_SKILLS: attunement ? CHARACTER_SKILLS : characterSkillsForRules(37), COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES: magic.discoveries, BATTLE_SPELLS: magic.spells, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES, ...(unification ? { UNIFICATION_VICTORY: unification } : {}), ...(cityStates ? { CITY_STATES } : {}), ...(magic.traditions ? { FACTION_APTITUDES, FACTION_ARCANE_TRADITIONS } : {}), ...(attunement ? { ATTUNEMENT_VICTORY: attunementVictory } : {}), ...(magic.rites ? { STRATEGIC_RITES: magic.rites } : {}) }));
+export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES, unification: typeof UNIFICATION_VICTORY | null = UNIFICATION_VICTORY, cityStates = true, magic: MagicPack = CURRENT_MAGIC, attunement = true, attunementVictory: typeof ATTUNEMENT_VICTORY = ATTUNEMENT_VICTORY, events = true): string => checksum(JSON.stringify({ ...(events ? { HEARTH_EVENTS } : {}), BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS: attunement ? CHARACTER_DEFINITIONS : characterDefinitionsForRules(37), CHARACTER_MISSIONS, CHARACTER_SKILLS: attunement ? CHARACTER_SKILLS : characterSkillsForRules(37), COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES: magic.discoveries, BATTLE_SPELLS: magic.spells, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES, ...(unification ? { UNIFICATION_VICTORY: unification } : {}), ...(cityStates ? { CITY_STATES } : {}), ...(magic.traditions ? { FACTION_APTITUDES, FACTION_ARCANE_TRADITIONS } : {}), ...(attunement ? { ATTUNEMENT_VICTORY: attunementVictory } : {}), ...(magic.rites ? { STRATEGIC_RITES: magic.rites } : {}) }));
 export const CONTENT_HASH = contentPackHash();
 export const LOCALIZATION: Readonly<Record<string, string>> = Object.fromEntries([
+  ...HEARTH_EVENTS.flatMap(item => [[item.id + '.name', item.name], [item.id + '.text', item.text], ...item.choices.flatMap(choice => [[`${item.id}.${choice.id}.label`, choice.label], [`${item.id}.${choice.id}.description`, choice.description]])]),
   ...INNATE_BATTLE_ABILITIES.flatMap(item => [[item.id + '.name', item.name], [item.id + '.description', item.description]]),
-  ...[...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, ATTUNEMENT_VICTORY, ...CITY_STATES, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...STRATEGIC_RITES, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
+  ...[...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, ATTUNEMENT_VICTORY, ...CITY_STATES, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...STRATEGIC_RITES, ...HEARTH_EVENTS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
   ...Object.entries(FACTION_PROFILES).flatMap(([id, profile]) => [[id + '.description', profile.description], [id + '.recruitmentRationale', profile.recruitmentRationale]]),
 ]);
 
@@ -115,7 +118,7 @@ export function validateCityStateContent(): void {
     colors.add(item.color);
   }
 }
-export function validateContent(): { resources: number; developmentNodes: number; buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; victoryPaths: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; strategicRites: number; magicPaths: number; innateBattleAbilities: number; hash: string } {
+export function validateContent(): { resources: number; developmentNodes: number; buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; victoryPaths: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; strategicRites: number; magicPaths: number; innateBattleAbilities: number; hearthEvents: number; hash: string } {
   const definitions = [...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, ATTUNEMENT_VICTORY, ...CITY_STATES, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...STRATEGIC_RITES, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate content ID');
   validateProductionContent();
@@ -127,8 +130,9 @@ export function validateContent(): { resources: number; developmentNodes: number
   validateProgressionContent(new Set(BUILDINGS.map(item => item.id)));
   validateCharacterContent(new Set(FACTIONS.map(item => item.id)));
   validateMagicContent(new Set(CHARACTER_DEFINITIONS.map(item => item.id)), new Set(BUILDINGS.map(item => item.id)));
+  validateHearthEventContent();
   for (const ability of INNATE_BATTLE_ABILITIES) if (!UNITS.some(unit => unit.id === ability.unitId)) throw new Error('Unknown innate-ability unit: ' + ability.unitId);
   validateEcologyContent(new Set(FACTIONS.map(item => item.id)));
   for (const item of definitions) if (!LOCALIZATION[item.id + '.name']) throw new Error('Missing localization: ' + item.id);
-  return { resources: RESOURCES.length, developmentNodes: DEVELOPMENT_NODES.length, buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, victoryPaths: 3, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, arcaneDiscoveries: ARCANE_DISCOVERIES.length, battleSpells: BATTLE_SPELLS.length, strategicRites: STRATEGIC_RITES.length, magicPaths: MAGIC_PATHS.length, innateBattleAbilities: INNATE_BATTLE_ABILITIES.length, hash: CONTENT_HASH };
+  return { resources: RESOURCES.length, developmentNodes: DEVELOPMENT_NODES.length, buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, victoryPaths: 3, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, arcaneDiscoveries: ARCANE_DISCOVERIES.length, battleSpells: BATTLE_SPELLS.length, strategicRites: STRATEGIC_RITES.length, magicPaths: MAGIC_PATHS.length, innateBattleAbilities: INNATE_BATTLE_ABILITIES.length, hearthEvents: HEARTH_EVENTS.length, hash: CONTENT_HASH };
 }
