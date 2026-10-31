@@ -29,7 +29,9 @@ tests; unit **2,318 tests / 285 files**, campaigns 57, lint, typecheck and
 build pass; six covering journeys pass. Measured gap now: a seam of the
 missing path inside another realm's borders, mostly at peace, which the AI
 does not pursue by conquest or cession. Only one seed and one culture (Glass
-Tide) have reached the path in headline play.
+Tide) have reached the path in headline play. Deployed as `e11e82f`: both
+workflows and the live readback pass
+([publication packet](development/2026-10-31-publication-seam-expeditions/README.md)).
 [Evidence](development/2026-10-31-ai-seam-expeditions/README.md),
 [ADR0068](architecture/0068-ai-seam-expeditions.md),
 [ADR0069](architecture/0069-attunement-repricing.md).

@@ -22,7 +22,7 @@ then continue development".
   third-path victories in measured headline play.
 - Evidence packet [docs/development/2026-10-31-ai-seam-expeditions/](../2026-10-31-ai-seam-expeditions/README.md);
   CHANGELOG, implementation status, the 1.0 plan's M7 section, the roadmap
-  library (two delivered bullets, 109 of 158 points) and the release
+  library (two delivered bullets: 109 delivered, 49 remaining) and the release
   expectations updated.
 
 ## Verified
