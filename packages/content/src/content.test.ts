@@ -139,10 +139,19 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(46), true, ATTUNEMENT_VICTORY, hearthEventsForRules(46))).toBe('8a737501');
   expect(CONTENT_HASH).not.toBe('1f0c41ca');
   expect(CONTENT_HASH).not.toBe('8a737501');
-  expect(HEARTH_EVENTS).toHaveLength(24);
+  // Rules 47 content, twenty-four events, before rules 48 added the chains; the current pack seals all thirty-three.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(47), true, ATTUNEMENT_VICTORY, hearthEventsForRules(47))).toBe('c1e05b8e');
+  expect(CONTENT_HASH).not.toBe('c1e05b8e');
+  expect(HEARTH_EVENTS).toHaveLength(33);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
   expect(hearthEventsForRules(47)).toHaveLength(24);
+  expect(hearthEventsForRules(48)).toHaveLength(33);
+  expect(hearthEventsForRules(47).every(event => event.condition !== 'chained' && event.choices.every(choice => !choice.followUp))).toBe(true);
+  const rising = HEARTH_EVENTS.find(event => event.id === 'event.river_rising')!;
+  expect(() => validateHearthEventContent([{ ...rising, sinceRules: 47 }, ...HEARTH_EVENTS.filter(event => event.condition === 'chained')])).toThrow('schedules no follow-up');
+  expect(() => validateHearthEventContent([{ ...rising, choices: rising.choices.map(choice => ({ ...choice, followUp: { templateId: 'event.kiln_fire', afterTurns: 2 } })) }, HEARTH_EVENTS[1]!])).toThrow('is a chained event');
+  expect(() => validateHearthEventContent([HEARTH_EVENTS.find(event => event.id === 'event.levees_hold')!])).toThrow('reached by some follow-up');
   expect(hearthEventsForRules(46).every(event => event.choices.every(choice => !('ashglass' in choice.effects) && !('garrison' in choice.effects)))).toBe(true);
   expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, choices: HEARTH_EVENTS[0]!.choices.map(choice => ({ ...choice, effects: { ...choice.effects, ashglass: 2 } })) }])).toThrow('no rules 47 effect');
   expect(() => validateHearthEventContent()).not.toThrow();

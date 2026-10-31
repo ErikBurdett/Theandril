@@ -11,7 +11,7 @@ export function HearthEvents({ view, busy, issue }: { view: Observation; busy: b
   return <section className="hearth-events" aria-label="Hearth events" data-testid="hearth-events">
     <h3>Hearth events</h3>
     {events.map(event => <article key={event.id} className="hearth-event" aria-label={`${event.name} at ${event.settlementName}`}>
-      <h4>{event.name} <small>at {event.settlementName}, turn {event.turn}</small></h4>
+      <h4>{event.name} <small>at {event.settlementName}, turn {event.turn}{event.followsFrom ? `, following ${event.followsFrom.toLowerCase()}` : ''}</small></h4>
       <p>{event.text}</p>
       <p className="muted">Answer by turn {event.expiresTurn}; left unanswered, {event.choices[0]!.label.toLowerCase()} is taken.</p>
       <div className="offer-responses">
@@ -20,7 +20,7 @@ export function HearthEvents({ view, busy, issue }: { view: Observation; busy: b
           onClick={() => issue({ type: 'resolveHearthEvent', factionId: view.factionId, eventId: event.id, choiceId: choice.id })}>{choice.label}</button>)}
       </div>
       <ul className="hearth-event-answers">
-        {event.choices.map(choice => <li key={choice.id} id={`${event.id}-${choice.id}`}><strong>{choice.label}.</strong> {choice.description} <em>{choice.summary}.</em>{choice.blocker && <span className="muted"> {choice.blocker}</span>}</li>)}
+        {event.choices.map(choice => <li key={choice.id} id={`${event.id}-${choice.id}`}><strong>{choice.label}.</strong> {choice.description} <em>{choice.summary}.</em>{choice.followUp && <span> Then, after {choice.followUp.afterTurns} turn{choice.followUp.afterTurns === 1 ? '' : 's'}: {choice.followUp.name.toLowerCase()}.</span>}{choice.blocker && <span className="muted"> {choice.blocker}</span>}</li>)}
       </ul>
     </article>)}
   </section>;

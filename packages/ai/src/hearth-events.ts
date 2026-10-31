@@ -1,4 +1,4 @@
-import { hearthEventEffect } from '@theandril/content';
+import { hearthEventEffect, hearthEventTemplate, type HearthEventEffects } from '@theandril/content';
 import type { GameCommand, Observation, ObservedHearthEvent, ObservedHearthEventChoice } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 
@@ -14,10 +14,17 @@ export function valueHearthEventChoice(view: Observation, event: ObservedHearthE
   const hungry = town !== undefined && town.food < 12;
   // Devastation halves what a scarred hearth yields for many turns, so a badly scarred hearth pays dearly to be repaired.
   const scarred = town !== undefined && town.devastation >= 30;
-  const effects = choice.effects;
-  // Ashglass feeds the rites and the working; garrison strength is worth what the companies cost to raise.
-  return effects.coin + effects.knowledge * 1.5 + effects.food * (hungry ? 4 : 1.5) + effects.population * 25 - effects.devastation * (scarred ? 5 : 2)
+  const worth = (effects: HearthEventEffects): number => effects.coin + effects.knowledge * 1.5 + effects.food * (hungry ? 4 : 1.5) + effects.population * 25 - effects.devastation * (scarred ? 5 : 2)
+    // Ashglass feeds the rites and the working; garrison strength is worth what the companies cost to raise.
     + hearthEventEffect(effects, 'ashglass') * 3 + hearthEventEffect(effects, 'garrison') * 1.5;
+  // Rules 48: an answer that schedules a follow-up is worth its own effects and the best the follow-up
+  // can then be answered for, discounted, two steps deep at most; the catalogue is public content.
+  const ahead = (templateId: string, depth: number): number => {
+    const template = hearthEventTemplate(templateId);
+    if (!template || depth === 0) return 0;
+    return Math.max(...template.choices.map(next => worth(next.effects) + (next.followUp ? 0.8 * ahead(next.followUp.templateId, depth - 1) : 0)));
+  };
+  return worth(choice.effects) + (choice.followUp ? 0.8 * ahead(choice.followUp.templateId, 2) : 0);
 }
 export interface HearthEventPlan extends AiPlan { coinSpent: number; knowledgeSpent: number }
 export function planHearthEvents(view: Observation): HearthEventPlan | null {

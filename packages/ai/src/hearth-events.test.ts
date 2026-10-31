@@ -36,6 +36,11 @@ test('rules 46: the AI answers a hearth event by the quoted value of its effects
   // Devastation and population weigh: refugees are taken in, a collapse is rebuilt when the coin is there.
   offer(state, 'event.road_refugees');
   expect(planHearthEvents(getObservation(state, player))!.commands[0]).toMatchObject({ choiceId: 'take_them_in' });
+  // Rules 48: an answer is worth its own effects and the best the follow-up can then be answered for, discounted: the levees are raised, the sickness is closed in the lanes.
+  offer(state, 'event.river_rising');
+  expect(planHearthEvents(getObservation(state, player))!.commands[0]).toMatchObject({ choiceId: 'raise_the_levees' });
+  offer(state, 'event.sickness_in_the_lanes');
+  expect(planHearthEvents(getObservation(state, player))!.commands[0]).toMatchObject({ choiceId: 'close_the_lanes' });
   offer(state, 'event.old_quarter_collapse');
   host.devastation = 20;
   expect(planHearthEvents(getObservation(state, player))!.commands[0]).toMatchObject({ choiceId: 'clear_the_rubble' });

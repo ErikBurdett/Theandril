@@ -14,16 +14,20 @@ const name = z.string().min(1).max(60);
 const text = z.string().min(1).max(400);
 const small = z.number().int().min(-40).max(40);
 const coin = z.number().int().min(-200).max(200);
-export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young']);
+/** `chained` events are never drawn: they are reached only as another event's follow-up. */
+export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young', 'chained']);
 export type HearthEventCondition = z.infer<typeof hearthEventConditionSchema>;
 /** Rules 47 adds ashglass (the realm's stockpile) and garrison (the strength of the realm's companies at the hearth); rules 46 templates carry neither key, so their seal is unchanged. */
 export const hearthEventEffectsSchema = z.object({ food: small, coin, knowledge: coin, population: z.number().int().min(-2).max(2), devastation: small,
   ashglass: z.number().int().min(-20).max(20).optional(), garrison: z.number().int().min(-30).max(30).optional() }).strict();
 export type HearthEventEffects = z.infer<typeof hearthEventEffectsSchema>;
-export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema }).strict();
+/** Rules 48: an answer may schedule a follow-up event at the same hearth after a few turns, so an event can escalate or recover by what was chosen. */
+export const hearthEventFollowUpSchema = z.object({ templateId: id, afterTurns: z.number().int().min(1).max(10) }).strict();
+export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
+export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48)]),
 }).strict();
 export type HearthEventChoiceDefinition = z.infer<typeof hearthEventChoiceSchema>;
 export type HearthEventDefinition = z.infer<typeof hearthEventSchema>;
@@ -184,7 +188,67 @@ const SECOND_BATCH: readonly HearthEventDefinition[] = [
       { id: 'quiet_the_seam', label: 'Quiet the seam', description: 'Spend ashglass to damp the seam before the windows break.', effects: effects({ ashglass: -6 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH];
+/** Rules 48: three chains. Each begins with a drawn event whose answers either settle the matter or let it run, and runs through chained events no draw can reach. */
+const follow = (templateId: string, afterTurns: number): HearthEventFollowUp => ({ templateId, afterTurns });
+const THIRD_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.sickness_in_the_lanes', name: 'Sickness in the lanes', condition: 'populous', weight: 2, sinceRules: 48,
+    text: 'A sickness takes hold in the lower lanes of {hearth}, and the surgeons ask for the lanes to be closed before it climbs the hill.',
+    choices: [
+      { id: 'close_the_lanes', label: 'Close the lanes', description: 'Shut the lower lanes, feed the shut-in from the stores and pay the surgeons; it goes no further.', effects: effects({ coin: -20, food: -5 }) },
+      { id: 'let_it_run', label: 'Let it run', description: 'Keep the lanes open and the works going; what follows, follows.', effects: effects({}), followUp: follow('event.sickness_spreads', 3) },
+    ] },
+  { id: 'event.sickness_spreads', name: 'The sickness spreads', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The sickness climbs the hill of {hearth} faster than the surgeons can follow it.',
+    choices: [
+      { id: 'quarantine_the_quarter', label: 'Quarantine the quarter', description: 'Wall off the sick quarter and pay for its keeping; the lanes inside suffer.', effects: effects({ coin: -40, devastation: 5 }) },
+      { id: 'pray_it_passes', label: 'Pray it passes', description: 'Keep the hearth open and bury who must be buried.', effects: effects({ population: -1 }), followUp: follow('event.dying_season', 3) },
+    ] },
+  { id: 'event.dying_season', name: 'The dying season', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The dying season closes on {hearth}, and the bells do not stop.',
+    choices: [
+      { id: 'bury_the_dead', label: 'Bury the dead', description: 'Dig the pits beyond the walls and let the quarter stand empty.', effects: effects({ population: -2, devastation: 10 }) },
+      { id: 'burn_the_quarter', label: 'Burn the quarter', description: 'Burn the sick quarter to end it; fewer die, and the quarter is gone.', effects: effects({ population: -1, devastation: 25 }) },
+    ] },
+  { id: 'event.riders_on_the_ridge', name: 'Riders on the ridge', condition: 'any', weight: 2, sinceRules: 48,
+    text: 'Riders are seen on the ridge above {hearth}, counting its herds and its gates.',
+    choices: [
+      { id: 'pay_them_off', label: 'Pay them off', description: 'Send coin up the ridge and they ride on.', effects: effects({ coin: -30 }) },
+      { id: 'muster_the_levy', label: 'Muster the levy', description: 'Call the levy in from the farms, feed it, and let the riders see the walls manned.', effects: effects({ food: -6, garrison: 5 }) },
+      { id: 'bar_the_gates', label: 'Bar the gates', description: 'Bar the gates and wait them out.', effects: effects({}), followUp: follow('event.riders_strike', 2) },
+    ] },
+  { id: 'event.riders_strike', name: 'The riders strike', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The riders come down on the farms of {hearth} at dawn, and the herds are already moving.',
+    choices: [
+      { id: 'sally_out', label: 'Sally out', description: 'Send the companies out after them; it costs them, and the farms burn a little.', effects: effects({ garrison: -10, devastation: 5 }), followUp: follow('event.riders_driven_off', 2) },
+      { id: 'endure_the_raid', label: 'Endure the raid', description: 'Keep the gates shut and count the losses when they are gone.', effects: effects({ food: -12, coin: -20, devastation: 10 }) },
+    ] },
+  { id: 'event.riders_driven_off', name: 'The riders driven off', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The riders are driven off from {hearth} and leave what they took in the ditches along the road.',
+    choices: [
+      { id: 'gather_the_plunder', label: 'Gather the plunder', description: 'Bring it in to the stores and the treasury.', effects: effects({ coin: 25, food: 6 }) },
+      { id: 'return_it_to_the_farms', label: 'Return it to the farms', description: 'Give it back where it was taken; the farms recover and remember.', effects: effects({ devastation: -5, knowledge: 5 }) },
+    ] },
+  { id: 'event.river_rising', name: 'The river rising', condition: 'any', weight: 2, sinceRules: 48,
+    text: 'The river below {hearth} rises a hand a day, and the lower fields are already wet.',
+    choices: [
+      { id: 'raise_the_levees', label: 'Raise the levees', description: 'Pay the diggers now and see whether the levees hold.', effects: effects({ coin: -25 }), followUp: follow('event.levees_hold', 2) },
+      { id: 'wait_and_see', label: 'Wait and see', description: 'The river has risen before and gone down again.', effects: effects({}), followUp: follow('event.river_floods', 2) },
+    ] },
+  { id: 'event.levees_hold', name: 'The levees hold', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The levees at {hearth} hold, and the flood passes on down the valley to someone else’s fields.',
+    choices: [
+      { id: 'open_the_sluices', label: 'Open the sluices', description: 'Let the silt onto the fields for the spring.', effects: effects({ food: 10 }) },
+      { id: 'keep_the_works', label: 'Keep the works', description: 'Keep the diggers on and learn the river’s measure.', effects: effects({ knowledge: 15 }) },
+    ] },
+  { id: 'event.river_floods', name: 'The river floods', condition: 'chained', weight: 1, sinceRules: 48,
+    text: 'The river takes the lower fields of {hearth} and does not give them back for a season.',
+    choices: [
+      { id: 'rebuild_the_fields', label: 'Rebuild the fields', description: 'Pay to drain and reterrace the lower fields.', effects: effects({ coin: -35, food: -6 }) },
+      { id: 'move_the_fields_uphill', label: 'Move the fields uphill', description: 'Give up the lower fields and break new ground above the flood line.', effects: effects({ food: -10, devastation: 8, knowledge: 10 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH];
+export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);
 export const HEARTH_EVENT_EFFECT_KEYS = ['food', 'coin', 'knowledge', 'population', 'devastation', 'ashglass', 'garrison'] as const;
@@ -206,5 +270,15 @@ export function validateHearthEventContent(events = HEARTH_EVENTS): void {
     if (new Set(choices).size !== choices.length) throw new Error('Duplicate hearth event choice: ' + event.id);
     if (event.choices.every(choice => Object.values(choice.effects).every(value => !value))) throw new Error('A hearth event changes something: ' + event.id);
     if (event.sinceRules === 46 && event.choices.some(choice => 'ashglass' in choice.effects || 'garrison' in choice.effects)) throw new Error('A rules 46 event carries no rules 47 effect: ' + event.id);
+    if (event.sinceRules < 48 && event.choices.some(choice => choice.followUp)) throw new Error('A rules 46 or 47 event schedules no follow-up: ' + event.id);
+    if (event.condition === 'chained' && event.sinceRules < 48) throw new Error('A chained event belongs to rules 48 or later: ' + event.id);
+    for (const choice of event.choices) if (choice.followUp) {
+      const next = events.find(item => item.id === choice.followUp!.templateId);
+      if (!next || next.id === event.id) throw new Error('A follow-up names another event of the catalogue: ' + event.id);
+      if (next.condition !== 'chained') throw new Error('A follow-up is a chained event: ' + event.id);
+    }
+  }
+  for (const event of events) {
+    if (event.condition === 'chained' && !events.some(item => item.choices.some(choice => choice.followUp?.templateId === event.id))) throw new Error('A chained event is reached by some follow-up: ' + event.id);
   }
 }

@@ -25,5 +25,11 @@ describe('hearth events panel (rules 46)', () => {
     expect(stateHash(state)).toBe(before);
     state.hearthEvents.pending = [];
     expect(render(state)).toBe('');
+    // Rules 48: a chained event names what it follows, and an answer that schedules a follow-up says what comes and when.
+    const player = state.turnOwnerId, host = Object.values(state.settlements).find(town => town.factionId === player)!;
+    state.hearthEvents.pending = [{ id: `event.${state.turn}.1`, factionId: player, settlementId: host.id, templateId: 'event.riders_strike', turn: state.turn, expiresTurn: state.turn + 5, chainedFrom: 'event.riders_on_the_ridge' }];
+    const chained = render(state);
+    expect(chained).toContain('following riders on the ridge');
+    expect(chained).toContain('Then, after 2 turns: the riders driven off.');
   });
 });

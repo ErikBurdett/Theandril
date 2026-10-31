@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45 and hearth events I and II
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events and their chains
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -41,6 +41,14 @@
   strength as effects; the rules 46 catalogue frozen. The chronicle journey's
   pinned victory turn moves 55 → 56, attributed headlessly. Evidence packet
   [docs/development/2026-10-31-hearth-events-ii/](../2026-10-31-hearth-events-ii/README.md).
+- Hearth event chains, rules/save 48 ([ADR 0078](../../architecture/0078-hearth-event-chains.md)):
+  an answer may schedule what follows at the same hearth; three chains of
+  three, the AI looking two steps ahead; the pin moves back to 55, attributed.
+  Evidence packet [docs/development/2026-10-31-hearth-event-chains/](../2026-10-31-hearth-event-chains/README.md);
+  roadmap library 116 delivered.
+- A mission-ordering fix for the refused survey order was measured, moved the
+  Epic headline out of band, and was reverted
+  ([experiment](../2026-10-31-missions-before-marches/README.md)).
 
 ## Verified
 
@@ -53,7 +61,8 @@ proxies 372 / 393 / 307 / 199. Hearth events: unit 2,329 / 288 files, campaigns
 57, build, three covering journeys (one new) and the chronicles journey;
 headline **393 / 301 / 210**, proxies 385 / 412 / 270 / 182. Hearth events II:
 unit 2,330, campaigns 57, build, the same journeys; headline **388 / 313 /
-216**, proxies 344 / 401 / 300 / 194. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
+216**, proxies 344 / 401 / 300 / 194. Chains: unit 2,331, campaigns 57, build,
+the same journeys; headline **385 / 306 / 211**, proxies 345 / 469 / 311 / 193. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
@@ -62,8 +71,10 @@ first on 379.
 - A warden for every seam hearth (rites 40–42) is not built; the watch does
   not garrison every seam hearth at once.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
-- Hearth events: twenty-four templates against a target of one hundred and
-  fifty; no epochs, escalation or crises yet. One survey mission refused on
+- Hearth events: thirty-three templates against a target of one hundred and
+  fifty; chains are the first escalation; no epochs or world crises yet.
+  Deployment of the rules 48 commit is recorded in its publication packet
+  once the workflows finish. One survey mission refused on
   the Epic headline at turn 130, a same-batch race, is recorded and open; a
   reordering fix was measured, moved the Epic headline out of band, and was
   reverted ([experiment](../2026-10-31-missions-before-marches/README.md)).

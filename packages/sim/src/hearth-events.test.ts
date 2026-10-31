@@ -3,7 +3,7 @@ import { CONTENT_HASH, HEARTH_EVENTS, HEARTH_EVENT_ANSWER_TURNS, HEARTH_EVENT_IN
 import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, serializeGameForVersion } from './save';
+import { PRE_CHAINS_CONTENT_HASH, PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceHearthEvents, hearthEventConditionHolds, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
 import { armyStrength } from './army-composition';
 
@@ -145,7 +145,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 48, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -200,7 +200,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 48, contentHash: CONTENT_HASH });
     view = getObservation(loaded, player);
     expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
     // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
@@ -210,5 +210,62 @@ describe('rules 46: hearth events', () => {
       for (let round = 0; round < 60; round++) for (let seat = 0; seat < historical.factions.length; seat++) issue(historical, { type: 'endTurn', factionId: historical.turnOwnerId });
     });
     expect(historical.hearthEvents.pending.every(item => !second.has(item.templateId))).toBe(true);
+  });
+
+  it('rules 48: an answer schedules its follow-up at the same hearth, which is offered on its turn, chains on, lapses like any event, is never drawn, and seals only under rules 48', () => {
+    const state = attunementCampaign(), player = state.turnOwnerId, host = Object.values(state.settlements).find(town => town.factionId === player)!;
+    state.factions[0]!.treasury = 200;
+    const offer = (templateId: string) => { const eventId = `event.${state.turn}.9`; state.hearthEvents.pending = [{ id: eventId, factionId: player, settlementId: host.id, templateId, turn: state.turn, expiresTurn: state.turn + HEARTH_EVENT_ANSWER_TURNS }]; return eventId; };
+    const eventId = offer('event.river_rising');
+    const view = getObservation(state, player);
+    const rising = view.hearthEvents![0]!;
+    expect(rising.choices.map(choice => choice.followUp?.name)).toEqual(['The levees hold', 'The river floods']);
+    const result = issue(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'wait_and_see' });
+    expect(result.events[0]!.message).toContain('What follows comes in 2 turns');
+    // The follow-up waits ahead: not seen, not answerable, counted as the realm's one event; the draw passes the realm by.
+    const scheduled = state.hearthEvents.pending[0]!;
+    expect(scheduled).toMatchObject({ templateId: 'event.river_floods', turn: state.turn + 2, expiresTurn: state.turn + 2 + HEARTH_EVENT_ANSWER_TURNS, chainedFrom: 'event.river_rising', settlementId: host.id });
+    expect(getObservation(state, player).hearthEvents).toEqual([]);
+    expect(applyCommand(state, { type: 'resolveHearthEvent', factionId: player, eventId: scheduled.id, choiceId: 'rebuild_the_fields' })).toMatchObject({ ok: false, error: expect.stringContaining('no such hearth event') });
+    expect(() => validateHearthEvents(state)).not.toThrow();
+    const offered: string[] = [];
+    for (let seat = 0; seat < state.factions.length * 2; seat++) offered.push(...issue(state, { type: 'endTurn', factionId: state.turnOwnerId }).events.filter(event => event.type === 'hearth_event_offered' && event.factionId === player).map(event => event.message));
+    expect(offered).toHaveLength(1);
+    expect(offered[0]).toContain('The river floods at');
+    expect(offered[0]).toContain('following the river rising');
+    const floods = getObservation(state, player).hearthEvents![0]!;
+    expect(floods).toMatchObject({ id: scheduled.id, name: 'The river floods', followsFrom: 'The river rising' });
+    // A chained event answered applies its effects like any other; one left alone lapses to its first affordable answer and chains on where that answer does.
+    const food = host.food, coin = state.factions[0]!.treasury;
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId: floods.id, choiceId: 'rebuild_the_fields' });
+    expect(host.food).toBe(Math.max(0, food - 6));
+    expect(state.factions[0]!.treasury).toBe(coin - 35);
+    expect(state.hearthEvents.pending).toEqual([]);
+    offer('event.riders_on_the_ridge');
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId: `event.${state.turn}.9`, choiceId: 'bar_the_gates' });
+    const strike = state.hearthEvents.pending[0]!;
+    expect(strike.templateId).toBe('event.riders_strike');
+    const clone = structuredClone(state);
+    clone.turn = strike.expiresTurn;
+    const lapsed: Parameters<typeof advanceHearthEvents>[1] = [];
+    advanceHearthEvents(clone, lapsed);
+    expect(lapsed.some(event => event.type === 'hearth_event_lapsed' && event.message.includes('sally out') && event.message.includes('What follows comes in 2 turns'))).toBe(true);
+    expect(clone.hearthEvents.pending[0]).toMatchObject({ templateId: 'event.riders_driven_off', chainedFrom: 'event.riders_strike' });
+    // Chained templates are never drawn, and a scheduled rules 48 event cannot be sealed as v47; without one the v47 envelope loads unchanged.
+    const chained = new Set(HEARTH_EVENTS.filter(item => item.condition === 'chained').map(item => item.id));
+    const drawn = attunementCampaign();
+    for (let round = 0; round < 80; round++) for (let seat = 0; seat < drawn.factions.length; seat++) issue(drawn, { type: 'endTurn', factionId: drawn.turnOwnerId });
+    expect(drawn.hearthEvents.pending.every(item => !chained.has(item.templateId) || item.chainedFrom)).toBe(true);
+    expect(() => serializeGameForVersion(state, 47)).toThrow('hearth events unavailable');
+    state.hearthEvents.pending = [];
+    const sealed = serializeGameForVersion(state, 47);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 47, contentHash: PRE_CHAINS_CONTENT_HASH });
+    const loaded = deserializeGame(sealed);
+    expect(stateHash(loaded)).toBe(stateHash(state));
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 48, contentHash: CONTENT_HASH });
+    // A pending event that lies ahead without an event it follows is refused by validation.
+    const corrupt = deserializeGame(serializeGame(state));
+    corrupt.hearthEvents.pending = [{ id: 'event.999.1', factionId: player, settlementId: host.id, templateId: 'event.kiln_fire', turn: corrupt.turn + 3, expiresTurn: corrupt.turn + 3 + HEARTH_EVENT_ANSWER_TURNS }];
+    expect(() => validateHearthEvents(corrupt)).toThrow('lies ahead');
   });
 });

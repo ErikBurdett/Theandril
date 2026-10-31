@@ -16,15 +16,16 @@ import { arcaneSites, controllingSettlement } from './arcane-sites';
 const id = z.string().min(1).max(100);
 const turn = z.number().int().min(1).max(1_000_030);
 export const MAX_PENDING_HEARTH_EVENTS = 64;
-export const pendingHearthEventSchema = z.object({ id, factionId: id, settlementId: id, templateId: id, turn, expiresTurn: turn }).strict();
+/** Rules 48: `turn` may lie ahead for an event an answer scheduled; it is offered, seen and answerable only from that turn, and `chainedFrom` names the event it follows. */
+export const pendingHearthEventSchema = z.object({ id, factionId: id, settlementId: id, templateId: id, turn, expiresTurn: turn, chainedFrom: id.optional() }).strict();
 export const hearthEventStateSchema = z.object({
   pending: z.array(pendingHearthEventSchema).max(MAX_PENDING_HEARTH_EVENTS),
   recent: z.array(z.object({ factionId: id, turn }).strict()).max(64),
 }).strict();
 export type PendingHearthEvent = z.infer<typeof pendingHearthEventSchema>;
 export type HearthEventState = z.infer<typeof hearthEventStateSchema>;
-export interface ObservedHearthEventChoice { id: string; label: string; description: string; effects: HearthEventEffects; summary: string; blocker: string | null }
-export interface ObservedHearthEvent { id: string; settlementId: string; settlementName: string; cell: number; name: string; text: string; turn: number; expiresTurn: number; choices: ObservedHearthEventChoice[] }
+export interface ObservedHearthEventChoice { id: string; label: string; description: string; effects: HearthEventEffects; summary: string; blocker: string | null; followUp?: { templateId: string; name: string; afterTurns: number } }
+export interface ObservedHearthEvent { id: string; settlementId: string; settlementName: string; cell: number; name: string; text: string; turn: number; expiresTurn: number; followsFrom?: string; choices: ObservedHearthEventChoice[] }
 export const hearthEventCommandSchemas = [
   z.object({ type: z.literal('resolveHearthEvent'), factionId: id, eventId: id, choiceId: z.string().min(1).max(100) }).strict(),
 ] as const;
@@ -70,6 +71,7 @@ export function hearthEventConditionHolds(state: GameState, template: HearthEven
     case 'garrisoned': return garrisonAt(state, settlementId).length > 0;
     case 'wide': return Object.values(state.settlements).filter(item => item.factionId === town.factionId).length >= 4;
     case 'young': return town.population <= 2;
+    case 'chained': return false;
   }
 }
 /** Hearths an event may visit: the realm's own, neither besieged nor occupied, by id. */
@@ -130,13 +132,28 @@ const noteTurn = (state: GameState, factionId: string): void => {
   state.hearthEvents.recent = [...state.hearthEvents.recent.filter(item => item.factionId !== factionId), { factionId, turn: state.turn }].sort(byFaction);
 };
 const storyText = (template: HearthEventDefinition, hearthName: string): string => template.text.split('{hearth}').join(hearthName);
+const seatOf = (state: GameState, factionId: string): number => Math.max(0, state.factions.findIndex(faction => faction.id === factionId));
+/** Applies the answer's effects and, under rules 48, schedules the follow-up it names at the same hearth; the chain keeps the realm's one pending slot. */
+function settle(state: GameState, pending: PendingHearthEvent, template: HearthEventDefinition, choice: HearthEventDefinition['choices'][number]): string {
+  applyEffects(state, pending, choice.effects);
+  const next = choice.followUp && rulesVersion(state) >= 48 ? templateOf(state, choice.followUp.templateId) : undefined;
+  if (!next || !choice.followUp) return '';
+  const offerTurn = state.turn + choice.followUp.afterTurns;
+  state.hearthEvents.pending = [...state.hearthEvents.pending, { id: `event.${offerTurn}.${seatOf(state, pending.factionId) + 1}`, factionId: pending.factionId, settlementId: pending.settlementId, templateId: next.id, turn: offerTurn, expiresTurn: offerTurn + HEARTH_EVENT_ANSWER_TURNS, chainedFrom: template.id }].sort(byId);
+  return ` What follows comes in ${choice.followUp.afterTurns} turn${choice.followUp.afterTurns === 1 ? '' : 's'}.`;
+}
 
 /** Lapsed events take their first choice; then each realm without an event may be offered one. Bounded by realms and their hearths, never by tiles. */
 export function advanceHearthEvents(state: GameState, events: DomainEvent[]): void {
   if (rulesVersion(state) < 46 || state.victory) return;
   for (const pending of [...state.hearthEvents.pending].sort(byId)) {
-    if (pending.expiresTurn > state.turn) continue;
     const template = templateOf(state, pending.templateId), town = state.settlements[pending.settlementId];
+    // A scheduled follow-up is offered on its turn, with the event it follows named.
+    if (pending.turn === state.turn && pending.chainedFrom) {
+      if (template && town && town.factionId === pending.factionId) events.push({ turn: state.turn, factionId: pending.factionId, type: 'hearth_event_offered', cell: town.cell, message: `${template.name} at ${town.name}, following ${templateOf(state, pending.chainedFrom)?.name.toLowerCase() ?? pending.chainedFrom}: ${storyText(template, town.name)} Answer it by turn ${pending.expiresTurn}.` });
+      continue;
+    }
+    if (pending.expiresTurn > state.turn) continue;
     remove(state, pending.id);
     if (!template || !town || town.factionId !== pending.factionId) {
       events.push({ turn: state.turn, factionId: pending.factionId, type: 'hearth_event_lapsed', message: `${template?.name ?? pending.templateId} passed: the hearth is no longer the realm's.` });
@@ -144,8 +161,8 @@ export function advanceHearthEvents(state: GameState, events: DomainEvent[]): vo
     }
     // The first answer the realm can afford; the last if it can afford none, which costs nothing it has.
     const choice = template.choices.find(item => hearthEventChoiceBlocker(state, pending.factionId, item.effects) === null) ?? template.choices[template.choices.length - 1]!;
-    applyEffects(state, pending, choice.effects);
-    events.push({ turn: state.turn, factionId: pending.factionId, type: 'hearth_event_lapsed', cell: town.cell, message: `${template.name} at ${town.name} went unanswered, so ${choice.label.toLowerCase()} was taken: ${describeHearthEventEffects(choice.effects)}.` });
+    const follows = settle(state, pending, template, choice);
+    events.push({ turn: state.turn, factionId: pending.factionId, type: 'hearth_event_lapsed', cell: town.cell, message: `${template.name} at ${town.name} went unanswered, so ${choice.label.toLowerCase()} was taken: ${describeHearthEventEffects(choice.effects)}.${follows}` });
   }
   const catalogue = templates(state);
   if (!catalogue.length || state.turn < HEARTH_EVENT_FIRST_TURN) return;
@@ -178,7 +195,7 @@ export function hearthEventObjection(state: GameState, factionId: string, eventI
   if (state.victory) return 'This campaign has ended in victory.';
   if (state.battle || state.pendingCapture) return 'Resolve the pending battle or capture first.';
   const pending = state.hearthEvents.pending.find(item => item.id === eventId);
-  if (!pending || pending.factionId !== factionId) return 'You have no such hearth event to answer.';
+  if (!pending || pending.factionId !== factionId || pending.turn > state.turn) return 'You have no such hearth event to answer.';
   const template = templateOf(state, pending.templateId);
   if (!template) return 'This event is unknown to the current rules.';
   const choice = template.choices.find(item => item.id === choiceId);
@@ -192,17 +209,22 @@ export function resolveHearthEvent(state: GameState, factionId: string, eventId:
   const choice = template.choices.find(item => item.id === choiceId)!, town = state.settlements[pending.settlementId];
   remove(state, pending.id);
   if (!town || town.factionId !== factionId) return { ok: true, events: [{ turn: state.turn, factionId, type: 'hearth_event_lapsed', message: `${template.name} passed: the hearth is no longer the realm's.` }] };
-  applyEffects(state, pending, choice.effects);
-  return { ok: true, events: [{ turn: state.turn, factionId, type: 'hearth_event_resolved', cell: town.cell, message: `${template.name} at ${town.name}: ${choice.label.toLowerCase()}. ${describeHearthEventEffects(choice.effects)}.` }] };
+  const follows = settle(state, pending, template, choice);
+  return { ok: true, events: [{ turn: state.turn, factionId, type: 'hearth_event_resolved', cell: town.cell, message: `${template.name} at ${town.name}: ${choice.label.toLowerCase()}. ${describeHearthEventEffects(choice.effects)}.${follows}` }] };
 }
 /** Own pending events in full, with every answer quoted. */
 export function observeHearthEvents(state: GameState, factionId: string): ObservedHearthEvent[] {
   if (rulesVersion(state) < 46) return [];
-  return state.hearthEvents.pending.filter(item => item.factionId === factionId).flatMap(pending => {
+  return state.hearthEvents.pending.filter(item => item.factionId === factionId && item.turn <= state.turn).flatMap(pending => {
     const template = templateOf(state, pending.templateId), town = state.settlements[pending.settlementId];
     if (!template || !town) return [];
-    return [{ id: pending.id, settlementId: town.id, settlementName: town.name, cell: town.cell, name: template.name, text: storyText(template, town.name), turn: pending.turn, expiresTurn: pending.expiresTurn,
-      choices: template.choices.map(choice => ({ id: choice.id, label: choice.label, description: choice.description, effects: choice.effects, summary: describeHearthEventEffects(choice.effects), blocker: hearthEventChoiceBlocker(state, factionId, choice.effects) })) }];
+    const followsFrom = pending.chainedFrom ? templateOf(state, pending.chainedFrom)?.name : undefined;
+    return [{ id: pending.id, settlementId: town.id, settlementName: town.name, cell: town.cell, name: template.name, text: storyText(template, town.name), turn: pending.turn, expiresTurn: pending.expiresTurn, ...(followsFrom ? { followsFrom } : {}),
+      choices: template.choices.map(choice => {
+        const next = choice.followUp ? templateOf(state, choice.followUp.templateId) : undefined;
+        return { id: choice.id, label: choice.label, description: choice.description, effects: choice.effects, summary: describeHearthEventEffects(choice.effects), blocker: hearthEventChoiceBlocker(state, factionId, choice.effects),
+          ...(next && choice.followUp ? { followUp: { templateId: next.id, name: next.name, afterTurns: choice.followUp.afterTurns } } : {}) };
+      }) }];
   });
 }
 export function validateHearthEvents(state: GameState): void {
@@ -215,7 +237,9 @@ export function validateHearthEvents(state: GameState): void {
     assert(state.factions.some(faction => faction.id === pending.factionId), 'names an unknown realm');
     assert(town && town.factionId === pending.factionId, 'names a hearth the realm does not hold');
     assert(templateOf(state, pending.templateId), 'names an unknown event');
-    assert(pending.turn <= state.turn && pending.expiresTurn === pending.turn + HEARTH_EVENT_ANSWER_TURNS, 'has an invalid term');
+    assert(pending.turn <= state.turn + 10 && pending.expiresTurn === pending.turn + HEARTH_EVENT_ANSWER_TURNS, 'has an invalid term');
+    assert(pending.turn <= state.turn || pending.chainedFrom, 'lies ahead without an event it follows');
+    assert(!pending.chainedFrom || templateOf(state, pending.chainedFrom), 'follows an unknown event');
   });
   state.hearthEvents.recent.forEach((item, index) => {
     assert(index === 0 || byFaction(state.hearthEvents.recent[index - 1]!, item) < 0, 'memory must be ordered by realm without repeats');

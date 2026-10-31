@@ -1,0 +1,12 @@
+
+> theandril@0.1.0 measure:pacing /home/telephoneheater/Work/Theandril
+> tsx scripts/measure-pacing.ts proxy-epic proxy-epic-chronicle proxy-long proxy-standard --json=docs/development/2026-10-31-hearth-event-chains/pacing-proxies.json
+
+proxy-epic (epic, tiny, 4 realms, seed 74, rules current) — target pacing-epic.test.ts bound
+  turn 345 · prosperity · 13 depots · 0 refused orders · 97 automatic refusals · 5s
+proxy-epic-chronicle (epic, tiny, 4 realms, seed 20260905, rules current) — target chronicle-victory.test.ts bound
+  turn 469 · prosperity · 6 depots · 0 refused orders · 331 automatic refusals · 8s
+proxy-long (long, tiny, 4 realms, seed 99, rules current) — target pacing.test.ts bound
+  turn 311 · prosperity · 11 depots · 0 refused orders · 0 automatic refusals · 5s
+proxy-standard (standard, tiny, 4 realms, seed 74, rules current) — target pacing.test.ts bound
+  turn 193 · prosperity · 10 depots · 0 refused orders · 0 automatic refusals · 2s

@@ -1,5 +1,25 @@
 # Theandril implementation status
 
+## Hearth event chains (rules/save 48) — 2026-10-31
+
+M6's first escalation. An answer may schedule a follow-up event at the same
+hearth after a bounded number of turns (`followUp`), and `chained` templates
+are reached only that way; the follow-up lies ahead in the pending register,
+unseen and unanswerable until its turn, holds the realm's one slot, is offered
+with the event it follows named, and then lapses, chains and seals like any
+other. Three chains of three (sickness, riders, the river) make nine new
+templates, thirty-three in all. The panel says what each answer brings and
+when; the AI values an answer with a discounted two-step lookahead through
+the public catalogue. The rules 47 pack is frozen as `c1e05b8e`; v47 saves
+load unchanged; a scheduled rules 48 event cannot be sealed under older
+rules. Headline pacing **385 / 306 / 211**, all Prosperity, in band, no
+refused order; proxies 345 / 469 / 311 / 193. The chronicle journey's pin
+moves 56 → 55, attributed to the same turn-40 draw. Verification: sim,
+content, AI and UI tests extended; unit 2,331 / 288 files, campaigns 57, lint,
+typecheck, build, three covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-hearth-event-chains/README.md),
+[ADR0078](architecture/0078-hearth-event-chains.md).
+
 ## Hearth events II: the second catalogue (rules/save 47) — 2026-10-31
 
 Sixteen more original templates (twenty-four in all) with six new conditions
