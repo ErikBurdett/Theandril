@@ -1,5 +1,39 @@
 # Theandril implementation status
 
+## AI seam expeditions, and rules 44 re-prices the third path — 2026-10-31
+
+AI: realms hold the seams they find. A found seam within four hexes of a
+hearth is claimed toward one legal hex at a time; a farther seam in nobody's
+borders is settled beside: a free caravan is given a saved road to the seam's
+hex or a neighbour and held on it until it founds the hearth, or a caravan is
+raised at the nearest hearth once the purse covers the caravan, the founding
+fee and six turns of running costs and a company can quote the road. One
+expedition at a time; a seam in another realm's borders is left alone. At the
+end of the Epic headline campaign every found seam is held and **eight of
+twelve realms hold a path** (three before).
+
+Rules/save 44, content prices only: with the seams held, the Long and Standard
+headline campaigns sealed a working on turns 177 and 127 at the rules 38
+prices. From measured campaigns, Attunement now costs **3,600 / 6,000 / 9,600**
+knowledge (Standard / Long / Epic; Short unchanged) and the Epic Hearth
+Exchange **44,000** coin. The headline campaigns end on **369 / 300 / 203**:
+Epic by Prosperity, Long and Standard by Attunement, each contested by a rival
+Prosperity bid started 8 to 32 turns before the seal. The rules 22–43 pace
+table and the rules 38–43 working are frozen under pack `f738e917`; older
+campaigns keep their prices, and v42 and v43 envelopes load unchanged. The
+Epic proxy (seed 74) moves from 355 to 473 and the chronicle proxy to 452, so
+`pacing-epic.test.ts` re-derives its maximum to 550.
+
+Verification: four new AI tests, a sim pricing and envelope test, content hash
+tests; unit **2,318 tests / 285 files**, campaigns 57, lint, typecheck and
+build pass; six covering journeys pass. Measured gap now: a seam of the
+missing path inside another realm's borders, mostly at peace, which the AI
+does not pursue by conquest or cession. Only one seed and one culture (Glass
+Tide) have reached the path in headline play.
+[Evidence](development/2026-10-31-ai-seam-expeditions/README.md),
+[ADR0068](architecture/0068-ai-seam-expeditions.md),
+[ADR0069](architecture/0069-attunement-repricing.md).
+
 ## AI surveys the glass, and two save repairs — 2026-10-30
 
 AI only, with two `packages/sim` validation repairs; no rules, content or save

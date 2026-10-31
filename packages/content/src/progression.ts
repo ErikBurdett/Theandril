@@ -64,11 +64,19 @@ export const SCHEMA21_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPace
 };
 /** Rules 22: patronage moves coin between realms and keeps patrons and clients out
  * of each other's wars, which lengthened the longest campaigns. The Epic price is
- * set from measured rules-22 campaigns, not from the older curve. */
-export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+ * set from measured rules-22 campaigns, not from the older curve. Frozen through
+ * rules 43. */
+export const SCHEMA43_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
   ...SCHEMA21_CAMPAIGN_PACES,
   long: { ...SCHEMA21_CAMPAIGN_PACES.long, projectCoinCost: 32_000 },
   epic: { ...SCHEMA21_CAMPAIGN_PACES.epic, projectCoinCost: 36_000, description: 'The longest campaign, aiming for about four hundred turns — a little shorter on a crowded map — with a sixty-turn window to oppose public projects. Actual length depends on play.' },
+};
+/** Rules 44: AI realms settle beside the seams they find, so the headline Epic
+ * campaign funds its Hearth Exchange sooner from more hearths. The Epic price is
+ * set from measured rules-44 campaigns (36,000 ended on turn 328; 44,000 on 369). */
+export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  ...SCHEMA43_CAMPAIGN_PACES,
+  epic: { ...SCHEMA43_CAMPAIGN_PACES.epic, projectCoinCost: 44_000 },
 };
 
 export const TECHNOLOGIES: readonly TechnologyDefinition[] = [
@@ -132,11 +140,21 @@ export const attunementVictorySchema = z.object({
   knowledgeCost: z.object({ short: cost, standard: cost, long: cost, epic: cost }).strict(),
 }).strict();
 export type AttunementVictoryDefinition = z.infer<typeof attunementVictorySchema>;
-export const ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
+export const SCHEMA43_ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
   id: 'victory.attunement', name: 'Attunement',
   description: 'Seal a working that binds the Ashfall’s seams to your realm. Finish every Arcane Theory discovery, hold a surveyed seam of every magical path inside your borders, and keep a Waykeeper of the second degree at an unoccupied hearth with a Witness archive. The working costs knowledge on starting and must be sustained through the pace’s public response window: a siege, a lost seam or an absent caster pauses it, and losing the host ends it without refund.',
   requiredBuildings: ['building.archive'], casterDegree: 2,
   knowledgeCost: { short: 60, standard: 600, long: 1200, epic: 2400 },
+};
+/** Rules 44: the rules-38 prices were set when no AI realm reached the path.
+ * Once realms held the seams they found, the Standard and Long headline
+ * campaigns sealed a working on turns 127 and 177. The prices are set from
+ * measured rules-44 campaigns: 3,600 seals Standard on turn 203 and 6,000 Long
+ * on turn 300, each against a rival Prosperity bid already started. Epic is
+ * scaled with the window; no headline Epic realm reached the path either way. */
+export const ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
+  ...SCHEMA43_ATTUNEMENT_VICTORY,
+  knowledgeCost: { short: 60, standard: 3600, long: 6000, epic: 9600 },
 };
 
 export function validateProgressionContent(

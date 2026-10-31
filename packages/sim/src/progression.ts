@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ARCANE_DISCOVERIES, ATTUNEMENT_VICTORY, CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, MAGIC_PATHS, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA21_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, SCHEMA20_UNIFICATION_VICTORY, UNIFICATION_VICTORY, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
+import { ARCANE_DISCOVERIES, ATTUNEMENT_VICTORY, CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, MAGIC_PATHS, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA21_CAMPAIGN_PACES, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, SCHEMA20_UNIFICATION_VICTORY, UNIFICATION_VICTORY, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
 import { isPassable } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
@@ -63,7 +63,7 @@ const HOST_FELL = 'The host capital fell; the unification bid ended.';
 const MAJORITY_LOST = 'The realm no longer holds two thirds of the world’s hearths; the unification bid ended.';
 const MAJORITY_LOST_V20 = 'The realm no longer holds a majority of hearths; the unification bid ended.';
 const majorityLost = (state: GameState) => rulesVersion(state) < 21 ? MAJORITY_LOST_V20 : MAJORITY_LOST;
-const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : rulesVersion(state) < 18 ? SCHEMA17_CAMPAIGN_PACES : rulesVersion(state) < 21 ? SCHEMA20_CAMPAIGN_PACES : rulesVersion(state) < 22 ? SCHEMA21_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
+const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : rulesVersion(state) < 18 ? SCHEMA17_CAMPAIGN_PACES : rulesVersion(state) < 21 ? SCHEMA20_CAMPAIGN_PACES : rulesVersion(state) < 22 ? SCHEMA21_CAMPAIGN_PACES : rulesVersion(state) < 44 ? SCHEMA43_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
 
 export function doctrineEffects(doctrineId: string | null) {
   return DOCTRINES.find(item => item.id === doctrineId)?.effects ?? { attack: 0, armor: 0, movement: 0 };
@@ -129,7 +129,8 @@ function unificationBlockers(state: GameState, factionId: string, standing = hea
 }
 /** Rules 38. Everything the sealed working rests on can be taken: the seams
  * (through the hearths whose borders hold them), the host, and the caster. */
-const attunementKnowledgeCost = (state: GameState): number => ATTUNEMENT_VICTORY.knowledgeCost[state.pace];
+/** Rules 44 re-priced the working from measured campaigns; a rules 38–43 campaign keeps the price it was sealed under. */
+const attunementKnowledgeCost = (state: GameState): number => (rulesVersion(state) < 44 ? SCHEMA43_ATTUNEMENT_VICTORY : ATTUNEMENT_VICTORY).knowledgeCost[state.pace];
 const casterDegree = (character: GameState['characters'][string]): number => Math.max(0, ...Object.values(character.aptitudes ?? {}));
 /** Sparse: seams are few and bounded; every path is checked against the realm's held seams only. */
 function attunementPaths(state: GameState, factionId: string): { pathId: string; pathName: string; held: boolean }[] {

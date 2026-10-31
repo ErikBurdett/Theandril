@@ -1,0 +1,15 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/attunement.spec.ts tests/gameplay/arcane-seams.spec.ts tests/gameplay/seam-warding.spec.ts --workers=2 --output=docs/development/2026-10-31-ai-seam-expeditions/browser-results
+
+
+Running 6 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (4.6s)
+  ✓  2 [gameplay] › tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (4.7s)
+  ✓  3 [gameplay] › tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.5s)
+  ✓  4 [gameplay] › tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (3.4s)
+  ✓  5 [gameplay] › tests/gameplay/seam-warding.spec.ts:63:1 › a besieger breaks the ward on its turn and the holder is jarred (2.8s)
+  ✓  6 [gameplay] › tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column (3.0s)
+
+  6 passed (14.9s)

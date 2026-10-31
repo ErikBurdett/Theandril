@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-10-31 | [AI seam expeditions and rules 44 re-pricing](2026-10-31-seam-expeditions-and-repricing.md) | Status report page; seam expeditions and re-pricing verified locally; deployment recorded in the publication packet |
 | 2026-10-30 | [Testing second pass, AI glass surveys and two save repairs](2026-10-30-glass-surveys-and-save-repairs.md) | Roster sweep consolidated and trace archives dropped (`4a06420`); AI surveys target glass, two save-load defects repaired; publication recorded in the report |
 | 2026-10-30 | [Testing methodology cut to proportionate verification](2026-10-30-testing-methodology.md) | Local process only: gameplay suite split into 202 ordinary and 50 `@scale` journeys, `docs/TESTING.md` written, traces gitignored; no publication |
 | 2026-10-29 | [Playwright crash mitigation](2026-10-29-playwright-reliability.md) | Local test infrastructure only; eight attempts across four distinct journeys pass; no publication |

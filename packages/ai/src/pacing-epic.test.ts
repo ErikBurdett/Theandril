@@ -6,7 +6,9 @@ import { expectEarnedLongFormVictory, PACING_TIMEOUT, PACING_TITLE, type PacingC
 // seeds on it sit over a hundred turns apart. The headline case - a standard map
 // with twelve realms - measured turn 388 under rules 29, inside that band. Check
 // it with `pnpm measure:pacing` (local only) and re-derive these bounds from what
-// it reports rather than holding them.
-const campaigns: PacingCampaign[] = [{ pace: 'epic', seed: 74, minimum: 250, maximum: 450 }];
+// it reports rather than holding them. Rules 44 re-priced the Epic Hearth Exchange
+// from measured headline campaigns (369 turns); this proxy then measured 473 and
+// the chronicle proxy 452, so the bound follows the tool.
+const campaigns: PacingCampaign[] = [{ pace: 'epic', seed: 74, minimum: 250, maximum: 550 }];
 
 test.each(campaigns)(PACING_TITLE, expectEarnedLongFormVictory, PACING_TIMEOUT);

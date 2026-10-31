@@ -3,7 +3,7 @@ import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planDepot } from './supply';
-import { planArcaneSurvey, planGlassApproach } from './arcane';
+import { planArcaneSurvey, planGlassApproach, planSeamExpedition } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planRites } from './rites';
 import { planWardenReturn } from './wardens';
@@ -100,6 +100,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // A company already standing on fresh glass surveys; otherwise one may walk to glass in sight.
   const glassApproach = survey ? null : planGlassApproach(view, theater.heldArmyIds);
   for (const id of glassApproach?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
+  // A seam found far from every hearth is held by settling beside it: a free
+  // caravan takes the road and keeps it, or one is raised at the nearest hearth.
+  const expedition = minor ? null : planSeamExpedition(view, theater.heldArmyIds);
+  for (const id of expedition?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
   // A surveying company spends its movement on the ground it stands on, so nothing
   // later in this pass may march it away.
   // Rules 28: a force wasting outside supply raises a depot under itself instead.
@@ -107,8 +111,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;
@@ -143,7 +147,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // An embarked founder belongs to a separate expedition. It must not freeze
   // affordable overland expansion while a distant fleet searches for a landing.
   const hasColonist = ownArmies.some(army => army.formations.some(formation => units.get(formation.unitId)?.canFound));
-  let plannedColonist = hasColonist || ownSettlements.some(town => town.queue.some(order => order.itemId === 'unit.colonist'));
+  let plannedColonist = hasColonist || ownSettlements.some(town => town.queue.some(order => order.itemId === 'unit.colonist')) || Boolean(expedition?.queuedColonist);
   const formations = allOwnArmies.filter(army => army.domain !== 'naval').flatMap(army => army.formations);
   const militaryCount = formations.filter(formation => !units.get(formation.unitId)?.canFound).length;
   const areaPerFaction = view.width * view.height / Math.max(1, view.factionCount);
@@ -159,7 +163,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // Every order already placed this pass has spent real coin: the survey, the
   // depot and a patronage subsidy all pay before the rest of the turn is planned,
   // and the budget below must not offer that coin a second time.
-  const committed = (survey ? view.arcaneSearchCoinCost : 0) + (depot ? view.depotCoinCost : 0)
+  const committed = (survey ? view.arcaneSearchCoinCost : 0) + (depot ? view.depotCoinCost : 0) + (expedition?.coinSpent ?? 0)
     + (patronage?.commands ?? []).reduce((sum, command) => sum + (command.type === 'proposeClient' ? command.terms.giftCoin : 0), 0);
   let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve - foundingReserve - expeditionSavings - committed);
   // Protect the next expansion caravan and one basic building before optional appointments.
@@ -235,6 +239,12 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const foundingCells = view.settlements.map(town => town.cell);
   let hearthNumber = ownSettlements.length;
   let foundingCount = ownSettlements.length, foundingBudget = budget + foundingReserve;
+  // A hearth founded beside a seam this pass takes its name, its ground and its founding fee before any other caravan settles.
+  for (const command of expedition?.commands ?? []) if (command.type === 'found') {
+    settlementNames.add(command.name); foundingCount++;
+    const caravan = view.armies.find(army => army.id === command.armyId);
+    if (caravan) foundingCells.push(caravan.cell);
+  }
   const reorganized = new Set<string>();
   const ownTownCells = new Set(ownSettlements.map(town => town.cell));
   // A charted foreign border is a discovery clue, not permission to attack or a

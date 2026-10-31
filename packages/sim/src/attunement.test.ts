@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { ATTUNEMENT_VICTORY, CAMPAIGN_PACES } from '@theandril/content';
+import { ATTUNEMENT_VICTORY, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA43_ATTUNEMENT_VICTORY } from '@theandril/content';
+import { withRules } from './rules';
+import { PRE_SEAM_PRICING_CONTENT_HASH } from './save';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { applyCommand, applyCommandForVersion, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, type GameState } from './index';
 import { characterSpellIds } from './magic';
@@ -184,5 +186,28 @@ describe('seam study (rules 39)', () => {
       expect(caster.experience).toBe(2);
       expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
     }
+  });
+});
+
+describe('rules 44 pricing', () => {
+  it('re-prices the working from measured campaigns, keeps the rules 38–43 price for older campaigns, and loads a v43 envelope under the new pack', () => {
+    const state = attunementCampaign(), player = state.turnOwnerId;
+    state.pace = 'standard';
+    const price = (version: 43 | 44) => withRules(state, version, () => getObservation(state, player).progression.attunement!.knowledgeCost);
+    expect(price(44)).toBe(ATTUNEMENT_VICTORY.knowledgeCost.standard);
+    expect(price(44)).toBe(3600);
+    expect(price(43)).toBe(SCHEMA43_ATTUNEMENT_VICTORY.knowledgeCost.standard);
+    expect(price(43)).toBe(600);
+    // The working itself is unchanged: a rules 43 realm with 600 knowledge may start it, a rules 44 realm may not.
+    state.factions[0]!.knowledge = 600;
+    expect(withRules(state, 44, () => getObservation(state, player).progression.attunement!.blockers)).toContainEqual(expect.stringContaining('3600 knowledge'));
+    expect(withRules(state, 43, () => getObservation(state, player).progression.attunement!.blockers)).toEqual([]);
+    // A campaign sealed under the frozen rules 42–43 pack continues unchanged under rules 44.
+    const sealed = serializeGameForVersion(state, 43);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 43, contentHash: PRE_SEAM_PRICING_CONTENT_HASH });
+    const loaded = deserializeGame(sealed);
+    expect(stateHash(loaded)).toBe(stateHash(state));
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 44, contentHash: CONTENT_HASH });
+    expect(getObservation(loaded, player).progression.attunement!.knowledgeCost).toBe(3600);
   });
 });

@@ -40,7 +40,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 43;
+export const SAVE_VERSION = 44;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -60,6 +60,8 @@ export const PRE_RITE_CONTENT_HASH = '03ac0328';
 export const PRE_BREAKING_CONTENT_HASH = 'ac80514d';
 /** Rules 41 content, before rules 42 added the Flame kindling rite. */
 export const PRE_KINDLING_CONTENT_HASH = '78df970c';
+/** Rules 42–43 content, before rules 44 re-priced Attunement and the Epic Hearth Exchange. */
+export const PRE_SEAM_PRICING_CONTENT_HASH = 'f738e917';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -261,8 +263,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(43), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
-/** Rules 41, 42 and 43 change no canonical field; v40 and v41 envelopes differ only in their seals and a v42 envelope only in its version. */
+const saveSchema = z.object({ version: z.literal(44), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 41 through 44 change no canonical field; v40 and v41 envelopes differ only in their seals, a v42 envelope only in its version, and rules 44 re-prices the pack a v42 or v43 envelope was sealed under. */
+const saveV43Schema = saveSchema.extend({ version: z.literal(43), state: stateSchema }).strict();
 const saveV42Schema = saveSchema.extend({ version: z.literal(42), state: stateSchema }).strict();
 const saveV41Schema = saveSchema.extend({ version: z.literal(41), state: stateSchema }).strict();
 const saveV40Schema = saveSchema.extend({ version: z.literal(40), state: stateSchema }).strict();
@@ -654,7 +657,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 42) return CONTENT_HASH;
+  if (version >= 44) return CONTENT_HASH;
+  if (version >= 42) return PRE_SEAM_PRICING_CONTENT_HASH;
   if (version >= 41) return PRE_KINDLING_CONTENT_HASH;
   if (version >= 40) return PRE_BREAKING_CONTENT_HASH;
   if (version >= 38) return PRE_RITE_CONTENT_HASH;
@@ -932,12 +936,19 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 43) {
+    const prior = saveV43Schema.parse(raw);
+    assert(prior.contentHash === PRE_SEAM_PRICING_CONTENT_HASH, 'v43 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v43 snapshot checksum does not match its contents');
+    // Rules 44 re-prices Attunement and the Epic project as content only; the state continues unchanged under the new pack.
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 42) {
     const prior = saveV42Schema.parse(raw);
-    assert(prior.contentHash === CONTENT_HASH, 'v42 content hash is not a recognized compatible pack');
+    assert(prior.contentHash === PRE_SEAM_PRICING_CONTENT_HASH, 'v42 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v42 snapshot checksum does not match its contents');
-    // Rules 43 changes how a battle working is answered, not the pack or any field; the state continues unchanged.
-    return { ...prior, version: SAVE_VERSION };
+    // Rules 43 changes how a battle working is answered, not the pack or any field; rules 44 re-prices the pack.
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
   }
   if (version === 41) {
     const prior = saveV41Schema.parse(raw);

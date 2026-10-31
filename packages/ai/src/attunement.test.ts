@@ -1,11 +1,12 @@
 import { expect, test } from 'vitest';
 import { ATTUNEMENT_VICTORY, TECHNOLOGIES } from '@theandril/content';
-import { applyCommand, getObservation, type GameState } from '@theandril/sim';
+import { applyCommand, arcaneSites, createArmyFormation, createGame, getObservation, refreshLandKnowledge, type GameCommand, type GameState } from '@theandril/sim';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
+import { getLandIndex } from '../../sim/src/territory';
 import { planTurnWithReasons } from './index';
 import { planProgression } from './progression';
-import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach } from './arcane';
+import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, seamExpeditionSite } from './arcane';
 import { hexDistance, isPassable } from '@theandril/mapgen';
 import { SITE_SEARCH_RADIUS } from '@theandril/sim';
 
@@ -228,4 +229,131 @@ test('rules 39: a realm at peace holding every seam path appoints a Waykeeper to
   const lodged = planCharacters(getObservation(state, player), 200);
   expect(lodged.commands.some(command => command.type === 'assignCharacter')).toBe(false);
   expect(lodged.commands.some(command => command.type === 'recruitCharacter' && command.definitionId === 'character.waykeeper')).toBe(false);
+});
+
+/** The attunement world with the Rune seam's ground lost two hexes around it:
+ * the seam is found, unheld, seven hexes from the hearth and in nobody's borders. */
+function farSeamCampaign(): { state: GameState; player: string; seam: number } {
+  const state = attunementCampaign(), player = state.turnOwnerId, host = hostOf(state);
+  const rune = arcaneSites(state.world).find(site => site.pathId === 'path.rune')!;
+  const land = state.land.settlements[host.id]!;
+  const lost = land.claimed.filter(cell => hexDistance(cell, rune.cell, state.world.width) <= 2);
+  land.claimed = land.claimed.filter(cell => !lost.includes(cell));
+  // The engine's land index and the realm's own memory of that ground follow, as they would in play.
+  const index = getLandIndex(state);
+  for (const cell of lost) index.delete(cell);
+  refreshLandKnowledge(state, player, lost);
+  refreshAuthoredSight(state);
+  return { state, player, seam: rune.cell };
+}
+
+test('a realm settles beside a seam it found beyond its borders: a free caravan takes the road, is held on it and founds the hearth on arrival', () => {
+  const { state, player, seam } = farSeamCampaign(), host = hostOf(state);
+  const id = 'army.caravan';
+  state.armies[id] = { id, factionId: player, name: 'Seam caravan', cell: host.cell, movement: 3, formations: [createArmyFormation(id, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  let view = getObservation(state, player);
+  expect(view.arcaneSites.find(site => site.cell === seam)).toMatchObject({ pathId: 'path.rune', controlled: false });
+  const distance = hexDistance(host.cell, seam, state.world.width);
+  expect(distance).toBeGreaterThan(SEAM_CLAIM_REACH);
+  expect(seamExpeditionSite(view)).toMatchObject({ seam: { cell: seam }, site: seam, hearth: { id: host.id }, distance });
+  // A seam the border already touches is claimed, never settled beside.
+  expect(seamExpeditionSite({ ...view, land: { ...view.land, settlements: view.land.settlements.map(land => ({ ...land, claimed: [...land.claimed, seam - 1] })) } })).toBeNull();
+  const plan = planSeamExpedition(view)!;
+  expect(plan.commands).toEqual([{ type: 'queueMovement', factionId: player, armyId: id, target: seam }]);
+  expect([...plan.heldArmyIds]).toEqual([id]);
+  expect(plan.reasons[0]).toContain('found a hearth beside the rune seam');
+  const turn = planTurnWithReasons(view);
+  expect(turn.commands).toContainEqual(plan.commands[0]);
+  expect(turn.commands.filter(command => 'armyId' in command && command.armyId === id)).toEqual([plan.commands[0]]);
+  // The road is played out through ordinary turns: the caravan is held on it
+  // by every later plan, and founds the hearth when it stands on the seam.
+  let founded: string | undefined;
+  for (let round = 0; round < 12 && !founded; round++) {
+    for (const command of planTurnWithReasons(getObservation(state, player)).commands) {
+      if (!('armyId' in command) || command.armyId !== id) continue;
+      expect(['queueMovement', 'found']).toContain(command.type);
+      const result = applyCommand(state, command);
+      expect(result.ok, result.ok ? '' : result.error).toBe(true);
+      if (command.type === 'found') founded = command.name;
+    }
+    for (let seat = 0; seat < state.factions.length; seat++) expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId })).toMatchObject({ ok: true });
+  }
+  expect(founded).toBe('Hearth 2');
+  view = getObservation(state, player);
+  expect(view.arcaneSites.find(site => site.cell === seam)!.controlled).toBe(true);
+  expect(view.settlements.find(town => town.name === founded)).toMatchObject({ factionId: player, cell: seam });
+  expect(view.progression.attunement!.paths.every(path => path.held)).toBe(true);
+  expect(planSeamExpedition(view)).toBeNull();
+});
+
+test('with no caravan to send, a realm raises one at the nearest hearth for a far seam when its purse covers the whole hearth, and a company can quote the road', () => {
+  const { state, player, seam } = farSeamCampaign(), host = hostOf(state);
+  state.factions[0]!.treasury = 260;
+  const view = getObservation(state, player);
+  const plan = planSeamExpedition(view)!;
+  expect(plan.commands).toEqual([{ type: 'queue', factionId: player, settlementId: host.id, itemId: 'unit.colonist' }]);
+  expect(plan).toMatchObject({ queuedColonist: true, coinSpent: 16, heldArmyIds: new Set() });
+  expect(plan.reasons[0]).toContain(`rune seam at hex ${seam}`);
+  const turn = planTurnWithReasons(view);
+  expect(turn.commands.filter(command => command.type === 'queue' && command.itemId === 'unit.colonist')).toEqual(plan.commands);
+  expect(applyCommand(state, plan.commands[0]!)).toMatchObject({ ok: true });
+  // One caravan at a time: the queued one is awaited, and a thin purse raises none.
+  expect(planSeamExpedition(getObservation(state, player))).toBeNull();
+  expect(planSeamExpedition({ ...view, treasury: 40 })).toBeNull();
+  // Without a company to quote the road, no caravan is raised for ground that may be unreachable.
+  expect(planSeamExpedition({ ...view, armies: view.armies.filter(army => army.factionId !== player) })).toBeNull();
+});
+
+test('a found seam inside another realm\'s borders is neither settled beside nor claimed toward', () => {
+  const { state, player, seam } = farSeamCampaign(), rival = state.factions[1]!.id;
+  // The rival founds a hearth whose first claims hold the seam, in the player's sight.
+  const foundingCell = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, seam, state.world.width) === 1
+    && Object.values(state.settlements).every(town => hexDistance(town.cell, cell, state.world.width) > 2));
+  expect(foundingCell).toBeGreaterThan(0);
+  const id = 'army.rival_caravan';
+  state.armies[id] = { id, factionId: rival, name: 'Reed caravan', cell: foundingCell, movement: 3, formations: [createArmyFormation(id, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'found', factionId: rival, armyId: id, name: 'Seam Reach' })).toMatchObject({ ok: true });
+  const witness = Object.values(state.armies).find(army => army.factionId === player)!;
+  witness.cell = seam;
+  refreshAuthoredSight(state);
+  const view = getObservation(state, player);
+  expect(view.cells.find(cell => cell.cell === seam)).toMatchObject({ factionId: rival });
+  expect(view.arcaneSites.find(site => site.cell === seam)).toMatchObject({ controlled: false });
+  expect(seamExpeditionSite(view)).toBeNull();
+  expect(planSeamExpedition(view)).toBeNull();
+  expect(claimArcaneSeam({ ...view, treasury: 1000 }, 1000)).toBeNull();
+});
+
+test('a seam found within reach of a hearth is claimed toward one legal hex at a time until the border holds it', () => {
+  const state = createGame({ seed: 20, size: 'tiny', factionCount: 2, pace: 'short' }), player = state.turnOwnerId;
+  const issue = (command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.ok ? '' : result.error).toBe(true); };
+  const caravan = Object.values(state.armies).find(army => army.factionId === player && army.formations.some(formation => formation.unitId === 'unit.colonist'))!;
+  issue({ type: 'found', factionId: player, armyId: caravan.id, name: 'Seamwatch' });
+  const town = Object.values(state.settlements).find(item => item.factionId === player)!;
+  const seam = arcaneSites(state.world).find(site => site.pathId === 'path.flame' && hexDistance(site.cell, town.cell, state.world.width) === SEAM_CLAIM_REACH)!;
+  expect(seam.cell).toBe(324);
+  state.arcaneSurveys[player] = [seam.cell];
+  state.factions[0]!.treasury = 1000;
+  refreshAuthoredSight(state);
+  const gap = () => Math.min(...state.land.settlements[town.id]!.claimed.map(cell => hexDistance(cell, seam.cell, state.world.width)));
+  expect(gap()).toBe(SEAM_CLAIM_REACH - 1);
+  expect(seamExpeditionSite(getObservation(state, player))).toBeNull();
+  const steps: number[] = [];
+  for (let claims = 0; claims < 6; claims++) {
+    const view = getObservation(state, player);
+    if (view.arcaneSites[0]!.controlled) break;
+    const claim = claimArcaneSeam(view, 1000)!;
+    expect(claim.command).toMatchObject({ type: 'claimCell', factionId: player, settlementId: town.id });
+    const before = gap();
+    issue(claim.command);
+    steps.push((claim.command as { cell: number }).cell);
+    expect(gap()).toBeLessThan(before);
+  }
+  expect(steps).toHaveLength(SEAM_CLAIM_REACH - 1);
+  expect(steps.at(-1)).toBe(seam.cell);
+  const view = getObservation(state, player);
+  expect(view.arcaneSites[0]).toMatchObject({ cell: seam.cell, controlled: true });
+  expect(claimArcaneSeam(view, 1000)).toBeNull();
 });
