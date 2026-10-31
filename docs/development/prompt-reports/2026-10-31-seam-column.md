@@ -64,7 +64,9 @@ first on 379.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
 - Hearth events: twenty-four templates against a target of one hundred and
   fifty; no epochs, escalation or crises yet. One survey mission refused on
-  the Epic headline at turn 130, a same-batch race, is recorded and open.
+  the Epic headline at turn 130, a same-batch race, is recorded and open; a
+  reordering fix was measured, moved the Epic headline out of band, and was
+  reverted ([experiment](../2026-10-31-missions-before-marches/README.md)).
   Commit `605196e` (rules 47) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-hearth-events-ii/README.md)). Commit `594ffdf` is deployed: both
