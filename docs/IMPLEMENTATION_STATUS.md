@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## AI seam objective: a war for the missing path — 2026-10-31
+
+AI only. A realm one seam short of the third path — it holds a seam, has a
+Waykeeper of the required degree and is at peace — treats the hearth holding
+a found seam of the missing path, inside another realm's borders within
+twenty-four hexes, as an objective of war: field armies march on the seam, the
+holder's hearths within three hexes rank with an enemy victory host, and the
+existing adjacent siege rule declares the war and lays the siege. Oath, treaty
+and supply partners are never pursued; city-states make no objective.
+
+Measured honestly: an unbounded first version (any realm holding a seam and
+lacking a path) moved the headline campaigns to 420 / 327 by Prosperity and
+cost the Long campaign its sealed working; it is recorded, not shipped. The
+bounded version leaves pacing at **368 / 300 / 203** with Long and Standard
+command counts identical to the rules 44 baseline (it never fires there) and
+fires on Epic for one realm on three turns, taking nothing. Verification: a
+new AI test; unit, campaigns, lint, typecheck, build and the chronicles
+journey. The measured gap is unchanged in practice: realms that hold both
+paths still fail to seal on Epic, where the scaled 9,600 price is unmeasured.
+[Evidence](development/2026-10-31-ai-seam-objective/README.md),
+[ADR0070](architecture/0070-ai-seam-objective.md).
+
 ## AI seam expeditions, and rules 44 re-prices the third path — 2026-10-31
 
 AI: realms hold the seams they find. A found seam within four hexes of a

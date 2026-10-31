@@ -267,3 +267,36 @@ export function planGlassApproach(view: Observation, heldArmyIds: ReadonlySet<st
   }
   return null;
 }
+
+/** How far from its hearths a realm will carry a war for a seam another realm holds. */
+export const SEAM_OBJECTIVE_RANGE = 24;
+export interface SeamObjective { seam: ObservedArcaneSite; holderId: string; settlementId: string | null; distance: number }
+
+/** A seam of a path the realm lacks, found inside another realm's borders, is
+ * an objective of war once it is the last gap before the working (the realm
+ * holds a seam, a caster of the required degree and no war): field armies march on it, the
+ * hearth whose borders hold it is besieged when it comes into sight, and the
+ * war is declared the moment a company can lay siege. Realms bound by oath,
+ * treaty or a supply agreement are never pursued; one objective at a time,
+ * the nearest to the realm's hearths within range. The ground's holder is read
+ * from the realm's own memory of the land, so a seam another realm claimed
+ * since it was last seen is pursued only once it is seen again. */
+export function seamObjective(view: Observation, protectedIds: ReadonlySet<string>): SeamObjective | null {
+  const attunement = view.progression.attunement;
+  // Only the last gap is worth a war: the realm holds a seam, has a caster who
+  // could seal the working, and is at peace, so the seam is all it lacks and
+  // the war is not a second front.
+  if (!attunement || view.wars.length || !view.arcaneSites.some(site => site.controlled) || !attunement.casters.some(caster => caster.degree >= attunement.casterDegree)) return null;
+  const own = view.settlements.filter(town => town.factionId === view.factionId);
+  if (!own.length) return null;
+  const cells = observedCells(view);
+  const candidates: SeamObjective[] = [];
+  for (const seam of wantedSeams(view)) {
+    const ground = cells.get(seam.cell), holderId = ground?.factionId;
+    if (!holderId || holderId === view.factionId || protectedIds.has(holderId)) continue;
+    const distance = Math.min(...own.map(town => hexDistance(town.cell, seam.cell, view.width)));
+    if (distance > SEAM_OBJECTIVE_RANGE) continue;
+    candidates.push({ seam, holderId, settlementId: ground?.settlementId ?? null, distance });
+  }
+  return candidates.sort((a, b) => a.distance - b.distance || a.seam.cell - b.seam.cell)[0] ?? null;
+}

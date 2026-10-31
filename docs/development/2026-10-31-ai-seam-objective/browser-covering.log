@@ -1,0 +1,12 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/attunement.spec.ts tests/gameplay/arcane-seams.spec.ts --workers=2 --output=docs/development/2026-10-31-ai-seam-objective/browser-results
+
+
+Running 3 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (4.0s)
+  ✓  2 [gameplay] › tests/gameplay/arcane-seams.spec.ts:19:1 › a paid survey finds a hidden seam, names what it unlocks and survives a save (4.5s)
+  ✓  3 [gameplay] › tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.4s)
+
+  3 passed (6.1s)

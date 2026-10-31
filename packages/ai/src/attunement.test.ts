@@ -6,7 +6,8 @@ import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { getLandIndex } from '../../sim/src/territory';
 import { planTurnWithReasons } from './index';
 import { planProgression } from './progression';
-import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, seamExpeditionSite } from './arcane';
+import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, SEAM_OBJECTIVE_RANGE, seamExpeditionSite, seamObjective } from './arcane';
+import { protectedFactions } from './diplomacy';
 import { hexDistance, isPassable } from '@theandril/mapgen';
 import { SITE_SEARCH_RADIUS } from '@theandril/sim';
 
@@ -356,4 +357,50 @@ test('a seam found within reach of a hearth is claimed toward one legal hex at a
   const view = getObservation(state, player);
   expect(view.arcaneSites[0]).toMatchObject({ cell: seam.cell, controlled: true });
   expect(claimArcaneSeam(view, 1000)).toBeNull();
+});
+
+test('a seam of a lacking path inside another realm\'s borders is an objective of war: field armies march on it, the hearth holding it is besieged in sight, and a protected realm is never pursued', () => {
+  const { state, player, seam } = farSeamCampaign(), rival = state.factions[1]!.id, host = hostOf(state);
+  const foundingCell = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, seam, state.world.width) === 1
+    && Object.values(state.settlements).every(town => hexDistance(town.cell, cell, state.world.width) > 2));
+  const id = 'army.rival_caravan';
+  state.armies[id] = { id, factionId: rival, name: 'Reed caravan', cell: foundingCell, movement: 3, formations: [createArmyFormation(id, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'found', factionId: rival, armyId: id, name: 'Seam Reach' })).toMatchObject({ ok: true });
+  const reach = Object.values(state.settlements).find(town => town.name === 'Seam Reach')!;
+  // The realm learns who holds the ground by seeing it, then its field company returns home.
+  const witness = 'army.warband';
+  state.armies[witness] = { id: witness, factionId: player, name: 'Glass warband', cell: seam, movement: 3, formations: [createArmyFormation(witness, 'unit.guard'), createArmyFormation(`${witness}.2`, 'unit.guard')] };
+  refreshAuthoredSight(state);
+  state.armies[witness]!.cell = host.cell; refreshAuthoredSight(state);
+  state.factions[0]!.treasury = 40;
+  let view = getObservation(state, player);
+  expect(view.settlements.some(town => town.id === reach.id)).toBe(false);
+  const goal = seamObjective(view, protectedFactions(view))!;
+  expect(goal).toMatchObject({ seam: { cell: seam, pathId: 'path.rune' }, holderId: rival, settlementId: reach.id });
+  expect(goal.distance).toBeLessThanOrEqual(SEAM_OBJECTIVE_RANGE);
+  // Out of sight the seam draws the field army closer; nothing is settled beside a held seam.
+  expect(seamExpeditionSite(view)).toBeNull();
+  const turn = planTurnWithReasons(view);
+  expect(turn.reasons.some(reason => reason.includes('objective of war'))).toBe(true);
+  const march = turn.commands.find(command => command.type === 'moveTo' && command.armyId === witness) as { target: number } | undefined;
+  expect(march).toBeDefined();
+  expect(hexDistance(march!.target, seam, state.world.width)).toBeLessThan(hexDistance(host.cell, seam, state.world.width));
+  expect(turn.commands.some(command => command.type === 'declareWar')).toBe(false);
+  // Beside the hearth, in sight, the war is declared and the siege laid in one pass.
+  state.armies[witness]!.cell = seam; state.armies[witness]!.movement = 3; refreshAuthoredSight(state);
+  view = getObservation(state, player);
+  const siege = planTurnWithReasons(view);
+  expect(siege.commands).toContainEqual({ type: 'declareWar', factionId: player, targetFactionId: rival });
+  expect(siege.commands).toContainEqual({ type: 'besiege', factionId: player, armyId: witness, settlementId: reach.id });
+  for (const command of siege.commands.filter(command => command.type === 'declareWar' || command.type === 'besiege')) expect(applyCommand(state, command)).toMatchObject({ ok: true });
+  expect(state.sieges[reach.id]).toBeDefined();
+  // An oath, treaty or supply agreement protects the holder: no objective, no war.
+  const bound = { ...view, diplomacy: { ...view.diplomacy, treaties: [{ id: 'treaty.1', parties: [player, rival], expiresTurn: view.turn + 10 }] } } as typeof view;
+  expect(seamObjective(bound, protectedFactions(bound))).toBeNull();
+  // A realm that holds no seam yet is not on the arcane road and makes no war for one.
+  expect(seamObjective({ ...view, arcaneSites: view.arcaneSites.map(site => ({ ...site, controlled: false, settlementId: null })) }, protectedFactions(view))).toBeNull();
+  // Nor does a realm already at war, or one without a caster who could seal the working.
+  expect(seamObjective({ ...view, wars: ['faction.elsewhere'] }, protectedFactions(view))).toBeNull();
+  expect(seamObjective({ ...view, progression: { ...view.progression, attunement: { ...view.progression.attunement!, casters: [] } } }, protectedFactions(view))).toBeNull();
 });

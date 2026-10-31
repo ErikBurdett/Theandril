@@ -25,17 +25,27 @@ then continue development".
   library (two delivered bullets: 109 delivered, 49 remaining) and the release
   expectations updated.
 
+- AI seam objective ([ADR 0070](../../architecture/0070-ai-seam-objective.md)):
+  a realm one seam short of the working, at peace and with a qualified caster,
+  makes the hearth holding that seam an objective of war. The unbounded first
+  version measured 420 / 327 and is recorded only; the bounded version leaves
+  the headline at 368 / 300 / 203 and fires once on Epic, taking nothing.
+  Evidence packet [docs/development/2026-10-31-ai-seam-objective/](../2026-10-31-ai-seam-objective/README.md).
+
 ## Verified
 
 Typecheck, lint, unit 2,318 / 285 files, campaigns 57 (after re-deriving the
 Epic proxy maximum from 450 to 550 on a measured 473), build, three covering
 gameplay journeys (6 of 6) and the `@scale` chronicles journey alone (1 of 1).
 Pacing: headline 369 / 300 / 203 under rules 44; proxies 473 / 452 / 357 / 263.
+Seam objective: unit 2,319, campaigns 57, build, two covering journeys and the
+chronicles journey; headline 368 / 300 / 203.
 
 ## Left open
 
-- An AI objective for a seam inside another realm's borders (conquest or
-  cession), now the measured gap to the third path.
+- The seam objective is bounded and nearly inert on the headline seed; why a
+  realm holding both paths on Epic starts a Hearth Exchange instead of a
+  working is undiagnosed. Cession as a road to a seam is not built.
 - Three-seed pacing coverage per pace under rules 44; only seed 20260905 was
   measured, and only Glass Tide reached the path.
 - Deployment and live readback of this commit are recorded in the publication
