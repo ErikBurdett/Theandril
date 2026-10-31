@@ -1,7 +1,7 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
-import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
+import { answerAlliance, answerPatronage, proposeAlliance, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planDepot } from './supply';
 import { planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_OBJECTIVE_RANGE, seamObjective, seamRally } from './arcane';
 import { planConquestDecision } from './conquest';
@@ -57,6 +57,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (diplomatic) return diplomatic;
   const answered = answerPatronage(view);
   if (answered) return answered;
+  // Rules 50: an alliance offer is answered before anything else is planned, as an oath is.
+  const allied = answerAlliance(view);
+  if (allied) return allied;
   const supplyAnswer = answerSupplyAccess(view);
   if (supplyAnswer) return supplyAnswer;
 
@@ -109,6 +112,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   for (const id of patrol.heldArmyIds) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
   const patronage = proposePatronage(view);
+  const courting = minor ? null : proposeAlliance(view);
   // An occasional paid survey of ground the realm already holds; both are bounded
   // orders that travel with the turn rather than replacing its ordinary work.
   const survey = planArcaneSurvey(view, theater.heldArmyIds);
@@ -126,8 +130,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(courting?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(courting?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;
@@ -258,6 +262,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const claimed = new Set<number>();
   const navigation = createNavigation(view);
   const wars = new Set(view.wars);
+  // Rules 50: a war declared on a realm brings its allies in at once, so a later order in this batch against one of them would be refused as already at war.
+  const alliesOfRealm = (id: string): string[] => (view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(id)).map(pact => pact.parties[0] === id ? pact.parties[1] : pact.parties[0]);
+  const openWar = (id: string): void => { wars.add(id); for (const ally of alliesOfRealm(id)) if (!protectedIds.has(ally)) wars.add(ally); };
   const settlementNames = new Set(ownSettlements.map(town => town.name));
   const foundingCells = view.settlements.map(town => town.cell);
   let hearthNumber = ownSettlements.length;
@@ -361,7 +368,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (target && plans.length <= 126 && (!minor || wars.has(target.factionId))) {
         if (!wars.has(target.factionId)) {
           plans.push({ type: 'declareWar', factionId, targetFactionId: target.factionId });
-          wars.add(target.factionId);
+          openWar(target.factionId);
           // New contingent attacks need a real post-declaration movement quote;
           // do not invent a war in the observation to bypass its current blocker.
           if (target.battleDefense) return { commands: plans, reasons };
@@ -375,7 +382,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (town && plans.length <= 126 && (!minor || wars.has(town.factionId))) {
         if (!wars.has(town.factionId)) {
           plans.push({ type: 'declareWar', factionId, targetFactionId: town.factionId });
-          wars.add(town.factionId);
+          openWar(town.factionId);
         }
         plans.push({ type: 'besiege', factionId, armyId: army.id, settlementId: town.id });
         besiegedTowns.add(town.id);

@@ -9,6 +9,7 @@ import type { BattleFormation, BattleOrder } from './combat';
 import type { Army, ArmyFormation, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
 import { indexes, updateSight } from './visibility';
 import { declareWarObjection, recordWar } from './diplomacy';
+import { allianceBetween, callAllies } from './alliances';
 import { doctrineEffects } from './progression';
 
 import { armyCanAttack, armySight, armyStrength } from './army-composition';
@@ -33,6 +34,10 @@ export function atWar(state: GameState, first: string, second: string): boolean 
   return state.wars.some(war => war[0] === pair[0] && war[1] === pair[1]);
 }
 
+/** A standing supply agreement between two realms keeps them out of each other's wars. */
+const supplyBinds = (state: GameState, a: string, b: string): string | null =>
+  state.supplyAccess.agreements.some(agreement => agreement.expiresTurn > state.turn && ((agreement.buyerId === a && agreement.providerId === b) || (agreement.buyerId === b && agreement.providerId === a)))
+    ? 'a supply agreement binds the realms.' : null;
 export function declareCampaignWar(state: GameState, factionId: string, targetFactionId: string): CommandResult {
   const target = state.factions.find(faction => faction.id === targetFactionId);
   const faction = state.factions.find(item => item.id === factionId);
@@ -41,6 +46,8 @@ export function declareCampaignWar(state: GameState, factionId: string, targetFa
   if (atWar(state, factionId, targetFactionId)) return fail('These factions are already at war.');
   const objection = declareWarObjection(state, factionId, targetFactionId);
   if (objection) return fail(objection);
+  // Rules 50: allies do not make war on each other.
+  if (allianceBetween(state, factionId, targetFactionId)) return fail('Allied realms do not make war on each other. Renounce the alliance first.');
   const visible = indexes(state).visible.get(factionId);
   const hasContact = Object.values(state.armies).some(army => !state.transports[army.id] && army.factionId === targetFactionId && visible?.has(army.cell))
     || Object.values(state.settlements).some(town => town.factionId === targetFactionId && visible?.has(town.cell));
@@ -48,9 +55,13 @@ export function declareCampaignWar(state: GameState, factionId: string, targetFa
   state.wars.push(warPair(factionId, targetFactionId));
   state.wars.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
   recordWar(state, factionId, targetFactionId);
+  // Rules 50: the target's allies answer, each unless an oath, a binding peace or a supply agreement with the attacker binds it.
+  const answered = callAllies(state, factionId, targetFactionId, allyId => declareWarObjection(state, allyId, factionId) ?? supplyBinds(state, allyId, factionId));
+  for (const [a, b] of state.wars) if ((a === factionId || b === factionId) && answered.some(event => event.type === 'alliance_answered' && event.factionId === (a === factionId ? b : a))) recordWar(state, a, b);
   return { ok: true, events: [
     { turn: state.turn, type: 'war_declared', factionId, message: `${faction.name} declared war on ${target.name}.` },
     { turn: state.turn, type: 'war_declared', factionId: targetFactionId, message: `${faction.name} declared war on ${target.name}.` },
+    ...answered,
   ] };
 }
 

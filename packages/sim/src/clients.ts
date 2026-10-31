@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { atWar, warPair } from './warfare';
 import { rulesVersion } from './rules';
+import { allianceBetween } from './alliances';
 
 /** Rules 22: a realm may take another realm as its client. The patron pays a
  * subsidy once; the client pays tribute every turn for an agreed term and keeps
@@ -53,6 +54,8 @@ export function clientProposalObjection(state: GameState, patronId: string, clie
   const patron = state.factions.find(faction => faction.id === patronId);
   if (!patron || !state.factions.some(faction => faction.id === clientId) || patronId === clientId) return 'Choose a different known realm.';
   if (atWar(state, patronId, clientId)) return 'Make peace before offering patronage.';
+  // Rules 50: an alliance is a pact between equals; patronage would bind one under the other.
+  if (allianceBetween(state, patronId, clientId)) return 'Allied realms do not take each other as clients. Renounce the alliance first.';
   if (patron.treasury < terms.giftCoin) return 'You cannot fund the offered subsidy.';
   if (patronOf(state, patronId)) return 'A client realm cannot take clients of its own.';
   if (patronOf(state, clientId)) return 'That realm already answers to a patron.';
@@ -68,6 +71,7 @@ export function clientAcceptanceBlocker(state: GameState, offer: ClientOffer): s
   const patron = state.factions.find(faction => faction.id === offer.patronId);
   if (!patron || !state.factions.some(faction => faction.id === offer.clientId)) return 'The offer references an unknown realm.';
   if (atWar(state, offer.patronId, offer.clientId)) return 'The realms are at war; the offer cannot be accepted.';
+  if (allianceBetween(state, offer.patronId, offer.clientId)) return 'The realms are allied; the offer cannot be accepted.';
   if (patron.treasury < offer.terms.giftCoin) return 'The patron can no longer fund the subsidy.';
   if (patronOf(state, offer.clientId)) return 'This realm already answers to a patron.';
   if (patronOf(state, offer.patronId) || clientsOf(state, offer.clientId).length) return 'Patronage cannot pass through a realm that is itself bound.';

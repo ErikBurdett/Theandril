@@ -21,6 +21,7 @@ import type { ArcaneSearchState, ArcaneSurveyState, ObservedArcaneSite } from '.
 import type { ObservedWard, RiteOption, Ward } from './rites';
 import type { HearthEventState, ObservedHearthEvent } from './hearth-events';
 import type { ObservedEpoch } from './epochs';
+import type { AllianceState, ObservedAlliances } from './alliances';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -266,6 +267,9 @@ export type GameCommand =
   | { type: 'cedeSettlement'; factionId: string; settlementId: string; recipientFactionId: string }
   | { type: 'performRite'; factionId: string; characterId: string; riteId: string }
   | { type: 'resolveHearthEvent'; factionId: string; eventId: string; choiceId: string }
+  | { type: 'proposeAlliance'; factionId: string; targetFactionId: string; termTurns: number }
+  | { type: 'respondAlliance'; factionId: string; offerId: string; accept: boolean }
+  | { type: 'renounceAlliance'; factionId: string; allyId: string }
   | { type: 'endTurn'; factionId: string };
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
@@ -289,6 +293,8 @@ export interface GameState {
   wards: Ward[];
   /** Rules 46: pending hearth events, one per realm, and when each realm last drew for one. */
   hearthEvents: HearthEventState;
+  /** Rules 50: defensive pacts between realms and the offers of them. */
+  alliances: AllianceState;
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -355,6 +361,8 @@ export interface Observation {
   hearthEvents?: ObservedHearthEvent[];
   /** Rules 49: the world's current age; absent under historical rules. */
   epoch?: ObservedEpoch;
+  /** Rules 50: every pact, and the realm's own alliance offers with their acceptance blockers; absent under historical rules. */
+  alliances?: ObservedAlliances;
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

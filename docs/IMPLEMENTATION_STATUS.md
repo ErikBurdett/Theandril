@@ -1,5 +1,30 @@
 # Theandril implementation status
 
+## Alliances (rules/save 50) — 2026-10-31
+
+Gate G's first pact. A realm offers another a defensive alliance of ten to
+sixty turns; sworn, allies do not make war on each other and each enters a
+war declared on the other at once, unless an oath, a binding peace, a supply
+agreement or an alliance with the attacker binds it, in which case the call
+goes unanswered and every party reads why. An alliance never calls an ally
+into a war its partner opens; a breach before the term is remembered; patron
+and client do not ally and allies take no clients; a city-state swears none;
+pacts are public. AI realms protect allies, answer an offer before anything
+else, accept while at war with fewer than two pacts, court the strongest free
+realm when pressed by a war and holding none, and count a target's allies as
+enemies the moment they declare war. Realm affairs shows the ally, offers to
+propose or renounce, lists incoming offers and disables war on an ally. Save
+50 carries the register; older envelopes load with none. Headline pacing
+**359 / 314 / 222**, the other seeds 341 / 339, 263 / 280, 196 / 196, no
+refused order; proxies 307 / 388 / 333 / 189; ten, six and eight pacts sworn
+on the headline paces. A first AI appetite swore 146 pacts and moved every
+pace out of band; it is recorded and was replaced before shipping.
+Verification: new sim, AI and journey tests; unit 2,339 / 291 files,
+campaigns 57, lint, typecheck, build, four covering journeys and the
+chronicles journey.
+[Evidence](development/2026-10-31-alliances/README.md),
+[ADR0080](architecture/0080-alliances.md).
+
 ## Campaign epochs (rules/save 49) — 2026-10-31
 
 M6's visible progression. Four ages in order — Fracture, Roads (two hearths

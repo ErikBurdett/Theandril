@@ -15,8 +15,62 @@ export function protectedFactions(view: Observation): Set<string> {
     else if (agreement.providerId === view.factionId) bound.push(agreement.buyerId);
   }
   for (const offer of view.supplyAccess?.offers ?? []) if (offer.buyerId === view.factionId && offer.expiresTurn > view.turn) bound.push(offer.providerId);
+  // Rules 50: allies do not make war on each other.
+  for (const pact of view.alliances?.pacts ?? []) if (pact.parties.includes(view.factionId)) bound.push(...pact.parties.filter(id => id !== view.factionId));
   return new Set([...bound, ...view.diplomacy.treaties.filter(treaty => treaty.expiresTurn > view.turn)
     .flatMap(treaty => treaty.parties.filter(id => id !== view.factionId))]);
+}
+
+/** Rules 50. A realm at war, or one weaker than the realm offering, accepts a
+ * defensive pact from a realm it is at peace with; a realm answers a standing
+ * offer before it makes one. Answering an offer changes who may be attacked
+ * and who answers a war, so it ends the pass. */
+export function answerAlliance(view: Observation): AiPlan | null {
+  const factionId = view.factionId;
+  if (!view.alliances || isCityState(factionId) || view.strategicCommandBlocker) return null;
+  const incoming = [...view.alliances.offers].sort((a, b) => a.createdTurn - b.createdTurn || (a.id < b.id ? -1 : 1))
+    .find(offer => offer.recipientId === factionId && offer.expiresTurn > view.turn);
+  if (!incoming) return null;
+  const own = hearths(view, factionId), theirs = hearths(view, incoming.proposerId);
+  const held = view.alliances.pacts.filter(pact => pact.parties.includes(factionId)).length;
+  // A realm bound by oath to a third realm answers that oath first; a realm at war with fewer than two allies takes the pact, since every pact also calls it into its partner's wars.
+  const accept = !incoming.acceptanceBlocker && !view.diplomacy.clients.some(bond => bond.clientId === factionId) && view.wars.length > 0 && held < 2;
+  return {
+    commands: [{ type: 'respondAlliance', factionId, offerId: incoming.id, accept }],
+    reasons: [`${accept ? 'Accept' : 'Refuse'} the alliance ${incoming.proposerId} offers for ${incoming.termTurns} turns: ${theirs} hearths against ${own}, ${view.wars.length} war${view.wars.length === 1 ? '' : 's'} of our own${incoming.acceptanceBlocker ? `; ${incoming.acceptanceBlocker}` : ''}.`],
+  };
+}
+/** Whether the wars in sight press the realm: exhausted companies, or more enemy strength in view than its own. */
+export function pressedByWar(view: Observation): boolean {
+  if (!view.wars.length) return false;
+  const own = view.armies.filter(army => army.factionId === view.factionId);
+  const strength = own.reduce((sum, army) => sum + army.strength, 0);
+  const enemies = new Set(view.wars);
+  const seen = view.armies.filter(army => enemies.has(army.factionId)).reduce((sum, army) => sum + army.strength, 0);
+  return own.some(army => army.morale < 30 || army.fatigue > 65) || seen > strength;
+}
+/** Rules 50. A realm pressed by a war and without an ally courts one every ten turns: the strongest known realm at peace with it that is neither bound to it nor already full. Making an offer binds nobody, so it travels with the turn's orders. */
+export const ALLIANCE_TERM = 30;
+export function proposeAlliance(view: Observation): AiPlan | null {
+  const factionId = view.factionId;
+  if (!view.alliances || isCityState(factionId) || !pressedByWar(view) || view.factions.length < 2) return null;
+  const seat = view.factions.findIndex(faction => faction.id === factionId);
+  if (seat < 0 || (view.turn + seat + 5) % 10 !== 0) return null;
+  // Only this realm's own partners and offers are passed over; a realm allied elsewhere may still be courted.
+  const allied = new Set(view.alliances.pacts.filter(pact => pact.parties.includes(factionId)).flatMap(pact => pact.parties));
+  const pending = new Set(view.alliances.offers.filter(offer => offer.proposerId === factionId || offer.recipientId === factionId).flatMap(offer => [offer.proposerId, offer.recipientId]));
+  const bound = new Set(view.diplomacy.clients.flatMap(bond => [bond.patronId, bond.clientId]));
+  if (view.alliances.pacts.some(pact => pact.parties.includes(factionId)) || view.alliances.offers.some(offer => offer.proposerId === factionId)) return null;
+  // Pacts are public: a realm already holding as many as a realm may is not courted.
+  const full = (id: string) => view.alliances!.pacts.filter(pact => pact.parties.includes(id)).length >= 3;
+  const candidate = view.factions.map(faction => faction.id)
+    .filter(id => id !== factionId && !isCityState(id) && !view.wars.includes(id) && !allied.has(id) && !pending.has(id) && !bound.has(id) && !full(id))
+    .sort((a, b) => hearths(view, b) - hearths(view, a) || (a < b ? -1 : 1))[0];
+  if (!candidate) return null;
+  return {
+    commands: [{ type: 'proposeAlliance', factionId, targetFactionId: candidate, termTurns: ALLIANCE_TERM }],
+    reasons: [`Offer ${candidate} an alliance of ${ALLIANCE_TERM} turns: ${hearths(view, candidate)} hearths beside our ${hearths(view, factionId)} while the realm is pressed by war.`],
+  };
 }
 
 /** Accepted peace ends the pass. A rejection preserves war and the quoted
@@ -126,8 +180,10 @@ export function proposePatronage(view: Observation): AiPlan | null {
   if (view.treasury < gift + 80 || own < 2) return null;
   const pending = new Set(view.diplomacy.clientOffers.flatMap(offer => [offer.patronId, offer.clientId]));
   const claimed = new Set(view.diplomacy.clients.flatMap(bond => [bond.patronId, bond.clientId]));
+  // Rules 50: an ally is an equal, never a client.
+  const allied = new Set((view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(factionId)).flatMap(pact => pact.parties));
   const candidate = view.factions.map(faction => faction.id)
-    .filter(id => id !== factionId && !pending.has(id) && !claimed.has(id) && !view.wars.includes(id) && hearths(view, id) > 0 && hearths(view, id) < own)
+    .filter(id => id !== factionId && !pending.has(id) && !claimed.has(id) && !allied.has(id) && !view.wars.includes(id) && hearths(view, id) > 0 && hearths(view, id) < own)
     .sort((a, b) => (isCityState(b) ? 1 : 0) - (isCityState(a) ? 1 : 0) || hearths(view, a) - hearths(view, b) || (a < b ? -1 : 1))[0];
   if (!candidate) return null;
   return {

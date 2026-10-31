@@ -94,6 +94,10 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
   const bondWith = (id: string) => view.diplomacy.clients.find(bond => (bond.patronId === id && bond.clientId === view.factionId) || (bond.clientId === id && bond.patronId === view.factionId));
   const boundElsewhere = (id: string) => view.diplomacy.clients.some(bond => bond.patronId === id || bond.clientId === id);
   const incomingPatronage = view.diplomacy.clientOffers.filter(offer => offer.clientId === view.factionId);
+  const allyWith = (id: string) => view.alliances?.pacts.find(pact => pact.parties.includes(view.factionId) && pact.parties.includes(id));
+  const allianceOfferWith = (id: string) => view.alliances?.offers.find(offer => (offer.proposerId === view.factionId && offer.recipientId === id) || (offer.proposerId === id && offer.recipientId === view.factionId));
+  const incomingAlliances = (view.alliances?.offers ?? []).filter(offer => offer.recipientId === view.factionId);
+  const ownAllies = (view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(view.factionId));
   const encounters = view.factions.filter(faction => faction.id !== view.factionId);
   const blocked = busy || Boolean(view.battle || view.pendingCapture);
   return <section className="faction-encounters" data-testid="faction-encounters" aria-label="Encountered factions">
@@ -106,18 +110,35 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
       return <div className="faction-encounter" key={faction.id}>
         <div className="faction-art-heading"><FactionArt contentId="ui.badge" definitionId={faction.definitionId} label={`${faction.name} badge`}/><strong>{faction.name}</strong></div>
         {isCityState(faction.id) && <small className="field-help" data-testid={`city-state-${faction.id}`}>City-state — one independent hearth. It keeps to its own walls and never opens a war.</small>}
+        {allyWith(faction.id) && <small className="field-help" data-testid={`alliance-${faction.id}`}>Allied until turn {allyWith(faction.id)!.expiresTurn}: neither makes war on the other, and each answers a war declared on the other.</small>}
         {bondWith(faction.id) && <small className="field-help" data-testid={`patronage-${faction.id}`}>{bondWith(faction.id)!.patronId === view.factionId ? `Your client until turn ${bondWith(faction.id)!.expiresTurn}; ${bondWith(faction.id)!.terms.tributeCoin} coin tribute each turn.` : `Your patron until turn ${bondWith(faction.id)!.expiresTurn}; you pay ${bondWith(faction.id)!.terms.tributeCoin} coin each turn.`}</small>}
         {atWar ? <><span className="war-state">⚔ At war</span><button disabled={blocked} aria-label={`Negotiate peace with ${faction.name}`} onClick={() => setNegotiating(faction.id)}>Negotiate peace</button></>
-          : <><span className="peace-state">{treaty ? `Truce until turn ${treaty.expiresTurn}` : 'At peace'}</span><button disabled={blocked || Boolean(treaty) || Boolean(bondWith(faction.id))} aria-label={`Declare war on ${faction.name}`} onClick={() => issue({ type: 'declareWar', factionId: view.factionId, targetFactionId: faction.id })}>Declare war</button></>}
+          : <><span className="peace-state">{treaty ? `Truce until turn ${treaty.expiresTurn}` : 'At peace'}</span><button disabled={blocked || Boolean(treaty) || Boolean(bondWith(faction.id)) || Boolean(allyWith(faction.id))} aria-label={`Declare war on ${faction.name}`} onClick={() => issue({ type: 'declareWar', factionId: view.factionId, targetFactionId: faction.id })}>Declare war</button></>}
         {bondWith(faction.id)?.patronId === view.factionId
           ? <button disabled={blocked} aria-label={`Release ${faction.name}`} onClick={() => issue({ type: 'releaseClient', factionId: view.factionId, clientId: faction.id })}>Release client</button>
           : bondWith(faction.id)
             ? <button className="danger" disabled={blocked} aria-label={`Renounce ${faction.name}`} onClick={() => issue({ type: 'renounceClient', factionId: view.factionId })}>{view.turn >= bondWith(faction.id)!.expiresTurn ? 'End the obligation' : 'Renounce the oath'}</button>
             : !atWar && !patron && !boundElsewhere(faction.id) && <button disabled={blocked} aria-label={`Offer patronage to ${faction.name}`} onClick={() => setCourting(faction.id)}>Offer patronage</button>}
+        {view.alliances && !isCityState(faction.id) && !atWar && !bondWith(faction.id) && (allyWith(faction.id)
+          ? <button className="danger" disabled={blocked} aria-label={`Renounce the alliance with ${faction.name}`} onClick={() => issue({ type: 'renounceAlliance', factionId: view.factionId, allyId: faction.id })}>{view.turn >= allyWith(faction.id)!.expiresTurn ? 'End the alliance' : 'Renounce the alliance'}</button>
+          : allianceOfferWith(faction.id)
+            ? <small className="field-help">An alliance offer between you awaits an answer until turn {allianceOfferWith(faction.id)!.expiresTurn}.</small>
+            : <button disabled={blocked} aria-label={`Propose an alliance to ${faction.name}`} onClick={() => issue({ type: 'proposeAlliance', factionId: view.factionId, targetFactionId: faction.id, termTurns: 30 })}>Propose an alliance (30 turns)</button>)}
       </div>;
     })}
     {negotiating && view.wars.includes(negotiating) && <PeaceBuilder key={negotiating} view={view} targetId={negotiating} busy={busy} stateHash={stateHash} issue={issue} review={review} close={() => setNegotiating(undefined)}/>}
     {courting && !patron && <PatronageBuilder key={courting} view={view} targetId={courting} busy={busy} issue={issue} close={() => setCourting(undefined)}/>}
+    {(incomingAlliances.length > 0 || ownAllies.length > 0) && <section className="peace-offers" data-testid="alliances" aria-label="Alliances">
+      <h3>Allies</h3>
+      {ownAllies.length > 0 && <p>{ownAllies.length === 1 ? 'One realm stands' : `${ownAllies.length} realms stand`} with you: {ownAllies.map(pact => `${nameOf(view, pact.parties.find(id => id !== view.factionId)!)} until turn ${pact.expiresTurn}`).join(', ')}. A war declared on either brings the other in.</p>}
+      {incomingAlliances.map(offer => <article className="peace-offer" key={offer.id} data-testid={`alliance-offer-${offer.id}`}>
+        <strong>From {nameOf(view, offer.proposerId)}</strong>
+        <p>They offer a defensive alliance of {offer.termTurns} turns: neither realm makes war on the other, and each enters a war declared on the other unless an oath, a binding peace or a supply agreement with the attacker binds it.</p>
+        <small>Expires on turn {offer.expiresTurn}.</small>
+        {offer.acceptanceBlocker && <p className="negotiation-error" role="status">{offer.acceptanceBlocker}</p>}
+        <div className="offer-responses"><button className="primary" disabled={blocked || Boolean(offer.acceptanceBlocker)} aria-label={`Accept alliance offer ${offer.id}`} onClick={() => issue({ type: 'respondAlliance', factionId: view.factionId, offerId: offer.id, accept: true })}>Accept the alliance</button><button disabled={blocked} aria-label={`Refuse alliance offer ${offer.id}`} onClick={() => issue({ type: 'respondAlliance', factionId: view.factionId, offerId: offer.id, accept: false })}>Refuse</button></div>
+      </article>)}
+    </section>}
     {(incomingPatronage.length > 0 || ownClients.length > 0 || patron) && <section className="peace-offers" data-testid="patronage" aria-label="Patronage">
       <h3>Oaths between realms</h3>
       {patron && <p>Your realm answers to {nameOf(view, patron.patronId)} until turn {patron.expiresTurn}, paying {patron.terms.tributeCoin} coin each turn.</p>}

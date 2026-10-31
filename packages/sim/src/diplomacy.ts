@@ -64,7 +64,7 @@ function paymentObjection(state: GameState, offer: PeaceOffer): string | null {
 
 export function createDiplomacy(): DiplomacyState { return { offers: [], treaties: [], relations: [], clients: [], clientOffers: [] }; }
 
-function relation(state: GameState, a: string, b: string): DiplomaticRelation {
+export function relation(state: GameState, a: string, b: string): DiplomaticRelation {
   let result = state.diplomacy.relations.find(item => same(item.parties, a, b));
   if (!result) {
     result = { parties: warPair(a, b), trust: 0, respect: 0, grievances: 0, warStartedTurn: null, lastOfferTurn: 0 };
