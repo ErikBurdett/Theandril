@@ -20,6 +20,7 @@ import type { Depot } from './depots';
 import type { ArcaneSearchState, ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { ObservedWard, RiteOption, Ward } from './rites';
 import type { HearthEventState, ObservedHearthEvent } from './hearth-events';
+import type { ObservedEpoch } from './epochs';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -352,6 +353,8 @@ export interface Observation {
   rites?: RiteOption[];
   /** Rules 46: own pending hearth events with every answer quoted; absent under historical rules. */
   hearthEvents?: ObservedHearthEvent[];
+  /** Rules 49: the world's current age; absent under historical rules. */
+  epoch?: ObservedEpoch;
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

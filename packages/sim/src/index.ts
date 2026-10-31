@@ -34,6 +34,8 @@ export { arcaneSites, observeArcaneSites, searchObjection, GLASS_SHARDS, SITE_EX
 export type { ArcaneSite, ObservedArcaneSite } from './arcane-sites';
 export { advanceHearthEvents, assertHearthEventsWithin, describeHearthEventEffects, hearthEventChoiceBlocker, emptyHearthEvents, hearthEventConditionHolds, hearthEventObjection, MAX_PENDING_HEARTH_EVENTS, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
 export type { HearthEventState, ObservedHearthEvent, ObservedHearthEventChoice, PendingHearthEvent } from './hearth-events';
+export { announceEpochs, epochConditionHolds, epochId, epochIndex, observeEpoch } from './epochs';
+export type { ObservedEpoch } from './epochs';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';
 export { previewPeace, evaluatePeaceOffer } from './diplomacy';

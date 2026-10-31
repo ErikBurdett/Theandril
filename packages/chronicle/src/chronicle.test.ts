@@ -10,7 +10,8 @@ test('retains every command and event after the bounded campaign feed rotates', 
   expect(game.events).toHaveLength(200);
   expect(archive.records).toHaveLength(65);
   expect(archive.records.flatMap(record => record.events).filter(event => event.type === 'turn_started')).toHaveLength(260);
-  expect(archive.records.flatMap(record => record.events)).toHaveLength(400); // Includes late upkeep shortfalls.
+  // Rules 49 adds the ages that begin for each of the two realms (Roads on turn 12, Seams on 24 at the Short pace): four more events.
+  expect(archive.records.flatMap(record => record.events)).toHaveLength(404); // Includes late upkeep shortfalls.
   expect(archive.records[0]?.turn).toBe(1);
   expect(archive.records.at(-1)?.afterTurn).toBe(66);
   expect(stateHash(replayArchive(parseArchive(JSON.parse(JSON.stringify(archive)) as unknown, game)))).toBe(stateHash(game));

@@ -42,9 +42,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // This private planning purse never mutates the permitted observation.
   const promisedSupplyFees = pendingSupplyAccessFees(view);
   if (promisedSupplyFees) view = { ...view, treasury: Math.max(0, view.treasury - promisedSupplyFees) };
-  // Rules 46: hearth events are answered with the turn's other orders, and an
-  // answer that costs coin or knowledge is paid before the rest of the turn is
-  // planned, so no later order is budgeted on coin the answer spends.
+  // Rules 46: hearth events are answered after the turn's other orders, so an
+  // answer that moves a hearth's people or stores never unsettles an order
+  // planned on them; its cost in coin or knowledge is taken off the purse
+  // before the rest of the turn is planned, so that coin is still there at the end.
   const hearthAnswers = planHearthEvents(view);
   if (hearthAnswers) view = { ...view, treasury: Math.max(0, view.treasury - hearthAnswers.coinSpent), knowledge: Math.max(0, view.knowledge - hearthAnswers.knowledgeSpent) };
   // The seam of the missing path, the last gap before the working, is one
@@ -125,7 +126,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...(hearthAnswers?.commands ?? []), ...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
   const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
@@ -433,5 +434,5 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (reasons.length < 16) reasons.push(`${army.id} ${strategic ? 'advances toward its visible objective' : 'explores new ground'} using its available movement budget.`);
     }
   }
-  return { commands: plans, reasons };
+  return { commands: [...plans, ...(hearthAnswers?.commands ?? [])], reasons };
 }

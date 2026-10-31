@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { EPOCHS, epochIndexOf } from './epochs';
 
 /** Rules 46: hearth events. Every so many turns a realm's hearth meets a
  * small, local turn of fortune and its ruler answers it with one of two or
@@ -27,7 +28,9 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49)]),
+  /** Rules 49: drawn only once the world has reached this age. */
+  epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
 }).strict();
 export type HearthEventChoiceDefinition = z.infer<typeof hearthEventChoiceSchema>;
 export type HearthEventDefinition = z.infer<typeof hearthEventSchema>;
@@ -247,7 +250,46 @@ const THIRD_BATCH: readonly HearthEventDefinition[] = [
       { id: 'move_the_fields_uphill', label: 'Move the fields uphill', description: 'Give up the lower fields and break new ground above the flood line.', effects: effects({ food: -10, devastation: 8, knowledge: 10 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH];
+/** Rules 49: events of the ages, drawn only once the world has reached them. */
+const FOURTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.toll_dispute', name: 'A dispute at the toll', condition: 'any', epoch: 'epoch.roads', weight: 2, sinceRules: 49,
+    text: 'Carters on the new road through {hearth} refuse the toll and block the gate with their wagons until it is settled.',
+    choices: [
+      { id: 'lower_the_toll', label: 'Lower the toll', description: 'Settle it cheaply; the road stays open and some of the carters stay.', effects: effects({ coin: -10, population: 1 }) },
+      { id: 'hold_the_toll', label: 'Hold the toll', description: 'Clear the wagons and take the toll; the gate quarter pays for the quarrel.', effects: effects({ coin: 20, devastation: 3 }) },
+    ] },
+  { id: 'event.road_wardens', name: 'Wardens for the road', condition: 'garrisoned', epoch: 'epoch.roads', weight: 2, sinceRules: 49,
+    text: 'The carters’ guild of {hearth} asks for a company to ward the road for a season, and offers to pay for it.',
+    choices: [
+      { id: 'post_the_wardens', label: 'Post the wardens', description: 'Lend the company to the road; it comes back thinner and paid.', effects: effects({ garrison: -5, coin: 15 }) },
+      { id: 'keep_them_home', label: 'Keep them home', description: 'The company stays at the hearth and the carters ward themselves.', effects: effects({}) },
+    ] },
+  { id: 'event.glass_rumours', name: 'Rumours of glass', condition: 'any', epoch: 'epoch.seams', weight: 2, sinceRules: 49,
+    text: 'Travellers at {hearth} swear the Ashfall glass on the ridge sings at night, now that everyone knows what a seam is.',
+    choices: [
+      { id: 'send_surveyors', label: 'Send surveyors', description: 'Pay a party to walk the ridge and write down what it finds.', effects: effects({ coin: -20, knowledge: 15 }) },
+      { id: 'ignore_the_rumours', label: 'Ignore the rumours', description: 'Glass sings in every tavern.', effects: effects({}) },
+    ] },
+  { id: 'event.seam_pilgrims', name: 'Pilgrims to the seam', condition: 'seam', epoch: 'epoch.seams', weight: 2, sinceRules: 49,
+    text: 'Pilgrims come to {hearth} to see the seam its borders hold, and will not be kept from it.',
+    choices: [
+      { id: 'admit_them', label: 'Admit them', description: 'Let them in to the lower terraces and learn what they carry from other seams.', effects: effects({ knowledge: 20, food: -4 }) },
+      { id: 'charge_them', label: 'Charge them', description: 'Sell them a look from the wall.', effects: effects({ coin: 10 }) },
+    ] },
+  { id: 'event.bid_fever', name: 'The fever of the bid', condition: 'any', epoch: 'epoch.bids', weight: 2, sinceRules: 49,
+    text: 'Word that a realm has opened its bid for the world reaches {hearth}, and the market will talk of nothing else.',
+    choices: [
+      { id: 'raise_a_subscription', label: 'Raise a subscription', description: 'Let the hearth subscribe to the realm’s own future; it pays, and quarrels over it.', effects: effects({ coin: 30, devastation: 5 }) },
+      { id: 'calm_the_hearth', label: 'Calm the hearth', description: 'Open the stores and the archive and let the talk burn down.', effects: effects({ food: -5, knowledge: 10 }) },
+    ] },
+  { id: 'event.wagers_on_the_future', name: 'Wagers on the future', condition: 'populous', epoch: 'epoch.bids', weight: 2, sinceRules: 49,
+    text: 'The bookmakers of {hearth} are taking wagers on which realm will close the age.',
+    choices: [
+      { id: 'take_the_house_share', label: 'Take the house’s share', description: 'Licence the wagers and take a share of every book.', effects: effects({ coin: 40 }) },
+      { id: 'forbid_the_wagers', label: 'Forbid the wagers', description: 'Close the books and put the bookmakers’ clerks to the archive.', effects: effects({ knowledge: 10 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);
@@ -271,6 +313,9 @@ export function validateHearthEventContent(events = HEARTH_EVENTS): void {
     if (event.choices.every(choice => Object.values(choice.effects).every(value => !value))) throw new Error('A hearth event changes something: ' + event.id);
     if (event.sinceRules === 46 && event.choices.some(choice => 'ashglass' in choice.effects || 'garrison' in choice.effects)) throw new Error('A rules 46 event carries no rules 47 effect: ' + event.id);
     if (event.sinceRules < 48 && event.choices.some(choice => choice.followUp)) throw new Error('A rules 46 or 47 event schedules no follow-up: ' + event.id);
+    if (event.sinceRules < 49 && event.epoch) throw new Error('An event before rules 49 names no age: ' + event.id);
+    if (event.epoch && epochIndexOf(event.epoch) < 0) throw new Error('An event names an age of the catalogue: ' + event.id);
+    if (event.epoch === EPOCHS[0]!.id) throw new Error('The first age gates nothing: ' + event.id);
     if (event.condition === 'chained' && event.sinceRules < 48) throw new Error('A chained event belongs to rules 48 or later: ' + event.id);
     for (const choice of event.choices) if (choice.followUp) {
       const next = events.find(item => item.id === choice.followUp!.templateId);

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { ATTUNEMENT_VICTORY, HEARTH_EVENTS, hearthEventsForRules, validateHearthEventContent, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, SCHEMA44_ATTUNEMENT_VICTORY, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
+import { ATTUNEMENT_VICTORY, EPOCHS, validateEpochContent, HEARTH_EVENTS, hearthEventsForRules, validateHearthEventContent, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, SCHEMA44_ATTUNEMENT_VICTORY, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
   expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
@@ -114,39 +114,51 @@ test('production rejects missing references, duplicate prerequisites and impossi
 });
 
 test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves still load', () => {
-  expect(contentPackHash(SCHEMA17_CAMPAIGN_PACES, null, false, magicPackForRules(17), false, undefined, false)).toBe('b79c78ed');
-  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, null, false, magicPackForRules(18), false, undefined, false)).toBe('98b97bba');
-  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, false, magicPackForRules(20), false, undefined, false)).toBe('3127e431');
-  expect(contentPackHash(SCHEMA21_CAMPAIGN_PACES, undefined, true, magicPackForRules(21), false, undefined, false)).toBe('f70d99d5');
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(23), false, undefined, false)).toBe('f4076f55');
+  expect(contentPackHash(SCHEMA17_CAMPAIGN_PACES, null, false, magicPackForRules(17), false, undefined, false, false)).toBe('b79c78ed');
+  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, null, false, magicPackForRules(18), false, undefined, false, false)).toBe('98b97bba');
+  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, false, magicPackForRules(20), false, undefined, false, false)).toBe('3127e431');
+  expect(contentPackHash(SCHEMA21_CAMPAIGN_PACES, undefined, true, magicPackForRules(21), false, undefined, false, false)).toBe('f70d99d5');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(23), false, undefined, false, false)).toBe('f4076f55');
   // Rules 24–37 content, before rules 38 added Attunement and path deepening.
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(37), false, undefined, false)).toBe('015468d1');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(37), false, undefined, false, false)).toBe('015468d1');
   // Rules 38–39 content, before rules 40 added strategic rites.
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(39), true, SCHEMA43_ATTUNEMENT_VICTORY, false)).toBe('03ac0328');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(39), true, SCHEMA43_ATTUNEMENT_VICTORY, false, false)).toBe('03ac0328');
   // Rules 40 content, before rules 41 added the ward-breaking counter-rite.
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(40), true, SCHEMA43_ATTUNEMENT_VICTORY, false)).toBe('ac80514d');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(40), true, SCHEMA43_ATTUNEMENT_VICTORY, false, false)).toBe('ac80514d');
   // Rules 41 content, before rules 42 added the Flame kindling rite.
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(41), true, SCHEMA43_ATTUNEMENT_VICTORY, false)).toBe('78df970c');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(41), true, SCHEMA43_ATTUNEMENT_VICTORY, false, false)).toBe('78df970c');
   // Rules 42–43 content, before rules 44 re-priced Attunement and the Epic Hearth Exchange.
-  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(43), true, SCHEMA43_ATTUNEMENT_VICTORY, false)).toBe('f738e917');
+  expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(43), true, SCHEMA43_ATTUNEMENT_VICTORY, false, false)).toBe('f738e917');
   // Rules 44 content, before rules 45 re-priced Attunement once AI realms guarded their seam hearths.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(44), true, SCHEMA44_ATTUNEMENT_VICTORY, false)).toBe('88b0823d');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(44), true, SCHEMA44_ATTUNEMENT_VICTORY, false, false)).toBe('88b0823d');
   expect(SCHEMA44_ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 3600, long: 6000, epic: 9600 });
   expect(ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 7200, long: 12_000, epic: 18_000 });
   // Rules 45 content, before rules 46 added hearth events; the current pack seals them.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(45), true, ATTUNEMENT_VICTORY, false)).toBe('1f0c41ca');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(45), true, ATTUNEMENT_VICTORY, false, false)).toBe('1f0c41ca');
   // Rules 46 content, the first eight hearth events, before rules 47 added sixteen more; the current pack seals all twenty-four.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(46), true, ATTUNEMENT_VICTORY, hearthEventsForRules(46))).toBe('8a737501');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(46), true, ATTUNEMENT_VICTORY, hearthEventsForRules(46), false)).toBe('8a737501');
   expect(CONTENT_HASH).not.toBe('1f0c41ca');
   expect(CONTENT_HASH).not.toBe('8a737501');
   // Rules 47 content, twenty-four events, before rules 48 added the chains; the current pack seals all thirty-three.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(47), true, ATTUNEMENT_VICTORY, hearthEventsForRules(47))).toBe('c1e05b8e');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(47), true, ATTUNEMENT_VICTORY, hearthEventsForRules(47), false)).toBe('c1e05b8e');
   expect(CONTENT_HASH).not.toBe('c1e05b8e');
-  expect(HEARTH_EVENTS).toHaveLength(33);
+  // Rules 48 content, thirty-three events and no ages, before rules 49 added the ages; the current pack seals the ages and thirty-nine events.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(48), true, ATTUNEMENT_VICTORY, hearthEventsForRules(48), false)).toBe('4847de40');
+  expect(CONTENT_HASH).not.toBe('4847de40');
+  expect(EPOCHS.map(epoch => epoch.id)).toEqual(['epoch.fracture', 'epoch.roads', 'epoch.seams', 'epoch.bids']);
+  expect(() => validateEpochContent()).not.toThrow();
+  expect(() => validateEpochContent([EPOCHS[1]!, EPOCHS[0]!])).toThrow('first epoch is the start');
+  expect(() => validateEpochContent([EPOCHS[0]!, EPOCHS[0]!])).toThrow('Duplicate epoch ID');
+  expect(hearthEventsForRules(49)).toHaveLength(39);
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, epoch: 'epoch.roads' }])).toThrow('names no age');
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 49, epoch: 'epoch.nowhere' }])).toThrow('names an age of the catalogue');
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 49, epoch: 'epoch.fracture' }])).toThrow('first age gates nothing');
+  expect(HEARTH_EVENTS).toHaveLength(39);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
   expect(hearthEventsForRules(47)).toHaveLength(24);
   expect(hearthEventsForRules(48)).toHaveLength(33);
+  expect(hearthEventsForRules(48).every(event => !event.epoch)).toBe(true);
   expect(hearthEventsForRules(47).every(event => event.condition !== 'chained' && event.choices.every(choice => !choice.followUp))).toBe(true);
   const rising = HEARTH_EVENTS.find(event => event.id === 'event.river_rising')!;
   expect(() => validateHearthEventContent([{ ...rising, sinceRules: 47 }, ...HEARTH_EVENTS.filter(event => event.condition === 'chained')])).toThrow('schedules no follow-up');

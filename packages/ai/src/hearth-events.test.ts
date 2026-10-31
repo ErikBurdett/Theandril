@@ -29,8 +29,9 @@ test('rules 46: the AI answers a hearth event by the quoted value of its effects
   view = getObservation(state, player);
   expect(planHearthEvents(view)!.commands[0]).toMatchObject({ choiceId: 'fill_the_granary' });
   const turn = planTurnWithReasons(view);
-  expect(turn.commands[0]).toEqual({ type: 'resolveHearthEvent', factionId: player, eventId: id, choiceId: 'fill_the_granary' });
-  expect(applyCommand(state, turn.commands[0]!)).toMatchObject({ ok: true });
+  // The answer closes the turn's orders, so nothing planned on the hearth's stores is unsettled by it.
+  expect(turn.commands.at(-1)).toEqual({ type: 'resolveHearthEvent', factionId: player, eventId: id, choiceId: 'fill_the_granary' });
+  expect(applyCommand(state, turn.commands.at(-1)!)).toMatchObject({ ok: true });
   expect(host.food).toBe(14);
   expect(planHearthEvents(getObservation(state, player))).toBeNull();
   // Devastation and population weigh: refugees are taken in, a collapse is rebuilt when the coin is there.

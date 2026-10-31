@@ -39,6 +39,7 @@ import { emptyArcaneResearch, observeArcaneResearch, researchArcane } from './ma
 import { cedeSettlement, cessionCommandSchemas } from './cession';
 import { advanceWards, assertNoWards, observeRites, observeWards, performRite, riteCommandSchemas } from './rites';
 import { advanceHearthEvents, emptyHearthEvents, hearthEventCommandSchemas, observeHearthEvents, resolveHearthEvent } from './hearth-events';
+import { announceEpochs, epochIndex, observeEpoch } from './epochs';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
 import type { BattleFactObserver, BattlePresentationEvent, BattlePresentationObserver } from './combat/presentation';
 
@@ -185,7 +186,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48)]).default(40),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49)]).default(40),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -452,6 +453,8 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     return command.type === 'endTurn' ? validateEndTurn(state, command) : fail('Resolve the pending battle before issuing strategic commands.');
   }
   const emitted: DomainEvent[] = [];
+  // Rules 49: the age the world is in before this command; every age it enters by the command's end is announced with its facts.
+  const ageBefore = epochIndex(state);
   // Only this bounded command's actual facts are collected. No callback receives live state.
   const presentedBattle = onBattle && (state.battle?.rulesVersion ?? 0) >= 9 ? state.battle : null;
   const beforeScene = presentedBattle ? getBattleScene(state, presentedBattle) : null;
@@ -698,6 +701,7 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     for (const party of state.factions) refreshLandKnowledge(state, party.id, index.visible.get(party.id) ?? new Map());
   }
   upgradeLandVisibility(state);
+  announceEpochs(state, ageBefore, emitted);
   state.events.push(...emitted);
   if (state.events.length > MAX_EVENTS) state.events.splice(0, state.events.length - MAX_EVENTS);
   if (onBattle && presentedBattle && beforeScene) {
@@ -747,7 +751,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
     battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
     arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}),
-    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
+    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), ...(rulesVersion(state) >= 49 ? { epoch: observeEpoch(state) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
     roads: observeRoads(state, factionId),
     layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),

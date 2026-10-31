@@ -1,5 +1,28 @@
 # Theandril implementation status
 
+## Campaign epochs (rules/save 49) — 2026-10-31
+
+M6's visible progression. Four ages in order — Fracture, Roads (two hearths
+ever founded per realm, or the pace's turn), Seams (a seam found, or the
+pace's turn), Bids (a public bid opened) — read from facts of the world that
+only grow, so the age needs no canonical field, never goes back, and a replay
+or an older envelope reads the same age from the same world. Every applied
+command announces each age the world entered (`epoch_begun`, to every
+realm); the chronicle titles such a turn's chapter after the age; the
+masthead names the age; the observation carries it. Six hearth events belong
+to the later ages and are drawn only once the world reaches them. The rules
+48 pack is frozen as `4847de40`; v48 saves load unchanged. Headline pacing
+**419 / 293 / 211** on the headline seed, the two other seeds 352 / 340,
+270 / 274, 193 / 193, no refused order; proxies 333 / 365 / 294 / 189. The
+Epic headline course sits nineteen turns above its band while the other two
+Epic seeds sit inside it: recorded as a drift of one course, not re-priced.
+A first design that kept the age as canonical state broke older-envelope
+round trips and was replaced. Verification: new sim and content tests, a new
+journey; unit 2,335 / 289 files, campaigns 57, lint, typecheck, build, four
+covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-epochs/README.md),
+[ADR0079](architecture/0079-campaign-epochs.md).
+
 ## Hearth event chains (rules/save 48) — 2026-10-31
 
 M6's first escalation. An answer may schedule a follow-up event at the same

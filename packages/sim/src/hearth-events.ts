@@ -4,6 +4,8 @@ import { neighbors, SeededRandom } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
 import { arcaneSites, controllingSettlement } from './arcane-sites';
+import { epochIndex } from './epochs';
+import { epochIndexOf } from '@theandril/content';
 
 /** Rules 46: hearth events. At the start of a turn a realm that has had no
  * event for ten turns may be offered one at a hearth of its own that is
@@ -58,6 +60,8 @@ const templateOf = (state: GameState, templateId: string): HearthEventDefinition
 export function hearthEventConditionHolds(state: GameState, template: HearthEventDefinition, settlementId: string): boolean {
   const town = state.settlements[settlementId];
   if (!town) return false;
+  // Rules 49: an event of a later age waits for the world to reach it.
+  if (template.epoch && epochIndex(state) < epochIndexOf(template.epoch)) return false;
   switch (template.condition) {
     case 'any': return true;
     case 'populous': return town.population >= 6;

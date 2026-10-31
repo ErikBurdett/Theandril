@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events and their chains
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, their chains and the ages
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -49,6 +49,12 @@
 - A mission-ordering fix for the refused survey order was measured, moved the
   Epic headline out of band, and was reverted
   ([experiment](../2026-10-31-missions-before-marches/README.md)).
+- Campaign epochs, rules/save 49 ([ADR 0079](../../architecture/0079-campaign-epochs.md)):
+  four ages read from facts of the world that only grow, announced as they
+  happen, in the masthead and the chronicle; six events of the ages. A first
+  design kept the age as canonical state and was replaced. Evidence packet
+  [docs/development/2026-10-31-epochs/](../2026-10-31-epochs/README.md);
+  roadmap library 117 delivered.
 
 ## Verified
 
@@ -62,7 +68,10 @@ proxies 372 / 393 / 307 / 199. Hearth events: unit 2,329 / 288 files, campaigns
 headline **393 / 301 / 210**, proxies 385 / 412 / 270 / 182. Hearth events II:
 unit 2,330, campaigns 57, build, the same journeys; headline **388 / 313 /
 216**, proxies 344 / 401 / 300 / 194. Chains: unit 2,331, campaigns 57, build,
-the same journeys; headline **385 / 306 / 211**, proxies 345 / 469 / 311 / 193. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
+the same journeys; headline **385 / 306 / 211**, proxies 345 / 469 / 311 / 193.
+Epochs: unit 2,335, campaigns 57, build, four journeys and the chronicles
+journey; headline **419 / 293 / 211**, the other seeds 352 / 340, 270 / 274,
+193 / 193, proxies 333 / 365 / 294 / 189. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
@@ -71,8 +80,12 @@ first on 379.
 - A warden for every seam hearth (rites 40–42) is not built; the watch does
   not garrison every seam hearth at once.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
-- Hearth events: thirty-three templates against a target of one hundred and
-  fifty; chains are the first escalation; no epochs or world crises yet.
+- Hearth events: thirty-nine templates against a target of one hundred and
+  fifty; chains and the ages are built; no world crises, migration or
+  collapse yet. The Epic headline course ends on 419, above its band, while
+  the two other Epic seeds end inside it; recorded as a drift of one course.
+  Deployment of the rules 49 commit is recorded in its publication packet
+  once the workflows finish.
   Commit `7447299` (rules 48) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-hearth-event-chains/README.md)). One survey mission refused on

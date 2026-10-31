@@ -11,7 +11,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49;
 export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
@@ -58,7 +58,7 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
@@ -106,6 +106,7 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(46) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(47) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(48) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(49) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 
@@ -256,7 +257,9 @@ export function generateChronicles(game: GameState, archive: CampaignArchive): C
     if (landProgress) paragraphs.push(`Across the hinterlands, ${landProgress} land-work order${landProgress === 1 ? '' : 's'} advanced. Their paid commitments and remaining work are preserved in the technical ledger.`);
     if (rejected) paragraphs.push(`${rejected} order${rejected === 1 ? ' was' : 's were'} refused by the campaign rules and changed no realm. The technical ledger preserves the reasons.`);
     if (!paragraphs.length) paragraphs.push('No new public achievement or calamity was recorded in this turn; the ledgers of the realms continued.');
+    const begun = events.find(e => e.type === 'epoch_begun');
     const title = events.some(e => e.type === 'campaign_victory') ? `Turn ${number} — The closing of the book`
+      : begun ? `Turn ${number} — ${begun.message.split(' begins:')[0]}`
       : events.some(e => e.type === 'settlement_captured') ? `Turn ${number} — Hearths under new banners`
         : events.some(e => e.type === 'battle_finished') ? `Turn ${number} — The reckoning of arms`
           : events.some(e => e.type === 'war_declared') ? `Turn ${number} — The broken peace`
