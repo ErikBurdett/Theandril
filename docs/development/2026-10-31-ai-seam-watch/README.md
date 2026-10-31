@@ -63,6 +63,7 @@ bid already started.
 | `pnpm test:unit` | **2,323 tests / 285 files pass** ([log](tests-unit.log)) |
 | `pnpm test:campaigns` | 57 tests / 10 files pass ([log](tests-campaigns.log)) |
 | `pnpm measure:pacing headline standard long` (rules 45) | **352 / 306 / 201**, all Attunement, 0 refusals ([log](pacing-rules45.log), [json](pacing-rules45.json)) |
+| seeds 20260906 and 20260907, rules 45 | Epic 360 / 315, Long 269 / 251, Standard 184 / 181, all Prosperity, 0 refusals: with the headline seed the matrix reads Standard 201/184/181, Long 306/269/251, Epic 352/360/315 against the rules 35 matrix 219/194/201, 329/309/287, 374/332/327 ([log](pacing-three-seed-rules45.log), [json](pacing-three-seed-rules45.json)) |
 | proxies, rules 45 | Epic 372, chronicle Epic 393, Long 307, Standard 199, all Prosperity, within their bounds ([log](pacing-proxies-rules45.log), [json](pacing-proxies-rules45.json)) |
 | seam-hearth sieges, Epic, under the watch at rules 44 prices | five sieges against four before the end on 283 ([after](seam-siege-defense-epic-after.txt)); seam hearth losses ([after](seam-hearth-loss-epic-after.txt)) |
 | `pnpm build` | pass ([log](build.log)) |
@@ -76,6 +77,7 @@ bid already started.
   has not arrived can still fall (Glass Tide, Epic, turn 191 under the watch).
 - The Epic replays under the watch were made at the rules 44 prices and end on
   283; they are the measurements that forced the re-pricing, kept as such.
-- One seed; Sepulchral Synod is the realm that reaches the path on every pace.
-  Three-seed coverage per pace is not measured here.
+- Sepulchral Synod is the only realm that reaches the path, on the headline seed
+  only; the two other seeds end by Prosperity, the third Long and Epic seeds
+  under their targets (251, 315) as they were at rules 35 (287, 327).
 - A warden for every seam hearth (rites 40–42) is not built.

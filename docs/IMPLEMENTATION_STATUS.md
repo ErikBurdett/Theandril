@@ -13,7 +13,10 @@ paths and seal the working as soon as the rules 44 price was met: 283 / 226 /
 to 7,200 / 12,000 / 18,000 knowledge (Short unchanged), the rules 44 working
 frozen under pack `88b0823d`; v44 saves load unchanged. Headline pacing
 **352 / 306 / 201**, every campaign in band, all by Attunement against a
-Prosperity bid; proxies 372 / 393 / 307 / 199. Verification: new AI, sim and
+Prosperity bid; proxies 372 / 393 / 307 / 199. The first three-seed matrix
+since rules 35 reads Standard 201/184/181, Long 306/269/251, Epic 352/360/315
+(the other seeds by Prosperity; the third Long and Epic seeds under target, as
+at rules 35). Verification: new AI, sim and
 content tests; unit 2,323, campaigns 57, lint, typecheck, build, covering
 journeys and the chronicles journey. Not built: a warden for every seam
 hearth; three-seed coverage per pace. Commit `0e3c26b` is deployed: both
