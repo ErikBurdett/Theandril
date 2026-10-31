@@ -15,6 +15,8 @@ war before the price is met on turn 330. Headline pacing **369 / 300 / 203**,
 unchanged. Verification: a new AI test; unit, campaigns, lint, typecheck,
 build, two covering journeys and the chronicles journey. The measured gap is
 now keeping or retaking a seam hearth through a long campaign's wars.
+Deployed as `6465b33`: both workflows and the live readback pass
+([publication packet](development/2026-10-31-publication-seam-study-post/README.md)).
 [Evidence](development/2026-10-31-ai-seam-study-post/README.md),
 [ADR0071](architecture/0071-ai-seam-study-post.md).
 
