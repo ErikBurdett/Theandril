@@ -22,6 +22,9 @@ Landmarks have no events, rewards beyond yield, intelligence or faction
 interactions yet, and the AI does not seek them. Verification: new sim,
 content and journey tests; unit 2,342 / 292 files, campaigns 57, lint,
 typecheck, build, three covering journeys and the chronicles journey.
+Commit `face6a1` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-10-31-publication-landmarks/README.md)).
 [Evidence](development/2026-10-31-landmarks/README.md),
 [ADR0081](architecture/0081-landmarks.md).
 

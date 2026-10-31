@@ -66,7 +66,10 @@
 - Landmarks, rules/save 51 ([ADR 0081](../../architecture/0081-landmarks.md)):
   twelve original landmark kinds set from the campaign seed with no save field,
   seen when explored, read in the hex inspector and yielding with the land to
-  the hearth that works the hex. Evidence packet
+  the hearth that works the hex. Commit `face6a1` is deployed: both workflows
+  succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-landmarks/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-landmarks/](../2026-10-31-landmarks/README.md);
   roadmap library 119 delivered.
 
