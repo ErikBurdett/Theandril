@@ -22,6 +22,7 @@ import type { ObservedWard, RiteOption, Ward } from './rites';
 import type { HearthEventState, ObservedHearthEvent } from './hearth-events';
 import type { ObservedEpoch } from './epochs';
 import type { AllianceState, ObservedAlliances } from './alliances';
+import type { ObservedLandmark } from './landmarks';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -363,6 +364,8 @@ export interface Observation {
   epoch?: ObservedEpoch;
   /** Rules 50: every pact, and the realm's own alliance offers with their acceptance blockers; absent under historical rules. */
   alliances?: ObservedAlliances;
+  /** Rules 51: every landmark on explored ground; absent under historical rules. */
+  landmarks?: ObservedLandmark[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

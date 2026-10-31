@@ -37,6 +37,8 @@ export type { HearthEventState, ObservedHearthEvent, ObservedHearthEventChoice, 
 export { announceEpochs, epochConditionHolds, epochId, epochIndex, observeEpoch } from './epochs';
 export { ALLIANCE_OFFER_TURNS, allianceAcceptanceBlocker, allianceBetween, allianceProposalObjection, alliesOf, callAllies, emptyAlliances, MAX_ALLIANCES_PER_REALM, observeAlliances, validateAlliances } from './alliances';
 export type { Alliance, AllianceOffer, AllianceState, ObservedAllianceOffer, ObservedAlliances } from './alliances';
+export { landmarkAt, landmarks, landmarkYieldAt, MAX_LANDMARKS, observeLandmarks } from './landmarks';
+export type { Landmark, ObservedLandmark } from './landmarks';
 export type { ObservedEpoch } from './epochs';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';

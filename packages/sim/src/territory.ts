@@ -1,4 +1,5 @@
 import { cessionOptions, type CessionOption } from './cession';
+import { landmarkYieldAt } from './landmarks';
 import { z } from 'zod';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, TECHNOLOGIES, resourceById, type LandYield } from '@theandril/content';
 import { BIOME_NAMES, hexDistance, naturalFeatures, neighbors } from '@theandril/mapgen';
@@ -411,6 +412,8 @@ function cellYields(state: GameState, town: Settlement, cell: number, context?: 
   const land = state.land.settlements[town.id], improvement = context ? context.town.owner.byId.get(land?.improvements[cell] ?? '') : IMPROVEMENTS.find(item => item.id === land?.improvements[cell]);
   const result: LandYieldBreakdown = { biome: { ...(BIOME_YIELDS[biome] ?? emptyYield()) }, features: emptyYield(), affinity: emptyYield(), improvement: { ...(improvement?.yields ?? emptyYield()) }, featureModifiers: emptyYield(), total: emptyYield() };
   for (const feature of NATURAL_FEATURES) if (flags & feature.feature) addYield(result.features, feature.yields);
+  // Rules 51: a landmark on the hex yields with the land to the hearth that works it.
+  addYield(result.features, landmarkYieldAt(state, cell));
   const ecology = context ? context.town.owner.ecology : FACTION_ECOLOGIES[faction(state, town.factionId)?.definitionId ?? ''];
   for (const affinity of ecology?.affinities ?? []) if (affinity.biomeId === biome) addYield(result.affinity, affinity.yields);
   for (const modifier of improvement?.featureModifiers ?? []) if ((flags & modifier.feature) === modifier.feature) addYield(result.featureModifiers, modifier.yields);

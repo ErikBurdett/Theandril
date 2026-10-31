@@ -1,0 +1,15 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/landmarks.spec.ts tests/gameplay/map-actions.spec.ts tests/gameplay/attunement.spec.ts --workers=2 --output=docs/development/2026-10-31-landmarks/browser-results
+
+
+Running 6 tests using 2 workers
+
+  ✓  2 [gameplay] › tests/gameplay/landmarks.spec.ts:11:1 › select a landmark hex and read its name, story and yield in the hex inspector (5.6s)
+  ✓  1 [gameplay] › tests/gameplay/attunement.spec.ts:9:1 › seal an Attunement through its qualified caster, sustain it to victory and read the chronicle (6.6s)
+  ✓  4 [gameplay] › tests/gameplay/attunement.spec.ts:62:1 › the Victory tab explains an unqualified caster and keeps the working closed at 390px with larger text (1.7s)
+  ✓  3 [gameplay] › tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (3.0s)
+  ✓  5 [gameplay] › tests/gameplay/map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (1.8s)
+  ✓  6 [gameplay] › tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (3.0s)
+
+  6 passed (14.1s)

@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages and alliances
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances and landmarks
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -63,6 +63,12 @@
   matched the build ([publication packet](../2026-10-31-publication-alliances/README.md)).
   Evidence packet [docs/development/2026-10-31-alliances/](../2026-10-31-alliances/README.md);
   roadmap library 118 delivered.
+- Landmarks, rules/save 51 ([ADR 0081](../../architecture/0081-landmarks.md)):
+  twelve original landmark kinds set from the campaign seed with no save field,
+  seen when explored, read in the hex inspector and yielding with the land to
+  the hearth that works the hex. Evidence packet
+  [docs/development/2026-10-31-landmarks/](../2026-10-31-landmarks/README.md);
+  roadmap library 119 delivered.
 
 ## Verified
 
@@ -82,6 +88,9 @@ journey; headline **419 / 293 / 211**, the other seeds 352 / 340, 270 / 274,
 193 / 193, proxies 333 / 365 / 294 / 189. Alliances: unit 2,339, campaigns 57,
 build, four journeys and the chronicles journey; headline **359 / 314 / 222**,
 the other seeds 341 / 339, 263 / 280, 196 / 196, proxies 307 / 388 / 333 / 189.
+Landmarks: unit 2,342 / 292 files, campaigns 57, build, three journeys (one
+new) and the chronicles journey; headline **413 / 320 / 216**, the other seeds
+379 / 332, 260 / 284, 197 / 201, proxies 314 / 424 / 309 / 189.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -97,6 +106,10 @@ first on 379.
   the two other Epic seeds end inside it; recorded as a drift of one course.
 - Alliances: an ally called into a war makes its own peace; no shared peace,
   guarantees or passage rights.
+- Landmarks: twelve kinds, yield only; no events, rewards, intelligence or
+  faction interactions, and the AI does not seek them. The Epic headline
+  course ends on 413, above band for the third slice running, while the other
+  Epic seeds end inside it.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

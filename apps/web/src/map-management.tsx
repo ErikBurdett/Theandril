@@ -27,6 +27,8 @@ type Props = {
 };
 
 /** Both management surfaces mount these same controls, never two land-query owners. */
+/** Rules 51: a landmark's yield in words, only the parts that are not zero. */
+const yieldSummary = (yields: { food: number; industry: number; coin: number; knowledge: number }): string => (['food', 'industry', 'coin', 'knowledge'] as const).filter(key => yields[key]).map(key => `+${yields[key]} ${key}`).join(', ') || 'nothing';
 export function managementPanes({ view, selection, movement, busy, name, setName, issue, select, openCharacters, renderer, query, stateHash, queryEpoch, queryEnabled, spectator }: Props) {
   const army = view.armies.find(item => item.id === selection.armyId && item.factionId === view.factionId);
   const settlement = view.settlements.find(item => item.id === selection.settlementId && item.factionId === view.factionId);
@@ -109,10 +111,13 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   </> : settlement ? <>
     <h2>{settlement.name}</h2><p className="subtle">A hearth of the {realmName} · cell {settlement.cell}</p>
     <div className="stat-pair"><div><strong>{settlement.population}</strong><small>Population</small></div><div><strong>{settlement.food}</strong><small>Stored food</small></div></div>
+    {(view.landmarks ?? []).filter(landmark => view.cells.find(item => item.cell === landmark.cell)?.settlementId === settlement.id).map(landmark => <p key={landmark.id} className="field-help" data-testid={`held-landmark-${landmark.id}`}>Within its borders: {landmark.name} — {yieldSummary(landmark.yields)} when worked.</p>)}
   </> : null;
+  const landmarkHere = selection.cell === undefined ? undefined : (view.landmarks ?? []).find(landmark => landmark.cell === selection.cell);
   const location = <>
     <RuinInspection view={view} cell={selection.cell}/>
-    {selection.cell !== undefined && <div className="hex-inspector"><span className="eyebrow">Selected hex {selection.cell}</span><p>{cell ? `${isLake(cell.hydrology ?? 0) ? 'Freshwater lake' : cell.waterDepth ? WATER_DEPTH_NAMES[cell.waterDepth] : BIOME_NAMES[cell.biome] ?? 'Unknown biome'} · ${terrainNames[cell.terrain]} · fertility ${cell.fertility} · ${spectator ? 'spectator view' : cell.visible ? 'in sight' : 'last explored'}` : 'Beyond known maps. Send a wayfinder or fleet to chart this region.'}</p>
+    {selection.cell !== undefined && <div className="hex-inspector"><span className="eyebrow">Selected hex {selection.cell}</span>
+      {landmarkHere && <p data-testid="landmark"><strong>{landmarkHere.name}</strong> · {landmarkHere.description}<br/>Worked by the hearth that claims it: {yieldSummary(landmarkHere.yields)}.</p>}<p>{cell ? `${isLake(cell.hydrology ?? 0) ? 'Freshwater lake' : cell.waterDepth ? WATER_DEPTH_NAMES[cell.waterDepth] : BIOME_NAMES[cell.biome] ?? 'Unknown biome'} · ${terrainNames[cell.terrain]} · fertility ${cell.fertility} · ${spectator ? 'spectator view' : cell.visible ? 'in sight' : 'last explored'}` : 'Beyond known maps. Send a wayfinder or fleet to chart this region.'}</p>
       {resource && <div className="resource-works"><MapArt contentId={resource.id} label={resource.name} compact/><p><strong>{resource.name}</strong> · {resource.description}<br/>Work with {IMPROVEMENTS.find(item => item.id === resource.improvementId)?.name} to gather {resource.extraction} / turn.</p></div>}
       {cell && riverSize(cell.hydrology ?? 0) > 0 && <p>River · {['', 'headwater', 'tributary', 'main river'][riverSize(cell.hydrology ?? 0)]}</p>}
       {Boolean(cell?.roadMask) && <p>Completed road connections · {Array.from({ length: 6 }, (_, bit) => Boolean((cell?.roadMask ?? 0) & (1 << bit))).filter(Boolean).length} known directions</p>}

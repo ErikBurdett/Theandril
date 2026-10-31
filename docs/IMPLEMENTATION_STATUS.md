@@ -1,5 +1,30 @@
 # Theandril implementation status
 
+## Landmarks (rules/save 51) — 2026-10-31
+
+M8's first authored places. Twelve original landmark kinds, each with a name,
+a story, the terrains it stands on, a coastal flag and a small yield, sealed
+into the pack from rules 51. Where they lie is derived from the campaign seed
+like the seams — passable ground that is not glass, four hexes from every
+start, two from every seam, eight from each other, one per forty passable
+hexes between four and twenty-four — cached beside the world, so a replay,
+a transfer and an older envelope under the current rules read the same
+landmarks and no save field is added. A hearth that works a landmark's hex
+draws its yield among the hex's features from rules 51; earlier campaigns
+keep their yields. The observation lists every landmark on explored ground;
+the hex inspector names it with its story and yield and the settlement
+summary lists the landmarks a hearth holds. Save 51 upgrades v50 envelopes
+unchanged. Headline pacing **413 / 320 / 216**, the other seeds 379 / 332,
+260 / 284, 197 / 201, no refused order; proxies 314 / 424 / 309 / 189. The
+Epic headline course ends above its band for the third slice running while
+the other Epic seeds end inside it, recorded as a drift of one course.
+Landmarks have no events, rewards beyond yield, intelligence or faction
+interactions yet, and the AI does not seek them. Verification: new sim,
+content and journey tests; unit 2,342 / 292 files, campaigns 57, lint,
+typecheck, build, three covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-landmarks/README.md),
+[ADR0081](architecture/0081-landmarks.md).
+
 ## Alliances (rules/save 50) — 2026-10-31
 
 Gate G's first pact. A realm offers another a defensive alliance of ten to
