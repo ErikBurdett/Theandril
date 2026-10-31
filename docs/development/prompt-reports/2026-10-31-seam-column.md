@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances and landmarks
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks and landmark events
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -72,6 +72,11 @@
   Evidence packet
   [docs/development/2026-10-31-landmarks/](../2026-10-31-landmarks/README.md);
   roadmap library 119 delivered.
+- Landmark events, rules/save 52 ([ADR 0082](../../architecture/0082-landmark-events.md)):
+  a `landmark` condition and six templates of the old places, one a chain;
+  an AI claim planner was built, measured inert and removed. Evidence packet
+  [docs/development/2026-10-31-landmark-events/](../2026-10-31-landmark-events/README.md);
+  roadmap library 120 delivered.
 
 ## Verified
 
@@ -94,6 +99,9 @@ the other seeds 341 / 339, 263 / 280, 196 / 196, proxies 307 / 388 / 333 / 189.
 Landmarks: unit 2,342 / 292 files, campaigns 57, build, three journeys (one
 new) and the chronicles journey; headline **413 / 320 / 216**, the other seeds
 379 / 332, 260 / 284, 197 / 201, proxies 314 / 424 / 309 / 189.
+Landmark events: unit 2,342, campaigns 57, build, three journeys (one new) and
+the chronicles journey; headline **394 / 356 / 216**, the other seeds
+381 / 332, 260 / 284, 197 / 201, proxies 326 / 420 / 300 / 189.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -113,6 +121,10 @@ first on 379.
   faction interactions, and the AI does not seek them. The Epic headline
   course ends on 413, above band for the third slice running, while the other
   Epic seeds end inside it.
+- Landmark events: rare (two or three per headline campaign); the AI does not
+  seek landmarks, and paid AI claims of any hex are almost absent from
+  measured play, which also bounds the seam claim planner. The Long headline
+  course moves 320 → 356 by re-rolled draws alone.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

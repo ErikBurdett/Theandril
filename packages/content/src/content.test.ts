@@ -161,7 +161,14 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(() => validateLandmarkContent([LANDMARK_KINDS[0]!, LANDMARK_KINDS[0]!])).toThrow('Duplicate landmark ID');
   expect(() => validateLandmarkContent([{ ...LANDMARK_KINDS[0]!, yields: { food: 0, industry: 0, coin: 0, knowledge: 0 } }])).toThrow('yields something');
   expect(() => validateLandmarkContent(LANDMARK_KINDS.filter(kind => !kind.terrains.includes(2)))).toThrow('No landmark fits');
-  expect(HEARTH_EVENTS).toHaveLength(39);
+  // Rules 51 content, thirty-nine events and the landmarks, before rules 52 added the landmark events; the current pack seals forty-five.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(51), true, ATTUNEMENT_VICTORY, hearthEventsForRules(51), EPOCHS, LANDMARK_KINDS)).toBe('33f583e9');
+  expect(CONTENT_HASH).not.toBe('33f583e9');
+  expect(hearthEventsForRules(51)).toHaveLength(39);
+  expect(hearthEventsForRules(52)).toHaveLength(45);
+  expect(hearthEventsForRules(52).filter(event => event.condition === 'landmark')).toHaveLength(5);
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, condition: 'landmark' }])).toThrow('rules 52 or later');
+  expect(HEARTH_EVENTS).toHaveLength(45);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
   expect(hearthEventsForRules(47)).toHaveLength(24);

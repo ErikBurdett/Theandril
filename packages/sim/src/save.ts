@@ -13,7 +13,7 @@ import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
 import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
-import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, hearthEventsForRules, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
 import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand } from './simulation';
@@ -42,7 +42,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 51;
+export const SAVE_VERSION = 52;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -76,6 +76,8 @@ export const PRE_CHAINS_CONTENT_HASH = 'c1e05b8e';
 export const PRE_EPOCHS_CONTENT_HASH = '4847de40';
 /** Rules 49 and 50 content, the ages, before rules 51 added the landmarks. */
 export const PRE_LANDMARKS_CONTENT_HASH = '5b9864d4';
+/** The rules 51 pack, before rules 52 added the landmark events. */
+export const PRE_LANDMARK_EVENTS_CONTENT_HASH = '33f583e9';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -281,8 +283,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(51), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
-/** Rules 51 changes no canonical field; a v50 envelope differs only in its version and the pack it was sealed under. */
+const saveSchema = z.object({ version: z.literal(52), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 51 and 52 change no canonical field; v50 and v51 envelopes differ only in their version and the pack they were sealed under. */
+const saveV51Schema = saveSchema.extend({ version: z.literal(51) }).strict();
 const saveV50Schema = saveSchema.extend({ version: z.literal(50) }).strict();
 /** v46 through v49 envelopes carry the rules 46 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 50 records. */
 type Through49 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV49Schema> };
@@ -694,7 +697,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 51) return CONTENT_HASH;
+  if (version >= 52) return CONTENT_HASH;
+  if (version >= 51) return PRE_LANDMARK_EVENTS_CONTENT_HASH;
   if (version >= 49) return PRE_LANDMARKS_CONTENT_HASH; // rules 50 changed no content
   if (version >= 48) return PRE_EPOCHS_CONTENT_HASH;
   if (version >= 47) return PRE_CHAINS_CONTENT_HASH;
@@ -1141,6 +1145,14 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 51) {
+    const sealed = saveV51Schema.parse(raw);
+    assert(sealed.contentHash === PRE_LANDMARK_EVENTS_CONTENT_HASH, 'v51 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v51 snapshot checksum does not match its contents');
+    assert(sealed.state.hearthEvents.pending.every(pending => hearthEventsForRules(51).some(item => item.id === pending.templateId)), 'v51 envelope names a hearth event of later rules');
+    // Rules 52 adds landmark events to the content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 50) {
     const sealed = saveV50Schema.parse(raw);
     assert(sealed.contentHash === PRE_LANDMARKS_CONTENT_HASH, 'v50 content hash is not a recognized compatible pack');

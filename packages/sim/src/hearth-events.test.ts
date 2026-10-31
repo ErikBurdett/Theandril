@@ -5,6 +5,7 @@ import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
 import { PRE_CHAINS_CONTENT_HASH, PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceHearthEvents, hearthEventConditionHolds, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
+import { landmarks } from './landmarks';
 import { armyStrength } from './army-composition';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); return result; };
@@ -121,6 +122,16 @@ describe('rules 46: hearth events', () => {
     state.wars.push([player, state.factions[1]!.id].sort() as [string, string]);
     expect(hearthEventConditionHolds(state, template('wartime'), host.id)).toBe(true);
     expect(hearthEventConditionHolds(state, template('any'), 'settlement.none')).toBe(false);
+    // Rules 52: a landmark within the hearth's own borders; no survey is needed.
+    const landmarkCell = landmarks(state.world)[0]?.cell;
+    const hostLand = state.land.settlements[host.id]!;
+    hostLand.claimed = hostLand.claimed.filter(cell => cell !== landmarkCell);
+    expect(hearthEventConditionHolds(state, template('landmark'), host.id)).toBe(false);
+    if (landmarkCell !== undefined) {
+      hostLand.claimed = [...hostLand.claimed, landmarkCell];
+      expect(hearthEventConditionHolds(state, template('landmark'), host.id)).toBe(true);
+      hostLand.claimed = hostLand.claimed.filter(cell => cell !== landmarkCell);
+    }
     // Occupied: no event may visit; the draw still spends the realm's turn.
     host.occupationTurns = 2;
     const events: Parameters<typeof advanceHearthEvents>[1] = [];
@@ -145,7 +156,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 51, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 52, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -200,7 +211,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 51, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 52, contentHash: CONTENT_HASH });
     view = getObservation(loaded, player);
     expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
     // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
@@ -262,7 +273,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 47, contentHash: PRE_CHAINS_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 51, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 52, contentHash: CONTENT_HASH });
     // A pending event that lies ahead without an event it follows is refused by validation.
     const corrupt = deserializeGame(serializeGame(state));
     corrupt.hearthEvents.pending = [{ id: 'event.999.1', factionId: player, settlementId: host.id, templateId: 'event.kiln_fire', turn: corrupt.turn + 3, expiresTurn: corrupt.turn + 3 + HEARTH_EVENT_ANSWER_TURNS }];

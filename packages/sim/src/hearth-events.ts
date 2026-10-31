@@ -5,6 +5,7 @@ import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
 import { arcaneSites, controllingSettlement } from './arcane-sites';
 import { epochIndex } from './epochs';
+import { landmarks } from './landmarks';
 import { epochIndexOf } from '@theandril/content';
 
 /** Rules 46: hearth events. At the start of a turn a realm that has had no
@@ -76,6 +77,8 @@ export function hearthEventConditionHolds(state: GameState, template: HearthEven
     case 'wide': return Object.values(state.settlements).filter(item => item.factionId === town.factionId).length >= 4;
     case 'young': return town.population <= 2;
     case 'chained': return false;
+    // Rules 52: the hearth's own borders hold a landmark; no survey is needed to know one.
+    case 'landmark': return landmarks(state.world).some(site => state.land.settlements[settlementId]?.claimed.includes(site.cell));
   }
 }
 /** Hearths an event may visit: the realm's own, neither besieged nor occupied, by id. */

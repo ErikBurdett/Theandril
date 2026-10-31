@@ -1,5 +1,31 @@
 # Theandril implementation status
 
+## Landmark events (rules/save 52) — 2026-10-31
+
+The landmarks' first interaction. A `landmark` condition holds at a hearth
+whose own claimed land includes a landmark's hex, read from the derived
+placement with no survey; six original templates from rules 52 — pilgrims
+at the old place, relic hunters and the find their licensed dig brings up
+four turns later, a keeper for the place, the stones moved, a festival at
+the old place — bring the catalogue to forty-five, the rules 51 catalogue
+frozen for older campaigns. Save 52 upgrades v51 envelopes unchanged,
+asserting the rules 51 pack and that no pending event names a later
+template. Headline pacing **394 / 356 / 216**, the other seeds 381 / 332,
+260 / 284, 197 / 201; proxies 326 / 420 / 300 / 189. The Epic headline
+course is back inside its band; the Long headline course moves from 320 to
+356 while the other Long seeds are unchanged to the turn, and the same code
+under the frozen rules 51 pack ends on 320, so the move is the re-rolled
+draws of a larger catalogue on one course. Landmark events are rare, two or
+three per headline campaign, since few hearths hold a landmark. An AI
+planner that claimed landmarks was built, measured as inert (AI realms grow
+land through commissions, almost never by paid claim, and still hold
+twelve to fourteen of twenty-four landmarks by the end) and removed before
+shipping. Verification: content, sim and journey tests; unit 2,342 / 292
+files, campaigns 57, lint, typecheck, build, three covering journeys and
+the chronicles journey.
+[Evidence](development/2026-10-31-landmark-events/README.md),
+[ADR0082](architecture/0082-landmark-events.md).
+
 ## Landmarks (rules/save 51) — 2026-10-31
 
 M8's first authored places. Twelve original landmark kinds, each with a name,

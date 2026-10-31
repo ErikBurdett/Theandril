@@ -15,8 +15,8 @@ const name = z.string().min(1).max(60);
 const text = z.string().min(1).max(400);
 const small = z.number().int().min(-40).max(40);
 const coin = z.number().int().min(-200).max(200);
-/** `chained` events are never drawn: they are reached only as another event's follow-up. */
-export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young', 'chained']);
+/** `chained` events are never drawn: they are reached only as another event's follow-up. Rules 52: `landmark` holds at a hearth whose borders hold a landmark. */
+export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young', 'chained', 'landmark']);
 export type HearthEventCondition = z.infer<typeof hearthEventConditionSchema>;
 /** Rules 47 adds ashglass (the realm's stockpile) and garrison (the strength of the realm's companies at the hearth); rules 46 templates carry neither key, so their seal is unchanged. */
 export const hearthEventEffectsSchema = z.object({ food: small, coin, knowledge: coin, population: z.number().int().min(-2).max(2), devastation: small,
@@ -28,7 +28,7 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52)]),
   /** Rules 49: drawn only once the world has reached this age. */
   epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
 }).strict();
@@ -289,7 +289,46 @@ const FOURTH_BATCH: readonly HearthEventDefinition[] = [
       { id: 'forbid_the_wagers', label: 'Forbid the wagers', description: 'Close the books and put the bookmakers’ clerks to the archive.', effects: effects({ knowledge: 10 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH];
+/** Rules 52: six events of the old places, drawn only at a hearth whose borders hold a landmark. */
+const FIFTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.pilgrims_at_the_place', name: 'Pilgrims at the old place', condition: 'landmark', weight: 3, sinceRules: 52,
+    text: 'Pilgrims come up the road to the old place within the borders of {hearth}, more each day, and ask leave to camp beside it.',
+    choices: [
+      { id: 'let_them_pass', label: 'Let them pass freely', description: 'Open the road and the place; they leave coin at the stones and stories in the lanes.', effects: effects({ coin: 15, knowledge: 10 }) },
+      { id: 'charge_a_toll', label: 'Charge a toll', description: 'Set a warden on the road and take coin from every pilgrim; the camp is trampled and resented.', effects: effects({ coin: 40, devastation: 3 }) },
+    ] },
+  { id: 'event.relic_hunters', name: 'Relic hunters', condition: 'landmark', weight: 2, sinceRules: 52,
+    text: 'Diggers with a licence from nobody have opened a pit at the old place within the borders of {hearth}.',
+    choices: [
+      { id: 'license_the_dig', label: 'License the dig', description: 'Take a fee and set a clerk over the pit; whatever they bring up comes to the hearth in a few turns.', effects: effects({ coin: 20 }), followUp: follow('event.the_find', 4) },
+      { id: 'drive_them_off', label: 'Drive them off', description: 'Send the watch to fill the pit and turn the diggers out; the place stays as it was.', effects: effects({ coin: -10 }) },
+    ] },
+  { id: 'event.the_find', name: 'The find', condition: 'chained', weight: 1, sinceRules: 52,
+    text: 'The diggers at the old place of {hearth} have brought something up: a sealed jar, a sheet of beaten metal, writing nobody here can read.',
+    choices: [
+      { id: 'keep_the_find', label: 'Keep the find', description: 'Pay the diggers off and send the find to the archive; the clerks will be years reading it.', effects: effects({ coin: -20, knowledge: 60 }) },
+      { id: 'sell_the_find', label: 'Sell the find', description: 'Let the diggers sell it on and take the hearth’s share.', effects: effects({ coin: 50 }) },
+    ] },
+  { id: 'event.keeper_of_the_place', name: 'A keeper for the place', condition: 'landmark', weight: 2, sinceRules: 52,
+    text: 'An old woman who has lived beside the old place of {hearth} longer than anyone remembers asks the hearth for a stipend to keep it.',
+    choices: [
+      { id: 'pay_the_keeper', label: 'Pay the keeper', description: 'Grant the stipend; she knows every stone of the place and tells the clerks what they ask.', effects: effects({ coin: -30, knowledge: 25 }) },
+      { id: 'leave_it_to_the_hearth', label: 'Leave it to the hearth', description: 'The hearth keeps its own places; she goes on as before, unpaid, and the coin stays.', effects: effects({ coin: 10 }) },
+    ] },
+  { id: 'event.the_stones_moved', name: 'The stones are moved', condition: 'landmark', weight: 2, sinceRules: 52,
+    text: 'Somebody has shifted the stones of the old place within the borders of {hearth} in the night, and the farmers will not work the fields beside it.',
+    choices: [
+      { id: 'set_them_back', label: 'Set them back', description: 'Pay masons to set every stone where it stood and hold a rite over it; the fields are worked again.', effects: effects({ coin: -20, devastation: -5 }) },
+      { id: 'let_them_lie', label: 'Let them lie', description: 'Stones are stones; the fields beside the place lie fallow a season.', effects: effects({ food: -10, devastation: 5 }) },
+    ] },
+  { id: 'event.festival_at_the_place', name: 'A festival at the old place', condition: 'landmark', weight: 2, sinceRules: 52,
+    text: 'The people of {hearth} ask to hold the summer festival at the old place within its borders, as their grandparents did.',
+    choices: [
+      { id: 'hold_the_festival', label: 'Hold the festival', description: 'Feed the hearth at the place for three days; the traders come, and the hearth remembers the year.', effects: effects({ food: -10, coin: 30 }) },
+      { id: 'keep_it_within_the_walls', label: 'Keep it within the walls', description: 'Hold the festival in the square as every year; the place stays quiet.', effects: effects({ coin: 5 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);
@@ -317,6 +356,7 @@ export function validateHearthEventContent(events = HEARTH_EVENTS): void {
     if (event.epoch && epochIndexOf(event.epoch) < 0) throw new Error('An event names an age of the catalogue: ' + event.id);
     if (event.epoch === EPOCHS[0]!.id) throw new Error('The first age gates nothing: ' + event.id);
     if (event.condition === 'chained' && event.sinceRules < 48) throw new Error('A chained event belongs to rules 48 or later: ' + event.id);
+    if (event.condition === 'landmark' && event.sinceRules < 52) throw new Error('A landmark event belongs to rules 52 or later: ' + event.id);
     for (const choice of event.choices) if (choice.followUp) {
       const next = events.find(item => item.id === choice.followUp!.templateId);
       if (!next || next.id === event.id) throw new Error('A follow-up names another event of the catalogue: ' + event.id);
