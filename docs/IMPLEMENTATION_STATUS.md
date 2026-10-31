@@ -14,7 +14,9 @@ Headline pacing **388 / 313 / 216**, all Prosperity, in band; proxies 344 /
 55 → 56, attributed headlessly to one turn-40 draw. One survey mission was
 refused on Epic turn 130 (a same-batch race, recorded). Verification: sim and
 content tests extended; unit 2,330 / 288 files, campaigns 57, lint,
-typecheck, build, three covering journeys and the chronicles journey.
+typecheck, build, three covering journeys and the chronicles journey. Commit
+`605196e` is deployed: both workflows succeeded and the live readback matched
+the build ([publication packet](development/2026-10-31-publication-hearth-events-ii/README.md)).
 [Evidence](development/2026-10-31-hearth-events-ii/README.md),
 [ADR0077](architecture/0077-hearth-events-second-catalogue.md).
 

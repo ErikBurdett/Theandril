@@ -65,8 +65,9 @@ first on 379.
 - Hearth events: twenty-four templates against a target of one hundred and
   fifty; no epochs, escalation or crises yet. One survey mission refused on
   the Epic headline at turn 130, a same-batch race, is recorded and open.
-  Deployment of the rules 47 commit is recorded in its publication packet
-  once the workflows finish. Commit `594ffdf` is deployed: both
+  Commit `605196e` (rules 47) is deployed: both workflows succeeded and the
+  live readback matched the build
+  ([publication packet](../2026-10-31-publication-hearth-events-ii/README.md)). Commit `594ffdf` is deployed: both
   workflows succeeded and the live readback matched the build
   ([publication packet](../2026-10-31-publication-hearth-events/README.md)).
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.
