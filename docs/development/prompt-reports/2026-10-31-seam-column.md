@@ -74,7 +74,10 @@
   roadmap library 119 delivered.
 - Landmark events, rules/save 52 ([ADR 0082](../../architecture/0082-landmark-events.md)):
   a `landmark` condition and six templates of the old places, one a chain;
-  an AI claim planner was built, measured inert and removed. Evidence packet
+  an AI claim planner was built, measured inert and removed. Commit `62fa475`
+  is deployed: both workflows succeeded and the live readback matched the
+  build ([publication packet](../2026-10-31-publication-landmark-events/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-landmark-events/](../2026-10-31-landmark-events/README.md);
   roadmap library 120 delivered.
 

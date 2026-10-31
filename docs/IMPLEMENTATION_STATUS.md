@@ -22,7 +22,9 @@ land through commissions, almost never by paid claim, and still hold
 twelve to fourteen of twenty-four landmarks by the end) and removed before
 shipping. Verification: content, sim and journey tests; unit 2,342 / 292
 files, campaigns 57, lint, typecheck, build, three covering journeys and
-the chronicles journey.
+the chronicles journey. Commit `62fa475` is deployed: both workflows
+succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-landmark-events/README.md)).
 [Evidence](development/2026-10-31-landmark-events/README.md),
 [ADR0082](architecture/0082-landmark-events.md).
 
