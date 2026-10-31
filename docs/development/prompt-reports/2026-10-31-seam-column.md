@@ -47,5 +47,7 @@ first on 379.
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.
 - Commit `68f4f5b` is deployed: both workflows succeeded and the live readback
   matched the build ([publication packet](../2026-10-31-publication-seam-column/README.md)).
+- Commit `0e3c26b` (seam hearth watch, rules 45) is deployed the same way
+  ([publication packet](../2026-10-31-publication-seam-watch/README.md)).
 - Owner decisions unchanged: the e103a72 history purge; the other session's
   uncommitted Playwright config edits and reliability packet.

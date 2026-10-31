@@ -16,7 +16,9 @@ frozen under pack `88b0823d`; v44 saves load unchanged. Headline pacing
 Prosperity bid; proxies 372 / 393 / 307 / 199. Verification: new AI, sim and
 content tests; unit 2,323, campaigns 57, lint, typecheck, build, covering
 journeys and the chronicles journey. Not built: a warden for every seam
-hearth; three-seed coverage per pace.
+hearth; three-seed coverage per pace. Commit `0e3c26b` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-seam-watch/README.md)).
 [Evidence](development/2026-10-31-ai-seam-watch/README.md),
 [ADR0073](architecture/0073-ai-seam-watch.md),
 [ADR0074](architecture/0074-attunement-repricing-45.md).
