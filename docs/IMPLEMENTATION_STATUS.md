@@ -16,7 +16,9 @@ rules. Headline pacing **385 / 306 / 211**, all Prosperity, in band, no
 refused order; proxies 345 / 469 / 311 / 193. The chronicle journey's pin
 moves 56 → 55, attributed to the same turn-40 draw. Verification: sim,
 content, AI and UI tests extended; unit 2,331 / 288 files, campaigns 57, lint,
-typecheck, build, three covering journeys and the chronicles journey.
+typecheck, build, three covering journeys and the chronicles journey. Commit
+`7447299` is deployed: both workflows succeeded and the live readback matched
+the build ([publication packet](development/2026-10-31-publication-hearth-event-chains/README.md)).
 [Evidence](development/2026-10-31-hearth-event-chains/README.md),
 [ADR0078](architecture/0078-hearth-event-chains.md).
 

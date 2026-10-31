@@ -73,8 +73,9 @@ first on 379.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
 - Hearth events: thirty-three templates against a target of one hundred and
   fifty; chains are the first escalation; no epochs or world crises yet.
-  Deployment of the rules 48 commit is recorded in its publication packet
-  once the workflows finish. One survey mission refused on
+  Commit `7447299` (rules 48) is deployed: both workflows succeeded and the
+  live readback matched the build
+  ([publication packet](../2026-10-31-publication-hearth-event-chains/README.md)). One survey mission refused on
   the Epic headline at turn 130, a same-batch race, is recorded and open; a
   reordering fix was measured, moved the Epic headline out of band, and was
   reverted ([experiment](../2026-10-31-missions-before-marches/README.md)).
