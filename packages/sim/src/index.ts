@@ -32,7 +32,7 @@ export { DEPOT_BUDGET, DEPOT_COIN, DEPOT_SPACING, DEPOT_UPKEEP, MAX_REALM_DEPOTS
 export type { Depot } from './depots';
 export { arcaneSites, observeArcaneSites, searchObjection, GLASS_SHARDS, SITE_EXTRACTION, SITE_SEARCH_COIN, SITE_SEARCH_RADIUS } from './arcane-sites';
 export type { ArcaneSite, ObservedArcaneSite } from './arcane-sites';
-export { advanceHearthEvents, describeHearthEventEffects, hearthEventChoiceBlocker, emptyHearthEvents, hearthEventConditionHolds, hearthEventObjection, MAX_PENDING_HEARTH_EVENTS, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
+export { advanceHearthEvents, assertHearthEventsWithin, describeHearthEventEffects, hearthEventChoiceBlocker, emptyHearthEvents, hearthEventConditionHolds, hearthEventObjection, MAX_PENDING_HEARTH_EVENTS, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
 export type { HearthEventState, ObservedHearthEvent, ObservedHearthEventChoice, PendingHearthEvent } from './hearth-events';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';

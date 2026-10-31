@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { HEARTH_EVENT_ANSWER_TURNS, HEARTH_EVENT_CHANCE_PERCENT, HEARTH_EVENT_FIRST_TURN, HEARTH_EVENT_INTERVAL, hearthEventsForRules, type HearthEventDefinition, type HearthEventEffects } from '@theandril/content';
+import { HEARTH_EVENT_ANSWER_TURNS, HEARTH_EVENT_CHANCE_PERCENT, HEARTH_EVENT_FIRST_TURN, HEARTH_EVENT_INTERVAL, hearthEventEffect, hearthEventsForRules, UNITS, type HearthEventDefinition, type HearthEventEffects } from '@theandril/content';
 import { neighbors, SeededRandom } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
@@ -31,11 +31,24 @@ export const hearthEventCommandSchemas = [
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const byId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 const byFaction = (a: { factionId: string }, b: { factionId: string }): number => a.factionId < b.factionId ? -1 : a.factionId > b.factionId ? 1 : 0;
+const units = new Map(UNITS.map(unit => [unit.id, unit]));
+const ASHGLASS = 'resource.ashglass';
+/** The realm's land companies quartered at a hearth, by id: the garrison an event can harden or thin. */
+const garrisonAt = (state: GameState, settlementId: string) => {
+  const town = state.settlements[settlementId];
+  return town ? Object.values(state.armies).filter(army => army.factionId === town.factionId && army.cell === town.cell
+    && army.formations.some(formation => units.get(formation.unitId)?.movementDomain !== 'naval' && !units.get(formation.unitId)?.canFound)).sort(byId) : [];
+};
 
 export const emptyHearthEvents = (): HearthEventState => ({ pending: [], recent: [] });
 export const hasHearthEvents = (state: GameState): boolean => (state.hearthEvents?.pending.length ?? 0) > 0 || (state.hearthEvents?.recent.length ?? 0) > 0;
 export function assertNoHearthEvents(state: GameState): void {
   if (hasHearthEvents(state)) throw new Error('This campaign has hearth events unavailable in historical rules.');
+}
+/** A pending event of a later catalogue cannot be sealed under an older rules version. */
+export function assertHearthEventsWithin(state: GameState, version: number): void {
+  const known = new Set(hearthEventsForRules(version).map(item => item.id));
+  if (state.hearthEvents.pending.some(item => !known.has(item.templateId))) throw new Error('This campaign has hearth events unavailable in historical rules.');
 }
 const templates = (state: GameState) => hearthEventsForRules(rulesVersion(state));
 const templateOf = (state: GameState, templateId: string): HearthEventDefinition | undefined => templates(state).find(item => item.id === templateId);
@@ -51,6 +64,12 @@ export function hearthEventConditionHolds(state: GameState, template: HearthEven
     case 'coastal': return neighbors(town.cell, state.world.width, state.world.height).some(cell => (state.world.waterDepth[cell] ?? 0) > 0);
     case 'seam': return arcaneSites(state.world).some(site => controllingSettlement(state, site.cell, town.factionId) === settlementId);
     case 'wartime': return state.wars.some(pair => pair.includes(town.factionId));
+    case 'peace': return !state.wars.some(pair => pair.includes(town.factionId));
+    case 'harbor': return town.buildings.includes('building.harbor');
+    case 'archive': return town.buildings.includes('building.archive');
+    case 'garrisoned': return garrisonAt(state, settlementId).length > 0;
+    case 'wide': return Object.values(state.settlements).filter(item => item.factionId === town.factionId).length >= 4;
+    case 'young': return town.population <= 2;
   }
 }
 /** Hearths an event may visit: the realm's own, neither besieged nor occupied, by id. */
@@ -68,6 +87,8 @@ export function describeHearthEventEffects(effects: HearthEventEffects): string 
   if (effects.devastation) parts.push(`${signed(effects.devastation)} devastation`);
   if (effects.coin) parts.push(`${signed(effects.coin)} coin`);
   if (effects.knowledge) parts.push(`${signed(effects.knowledge)} knowledge`);
+  if (effects.ashglass) parts.push(`${signed(effects.ashglass)} ashglass`);
+  if (effects.garrison) parts.push(`${signed(effects.garrison)} garrison strength`);
   return parts.length ? parts.join(', ') : 'no change';
 }
 /** An answer that costs coin or knowledge the realm does not have is not on offer; nothing is ever paid short. */
@@ -76,6 +97,8 @@ export function hearthEventChoiceBlocker(state: GameState, factionId: string, ef
   if (!faction) return 'Unknown realm.';
   if (effects.coin < 0 && faction.treasury < -effects.coin) return `Requires ${-effects.coin} coin.`;
   if (effects.knowledge < 0 && faction.knowledge < -effects.knowledge) return `Requires ${-effects.knowledge} knowledge.`;
+  const ashglass = hearthEventEffect(effects, 'ashglass');
+  if (ashglass < 0 && (state.resources.stockpiles[factionId]?.[ASHGLASS] ?? 0) < -ashglass) return `Requires ${-ashglass} ashglass.`;
   return null;
 }
 function applyEffects(state: GameState, pending: PendingHearthEvent, effects: HearthEventEffects): void {
@@ -88,6 +111,18 @@ function applyEffects(state: GameState, pending: PendingHearthEvent, effects: He
   if (faction) {
     faction.treasury = Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, faction.treasury + effects.coin));
     faction.knowledge = Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, faction.knowledge + effects.knowledge));
+    const ashglass = hearthEventEffect(effects, 'ashglass');
+    if (ashglass) {
+      const stock = state.resources.stockpiles[faction.id] ?? (state.resources.stockpiles[faction.id] = {});
+      const next = Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, (stock[ASHGLASS] ?? 0) + ashglass));
+      if (next) stock[ASHGLASS] = next; else delete stock[ASHGLASS];
+    }
+  }
+  const garrison = hearthEventEffect(effects, 'garrison');
+  if (garrison && town && town.factionId === pending.factionId) for (const army of garrisonAt(state, town.id)) for (const formation of army.formations) {
+    const unit = units.get(formation.unitId);
+    if (!unit || unit.movementDomain === 'naval' || unit.canFound) continue;
+    formation.strength = Math.max(1, Math.min(unit.strength, formation.strength + garrison));
   }
 }
 const remove = (state: GameState, eventId: string): void => { state.hearthEvents.pending = state.hearthEvents.pending.filter(item => item.id !== eventId); };

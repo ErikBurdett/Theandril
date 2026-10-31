@@ -1,0 +1,12 @@
+
+> theandril@0.1.0 measure:pacing /home/telephoneheater/Work/Theandril
+> tsx scripts/measure-pacing.ts headline standard long --json=docs/development/2026-10-31-hearth-events-ii/pacing-after.json
+
+headline (epic, standard, 12 realms, seed 20260905, rules current) — target 350–400 turns
+  refused at turn 130: {"type":"startCharacterMission","factionId":"faction.rimehorn_clans","characterId":"character.61","missionId":"mission.survey","targetCell":16182}: This survey area is already explored.
+  turn 388 · prosperity · 188 depots · 1 refused orders · 263 automatic refusals · 39s
+  REFUSED ORDERS: the planner asked for something the rules do not allow.
+headline-long (long, standard, 12 realms, seed 20260905, rules current) — target about 300 turns
+  turn 313 · prosperity · 147 depots · 0 refused orders · 12 automatic refusals · 27s
+headline-standard (standard, standard, 12 realms, seed 20260905, rules current) — target about 200 turns
+  turn 216 · prosperity · 121 depots · 0 refused orders · 1 automatic refusals · 17s

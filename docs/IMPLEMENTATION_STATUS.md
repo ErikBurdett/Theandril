@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## Hearth events II: the second catalogue (rules/save 47) — 2026-10-31
+
+Sixteen more original templates (twenty-four in all) with six new conditions
+read from canonical state (harbor, archive, garrisoned, peace, wide, young)
+and two new effect kinds: ashglass moves the realm's stockpile and is blocked
+when short; garrison hardens or thins every land company quartered at the
+hearth within its ranks. A rules 46 template carries neither key, so the rules
+46 catalogue seals exactly as before and is frozen as `8a737501`; v46 saves
+load unchanged, and a pending second-catalogue event cannot be sealed as v46.
+Headline pacing **388 / 313 / 216**, all Prosperity, in band; proxies 344 /
+401 / 300 / 194. The AI-watch chronicle journey's pinned victory turn moves
+55 → 56, attributed headlessly to one turn-40 draw. One survey mission was
+refused on Epic turn 130 (a same-batch race, recorded). Verification: sim and
+content tests extended; unit 2,330 / 288 files, campaigns 57, lint,
+typecheck, build, three covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-hearth-events-ii/README.md),
+[ADR0077](architecture/0077-hearth-events-second-catalogue.md).
+
 ## Hearth events (rules/save 46); ferry landings on the ferry's own water — 2026-10-31
 
 The first slice of M6. Eight original event templates seal into the content

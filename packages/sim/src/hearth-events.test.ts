@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { CONTENT_HASH, HEARTH_EVENTS, HEARTH_EVENT_ANSWER_TURNS, HEARTH_EVENT_INTERVAL } from '@theandril/content';
-import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
+import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { PRE_EVENTS_CONTENT_HASH, serializeGameForVersion } from './save';
+import { PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceHearthEvents, hearthEventConditionHolds, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
+import { armyStrength } from './army-composition';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); return result; };
 /** Plays whole rounds until the realm is offered an event, within a bound. */
@@ -91,7 +92,7 @@ describe('rules 46: hearth events', () => {
     const upkeepFree = structuredClone(lapsing);
     upkeepFree.hearthEvents.pending = [{ ...late }];
     const lapsed: string[] = [];
-    withRules(upkeepFree, 46, () => {
+    withRules(upkeepFree, 47, () => {
       upkeepFree.turn = late.expiresTurn;
       const events: Parameters<typeof advanceHearthEvents>[1] = [];
       advanceHearthEvents(upkeepFree, events);
@@ -144,7 +145,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 46, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -154,5 +155,60 @@ describe('rules 46: hearth events', () => {
     expect(() => validateHearthEvents(corrupt)).toThrow('does not hold');
     const legacy = attunementCampaign();
     withRules(legacy, 45, () => expect(resolveHearthEvent(legacy, legacy.turnOwnerId, 'event.1', 'a')).toMatchObject({ ok: false, error: expect.stringContaining('historical') }));
+  });
+
+  it('rules 47: the second catalogue reads harbor, archive, garrison, peace, breadth and youth from canonical state, moves ashglass and garrison strength, and seals only under rules 47', () => {
+    const state = attunementCampaign(), player = state.turnOwnerId, host = Object.values(state.settlements).find(town => town.factionId === player)!;
+    const template = (id: string) => HEARTH_EVENTS.find(item => item.id === id)!;
+    expect(hearthEventConditionHolds(state, template('event.visiting_witness'), host.id)).toBe(true); // the fixture's archive
+    expect(hearthEventConditionHolds(state, template('event.drowned_ledger'), host.id)).toBe(host.buildings.includes('building.harbor'));
+    expect(hearthEventConditionHolds(state, template('event.border_fair'), host.id)).toBe(true);
+    expect(hearthEventConditionHolds(state, template('event.far_hearth_petition'), host.id)).toBe(false);
+    expect(hearthEventConditionHolds(state, template('event.first_winter'), host.id)).toBe(host.population <= 2);
+    const guard = Object.values(state.armies).find(army => army.factionId === player && army.formations.some(item => item.unitId !== 'unit.colonist'));
+    expect(hearthEventConditionHolds(state, template('event.veteran_drill'), host.id)).toBe(Boolean(guard && guard.cell === host.cell));
+    // A garrison drill hardens every company at the hearth up to its full ranks; a fever thins them, never below one.
+    const id = `army.${state.nextId++}`;
+    state.armies[id] = { id, factionId: player, name: 'Quartered guard', cell: host.cell, movement: 3, formations: [{ ...createArmyFormation(id, 'unit.guard'), strength: 30 }] };
+    expect(hearthEventConditionHolds(state, template('event.veteran_drill'), host.id)).toBe(true);
+    const offer = (templateId: string) => { const eventId = `event.${state.turn}.9`; state.hearthEvents.pending = [{ id: eventId, factionId: player, settlementId: host.id, templateId, turn: state.turn, expiresTurn: state.turn + HEARTH_EVENT_ANSWER_TURNS }]; return eventId; };
+    state.factions[0]!.treasury = 100;
+    let eventId = offer('event.veteran_drill');
+    expect(getObservation(state, player).hearthEvents![0]!.choices[0]!.summary).toBe('-20 coin, +15 garrison strength');
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'pay_the_drill' });
+    expect(armyStrength(state.armies[id]!)).toBe(45);
+    expect(state.factions[0]!.treasury).toBe(80);
+    eventId = offer('event.garrison_fever');
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'ration_the_sick' });
+    expect(armyStrength(state.armies[id]!)).toBe(33);
+    // Ashglass is drawn from and paid into the realm's stockpile, and an answer that spends more than it holds is blocked.
+    state.resources.stockpiles[player]!['resource.ashglass'] = 4;
+    eventId = offer('event.seam_hum');
+    let view = getObservation(state, player);
+    expect(view.hearthEvents![0]!.choices[1]!.blocker).toBe('Requires 6 ashglass.');
+    expect(applyCommand(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'quiet_the_seam' })).toMatchObject({ ok: false, error: 'Requires 6 ashglass.' });
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'leave_them_to_it' });
+    expect(state.resources.stockpiles[player]!['resource.ashglass']).toBe(8);
+    eventId = offer('event.seam_hum');
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId, choiceId: 'quiet_the_seam' });
+    expect(state.resources.stockpiles[player]!['resource.ashglass']).toBe(2);
+    // A pending rules 47 event cannot be sealed as a v46 envelope; a rules 46 event can, and the envelope loads unchanged under rules 47.
+    eventId = offer('event.wolf_winter');
+    expect(() => serializeGameForVersion(state, 46)).toThrow('hearth events unavailable');
+    offer('event.kiln_fire');
+    const sealed = serializeGameForVersion(state, 46);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
+    const loaded = deserializeGame(sealed);
+    expect(stateHash(loaded)).toBe(stateHash(state));
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
+    view = getObservation(loaded, player);
+    expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
+    // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
+    const second = new Set(HEARTH_EVENTS.filter(item => item.sinceRules === 47).map(item => item.id));
+    const historical = attunementCampaign();
+    withRules(historical, 46, () => {
+      for (let round = 0; round < 60; round++) for (let seat = 0; seat < historical.factions.length; seat++) issue(historical, { type: 'endTurn', factionId: historical.turnOwnerId });
+    });
+    expect(historical.hearthEvents.pending.every(item => !second.has(item.templateId))).toBe(true);
   });
 });

@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45 and hearth events
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45 and hearth events I and II
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -36,6 +36,11 @@
   Its tests exposed a naval gap fixed in [ADR 0076](../../architecture/0076-ferry-landings-on-own-water.md).
   Evidence packet [docs/development/2026-10-31-hearth-events/](../2026-10-31-hearth-events/README.md);
   roadmap library 115 delivered, the epochs item now in progress.
+- Hearth events II, rules/save 47 ([ADR 0077](../../architecture/0077-hearth-events-second-catalogue.md)):
+  sixteen more templates with six new conditions and ashglass and garrison
+  strength as effects; the rules 46 catalogue frozen. The chronicle journey's
+  pinned victory turn moves 55 → 56, attributed headlessly. Evidence packet
+  [docs/development/2026-10-31-hearth-events-ii/](../2026-10-31-hearth-events-ii/README.md).
 
 ## Verified
 
@@ -46,7 +51,9 @@ unchanged. Seam watch and rules 45: unit 2,323, campaigns 57, build, the
 covering journeys and the chronicles journey; headline **352 / 306 / 201**,
 proxies 372 / 393 / 307 / 199. Hearth events: unit 2,329 / 288 files, campaigns
 57, build, three covering journeys (one new) and the chronicles journey;
-headline **393 / 301 / 210**, proxies 385 / 412 / 270 / 182. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
+headline **393 / 301 / 210**, proxies 385 / 412 / 270 / 182. Hearth events II:
+unit 2,330, campaigns 57, build, the same journeys; headline **388 / 313 /
+216**, proxies 344 / 401 / 300 / 194. Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
@@ -55,8 +62,11 @@ first on 379.
 - A warden for every seam hearth (rites 40–42) is not built; the watch does
   not garrison every seam hearth at once.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
-- Hearth events: eight templates against a target of one hundred and fifty; no
-  epochs, escalation or crises yet. Commit `594ffdf` is deployed: both
+- Hearth events: twenty-four templates against a target of one hundred and
+  fifty; no epochs, escalation or crises yet. One survey mission refused on
+  the Epic headline at turn 130, a same-batch race, is recorded and open.
+  Deployment of the rules 47 commit is recorded in its publication packet
+  once the workflows finish. Commit `594ffdf` is deployed: both
   workflows succeeded and the live readback matched the build
   ([publication packet](../2026-10-31-publication-hearth-events/README.md)).
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.

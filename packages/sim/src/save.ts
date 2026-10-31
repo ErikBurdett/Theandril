@@ -29,7 +29,7 @@ import { clientBondSchema, clientOfferSchema } from './clients';
 import { arcaneSurveySchema, hasArcaneSurveys, validateArcaneSurveys, arcaneSearchSchema, hasArcaneSearches, validateArcaneSearches } from './arcane-sites';
 import { assertNoSubjectRule, captureDecisionSchema, captureDecisionV15Schema, captureDecisionV39Schema, ruinSchema, siegeSchema, siegeV20Schema, validateSieges } from './siege';
 import { assertNoWards, validateWards, wardStateSchema } from './rites';
-import { assertNoHearthEvents, emptyHearthEvents, hearthEventStateSchema, validateHearthEvents } from './hearth-events';
+import { assertHearthEventsWithin, assertNoHearthEvents, emptyHearthEvents, hearthEventStateSchema, validateHearthEvents } from './hearth-events';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -41,7 +41,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 46;
+export const SAVE_VERSION = 47;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -67,6 +67,8 @@ export const PRE_SEAM_PRICING_CONTENT_HASH = 'f738e917';
 export const PRE_SEAM_WATCH_PRICING_CONTENT_HASH = '88b0823d';
 /** Rules 45 content, before rules 46 added hearth events. */
 export const PRE_EVENTS_CONTENT_HASH = '1f0c41ca';
+/** Rules 46 content, the first eight hearth events, before rules 47 added sixteen more. */
+export const PRE_EVENTS_II_CONTENT_HASH = '8a737501';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -270,7 +272,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(46), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(47), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 47 changes no canonical field; a v46 envelope differs only in its version and the pack it was sealed under. */
+const saveV46Schema = saveSchema.extend({ version: z.literal(46) }).strict();
 /** Every envelope through v45 carries the rules 40–45 state; the wrapper below adds what rules 46 records. */
 type Through45 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV45Schema> };
 const saveV45Schema = saveSchema.extend({ version: z.literal(45), state: stateV45Schema }).strict();
@@ -541,7 +545,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 19) assertNoUnification(state);
-  if (version < 46) assertNoHearthEvents(state);
+  if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
   const latest = canonicalPayload(state);
   const beforePatronage = payloadForVersion(state, version, latest);
@@ -670,9 +674,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
-  if (version < 46) assertNoHearthEvents(state);
+  if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 46) return CONTENT_HASH;
+  if (version >= 47) return CONTENT_HASH;
+  if (version >= 46) return PRE_EVENTS_II_CONTENT_HASH;
   if (version >= 45) return PRE_EVENTS_CONTENT_HASH;
   if (version >= 44) return PRE_SEAM_WATCH_PRICING_CONTENT_HASH;
   if (version >= 42) return PRE_SEAM_PRICING_CONTENT_HASH;
@@ -1113,6 +1118,13 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 46) {
+    const sealed = saveV46Schema.parse(raw);
+    assert(sealed.contentHash === PRE_EVENTS_II_CONTENT_HASH, 'v46 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v46 snapshot checksum does not match its contents');
+    // Rules 47 adds templates to the catalogue, content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   const prior = parseSaveThrough45(raw);
   const state = { ...prior.state, hearthEvents: emptyHearthEvents() };
   return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };

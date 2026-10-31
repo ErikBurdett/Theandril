@@ -1,0 +1,12 @@
+factionCount 4 rules46 turn 55 prosperity | rules47 turn 56 prosperity
+first divergence at command index 525 of 851 887
+46: 40 faction.reedbound_council {"type":"resolveHearthEvent","factionId":"faction.reedbound_council","eventId":"event.40.2","choiceId":"let_it_burn_out"} ok
+    40 faction.reedbound_council {"type":"research","factionId":"faction.reedbound_council","technologyId":"technology.surveyed_estates"} ok
+    40 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.engineer"} ok
+    40 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.48","target":838} ok
+47: 40 faction.reedbound_council {"type":"resolveHearthEvent","factionId":"faction.reedbound_council","eventId":"event.40.2","choiceId":"dry_the_ledger"} ok
+    40 faction.reedbound_council {"type":"research","factionId":"faction.reedbound_council","technologyId":"technology.surveyed_estates"} ok
+    40 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.engineer"} ok
+    40 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.48","target":838} ok
+--- rules 47 reasons around turn 40
+40 faction.ashen_compact :: Charter transport: return through charted water to harbor supply (1 provision turns; 1-turn route). | army.72 holds its recruitment point for a mixed formation column. | army.90 holds its recruitment point for a mixed formation column.

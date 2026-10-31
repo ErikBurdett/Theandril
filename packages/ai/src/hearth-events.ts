@@ -1,3 +1,4 @@
+import { hearthEventEffect } from '@theandril/content';
 import type { GameCommand, Observation, ObservedHearthEvent, ObservedHearthEventChoice } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 
@@ -14,7 +15,9 @@ export function valueHearthEventChoice(view: Observation, event: ObservedHearthE
   // Devastation halves what a scarred hearth yields for many turns, so a badly scarred hearth pays dearly to be repaired.
   const scarred = town !== undefined && town.devastation >= 30;
   const effects = choice.effects;
-  return effects.coin + effects.knowledge * 1.5 + effects.food * (hungry ? 4 : 1.5) + effects.population * 25 - effects.devastation * (scarred ? 5 : 2);
+  // Ashglass feeds the rites and the working; garrison strength is worth what the companies cost to raise.
+  return effects.coin + effects.knowledge * 1.5 + effects.food * (hungry ? 4 : 1.5) + effects.population * 25 - effects.devastation * (scarred ? 5 : 2)
+    + hearthEventEffect(effects, 'ashglass') * 3 + hearthEventEffect(effects, 'garrison') * 1.5;
 }
 export interface HearthEventPlan extends AiPlan { coinSpent: number; knowledgeSpent: number }
 export function planHearthEvents(view: Observation): HearthEventPlan | null {

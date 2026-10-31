@@ -210,14 +210,14 @@ describe('rules 44 and 45 pricing', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 43, contentHash: PRE_SEAM_PRICING_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 46, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
     expect(getObservation(loaded, player).progression.attunement!.knowledgeCost).toBe(7200);
     // A campaign sealed under the frozen rules 44 pack continues unchanged under rules 45.
     const sealed44 = serializeGameForVersion(state, 44);
     expect(JSON.parse(sealed44)).toMatchObject({ version: 44, contentHash: PRE_SEAM_WATCH_PRICING_CONTENT_HASH });
     const loaded44 = deserializeGame(sealed44);
     expect(stateHash(loaded44)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded44))).toMatchObject({ version: 46, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded44))).toMatchObject({ version: 47, contentHash: CONTENT_HASH });
     expect(getObservation(loaded44, player).progression.attunement!.knowledgeCost).toBe(7200);
   });
 });

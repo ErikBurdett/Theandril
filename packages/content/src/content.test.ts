@@ -135,10 +135,16 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 7200, long: 12_000, epic: 18_000 });
   // Rules 45 content, before rules 46 added hearth events; the current pack seals them.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(45), true, ATTUNEMENT_VICTORY, false)).toBe('1f0c41ca');
+  // Rules 46 content, the first eight hearth events, before rules 47 added sixteen more; the current pack seals all twenty-four.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(46), true, ATTUNEMENT_VICTORY, hearthEventsForRules(46))).toBe('8a737501');
   expect(CONTENT_HASH).not.toBe('1f0c41ca');
-  expect(HEARTH_EVENTS).toHaveLength(8);
+  expect(CONTENT_HASH).not.toBe('8a737501');
+  expect(HEARTH_EVENTS).toHaveLength(24);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
+  expect(hearthEventsForRules(47)).toHaveLength(24);
+  expect(hearthEventsForRules(46).every(event => event.choices.every(choice => !('ashglass' in choice.effects) && !('garrison' in choice.effects)))).toBe(true);
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, choices: HEARTH_EVENTS[0]!.choices.map(choice => ({ ...choice, effects: { ...choice.effects, ashglass: 2 } })) }])).toThrow('no rules 47 effect');
   expect(() => validateHearthEventContent()).not.toThrow();
   expect(() => validateHearthEventContent([HEARTH_EVENTS[0]!, HEARTH_EVENTS[0]!])).toThrow('Duplicate hearth event ID');
   expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, text: 'No hearth named.' }])).toThrow('names its hearth');
