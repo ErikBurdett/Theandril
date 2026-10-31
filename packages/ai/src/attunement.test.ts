@@ -6,12 +6,13 @@ import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { getLandIndex } from '../../sim/src/territory';
 import { planTurnWithReasons } from './index';
 import { planProgression } from './progression';
-import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, SEAM_OBJECTIVE_RANGE, seamExpeditionSite, seamObjective } from './arcane';
-import { protectedFactions } from './diplomacy';
+import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, SEAM_OBJECTIVE_RANGE, SEAM_RALLY_REACH, seamExpeditionSite, seamObjective, seamRally } from './arcane';
+import { planDiplomacy, protectedFactions } from './diplomacy';
+import { planConquestDecision } from './conquest';
 import { planCharacters } from './characters';
 import { deserializeGame, serializeGame } from '@theandril/sim';
-import { hexDistance, isPassable } from '@theandril/mapgen';
-import { SITE_SEARCH_RADIUS } from '@theandril/sim';
+import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
+import { getMovementQuery, SITE_SEARCH_RADIUS } from '@theandril/sim';
 
 const casterOf = (state: GameState) => Object.values(state.characters).find(character => character.factionId === state.turnOwnerId && character.definitionId === 'character.waykeeper')!;
 const hostOf = (state: GameState) => Object.values(state.settlements).find(town => town.factionId === state.turnOwnerId)!;
@@ -405,6 +406,92 @@ test('a seam of a lacking path inside another realm\'s borders is an objective o
   // Nor does a realm already at war, or one without a caster who could seal the working.
   expect(seamObjective({ ...view, wars: ['faction.elsewhere'] }, protectedFactions(view))).toBeNull();
   expect(seamObjective({ ...view, progression: { ...view.progression, attunement: { ...view.progression.attunement!, casters: [] } } }, protectedFactions(view))).toBeNull();
+});
+
+test('a standing war is carried to the seam: the objective holds against peace while a company pursues it, companies gather on one rally hex, and the siege of the hearth passes to a column that can storm its warded walls', () => {
+  const { state, player, seam } = farSeamCampaign(), rival = state.factions[1]!.id, host = hostOf(state), width = state.world.width;
+  const foundingCell = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, seam, width) === 1
+    && Object.values(state.settlements).every(town => hexDistance(town.cell, cell, width) > 2));
+  const caravan = 'army.rival_caravan';
+  state.armies[caravan] = { id: caravan, factionId: rival, name: 'Reed caravan', cell: foundingCell, movement: 3, formations: [createArmyFormation(caravan, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'found', factionId: rival, armyId: caravan, name: 'Seam Reach' })).toMatchObject({ ok: true });
+  const reach = Object.values(state.settlements).find(town => town.name === 'Seam Reach')!;
+  reach.population = 6; // a full militia of sixty
+  const ground = (cell: number) => isPassable(state.world.terrain[cell]!) && state.world.waterDepth[cell] === 0 && !Object.values(state.settlements).some(town => town.cell === cell);
+  const beside = neighbors(reach.cell, width, state.world.height).filter(cell => ground(cell) && hexDistance(cell, seam, width) <= SEAM_RALLY_REACH).sort((a, b) => a - b)[0]!;
+  const leader = 'army.leader';
+  state.armies[leader] = { id: leader, factionId: player, name: 'Glass vanguard', cell: beside, movement: 3, formations: [createArmyFormation(leader, 'unit.guard')] };
+  refreshAuthoredSight(state);
+  let view = getObservation(state, player);
+  const protectedIds = protectedFactions(view);
+  // At war with another realm only, the holder is not pursued: the objective never opens a second front. At war with the holder it is carried to the seam.
+  expect(seamObjective({ ...view, wars: ['faction.elsewhere'] }, protectedIds)).toBeNull();
+  expect(seamObjective({ ...view, wars: [rival, 'faction.elsewhere'] }, protectedIds)).toMatchObject({ holderId: rival, settlementId: reach.id, atWar: true });
+  expect(seamObjective(view, protectedIds)).toMatchObject({ holderId: rival, atWar: false });
+  // Beside the hearth, the vanguard declares the war and lays the siege: the realm's quote of the walls.
+  const opening = planTurnWithReasons(view);
+  expect(opening.commands).toContainEqual({ type: 'declareWar', factionId: player, targetFactionId: rival });
+  expect(opening.commands).toContainEqual({ type: 'besiege', factionId: player, armyId: leader, settlementId: reach.id });
+  for (const command of opening.commands.filter(command => command.type === 'declareWar' || command.type === 'besiege')) expect(applyCommand(state, command)).toMatchObject({ ok: true });
+  // A second company within range gathers on the vanguard's hex rather than claiming its own.
+  const follower = 'army.follower';
+  const camp = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, beside, width) === 2
+    && !Object.values(state.settlements).some(town => hexDistance(town.cell, cell, width) <= 1) && state.explored[player]!.has(cell));
+  expect(camp).toBeGreaterThan(0);
+  state.armies[follower] = { id: follower, factionId: player, name: 'Glass second', cell: camp, movement: 3, formations: [createArmyFormation(follower, 'unit.guard')] };
+  refreshAuthoredSight(state);
+  view = getObservation(state, player);
+  const goal = seamObjective(view, protectedIds)!;
+  expect(goal).toMatchObject({ holderId: rival, settlementId: reach.id, atWar: true });
+  expect(seamRally(view, goal)).toBe(beside);
+  const gathering = planTurnWithReasons(view);
+  expect(gathering.reasons.some(reason => reason.includes('objective of the war'))).toBe(true);
+  const march = gathering.commands.find(command => command.type === 'moveTo' && command.armyId === follower) as { target: number } | undefined;
+  expect(march).toBeDefined();
+  if (getMovementQuery(view, follower).reachable.some(item => item.cell === beside)) expect(march!.target).toBe(beside);
+  else expect(hexDistance(march!.target, beside, width)).toBeLessThan(2);
+  // The holder's peace is refused and none is sought while the siege stands, though the same offer is welcome once nothing pursues the seam.
+  state.diplomacy.offers.push({ id: 'offer.seam', proposerId: rival, recipientId: player, createdTurn: state.turn, expiresTurn: state.turn + 3, terms: { offerCoin: 40, requestCoin: 0, truceTurns: 10 } });
+  view = getObservation(state, player);
+  const refusal = planDiplomacy(view, seamObjective(view, protectedIds))!;
+  expect(refusal.commands).toEqual([{ type: 'respondPeace', factionId: player, offerId: 'offer.seam', accept: false }]);
+  expect(refusal.reasons[0]).toContain('carried to the rune seam');
+  const idle = { ...view, sieges: [], armies: view.armies.map(army => army.factionId === player ? { ...army, cell: host.cell } : army) };
+  expect(planDiplomacy(idle, seamObjective(idle, protectedIds))!.commands).toEqual([{ type: 'respondPeace', factionId: player, offerId: 'offer.seam', accept: true }]);
+  state.diplomacy.offers.length = 0;
+  state.turn += 12;
+  const memory = state.diplomacy.relations.find(relation => relation.parties.includes(rival))!;
+  memory.warStartedTurn = state.turn - 12; memory.lastOfferTurn = state.turn - 3;
+  view = getObservation(state, player);
+  expect(planDiplomacy(view, null)!.commands[0]).toMatchObject({ type: 'proposePeace', targetFactionId: rival });
+  expect(planDiplomacy(view, seamObjective(view, protectedIds))).toBeNull();
+  // Warded walls do not end the siege of the seam hearth: it is the quote the column gathers on. Elsewhere the old rule lifts it.
+  state.wards.push({ settlementId: reach.id, factionId: rival, casterId: 'character.rival_waykeeper', riteId: 'rite.seam_warding', startedTurn: state.turn, expiresTurn: state.turn + 10 });
+  view = getObservation(state, player);
+  expect(view.sieges.find(siege => siege.settlementId === reach.id)).toMatchObject({ warded: true, defenderStrength: 60 });
+  expect(planConquestDecision(view, new Set(), seamObjective(view, protectedIds))).toBeNull();
+  expect(planConquestDecision(view, new Set(), null)!.commands).toEqual([{ type: 'liftSiege', factionId: player, settlementId: reach.id }]);
+  // A column of three guards on the vanguard's hex can storm walls held by sixty: the siege is handed to it, and the next pass it lays the siege itself.
+  const column = 'army.column';
+  state.armies[column] = { id: column, factionId: player, name: 'Glass column', cell: beside, movement: 3, formations: ['a', 'b', 'c'].map(suffix => createArmyFormation(`${column}.${suffix}`, 'unit.guard')) };
+  refreshAuthoredSight(state);
+  view = getObservation(state, player);
+  const handover = planConquestDecision(view, new Set(), seamObjective(view, protectedIds))!;
+  expect(handover.commands).toEqual([{ type: 'liftSiege', factionId: player, settlementId: reach.id }]);
+  expect(handover.reasons[0]).toContain('Hand the siege');
+  expect(applyCommand(state, handover.commands[0]!)).toMatchObject({ ok: true });
+  view = getObservation(state, player);
+  // Released, the vanguard is concentrated into the column on their shared hex; with fresh facts the column lays the siege, and the vanguard never takes it back.
+  const concentration = planTurnWithReasons(view);
+  expect(concentration.commands).toContainEqual({ type: 'mergeArmies', factionId: player, sourceArmyId: leader, targetArmyId: column });
+  expect(concentration.commands.some(command => command.type === 'besiege')).toBe(false);
+  for (const command of concentration.commands.filter(command => command.type === 'mergeArmies')) expect(applyCommand(state, command)).toMatchObject({ ok: true });
+  state.armies[column]!.movement = 3; // the next turn's movement
+  view = getObservation(state, player);
+  const storm = planTurnWithReasons(view);
+  expect(storm.commands).toContainEqual({ type: 'besiege', factionId: player, armyId: column, settlementId: reach.id });
+  expect(view.armies.find(army => army.id === column)!.formations).toHaveLength(4);
 });
 
 test('rules 39: the study post is a hearth whose borders hold a seam, so a lodged Waykeeper actually studies; a caster lodged at a seamless archive hearth gets a studying colleague', () => {

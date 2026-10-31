@@ -1,6 +1,6 @@
 import { MAGIC_PATHS, UNITS } from '@theandril/content';
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
-import { getMovementQuery, GLASS_SHARDS, SITE_SEARCH_RADIUS, type GameCommand, type Observation, type ObservedArcaneSite } from '@theandril/sim';
+import { getMovementQuery, GLASS_SHARDS, SITE_SEARCH_RADIUS, type ArmyView, type GameCommand, type Observation, type ObservedArcaneSite } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 import { observedCells } from './observation-index';
 import { heldDelegatedArmyIds } from './theaters';
@@ -270,33 +270,64 @@ export function planGlassApproach(view: Observation, heldArmyIds: ReadonlySet<st
 
 /** How far from its hearths a realm will carry a war for a seam another realm holds. */
 export const SEAM_OBJECTIVE_RANGE = 24;
-export interface SeamObjective { seam: ObservedArcaneSite; holderId: string; settlementId: string | null; distance: number }
+export interface SeamObjective { seam: ObservedArcaneSite; holderId: string; settlementId: string | null; distance: number; atWar: boolean }
 
 /** A seam of a path the realm lacks, found inside another realm's borders, is
  * an objective of war once it is the last gap before the working (the realm
- * holds a seam, a caster of the required degree and no war): field armies march on it, the
+ * holds a seam and a caster of the required degree): field armies march on it, the
  * hearth whose borders hold it is besieged when it comes into sight, and the
- * war is declared the moment a company can lay siege. Realms bound by oath,
- * treaty or a supply agreement are never pursued; one objective at a time,
- * the nearest to the realm's hearths within range. The ground's holder is read
- * from the realm's own memory of the land, so a seam another realm claimed
- * since it was last seen is pursued only once it is seen again. */
+ * war is declared the moment a company can lay siege. The objective never opens
+ * a second front: at peace any unprotected holder may be pursued, but a realm
+ * already at war pursues only a holder it already fights, so a war that cost it
+ * a seam hearth is carried back to that hearth. Realms bound by oath, treaty or
+ * a supply agreement are never pursued; one objective at a time, the nearest to
+ * the realm's hearths within range. The ground's holder is read from the realm's
+ * own memory of the land, so a seam another realm claimed since it was last
+ * seen is pursued only once it is seen again. */
 export function seamObjective(view: Observation, protectedIds: ReadonlySet<string>): SeamObjective | null {
   const attunement = view.progression.attunement;
-  // Only the last gap is worth a war: the realm holds a seam, has a caster who
-  // could seal the working, and is at peace, so the seam is all it lacks and
-  // the war is not a second front.
-  if (!attunement || view.wars.length || !view.arcaneSites.some(site => site.controlled) || !attunement.casters.some(caster => caster.degree >= attunement.casterDegree)) return null;
+  // Only the last gap is worth a war: the realm holds a seam and has a caster
+  // who could seal the working, so the seam is all it lacks.
+  if (!attunement || !view.arcaneSites.some(site => site.controlled) || !attunement.casters.some(caster => caster.degree >= attunement.casterDegree)) return null;
   const own = view.settlements.filter(town => town.factionId === view.factionId);
   if (!own.length) return null;
+  const wars = new Set(view.wars);
   const cells = observedCells(view);
   const candidates: SeamObjective[] = [];
   for (const seam of wantedSeams(view)) {
     const ground = cells.get(seam.cell), holderId = ground?.factionId;
     if (!holderId || holderId === view.factionId || protectedIds.has(holderId)) continue;
+    if (wars.size && !wars.has(holderId)) continue;
     const distance = Math.min(...own.map(town => hexDistance(town.cell, seam.cell, view.width)));
     if (distance > SEAM_OBJECTIVE_RANGE) continue;
-    candidates.push({ seam, holderId, settlementId: ground?.settlementId ?? null, distance });
+    candidates.push({ seam, holderId, settlementId: ground?.settlementId ?? null, distance, atWar: wars.has(holderId) });
   }
   return candidates.sort((a, b) => a.distance - b.distance || a.seam.cell - b.seam.cell)[0] ?? null;
+}
+
+/** How close to the seam a company counts as part of the column gathering for it. */
+export const SEAM_RALLY_REACH = 3;
+const fieldCompany = (view: Observation, army: ArmyView): boolean => army.factionId === view.factionId && army.domain === 'land' && !army.carrierId
+  && army.canAttack && !army.canFound && !army.formations.some(formation => formation.unitId === 'unit.scout');
+/** Where the column for the seam gathers: the siege lines, when the realm
+ * besieges the hearth holding the seam; else the hex of the strongest own
+ * field company already within reach of the seam; else the seam itself.
+ * Companies drawn to the objective share that hex instead of each claiming its
+ * own, so they stand together and are concentrated into one column the next
+ * turn; a company alone before a warded hearth can neither wear its walls nor
+ * storm them. */
+export function seamRally(view: Observation, goal: SeamObjective): number {
+  const siege = goal.settlementId === null ? undefined : view.sieges.find(siege => siege.factionId === view.factionId && siege.settlementId === goal.settlementId);
+  const besieger = siege && view.armies.find(army => army.id === siege.armyId);
+  if (besieger) return besieger.cell;
+  const near = view.armies.filter(army => fieldCompany(view, army) && hexDistance(army.cell, goal.seam.cell, view.width) <= SEAM_RALLY_REACH)
+    .sort((a, b) => b.strength - a.strength || b.formations.length - a.formations.length || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  return near[0]?.cell ?? goal.seam.cell;
+}
+/** Whether the realm is actually pursuing its seam objective: a company stands
+ * within reach of the seam or besieges the hearth that holds it. Only then is
+ * the war with the holder worth holding against a peace. */
+export function seamPursued(view: Observation, goal: SeamObjective): boolean {
+  return view.armies.some(army => fieldCompany(view, army) && hexDistance(army.cell, goal.seam.cell, view.width) <= SEAM_RALLY_REACH)
+    || (goal.settlementId !== null && view.sieges.some(siege => siege.factionId === view.factionId && siege.settlementId === goal.settlementId));
 }

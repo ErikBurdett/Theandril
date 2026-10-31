@@ -3,7 +3,7 @@ import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planDepot } from './supply';
-import { planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_OBJECTIVE_RANGE, seamObjective } from './arcane';
+import { planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_OBJECTIVE_RANGE, seamObjective, seamRally } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planRites } from './rites';
 import { planWardenReturn } from './wardens';
@@ -41,7 +41,12 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // This private planning purse never mutates the permitted observation.
   const promisedSupplyFees = pendingSupplyAccessFees(view);
   if (promisedSupplyFees) view = { ...view, treasury: Math.max(0, view.treasury - promisedSupplyFees) };
-  const diplomatic = planDiplomacy(view);
+  // The seam of the missing path, the last gap before the working, is one
+  // objective for the whole turn: diplomacy holds the war for it, the siege
+  // planner keeps or hands over the siege of its hearth, and the field
+  // companies within range gather before it.
+  const seamGoal = isCityState(view.factionId) ? null : seamObjective(view, protectedFactions(view));
+  const diplomatic = planDiplomacy(view, seamGoal);
   if (diplomatic) return diplomatic;
   const answered = answerPatronage(view);
   if (answered) return answered;
@@ -51,7 +56,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // Rules 41: a ward is broken before a warded siege is judged hopeless and lifted.
   const warding = planRites(view);
   if (warding) return warding;
-  const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view));
+  const siegeDecision = planConquestDecision(view, heldDelegatedArmyIds(view), seamGoal);
   if (siegeDecision) return siegeDecision;
   const oceanScoutReserve = reserveOceanScout(view);
   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
@@ -145,12 +150,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // A seam of a lacking path inside another realm's borders is an objective of
   // war: the hearths within claim reach of it rank with an enemy victory host,
   // and the seam itself draws field armies until one of them is in sight.
-  const seamGoal = minor ? null : seamObjective(view, protectedIds);
-  const seamHosts = new Set(seamGoal ? enemyTowns.filter(town => town.factionId === seamGoal.holderId && hexDistance(town.cell, seamGoal.seam.cell, view.width) <= 3).map(town => town.id) : []);
+  const objective = seamGoal && !protectedIds.has(seamGoal.holderId) ? seamGoal : null;
+  const seamHosts = new Set(objective ? enemyTowns.filter(town => town.factionId === objective.holderId && hexDistance(town.cell, objective.seam.cell, view.width) <= 3).map(town => town.id) : []);
+  const rally = objective ? seamRally(view, objective) : undefined;
   const priority = (town: { id: string }): number => Number(projectHosts.has(town.id) || seamHosts.has(town.id));
   const objectives = enemyTowns.filter(town => !protectedIds.has(town.factionId)).sort((a, b) => priority(b) - priority(a) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)).slice(0, 64);
   const approachCells = [...new Set([...enemies, ...enemyTowns].filter(entity => !protectedIds.has(entity.factionId)).map(entity => entity.cell))].slice(0, 64);
-  if (seamGoal) reasons.push(`A ${seamGoal.seam.pathName.toLowerCase()} seam at hex ${seamGoal.seam.cell} lies in ${seamGoal.holderId}'s borders, ${seamGoal.distance} hexes from the realm's hearths: the realm lacks that path, so the hearth holding it is an objective of war.`);
+  if (objective) reasons.push(`A ${objective.seam.pathName.toLowerCase()} seam at hex ${objective.seam.cell} lies in ${objective.holderId}'s borders, ${objective.distance} hexes from the realm's hearths: the realm lacks that path, so the hearth holding it is an objective of ${objective.atWar ? 'the war' : 'war'}; its column gathers at hex ${rally}.`);
   // An embarked founder belongs to a separate expedition. It must not freeze
   // affordable overland expansion while a distant fleet searches for a landing.
   const hasColonist = ownArmies.some(army => army.formations.some(formation => units.get(formation.unitId)?.canFound));
@@ -261,6 +267,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const contactClues = foreignBorders.filter((_, index) => index % borderStride === 0).slice(0, 64);
   // Keep one fast reconnaissance detachment independent. Other recruits join real field armies.
   const explorerId = ownArmies.find(army => army.formations.length === 1 && army.unitId === 'unit.scout')?.id;
+  // The hearth holding the seam objective is besieged by the strongest company
+  // beside it, so a weaker one does not take the siege from the column.
+  const ownField = ownArmies.filter(army => army.canAttack && !army.canFound && army.id !== explorerId);
+  const strongestBeside = (army: typeof ownArmies[number], town: { cell: number }): boolean => !ownField.some(other => other.id !== army.id
+    && hexDistance(other.cell, town.cell, view.width) === 1 && (other.strength > army.strength || (other.strength === army.strength && other.id < army.id)));
+  // Companies gathering for the seam share the rally hex instead of each claiming its own.
+  const rallyClaimed = new Set<number>();
   const groups = new Map<number, typeof ownArmies>();
   const desiredConcentration = (army: typeof ownArmies[number]): number => army.commander
     ? Math.min(army.formationCapacity, Math.max(12, ...enemies.filter(enemy => hexDistance(army.cell, enemy.cell, view.width) <= 18).map(enemy => enemy.formations.length + 2)))
@@ -348,7 +361,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
         return { commands: plans, reasons };
       }
       const town = adjacent.map(cell => townByCell.get(cell)).find(town => town && !protectedIds.has(town.factionId) && !besiegedTowns.has(town.id) &&
-        (strengthByCell.get(town.cell) ?? 0) <= army.strength);
+        (strengthByCell.get(town.cell) ?? 0) <= army.strength && (!seamHosts.has(town.id) || strongestBeside(army, town)));
       if (town && plans.length <= 126 && (!minor || wars.has(town.factionId))) {
         if (!wars.has(town.factionId)) {
           plans.push({ type: 'declareWar', factionId, targetFactionId: town.factionId });
@@ -372,26 +385,38 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     // the force it feeds, but it is never worth marching for and never outranks
     // engaging an enemy army, so it is weighted below the ordinary approach.
     const raidCells = military ? view.depots.filter(depot => wars.has(depot.factionId) && hexDistance(army.cell, depot.cell, view.width) <= 3).map(depot => depot.cell).slice(0, 16) : [];
-    // The seam objective draws a field army within range of it until the hearth holding it is in sight.
-    const seamApproach = military && seamGoal && hexDistance(army.cell, seamGoal.seam.cell, view.width) <= SEAM_OBJECTIVE_RANGE ? seamGoal.seam.cell : undefined;
+    // The seam objective draws every field army within range of it to the
+    // column's rally hex. The company at the rally leads the column: it closes
+    // on the hearth holding the seam once that is in sight and otherwise holds
+    // the rally for the companies gathering on it.
+    const seamApproach = military && objective && rally !== undefined && hexDistance(army.cell, objective.seam.cell, view.width) <= SEAM_OBJECTIVE_RANGE ? rally : undefined;
+    let seamTarget = seamApproach;
+    if (seamApproach !== undefined && army.cell === seamApproach) {
+      const host = enemyTowns.filter(town => seamHosts.has(town.id)).sort((a, b) => hexDistance(a.cell, army.cell, view.width) - hexDistance(b.cell, army.cell, view.width) || (a.id < b.id ? -1 : 1))[0];
+      if (host && !adjacent.includes(host.cell)) seamTarget = host.cell;
+      else {
+        if (reasons.length < 16) reasons.push(`${army.id} holds the column's rally before the ${objective!.seam.pathName.toLowerCase()} seam.`);
+        continue;
+      }
+    }
     const score = (cell: number): number => {
       const distance = Math.min(20, ...ownSettlements.map(town => hexDistance(cell, town.cell, view.width)));
       const invading = nearbyObjectives.length > 0;
-      const approach = invading ? Math.max(...nearbyObjectives.map(town => (priority(town) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
-        : seamApproach !== undefined ? -hexDistance(cell, seamApproach, view.width) * 100
+      const approach = seamTarget !== undefined ? -hexDistance(cell, seamTarget, view.width) * 500
+        : invading ? Math.max(...nearbyObjectives.map(town => (priority(town) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
         : raidCells.length ? -Math.min(...raidCells.map(post => hexDistance(cell, post, view.width))) * 80
           : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
       const danger = nearbyThreat.reduce((sum, enemy) => sum + Math.max(0, 5 - hexDistance(cell, enemy.cell, view.width)) * 1200, 0);
       return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? view.growth ? settlementSiteValue(view, cell) : distance * 100
         : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
     };
-    const strategic = army.canFound || nearbyContacts.length > 0 || raidCells.length > 0 || seamApproach !== undefined || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
+    const strategic = army.canFound || nearbyContacts.length > 0 || raidCells.length > 0 || seamTarget !== undefined || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
     const distantContact = !strategic && sparseContactNeeded(view) && army.id === explorerId && view.factions.length === 1;
     // One scout broadens the contact search while ordinary field armies retain
     // local exploration. Only new sight earns the public inward bearing: zero
     // gain still invokes the bounded frontier search, never a center magnet.
     const chartCenter = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
-    const target = navigation.destination(army, army.sight, claimed, strategic ? score : undefined, undefined,
+    const target = navigation.destination(army, army.sight, seamTarget !== undefined && seamTarget === seamApproach ? rallyClaimed : claimed, strategic ? score : undefined, undefined,
       distantContact ? (cell, gain) => gain * 100 + (gain > 0 ? (hexDistance(army.cell, chartCenter, view.width) - hexDistance(cell, chartCenter, view.width)) * 500 : 0) : undefined);
     if (target !== undefined) {
       claimed.add(target);

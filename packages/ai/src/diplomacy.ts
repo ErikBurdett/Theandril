@@ -1,6 +1,7 @@
 import { evaluatePeaceOffer, isCityState, type GameCommand, type Observation } from '@theandril/sim';
 import { UNIFICATION_VICTORY } from '@theandril/content';
 import { reviewProjectCounterplay } from './project-counterplay';
+import { seamPursued, type SeamObjective } from './arcane';
 
 export interface AiPlan { commands: GameCommand[]; reasons: string[] }
 
@@ -21,8 +22,12 @@ export function protectedFactions(view: Observation): Set<string> {
 /** Accepted peace ends the pass. A rejection preserves war and the quoted
  * siege facts, so an imminent-project rejection may carry that one siege in
  * the same batch: Watch plans only once per realm per round. */
-export function planDiplomacy(view: Observation): AiPlan | null {
+export function planDiplomacy(view: Observation, seamGoal: SeamObjective | null = null): AiPlan | null {
   if (view.strategicCommandBlocker) return null;
+  // A war carried to the seam of the missing path is held while a company
+  // pursues it: no peace is offered to the holder and none of its is accepted.
+  // The hold ends with the pursuit, so a column driven off makes peace as before.
+  const heldWar = seamGoal?.atWar && seamPursued(view, seamGoal) ? seamGoal.holderId : null;
   const incoming = [...view.diplomacy.offers].sort((a, b) => a.createdTurn - b.createdTurn || (a.id < b.id ? -1 : 1))
     .find(offer => offer.recipientId === view.factionId && offer.expiresTurn > view.turn && view.wars.includes(offer.proposerId));
   if (incoming) {
@@ -32,6 +37,10 @@ export function planDiplomacy(view: Observation): AiPlan | null {
     if (interruption.command || interruption.peaceBlockedFactionIds.includes(incoming.proposerId)) return {
       commands: [{ type: 'respondPeace', factionId: view.factionId, offerId: incoming.id, accept: false }, ...(interruption.command ? [interruption.command] : [])],
       reasons: [`Reject ${incoming.id}: its ${incoming.terms.truceTurns}-turn binding peace would protect this enemy victory. ${interruption.reason}`],
+    };
+    if (incoming.proposerId === heldWar) return {
+      commands: [{ type: 'respondPeace', factionId: view.factionId, offerId: incoming.id, accept: false }],
+      reasons: [`Reject ${incoming.id}: the war with ${incoming.proposerId} is carried to the ${seamGoal!.seam.pathName.toLowerCase()} seam at hex ${seamGoal!.seam.cell}, the last the working lacks, and a company stands before it.`],
     };
     return {
       commands: [{ type: 'respondPeace', factionId: view.factionId, offerId: incoming.id, accept }],
@@ -47,7 +56,7 @@ export function planDiplomacy(view: Observation): AiPlan | null {
   const exhausted = own.some(army => army.morale < 30 || army.fatigue > 65);
   const pending = new Set(view.diplomacy.offers.flatMap(offer => [offer.proposerId, offer.recipientId]));
   for (const enemyId of [...view.wars].sort().slice(0, 48)) {
-    if (pending.has(enemyId) || interruption.peaceBlockedFactionIds.includes(enemyId)) continue;
+    if (pending.has(enemyId) || interruption.peaceBlockedFactionIds.includes(enemyId) || enemyId === heldWar) continue;
     const memory = view.diplomacy.relations.find(relation => relation.parties.includes(enemyId));
     if (!memory || memory.warStartedTurn === null || view.turn - memory.lastOfferTurn < 3) continue;
     const duration = view.turn - memory.warStartedTurn;

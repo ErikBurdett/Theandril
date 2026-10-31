@@ -1,4 +1,6 @@
+import { neighbors } from '@theandril/mapgen';
 import type { CaptureOption, Observation } from '@theandril/sim';
+import type { SeamObjective } from './arcane';
 import type { AiPlan } from './diplomacy';
 import { heldDelegatedArmyIds } from './theaters';
 
@@ -18,7 +20,7 @@ export function chooseCaptureOption(view: Observation): CaptureOption | undefine
   return [...pending.options].sort((a, b) => score(b) - score(a) || (a.outcome < b.outcome ? -1 : a.outcome > b.outcome ? 1 : 0))[0];
 }
 
-export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): AiPlan | null {
+export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view), seamGoal: SeamObjective | null = null): AiPlan | null {
   if (view.pendingCapture) {
     const option = chooseCaptureOption(view);
     if (!option) return { commands: [], reasons: ['Await the controlling faction’s capture decision.'] };
@@ -39,6 +41,19 @@ export function planConquestDecision(view: Observation, heldArmyIds: ReadonlySet
     const assaultReady = view.growth ? siege.defenses === 0 || army.strength >= siege.defenderStrength * 3 : siege.defenses <= 10 || army.strength >= siege.defenderStrength * 2;
     if (siege.canAssault && army.morale >= 35 && army.fatigue <= 65 && assaultReady) {
       return { commands: [{ type: 'assault', factionId: view.factionId, settlementId: siege.settlementId }], reasons: [`Assault ${siege.settlementId}: defenses ${siege.defenses}, observed defender strength ${siege.defenderStrength}, army strength ${army.strength}.`] };
+    }
+    // The siege of the hearth holding the seam objective is the realm's quote of
+    // its walls. It stands while the column gathers beside it, and passes to a
+    // company beside the hearth that can storm them when the besieger cannot.
+    if (seamGoal && siege.settlementId === seamGoal.settlementId) {
+      const town = view.settlements.find(item => item.id === siege.settlementId);
+      const storm = view.growth ? siege.defenderStrength * 3 : siege.defenderStrength * 2;
+      const beside = town ? neighbors(town.cell, view.width, view.height) : [];
+      const column = view.armies.filter(item => item.factionId === view.factionId && item.id !== army.id && item.domain === 'land' && !item.carrierId
+        && item.canAttack && !item.canFound && !heldArmyIds.has(item.id) && !item.commandBlocker && item.strength >= storm && item.strength > army.strength && beside.includes(item.cell))
+        .sort((a, b) => b.strength - a.strength || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))[0];
+      if (column) return { commands: [{ type: 'liftSiege', factionId: view.factionId, settlementId: siege.settlementId }], reasons: [`Hand the siege of ${siege.settlementId} to ${column.name}: its ${column.strength} strength beside the hearth can storm walls held by ${siege.defenderStrength}, and ${army.name} cannot.`] };
+      if (siege.warded) continue;
     }
     // Rules 40: warded walls never wear down, so a siege that cannot storm them
     // now only starves the army's own treasury. Lift it and seek another front.

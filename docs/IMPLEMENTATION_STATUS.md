@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## AI seam column: a standing war carried to the seam — 2026-10-31
+
+AI only. A replay of every change of hands of a seam hearth in the Epic
+headline campaign showed Glass Tide losing its Rune seam hearth on turn 160
+and never retaking it: the hearth stood ungarrisoned under a seam warding
+recast every ten turns, the bounded objective fired only at peace, each
+company reached the walls alone, laid a siege lifted the next turn as hopeless,
+and the realm made peace with the holder every eight turns of war. Now a
+standing war is carried to the seam (never a second front), the companies
+within range gather on one rally hex and are concentrated into a column, the
+hearth is besieged by the strongest company beside it, the siege is kept
+under a warding and handed to a column that can storm the walls, and no peace
+is offered to or accepted from the holder while the seam is pursued. Traced
+after: the hearth is retaken on 246 and held from 250 to 373, the working is
+sealed on about 353, and Saltwind's Prosperity completes first on 379.
+Headline pacing **379 / 300 / 203**, every campaign in band. Verification: a
+new AI test; unit 2,321, campaigns 57, lint, typecheck, build, three covering
+journeys and the chronicles journey. The gap is now the race between a late
+working and a rival project, and keeping the retaken hearth.
+[Evidence](development/2026-10-31-ai-seam-column/README.md),
+[ADR0072](architecture/0072-ai-seam-column.md).
+
 ## AI study post: a Waykeeper studies where a seam is held — 2026-10-31
 
 AI only. A trace of the Epic headline campaign showed Glass Tide holding both
