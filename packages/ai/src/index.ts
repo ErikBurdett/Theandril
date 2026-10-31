@@ -17,7 +17,7 @@ import { planRoadAcceleration } from './roads';
 import { settlementSpacing, settlementSiteValue } from './expansion';
 import { isCityState } from '@theandril/sim';
 import { observedCells } from './observation-index';
-import { heldDelegatedArmyIds, planDefenseTheater } from './theaters';
+import { heldDelegatedArmyIds, planDefenseTheater, planSeamWatch } from './theaters';
 import { planPatrol } from './patrols';
 import { answerSupplyAccess, pendingSupplyAccessFees, planSupplyAccess } from './supply-access';
 
@@ -90,6 +90,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (supplyFee) view = { ...view, treasury: Math.max(0, view.treasury - supplyFee) };
   const factionId = view.factionId;
   const theater = planDefenseTheater(view);
+  // Once the realm holds a seam hearth, its own home watch adopts it.
+  const seamWatch = theater.commands.length ? null : planSeamWatch(view, theater.heldArmyIds);
+  if (seamWatch) { theater.commands.push(...seamWatch.commands); theater.reasons.push(...seamWatch.reasons); for (const id of seamWatch.heldArmyIds) theater.heldArmyIds.add(id); }
   for (const id of supplyPurchase?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
   // A company carrying a caster home for a sealed working keeps that road; so does one bringing a warden to a besieged seam hearth.
   for (const id of advancement.heldArmyIds) theater.heldArmyIds.add(id);

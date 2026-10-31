@@ -1,5 +1,5 @@
 import { hexDistance } from '@theandril/mapgen';
-import { getMovementPreview, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
+import { getMovementPreview, type ArmyView, type GameCommand, type Observation, type ObservedDefenseTheater } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 
 const byId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
@@ -86,4 +86,71 @@ export function planDefenseTheater(view: Observation): TheaterPlan {
   return result([{ type: 'setTheater', factionId: view.factionId, name: 'Home watch', settlementIds, armyIds,
     reserveCell: reserve.cell, guardsPerSettlement: 1, enabled: true, ...(view.theaterReinforcement ? { reinforcementLimit: 1 } : {}) }],
   [`Delegate ${armyIds.length} spare compan${armyIds.length === 1 ? 'y' : 'ies'} to a home watch of ${settlementIds.length} hearth${settlementIds.length === 1 ? '' : 's'}, one army each; retain scouts and the two strongest field armies.`]);
+}
+
+/** The AI's own home watch, by the name it gives it; a player's theaters are never rewritten. */
+export const HOME_WATCH_NAME = 'Home watch';
+const spareCompanies = (view: Observation, heldArmyIds: ReadonlySet<string>): ArmyView[] => {
+  const military = view.armies.filter(army => army.factionId === view.factionId && army.domain === 'land'
+    && !army.carrierId && army.canAttack && !army.canFound && !army.formations.some(formation => formation.unitId === 'unit.scout'))
+    .sort((a, b) => b.strength - a.strength || b.formations.length - a.formations.length || byId(a, b));
+  const committed = new Set([
+    ...heldArmyIds,
+    ...(view.patrols ?? []).map(patrol => patrol.armyId),
+    ...(view.theaters ?? []).flatMap(theater => theater.armyIds),
+    ...military.slice(0, 2).map(army => army.id),
+    ...view.routes.map(route => route.armyId),
+    ...view.postings.map(posting => posting.armyId),
+    ...view.sieges.map(siege => siege.armyId),
+  ]);
+  return military.filter(army => !committed.has(army.id) && army.formations.length === 1
+    && !army.commander && !army.agents.length && !army.movementBlocker && !army.reorganizationBlocker);
+};
+
+/** A hearth whose borders hold a surveyed seam is what the realm's arcane road
+ * stands on, and it was lost, in every measured case, to a company too small to
+ * besiege a guarded hearth. Once the realm holds one, its own home watch adopts
+ * it, and one spare company for each hearth the watch is short, so the
+ * canonical theater keeps a guard there; the watch's other hearths, reserve and
+ * policy are kept. At most the adoption bound of hearths and route reviews;
+ * nothing is rewritten when every held seam hearth is already watched. */
+export function planSeamWatch(view: Observation, heldArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): TheaterPlan | null {
+  if (!view.theaters || view.victory || view.battle || view.pendingCapture) return null;
+  const watch: ObservedDefenseTheater | undefined = view.theaters.find(theater => theater.factionId === view.factionId && theater.enabled && theater.name === HOME_WATCH_NAME);
+  if (!watch) return null;
+  const watched = new Set(view.theaters.filter(theater => theater.factionId === view.factionId).flatMap(theater => theater.settlementIds));
+  const own = new Map(view.settlements.filter(town => town.factionId === view.factionId).map(town => [town.id, town]));
+  const paths = new Map<string, Set<string>>();
+  for (const site of view.arcaneSites) if (site.controlled && site.settlementId && own.has(site.settlementId)) paths.set(site.settlementId, (paths.get(site.settlementId) ?? new Set()).add(site.pathId));
+  const room = Math.max(0, MAX_THEATER_ADOPTION_HEARTHS - watch.settlementIds.length);
+  const adopted = [...paths.keys()].filter(id => !watched.has(id))
+    .sort((a, b) => paths.get(b)!.size - paths.get(a)!.size || (a < b ? -1 : a > b ? 1 : 0)).slice(0, room);
+  if (!adopted.length) return null;
+  const settlementIds = [...watch.settlementIds, ...adopted].sort();
+  const held = new Set(heldArmyIds);
+  let routeQueries = 0, targetSearchExpandedNodes = 0;
+  const shortfall = Math.max(0, settlementIds.length - watch.armyIds.length);
+  const members: string[] = [];
+  if (shortfall) {
+    const towns = adopted.map(id => own.get(id)!);
+    const spares = spareCompanies(view, held)
+      .sort((a, b) => Math.min(...towns.map(town => hexDistance(a.cell, town.cell, view.width))) - Math.min(...towns.map(town => hexDistance(b.cell, town.cell, view.width))) || byId(a, b));
+    for (const army of spares) {
+      if (members.length >= shortfall || routeQueries >= MAX_THEATER_ADOPTION_ROUTE_QUERIES) break;
+      const nearest = towns.sort((a, b) => hexDistance(army.cell, a.cell, view.width) - hexDistance(army.cell, b.cell, view.width) || byId(a, b))[0]!;
+      if (army.cell !== nearest.cell) {
+        const preview = getMovementPreview(view, army.id, nearest.cell);
+        routeQueries++; targetSearchExpandedNodes += preview.expandedNodes;
+        if (!preview.canQueue || preview.action !== 'move') continue;
+      }
+      members.push(army.id);
+    }
+  }
+  const armyIds = [...watch.armyIds, ...members].sort();
+  for (const id of members) held.add(id);
+  const names = adopted.map(id => own.get(id)!.name);
+  return { commands: [{ type: 'setTheater', theaterId: watch.id, factionId: view.factionId, name: watch.name, settlementIds, armyIds,
+    reserveCell: watch.reserveCell, guardsPerSettlement: watch.guardsPerSettlement, enabled: true, ...(watch.reinforcementLimit ? { reinforcementLimit: watch.reinforcementLimit } : {}) }],
+  reasons: [`The home watch adopts ${names.join(' and ')}: ${adopted.length === 1 ? 'its borders hold' : 'their borders hold'} a surveyed seam${members.length ? `, with ${members.length} spare compan${members.length === 1 ? 'y' : 'ies'} to guard it` : shortfall ? ', though no spare company is free to guard it yet' : ''}.`],
+  heldArmyIds: held, routeQueries, targetSearchExpandedNodes };
 }

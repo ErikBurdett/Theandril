@@ -9,6 +9,7 @@ import { planProgression } from './progression';
 import { claimArcaneSeam, GLASS_APPROACH_RANGE, planArcaneSurvey, planGlassApproach, planSeamExpedition, SEAM_CLAIM_REACH, SEAM_OBJECTIVE_RANGE, SEAM_RALLY_REACH, seamExpeditionSite, seamObjective, seamRally } from './arcane';
 import { planDiplomacy, protectedFactions } from './diplomacy';
 import { planConquestDecision } from './conquest';
+import { HOME_WATCH_NAME, planSeamWatch } from './theaters';
 import { planCharacters } from './characters';
 import { deserializeGame, serializeGame } from '@theandril/sim';
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
@@ -492,6 +493,39 @@ test('a standing war is carried to the seam: the objective holds against peace w
   const storm = planTurnWithReasons(view);
   expect(storm.commands).toContainEqual({ type: 'besiege', factionId: player, armyId: column, settlementId: reach.id });
   expect(view.armies.find(army => army.id === column)!.formations).toHaveLength(4);
+});
+
+test('the home watch adopts a held seam hearth and a spare company to guard it, once, and never a player\'s theater', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId, host = hostOf(state), width = state.world.width;
+  const site = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && state.world.waterDepth[cell] === 0 && hexDistance(cell, host.cell, width) === 4
+    && state.explored[player]!.has(cell) && Object.values(state.settlements).every(town => hexDistance(town.cell, cell, width) > 2)
+    && arcaneSites(state.world).every(seam => hexDistance(seam.cell, cell, width) > 1));
+  expect(site).toBeGreaterThan(0);
+  const caravan = 'army.watch_caravan';
+  state.armies[caravan] = { id: caravan, factionId: player, name: 'Watch caravan', cell: site, movement: 3, formations: [createArmyFormation(caravan, 'unit.colonist')] };
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'found', factionId: player, armyId: caravan, name: 'Watch Hold' })).toMatchObject({ ok: true });
+  const hold = Object.values(state.settlements).find(town => town.name === 'Watch Hold')!;
+  // Two field columns stay with the field; two single companies are spare.
+  const author = (id: string, cell: number, count: number) => { state.armies[id] = { id, factionId: player, name: id, cell, movement: 3, formations: Array.from({ length: count }, (_, index) => createArmyFormation(index ? `${id}.${index}` : id, 'unit.guard')) }; };
+  author('army.column_a', host.cell, 2); author('army.column_b', host.cell, 2); author('army.spare_a', hold.cell, 1); author('army.spare_b', hold.cell, 1);
+  refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'setTheater', factionId: player, name: HOME_WATCH_NAME, settlementIds: [hold.id], armyIds: ['army.spare_a'], reserveCell: hold.cell, guardsPerSettlement: 1, enabled: true })).toMatchObject({ ok: true });
+  let view = getObservation(state, player);
+  expect(view.arcaneSites.every(seam => seam.controlled && seam.settlementId === host.id)).toBe(true);
+  const plan = planSeamWatch(view)!;
+  expect(plan.commands).toEqual([{ type: 'setTheater', theaterId: view.theaters![0]!.id, factionId: player, name: HOME_WATCH_NAME, settlementIds: [hold.id, host.id].sort(), armyIds: ['army.spare_a', 'army.spare_b'], reserveCell: hold.cell, guardsPerSettlement: 1, enabled: true }]);
+  expect(plan.reasons[0]).toContain('adopts');
+  expect(plan.heldArmyIds.has('army.spare_b')).toBe(true);
+  // The whole turn carries the same order, and the simulation accepts it.
+  expect(planTurnWithReasons(view).commands).toContainEqual(plan.commands[0]);
+  expect(applyCommand(state, plan.commands[0]!)).toMatchObject({ ok: true });
+  view = getObservation(state, player);
+  expect(view.theaters![0]).toMatchObject({ settlementIds: [hold.id, host.id].sort(), armyIds: ['army.spare_a', 'army.spare_b'] });
+  // Watched already: nothing is rewritten. A theater under another name is the player's and is left alone.
+  expect(planSeamWatch(view)).toBeNull();
+  const renamed = { ...view, theaters: view.theaters!.map(theater => ({ ...theater, name: 'Coast guard', settlementIds: [hold.id] })) };
+  expect(planSeamWatch(renamed)).toBeNull();
 });
 
 test('rules 39: the study post is a hearth whose borders hold a seam, so a lodged Waykeeper actually studies; a caster lodged at a seamless archive hearth gets a studying colleague', () => {

@@ -152,9 +152,19 @@ export const SCHEMA43_ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
  * measured rules-44 campaigns: 3,600 seals Standard on turn 203 and 6,000 Long
  * on turn 300, each against a rival Prosperity bid already started. Epic is
  * scaled with the window; no headline Epic realm reached the path either way. */
-export const ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
+export const SCHEMA44_ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
   ...SCHEMA43_ATTUNEMENT_VICTORY,
   knowledgeCost: { short: 60, standard: 3600, long: 6000, epic: 9600 },
+};
+/** Rules 45: the rules-44 prices were measured while every AI realm lost the
+ * hearths holding its seams to the first company at the gate. Once a realm's
+ * home watch guards its seam hearths, the knowledge-rich realm of the headline
+ * campaigns sealed a working on turns 128, 186 and 223. The prices are set from
+ * measured rules-45 campaigns: 7,200 seals Standard on turn 201, 12,000 Long on
+ * 306 and 18,000 Epic on 352, each against a rival Prosperity bid already started. */
+export const ATTUNEMENT_VICTORY: AttunementVictoryDefinition = {
+  ...SCHEMA44_ATTUNEMENT_VICTORY,
+  knowledgeCost: { short: 60, standard: 7200, long: 12_000, epic: 18_000 },
 };
 
 export function validateProgressionContent(

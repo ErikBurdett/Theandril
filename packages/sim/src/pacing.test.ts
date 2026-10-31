@@ -37,6 +37,7 @@ describe('canonical campaign pace', () => {
     { version: 22, price: SCHEMA43_CAMPAIGN_PACES.epic.projectCoinCost },
     { version: 43, price: SCHEMA43_CAMPAIGN_PACES.epic.projectCoinCost },
     { version: 44, price: CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 45, price: CAMPAIGN_PACES.epic.projectCoinCost },
   ] as const)('rules $version quotes and charges the Epic project at $price coin', ({ version, price }) => {
     for (const treasury of [price - 1, price]) {
       const state = prosperityCampaign(); state.pace = 'epic';

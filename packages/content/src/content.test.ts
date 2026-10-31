@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { ATTUNEMENT_VICTORY, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
+import { ATTUNEMENT_VICTORY, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, SCHEMA44_ATTUNEMENT_VICTORY, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
   expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
@@ -129,7 +129,10 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(41), true, SCHEMA43_ATTUNEMENT_VICTORY)).toBe('78df970c');
   // Rules 42–43 content, before rules 44 re-priced Attunement and the Epic Hearth Exchange.
   expect(contentPackHash(SCHEMA43_CAMPAIGN_PACES, undefined, true, magicPackForRules(43), true, SCHEMA43_ATTUNEMENT_VICTORY)).toBe('f738e917');
-  expect(ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 3600, long: 6000, epic: 9600 });
+  // Rules 44 content, before rules 45 re-priced Attunement once AI realms guarded their seam hearths.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(44), true, SCHEMA44_ATTUNEMENT_VICTORY)).toBe('88b0823d');
+  expect(SCHEMA44_ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 3600, long: 6000, epic: 9600 });
+  expect(ATTUNEMENT_VICTORY.knowledgeCost).toEqual({ short: 60, standard: 7200, long: 12_000, epic: 18_000 });
   expect(CAMPAIGN_PACES.epic.projectCoinCost).toBe(44_000);
   expect(CONTENT_HASH).toBe(contentPackHash());
   expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431', 'f70d99d5', 'f4076f55', '015468d1', '03ac0328', 'ac80514d', '78df970c']).size).toBe(10);

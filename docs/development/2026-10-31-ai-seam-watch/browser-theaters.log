@@ -1,0 +1,14 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/defense-theaters.spec.ts tests/gameplay/defense-theater-recovery.spec.ts --workers=2 --output=docs/development/2026-10-31-ai-seam-watch/browser-theaters-results
+
+
+Running 5 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/defense-theater-recovery.spec.ts:23:1 › an ordinary completed turn with a missing theater view cannot silently erase delegation controls (8.4s)
+  ✓  3 [gameplay] › tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by missing-theaters locks orders until manual save restoration, without automatic retry (3.9s)
+  ✓  2 [gameplay] › tests/gameplay/defense-theaters.spec.ts:129:1 › detach, pause and delete preserve existing travel and postings while manual and portable saves restore the whole theater (13.1s)
+  ✓  4 [gameplay] › tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by malformed-theaters locks orders until manual save restoration, without automatic retry (3.4s)
+  ✓  5 [gameplay] › tests/gameplay/defense-theater-recovery.spec.ts:85:3 › a real theater edit followed by worker-crash locks orders until manual save restoration, without automatic retry (3.5s)
+
+  5 passed (19.9s)
