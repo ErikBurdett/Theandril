@@ -36,7 +36,7 @@ first on 379.
 - The retaken hearth is lost again on 373: defending a seam hearth is not an
   AI concern yet.
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.
-- Deployment and live readback are recorded in the publication packet named in
-  the implementation status entry once the workflows finish.
+- Commit `68f4f5b` is deployed: both workflows succeeded and the live readback
+  matched the build ([publication packet](../2026-10-31-publication-seam-column/README.md)).
 - Owner decisions unchanged: the e103a72 history purge; the other session's
   uncommitted Playwright config edits and reliability packet.

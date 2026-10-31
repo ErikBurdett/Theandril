@@ -18,7 +18,9 @@ sealed on about 353, and Saltwind's Prosperity completes first on 379.
 Headline pacing **379 / 300 / 203**, every campaign in band. Verification: a
 new AI test; unit 2,321, campaigns 57, lint, typecheck, build, three covering
 journeys and the chronicles journey. The gap is now the race between a late
-working and a rival project, and keeping the retaken hearth.
+working and a rival project, and keeping the retaken hearth. Commit `68f4f5b`
+is deployed: both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-seam-column/README.md)).
 [Evidence](development/2026-10-31-ai-seam-column/README.md),
 [ADR0072](architecture/0072-ai-seam-column.md).
 
