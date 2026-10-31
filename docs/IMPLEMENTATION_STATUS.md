@@ -19,7 +19,9 @@ Epic seeds sit inside it: recorded as a drift of one course, not re-priced.
 A first design that kept the age as canonical state broke older-envelope
 round trips and was replaced. Verification: new sim and content tests, a new
 journey; unit 2,335 / 289 files, campaigns 57, lint, typecheck, build, four
-covering journeys and the chronicles journey.
+covering journeys and the chronicles journey. Commit `91172b7` is deployed:
+both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-epochs/README.md)).
 [Evidence](development/2026-10-31-epochs/README.md),
 [ADR0079](architecture/0079-campaign-epochs.md).
 

@@ -84,8 +84,9 @@ first on 379.
   fifty; chains and the ages are built; no world crises, migration or
   collapse yet. The Epic headline course ends on 419, above its band, while
   the two other Epic seeds end inside it; recorded as a drift of one course.
-  Deployment of the rules 49 commit is recorded in its publication packet
-  once the workflows finish.
+  Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
+  live readback matched the build
+  ([publication packet](../2026-10-31-publication-epochs/README.md)).
   Commit `7447299` (rules 48) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-hearth-event-chains/README.md)). One survey mission refused on
