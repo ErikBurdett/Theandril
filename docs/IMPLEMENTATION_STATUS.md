@@ -22,7 +22,9 @@ proxies 385 / 412 / 270 / 182. Verification: new sim, AI, content and UI
 tests and a new journey; unit 2,329 / 288 files, campaigns 57, lint,
 typecheck, build, three covering journeys and the chronicles journey. Not
 built: the catalogue beyond eight, epochs, escalation, crises, migration,
-collapse.
+collapse. Commit `594ffdf` is deployed: both workflows succeeded and the live
+readback matched the build
+([publication packet](development/2026-10-31-publication-hearth-events/README.md)).
 [Evidence](development/2026-10-31-hearth-events/README.md),
 [ADR0075](architecture/0075-hearth-events.md),
 [ADR0076](architecture/0076-ferry-landings-on-own-water.md).

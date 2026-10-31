@@ -56,8 +56,9 @@ first on 379.
   not garrison every seam hearth at once.
 - Only Sepulchral Synod reaches the path, on one seed, on every pace.
 - Hearth events: eight templates against a target of one hundred and fifty; no
-  epochs, escalation or crises yet. Deployment of the events commit is recorded
-  in its publication packet once the workflows finish.
+  epochs, escalation or crises yet. Commit `594ffdf` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-hearth-events/README.md)).
 - Three-seed pacing coverage per pace under rules 44 remains unmeasured.
 - Commit `68f4f5b` is deployed: both workflows succeeded and the live readback
   matched the build ([publication packet](../2026-10-31-publication-seam-column/README.md)).
