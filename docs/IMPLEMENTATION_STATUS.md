@@ -21,7 +21,9 @@ on the headline paces. A first AI appetite swore 146 pacts and moved every
 pace out of band; it is recorded and was replaced before shipping.
 Verification: new sim, AI and journey tests; unit 2,339 / 291 files,
 campaigns 57, lint, typecheck, build, four covering journeys and the
-chronicles journey.
+chronicles journey. Commit `f7ef04a` is deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-10-31-publication-alliances/README.md)).
 [Evidence](development/2026-10-31-alliances/README.md),
 [ADR0080](architecture/0080-alliances.md).
 
