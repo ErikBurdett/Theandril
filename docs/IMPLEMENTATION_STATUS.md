@@ -14,7 +14,9 @@ new canonical register; save 70; the pack unchanged. Headline pacing
 **388 / 296 / 198**, the other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207:
 every headline course in band and the two other Epic seeds just under it, risen from 344 / 336. Verification: sim, AI and journey tests; unit 2,373 / 306 files,
 campaigns 57, lint, typecheck, build, the taxes and tribute journeys and
-the chronicles journey (pin 56 unmoved).
+the chronicles journey (pin 56 unmoved). Commit `8a2578f` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-taxes/README.md)).
 [Evidence](development/2026-11-01-taxes/README.md),
 [ADR0101](architecture/0101-taxes.md).
 

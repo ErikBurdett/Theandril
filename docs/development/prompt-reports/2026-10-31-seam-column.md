@@ -238,8 +238,10 @@
 - Taxes, rules/save 70 ([ADR 0101](../../architecture/0101-taxes.md)): a realm
   sets lean, steady or heavy taxes, trading every hearth's coin against the
   mending of its lanes; the AI sets heavy taxes when short and lean ones
-  when rich with scarred hearths. Evidence packet
-  [docs/development/2026-11-01-taxes/](../2026-11-01-taxes/README.md);
+  when rich with scarred hearths. Commit `8a2578f` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-11-01-publication-taxes/README.md)).
+  Evidence packet [docs/development/2026-11-01-taxes/](../2026-11-01-taxes/README.md);
   roadmap library 139 delivered.
 
 ## Verified
