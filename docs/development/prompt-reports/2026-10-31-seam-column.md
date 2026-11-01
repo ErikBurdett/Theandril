@@ -190,8 +190,10 @@
 - Notable characters, rules/save 64 ([ADR 0095](../../architecture/0095-notable-characters.md)):
   one figure of the age for every culture, answering the realm's first
   appointment of their role with their name, their specialization already
-  theirs and their story on the character sheet. Evidence packet
-  [docs/development/2026-10-31-notables/](../2026-10-31-notables/README.md);
+  theirs and their story on the character sheet. Commit `da4b8ab` is
+  deployed: both workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-notables/README.md)).
+  Evidence packet [docs/development/2026-10-31-notables/](../2026-10-31-notables/README.md);
   roadmap library 133 delivered.
 
 ## Verified

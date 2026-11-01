@@ -19,7 +19,9 @@ specialization appoint under rules 63 and say so. Verification: content,
 sim and journey tests; unit 2,360 / 299 files, campaigns 57, lint,
 typecheck, build, the characters and notables journeys and the chronicles
 journey (pin 53 → 57, attributed to the Reedbound Council’s figure widening
-its turn-19 survey).
+its turn-19 survey). Commit `da4b8ab` is deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-10-31-publication-notables/README.md)).
 [Evidence](development/2026-10-31-notables/README.md),
 [ADR0095](architecture/0095-notable-characters.md).
 
