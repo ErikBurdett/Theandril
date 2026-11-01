@@ -18,6 +18,9 @@ pacing **380 / 305 / 207**, the other seeds 306 / 349, 256 / 326, 192 / 218, pro
 307 / 467 / 290 / 189: every course identical to rules 64, the headline in band and the two other Epic seeds still under it as recorded with the notables; the AI’s office rule seated nobody who changed these campaigns. Verification: content, sim, AI and journey
 tests; unit 2,363 / 301 files, campaigns 57, lint, typecheck, build, the
 characters and offices journeys and the chronicles journey (pin 57 unmoved).
+Commit `e8379ce` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-10-31-publication-offices/README.md)).
 [Evidence](development/2026-10-31-offices/README.md),
 [ADR0096](architecture/0096-offices.md).
 

@@ -199,8 +199,10 @@
   one office for every character role, held from a hearth by a character of
   the role and paying that hearth a yield of two while held; a holder
   resigns before riding; death vacates; AI realms seat idle characters when
-  they keep another of the role for the road. Evidence packet
-  [docs/development/2026-10-31-offices/](../2026-10-31-offices/README.md);
+  they keep another of the role for the road. Commit `e8379ce` is deployed:
+  both workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-offices/README.md)).
+  Evidence packet [docs/development/2026-10-31-offices/](../2026-10-31-offices/README.md);
   roadmap library 134 delivered.
 
 ## Verified
