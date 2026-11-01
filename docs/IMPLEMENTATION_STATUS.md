@@ -20,7 +20,9 @@ target: recorded as the spread of a world that changes, judged on the
 three-seed matrix. The chronicle journey's pin moves 53 → 56, attributed.
 Verification: content, sim, AI and journey tests; unit 2,346 / 294 files,
 campaigns 57, lint, typecheck, build, two covering journeys and the
-chronicles journey.
+chronicles journey. Commit `6f8c78e` is deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-10-31-publication-crisis-events/README.md)).
 [Evidence](development/2026-10-31-crisis-events/README.md),
 [ADR0084](architecture/0084-crisis-events.md).
 

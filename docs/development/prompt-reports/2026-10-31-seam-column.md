@@ -94,7 +94,10 @@
 - The crises' own events, rules/save 54 ([ADR 0084](../../architecture/0084-crisis-events.md)):
   one hearth event per crisis, offered to every realm with a free slot as
   the crisis comes and never drawn; a drawn version was measured inert and
-  replaced; the AI's shelter is issued first in its batch. Evidence packet
+  replaced; the AI's shelter is issued first in its batch. Commit `6f8c78e`
+  is deployed: both workflows succeeded and the live readback matched the
+  build ([publication packet](../2026-10-31-publication-crisis-events/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-crisis-events/](../2026-10-31-crisis-events/README.md);
   roadmap library 122 delivered.
 
