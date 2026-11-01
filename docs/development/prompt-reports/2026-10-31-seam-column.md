@@ -329,7 +329,8 @@
   the ruins of a razed hearth hold one salvage, taken by the realm whose
   company stands on them and read in the hex inspector. Evidence packet
   [docs/development/2026-11-01-salvage/](../2026-11-01-salvage/README.md);
-  roadmap library 152 delivered.
+  roadmap library 152 delivered. Commit `4a60d10` is deployed and read back
+  ([publication packet](../2026-11-01-publication-salvage/README.md)).
 
 ## Verified
 

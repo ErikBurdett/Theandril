@@ -12,6 +12,9 @@ save 81 loads v80 envelopes with none and refuses one naming salvage.
 Headline pacing 384 / 291 / 205 and every other course identical to rules 80, since no measured campaign razes a hearth; the chronicle pin at 57 holds. Verification: sim, AI and journey tests; unit 2,386 / 313 files,
 campaigns 57, lint, typecheck, build, the salvage and conquest journeys
 and the chronicles journey (pin 57 unmoved).
+Commit `4a60d10` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-salvage/README.md)).
 [Evidence](development/2026-11-01-salvage/README.md),
 [ADR0114](architecture/0114-salvage.md).
 
