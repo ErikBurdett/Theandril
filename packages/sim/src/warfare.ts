@@ -9,7 +9,7 @@ import type { BattleFormation, BattleOrder } from './combat';
 import type { Army, ArmyFormation, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
 import { indexes, updateSight } from './visibility';
 import { declareWarObjection, recordWar } from './diplomacy';
-import { allianceBetween, callAllies } from './alliances';
+import { allianceBetween, callAllies, callPatron } from './alliances';
 import { doctrineEffects } from './progression';
 
 import { armyCanAttack, armySight, armyStrength } from './army-composition';
@@ -57,7 +57,9 @@ export function declareCampaignWar(state: GameState, factionId: string, targetFa
   recordWar(state, factionId, targetFactionId);
   // Rules 50: the target's allies answer, each unless an oath, a binding peace or a supply agreement with the attacker binds it.
   const answered = callAllies(state, factionId, targetFactionId, allyId => declareWarObjection(state, allyId, factionId) ?? supplyBinds(state, allyId, factionId));
-  for (const [a, b] of state.wars) if ((a === factionId || b === factionId) && answered.some(event => event.type === 'alliance_answered' && event.factionId === (a === factionId ? b : a))) recordWar(state, a, b);
+  // Rules 58: the target's patron stands for its client the same way.
+  answered.push(...callPatron(state, factionId, targetFactionId, patronId => declareWarObjection(state, patronId, factionId) ?? supplyBinds(state, patronId, factionId)));
+  for (const [a, b] of state.wars) if ((a === factionId || b === factionId) && answered.some(event => (event.type === 'alliance_answered' || event.type === 'patronage_answered') && event.factionId === (a === factionId ? b : a))) recordWar(state, a, b);
   return { ok: true, events: [
     { turn: state.turn, type: 'war_declared', factionId, message: `${faction.name} declared war on ${target.name}.` },
     { turn: state.turn, type: 'war_declared', factionId: targetFactionId, message: `${faction.name} declared war on ${target.name}.` },

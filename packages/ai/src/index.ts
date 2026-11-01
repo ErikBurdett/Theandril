@@ -269,7 +269,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const wars = new Set(view.wars);
   // Rules 50: a war declared on a realm brings its allies in at once, so a later order in this batch against one of them would be refused as already at war.
   const alliesOfRealm = (id: string): string[] => (view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(id)).map(pact => pact.parties[0] === id ? pact.parties[1] : pact.parties[0]);
-  const openWar = (id: string): void => { wars.add(id); for (const ally of alliesOfRealm(id)) if (!protectedIds.has(ally)) wars.add(ally); };
+  // Rules 58: so does its patron.
+  const patronOfRealm = (id: string): string | undefined => view.diplomacy.clients.find(bond => bond.clientId === id)?.patronId;
+  const openWar = (id: string): void => { wars.add(id); for (const ally of alliesOfRealm(id)) if (!protectedIds.has(ally)) wars.add(ally); const patron = patronOfRealm(id); if (patron && !protectedIds.has(patron)) wars.add(patron); };
   const settlementNames = new Set(ownSettlements.map(town => town.name));
   const foundingCells = view.settlements.map(town => town.cell);
   let hearthNumber = ownSettlements.length;

@@ -98,6 +98,8 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
   const allianceOfferWith = (id: string) => view.alliances?.offers.find(offer => (offer.proposerId === view.factionId && offer.recipientId === id) || (offer.proposerId === id && offer.recipientId === view.factionId));
   const incomingAlliances = (view.alliances?.offers ?? []).filter(offer => offer.recipientId === view.factionId);
   const ownAllies = (view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(view.factionId));
+  // Rules 56 and 58: the calls the realm answered or was answered for, as an ally or a patron.
+  const ownCalls = (view.alliances?.calls ?? []).filter(call => call.allyId === view.factionId || call.partnerId === view.factionId);
   const encounters = view.factions.filter(faction => faction.id !== view.factionId);
   const blocked = busy || Boolean(view.battle || view.pendingCapture);
   return <section className="faction-encounters" data-testid="faction-encounters" aria-label="Encountered factions">
@@ -128,10 +130,10 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
     })}
     {negotiating && view.wars.includes(negotiating) && <PeaceBuilder key={negotiating} view={view} targetId={negotiating} busy={busy} stateHash={stateHash} issue={issue} review={review} close={() => setNegotiating(undefined)}/>}
     {courting && !patron && <PatronageBuilder key={courting} view={view} targetId={courting} busy={busy} issue={issue} close={() => setCourting(undefined)}/>}
-    {(incomingAlliances.length > 0 || ownAllies.length > 0) && <section className="peace-offers" data-testid="alliances" aria-label="Alliances">
+    {(incomingAlliances.length > 0 || ownAllies.length > 0 || ownCalls.length > 0) && <section className="peace-offers" data-testid="alliances" aria-label="Alliances">
       <h3>Allies</h3>
-      {(view.alliances?.calls ?? []).filter(call => call.allyId === view.factionId || call.partnerId === view.factionId).map(call => <p key={`${call.allyId}:${call.attackerId}`} className="field-help" data-testid="alliance-call">{call.allyId === view.factionId
-        ? `You entered the war against ${nameOf(view, call.attackerId)} on turn ${call.turn} beside your ally ${nameOf(view, call.partnerId)}; a peace they make ends your war too.`
+      {ownCalls.map(call => <p key={`${call.allyId}:${call.attackerId}`} className="field-help" data-testid="alliance-call">{call.allyId === view.factionId
+        ? `You entered the war against ${nameOf(view, call.attackerId)} on turn ${call.turn} for ${nameOf(view, call.partnerId)}, your ${view.diplomacy.clients.some(bond => bond.patronId === view.factionId && bond.clientId === call.partnerId) ? 'client' : 'ally'}; a peace they make ends your war too.`
         : `${nameOf(view, call.allyId)} entered your war against ${nameOf(view, call.attackerId)} on turn ${call.turn}; a peace you make ends theirs too.`}</p>)}
       {ownAllies.length > 0 && <p>{ownAllies.length === 1 ? 'One realm stands' : `${ownAllies.length} realms stand`} with you: {ownAllies.map(pact => `${nameOf(view, pact.parties.find(id => id !== view.factionId)!)} until turn ${pact.expiresTurn}`).join(', ')}. A war declared on either brings the other in.</p>}
       {incomingAlliances.map(offer => <article className="peace-offer" key={offer.id} data-testid={`alliance-offer-${offer.id}`}>
@@ -144,8 +146,8 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
     </section>}
     {(incomingPatronage.length > 0 || ownClients.length > 0 || patron) && <section className="peace-offers" data-testid="patronage" aria-label="Patronage">
       <h3>Oaths between realms</h3>
-      {patron && <p>Your realm answers to {nameOf(view, patron.patronId)} until turn {patron.expiresTurn}, paying {patron.terms.tributeCoin} coin each turn.</p>}
-      {ownClients.length > 0 && <p>{ownClients.length === 1 ? 'One realm answers' : `${ownClients.length} realms answer`} to you: {ownClients.map(bond => nameOf(view, bond.clientId)).join(', ')}. Their hearths stand behind your unification bid.</p>}
+      {patron && <p>Your realm answers to {nameOf(view, patron.patronId)} until turn {patron.expiresTurn}, paying {patron.terms.tributeCoin} coin each turn.{view.alliances?.calls ? ' A war declared on you brings your patron in, unless an oath, a binding peace, a supply agreement or an alliance with the attacker binds it.' : ''}</p>}
+      {ownClients.length > 0 && <p>{ownClients.length === 1 ? 'One realm answers' : `${ownClients.length} realms answer`} to you: {ownClients.map(bond => nameOf(view, bond.clientId)).join(', ')}. Their hearths stand behind your unification bid.{view.alliances?.calls ? ' A war declared on a client brings you in as its guarantor, unless an oath, a binding peace, a supply agreement or an alliance with the attacker binds you; the client\u2019s peace ends your war.' : ''}</p>}
       {incomingPatronage.map(offer => <article className="peace-offer" key={offer.id} data-testid={`patronage-offer-${offer.id}`}>
         <strong>From {nameOf(view, offer.patronId)}</strong>
         <p>They offer {offer.terms.giftCoin} coin now and ask {offer.terms.tributeCoin} coin each turn for {offer.terms.termTurns} turns. You keep your hearths and armies; neither realm may attack the other while it holds.</p>

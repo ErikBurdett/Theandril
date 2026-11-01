@@ -1,0 +1,16 @@
+
+> theandril@0.1.0 measure:pacing /home/telephoneheater/Work/Theandril
+> tsx scripts/measure-pacing.ts headline standard long --seeds=20260906,20260907 --json=docs/development/2026-10-31-guarantee/pacing-seeds.json
+
+headline (epic, standard, 12 realms, seed 20260906, rules current) — target 350–400 turns
+  turn 351 · prosperity · 143 depots · 0 refused orders · 0 automatic refusals · 32s
+headline (epic, standard, 12 realms, seed 20260907, rules current) — target 350–400 turns
+  turn 313 · prosperity · 124 depots · 0 refused orders · 41 automatic refusals · 30s
+headline-long (long, standard, 12 realms, seed 20260906, rules current) — target about 300 turns
+  turn 285 · prosperity · 121 depots · 0 refused orders · 0 automatic refusals · 24s
+headline-long (long, standard, 12 realms, seed 20260907, rules current) — target about 300 turns
+  turn 246 · prosperity · 134 depots · 0 refused orders · 13 automatic refusals · 20s
+headline-standard (standard, standard, 12 realms, seed 20260906, rules current) — target about 200 turns
+  turn 218 · prosperity · 113 depots · 0 refused orders · 1 automatic refusals · 16s
+headline-standard (standard, standard, 12 realms, seed 20260907, rules current) — target about 200 turns
+  turn 175 · prosperity · 116 depots · 0 refused orders · 0 automatic refusals · 12s

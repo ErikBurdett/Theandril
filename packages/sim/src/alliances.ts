@@ -124,6 +124,22 @@ export function callAllies(state: GameState, attackerId: string, targetId: strin
   }
   return events;
 }
+/** Rules 58: the patron of a realm just declared war on enters the war as its
+ * guarantor, unless an oath, a binding peace, a supply agreement or an
+ * alliance with the attacker binds it; the call is kept like an ally's, so the
+ * client's peace ends the patron's war and the patron's own peace releases it. */
+export function callPatron(state: GameState, attackerId: string, clientId: string, blockerFor: (patronId: string) => string | null): DomainEvent[] {
+  if (rulesVersion(state) < 58) return [];
+  const bond = state.diplomacy.clients.find(item => item.clientId === clientId);
+  if (!bond || bond.patronId === attackerId || atWar(state, bond.patronId, attackerId)) return [];
+  const patronId = bond.patronId;
+  const blocker = allianceBetween(state, patronId, attackerId) ? 'it is allied with the attacker.' : blockerFor(patronId);
+  if (blocker) return [patronId, clientId, attackerId].map(factionId => ({ turn: state.turn, factionId, type: 'patronage_unanswered', message: `${nameOf(state, patronId)} could not stand for its client ${nameOf(state, clientId)} against ${nameOf(state, attackerId)}: ${blocker}` }));
+  state.wars.push(warPair(patronId, attackerId));
+  state.wars.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+  state.alliances.calls = [...state.alliances.calls, { allyId: patronId, attackerId, partnerId: clientId, turn: state.turn }].sort(byCall);
+  return [patronId, clientId, attackerId].map(factionId => ({ turn: state.turn, factionId, type: 'patronage_answered', message: `${nameOf(state, patronId)} enters the war against ${nameOf(state, attackerId)} for its client ${nameOf(state, clientId)}.` }));
+}
 /** Rules 56: a peace between two realms settles the calls around it. An ally that
  * made its own peace with the attacker is released from its call; and every ally
  * still at war with the attacker beside the realm that just made peace leaves

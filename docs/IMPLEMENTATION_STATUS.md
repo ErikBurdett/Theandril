@@ -1,5 +1,25 @@
 # Theandril implementation status
 
+## A patron stands for its client (rules/save 58) — 2026-10-31
+
+Gate G's guarantee, through the patronage bond. A war declared on a client
+calls its patron into the war at once, unless an oath, a binding peace, a
+supply agreement or an alliance with the attacker binds it, in which case
+the call goes unanswered and every party reads why; a patron already at war
+with the attacker, or itself the attacker, is not called. The call is kept
+in the alliance register like an ally's, so the client's peace ends the
+patron's war under the same truce and the patron's own peace releases it.
+AI realms count a target's patron among their enemies for the batch; Realm
+affairs says what the bond now means in the patron's and the client's
+lines. No new field; a v57 envelope loads unchanged. On the Epic headline
+eighteen guarantees are answered and nineteen held back, on Long nineteen
+and thirteen. Headline pacing **411 / 336 / 209**, the other seeds
+351 / 313, 285 / 246, 218 / 175, proxies 358 / 451 / 302 / 204.
+Verification: sim and journey tests; unit 2,349 / 294 files, campaigns 57,
+lint, typecheck, build, four covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-guarantee/README.md),
+[ADR0088](architecture/0088-guarantee.md).
+
 ## The second landmark catalogue and its events (rules/save 57) — 2026-10-31
 
 M8 content. Twelve more landmark kinds from rules 57 with their terrains,

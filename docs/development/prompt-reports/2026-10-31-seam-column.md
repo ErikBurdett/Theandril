@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace and the second landmark catalogue
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue and the patron's guarantee
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -128,6 +128,11 @@
   Evidence packet
   [docs/development/2026-10-31-landmarks-ii/](../2026-10-31-landmarks-ii/README.md);
   roadmap library 125 delivered.
+- A patron stands for its client, rules/save 58 ([ADR 0088](../../architecture/0088-guarantee.md)):
+  a war declared on a client calls its patron unless bound to the attacker;
+  the call is kept so the client's peace ends the patron's war. Evidence
+  packet [docs/development/2026-10-31-guarantee/](../2026-10-31-guarantee/README.md);
+  roadmap library 126 delivered.
 
 ## Verified
 
@@ -168,7 +173,10 @@ the other seeds 347 / 305, 296 / 246, 209 / 185, proxies 353 / 468 / 323 / 204,
 thirteen of twenty-three answered calls on the Epic headline ending with the
 partner's peace. Landmarks II: unit 2,348, campaigns 57, build, three journeys
 and the chronicles journey (pin attributed); headline **382 / 329 / 195**, the
-other seeds 366 / 322, 299 / 251, 215 / 179, proxies 366 / 439 / 302 / 203.
+other seeds 366 / 322, 299 / 251, 215 / 179, proxies 366 / 439 / 302 / 203. Guarantee: unit 2,349, campaigns 57, build,
+four journeys (one new) and the chronicles journey; headline **411 / 336 / 209**,
+the other seeds 351 / 313, 285 / 246, 218 / 175, proxies 358 / 451 / 302 / 204,
+eighteen guarantees answered on the Epic headline.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -205,6 +213,8 @@ first on 379.
   reasons; guarantees, passage rights and joint war aims remain.
 - The enclosed-basin ferry scenario moves to seed 55 whenever the world's
   content changes what its tiny map yields; it is seed-specific by nature.
+- Guarantee: a patron is called whatever its strength or distance; passage
+  rights and joint war aims remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, type GameCommand, type GameState } from './index';
 import { recordWar } from './diplomacy';
+import { withRules } from './rules';
+import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { unificationCampaign } from '../../test-fixtures/src/victory-fixture';
 
 const terms = { giftCoin: 40, tributeCoin: 6, termTurns: 12 };
@@ -125,5 +127,46 @@ describe('patronage between realms (rules 22)', () => {
     expect(() => serializeGameForVersion(state, 21)).toThrow('patronage');
     issue(state, { type: 'respondClient', factionId: client, offerId: offerId(state), accept: true });
     expect(() => serializeGameForVersion(state, 20)).toThrow('patronage');
+  });
+
+  it('rules 58: a patron stands for its client against a declared war, unless bound to the attacker, and leaves with the client’s peace', () => {
+    const guaranteed = (): { state: GameState; patron: string; client: string; attacker: string } => {
+      const state = scene(), [patron, client, attacker] = state.factions.filter(faction => !faction.id.startsWith('citystate.')).map(faction => faction.id) as [string, string, string];
+      issue(state, { type: 'proposeClient', factionId: patron, targetFactionId: client, terms });
+      issue(state, { type: 'respondClient', factionId: client, offerId: offerId(state), accept: true });
+      const mine = Object.values(state.armies).find(army => army.factionId === attacker)!, theirs = Object.values(state.armies).find(army => army.factionId === client)!;
+      mine.cell = theirs.cell + 1; refreshAuthoredSight(state);
+      return { state, patron, client, attacker };
+    };
+    const { state, patron, client, attacker } = guaranteed();
+    const declared = issue(state, { type: 'declareWar', factionId: attacker, targetFactionId: client });
+    expect(declared.events.filter(event => event.type === 'patronage_answered').map(event => event.factionId).sort()).toEqual([patron, client, attacker].sort());
+    expect(declared.events.find(event => event.type === 'patronage_answered')!.message).toContain(`for its client`);
+    expect(state.wars.some(pair => pair.includes(patron) && pair.includes(attacker))).toBe(true);
+    expect(state.alliances.calls).toEqual([{ allyId: patron, attackerId: attacker, partnerId: client, turn: state.turn }]);
+    expect(state.diplomacy.relations.find(memory => memory.parties.includes(patron) && memory.parties.includes(attacker))?.warStartedTurn).toBe(state.turn);
+    // The client's peace ends the patron's war too, with the same truce.
+    issue(state, { type: 'proposePeace', factionId: attacker, targetFactionId: client, terms: { offerCoin: 0, requestCoin: 0, truceTurns: 10 } });
+    const offer = state.diplomacy.offers.find(item => item.proposerId === attacker && item.recipientId === client)!;
+    const peace = issue(state, { type: 'respondPeace', factionId: client, offerId: offer.id, accept: true });
+    expect(peace.events.filter(event => event.type === 'allied_peace').map(event => event.factionId).sort()).toEqual([patron, client, attacker].sort());
+    expect(state.wars.some(pair => pair.includes(patron) && pair.includes(attacker))).toBe(false);
+    expect(state.alliances.calls).toEqual([]);
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+    // A binding peace with the attacker leaves the patron out, and every party reads why.
+    const bound = guaranteed();
+    bound.state.diplomacy.treaties.push({ id: `treaty.${bound.state.nextId++}`, parties: [bound.patron, bound.attacker].sort() as [string, string], startedTurn: bound.state.turn, expiresTurn: bound.state.turn + 10, proposerId: bound.patron, terms: { offerCoin: 0, requestCoin: 0, truceTurns: 10 } });
+    const held = issue(bound.state, { type: 'declareWar', factionId: bound.attacker, targetFactionId: bound.client });
+    expect(held.events.filter(event => event.type === 'patronage_unanswered').map(event => event.factionId).sort()).toEqual([bound.patron, bound.client, bound.attacker].sort());
+    expect(held.events.find(event => event.type === 'patronage_unanswered')!.message).toContain('binding peace');
+    expect(bound.state.wars.some(pair => pair.includes(bound.patron) && pair.includes(bound.attacker))).toBe(false);
+    expect(bound.state.alliances.calls).toEqual([]);
+    // Nothing under rules 57.
+    const older = guaranteed();
+    withRules(older.state, 57, () => {
+      const quiet = issue(older.state, { type: 'declareWar', factionId: older.attacker, targetFactionId: older.client });
+      expect(quiet.events.filter(event => event.type.startsWith('patronage_'))).toEqual([]);
+      expect(older.state.wars.some(pair => pair.includes(older.patron) && pair.includes(older.attacker))).toBe(false);
+    });
   });
 });
