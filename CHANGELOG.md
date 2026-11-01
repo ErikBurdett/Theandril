@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 75 lets a land army choose how it draws up for battle: the line, a shield wall with the best-armored formations in front, pikes forward or a skirmish with the ranged companies in front, chosen in the army’s composition panel with its front rank quoted and the journal recording the choice. Battles without a doctrined army draw up exactly as before. Headline pacing 329 / 301 / 219, with the two other seeds at 355 / 383, 286 / 315, 194 / 204, every course identical to rules 74 since the AI keeps the line; the headline Epic drift recorded with the sixth catalogue stands.
+
 The text scale and a new Reduce motion choice are kept in the browser’s own storage and read back on the next visit; a store that cannot be read or refuses to write is reported in Campaign & settings and the defaults stand. The campaign never sees these settings.
 
 Rules/save 74 brings fifteen more hearth events — the salt road toll, the midwinter feast, the rubble market, the seal colony, the seam goes cold, the wounded column, the pilots’ dispute, the ledger of the dead, the drill sergeant, a wedding of houses, the far survey, the first well, the glass scare, rival envoys and the counter-envoy’s return — one hundred and twenty in all, with the rules 73 catalogue frozen so older saves keep the fortunes they were sealed with. Headline pacing 329 / 301 / 219, with the two other seeds at 355 / 383, 286 / 315, 194 / 204, the headline Epic course drifts to 329, under its band, while both other Epic seeds sit in band at 355 / 383 and Long and Standard hold; the drift is recorded as one course’s, not re-priced, with the evidence below.

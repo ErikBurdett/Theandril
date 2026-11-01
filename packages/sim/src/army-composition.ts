@@ -1,5 +1,6 @@
 import { DOCTRINES, UNITS } from '@theandril/content';
 import { defensePreview } from './battle-frontage';
+import { deploymentOf, frontRank } from './deployment';
 import type { Army, ArmyFormation, ArmyView, CommandResult, DomainEvent, GameState } from './types';
 import { indexes, updateSight } from './visibility';
 import { armyCommandCapacity, armyCommandStatus, armyHasCharacterMission, characterCommandCapacity, characterCompositionObjection, charactersForArmy, observeArmyCharacters, transferArmyCharacters } from './characters';
@@ -38,7 +39,7 @@ export function getArmyView(state: GameState, army: Army): ArmyView {
     return { armyId: id, label: target.name, resultCapacity, canMerge: mergeBlocker === null, blocker: mergeBlocker, transferLimit, transferBlocker: common ?? (transferLimit ? null : 'The receiving army has no spare command capacity.') };
   });
   const battleDefense = rulesVersion(state) >= 17 && !state.transports[army.id] ? defensePreview([army, ...peers.map(id => state.armies[id]!)], army.id) : undefined;
-  return { ...publicArmy, ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
+  return { ...publicArmy, doctrine: deploymentOf(state, army), frontRank: frontRank(state, army), ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
     movementBlocker: blocker, reorganizationBlocker: objection(state, army.factionId, army), formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
     strength: armyStrength(army), maxStrength: armyMaxStrength(army), morale: armyMorale(army), fatigue: armyFatigue(army),
     maxMovement: effectiveArmyMovement(state, army), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };

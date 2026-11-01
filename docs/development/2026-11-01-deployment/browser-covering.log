@@ -1,0 +1,14 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/deployment.spec.ts tests/gameplay/battlefield.spec.ts --workers=2 --output=docs/development/2026-11-01-deployment/browser-results
+
+
+Running 5 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/deployment.spec.ts:11:1 › choose a shield wall for an army and read its front rank and the journal (4.8s)
+  ✓  2 [gameplay] › tests/gameplay/battlefield.spec.ts:97:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (9.3s)
+  ✓  3 [gameplay] › tests/gameplay/battlefield.spec.ts:138:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (11.6s)
+  ✓  4 [gameplay] › tests/gameplay/battlefield.spec.ts:204:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (4.1s)
+  ✓  5 [gameplay] › tests/gameplay/battlefield.spec.ts:225:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (14.5s)
+
+  5 passed (40.8s)

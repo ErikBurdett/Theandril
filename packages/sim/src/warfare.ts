@@ -14,6 +14,7 @@ import { doctrineEffects } from './progression';
 
 import { armyCanAttack, armySight, armyStrength } from './army-composition';
 import { rulesVersion } from './rules';
+import { arrangedFormations } from './deployment';
 import { roadMovementCost } from './roads';
 import { armyCharacterLeadership, automaticallyRally, finishBattleCharacters, interruptArmyMissions, snapshotArmyCharacters } from './characters';
 import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo, snapshotFleetCargo } from './naval';
@@ -80,8 +81,11 @@ function formation(state: GameState, army: Army, item: ArmyFormation, index: num
   };
 }
 function deployment(state: GameState, armies: Army[]): BattleFormation[] {
-  const roster = armies.flatMap(army => army.formations.map(item => ({ army, item })))
-    .sort((a, b) => compareId(rulesVersion(state) < 6 ? a.army : a.item, rulesVersion(state) < 6 ? b.army : b.item));
+  // Rules 75: an army with a doctrine draws up by it; a line of armies without one draws up as it always did.
+  const doctrined = rulesVersion(state) >= 75 && armies.some(army => army.deployment !== undefined);
+  const roster = doctrined
+    ? [...armies].sort(compareId).flatMap(army => arrangedFormations(state, army).map(item => ({ army, item })))
+    : armies.flatMap(army => army.formations.map(item => ({ army, item }))).sort((a, b) => compareId(rulesVersion(state) < 6 ? a.army : a.item, rulesVersion(state) < 6 ? b.army : b.item));
   return roster.map(({ army, item }, i) => formation(state, army, item, i, roster.length));
 }
 const battleVersion = (state: GameState): CampaignBattle['rulesVersion'] => rulesVersion(state) < 6 ? 5 : rulesVersion(state) < 7 ? 6 : rulesVersion(state) < 8 ? 7 : rulesVersion(state) < 14 ? 8 : rulesVersion(state) < 16 ? 9 : 10;

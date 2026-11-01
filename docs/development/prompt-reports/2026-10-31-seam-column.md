@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues and durable settings
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues, durable settings and army deployment
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -280,11 +280,20 @@
   ([publication packet](../2026-11-01-publication-durable-settings/README.md)).
   Evidence packet [docs/development/2026-11-01-durable-settings/](../2026-11-01-durable-settings/README.md);
   roadmap library 144 delivered.
+- Army deployment, rules/save 75 ([ADR 0107](../../architecture/0107-deployment.md)):
+  a land army draws up as the line, a shield wall, pikes forward or a
+  skirmish, chosen in its composition panel; battles without a doctrined
+  army are unchanged. Evidence packet
+  [docs/development/2026-11-01-deployment/](../2026-11-01-deployment/README.md);
+  roadmap library 145 delivered.
 
 ## Verified
 
 Durable settings: unit 2,378 / 309 files, build, the durable-settings and campaign-menu
 journeys; no pacing or chronicle run (web client only).
+Deployment: unit 2,380 / 310 files, campaigns 57, build, the deployment and
+battlefield journeys and the chronicles journey (pin 56 unmoved); headline
+**329 / 301 / 219**, the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209.
 
 Typecheck, lint, unit 2,321 / 285 files, campaigns 57, build, three covering
 gameplay journeys (6 of 6) and the `@scale` chronicles journey alone (1 of 1).
@@ -428,6 +437,8 @@ first on 379.
   fifty.
 - Two client settings are durable; fog colours, non-colour cues and
   keyboard workflows beyond the shortcuts remain.
+- A deployment orders the ranks only; column choice, per-formation
+  placement and a reserve line remain, and the AI keeps the line.
 - Headline Epic pacing under rules 74 sits at 329, under its band, while both
   other Epic seeds are in band; recorded as a drift of one course with the
   neutralised-effects and valuation evidence in the sixth catalogue's packet.

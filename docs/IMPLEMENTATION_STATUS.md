@@ -1,5 +1,22 @@
 # Theandril implementation status
 
+## Army deployment (rules/save 75) — 2026-11-01
+
+M4's editable deployment, first doctrines. `setDeployment` sets a land
+army to draw up as the line, a shield wall (best-armored first), pikes
+forward (polearms first) or a skirmish (ranged first), stable by id within
+a rank; a battle with a doctrined army draws the armies up in id order each
+by its doctrine, and one without draws up as before, so AI play is
+unchanged. The army view carries the doctrine and its front rank; the
+composition panel sets it; the journal records it. One optional canonical
+field on the army; save 75; the pack unchanged. Headline pacing
+**329 / 301 / 219**, the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209:
+every course identical to rules 74 since the AI keeps the line; the headline Epic drift recorded with the sixth catalogue stands. Verification: sim and journey tests; unit 2,380 / 310 files,
+campaigns 57, lint, typecheck, build, the deployment and battlefield
+journeys and the chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-deployment/README.md),
+[ADR0107](architecture/0107-deployment.md).
+
 ## Durable client settings — 2026-11-01
 
 M3's durable settings, first record. The text scale and a new Reduce motion

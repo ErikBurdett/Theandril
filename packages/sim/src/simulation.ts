@@ -48,6 +48,7 @@ import { emptyHires, hireCommandSchemas, hireCompany, observeHires } from './hir
 import { emptyTaxes, observeTaxes, setTaxRate, TAX_DEVASTATION_DRIFT, taxCommandSchemas, taxedCoin, taxRateOf } from './taxes';
 import { advanceUnrest, emptyUnrest, observeUnrest, unrestHalvesIndustry } from './unrest';
 import { emptyMapShares, mapShareCommandSchemas, observeMapShares, shareMaps } from './map-sharing';
+import { deploymentCommandSchemas, setDeployment } from './deployment';
 import { advanceAlliances, allianceCommandSchemas, alliedPeace, emptyAlliances, observeAlliances, proposeAlliance, renounceAlliance, respondAlliance } from './alliances';
 import { observeLandmarks } from './landmarks';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
@@ -152,7 +153,7 @@ const version46CommandSchema = z.discriminatedUnion('type', [...version40Command
 const version50CommandSchema = z.discriminatedUnion('type', [...version46CommandSchema.options, ...allianceCommandSchemas]);
 const version53CommandSchema = z.discriminatedUnion('type', [...version50CommandSchema.options, ...crisisCommandSchemas]);
 const version61CommandSchema = z.discriminatedUnion('type', [...version53CommandSchema.options, ...demandCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version61CommandSchema.options, ...relicCommandSchemas, ...officeCommandSchemas, ...hireCommandSchemas, ...taxCommandSchemas, ...mapShareCommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version61CommandSchema.options, ...relicCommandSchemas, ...officeCommandSchemas, ...hireCommandSchemas, ...taxCommandSchemas, ...mapShareCommandSchemas, ...deploymentCommandSchemas]);
 export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : version < 38 ? version37CommandSchema : version < 39 ? version38CommandSchema : version < 40 ? version39CommandSchema : version < 46 ? version40CommandSchema : version < 50 ? version46CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
@@ -201,7 +202,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70), z.literal(71), z.literal(72), z.literal(73), z.literal(74)]).default(CURRENT_RULES),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70), z.literal(71), z.literal(72), z.literal(73), z.literal(74), z.literal(75)]).default(CURRENT_RULES),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -694,6 +695,10 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = bestowRelic(state, faction.id, command.relicId, command.bearerId);
     if (!result.ok) return result;
     emitted.push(...result.events);
+  } else if (command.type === 'setDeployment') {
+    const result = setDeployment(state, faction.id, command.armyId, command.deployment);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'shareMaps') {
     const result = shareMaps(state, faction.id, command.allyId);
     if (!result.ok) return result;
@@ -826,7 +831,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     factions: state.factions.filter(item => knownFactions.has(item.id)).map(item => ({ id: item.id, definitionId: item.definitionId, name: item.name, color: item.color })),
     treasury: faction.treasury, knowledge: faction.knowledge,
     armies: armies.map(army => ({ ...getArmyView(state, army), ...(state.transports[army.id] ? { movementBlocker: carriedArmyBlocker(state, army.id), canFound: false, canAttack: false, maxMovement: 0 } : {}), ...(army.factionId === factionId ? {} : { commander: null, agents: [], movementBlocker: null, reorganizationBlocker: null,
-      formationCapacity: Math.max(12, army.formations.length), overCommand: false, commandBlocker: null, capacityReason: 'Foreign command organization is private.', splitFormationLimit: 0, mergeOptions: [], mergeOptionsTruncated: false,
+      doctrine: 'line', frontRank: [], formationCapacity: Math.max(12, army.formations.length), overCommand: false, commandBlocker: null, capacityReason: 'Foreign command organization is private.', splitFormationLimit: 0, mergeOptions: [], mergeOptionsTruncated: false,
       cargo: [], transportUsed: 0, carrierId: null, canEnterDeepWater: false, embarkOptions: [], disembarkOptions: [], transportOptionsTruncated: false }) })),
     productionOptions: observeProductionOptions(state, factionId),
     ...(rulesVersion(state) >= 33 ? { theaters: observeTheaters(state, factionId) } : {}),

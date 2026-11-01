@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { UNITS } from '@theandril/content';
-import type { GameCommand, Observation } from '@theandril/sim';
+import { DEPLOYMENTS, DEPLOYMENT_NAMES, DEPLOYMENT_TEXT, type Deployment, type GameCommand, type Observation } from '@theandril/sim';
 import { FactionArt } from './faction-art';
 import './army.css';
 
@@ -47,6 +47,7 @@ export function ArmyComposition({ army, view, busy, issue, inspectArmy }: {
         return <label key={formation.id} className="formation-choice"><input type="checkbox" checked={chosen.includes(formation.id)} aria-label={`Select formation ${formation.id}`} onChange={event => setSelected(current => event.target.checked ? [...current, formation.id] : current.filter(id => id !== formation.id))}/><FactionArt contentId={formation.unitId} definitionId={view.factions.find(faction => faction.id === army.factionId)?.definitionId} label={unitName(formation.unitId)} decorative/><span><strong>{unitName(formation.unitId)}</strong><small>{formation.id}</small><small>{formation.strength} strength · {formation.morale} morale · {formation.fatigue} fatigue</small>{definition && <small>{definition.movement} base movement · {definition.range} range · {definition.armor} armor · {definition.initiative} initiative</small>}</span></label>;
       })}</div>
     </fieldset>
+    {army.domain !== 'naval' && <div className="army-deployment" data-testid="army-deployment"><label>Deployment<select value={army.doctrine} disabled={locked} aria-label="Deployment" onChange={event => issue({ type: 'setDeployment', factionId: view.factionId, armyId: army.id, deployment: event.target.value as Deployment })}>{DEPLOYMENTS.map(option => <option key={option} value={option}>{DEPLOYMENT_NAMES[option]}</option>)}</select></label><p className="field-help" data-testid="army-front-rank">{DEPLOYMENT_TEXT[army.doctrine]} Front rank: {army.frontRank.length ? army.frontRank.join(', ') : 'none'}.</p></div>}
     {army.canFound && army.formations.length > 1 && <p className="field-help">Founding consumes one caravan formation only. Its escorts remain here, spend their remaining movement, and pause any travel order.</p>}
     {ownSiege && <p role="status" className="field-help">This army is maintaining a siege. Lift its siege before reorganizing.</p>}
     {army.reorganizationBlocker && <p role="status" className="character-blocker">{army.reorganizationBlocker}</p>}
