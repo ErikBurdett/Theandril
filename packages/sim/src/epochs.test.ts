@@ -64,7 +64,7 @@ describe('rules 49: campaign epochs', () => {
   it('gates the events of the ages, and the events of earlier catalogues name no age', () => {
     const state = attunementCampaign(), host = Object.values(state.settlements).find(town => town.factionId === state.turnOwnerId)!;
     const aged = HEARTH_EVENTS.filter(event => event.epoch);
-    expect(aged.map(event => event.id)).toEqual(['event.toll_dispute', 'event.road_wardens', 'event.glass_rumours', 'event.seam_pilgrims', 'event.bid_fever', 'event.wagers_on_the_future', 'event.long_peace', 'event.glass_pedlar', 'event.rumours_of_the_bid']);
+    expect(aged.map(event => event.id)).toEqual(['event.toll_dispute', 'event.road_wardens', 'event.glass_rumours', 'event.seam_pilgrims', 'event.bid_fever', 'event.wagers_on_the_future', 'event.long_peace', 'event.glass_pedlar', 'event.rumours_of_the_bid', 'event.seam_lights', 'event.peace_fair', 'event.old_debts', 'event.glassblowers_guild']);
     expect(HEARTH_EVENTS.filter(event => event.sinceRules < 49).every(event => !event.epoch)).toBe(true);
     const rumours = HEARTH_EVENTS.find(event => event.id === 'event.glass_rumours')!, toll = HEARTH_EVENTS.find(event => event.id === 'event.toll_dispute')!;
     expect(hearthEventConditionHolds(state, rumours, host.id)).toBe(false);

@@ -194,7 +194,11 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(hearthEventsForRules(61)).toHaveLength(60);
   expect(hearthEventsForRules(62)).toHaveLength(75);
   expect(hearthEventsForRules(62).filter(event => event.sinceRules === 62 && event.condition === 'chained')).toHaveLength(1);
-  expect(HEARTH_EVENTS).toHaveLength(75);
+  expect(hearthEventsForRules(65)).toHaveLength(75);
+  expect(hearthEventsForRules(66)).toHaveLength(90);
+  expect(hearthEventsForRules(66).filter(event => event.sinceRules === 66 && event.condition === 'chained')).toHaveLength(1);
+  expect(hearthEventsForRules(66).filter(event => event.sinceRules === 66).every(event => !event.choices[0]!.followUp)).toBe(true);
+  expect(HEARTH_EVENTS).toHaveLength(90);
   // Rules 62 content, before rules 63 added the relics.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(62), true, ATTUNEMENT_VICTORY, hearthEventsForRules(62), EPOCHS, landmarkKindsForRules(62), crisesForRules(62), CITY_STATE_TRADE, false, false, false)).toBe('85443208');
   expect(CONTENT_HASH).not.toBe('85443208');
@@ -225,6 +229,9 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(() => validateOfficeContent([OFFICES[0]!, OFFICES[0]!])).toThrow('Duplicate office ID');
   expect(() => validateOfficeContent([{ ...OFFICES[0]!, yields: { food: 0, industry: 0, coin: 0, knowledge: 0 } }])).toThrow('yields something');
   expect(() => validateOfficeContent(OFFICES.slice(1))).toThrow('Every role keeps one office');
+  // Rules 65 content, seventy-five events, before rules 66 added fifteen more.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(65), true, ATTUNEMENT_VICTORY, hearthEventsForRules(65), EPOCHS, landmarkKindsForRules(65), crisesForRules(65), CITY_STATE_TRADE, RELICS, NOTABLE_CHARACTERS, OFFICES)).toBe('cf5b6321');
+  expect(CONTENT_HASH).not.toBe('cf5b6321');
   expect(() => validateCrisisContent()).not.toThrow();
   expect(() => validateCrisisContent([CRISES[0]!, CRISES[0]!])).toThrow('Duplicate crisis ID');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, epoch: 'epoch.fracture' }])).toThrow('first age brings no crisis');

@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## The fourth hearth-event catalogue (rules/save 66) — 2026-10-31
+
+M6's hearth events, fourth catalogue. Fifteen more templates across the
+conditions and the ages — the bell-founders, the tax-farmers, ash in the
+wells, a whale ashore, lights over the seam, deserters at the gate, the
+customs house and its dues, fire in the scriptorium, the quartermaster's
+count, the peace fair, the border stones, an early winter, old debts called
+in and the glassblowers' guild — one a chain whose default lets the quay be;
+ninety in all, the rules 65 catalogue frozen. Content only; save 66
+upgrades v65 envelopes unchanged under the new pack and refuses a v65
+envelope naming a rules 66 template. Headline pacing **380 / 296 / 199**,
+the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 440 / 301 / 201: every headline course in band, the two other Epic seeds just under it at 344 / 336 (narrowing from the 306 / 349 recorded with the notables).
+Verification: content tests, the sim version pins; unit 2,363 / 301 files,
+campaigns 57, lint, typecheck, build, the three hearth-event journeys
+and the chronicles journey (pin 57 → 56, attributed to the Council’s turn-40 draw).
+[Evidence](development/2026-10-31-hearth-events-iv/README.md),
+[ADR0097](architecture/0097-hearth-events-iv.md).
+
 ## Offices of the realm (rules/save 65) — 2026-10-31
 
 M5's political cast, first office. Four offices, one for every character

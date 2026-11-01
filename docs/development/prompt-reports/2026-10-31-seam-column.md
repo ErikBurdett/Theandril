@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters and offices
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices and the fourth event catalogue
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -204,6 +204,11 @@
   ([publication packet](../2026-10-31-publication-offices/README.md)).
   Evidence packet [docs/development/2026-10-31-offices/](../2026-10-31-offices/README.md);
   roadmap library 134 delivered.
+- The fourth hearth-event catalogue, rules/save 66 ([ADR 0097](../../architecture/0097-hearth-events-iv.md)):
+  fifteen more templates across the conditions and the ages, ninety in all,
+  the rules 65 catalogue frozen. Evidence packet
+  [docs/development/2026-10-31-hearth-events-iv/](../2026-10-31-hearth-events-iv/README.md);
+  roadmap library 135 delivered.
 
 ## Verified
 
@@ -270,6 +275,9 @@ the other seeds 306 / 349, 256 / 326, 192 / 218, proxies 307 / 467 / 290 / 189.
 Offices: unit 2,363, campaigns 57, build, the characters and offices
 journeys and the chronicles journey (pin 57 unmoved); headline
 **380 / 305 / 207**, the other seeds 306 / 349, 256 / 326, 192 / 218, proxies 307 / 467 / 290 / 189.
+Hearth events IV: unit 2,363 / 301 files, campaigns 57, build, the three hearth-event
+journeys and the chronicles journey (pin 57 → 56, attributed to the Council’s turn-40 draw); headline
+**380 / 296 / 199**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 440 / 301 / 201.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -317,7 +325,7 @@ first on 379.
   remain.
 - The ferry fallback fires only in a proved-enclosed basin; a basin whose
   shores open later is not waited for.
-- Hearth events: seventy-five templates against one hundred and fifty.
+- Hearth events: ninety templates against one hundred and fifty.
 - Relics lead and nothing more; none is lost, stolen or traded. Rituals,
   summons and a third magical path remain.
 - A notable figure is a named, specialized appointment and nothing more;
