@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## Unrest in the hearths (rules/save 71) — 2026-11-01
+
+M5's cultural unrest, first measure. Each unbesieged turn a hearth's unrest
+rises three under heavy taxes, two while occupied and one while its
+devastation stands at fifty or more, falls one with no pressure, and lean
+taxes ease it two more; at fifty the hearth's industry is halved, at a
+hundred it riots (a household leaves, ten devastation, back to fifty). The
+observation carries each own hearth's level, pressures and halving; the
+condition panel shows them; AI realms set no heavy taxes at forty unrest and
+ease at sixty when they hold a hundred and fifty coin. A new canonical
+register; save 71; the pack unchanged. Headline pacing **388 / 296 / 198**,
+the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207: every headline course in band and identical to rules 70, the two other Epic seeds just under it.
+Verification: sim, AI and journey tests; unit 2,375 / 307 files, campaigns 57, lint,
+typecheck, build, the unrest, taxes and conquest journeys and the chronicles
+journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-unrest/README.md),
+[ADR0102](architecture/0102-unrest.md).
+
 ## Taxes (rules/save 70) — 2026-11-01
 
 M4's economic policy, first lever. `setTaxRate` sets a realm's taxes lean,

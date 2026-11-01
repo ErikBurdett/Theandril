@@ -37,6 +37,7 @@ import { assertNoRelics, emptyRelics, relicStateSchema, validateRelics } from '.
 import { assertNoOffices, emptyOffices, officeStateSchema, validateOffices } from './offices';
 import { assertNoHires, emptyHires, hireStateSchema, validateHires } from './hires';
 import { assertNoTaxes, emptyTaxes, taxStateSchema, validateTaxes } from './taxes';
+import { assertNoUnrest, emptyUnrest, unrestStateSchema, validateUnrest } from './unrest';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -48,7 +49,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 70;
+export const SAVE_VERSION = 71;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -307,7 +308,9 @@ const stateV67Schema = stateV49Schema.extend({ alliances: allianceStateSchema, c
 /** Rules 68 records the companies hired from city-states; rules 69 adds no canonical field. */
 const stateV69Schema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608), offices: officeStateSchema, hires: hireStateSchema }).strict();
 /** Rules 70 records the realms' tax rates. */
-const stateSchema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608), offices: officeStateSchema, hires: hireStateSchema, taxes: taxStateSchema }).strict();
+const stateV70Schema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608), offices: officeStateSchema, hires: hireStateSchema, taxes: taxStateSchema }).strict();
+/** Rules 71 records the unrest in the hearths. */
+const stateSchema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608), offices: officeStateSchema, hires: hireStateSchema, taxes: taxStateSchema, unrest: unrestStateSchema }).strict();
 const searchesFor = (factions: readonly { id: string }[]) => factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1);
 const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
@@ -329,11 +332,14 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(70), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(71), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
+/** A v70 envelope carries the rules 70 state and differs in its version; the wrapper below adds what rules 71 records. */
+type Through70 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV70Schema> };
+const saveV70Schema = saveSchema.extend({ version: z.literal(70), state: stateV70Schema }).strict();
 /** v68 and v69 envelopes carry the rules 68 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 70 records. */
 type Through69 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV69Schema> };
 const saveV69Schema = saveSchema.extend({ version: z.literal(69), state: stateV69Schema }).strict();
@@ -588,6 +594,8 @@ function canonicalPayload(state: GameState) {
       hires: hireStateSchema.parse(state.hires.map(item => ({ ...item }))),
       // Rules 70 appends the tax rates last, by realm.
       taxes: taxStateSchema.parse([...state.taxes].sort((a, b) => a.factionId < b.factionId ? -1 : 1).map(item => ({ ...item }))),
+      // Rules 71 appends the unrest last, by hearth.
+      unrest: unrestStateSchema.parse([...state.unrest].sort((a, b) => a.settlementId < b.settlementId ? -1 : 1).map(item => ({ ...item }))),
   };
   return payload;
 }
@@ -658,6 +666,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 19) assertNoUnification(state);
   if (version < 50) assertNoAlliances(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
+  if (version < 71) assertNoUnrest(state);
   if (version < 70) assertNoTaxes(state);
   if (version < 69) assertNoSecondRoster(state);
   if (version < 68) assertNoHires(state);
@@ -803,12 +812,13 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
+  if (version < 71) assertNoUnrest(state);
   if (version < 70) assertNoTaxes(state);
   if (version < 69) assertNoSecondRoster(state);
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 69) return CONTENT_HASH; // rules 70 changed no content
+  if (version >= 69) return CONTENT_HASH; // rules 70 and 71 changed no content
   if (version >= 67) return PRE_CITY_STATES_II_CONTENT_HASH; // rules 68 changed no content
   if (version >= 66) return PRE_SUMMONING_CONTENT_HASH;
   if (version >= 65) return PRE_EVENTS_IV_CONTENT_HASH;
@@ -843,8 +853,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 70) return latest;
-  const { taxes: _taxes, ...beforeTaxes } = latest;
+  if (version >= 71) return latest;
+  const { unrest: _unrest, ...beforeUnrest } = latest;
+  if (version >= 70) return beforeUnrest;
+  const { taxes: _taxes, ...beforeTaxes } = beforeUnrest;
   if (version >= 68) return beforeTaxes;
   const { hires: _hires, ...beforeHires } = beforeTaxes;
   if (version >= 65) return beforeHires;
@@ -1283,6 +1295,19 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  const prior = parseSaveThrough70(raw);
+  const state = { ...prior.state, unrest: emptyUnrest() };
+  return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+}
+function parseSaveThrough70(raw: unknown): Through70 {
+  const version = z.object({ version: z.number().int() }).parse(raw).version;
+  if (version === 70) {
+    const sealed = saveV70Schema.parse(raw);
+    assert(sealed.contentHash === CONTENT_HASH, 'v70 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v70 snapshot checksum does not match its contents');
+    // Rules 71 adds the unrest as a new register; the state continues unchanged under the same pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   const prior = parseSaveThrough69(raw);
   const state = { ...prior.state, taxes: emptyTaxes() };
   return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
@@ -1846,6 +1871,7 @@ export function deserializeGame(text: string): GameState {
     offices: data.offices.map(item => ({ ...item })),
     hires: data.hires.map(item => ({ ...item })),
     taxes: data.taxes.map(item => ({ ...item })),
+    unrest: data.unrest.map(item => ({ ...item })),
     roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
@@ -1884,6 +1910,7 @@ export function deserializeGame(text: string): GameState {
   validateOffices(state);
   validateHires(state);
   validateTaxes(state);
+  validateUnrest(state);
   validateSelectionGroups(state);
   validateTheaters(state);
   validatePatrols(state);

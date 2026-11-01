@@ -45,6 +45,8 @@ export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, emptyHires, hasHires, hireBlocker, 
 export type { HireQuote, HireRecord, ObservedHires } from './hires';
 export { TAX_COIN_PERCENT, TAX_DEVASTATION_DRIFT, emptyTaxes, hasTaxes, observeTaxes, setTaxRate, taxBlocker, taxRateOf, taxedCoin, validateTaxes } from './taxes';
 export type { ObservedTaxes, TaxRate, TaxRecord } from './taxes';
+export { UNREST_HALVING, UNREST_RIOT, RIOT_DEVASTATION, emptyUnrest, hasUnrest, observeUnrest, unrestOf, unrestPressures, validateUnrest } from './unrest';
+export type { ObservedUnrest, UnrestRecord } from './unrest';
 export { advanceRelics, bestowBlocker, bestowRelic, emptyRelics, hasRelics, MAX_RELICS, observeRelics, relicLeadership, validateRelics } from './relics';
 export type { ObservedRelic, RelicRecord } from './relics';
 export type { ObservedClientGoods } from './diplomacy';

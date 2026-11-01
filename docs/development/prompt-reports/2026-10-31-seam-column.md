@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster and taxes
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes and unrest
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -243,6 +243,12 @@
   ([publication packet](../2026-11-01-publication-taxes/README.md)).
   Evidence packet [docs/development/2026-11-01-taxes/](../2026-11-01-taxes/README.md);
   roadmap library 139 delivered.
+- Unrest in the hearths, rules/save 71 ([ADR 0102](../../architecture/0102-unrest.md)):
+  heavy taxes, occupation and deep scars raise a hearth's unrest, lean taxes
+  ease it; at fifty the industry halves and at a hundred the hearth riots;
+  the AI stops pressing restless lanes. Evidence packet
+  [docs/development/2026-11-01-unrest/](../2026-11-01-unrest/README.md);
+  roadmap library 140 delivered.
 
 ## Verified
 
@@ -325,6 +331,9 @@ headline **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, p
 Taxes: unit 2,373 / 306 files, campaigns 57, build, the taxes and tribute journeys and
 the chronicles journey (pin 56 unmoved); headline **388 / 296 / 198**, the
 other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207.
+Unrest: unit 2,375 / 307 files, campaigns 57, build, the unrest, taxes and conquest
+journeys and the chronicles journey (pin 56 unmoved); headline
+**388 / 296 / 198**, the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -386,6 +395,8 @@ first on 379.
   remain.
 - Taxes touch coin and devastation only; trade routes, processing and
   the wider economic policy remain.
+- Unrest knows three pressures and two consequences; legitimacy, secession
+  and rebels on the map remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

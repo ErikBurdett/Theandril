@@ -46,6 +46,7 @@ import { advanceRelics, bestowRelic, emptyRelics, observeRelics, relicCommandSch
 import { emptyOffices, holdOffice, observeOffices, officeCommandSchemas, officeYields, resignOffice } from './offices';
 import { emptyHires, hireCommandSchemas, hireCompany, observeHires } from './hires';
 import { emptyTaxes, observeTaxes, setTaxRate, TAX_DEVASTATION_DRIFT, taxCommandSchemas, taxedCoin, taxRateOf } from './taxes';
+import { advanceUnrest, emptyUnrest, observeUnrest, unrestHalvesIndustry } from './unrest';
 import { advanceAlliances, allianceCommandSchemas, alliedPeace, emptyAlliances, observeAlliances, proposeAlliance, renounceAlliance, respondAlliance } from './alliances';
 import { observeLandmarks } from './landmarks';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
@@ -199,7 +200,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70)]).default(CURRENT_RULES),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70), z.literal(71)]).default(CURRENT_RULES),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -252,7 +253,7 @@ export function createGame(options: NewGameOptions): GameState {
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
     development: createDevelopmentState(),
-    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), wards: [], hearthEvents: emptyHearthEvents(), alliances: emptyAlliances(), crises: emptyCrises(), demands: emptyDemands(), relics: emptyRelics(), offices: emptyOffices(), hires: emptyHires(), taxes: emptyTaxes(), charters: [], postings: [], musters: [], depots: [],
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), wards: [], hearthEvents: emptyHearthEvents(), alliances: emptyAlliances(), crises: emptyCrises(), demands: emptyDemands(), relics: emptyRelics(), offices: emptyOffices(), hires: emptyHires(), taxes: emptyTaxes(), unrest: emptyUnrest(), charters: [], postings: [], musters: [], depots: [],
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
@@ -307,8 +308,9 @@ export function settlementYields(state: GameState, settlement: Settlement): { fo
     if (settlement.occupationTurns > 0) yields[yieldId] = Math.floor(yields[yieldId] / 2);
     if (state.sieges[settlement.id]) yields[yieldId] = yieldId === 'food' ? 0 : Math.floor(yields[yieldId] / 2);
   }
-  // Rules 70: the realm's taxes take their share of the coin last.
+  // Rules 70: the realm's taxes take their share of the coin last. Rules 71: unrest at fifty halves the industry.
   yields.coin = taxedCoin(state, settlement.factionId, yields.coin);
+  if (unrestHalvesIndustry(state, settlement.id)) yields.industry = Math.floor(yields.industry / 2);
   return yields;
 }
 
@@ -381,6 +383,8 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
       settlement.devastation = Math.max(0, Math.min(100, settlement.devastation - 5 + (rulesVersion(state) >= 70 ? TAX_DEVASTATION_DRIFT[taxRateOf(state, faction.id)] : 0)));
       settlement.occupationTurns = Math.max(0, settlement.occupationTurns - 1);
     }
+    // Rules 71: the hearth's unrest follows its taxes, occupation and scars.
+    advanceUnrest(state, settlement, emitted);
   }
   // New workers and completed land work affect the following harvest.
   advanceWorkerPolicies(state, emitted);
@@ -809,7 +813,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
     battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
     arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}),
-    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), ...(rulesVersion(state) >= 49 ? { epoch: observeEpoch(state) } : {}), ...(rulesVersion(state) >= 50 ? { alliances: observeAlliances(state, factionId) } : {}), ...(rulesVersion(state) >= 51 ? { landmarks: observeLandmarks(state, factionId) } : {}), ...(rulesVersion(state) >= 53 ? { crisis: observeCrisis(state, factionId) } : {}), ...(rulesVersion(state) >= 61 ? { tribute: observeDemands(state, factionId) } : {}), ...(rulesVersion(state) >= 63 ? { relics: observeRelics(state, factionId) } : {}), ...(rulesVersion(state) >= 65 ? { offices: observeOffices(state, factionId) } : {}), ...(rulesVersion(state) >= 68 ? { hires: observeHires(state, factionId) } : {}), ...(rulesVersion(state) >= 70 ? { tax: observeTaxes(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
+    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), ...(rulesVersion(state) >= 49 ? { epoch: observeEpoch(state) } : {}), ...(rulesVersion(state) >= 50 ? { alliances: observeAlliances(state, factionId) } : {}), ...(rulesVersion(state) >= 51 ? { landmarks: observeLandmarks(state, factionId) } : {}), ...(rulesVersion(state) >= 53 ? { crisis: observeCrisis(state, factionId) } : {}), ...(rulesVersion(state) >= 61 ? { tribute: observeDemands(state, factionId) } : {}), ...(rulesVersion(state) >= 63 ? { relics: observeRelics(state, factionId) } : {}), ...(rulesVersion(state) >= 65 ? { offices: observeOffices(state, factionId) } : {}), ...(rulesVersion(state) >= 68 ? { hires: observeHires(state, factionId) } : {}), ...(rulesVersion(state) >= 70 ? { tax: observeTaxes(state, factionId) } : {}), ...(rulesVersion(state) >= 71 ? { unrest: observeUnrest(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
     roads: observeRoads(state, factionId),
     layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),

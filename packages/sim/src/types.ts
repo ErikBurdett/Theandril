@@ -29,6 +29,7 @@ import type { ObservedRelic, RelicRecord } from './relics';
 import type { ObservedOffice, OfficeRecord } from './offices';
 import type { HireRecord, ObservedHires } from './hires';
 import type { ObservedTaxes, TaxRecord } from './taxes';
+import type { ObservedUnrest, UnrestRecord } from './unrest';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -321,6 +322,8 @@ export interface GameState {
   hires: HireRecord[];
   /** Rules 70: the realms whose taxes depart from steady, by realm. */
   taxes: TaxRecord[];
+  /** Rules 71: the hearths with unrest and its level, by hearth. */
+  unrest: UnrestRecord[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -403,6 +406,8 @@ export interface Observation {
   hires?: ObservedHires;
   /** Rules 70: the realm's tax rate and what it does; absent under historical rules. */
   tax?: ObservedTaxes;
+  /** Rules 71: the unrest in each of the realm's hearths with its pressures; absent under historical rules. */
+  unrest?: ObservedUnrest[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

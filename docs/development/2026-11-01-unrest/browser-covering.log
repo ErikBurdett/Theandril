@@ -1,0 +1,14 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/unrest.spec.ts tests/gameplay/taxes.spec.ts tests/gameplay/conquest.spec.ts --workers=2 --output=docs/development/2026-11-01-unrest/browser-results
+
+
+Running 5 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/taxes.spec.ts:9:1 › set heavy taxes from Realm affairs and read the change in the journal (3.3s)
+  ✓  3 [gameplay] › tests/gameplay/unrest.spec.ts:9:1 › read a restless hearth’s unrest and pressures in its condition panel (3.1s)
+  ✓  2 [gameplay] › tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (7.2s)
+  ✓  4 [gameplay] › tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (8.5s)
+  ✓  5 [gameplay] › tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (2.9s)
+
+  5 passed (20.0s)
