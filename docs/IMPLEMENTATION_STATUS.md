@@ -13,6 +13,9 @@ hearth may rise for. No field, command or content; save 80.
 Headline pacing 384 / 291 / 205 and every other course identical to rules 79, since no measured campaign reaches a hundred unrest in a garrisonless conquered hearth; the chronicle pin at 57 holds. Verification: sim and journey tests; unit 2,383 / 310 files,
 campaigns 57, lint, typecheck, build, the restoration, unrest and
 conquest journeys and the chronicles journey (pin 57 unmoved).
+Commit `1ce53d2` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-restoration/README.md)).
 [Evidence](development/2026-11-01-restoration/README.md),
 [ADR0112](architecture/0112-restoration.md).
 

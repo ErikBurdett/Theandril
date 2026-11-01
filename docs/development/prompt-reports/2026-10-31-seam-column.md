@@ -317,7 +317,8 @@
   a conquered hearth with no garrison returns to its founder when its
   unrest reaches a hundred, the first rebellion. Evidence packet
   [docs/development/2026-11-01-restoration/](../2026-11-01-restoration/README.md);
-  roadmap library 150 delivered.
+  roadmap library 150 delivered. Commit `1ce53d2` is deployed and read back
+  ([publication packet](../2026-11-01-publication-restoration/README.md)).
 
 ## Verified
 
