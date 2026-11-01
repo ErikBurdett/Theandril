@@ -25,7 +25,10 @@ function knownComponent(view: Observation, origin: number, water: boolean): Set<
 test('Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay', () => {
   // Genuine generated resources and fog, not a funded/naval fixture. This is an
   // enclosed-sea crossing on the home landmass, explicitly not overseas proof.
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
+  // The seed is chosen for the crossing it shows and moves when the world's content changes what the
+  // realm's land yields: seed 74 under rules 56, seed 55 from rules 57 (the second landmark catalogue
+  // re-placed the landmarks of this tiny map); see docs/development/2026-10-31-landmarks-ii/README.md.
+  const state = createGame({ seed: 55, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
   const initialSave = serializeGame(state), factionId = state.turnOwnerId;
   const prices = new Map([...BUILDINGS, ...UNITS].map(item => [item.id, item.coinCost]));
   const records: { command: GameCommand; result: ReturnType<typeof applyCommand> }[] = [];

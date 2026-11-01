@@ -1,0 +1,12 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/landmarks.spec.ts tests/gameplay/hearth-events.spec.ts --workers=2 --output=docs/development/2026-10-31-landmarks-ii/browser-results
+
+
+Running 3 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/hearth-events.spec.ts:10:1 › answer a hearth event from Realm affairs and read its effect in the treasury and the journal (3.9s)
+  ✓  2 [gameplay] › tests/gameplay/landmarks.spec.ts:11:1 › select a landmark hex and read its name, story and yield in the hex inspector (4.4s)
+  ✓  3 [gameplay] › tests/gameplay/landmarks.spec.ts:40:1 › answer a landmark event from Realm affairs and read its coin in the treasury and the journal (2.6s)
+
+  3 passed (7.7s)

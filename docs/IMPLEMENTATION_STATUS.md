@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## The second landmark catalogue and its events (rules/save 57) — 2026-10-31
+
+M8 content. Twelve more landmark kinds from rules 57 with their terrains,
+shores and yields, twenty-four in all; the placement is read for a rules
+version (`landmarks(world, rules)`, cached per world and rules) so a sealed
+reading never changes, while a loaded campaign plays under the current rules
+as every catalogue does. Six more events of the old places, one a chain,
+bring the catalogue to fifty-seven; save 57 upgrades v56 envelopes unchanged
+under the new pack. Headline pacing **382 / 329 / 195**, the other seeds
+366 / 322, 299 / 251, 215 / 179, proxies 366 / 439 / 302 / 203: every Epic
+course inside its band. The re-placed landmarks of the tiny maps move the
+chronicle journey's pin (attributed) and the enclosed-basin ferry scenario
+to seed 55. Verification: content and sim tests; unit 2,348 / 294 files,
+campaigns 57, lint, typecheck, build, three covering journeys and the
+chronicles journey.
+[Evidence](development/2026-10-31-landmarks-ii/README.md),
+[ADR0087](architecture/0087-landmarks-ii.md).
+
 ## Allied peace (rules/save 56) — 2026-10-31
 
 Gate G's shared peace. The call an ally answers is kept in the alliance

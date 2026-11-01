@@ -37,7 +37,7 @@ export type { HearthEventState, ObservedHearthEvent, ObservedHearthEventChoice, 
 export { announceEpochs, epochConditionHolds, epochId, epochIndex, observeEpoch } from './epochs';
 export { ALLIANCE_OFFER_TURNS, allianceAcceptanceBlocker, allianceBetween, allianceProposalObjection, alliesOf, callAllies, emptyAlliances, MAX_ALLIANCES_PER_REALM, observeAlliances, validateAlliances } from './alliances';
 export type { Alliance, AllianceOffer, AllianceState, ObservedAllianceOffer, ObservedAlliances } from './alliances';
-export { landmarkAt, landmarks, landmarkYieldAt, MAX_LANDMARKS, observeLandmarks } from './landmarks';
+export { landmarkAt, landmarks, landmarkYieldAt, LANDMARK_RULES, MAX_LANDMARKS, observeLandmarks } from './landmarks';
 export type { Landmark, ObservedLandmark } from './landmarks';
 export { advanceCrises, beginCrises, blightWords, emptyCrises, hasCrises, MAX_PAST_CRISES, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, shelterCost, shelterFromCrisis, validateCrises } from './crises';
 export type { ActiveCrisis, CrisisState, ObservedCrisis, PastCrisis } from './crises';

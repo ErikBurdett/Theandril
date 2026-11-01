@@ -1,0 +1,20 @@
+factionCount 4 rules56 turn 56 prosperity | rules57 turn 54 prosperity
+first divergence at command index 244 of 920 874
+56: 23 faction.ashen_compact {"type":"setWorkedTiles","factionId":"faction.ashen_compact","settlementId":"settlement.35","cells":[487,582]} ok
+    23 faction.ashen_compact {"type":"moveTo","factionId":"faction.ashen_compact","armyId":"army.39","target":680} ok
+    23 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.25","missionId":"mission.survey","targetCell":1073} ok
+    23 faction.reedbound_council {"type":"queue","factionId":"faction.reedbound_council","settlementId":"settlement.10","itemId":"unit.transport"} ok
+57: 23 faction.ashen_compact {"type":"setWorkedTiles","factionId":"faction.ashen_compact","settlementId":"settlement.35","cells":[486,582]} ok
+    23 faction.ashen_compact {"type":"moveTo","factionId":"faction.ashen_compact","armyId":"army.39","target":680} ok
+    23 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.25","missionId":"mission.survey","targetCell":1073} ok
+    23 faction.reedbound_council {"type":"queue","factionId":"faction.reedbound_council","settlementId":"settlement.10","itemId":"unit.transport"} ok
+--- rules 57 reasons around turn 23
+23 faction.ashen_compact :: army.39 advances toward its visible objective using its available movement budget.
+23 faction.reedbound_council :: Neri Fordkeeper commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 6 hexes without revealing hidden armies. | Fund unit.transport at settlement.10 for a bounded coastal expedition (24 coin). | army.4 explores new ground using its available movement budget. | army.27 advances toward its visible objective using its available movement budget.
+23 faction.cinder_march :: army.6 explores new ground using its available movement budget.
+23 faction.glass_tide :: army.15 holds its recruitment point for a mixed formation column. | army.29 advances toward its visible objective using its available movement budget.
+--- rules 56 reasons around turn 23
+23 faction.ashen_compact :: army.39 advances toward its visible objective using its available movement budget.
+23 faction.reedbound_council :: Neri Fordkeeper commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 6 hexes without revealing hidden armies. | Fund unit.transport at settlement.10 for a bounded coastal expedition (24 coin). | army.4 explores new ground using its available movement budget. | army.27 advances toward its visible objective using its available movement budget.
+23 faction.cinder_march :: army.6 explores new ground using its available movement budget.
+23 faction.glass_tide :: army.15 holds its recruitment point for a mixed formation column. | army.29 advances toward its visible objective using its available movement budget.

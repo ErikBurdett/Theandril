@@ -3,7 +3,8 @@ import { CONTENT_HASH, landmarkKind } from '@theandril/content';
 import { hexDistance, isPassable, naturalFeatures, neighbors, TERRAIN } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, stateHash } from './index';
 import { arcaneSites, GLASS_SHARDS } from './arcane-sites';
-import { landmarkAt, landmarks, landmarkYieldAt, MAX_LANDMARKS, observeLandmarks } from './landmarks';
+import { landmarkAt, landmarks, LANDMARK_RULES, landmarkYieldAt, MAX_LANDMARKS, observeLandmarks } from './landmarks';
+import { landmarkKindsForRules } from '@theandril/content';
 import { landCellYields } from './territory';
 import { withRules } from './rules';
 import { PRE_LANDMARKS_CONTENT_HASH, serializeGameForVersion } from './save';
@@ -32,6 +33,13 @@ describe('rules 51: landmarks', () => {
     }
     expect(sites.every((site, index) => !index || site.cell > sites[index - 1]!.cell)).toBe(true);
     expect(landmarkAt(world, world.starts[0]!)).toBeUndefined();
+    // Rules 57: the second catalogue is placed from rules 57; a rules 56 reading of the same world keeps to the first twelve kinds and is read the same way again.
+    const older = landmarks(world, 56), first = new Set(landmarkKindsForRules(56).map(kind => kind.id));
+    expect(older.every(site => first.has(site.kindId))).toBe(true);
+    expect(landmarks(world, 56)).toBe(older);
+    expect(landmarks(world)).toBe(landmarks(world, LANDMARK_RULES));
+    expect(sites.some(site => !first.has(site.kindId)) || landmarks(createGame({ seed: 20260906, size: 'standard', factionCount: 12 }).world).some(site => !first.has(site.kindId))).toBe(true);
+    withRules(state, 56, () => expect(getObservation(state, state.turnOwnerId).landmarks!.every(site => first.has(site.kindId))).toBe(true));
   });
 
   it('is seen once its ground is explored, in full, and is nothing under older rules', () => {
@@ -59,7 +67,7 @@ describe('rules 51: landmarks', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 50, contentHash: PRE_LANDMARKS_CONTENT_HASH });
     const older = deserializeGame(sealed);
     expect(stateHash(older)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 56, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 57, contentHash: CONTENT_HASH });
     expect(observeLandmarks(older, player)).toEqual(observeLandmarks(state, player));
     // A worked landmark hex yields its kind on top of the ground.
     const site = landmarks(state.world)[0];

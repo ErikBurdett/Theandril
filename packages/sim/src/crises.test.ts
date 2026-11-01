@@ -5,7 +5,7 @@ import { CONTENT_HASH, CRISES, crisisDefinition, HEARTH_EVENTS } from '@theandri
 import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { PRE_CRISES_CONTENT_HASH, serializeGameForVersion } from './save';
+import { PRE_CRISES_CONTENT_HASH, PRE_LANDMARKS_II_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceCrises, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, validateCrises } from './crises';
 import { epochId } from './epochs';
 
@@ -110,7 +110,7 @@ describe('rules 53: crises of the ages', () => {
     const older = deserializeGame(sealed);
     expect(older.crises).toEqual({ active: null, past: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 56, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 57, contentHash: CONTENT_HASH });
     expect(CRISES.every(crisis => crisis.sinceRules === 53)).toBe(true);
   });
 
@@ -171,7 +171,7 @@ describe('rules 53: crises of the ages', () => {
     // A v54 envelope loads unchanged under rules 55 and seals back.
     const fresh = attunementCampaign();
     const sealed = serializeGameForVersion(fresh, 54);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 54, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 54, contentHash: PRE_LANDMARKS_II_CONTENT_HASH });
     expect(stateHash(deserializeGame(sealed))).toBe(stateHash(fresh));
   });
 });

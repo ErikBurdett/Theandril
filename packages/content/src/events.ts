@@ -29,7 +29,7 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54), z.literal(57)]),
   /** Rules 49: drawn only once the world has reached this age. */
   epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
   /** Rules 54: drawn only while this crisis stands. */
@@ -370,7 +370,46 @@ const SIXTH_BATCH: readonly HearthEventDefinition[] = [
       { id: 'leave_it_standing', label: 'Leave it standing', description: 'Let it stand; what the dark spares is sold as fodder.', effects: effects({ food: -8, coin: 5 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH];
+/** Rules 57: six more events of the old places, one of them a chain. */
+const SEVENTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.hermit_at_the_place', name: 'A hermit at the old place', condition: 'landmark', weight: 2, sinceRules: 57,
+    text: 'A hermit has taken up living at the old place within the borders of {hearth}, and the farmers bring him bread and questions.',
+    choices: [
+      { id: 'let_him_stay', label: 'Let him stay', description: 'Leave him his place; what he tells the farmers finds its way to the archive.', effects: effects({ knowledge: 20, food: -5 }) },
+      { id: 'move_him_on', label: 'Move him on', description: 'Send the watch to turn him off the realm’s land; the farmers grumble and give nothing.', effects: effects({ coin: -5, devastation: 2 }) },
+    ] },
+  { id: 'event.stone_robbers', name: 'Stone-robbers', condition: 'landmark', weight: 2, sinceRules: 57,
+    text: 'Carts have been seen at night at the old place within the borders of {hearth}, and the dressed stone is going somewhere.',
+    choices: [
+      { id: 'set_a_watch', label: 'Set a watch', description: 'Pay a watch at the place; the stone stays and the carts go elsewhere.', effects: effects({ coin: -15 }) },
+      { id: 'sell_the_stone', label: 'Sell the stone yourself', description: 'If it is going, it goes at the hearth’s price; the place is diminished.', effects: effects({ coin: 35, devastation: 3 }), followUp: follow('event.the_bare_place', 5) },
+    ] },
+  { id: 'event.the_bare_place', name: 'The bare place', condition: 'chained', weight: 1, sinceRules: 57,
+    text: 'The old place of {hearth} stands stripped to its footings, and the pilgrims who came for it have stopped coming.',
+    choices: [
+      { id: 'raise_it_again', label: 'Raise it again', description: 'Pay masons to raise the place in new stone; the pilgrims return in time.', effects: effects({ coin: -40, devastation: -3 }) },
+      { id: 'let_it_lie', label: 'Let it lie', description: 'Footings are footings; the fields take the ground.', effects: effects({ food: 5 }) },
+    ] },
+  { id: 'event.market_at_the_stones', name: 'A market at the stones', condition: 'landmark', weight: 3, sinceRules: 57,
+    text: 'Traders from beyond the border have begun to meet at the old place within the borders of {hearth}, and ask the hearth’s leave to make a market of it.',
+    choices: [
+      { id: 'grant_the_market', label: 'Grant the market', description: 'Take a stall fee and let the market stand; the lanes of the hearth fill on market days.', effects: effects({ coin: 25, food: 5 }) },
+      { id: 'forbid_it', label: 'Forbid it', description: 'The old place is no market; the traders go to the next hearth and so do the fees.', effects: effects({ coin: -10 }) },
+    ] },
+  { id: 'event.travellers_tales', name: 'Travellers’ tales', condition: 'landmark', weight: 2, sinceRules: 57,
+    text: 'A company of travellers lodged at {hearth} swears the old place within its borders is spoken of across the sea, and offers to tell what they know for a fee.',
+    choices: [
+      { id: 'pay_for_the_tales', label: 'Pay for the tales', description: 'Pay the fee and set a clerk to write the tales down.', effects: effects({ coin: -20, knowledge: 30 }) },
+      { id: 'send_them_on', label: 'Send them on their way', description: 'The hearth knows its own place; the travellers leave with their tales.', effects: effects({ coin: 5 }) },
+    ] },
+  { id: 'event.fire_at_the_place', name: 'Fire at the old place', condition: 'landmark', weight: 2, sinceRules: 57,
+    text: 'A grass fire has run up to the old place within the borders of {hearth}, and the wardens ask whether to fight it there or let it burn to the stones.',
+    choices: [
+      { id: 'fight_the_fire', label: 'Fight the fire', description: 'Turn out every hand to beat the fire back from the place; the fields beside it are trampled.', effects: effects({ food: -10, coin: -5 }) },
+      { id: 'let_it_burn', label: 'Let it burn to the stones', description: 'Stone does not burn; the grass does, and the ash feeds next year’s crop.', effects: effects({ food: 8, devastation: 4 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH, ...SEVENTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);

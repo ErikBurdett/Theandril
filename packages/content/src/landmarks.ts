@@ -13,7 +13,7 @@ const bonus = z.number().int().min(0).max(6);
 const yields = z.object({ food: bonus, industry: bonus, coin: bonus, knowledge: bonus }).strict();
 /** Plains 1, forest 2, hills 3 of the physical terrain table. */
 const terrain = z.union([z.literal(1), z.literal(2), z.literal(3)]);
-export const landmarkKindSchema = z.object({ id, name, description, terrains: z.array(terrain).min(1).max(3), coastal: z.boolean(), yields, sinceRules: z.literal(51) }).strict();
+export const landmarkKindSchema = z.object({ id, name, description, terrains: z.array(terrain).min(1).max(3), coastal: z.boolean(), yields, sinceRules: z.union([z.literal(51), z.literal(57)]) }).strict();
 export type LandmarkKind = z.infer<typeof landmarkKindSchema>;
 const y = (food: number, industry: number, coin: number, knowledge: number) => ({ food, industry, coin, knowledge });
 
@@ -31,6 +31,19 @@ export const LANDMARK_KINDS: readonly LandmarkKind[] = [
   { id: 'landmark.tide_bell', name: 'The Tide Bell', description: 'A bronze bell hung in a sea cave that rings itself at the turn of each tide.', terrains: [2, 3], coastal: true, yields: y(1, 0, 1, 2), sinceRules: 51 },
   { id: 'landmark.old_boundary', name: 'The Old Boundary', description: 'A line of standing stones that once marked a border nobody remembers; land on both sides of it is claimed with care.', terrains: [1, 2, 3], coastal: false, yields: y(1, 1, 1, 1), sinceRules: 51 },
   { id: 'landmark.ember_spring', name: 'The Ember Spring', description: 'A hot spring that steams in every season; its basin never freezes and its mud mends.', terrains: [1, 3], coastal: false, yields: y(2, 1, 0, 1), sinceRules: 51 },
+  // Rules 57: twelve more places.
+  { id: 'landmark.sunken_court', name: 'The Sunken Court', description: 'A flagged court below the level of the fields, its benches still in their rows; whoever sat here was obeyed.', terrains: [1], coastal: false, yields: y(0, 1, 2, 2), sinceRules: 57 },
+  { id: 'landmark.warden_tower', name: 'The Warden Tower', description: 'A round tower of the old roads with its stair intact, from whose top three days’ travel can be seen.', terrains: [3], coastal: false, yields: y(0, 2, 1, 2), sinceRules: 57 },
+  { id: 'landmark.whale_road', name: 'The Whale Road', description: 'A shelf of rock running out to sea where the great fish beach themselves each spring; the oil lights a town.', terrains: [1, 3], coastal: true, yields: y(2, 2, 1, 0), sinceRules: 57 },
+  { id: 'landmark.ash_vineyard', name: 'The Ash Vineyard', description: 'Vines that took root in the ash and bear a dark fruit nothing else will; the wine is known three realms away.', terrains: [1, 3], coastal: false, yields: y(1, 0, 3, 1), sinceRules: 57 },
+  { id: 'landmark.singing_bog', name: 'The Singing Bog', description: 'A bog that hums on still nights; the peat burns clean and the reeds weave tight.', terrains: [1, 2], coastal: false, yields: y(2, 2, 0, 0), sinceRules: 57 },
+  { id: 'landmark.ironwood_stand', name: 'The Ironwood Stand', description: 'A stand of trees so hard the axe rings on them; a felled trunk serves a generation.', terrains: [2], coastal: false, yields: y(0, 4, 0, 0), sinceRules: 57 },
+  { id: 'landmark.lantern_reef', name: 'The Lantern Reef', description: 'A reef that glows at the turn of the year, when the fishers of three shores come for the shoals above it.', terrains: [1, 2], coastal: true, yields: y(3, 0, 1, 1), sinceRules: 57 },
+  { id: 'landmark.hermit_cells', name: 'The Hermit Cells', description: 'Cells cut into a cliff where the seekers of the first age sat; their scratched walls are read still.', terrains: [3], coastal: false, yields: y(0, 0, 0, 4), sinceRules: 57 },
+  { id: 'landmark.old_ford', name: 'The Old Ford', description: 'A paved ford where every road of the valley once crossed, and the carts still do.', terrains: [1, 2], coastal: false, yields: y(1, 1, 3, 0), sinceRules: 57 },
+  { id: 'landmark.glass_lens', name: 'The Glass Lens', description: 'A sheet of Ashfall glass the size of a field, through which the ground beneath shows warm and green in winter.', terrains: [1], coastal: false, yields: y(3, 0, 0, 2), sinceRules: 57 },
+  { id: 'landmark.drum_hill', name: 'The Drum Hill', description: 'A hill that sounds hollow under a stamping foot; the quarry at its flank gives the best stone in the realm.', terrains: [3], coastal: false, yields: y(0, 3, 2, 0), sinceRules: 57 },
+  { id: 'landmark.wreck_strand', name: 'The Wreck Strand', description: 'A strand where the sea gives back what it took, a timber or a cask most mornings; the wreckers keep a watch.', terrains: [2, 3], coastal: true, yields: y(1, 2, 2, 0), sinceRules: 57 },
 ];
 export const landmarkKindsForRules = (version: number): readonly LandmarkKind[] => LANDMARK_KINDS.filter(kind => kind.sinceRules <= version);
 export const landmarkKind = (kindId: string): LandmarkKind | undefined => LANDMARK_KINDS.find(kind => kind.id === kindId);

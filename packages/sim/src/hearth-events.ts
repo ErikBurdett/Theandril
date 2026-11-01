@@ -80,7 +80,7 @@ export function hearthEventConditionHolds(state: GameState, template: HearthEven
     // Rules 54: a crisis event is never drawn; the crisis offers it as it comes.
     case 'crisis': return false;
     // Rules 52: the hearth's own borders hold a landmark; no survey is needed to know one.
-    case 'landmark': return landmarks(state.world).some(site => state.land.settlements[settlementId]?.claimed.includes(site.cell));
+    case 'landmark': return landmarks(state.world, rulesVersion(state)).some(site => state.land.settlements[settlementId]?.claimed.includes(site.cell));
   }
 }
 /** Hearths an event may visit: the realm's own, neither besieged nor occupied, by id. */
