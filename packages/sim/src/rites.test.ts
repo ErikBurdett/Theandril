@@ -216,7 +216,7 @@ describe('seam warding (rules 40)', () => {
     const older = deserializeGame(sealed);
     expect(stateHash(older)).toBe(stateHash(state));
     expect(older.armies[host_.id]).toMatchObject({ name: 'Ember host' });
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 81, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 82, contentHash: CONTENT_HASH });
     expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });
     expect(state.armies[host_.id]!.movement).toBeGreaterThan(0);
   });

@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 82 reads each realm’s legitimacy from facts of the world: settled at two, an office held or a client answering adds one, a seat of another realm’s founding, more conquered hearths than founded or a patron takes one; weak legitimacy raises every hearth’s unrest one more each turn and strong legitimacy eases it, and Realm affairs reads the level with its reasons. No save field. Headline pacing 384 / 291 / 205 and both other seeds identical to rules 81; the Epic proxy moves from 368 to 388 within its bound as a realm on it reads weak legitimacy; the chronicle pin at 57 holds.
+
 Rules/save 81 gives the ruins of a razed hearth one salvage: at the turn’s end the realm whose company stands on them takes twenty coin and ten knowledge, once, and the hex inspector reads whether the salvage is untouched or who took it; AI companies walk up to six hexes for untouched ruins. Headline pacing 384 / 291 / 205 and every other course identical to rules 80, since no measured campaign razes a hearth; the chronicle pin at 57 holds.
 
 AI realms now garrison a conquered hearth whose lanes may rise for its founder: from fifty unrest a company standing in it is kept there and, when none stands there, the nearest free company is sent in; the hearth’s condition panel reads whether it is garrisoned against the founder or may rise. AI and observation only; no rule or save change. Headline pacing 384 / 291 / 205 and every other course identical to the restoration slice, since no measured AI realm holds a conquered hearth whose lanes rise; the chronicle pin at 57 holds.

@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## Legitimacy (rules/save 82) — 2026-11-01
+
+M5's politics, the realm's standing read from the world. Every realm is
+settled at two; an office of the realm held or a client answering to it
+adds one; a seat of another realm's founding (or none), more conquered
+hearths than founded, or a patron takes one. Weak legitimacy (one or less)
+raises every hearth's unrest one more each turn, strong (three or more)
+eases it one more, and Realm affairs reads the level, the standing and the
+reasons. Derived, no save field, command or content; save 82 loads v81
+envelopes unchanged.
+Headline pacing 384 / 291 / 205 and both other seeds identical to rules 81; the Epic proxy moves from 368 to 388 within its bound as a realm on it reads weak legitimacy; the chronicle pin at 57 holds. Verification: sim and journey tests; unit 2,387 / 314 files,
+campaigns 57, lint, typecheck, build, the legitimacy, taxes and unrest
+journeys and the chronicles journey (pin 57 unmoved).
+[Evidence](development/2026-11-01-legitimacy/README.md),
+[ADR0115](architecture/0115-legitimacy.md).
+
 ## Salvage from the ruins (rules/save 81) — 2026-11-01
 
 M8's ruins, their first reward. The ruins of a razed hearth hold one

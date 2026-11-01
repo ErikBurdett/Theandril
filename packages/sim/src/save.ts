@@ -52,7 +52,7 @@ import { assertNoSalvage, validateSalvage } from './salvage';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 81;
+export const SAVE_VERSION = 82;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -353,7 +353,7 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(81), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(82), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
@@ -361,6 +361,8 @@ const saveSchema = z.object({ version: z.literal(81), gameVersion: z.literal('0.
 /** v72 through v74 envelopes carry the rules 72 state and differ in their version and the pack they were sealed under; no army of them carries a doctrine. */
 /** Rules 76 adds a doctrine value only; a v75 envelope differs in its version and may not name the wings. Rules 77 changes content only; a v76 envelope differs in its version and the pack it was sealed under. */
 /** Rules 78 through 80 change no canonical field; v77 and v78 envelopes differ only in their version and the pack they were sealed under, a v79 envelope only in its version. */
+/** Rules 82 changes no canonical field; a v81 envelope differs only in its version. */
+const saveV81Schema = saveSchema.extend({ version: z.literal(81) }).strict();
 /** A v80 envelope carries no salvage; rules 81 adds one optional field to the ruin. */
 const saveV80Schema = saveSchema.extend({ version: z.literal(80) }).strict();
 const saveV79Schema = saveSchema.extend({ version: z.literal(79) }).strict();
@@ -1350,6 +1352,13 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 81) {
+    const sealed = saveV81Schema.parse(raw);
+    assert(sealed.contentHash === CONTENT_HASH, 'v81 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v81 snapshot checksum does not match its contents');
+    // Rules 82 reads legitimacy from the world; the state and the pack continue unchanged.
+    return { ...sealed, version: SAVE_VERSION };
+  }
   if (version === 80) {
     const sealed = saveV80Schema.parse(raw);
     assert(sealed.contentHash === CONTENT_HASH, 'v80 content hash is not a recognized compatible pack');

@@ -30,6 +30,7 @@ import type { ObservedOffice, OfficeRecord } from './offices';
 import type { HireRecord, ObservedHires } from './hires';
 import type { ObservedTaxes, TaxRecord } from './taxes';
 import type { ObservedUnrest, UnrestRecord } from './unrest';
+import type { ObservedLegitimacy } from './legitimacy';
 import type { MapShare, ObservedMapShare } from './map-sharing';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
@@ -420,6 +421,8 @@ export interface Observation {
   tax?: ObservedTaxes;
   /** Rules 71: the unrest in each of the realm's hearths with its pressures; absent under historical rules. */
   unrest?: ObservedUnrest[];
+  /** Rules 82: the realm's legitimacy and its reasons. */
+  legitimacy?: ObservedLegitimacy;
   /** Rules 72: for each ally, whether maps can be shared now and when they last were; absent under historical rules. */
   mapShares?: ObservedMapShare[];
   arcaneSearchCoinCost: number;

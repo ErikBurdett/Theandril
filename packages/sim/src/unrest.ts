@@ -5,6 +5,7 @@ import { taxRateOf } from './taxes';
 import { indexes, updateSight } from './visibility';
 import { handleLandCapture } from './territory';
 import { captureSettlementCharacters } from './characters';
+import { legitimacyUnrest } from './legitimacy';
 
 /** Rules 71: unrest in the hearths. Each turn a hearth is not besieged its
  * unrest rises three under heavy taxes, two while it is occupied and one
@@ -49,6 +50,9 @@ export function unrestPressures(state: GameState, town: Settlement): { change: n
   if (town.devastation >= 50) { change += 1; pressures.push('devastation'); }
   if (!pressures.length) { change -= 1; if (rate === 'lean') { change -= 2; pressures.push('lean taxes ease the lanes'); } }
   else if (rate === 'lean') { change -= 2; pressures.push('lean taxes ease the lanes'); }
+  // Rules 82: the realm's legitimacy weighs on every hearth.
+  const legitimacy = legitimacyUnrest(state, town.factionId);
+  if (legitimacy.pressure) { change += legitimacy.change; pressures.push(legitimacy.pressure); }
   return { change, pressures };
 }
 /** Rules 80: the founder a hearth's lanes may rise for, or null while it is the founder's, the founder holds no hearth or it is the holder's capital. */

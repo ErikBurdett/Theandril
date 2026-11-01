@@ -55,7 +55,7 @@ describe('rules 81: salvage from the ruins', () => {
     expect(JSON.parse(v80)).toMatchObject({ version: 80, contentHash: CONTENT_HASH });
     expect(JSON.parse(v80).state.ruins[0].salvagedByFactionId).toBeUndefined();
     expect(stateHash(deserializeGame(v80))).toBe(stateHash(unsalvaged));
-    expect(JSON.parse(serializeGame(deserializeGame(v80)))).toMatchObject({ version: 81 });
+    expect(JSON.parse(serializeGame(deserializeGame(v80)))).toMatchObject({ version: 82 });
     const forged = JSON.parse(v80) as { state: { ruins: { salvagedByFactionId?: string }[] } };
     forged.state.ruins[0]!.salvagedByFactionId = player;
     expect(() => deserializeGame(JSON.stringify(forged))).toThrow();

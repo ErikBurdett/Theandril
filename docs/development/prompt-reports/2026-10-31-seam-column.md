@@ -331,6 +331,12 @@
   [docs/development/2026-11-01-salvage/](../2026-11-01-salvage/README.md);
   roadmap library 152 delivered. Commit `4a60d10` is deployed and read back
   ([publication packet](../2026-11-01-publication-salvage/README.md)).
+- Legitimacy, rules/save 82 ([ADR 0115](../../architecture/0115-legitimacy.md)):
+  each realm's standing read from its seat, conquests, offices and oaths,
+  weighing on every hearth's unrest when weak or strong, read in Realm
+  affairs. Evidence packet
+  [docs/development/2026-11-01-legitimacy/](../2026-11-01-legitimacy/README.md);
+  roadmap library 153 delivered.
 
 ## Verified
 
@@ -454,6 +460,9 @@ journeys and the chronicles journey (pin 57 unmoved); headline
 Salvage: unit 2,386 / 313 files, campaigns 57, build, the salvage and conquest journeys and
 the chronicles journey (pin 57 unmoved); headline 384 / 291 / 205, the other
 seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
+Legitimacy: unit 2,387 / 314 files, campaigns 57, build, the legitimacy, taxes and unrest
+journeys and the chronicles journey (pin 57 unmoved); headline 384 / 291 / 205,
+the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 388 / 407 / 382 / 209.
 
 ## Left open
 
