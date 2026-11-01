@@ -16,7 +16,9 @@ register; save 68; the pack unchanged. Headline pacing
 **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201:
 every course identical to rules 67, the headline in band and the two other Epic seeds just under it as before. Verification: sim, AI and journey tests; unit 2,368 / 303 files,
 campaigns 57, lint, typecheck, build, the hires and tribute journeys and
-the chronicles journey (pin 56 unmoved).
+the chronicles journey (pin 56 unmoved). Commit `ad620af` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-hires/README.md)).
 [Evidence](development/2026-11-01-hires/README.md),
 [ADR0099](architecture/0099-hired-companies.md).
 

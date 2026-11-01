@@ -223,8 +223,10 @@
 - Companies hired from city-states, rules/save 68 ([ADR 0099](../../architecture/0099-hired-companies.md)):
   a company at a city-state's gate buys a company of Ash pike for a price
   set by the city's size, once every ten turns; the AI hires at war when it
-  keeps a reserve. Evidence packet
-  [docs/development/2026-11-01-hires/](../2026-11-01-hires/README.md);
+  keeps a reserve. Commit `ad620af` is deployed: both workflows succeeded and
+  the live readback matched the build
+  ([publication packet](../2026-11-01-publication-hires/README.md)).
+  Evidence packet [docs/development/2026-11-01-hires/](../2026-11-01-hires/README.md);
   roadmap library 137 delivered.
 
 ## Verified
