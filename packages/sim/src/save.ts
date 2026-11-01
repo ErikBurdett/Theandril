@@ -34,6 +34,7 @@ import { allianceStateSchema, allianceStateV50Schema, assertNoAllianceCalls, ass
 import { assertNoCrises, assertNoRegionalCrisis, crisisStateSchema, emptyCrises, validateCrises } from './crises';
 import { assertNoDemands, demandStateSchema, emptyDemands, validateDemands } from './demands';
 import { assertNoRelics, emptyRelics, relicStateSchema, validateRelics } from './relics';
+import { assertNoOffices, emptyOffices, officeStateSchema, validateOffices } from './offices';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -45,7 +46,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 64;
+export const SAVE_VERSION = 65;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -97,6 +98,8 @@ export const PRE_EVENTS_III_CONTENT_HASH = 'acd39799';
 export const PRE_RELICS_CONTENT_HASH = '85443208';
 /** The rules 63 pack, before rules 64 added the notable characters. */
 export const PRE_NOTABLES_CONTENT_HASH = '513decf2';
+/** The rules 64 pack, before rules 65 added the offices. */
+export const PRE_OFFICES_CONTENT_HASH = '7bcec806';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -290,7 +293,9 @@ const stateV62Schema = stateV60Schema.extend({ demands: demandStateSchema }).str
 /** Rules 63 records the relics of the old places and their bearers. */
 const stateV63Schema = stateV62Schema.extend({ relics: relicStateSchema }).strict();
 /** Rules 64 names the notable figures a realm appoints; the register is the same, each character may carry one more field. */
-const stateSchema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608) }).strict();
+const stateV64Schema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608) }).strict();
+/** Rules 65 records the offices of the realms and their holders. */
+const stateSchema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema, demands: demandStateSchema, relics: relicStateSchema, characters: z.array(characterSchema).max(4608), offices: officeStateSchema }).strict();
 const searchesFor = (factions: readonly { id: string }[]) => factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1);
 const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
@@ -312,11 +317,14 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(64), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(65), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
+/** A v64 envelope carries the rules 64 state and differs in its version and the pack it was sealed under; the wrapper below adds what rules 65 records. */
+type Through64 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV64Schema> };
+const saveV64Schema = saveSchema.extend({ version: z.literal(64), state: stateV64Schema }).strict();
 /** A v63 envelope carries the rules 63 state and differs in its version and the pack it was sealed under; no character of it is a notable figure. */
 type Through63 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV63Schema> };
 const saveV63Schema = saveSchema.extend({ version: z.literal(63), state: stateV63Schema }).strict();
@@ -553,6 +561,8 @@ function canonicalPayload(state: GameState) {
       demands: demandStateSchema.parse(state.demands.map(item => ({ ...item }))),
       // Rules 63 appends the relics last, by landmark.
       relics: relicStateSchema.parse([...state.relics].sort(compareId).map(item => ({ ...item }))),
+      // Rules 65 appends the offices last, by office and realm.
+      offices: officeStateSchema.parse([...state.offices].sort(compareId).map(item => ({ ...item }))),
   };
   return payload;
 }
@@ -623,6 +633,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 19) assertNoUnification(state);
   if (version < 50) assertNoAlliances(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
+  if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
   if (version < 63) assertNoRelics(state);
   if (version < 61) assertNoDemands(state);
@@ -759,8 +770,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
+  if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 64) return CONTENT_HASH;
+  if (version >= 65) return CONTENT_HASH;
+  if (version >= 64) return PRE_OFFICES_CONTENT_HASH;
   if (version >= 63) return PRE_NOTABLES_CONTENT_HASH;
   if (version >= 62) return PRE_RELICS_CONTENT_HASH;
   if (version >= 60) return PRE_EVENTS_III_CONTENT_HASH; // rules 61 changed no content
@@ -791,8 +804,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 63) return latest;
-  const { relics: _relics, ...beforeRelics } = latest;
+  if (version >= 65) return latest;
+  const { offices: _offices, ...beforeOffices } = latest;
+  if (version >= 63) return beforeOffices;
+  const { relics: _relics, ...beforeRelics } = beforeOffices;
   if (version >= 61) return beforeRelics;
   const { demands: _demands, ...beforeDemands } = beforeRelics;
   if (version >= 56) return beforeDemands;
@@ -1225,6 +1240,19 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  const prior = parseSaveThrough64(raw);
+  const state = { ...prior.state, offices: emptyOffices() };
+  return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+}
+function parseSaveThrough64(raw: unknown): Through64 {
+  const version = z.object({ version: z.number().int() }).parse(raw).version;
+  if (version === 64) {
+    const sealed = saveV64Schema.parse(raw);
+    assert(sealed.contentHash === PRE_OFFICES_CONTENT_HASH, 'v64 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v64 snapshot checksum does not match its contents');
+    // Rules 65 adds the offices as a new register; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   return parseSaveThrough63(raw);
 }
 function parseSaveThrough63(raw: unknown): Through63 {
@@ -1724,6 +1752,7 @@ export function deserializeGame(text: string): GameState {
     crises: { active: data.crises.active ? { ...data.crises.active, sheltered: [...data.crises.active.sheltered] } : null, past: data.crises.past.map(item => ({ ...item })) },
     demands: data.demands.map(item => ({ ...item })),
     relics: data.relics.map(item => ({ ...item })),
+    offices: data.offices.map(item => ({ ...item })),
     roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
@@ -1759,6 +1788,7 @@ export function deserializeGame(text: string): GameState {
   validateCrises(state);
   validateDemands(state);
   validateRelics(state);
+  validateOffices(state);
   validateSelectionGroups(state);
   validateTheaters(state);
   validatePatrols(state);

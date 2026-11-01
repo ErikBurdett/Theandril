@@ -26,6 +26,7 @@ import type { ObservedLandmark } from './landmarks';
 import type { CrisisState, ObservedCrisis } from './crises';
 import type { ObservedDemands, TributeDemand } from './demands';
 import type { ObservedRelic, RelicRecord } from './relics';
+import type { ObservedOffice, OfficeRecord } from './offices';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -226,6 +227,8 @@ export type GameCommand =
   | { type: 'shelterFromCrisis'; factionId: string; crisisId: string }
   | { type: 'demandTribute'; factionId: string; cityStateId: string; armyId: string }
   | { type: 'bestowRelic'; factionId: string; relicId: string; bearerId: string | null }
+  | { type: 'holdOffice'; factionId: string; officeId: string; holderId: string }
+  | { type: 'resignOffice'; factionId: string; officeId: string }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -308,6 +311,8 @@ export interface GameState {
   demands: TributeDemand[];
   /** Rules 63: the relics brought up from the old places, by landmark, with their bearers. */
   relics: RelicRecord[];
+  /** Rules 65: the offices of every realm and who holds them, by office and realm. */
+  offices: OfficeRecord[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -384,6 +389,8 @@ export interface Observation {
   tribute?: ObservedDemands;
   /** Rules 63: the realm's relics with their bearers; absent under historical rules. */
   relics?: ObservedRelic[];
+  /** Rules 65: the realm's offices with their holders and seats; absent under historical rules. */
+  offices?: ObservedOffice[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

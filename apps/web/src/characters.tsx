@@ -104,6 +104,7 @@ function CharacterSheet({ character, view, busy, initialArmyId, issue, locate }:
     {character.mission && <ActiveMission character={character} busy={busy} factionId={view.factionId} issue={issue}/>}
     <CharacterSkills character={character} factionId={view.factionId} busy={busy || character.dead} issue={issue}/>
     <RelicKeeping view={view} character={character} busy={busy} issue={issue}/>
+    <OfficeKeeping view={view} character={character} busy={busy} issue={issue}/>
     {!character.dead && <>
       <h4>Army attachment</h4><p className="field-help">Appointments and transfers normally require the same hex. Officers can board an adjacent owned fleet from a harbor when the listed permission allows it, spending fleet movement. An army or fleet has one marshal and up to two agents. Review the destination and any restriction before changing an assignment.</p>
       <div className="character-actions">
@@ -134,6 +135,24 @@ export function CommanderBattleControls({ view, busy, issue, controls = true }: 
 }
 
 /** Rules 63: the relics a character bears and the ones waiting in the hearth; bestowing and taking back are ordinary commands. */
+/** Rules 65: the office a character holds from the hearth they sit in, or the vacant offices of their role they could take there. */
+export function OfficeKeeping({ view, character, busy, issue }: { view: Observation; character: Observation['characters'][number]; busy: boolean; issue: Issue }) {
+  const offices = view.offices;
+  if (!offices || !offices.length) return null;
+  const words = (yields: { food: number; industry: number; coin: number; knowledge: number }) => (['food', 'industry', 'coin', 'knowledge'] as const).filter(key => yields[key]).map(key => `+${yields[key]} ${key}`).join(', ');
+  const held = offices.find(item => item.holderCharacterId === character.id);
+  const location = character.location;
+  const seat = location?.kind === 'settlement' ? view.settlements.find(town => town.id === location.settlementId) : undefined;
+  const open = !character.dead && !held && seat && !character.woundedTurns ? offices.filter(item => item.role === character.role && item.holderCharacterId === null) : [];
+  if (!held && !open.length) return null;
+  return <section className="character-offices" aria-label="Offices" data-testid="character-offices">
+    <h4>Offices</h4>
+    {held && <p data-testid={`office-held-${held.officeId}`}><strong>{held.name}</strong> at {held.settlementName}: {words(held.yields)} for the hearth while they sit there; they cannot ride with a company until they resign.
+      <button disabled={busy} aria-label={`Resign ${held.name}`} onClick={() => issue({ type: 'resignOffice', factionId: view.factionId, officeId: held.officeId })}>Resign</button></p>}
+    {seat && open.map(item => <p key={item.officeId} className="field-help" data-testid={`office-open-${item.officeId}`}>{item.name} is vacant: {item.description} {words(item.yields)} for the hearth.
+      <button disabled={busy} aria-label={`Hold ${item.name} at ${seat.name}`} onClick={() => issue({ type: 'holdOffice', factionId: view.factionId, officeId: item.officeId, holderId: character.id })}>Hold office at {seat.name}</button></p>)}
+  </section>;
+}
 export function RelicKeeping({ view, character, busy, issue }: { view: Observation; character: Observation['characters'][number]; busy: boolean; issue: Issue }) {
   const relics = view.relics;
   if (!relics || !relics.length) return null;

@@ -1,5 +1,26 @@
 # Theandril implementation status
 
+## Offices of the realm (rules/save 65) — 2026-10-31
+
+M5's political cast, first office. Four offices, one for every character
+role — the Warden of the Walls, the Keeper of the Roll, the Master of Works
+and the Reader of the Seams — each paying the hearth its holder sits in a
+yield of two through the ordinary hearth sum. `holdOffice` seats a living,
+unwounded character of the role who sits in a hearth of the realm, once per
+office and one office per character; a holder cannot be assigned to a
+company until they resign; `resignOffice` and death vacate. The
+observation lists the realm's offices with holders and seats; the character
+sheet holds and resigns; AI realms seat a vacant office with a character
+the turn's work leaves sitting in a hearth with no company to join, only
+while they keep another of the role for the road, and never resign. A new
+canonical register; save 65; older envelopes load with none. Headline
+pacing **380 / 305 / 207**, the other seeds 306 / 349, 256 / 326, 192 / 218, proxies
+307 / 467 / 290 / 189: every course identical to rules 64, the headline in band and the two other Epic seeds still under it as recorded with the notables; the AI’s office rule seated nobody who changed these campaigns. Verification: content, sim, AI and journey
+tests; unit 2,363 / 301 files, campaigns 57, lint, typecheck, build, the
+characters and offices journeys and the chronicles journey (pin 57 unmoved).
+[Evidence](development/2026-10-31-offices/README.md),
+[ADR0096](architecture/0096-offices.md).
+
 ## Notable characters (rules/save 64) — 2026-10-31
 
 M8's authored figures and a first piece of M5's wider cast. Twenty-four

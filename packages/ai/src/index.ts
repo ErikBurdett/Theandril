@@ -22,6 +22,7 @@ import { planHearthEvents } from './hearth-events';
 import { planCrisis } from './crises';
 import { planDemand } from './demands';
 import { planRelics } from './relics';
+import { planOffices } from './offices';
 import { planPatrol } from './patrols';
 import { answerSupplyAccess, pendingSupplyAccessFees, planSupplyAccess } from './supply-access';
 
@@ -219,6 +220,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const specialists = planCharacters(characterView, Math.max(0, budget - economyReserve - oceanScoutReserve), theater.heldArmyIds);
   plans.push(...specialists.commands); reasons.push(...specialists.reasons);
   budget -= specialists.coinSpent;
+  // Rules 65: a vacant office goes to a character the turn's work leaves sitting in a hearth.
+  const offices = planOffices(view, new Set(specialists.commands.flatMap(command => command.type === 'assignCharacter' || command.type === 'startCharacterMission' ? [command.characterId] : [])));
+  if (offices) { plans.push(...offices.commands); reasons.push(...offices.reasons); }
   let plannedUpkeep = specialists.commands.reduce((sum, command) => sum + (command.type === 'recruitCharacter' ? view.characterRecruitment.find(option => option.definitionId === command.definitionId)?.upkeep ?? 0 : 0), 0);
   const knowledgeSpent = advancement.commands.reduce((sum, command) => sum + (command.type === 'research' ? view.progression.technologyChoices.find(choice => choice.id === command.technologyId)?.knowledgeCost ?? 0 : command.type === 'researchArcane' ? view.arcaneResearch.choices.find(choice => choice.id === command.discoveryId)?.knowledgeCost ?? 0 : 0), 0);
   // Normally retain a caravan's funding; honor a legally quoted first ocean

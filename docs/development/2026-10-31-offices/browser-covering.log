@@ -1,0 +1,15 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/offices.spec.ts tests/gameplay/characters.spec.ts --workers=2 --output=docs/development/2026-10-31-offices/browser-results
+
+
+Running 6 tests using 2 workers
+
+  ✓  2 [gameplay] › tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (2.6s)
+  ✓  1 [gameplay] › tests/gameplay/offices.spec.ts:12:1 › hold and resign an office of the realm from the character sheet (3.1s)
+  ✓  3 [gameplay] › tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (8.5s)
+  ✓  4 [gameplay] › tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (8.1s)
+  ✓  5 [gameplay] › tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (9.3s)
+  ✓  6 [gameplay] › tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (14.6s)
+
+  6 passed (44.3s)

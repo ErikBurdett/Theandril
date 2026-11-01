@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics and notable characters
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters and offices
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -195,6 +195,13 @@
   ([publication packet](../2026-10-31-publication-notables/README.md)).
   Evidence packet [docs/development/2026-10-31-notables/](../2026-10-31-notables/README.md);
   roadmap library 133 delivered.
+- Offices of the realm, rules/save 65 ([ADR 0096](../../architecture/0096-offices.md)):
+  one office for every character role, held from a hearth by a character of
+  the role and paying that hearth a yield of two while held; a holder
+  resigns before riding; death vacates; AI realms seat idle characters when
+  they keep another of the role for the road. Evidence packet
+  [docs/development/2026-10-31-offices/](../2026-10-31-offices/README.md);
+  roadmap library 134 delivered.
 
 ## Verified
 
@@ -258,6 +265,9 @@ the other seeds 390 / 365, 304 / 282, 189 / 202, proxies 336 / 440 / 290 / 197.
 Notable characters: unit 2,360, campaigns 57, build, the characters and
 notables journeys and the chronicles journey (pin 53 → 57, attributed); headline **380 / 305 / 207**,
 the other seeds 306 / 349, 256 / 326, 192 / 218, proxies 307 / 467 / 290 / 189.
+Offices: unit 2,363, campaigns 57, build, the characters and offices
+journeys and the chronicles journey (pin 57 unmoved); headline
+**380 / 305 / 207**, the other seeds 306 / 349, 256 / 326, 192 / 218, proxies 307 / 467 / 290 / 189.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -309,7 +319,9 @@ first on 379.
 - Relics lead and nothing more; none is lost, stolen or traded. Rituals,
   summons and a third magical path remain.
 - A notable figure is a named, specialized appointment and nothing more;
-  rulers, offices, legitimacy and the wider political cast remain.
+  rulers, legitimacy and the wider political cast remain.
+- An office pays its hearth and keeps its holder, nothing more; the AI
+  fills offices but never resigns one.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

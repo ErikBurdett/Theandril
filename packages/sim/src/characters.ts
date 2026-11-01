@@ -6,6 +6,7 @@ import { neighbors, SeededRandom } from '@theandril/mapgen';
 import type { Army, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
 import { cellsWithin, indexes } from './visibility';
 import { rulesVersion } from './rules';
+import { heldOffice, vacateOffices } from './offices';
 import { armyDomain, carriedArmyBlocker } from './naval';
 import { factionAptitudes, WAYKEEPER_APTITUDES } from '@theandril/content';
 import { characterSpellIds, personalAptitudesSchema } from './magic';
@@ -166,6 +167,8 @@ function assignmentObjection(state: GameState, factionId: string, character: Cha
     if (cargo) return cargo;
   }
   if (character.location?.kind === 'army' && character.location.armyId === armyId) return 'This character is already assigned to that army.';
+  // Rules 65: an office is held from a hearth; its holder resigns before riding.
+  if (heldOffice(state, character.id)) return 'This character holds an office of the realm; resign it before riding with a company.';
   if (characterCell(state, character) !== army.cell) {
     if (character.location?.kind !== 'settlement' || !harborTransfer(state, factionId, army, character.location.settlementId)) return 'The character and army must share a hex, or use an adjacent owned harbor to board a fleet.';
     if (army.movement < 1) return 'The fleet needs one movement point for a harbor officer transfer.';
@@ -330,6 +333,7 @@ function killCharacter(state: GameState, character: Character, reason: string, e
   const oldArmy = character.location?.kind === 'army' ? character.location.armyId : null;
   character.dead = true; character.woundedTurns = 0; character.mission = null; locate(state, character, null);
   events.push(notice(state, character, 'character_died', `${character.name} died ${reason}.`, cell));
+  vacateOffices(state, character, events);
   if (oldArmy && role(character) === 'marshal') reconcileArmyCommand(state, oldArmy, events, 'The army’s marshal died.');
 }
 export function removeArmyCharacters(state: GameState, armyId: string, events: DomainEvent[], settlementId?: string): void {
