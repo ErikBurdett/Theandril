@@ -10,11 +10,11 @@ houses, the far survey, the first well, the glass scare, rival envoys and
 the counter-envoy's return — one a chain whose default hears nothing; one
 hundred and twenty in all, the rules 73 catalogue frozen. Content only; save
 74 upgrades v73 envelopes unchanged under the new pack and refuses a v73
-envelope naming a rules 74 template. Headline pacing **PACING_HEADLINE**,
-the other seeds PACING_SEEDS, proxies PACING_PROXIES: PACING_VERDICT.
-Verification: content tests, the sim version pins; UNIT_SHORT,
-CAMPAIGNS_SHORT, lint, typecheck, build, the five hearth-event journeys and
-the chronicles journey CHRONICLES_NOTE.
+envelope naming a rules 74 template. Headline pacing **329 / 301 / 219**,
+the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209: the headline Epic course drifts to 329, under its band, while both other Epic seeds sit in band at 355 / 383 and Long and Standard hold; the drift is recorded as one course’s, not re-priced, with the evidence below.
+Verification: content tests, the sim version pins; unit 2,377 / 308 files,
+campaigns 57, lint, typecheck, build, the five hearth-event journeys and
+the chronicles journey (pin 56 unmoved though the turn-40 draw differs).
 [Evidence](development/2026-11-01-hearth-events-vi/README.md),
 [ADR0105](architecture/0105-hearth-events-vi.md).
 

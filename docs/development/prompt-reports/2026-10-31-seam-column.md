@@ -361,9 +361,9 @@ alliances journeys and the chronicles journey (pin 56 unmoved); headline
 Hearth events V: unit 2,377 / 308 files, campaigns 57, build, the four hearth-event
 journeys and the chronicles journey (pin 56 unmoved though the turn-40 draw differs); headline
 **375 / 317 / 207**, the other seeds 367 / 321, 290 / 266, 187 / 198, proxies 403 / 422 / 367 / 209.
-Hearth events VI: UNIT_SHORT, CAMPAIGNS_SHORT, build, the five hearth-event
-journeys and the chronicles journey CHRONICLES_NOTE; headline
-**PACING_HEADLINE**, the other seeds PACING_SEEDS, proxies PACING_PROXIES.
+Hearth events VI: unit 2,377 / 308 files, campaigns 57, build, the five hearth-event
+journeys and the chronicles journey (pin 56 unmoved though the turn-40 draw differs); headline
+**329 / 301 / 219**, the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -413,6 +413,10 @@ first on 379.
   shores open later is not waited for.
 - Hearth events: one hundred and twenty templates against one hundred and
   fifty.
+- Headline Epic pacing under rules 74 sits at 329, under its band, while both
+  other Epic seeds are in band; recorded as a drift of one course with the
+  neutralised-effects and valuation evidence in the sixth catalogue's packet.
+  A re-pricing of the Epic pace with the pack frozen is the owner's call.
 - Relics lead and nothing more; none is lost, stolen or traded. One
   summoning of one path exists; rituals beyond the four rites and a third
   magical path remain.

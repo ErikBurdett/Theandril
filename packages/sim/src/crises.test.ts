@@ -117,7 +117,7 @@ describe('rules 53: crises of the ages', () => {
     const older = deserializeGame(sealed);
     expect(older.crises).toEqual({ active: null, past: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 74, contentHash: CONTENT_HASH });
     expect(crisesForRules(53).every(crisis => crisis.sinceRules === 53)).toBe(true);
     expect(CRISES.some(crisis => crisis.sinceRules === 59 && crisis.scope === 'region')).toBe(true);
   });
