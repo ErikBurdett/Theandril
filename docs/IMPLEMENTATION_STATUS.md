@@ -11,7 +11,9 @@ of every seed in band. The chronicle pin moves 54 → 53, attributed (a draw
 of the larger catalogue lands on another template); the hearth-event cadence
 test now counts only drawn offers. Verification: content and sim tests;
 unit 2,355 / 296 files, campaigns 57, lint, typecheck, build, two covering
-journeys and the chronicles journey.
+journeys and the chronicles journey. Commit `0e14a39` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-hearth-events-iii/README.md)).
 [Evidence](development/2026-10-31-hearth-events-iii/README.md),
 [ADR0093](architecture/0093-hearth-events-iii.md).
 

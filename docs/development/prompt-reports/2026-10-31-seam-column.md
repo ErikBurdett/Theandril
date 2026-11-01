@@ -173,7 +173,10 @@
   roadmap library 130 delivered.
 - The third hearth-event catalogue, rules/save 62 ([ADR 0093](../../architecture/0093-hearth-events-iii.md)):
   fifteen more templates, seventy-five in all; every headline course of
-  every seed in band. Evidence packet
+  every seed in band. Commit `0e14a39` is deployed: both workflows succeeded
+  and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-hearth-events-iii/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-hearth-events-iii/](../2026-10-31-hearth-events-iii/README.md);
   roadmap library 131 delivered.
 
