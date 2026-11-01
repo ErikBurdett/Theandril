@@ -15,7 +15,9 @@ field; save 67 freezes the rules 66 pack. Headline pacing
 **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201:
 every headline course in band and the other seeds identical to rules 66, the two other Epic seeds just under the band as before. Verification: content, sim, AI, web and journey tests;
 unit 2,365 / 301 files, campaigns 57, lint, typecheck, build, the ember host and
-seam warding journeys and the chronicles journey (pin 56 unmoved).
+seam warding journeys and the chronicles journey (pin 56 unmoved). Commit
+`47f4385` is deployed: both workflows succeeded and the live readback matched
+the build ([publication packet](development/2026-10-31-publication-ember-host/README.md)).
 [Evidence](development/2026-10-31-ember-host/README.md),
 [ADR0098](architecture/0098-ember-host.md).
 

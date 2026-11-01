@@ -215,8 +215,10 @@
   the first summoning rite, a lodged Flame Waykeeper raising a company of
   Oath guard from the hearth's seam at eight ashglass, at once; the AI
   raises one at a besieged hearth once the standing rites are up and no
-  company of the realm stands within. Evidence
-  packet [docs/development/2026-10-31-ember-host/](../2026-10-31-ember-host/README.md);
+  company of the realm stands within. Commit `47f4385` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-ember-host/README.md)).
+  Evidence packet [docs/development/2026-10-31-ember-host/](../2026-10-31-ember-host/README.md);
   roadmap library 136 delivered.
 
 ## Verified
