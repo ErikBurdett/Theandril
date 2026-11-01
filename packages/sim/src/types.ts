@@ -24,6 +24,7 @@ import type { ObservedEpoch } from './epochs';
 import type { AllianceState, ObservedAlliances } from './alliances';
 import type { ObservedLandmark } from './landmarks';
 import type { CrisisState, ObservedCrisis } from './crises';
+import type { ObservedDemands, TributeDemand } from './demands';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -222,6 +223,7 @@ export type GameCommand =
   | { type: 'useBattleAbility'; factionId: string; battleId: string; sourceId: string; abilityId: string; targetId?: string }
   | { type: 'accelerateRoad'; factionId: string; settlementId: string }
   | { type: 'shelterFromCrisis'; factionId: string; crisisId: string }
+  | { type: 'demandTribute'; factionId: string; cityStateId: string; armyId: string }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -300,6 +302,8 @@ export interface GameState {
   alliances: AllianceState;
   /** Rules 53: the standing crisis of the age and the crises past. */
   crises: CrisisState;
+  /** Rules 61: the tribute demands realms have made of city-states, in order. */
+  demands: TributeDemand[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -372,6 +376,8 @@ export interface Observation {
   landmarks?: ObservedLandmark[];
   /** Rules 53: the crisis that stands, with the realm's own shelter quote; absent while none stands or under historical rules. */
   crisis?: ObservedCrisis;
+  /** Rules 61: the realm's tribute quotes at city-state gates and the demands it made or was made of; absent under historical rules. */
+  tribute?: ObservedDemands;
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

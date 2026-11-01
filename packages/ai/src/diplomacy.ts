@@ -157,7 +157,9 @@ export function answerPatronage(view: Observation): AiPlan | null {
     const affordable = (view.growth?.economy.net ?? 0) >= incoming.terms.tributeCoin || view.treasury >= incoming.terms.tributeCoin * 8;
     const outmatched = patronHearths > own || view.wars.length > 0 || isCityState(factionId);
     const bidding = biddingPatron(incoming.patronId);
-    const accept = !bound && !bidding && affordable && outmatched && incoming.terms.giftCoin >= incoming.terms.tributeCoin * 4;
+    // Rules 61: a city-state pressed for tribute by this realm within forty turns refuses its patronage.
+    const pressed = (view.tribute?.demands ?? []).some(item => item.cityStateId === factionId && item.factionId === incoming.patronId && view.turn - item.turn < 40);
+    const accept = !bound && !bidding && !pressed && affordable && outmatched && incoming.terms.giftCoin >= incoming.terms.tributeCoin * 4;
     return {
       commands: [{ type: 'respondClient', factionId, offerId: incoming.id, accept }],
       reasons: [`${accept ? 'Accept' : 'Refuse'} patronage ${incoming.id} from ${incoming.patronId}: ${patronHearths} hearths against ${own}, ${incoming.terms.tributeCoin} coin tribute against ${view.growth?.economy.net ?? 0} net income, ${incoming.terms.giftCoin} coin offered${bidding ? '; that realm holds a public unification bid' : ''}.`],

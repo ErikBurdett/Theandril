@@ -1,0 +1,15 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/tribute.spec.ts tests/gameplay/diplomacy.spec.ts --workers=2 --output=docs/development/2026-10-31-tribute-demands/browser-results
+
+
+Running 6 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/tribute.spec.ts:11:1 › press a city-state for tribute from Realm affairs and read the payment in the treasury and the journal (3.6s)
+  ✓  2 [gameplay] › tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (5.3s)
+  ✓  3 [gameplay] › tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.7s)
+  ✓  4 [gameplay] › tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.7s)
+  ✓  5 [gameplay] › tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (2.0s)
+  ✓  6 [gameplay] › tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (3.5s)
+
+  6 passed (15.1s)

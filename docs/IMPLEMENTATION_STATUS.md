@@ -1,5 +1,29 @@
 # Theandril implementation status
 
+## Pressing a city-state for tribute (rules/save 61) — 2026-10-31
+
+M5's first hostile interaction without war. A land company of a realm
+standing beside the hearth of a city-state at peace with it, neither its
+patron nor its client, may demand tribute: weighed against the garrison on
+the walls, a company that outweighs them by half again is paid what the city
+can of twenty coin and eight a head, and a weaker one is refused; either way
+the city's grievance grows and its trust falls, and the realm cannot press
+it again for twenty turns. The demands are a new canonical register from
+save 61 (the last hundred and twenty-eight); older envelopes load with none
+and a campaign with a demand is refused under earlier rules. The
+observation quotes every own land company at a city-state gate in sight;
+Realm affairs shows the quote and the demand on the city-state's row. AI
+realms under a hundred and fifty coin press the richest open quote once a
+turn; a pressed city-state refuses that realm's patronage for forty turns.
+Every pacing figure is identical to rules 60 (**395 / 302 / 203**;
+338 / 338, 268 / 287, 185 / 199; proxies 307 / 431 / 302 / 181); with six
+city-states seated the Epic course sees two demands paid and four refused.
+Verification: sim, AI and journey tests; unit 2,354 / 296 files, campaigns
+57, lint, typecheck, build, two covering journeys and the chronicles
+journey.
+[Evidence](development/2026-10-31-tribute-demands/README.md),
+[ADR0091](architecture/0091-tribute-demands.md).
+
 ## The goods a client city-state sends (rules/save 60) — 2026-10-31
 
 M5's first trade benefit. A table of twenty-four trades gives every

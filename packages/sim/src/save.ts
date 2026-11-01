@@ -32,6 +32,7 @@ import { assertNoWards, validateWards, wardStateSchema } from './rites';
 import { assertHearthEventsWithin, assertNoHearthEvents, emptyHearthEvents, hearthEventStateSchema, validateHearthEvents } from './hearth-events';
 import { allianceStateSchema, allianceStateV50Schema, assertNoAllianceCalls, assertNoAlliances, emptyAlliances, validateAlliances } from './alliances';
 import { assertNoCrises, assertNoRegionalCrisis, crisisStateSchema, emptyCrises, validateCrises } from './crises';
+import { assertNoDemands, demandStateSchema, emptyDemands, validateDemands } from './demands';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -43,7 +44,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 60;
+export const SAVE_VERSION = 61;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -275,8 +276,10 @@ const stateV49Schema = stateV45Schema.extend({ hearthEvents: hearthEventStateSch
 const stateV52Schema = stateV49Schema.extend({ alliances: allianceStateV50Schema }).strict();
 /** Rules 53 records the standing crisis and the crises past; rules 54 and 55 add no canonical field. */
 const stateV55Schema = stateV52Schema.extend({ crises: crisisStateSchema }).strict();
-/** Rules 56 records the calls of alliance that were answered. */
-const stateSchema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema }).strict();
+/** Rules 56 records the calls of alliance that were answered; rules 57 through 60 add no canonical field. */
+const stateV60Schema = stateV49Schema.extend({ alliances: allianceStateSchema, crises: crisisStateSchema }).strict();
+/** Rules 61 records the tribute demands made of city-states. */
+const stateSchema = stateV60Schema.extend({ demands: demandStateSchema }).strict();
 const searchesFor = (factions: readonly { id: string }[]) => factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1);
 const withLandPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
 const withWorkerPolicies = <T extends { factions: { id: string }[] }>(state: T) => ({ ...state, workerPolicies: [] as z.infer<typeof workerPolicyStateSchema>, landPolicies: [] as z.infer<typeof landPolicyStateSchema>, arcaneSearches: searchesFor((state as { factions: { id: string }[] }).factions), wards: [] as z.infer<typeof wardStateSchema> });
@@ -298,14 +301,16 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(60), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(61), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
-/** Rules 57 through 60 add no required field; v56 through v59 envelopes differ in their version and the pack they were sealed under. */
-const saveV59Schema = saveSchema.extend({ version: z.literal(59) }).strict();
-const saveV58Schema = saveSchema.extend({ version: z.literal(58) }).strict();
-const saveV57Schema = saveSchema.extend({ version: z.literal(57) }).strict();
-const saveV56Schema = saveSchema.extend({ version: z.literal(56) }).strict();
+/** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
+type Through60 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV60Schema> };
+const saveV60Schema = saveSchema.extend({ version: z.literal(60), state: stateV60Schema }).strict();
+const saveV59Schema = saveSchema.extend({ version: z.literal(59), state: stateV60Schema }).strict();
+const saveV58Schema = saveSchema.extend({ version: z.literal(58), state: stateV60Schema }).strict();
+const saveV57Schema = saveSchema.extend({ version: z.literal(57), state: stateV60Schema }).strict();
+const saveV56Schema = saveSchema.extend({ version: z.literal(56), state: stateV60Schema }).strict();
 type Through55 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV55Schema> };
 const saveV55Schema = saveSchema.extend({ version: z.literal(55), state: stateV55Schema }).strict();
 const saveV54Schema = saveSchema.extend({ version: z.literal(54), state: stateV55Schema }).strict();
@@ -526,6 +531,8 @@ function canonicalPayload(state: GameState) {
       alliances: allianceStateSchema.parse({ pacts: [...state.alliances.pacts].sort(compareId).map(pact => ({ ...pact, parties: [...pact.parties] })), offers: [...state.alliances.offers].sort(compareId), calls: [...state.alliances.calls].sort((a, b) => a.allyId < b.allyId ? -1 : a.allyId > b.allyId ? 1 : a.attackerId < b.attackerId ? -1 : a.attackerId > b.attackerId ? 1 : a.partnerId < b.partnerId ? -1 : a.partnerId > b.partnerId ? 1 : 0).map(call => ({ ...call })) }),
       // Rules 53 appends the crises last.
       crises: crisisStateSchema.parse({ active: state.crises.active ? { ...state.crises.active, sheltered: [...state.crises.active.sheltered].sort() } : null, past: state.crises.past.map(item => ({ ...item })) }),
+      // Rules 61 appends the tribute demands last, in order.
+      demands: demandStateSchema.parse(state.demands.map(item => ({ ...item }))),
   };
   return payload;
 }
@@ -596,6 +603,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 19) assertNoUnification(state);
   if (version < 50) assertNoAlliances(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
+  if (version < 61) assertNoDemands(state);
   if (version < 59) assertNoRegionalCrisis(state);
   if (version < 56) assertNoAllianceCalls(state);
   if (version < 53) assertNoCrises(state);
@@ -729,7 +737,7 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 60) return CONTENT_HASH;
+  if (version >= 60) return CONTENT_HASH; // rules 61 changed no content
   if (version >= 59) return PRE_TRADE_GOODS_CONTENT_HASH;
   if (version >= 57) return PRE_REGIONAL_CRISES_CONTENT_HASH; // rules 58 changed no content
   if (version >= 54) return PRE_LANDMARKS_II_CONTENT_HASH; // rules 55 and 56 changed no content
@@ -757,9 +765,11 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 56) return latest;
-  const { calls: _calls, ...allianceRegisters } = latest.alliances;
-  const beforeCalls = { ...latest, alliances: allianceRegisters };
+  if (version >= 61) return latest;
+  const { demands: _demands, ...beforeDemands } = latest;
+  if (version >= 56) return beforeDemands;
+  const { calls: _calls, ...allianceRegisters } = beforeDemands.alliances;
+  const beforeCalls = { ...beforeDemands, alliances: allianceRegisters };
   if (version >= 53) return beforeCalls;
   const { crises: _crises, ...beforeCrises } = beforeCalls;
   if (version >= 50) return beforeCrises;
@@ -1187,6 +1197,19 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  const prior = parseSaveThrough60(raw);
+  const state = { ...prior.state, demands: emptyDemands() };
+  return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+}
+function parseSaveThrough60(raw: unknown): Through60 {
+  const version = z.object({ version: z.number().int() }).parse(raw).version;
+  if (version === 60) {
+    const sealed = saveV60Schema.parse(raw);
+    assert(sealed.contentHash === CONTENT_HASH, 'v60 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v60 snapshot checksum does not match its contents');
+    // Rules 61 adds the tribute demands as a new register; the state continues unchanged under the same pack.
+    return { ...sealed, version: SAVE_VERSION };
+  }
   if (version === 59) {
     const sealed = saveV59Schema.parse(raw);
     assert(sealed.contentHash === PRE_TRADE_GOODS_CONTENT_HASH, 'v59 content hash is not a recognized compatible pack');
@@ -1638,6 +1661,7 @@ export function deserializeGame(text: string): GameState {
     hearthEvents: { pending: data.hearthEvents.pending.map(item => ({ ...item })), recent: data.hearthEvents.recent.map(item => ({ ...item })) },
     alliances: { pacts: data.alliances.pacts.map(pact => ({ ...pact, parties: [...pact.parties] as [string, string] })), offers: data.alliances.offers.map(offer => ({ ...offer })), calls: data.alliances.calls.map(call => ({ ...call })) },
     crises: { active: data.crises.active ? { ...data.crises.active, sheltered: [...data.crises.active.sheltered] } : null, past: data.crises.past.map(item => ({ ...item })) },
+    demands: data.demands.map(item => ({ ...item })),
     roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
@@ -1671,6 +1695,7 @@ export function deserializeGame(text: string): GameState {
   validateHearthEvents(state);
   validateAlliances(state);
   validateCrises(state);
+  validateDemands(state);
   validateSelectionGroups(state);
   validateTheaters(state);
   validatePatrols(state);

@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises and city-state goods
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods and tribute demands
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -151,6 +151,12 @@
   matched the build ([publication packet](../2026-10-31-publication-trade-goods/README.md)).
   Evidence packet [docs/development/2026-10-31-trade-goods/](../2026-10-31-trade-goods/README.md);
   roadmap library 128 delivered.
+- Pressing a city-state for tribute, rules/save 61 ([ADR 0091](../../architecture/0091-tribute-demands.md)):
+  a company at a city-state's gate demands tribute without war, paid when it
+  outweighs the walls' garrison and refused when not, remembered either way;
+  the AI presses when short of coin. Evidence packet
+  [docs/development/2026-10-31-tribute-demands/](../2026-10-31-tribute-demands/README.md);
+  roadmap library 129 delivered.
 
 ## Verified
 
@@ -200,7 +206,10 @@ journey; headline **395 / 302 / 203**, the other seeds 338 / 338, 268 / 287,
 185 / 199, proxies 307 / 431 / 302 / 181, every headline course in band.
 City-state goods: unit 2,351, campaigns 57, build, two journeys (one new) and
 the chronicles journey; every pacing figure identical to rules 59; thirty
-bonds with city-states on the Epic headline with six seated.
+bonds with city-states on the Epic headline with six seated. Tribute
+demands: unit 2,354, campaigns 57, build, two journeys (one new) and the
+chronicles journey; every pacing figure identical; two paid and four refused
+demands on the Epic headline with six city-states seated.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -243,6 +252,9 @@ first on 379.
   remains.
 - City-state goods: a flat amount per paid tribute; no market, no price, no
   trade between realms; the wider roster of independent powers remains.
+- Tribute demands: the walls are only the companies on the hearth, and a
+  refused demand costs nothing but trust; mercenary contracts and raiding
+  remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

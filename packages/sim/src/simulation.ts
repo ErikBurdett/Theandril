@@ -41,6 +41,7 @@ import { advanceWards, assertNoWards, observeRites, observeWards, performRite, r
 import { advanceHearthEvents, emptyHearthEvents, hearthEventCommandSchemas, observeHearthEvents, resolveHearthEvent } from './hearth-events';
 import { announceEpochs, epochIndex, observeEpoch } from './epochs';
 import { advanceCrises, beginCrises, crisisCommandSchemas, emptyCrises, observeCrisis, shelterFromCrisis } from './crises';
+import { demandCommandSchemas, demandTribute, emptyDemands, observeDemands } from './demands';
 import { advanceAlliances, allianceCommandSchemas, alliedPeace, emptyAlliances, observeAlliances, proposeAlliance, renounceAlliance, respondAlliance } from './alliances';
 import { observeLandmarks } from './landmarks';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
@@ -143,7 +144,8 @@ const version40CommandSchema = z.discriminatedUnion('type', [...version39Command
 const version46CommandSchema = z.discriminatedUnion('type', [...version40CommandSchema.options, ...hearthEventCommandSchemas]);
 /** Rules 50 adds alliances; rules 46 through 49 never accept one. */
 const version50CommandSchema = z.discriminatedUnion('type', [...version46CommandSchema.options, ...allianceCommandSchemas]);
-export const commandSchema = z.discriminatedUnion('type', [...version50CommandSchema.options, ...crisisCommandSchemas]);
+const version53CommandSchema = z.discriminatedUnion('type', [...version50CommandSchema.options, ...crisisCommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version53CommandSchema.options, ...demandCommandSchemas]);
 export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : version < 32 ? version31CommandSchema : version < 33 ? version32CommandSchema : version < 34 ? version33CommandSchema : version < 35 ? version34CommandSchema : version < 36 ? version35CommandSchema : version < 37 ? version36CommandSchema : version < 38 ? version37CommandSchema : version < 39 ? version38CommandSchema : version < 40 ? version39CommandSchema : version < 46 ? version40CommandSchema : version < 50 ? version46CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
@@ -192,7 +194,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60)]).default(40),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61)]).default(40),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -243,7 +245,7 @@ export function createGame(options: NewGameOptions): GameState {
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
     development: createDevelopmentState(),
-    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), wards: [], hearthEvents: emptyHearthEvents(), alliances: emptyAlliances(), crises: emptyCrises(), charters: [], postings: [], musters: [], depots: [],
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), arcaneSearches: emptyArcaneSearches(selected.map(faction => faction.id)), wards: [], hearthEvents: emptyHearthEvents(), alliances: emptyAlliances(), crises: emptyCrises(), demands: emptyDemands(), charters: [], postings: [], musters: [], depots: [],
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
@@ -665,6 +667,10 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = shelterFromCrisis(state, faction.id, command.crisisId);
     if (!result.ok) return result;
     emitted.push(...result.events);
+  } else if (command.type === 'demandTribute') {
+    const result = demandTribute(state, faction.id, command.cityStateId, command.armyId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'proposeAlliance' || command.type === 'respondAlliance' || command.type === 'renounceAlliance') {
     const result = command.type === 'proposeAlliance' ? proposeAlliance(state, faction.id, command.targetFactionId, command.termTurns)
       : command.type === 'respondAlliance' ? respondAlliance(state, faction.id, command.offerId, command.accept) : renounceAlliance(state, faction.id, command.allyId);
@@ -773,7 +779,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
     battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
     arcaneSites: observeArcaneSites(state, factionId), ...(rulesVersion(state) >= 39 ? { arcaneSearches: observeArcaneSearches(state, factionId) } : {}),
-    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), ...(rulesVersion(state) >= 49 ? { epoch: observeEpoch(state) } : {}), ...(rulesVersion(state) >= 50 ? { alliances: observeAlliances(state, factionId) } : {}), ...(rulesVersion(state) >= 51 ? { landmarks: observeLandmarks(state, factionId) } : {}), ...(rulesVersion(state) >= 53 ? { crisis: observeCrisis(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
+    ...(rulesVersion(state) >= 40 ? { wards: observeWards(state, factionId), rites: observeRites(state, factionId) } : {}), ...(rulesVersion(state) >= 46 ? { hearthEvents: observeHearthEvents(state, factionId) } : {}), ...(rulesVersion(state) >= 49 ? { epoch: observeEpoch(state) } : {}), ...(rulesVersion(state) >= 50 ? { alliances: observeAlliances(state, factionId) } : {}), ...(rulesVersion(state) >= 51 ? { landmarks: observeLandmarks(state, factionId) } : {}), ...(rulesVersion(state) >= 53 ? { crisis: observeCrisis(state, factionId) } : {}), ...(rulesVersion(state) >= 61 ? { tribute: observeDemands(state, factionId) } : {}), arcaneSearchCoinCost: SITE_SEARCH_COIN,
     roads: observeRoads(state, factionId),
     layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),
