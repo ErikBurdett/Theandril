@@ -14,7 +14,9 @@ unchanged. Headline pacing **388 / 296 / 198**, the other seeds
 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207: every course identical to rules 71 since the AI does not share maps. Verification: sim,
 AI and journey tests; unit 2,377 / 308 files, campaigns 57, lint, typecheck, build,
 the map-sharing and alliances journeys and the chronicles journey
-(pin 56 unmoved).
+(pin 56 unmoved). Commit `90e48ed` is deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-11-01-publication-map-sharing/README.md)).
 [Evidence](development/2026-11-01-map-sharing/README.md),
 [ADR0103](architecture/0103-map-sharing.md).
 

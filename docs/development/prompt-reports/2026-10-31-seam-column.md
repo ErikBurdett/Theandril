@@ -253,8 +253,10 @@
   roadmap library 140 delivered.
 - Allies share their maps, rules/save 72 ([ADR 0103](../../architecture/0103-map-sharing.md)):
   each ally learns every hex the other has explored, once every twenty
-  turns for the pair; the AI does not share on its own yet. Evidence packet
-  [docs/development/2026-11-01-map-sharing/](../2026-11-01-map-sharing/README.md);
+  turns for the pair; the AI does not share on its own yet. Commit `90e48ed`
+  is deployed: both workflows succeeded and the live readback matched the
+  build ([publication packet](../2026-11-01-publication-map-sharing/README.md)).
+  Evidence packet [docs/development/2026-11-01-map-sharing/](../2026-11-01-map-sharing/README.md);
   roadmap library 141 delivered.
 
 ## Verified
