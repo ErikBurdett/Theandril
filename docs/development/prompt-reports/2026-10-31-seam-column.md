@@ -147,6 +147,8 @@
 - The goods a client city-state sends, rules/save 60 ([ADR 0090](../../architecture/0090-city-state-trade.md)):
   every city-state trades in one good, delivered to its patron with each
   paid tribute and named in Realm affairs; the AI courts the good it lacks.
+  Commit `86fb735` is deployed: both workflows succeeded and the live readback
+  matched the build ([publication packet](../2026-10-31-publication-trade-goods/README.md)).
   Evidence packet [docs/development/2026-10-31-trade-goods/](../2026-10-31-trade-goods/README.md);
   roadmap library 128 delivered.
 

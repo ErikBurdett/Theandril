@@ -17,7 +17,9 @@ headline seed thirty such bonds are sworn and the course ends on 391. A good
 is a flat amount, not a share of the city-state's works; no market, no
 price, no trade between realms. Verification: content, sim and journey
 tests; unit 2,351 / 294 files, campaigns 57, lint, typecheck, build, two
-covering journeys and the chronicles journey.
+covering journeys and the chronicles journey. Commit `86fb735` is deployed:
+both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-trade-goods/README.md)).
 [Evidence](development/2026-10-31-trade-goods/README.md),
 [ADR0090](architecture/0090-city-state-trade.md).
 
