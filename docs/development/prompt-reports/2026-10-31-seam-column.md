@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events and migration
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration and allied peace
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -110,6 +110,12 @@
   Evidence packet
   [docs/development/2026-10-31-crisis-migration/](../2026-10-31-crisis-migration/README.md);
   roadmap library 123 delivered.
+- Allied peace, rules/save 56 ([ADR 0086](../../architecture/0086-allied-peace.md)):
+  the call an ally answers is kept while the war lasts, and its partner's
+  peace with the attacker ends the ally's war under the same truce; an
+  ally's own peace releases its call. Evidence packet
+  [docs/development/2026-10-31-allied-peace/](../2026-10-31-allied-peace/README.md);
+  roadmap library 124 delivered.
 
 ## Verified
 
@@ -144,7 +150,11 @@ headline **408 / 275 / 215**, the other seeds 344 / 313, 308 / 246,
 211 / 176, proxies 353 / 448 / 323 / 204. Migration: unit 2,347, campaigns
 57, build, two journeys (one new) and the chronicles journey; every pacing
 figure identical to rules 54, eight and seven households crossing on the
-Epic and Long headline.
+Epic and Long headline. Allied peace: unit 2,348, campaigns 57, build, three
+journeys (one new) and the chronicles journey; headline **418 / 295 / 211**,
+the other seeds 347 / 305, 296 / 246, 209 / 185, proxies 353 / 468 / 323 / 204,
+thirteen of twenty-three answered calls on the Epic headline ending with the
+partner's peace.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -177,6 +187,8 @@ first on 379.
   seeds below band and the Long courses under target.
 - Migration: only at a crisis's end, only to another realm's sheltered
   hearth within twelve hexes; collapse and regional crises remain.
+- Allied peace: an ally leaves with its partner's peace whatever its own
+  reasons; guarantees, passage rights and joint war aims remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

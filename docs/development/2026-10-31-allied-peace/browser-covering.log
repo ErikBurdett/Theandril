@@ -1,0 +1,16 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/allied-peace.spec.ts tests/gameplay/alliances.spec.ts tests/gameplay/diplomacy.spec.ts --workers=2 --output=docs/development/2026-10-31-allied-peace/browser-results
+
+
+Running 7 tests using 2 workers
+
+  ✓  2 [gameplay] › tests/gameplay/allied-peace.spec.ts:17:1 › accept a peace from Realm affairs and read the ally leaving the war with it (5.6s)
+  ✓  1 [gameplay] › tests/gameplay/alliances.spec.ts:12:1 › accept an alliance from Realm affairs and read the ally and the pact in the journal (5.8s)
+  ✓  3 [gameplay] › tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (4.6s)
+  ✓  4 [gameplay] › tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.9s)
+  ✓  5 [gameplay] › tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.8s)
+  ✓  6 [gameplay] › tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (2.1s)
+  ✓  7 [gameplay] › tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (3.3s)
+
+  7 passed (20.4s)

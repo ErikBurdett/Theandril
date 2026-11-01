@@ -1,5 +1,26 @@
 # Theandril implementation status
 
+## Allied peace (rules/save 56) — 2026-10-31
+
+Gate G's shared peace. The call an ally answers is kept in the alliance
+register while the war it entered lasts; when the partner it was called for
+makes peace with the attacker — accepting an offer, or under the peace a
+subject rule imposes — every ally still at war on that call leaves the war
+at once under a truce of the same term with no coin, its offers on that war
+lapsing, the ally, the partner and the attacker all told. An ally that made
+its own peace first is released from its call. The calls are seen by their
+parties; Realm affairs names who entered whose war and that a peace ends it.
+Save 56 appends the calls; older envelopes load with none and a campaign
+holding a call is refused under earlier rules. On the Epic headline
+twenty-three calls are answered and thirteen end with the partner's peace,
+on Long twelve and eight. Headline pacing **418 / 295 / 211**, the other
+seeds 347 / 305, 296 / 246, 209 / 185, proxies 353 / 468 / 323 / 204; the
+chronicle pin at 56 holds. Verification: sim and journey tests; unit
+2,348 / 294 files, campaigns 57, lint, typecheck, build, three covering
+journeys and the chronicles journey.
+[Evidence](development/2026-10-31-allied-peace/README.md),
+[ADR0086](architecture/0086-allied-peace.md).
+
 ## The migration a crisis leaves behind (rules/save 55) — 2026-10-31
 
 M6's migration. When a crisis passes, every hearth of three or more people

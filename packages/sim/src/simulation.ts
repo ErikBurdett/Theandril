@@ -41,7 +41,7 @@ import { advanceWards, assertNoWards, observeRites, observeWards, performRite, r
 import { advanceHearthEvents, emptyHearthEvents, hearthEventCommandSchemas, observeHearthEvents, resolveHearthEvent } from './hearth-events';
 import { announceEpochs, epochIndex, observeEpoch } from './epochs';
 import { advanceCrises, beginCrises, crisisCommandSchemas, emptyCrises, observeCrisis, shelterFromCrisis } from './crises';
-import { advanceAlliances, allianceCommandSchemas, emptyAlliances, observeAlliances, proposeAlliance, renounceAlliance, respondAlliance } from './alliances';
+import { advanceAlliances, allianceCommandSchemas, alliedPeace, emptyAlliances, observeAlliances, proposeAlliance, renounceAlliance, respondAlliance } from './alliances';
 import { observeLandmarks } from './landmarks';
 import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
 import type { BattleFactObserver, BattlePresentationEvent, BattlePresentationObserver } from './combat/presentation';
@@ -192,7 +192,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55)]).default(40),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56)]).default(40),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -638,9 +638,12 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     if (!result.ok) return result;
     emitted.push(...result.events);
   } else if (command.type === 'proposePeace' || command.type === 'respondPeace') {
+    const offer = command.type === 'respondPeace' ? state.diplomacy.offers.find(item => item.id === command.offerId) : undefined;
     const result = command.type === 'proposePeace' ? proposePeace(state, faction.id, command.targetFactionId, command.terms) : respondPeace(state, faction.id, command.offerId, command.accept);
     if (!result.ok) return result;
     emitted.push(...result.events);
+    // Rules 56: the peace settles the calls of alliance around it.
+    if (command.type === 'respondPeace' && command.accept && offer) emitted.push(...alliedPeace(state, offer.proposerId, offer.recipientId, offer.terms.truceTurns));
   } else if (command.type === 'researchArcane') {
     const result = researchArcane(state, faction.id, command.discoveryId);
     if (!result.ok) return result;

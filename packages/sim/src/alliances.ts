@@ -20,12 +20,16 @@ export const ALLIANCE_OFFER_TURNS = 3;
 export const allianceTermSchema = z.number().int().min(10).max(60);
 export const allianceOfferSchema = z.object({ id, proposerId: id, recipientId: id, createdTurn: turn, expiresTurn: turn, termTurns: allianceTermSchema }).strict();
 export const allianceSchema = z.object({ id, parties: z.tuple([id, id]), proposerId: id, startedTurn: turn, expiresTurn: turn, termTurns: allianceTermSchema }).strict();
-export const allianceStateSchema = z.object({ pacts: z.array(allianceSchema).max(1128), offers: z.array(allianceOfferSchema).max(1128) }).strict();
+/** Rules 56: the call an ally answered, kept while the war it entered lasts, so that its partner's peace ends that war too. */
+export const allianceCallSchema = z.object({ allyId: id, attackerId: id, partnerId: id, turn }).strict();
+export const allianceStateV50Schema = z.object({ pacts: z.array(allianceSchema).max(1128), offers: z.array(allianceOfferSchema).max(1128) }).strict();
+export const allianceStateSchema = allianceStateV50Schema.extend({ calls: z.array(allianceCallSchema).max(1128) }).strict();
+export type AllianceCall = z.infer<typeof allianceCallSchema>;
 export type AllianceOffer = z.infer<typeof allianceOfferSchema>;
 export type Alliance = z.infer<typeof allianceSchema>;
 export type AllianceState = z.infer<typeof allianceStateSchema>;
 export interface ObservedAllianceOffer extends AllianceOffer { acceptanceBlocker: string | null }
-export interface ObservedAlliances { pacts: Alliance[]; offers: ObservedAllianceOffer[] }
+export interface ObservedAlliances { pacts: Alliance[]; offers: ObservedAllianceOffer[]; /** Rules 56: the calls the realm answered, made or was answered against. */ calls?: AllianceCall[] }
 export const allianceCommandSchemas = [
   z.object({ type: z.literal('proposeAlliance'), factionId: id, targetFactionId: id, termTurns: allianceTermSchema }).strict(),
   z.object({ type: z.literal('respondAlliance'), factionId: id, offerId: id, accept: z.boolean() }).strict(),
@@ -37,7 +41,8 @@ const same = (pair: [string, string], a: string, b: string): boolean => pair.inc
 const pairEvents = (state: GameState, a: string, b: string, type: string, message: string): DomainEvent[] => [a, b].map(factionId => ({ turn: state.turn, factionId, type, message }));
 const nameOf = (state: GameState, factionId: string): string => state.factions.find(faction => faction.id === factionId)?.name ?? factionId;
 
-export const emptyAlliances = (): AllianceState => ({ pacts: [], offers: [] });
+export const emptyAlliances = (): AllianceState => ({ pacts: [], offers: [], calls: [] });
+const byCall = (a: AllianceCall, b: AllianceCall): number => a.allyId < b.allyId ? -1 : a.allyId > b.allyId ? 1 : a.attackerId < b.attackerId ? -1 : a.attackerId > b.attackerId ? 1 : a.partnerId < b.partnerId ? -1 : a.partnerId > b.partnerId ? 1 : 0;
 export const allianceBetween = (state: GameState, a: string, b: string): Alliance | undefined => state.alliances.pacts.find(pact => same(pact.parties, a, b));
 export const alliesOf = (state: GameState, factionId: string): string[] => state.alliances.pacts.filter(pact => pact.parties.includes(factionId)).map(pact => pact.parties[0] === factionId ? pact.parties[1] : pact.parties[0]).sort();
 const bound = (state: GameState, a: string, b: string): boolean => state.diplomacy.clients.some(bond => (bond.patronId === a && bond.clientId === b) || (bond.patronId === b && bond.clientId === a));
@@ -113,7 +118,34 @@ export function callAllies(state: GameState, attackerId: string, targetId: strin
     }
     state.wars.push(warPair(allyId, attackerId));
     state.wars.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+    // Rules 56: the call is kept while the war lasts, so the partner's peace ends it.
+    if (rulesVersion(state) >= 56) state.alliances.calls = [...state.alliances.calls, { allyId, attackerId, partnerId: targetId, turn: state.turn }].sort(byCall);
     events.push(...[allyId, targetId, attackerId].map(factionId => ({ turn: state.turn, factionId, type: 'alliance_answered', message: `${nameOf(state, allyId)} enters the war against ${nameOf(state, attackerId)} beside its ally ${nameOf(state, targetId)}.` })));
+  }
+  return events;
+}
+/** Rules 56: a peace between two realms settles the calls around it. An ally that
+ * made its own peace with the attacker is released from its call; and every ally
+ * still at war with the attacker beside the realm that just made peace leaves
+ * that war with the same truce and no coin, its offers on the war lapsing, all
+ * three parties reading it. Nothing happens under earlier rules. */
+export function alliedPeace(state: GameState, a: string, b: string, truceTurns: number): DomainEvent[] {
+  if (rulesVersion(state) < 56) return [];
+  const events: DomainEvent[] = [];
+  state.alliances.calls = state.alliances.calls.filter(call => !same([call.allyId, call.attackerId], a, b));
+  const answered = state.alliances.calls.filter(call => same([call.partnerId, call.attackerId], a, b));
+  state.alliances.calls = state.alliances.calls.filter(call => !answered.includes(call));
+  for (const call of answered) {
+    if (!atWar(state, call.allyId, call.attackerId)) continue;
+    state.wars = state.wars.filter(pair => !same(pair, call.allyId, call.attackerId));
+    const dropped = state.diplomacy.offers.filter(offer => same(warPair(offer.proposerId, offer.recipientId), call.allyId, call.attackerId));
+    state.diplomacy.offers = state.diplomacy.offers.filter(offer => !dropped.includes(offer));
+    state.diplomacy.treaties = state.diplomacy.treaties.filter(treaty => !same(treaty.parties, call.allyId, call.attackerId));
+    state.diplomacy.treaties.push({ id: `treaty.${state.nextId++}`, parties: warPair(call.allyId, call.attackerId), proposerId: call.attackerId, startedTurn: state.turn, expiresTurn: state.turn + truceTurns, terms: { offerCoin: 0, requestCoin: 0, truceTurns } });
+    state.diplomacy.treaties.sort(byId);
+    relation(state, call.allyId, call.attackerId).warStartedTurn = null;
+    events.push(...dropped.flatMap(offer => pairEvents(state, offer.proposerId, offer.recipientId, 'peace_offer_expired', `Peace offer ${offer.id} lapsed: the war it addressed has ended.`)));
+    for (const factionId of [call.allyId, call.partnerId, call.attackerId]) events.push({ turn: state.turn, factionId, type: 'allied_peace', message: `${nameOf(state, call.allyId)} leaves the war against ${nameOf(state, call.attackerId)} with the peace its ally ${nameOf(state, call.partnerId)} made; the truce binds them until turn ${state.turn + truceTurns}.` });
   }
   return events;
 }
@@ -139,9 +171,14 @@ export function observeAlliances(state: GameState, factionId: string): ObservedA
   return {
     pacts: state.alliances.pacts.map(pact => ({ ...pact, parties: [...pact.parties] as [string, string] })),
     offers: state.alliances.offers.filter(offer => offer.proposerId === factionId || offer.recipientId === factionId).map(offer => ({ ...offer, acceptanceBlocker: allianceAcceptanceBlocker(state, offer) })),
+    ...(rulesVersion(state) >= 56 ? { calls: state.alliances.calls.filter(call => call.allyId === factionId || call.attackerId === factionId || call.partnerId === factionId).map(call => ({ ...call })) } : {}),
   };
 }
 export const hasAlliances = (state: GameState): boolean => (state.alliances?.pacts.length ?? 0) > 0 || (state.alliances?.offers.length ?? 0) > 0;
+export const hasAllianceCalls = (state: GameState): boolean => (state.alliances?.calls?.length ?? 0) > 0;
+export function assertNoAllianceCalls(state: GameState): void {
+  if (hasAllianceCalls(state)) throw new Error('This campaign has answered calls of alliance unavailable in historical rules.');
+}
 export function assertNoAlliances(state: GameState): void {
   if (hasAlliances(state)) throw new Error('This campaign has alliances unavailable in historical rules.');
 }
@@ -170,5 +207,11 @@ export function validateAlliances(state: GameState): void {
     const key = warPair(offer.proposerId, offer.recipientId).join('|');
     assert(!pending.has(key), 'has duplicate offers for one pair'); pending.add(key);
     assert(offer.createdTurn <= state.turn && offer.expiresTurn === offer.createdTurn + ALLIANCE_OFFER_TURNS && offer.expiresTurn > state.turn, 'has an invalid offer lifetime');
+  }
+  for (const [index, call] of (state.alliances.calls ?? []).entries()) {
+    assert(factions.has(call.allyId) && factions.has(call.attackerId) && factions.has(call.partnerId), 'call names an unknown realm');
+    assert(call.allyId !== call.attackerId && call.allyId !== call.partnerId && call.partnerId !== call.attackerId, 'call names the same realm twice');
+    assert(call.turn <= state.turn, 'call lies ahead');
+    assert(!index || byCall(state.alliances.calls[index - 1]!, call) < 0, 'calls are out of order');
   }
 }

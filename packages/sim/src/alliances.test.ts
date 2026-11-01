@@ -131,8 +131,65 @@ describe('alliances (rules 50)', () => {
     expect(() => serializeGameForVersion(pact, 49)).toThrow('alliances unavailable');
     const fresh = scene();
     const older = deserializeGame(serializeGameForVersion(fresh, 49));
-    expect(older.alliances).toEqual({ pacts: [], offers: [] });
+    expect(older.alliances).toEqual({ pacts: [], offers: [], calls: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
     withRules(fresh, 49, () => { expect(applyCommand(fresh, { type: 'proposeAlliance', factionId: x, targetFactionId: y, termTurns: 30 })).toMatchObject({ ok: false }); expect(getObservation(fresh, x).alliances).toBeUndefined(); });
+  });
+
+  it('rules 56: the partner’s peace ends the wars its allies were called into, an ally’s own peace releases its call, and the calls stay out of older rules and envelopes', () => {
+    const allied = (): { state: GameState; a: string; b: string; c: string } => {
+      const state = scene(), [a, b, c] = state.factions.filter(faction => !faction.id.startsWith('citystate.')).map(faction => faction.id) as [string, string, string];
+      issue(state, { type: 'proposeAlliance', factionId: a, targetFactionId: b, termTurns: 30 });
+      issue(state, { type: 'respondAlliance', factionId: b, offerId: state.alliances.offers[0]!.id, accept: true });
+      contact(state, c, b);
+      issue(state, { type: 'declareWar', factionId: c, targetFactionId: b });
+      return { state, a, b, c };
+    };
+    const { state, a, b, c } = allied();
+    const call = { allyId: a, attackerId: c, partnerId: b, turn: state.turn };
+    expect(state.alliances.calls).toEqual([call]);
+    for (const id of [a, b, c]) expect(getObservation(state, id).alliances!.calls).toEqual([call]);
+    expect(getObservation(state, state.factions.find(faction => faction.id.startsWith('citystate.'))!.id).alliances!.calls).toEqual([]);
+    expect(() => validateAlliances(state)).not.toThrow();
+    // c offers b peace and b accepts: a leaves the war with the same truce and no coin, and all three read it.
+    issue(state, { type: 'proposePeace', factionId: c, targetFactionId: b, terms: { offerCoin: 0, requestCoin: 0, truceTurns: 12 } });
+    const offer = state.diplomacy.offers.find(item => item.proposerId === c && item.recipientId === b)!;
+    const peace = issue(state, { type: 'respondPeace', factionId: b, offerId: offer.id, accept: true });
+    expect(state.wars.some(pair => pair.includes(a) && pair.includes(c))).toBe(false);
+    expect(state.diplomacy.treaties.some(treaty => treaty.parties.includes(a) && treaty.parties.includes(c) && treaty.expiresTurn === state.turn + 12 && treaty.terms.offerCoin === 0 && treaty.terms.requestCoin === 0)).toBe(true);
+    expect(peace.events.filter(event => event.type === 'allied_peace').map(event => event.factionId).sort()).toEqual([a, b, c].sort());
+    expect(peace.events.find(event => event.type === 'allied_peace')!.message).toContain('leaves the war against');
+    expect(state.alliances.calls).toEqual([]);
+    expect(state.diplomacy.relations.find(memory => memory.parties.includes(a) && memory.parties.includes(c))?.warStartedTurn).toBeNull();
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+    // The ally's own peace releases its call; its partner's later peace then changes nothing for it.
+    const own = allied();
+    issue(own.state, { type: 'proposePeace', factionId: own.c, targetFactionId: own.a, terms: { offerCoin: 0, requestCoin: 0, truceTurns: 10 } });
+    const toAlly = own.state.diplomacy.offers.find(item => item.proposerId === own.c && item.recipientId === own.a)!;
+    const released = issue(own.state, { type: 'respondPeace', factionId: own.a, offerId: toAlly.id, accept: true });
+    expect(released.events.filter(event => event.type === 'allied_peace')).toEqual([]);
+    expect(own.state.alliances.calls).toEqual([]);
+    issue(own.state, { type: 'proposePeace', factionId: own.c, targetFactionId: own.b, terms: { offerCoin: 0, requestCoin: 0, truceTurns: 10 } });
+    const toPartner = own.state.diplomacy.offers.find(item => item.proposerId === own.c && item.recipientId === own.b)!;
+    expect(issue(own.state, { type: 'respondPeace', factionId: own.b, offerId: toPartner.id, accept: true }).events.filter(event => event.type === 'allied_peace')).toEqual([]);
+    // Older rules record no call; a campaign with one cannot be sealed under them; a v55 envelope loads with none.
+    const older = scene(), [x, y, z] = older.factions.filter(faction => !faction.id.startsWith('citystate.')).map(faction => faction.id) as [string, string, string];
+    withRules(older, 55, () => {
+      issue(older, { type: 'proposeAlliance', factionId: x, targetFactionId: y, termTurns: 30 });
+      issue(older, { type: 'respondAlliance', factionId: y, offerId: older.alliances.offers[0]!.id, accept: true });
+      contact(older, z, y);
+      issue(older, { type: 'declareWar', factionId: z, targetFactionId: y });
+      expect(older.wars).toContainEqual(warPair(x, z));
+      expect(older.alliances.calls).toEqual([]);
+      expect(getObservation(older, x).alliances!.calls).toBeUndefined();
+    });
+    expect(() => serializeGameForVersion(allied().state, 55)).toThrow('answered calls of alliance unavailable');
+    const fresh = scene();
+    const sealed = serializeGameForVersion(fresh, 55);
+    expect(JSON.parse(sealed).state.alliances.calls).toBeUndefined();
+    const loaded = deserializeGame(sealed);
+    expect(loaded.alliances.calls).toEqual([]);
+    expect(stateHash(loaded)).toBe(stateHash(fresh));
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 56 });
   });
 });

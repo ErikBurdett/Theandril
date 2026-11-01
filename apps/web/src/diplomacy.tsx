@@ -130,6 +130,9 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
     {courting && !patron && <PatronageBuilder key={courting} view={view} targetId={courting} busy={busy} issue={issue} close={() => setCourting(undefined)}/>}
     {(incomingAlliances.length > 0 || ownAllies.length > 0) && <section className="peace-offers" data-testid="alliances" aria-label="Alliances">
       <h3>Allies</h3>
+      {(view.alliances?.calls ?? []).filter(call => call.allyId === view.factionId || call.partnerId === view.factionId).map(call => <p key={`${call.allyId}:${call.attackerId}`} className="field-help" data-testid="alliance-call">{call.allyId === view.factionId
+        ? `You entered the war against ${nameOf(view, call.attackerId)} on turn ${call.turn} beside your ally ${nameOf(view, call.partnerId)}; a peace they make ends your war too.`
+        : `${nameOf(view, call.allyId)} entered your war against ${nameOf(view, call.attackerId)} on turn ${call.turn}; a peace you make ends theirs too.`}</p>)}
       {ownAllies.length > 0 && <p>{ownAllies.length === 1 ? 'One realm stands' : `${ownAllies.length} realms stand`} with you: {ownAllies.map(pact => `${nameOf(view, pact.parties.find(id => id !== view.factionId)!)} until turn ${pact.expiresTurn}`).join(', ')}. A war declared on either brings the other in.</p>}
       {incomingAlliances.map(offer => <article className="peace-offer" key={offer.id} data-testid={`alliance-offer-${offer.id}`}>
         <strong>From {nameOf(view, offer.proposerId)}</strong>

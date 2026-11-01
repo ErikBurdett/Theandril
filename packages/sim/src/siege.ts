@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { alliedPeace } from './alliances';
 import { defensePreview } from './battle-frontage';
 import { armyCanAttack, armyStrength } from './army-composition';
 import { rulesVersion } from './rules';
@@ -237,7 +238,7 @@ export function resolveSettlementCapture(state: GameState, factionId: string, se
   const recipients = new Set([factionId, victim.id, ...(option.recipientFactionId ? [option.recipientFactionId] : [])]);
   const captured = [...recipients].map(owner => ({ turn: state.turn, factionId: owner, type: 'settlement_captured', cell: town.cell, message: `${oldName}: ${option.label.toLowerCase()}. ${option.description}` }));
   // Rules 39: the capital goes back under an obligation. Peace must hold before the bond is sworn.
-  const subject = outcome === 'subject' ? (() => { const terms = subjectTerms(state, victim.id); return [...imposePeace(state, factionId, victim.id, terms.termTurns), ...imposeClient(state, factionId, victim.id, terms)]; })() : [];
+  const subject = outcome === 'subject' ? (() => { const terms = subjectTerms(state, victim.id); return [...imposePeace(state, factionId, victim.id, terms.termTurns), ...alliedPeace(state, factionId, victim.id, terms.termTurns), ...imposeClient(state, factionId, victim.id, terms)]; })() : [];
   return { ok: true, events: [...characterEvents, ...captured, ...subject] };
 }
 
