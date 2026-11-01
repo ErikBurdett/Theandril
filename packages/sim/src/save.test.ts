@@ -47,6 +47,7 @@ interface SaveFixture {
     hires: unknown[];
     taxes: unknown[];
     unrest: unknown[];
+    mapShares: unknown[];
     charters: { settlementId: string; factionId: string; focus: string; ceiling: number }[];
     postings: { armyId: string; factionId: string; cell: number; mode: string }[];
     musters: { settlementId: string; factionId: string; cell: number }[];
@@ -104,6 +105,8 @@ function previousV3State(save: SaveFixture) {
   if (save.state.taxes.length) throw new Error('Synthetic historical projection cannot discard tax rates.');
   // Unrest exists only from rules 71; a v3 projection holds none.
   if (save.state.unrest.length) throw new Error('Synthetic historical projection cannot discard unrest.');
+  // Shared maps exist only from rules 72; a v3 projection holds none.
+  if (save.state.mapShares.length) throw new Error('Synthetic historical projection cannot discard shared maps.');
   // Charters exist only from rules 25; a v3 projection holds none.
   if (save.state.charters.length) throw new Error('Synthetic historical projection cannot discard standing charters.');
   // Postings and muster points exist only from rules 26; a v3 projection holds none.
@@ -124,7 +127,7 @@ function previousV3State(save: SaveFixture) {
   };
   // Patronage exists only from rules 22; a v3 projection carries wars, offers and treaties alone.
   const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = state.diplomacy;
-  const { landPolicies: _landPolicies, workerPolicies: _workerPolicies, patrols: _patrols, arcaneSurveys: _surveys, arcaneSearches: _searches, wards: _wards, hearthEvents: _events, alliances: _alliances, crises: _crises, demands: _demands, relics: _relics, offices: _offices, hires: _hires, taxes: _taxes, unrest: _unrest, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
+  const { landPolicies: _landPolicies, workerPolicies: _workerPolicies, patrols: _patrols, arcaneSurveys: _surveys, arcaneSearches: _searches, wards: _wards, hearthEvents: _events, alliances: _alliances, crises: _crises, demands: _demands, relics: _relics, offices: _offices, hires: _hires, taxes: _taxes, unrest: _unrest, mapShares: _mapShares, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
   return { ...beforeSeams, diplomacy, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
 }
 

@@ -30,6 +30,7 @@ import type { ObservedOffice, OfficeRecord } from './offices';
 import type { HireRecord, ObservedHires } from './hires';
 import type { ObservedTaxes, TaxRecord } from './taxes';
 import type { ObservedUnrest, UnrestRecord } from './unrest';
+import type { MapShare, ObservedMapShare } from './map-sharing';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -234,6 +235,7 @@ export type GameCommand =
   | { type: 'resignOffice'; factionId: string; officeId: string }
   | { type: 'hireCompany'; factionId: string; cityStateId: string; armyId: string }
   | { type: 'setTaxRate'; factionId: string; rate: 'lean' | 'steady' | 'heavy' }
+  | { type: 'shareMaps'; factionId: string; allyId: string }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -324,6 +326,8 @@ export interface GameState {
   taxes: TaxRecord[];
   /** Rules 71: the hearths with unrest and its level, by hearth. */
   unrest: UnrestRecord[];
+  /** Rules 72: the pairs of allies that shared maps and when, by pair. */
+  mapShares: MapShare[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -408,6 +412,8 @@ export interface Observation {
   tax?: ObservedTaxes;
   /** Rules 71: the unrest in each of the realm's hearths with its pressures; absent under historical rules. */
   unrest?: ObservedUnrest[];
+  /** Rules 72: for each ally, whether maps can be shared now and when they last were; absent under historical rules. */
+  mapShares?: ObservedMapShare[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

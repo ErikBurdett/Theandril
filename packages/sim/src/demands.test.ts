@@ -90,6 +90,6 @@ describe('rules 61: tribute demands of city-states', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.demands).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 71 });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72 });
   });
 });

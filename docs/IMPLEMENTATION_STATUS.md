@@ -7,13 +7,14 @@ every hex the other has explored — remembered ground, not present sight —
 once every twenty turns for the pair, one record per pair. The observation
 lists each ally with whether maps can be shared, when they last were and
 the blocker; Realm affairs shows a Share maps button under the alliance;
-the journal records what each ally learned; AI allies share with the first
-ally they may, once a turn. A new canonical register; save 72; the pack
-unchanged. Headline pacing **PACING_HEADLINE**, the other seeds
-PACING_SEEDS, proxies PACING_PROXIES: PACING_VERDICT. Verification: sim,
-AI and journey tests; UNIT_SHORT, CAMPAIGNS_SHORT, lint, typecheck, build,
+the journal records what each ally learned; the AI does not share on its
+own yet (an AI planner moved the headline Epic course past its band with no
+misplay to fix, so it was removed and recorded). A new canonical register; save 72; the pack
+unchanged. Headline pacing **388 / 296 / 198**, the other seeds
+339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207: every course identical to rules 71 since the AI does not share maps. Verification: sim,
+AI and journey tests; unit 2,377 / 308 files, campaigns 57, lint, typecheck, build,
 the map-sharing and alliances journeys and the chronicles journey
-CHRONICLES_NOTE.
+(pin 56 unmoved).
 [Evidence](development/2026-11-01-map-sharing/README.md),
 [ADR0103](architecture/0103-map-sharing.md).
 

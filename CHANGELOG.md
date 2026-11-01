@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 72 lets allies share their maps from Realm affairs: each ally learns every hex the other has explored, once every twenty turns for the pair, the journal recording what each learned; AI allies accept a player’s sharing but do not share on their own yet. Headline pacing 388 / 296 / 198, with the two other seeds at 339 / 344, 283 / 286, 191 / 196, every course identical to rules 71 since the AI does not share maps.
+
 Rules/save 71 brings unrest to the hearths: heavy taxes, occupation and deep devastation raise a hearth’s unrest each turn and lean taxes ease it; at fifty the hearth’s industry is halved and at a hundred it riots, a household leaving and the lanes scarred, the journal recording it; the hearth’s condition panel shows the level and its pressures, and AI realms stop pressing restless lanes and ease them when they can afford to. Headline pacing 388 / 296 / 198, with the two other seeds at 339 / 344, 283 / 286, 191 / 196, every headline course in band and identical to rules 70, the two other Epic seeds just under it.
 
 Rules/save 70 lets a realm set its taxes from Realm affairs: lean taxes take three quarters of every hearth’s coin and mend the lanes two points faster each turn, heavy taxes take a quarter more and wear them by two, steady taxes take what they always took; the journal records the change, and AI realms set heavy taxes when short of coin and lean ones when rich with scarred hearths. Headline pacing 388 / 296 / 198, with the two other seeds at 345 / 344, 309 / 286, 191 / 196, every headline course in band and the two other Epic seeds just under it, risen from 344 / 336.

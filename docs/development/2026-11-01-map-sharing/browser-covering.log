@@ -1,0 +1,11 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/map-sharing.spec.ts tests/gameplay/alliances.spec.ts --workers=2 --output=docs/development/2026-11-01-map-sharing/browser-results
+
+
+Running 2 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/map-sharing.spec.ts:12:1 › share maps with an ally from Realm affairs and read the exchange in the journal (3.7s)
+  ✓  2 [gameplay] › tests/gameplay/alliances.spec.ts:12:1 › accept an alliance from Realm affairs and read the ally and the pact in the journal (3.8s)
+
+  2 passed (4.4s)

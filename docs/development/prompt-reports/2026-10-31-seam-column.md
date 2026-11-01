@@ -253,7 +253,7 @@
   roadmap library 140 delivered.
 - Allies share their maps, rules/save 72 ([ADR 0103](../../architecture/0103-map-sharing.md)):
   each ally learns every hex the other has explored, once every twenty
-  turns for the pair; the AI shares when it may. Evidence packet
+  turns for the pair; the AI does not share on its own yet. Evidence packet
   [docs/development/2026-11-01-map-sharing/](../2026-11-01-map-sharing/README.md);
   roadmap library 141 delivered.
 
@@ -341,9 +341,9 @@ other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207.
 Unrest: unit 2,375 / 307 files, campaigns 57, build, the unrest, taxes and conquest
 journeys and the chronicles journey (pin 56 unmoved); headline
 **388 / 296 / 198**, the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207.
-Shared maps: UNIT_SHORT, CAMPAIGNS_SHORT, build, the map-sharing and
-alliances journeys and the chronicles journey CHRONICLES_NOTE; headline
-**PACING_HEADLINE**, the other seeds PACING_SEEDS, proxies PACING_PROXIES.
+Shared maps: unit 2,377 / 308 files, campaigns 57, build, the map-sharing and
+alliances journeys and the chronicles journey (pin 56 unmoved); headline
+**388 / 296 / 198**, the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.

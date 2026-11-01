@@ -1,0 +1,25 @@
+share-probe.ts: the headline Epic campaign (seed 20260905, standard, twelve realms) played with the worker's planning loop.
+
+=== with an AI map-sharing planner (sharing at war)
+victory turn 406 prosperity
+t50: hearths 43, armies 128, explored avg 1825, pacts 0
+t100: hearths 60, armies 184, explored avg 3637, pacts 1
+t150: hearths 65, armies 182, explored avg 4793, pacts 1
+t200: hearths 67, armies 182, explored avg 5462, pacts 0
+t250: hearths 69, armies 191, explored avg 6589, pacts 1
+t300: hearths 71, armies 186, explored avg 6825, pacts 1
+t350: hearths 75, armies 188, explored avg 7676, pacts 2
+moveTo=29336 setWorkedTiles=4103 startCharacterMission=1123 attack=835 queue=822 sellResource=438 proposePeace=316 respondPeace=311 buildDepot=294 declareWar=284 searchArcane=193 mergeArmies=183 develop=178 resolveHearthEvent=174 queueMovement=163 besiege=154 promoteCharacter=134 research=119 proposeClient=88 improveTile=83 respondClient=81 resumeMovement=81 found=80 assignCharacter=73
+
+=== without AI map sharing
+victory turn 387 prosperity
+t50: hearths 43, armies 128, explored avg 1825, pacts 0
+t100: hearths 60, armies 183, explored avg 3488, pacts 1
+t150: hearths 64, armies 197, explored avg 4412, pacts 0
+t200: hearths 69, armies 196, explored avg 4932, pacts 4
+t250: hearths 72, armies 204, explored avg 5439, pacts 0
+t300: hearths 72, armies 202, explored avg 5818, pacts 2
+t350: hearths 76, armies 202, explored avg 6182, pacts 0
+moveTo=29972 setWorkedTiles=3987 startCharacterMission=1026 queue=812 attack=810 sellResource=449 buildDepot=330 proposePeace=304 respondPeace=298 declareWar=288 searchArcane=196 mergeArmies=183 queueMovement=181 besiege=167 resolveHearthEvent=167 develop=138 promoteCharacter=118 research=116 setTaxRate=83 found=76 proposeClient=72 recruitCharacter=70 assignCharacter=66 respondClient=66
+
+(The probe's own loop ends on 387 where measure:pacing reports 388: the two drivers settle battles and captures slightly differently; the comparison within the probe is like for like.)
