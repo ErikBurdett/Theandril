@@ -11,6 +11,9 @@ save field or content change.
 Headline pacing 350 / 281 / 199, all three courses in band with the Epic course at the bottom of its band (384 / 291 / 205 before the planner); the other seeds 331 / 359, 288 / 284, 200 / 203, one Epic seed nineteen under; proxies 334 / 412 / 295 / 200 within their bounds; the chronicle pin at 57 holds. Verification: AI tests; unit 2,388 / 314 files, campaigns 57, lint,
 typecheck, build, the legitimacy and offices journeys and the chronicles
 journey (pin 57 unmoved; no office is reached in that short campaign, ten are held in a tiny Long probe).
+Commit `bd0fc2a` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-ai-offices/README.md)).
 [Evidence](development/2026-11-01-ai-offices/README.md),
 [ADR0116](architecture/0116-ai-offices.md).
 

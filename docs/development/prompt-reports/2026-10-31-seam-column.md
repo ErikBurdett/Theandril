@@ -342,7 +342,8 @@
   appoint a second surveyor to sit as Keeper of the Roll and seat it once
   the first rides; AI only. Evidence packet
   [docs/development/2026-11-01-ai-offices/](../2026-11-01-ai-offices/README.md);
-  roadmap library 154 delivered.
+  roadmap library 154 delivered. Commit `bd0fc2a` is deployed and read back
+  ([publication packet](../2026-11-01-publication-ai-offices/README.md)).
 
 ## Verified
 
