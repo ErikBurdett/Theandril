@@ -130,8 +130,10 @@
   roadmap library 125 delivered.
 - A patron stands for its client, rules/save 58 ([ADR 0088](../../architecture/0088-guarantee.md)):
   a war declared on a client calls its patron unless bound to the attacker;
-  the call is kept so the client's peace ends the patron's war. Evidence
-  packet [docs/development/2026-10-31-guarantee/](../2026-10-31-guarantee/README.md);
+  the call is kept so the client's peace ends the patron's war. Commit
+  `7c6cca0` is deployed: both workflows succeeded and the live readback
+  matched the build ([publication packet](../2026-10-31-publication-guarantee/README.md)).
+  Evidence packet [docs/development/2026-10-31-guarantee/](../2026-10-31-guarantee/README.md);
   roadmap library 126 delivered.
 
 ## Verified

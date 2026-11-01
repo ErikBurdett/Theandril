@@ -17,6 +17,9 @@ and thirteen. Headline pacing **411 / 336 / 209**, the other seeds
 351 / 313, 285 / 246, 218 / 175, proxies 358 / 451 / 302 / 204.
 Verification: sim and journey tests; unit 2,349 / 294 files, campaigns 57,
 lint, typecheck, build, four covering journeys and the chronicles journey.
+Commit `7c6cca0` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-10-31-publication-guarantee/README.md)).
 [Evidence](development/2026-10-31-guarantee/README.md),
 [ADR0088](architecture/0088-guarantee.md).
 
