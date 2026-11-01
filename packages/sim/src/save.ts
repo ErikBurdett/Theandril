@@ -51,7 +51,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 78;
+export const SAVE_VERSION = 79;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -119,6 +119,8 @@ export const PRE_EVENTS_VI_CONTENT_HASH = '4c666e0d';
 export const PRE_KINDS_CONTENT_HASH = '56bc355d';
 /** The rules 77 pack, one hundred and twenty hearth events and the city-state kinds, before rules 78 added fifteen more events. */
 export const PRE_EVENTS_VII_CONTENT_HASH = 'a1d7c299';
+/** The rules 78 pack, one hundred and thirty-five hearth events, before rules 79 added the last fifteen. */
+export const PRE_EVENTS_VIII_CONTENT_HASH = '909bc40d';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -350,14 +352,15 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(78), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(79), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
 /** v72 through v74 envelopes carry the rules 72 state and differ in their version and the pack they were sealed under; no army of them carries a doctrine. */
 /** Rules 76 adds a doctrine value only; a v75 envelope differs in its version and may not name the wings. Rules 77 changes content only; a v76 envelope differs in its version and the pack it was sealed under. */
-/** Rules 78 changes no canonical field; a v77 envelope differs only in its version and the pack it was sealed under. */
+/** Rules 78 and 79 change no canonical field; v77 and v78 envelopes differ only in their version and the pack they were sealed under. */
+const saveV78Schema = saveSchema.extend({ version: z.literal(78) }).strict();
 const saveV77Schema = saveSchema.extend({ version: z.literal(77) }).strict();
 const saveV76Schema = saveSchema.extend({ version: z.literal(76) }).strict();
 const saveV75Schema = saveSchema.extend({ version: z.literal(75) }).strict();
@@ -857,7 +860,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 78) return CONTENT_HASH;
+  if (version >= 79) return CONTENT_HASH;
+  if (version >= 78) return PRE_EVENTS_VIII_CONTENT_HASH;
   if (version >= 77) return PRE_EVENTS_VII_CONTENT_HASH;
   if (version >= 74) return PRE_KINDS_CONTENT_HASH; // rules 75 and 76 changed no content
   if (version >= 73) return PRE_EVENTS_VI_CONTENT_HASH;
@@ -1340,6 +1344,14 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 78) {
+    const sealed = saveV78Schema.parse(raw);
+    assert(sealed.contentHash === PRE_EVENTS_VIII_CONTENT_HASH, 'v78 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v78 snapshot checksum does not match its contents');
+    assert(sealed.state.hearthEvents.pending.every(pending => hearthEventsForRules(78).some(item => item.id === pending.templateId)), 'v78 envelope names a hearth event of later rules');
+    // Rules 79 adds hearth events to the content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 77) {
     const sealed = saveV77Schema.parse(raw);
     assert(sealed.contentHash === PRE_EVENTS_VII_CONTENT_HASH, 'v77 content hash is not a recognized compatible pack');

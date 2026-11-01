@@ -216,7 +216,10 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(hearthEventsForRules(78)).toHaveLength(135);
   expect(hearthEventsForRules(78).filter(event => event.sinceRules === 78 && event.condition === 'chained')).toHaveLength(1);
   expect(hearthEventsForRules(78).filter(event => event.sinceRules === 78).every(event => !event.choices[0]!.followUp)).toBe(true);
-  expect(HEARTH_EVENTS).toHaveLength(135);
+  expect(hearthEventsForRules(79)).toHaveLength(150);
+  expect(hearthEventsForRules(79).filter(event => event.sinceRules === 79 && event.condition === 'chained')).toHaveLength(1);
+  expect(hearthEventsForRules(79).filter(event => event.sinceRules === 79).every(event => !event.choices[0]!.followUp)).toBe(true);
+  expect(HEARTH_EVENTS).toHaveLength(150);
   // Rules 62 content, before rules 63 added the relics.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(62), magicPackForRules(62), true, ATTUNEMENT_VICTORY, hearthEventsForRules(62), EPOCHS, landmarkKindsForRules(62), crisesForRules(62), cityStateTradeForRules(62), false, false, false, false)).toBe('85443208');
   expect(CONTENT_HASH).not.toBe('85443208');
@@ -262,6 +265,9 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   // Rules 77 content, one hundred and twenty events and the city-state kinds, before rules 78 added fifteen more events.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(77), magicPackForRules(77), true, ATTUNEMENT_VICTORY, hearthEventsForRules(77), EPOCHS, landmarkKindsForRules(77), crisesForRules(77), cityStateTradeForRules(77), RELICS, NOTABLE_CHARACTERS, OFFICES, cityStateKindsForRules(77))).toBe('a1d7c299');
   expect(CONTENT_HASH).not.toBe('a1d7c299');
+  // Rules 78 content, one hundred and thirty-five events, before rules 79 added the last fifteen of the scope's hundred and fifty.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(78), magicPackForRules(78), true, ATTUNEMENT_VICTORY, hearthEventsForRules(78), EPOCHS, landmarkKindsForRules(78), crisesForRules(78), cityStateTradeForRules(78), RELICS, NOTABLE_CHARACTERS, OFFICES, cityStateKindsForRules(78))).toBe('909bc40d');
+  expect(CONTENT_HASH).not.toBe('909bc40d');
   expect(CITY_STATE_KINDS).toHaveLength(48);
   expect(cityStateKindsForRules(76)).toEqual([]);
   expect(CITY_STATE_KIND_DEFINITIONS.map(item => item.id)).toEqual(['market', 'clanhold', 'camp', 'cove']);

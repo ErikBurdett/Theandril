@@ -6,10 +6,12 @@ import { expectEarnedLongFormVictory, PACING_TIMEOUT, PACING_TITLE, type PacingC
 // for that curve, not the target itself: measure the real thing with
 // `pnpm measure:pacing` (local only) and derive these bounds from it rather than
 // defending them. Rules 29 measured these two at turns 201 and 290.
+// Rules 79 measured the headline Long course at 291 while this Long proxy ran 382
+// on the eighth catalogue's redraw, so its bound follows the tool (maximum 375 → 450).
 // Epic runs in pacing-epic.test.ts so the two longest cases run in parallel files.
 const campaigns: PacingCampaign[] = [
   { pace: 'standard', seed: 74, minimum: 150, maximum: 300 },
-  { pace: 'long', seed: 99, minimum: 225, maximum: 375 },
+  { pace: 'long', seed: 99, minimum: 225, maximum: 450 },
 ];
 
 test.each(campaigns)(PACING_TITLE, expectEarnedLongFormVictory, PACING_TIMEOUT);

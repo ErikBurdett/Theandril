@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |campaigns| packages/ai/src/pacing.test.ts (2 tests | 1 failed) 15854ms
+   × 'long' seed 99 reaches an earned long-form victory with legal orders and save continuation 8752ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |campaigns| packages/ai/src/pacing.test.ts > 'long' seed 99 reaches an earned long-form victory with legal orders and save continuation
+AssertionError: expected undefined to be 'prosperity' // Object.is equality
+
+- Expected:
+"prosperity"
+
++ Received:
+undefined
+
+ ❯ expectEarnedLongFormVictory packages/ai/src/testing/pacing-campaign.ts:46:31
+     44|     }
+     45|   }
+     46|   expect(state.victory?.path).toBe('prosperity');
+       |                               ^
+     47|   expect(state.turn).toBeGreaterThanOrEqual(minimum);
+     48|   expect(state.turn).toBeLessThanOrEqual(maximum);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 9 passed (10)
+      Tests  1 failed | 56 passed (57)
+   Start at  02:25:03
+   Duration  21.09s (transform 5.68s, setup 0ms, import 8.27s, tests 87.59s, environment 1ms)
+

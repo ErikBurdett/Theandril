@@ -31,7 +31,7 @@ describe('rules 69: the second city-state roster', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 68, contentHash: PRE_CITY_STATES_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(older));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 79, contentHash: CONTENT_HASH });
     let withSecond = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 2, pace: 'short', generatorVersion: 4 });
     for (let seed = 75; !seated(withSecond).some(id => second.has(id)) && seed < 120; seed++) withSecond = createGame({ seed, size: 'tiny', factionCount: 4, cityStateCount: 2, pace: 'short', generatorVersion: 4 });
     expect(seated(withSecond).some(id => second.has(id))).toBe(true);

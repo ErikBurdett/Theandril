@@ -307,6 +307,11 @@
   [docs/development/2026-11-01-hearth-events-vii/](../2026-11-01-hearth-events-vii/README.md);
   roadmap library 148 delivered. Commit `51484d9` is deployed and read back
   ([publication packet](../2026-11-01-publication-hearth-events-vii/README.md)).
+- The eighth hearth-event catalogue, rules/save 79 ([ADR 0111](../../architecture/0111-hearth-events-viii.md)):
+  fifteen more templates across the conditions and the ages, one hundred
+  and fifty in all, the scope's count met. Evidence packet
+  [docs/development/2026-11-01-hearth-events-viii/](../2026-11-01-hearth-events-viii/README.md);
+  roadmap library 149 delivered.
 
 ## Verified
 
@@ -418,6 +423,9 @@ the chronicles journey (pin 56 unmoved); Headline pacing 329 / 301 / 219 and eve
 Hearth events VII: unit 2,381 / 310 files, campaigns 57, build, the six hearth-event
 journeys and the chronicles journey (pin moved from 56 to 57, attributed); headline
 339 / 281 / 213, the other seeds 355 / 338, 246 / 285, 194 / 199, proxies 402 / 426 / 288 / 208.
+Hearth events VIII: unit 2,382 / 310 files, campaigns 57 (Long proxy bound re-derived), build, the seven hearth-event
+journeys and the chronicles journey (pin 57 unmoved though the turn-40 draw differs); headline
+384 / 291 / 205, all in band, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209 (the Long proxy bound re-derived to 450).
 
 ## Left open
 

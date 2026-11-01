@@ -11,7 +11,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64 | 65 | 66 | 67 | 68 | 69 | 70 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64 | 65 | 66 | 67 | 68 | 69 | 70 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78 | 79;
 export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
@@ -58,7 +58,7 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70), z.literal(71), z.literal(72), z.literal(73), z.literal(74), z.literal(75), z.literal(76), z.literal(77), z.literal(78)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69), z.literal(70), z.literal(71), z.literal(72), z.literal(73), z.literal(74), z.literal(75), z.literal(76), z.literal(77), z.literal(78), z.literal(79)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
@@ -136,6 +136,7 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(76) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(77) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(78) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(79) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 

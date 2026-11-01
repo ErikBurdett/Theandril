@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## The eighth hearth-event catalogue (rules/save 79) — 2026-11-01
+
+M6's events, meeting the scope's one hundred and fifty. Fifteen more
+templates across the conditions and the ages — the road menders, the wards'
+quarrel, the salvage rights, the shipwreck's cargo, the seam cartel, the war
+levy, the harbor dredging, the copyists' strike, the garrison duel, the
+bridge toll (Roads), the far wedding, the first mill, the glass lanterns
+(Seams), the bidder's bribe (Bids) and the bribe discovered — one hundred
+and fifty in all; content only, save 79 freezes the rules 78 pack and a v78
+envelope may not name a rules 79 template.
+Headline pacing 384 / 291 / 205: all three courses in band, the Epic course for the first time since rules 73; the other seeds 352 / 351, 289 / 282, 197 / 200 in band; proxies 368 / 407 / 382 / 209, the Long proxy’s bound re-derived from the tool (maximum 375 to 450) with the headline Long at 291; the chronicle pin at 57 holds. Verification: content, sim and journey tests; unit 2,382 / 310 files,
+campaigns 57 (Long proxy bound re-derived), lint, typecheck, build, the seven hearth-event journeys and
+the chronicles journey (pin 57 unmoved though the turn-40 draw differs).
+[Evidence](development/2026-11-01-hearth-events-viii/README.md),
+[ADR0111](architecture/0111-hearth-events-viii.md).
+
 ## The seventh hearth-event catalogue (rules/save 78) — 2026-11-01
 
 M6's events, within fifteen of the scope's one hundred and fifty. Fifteen
