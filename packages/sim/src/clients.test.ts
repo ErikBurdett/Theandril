@@ -9,7 +9,7 @@ import { unificationCampaign } from '../../test-fixtures/src/victory-fixture';
 
 const terms = { giftCoin: 40, tributeCoin: 6, termTurns: 12 };
 const scene = (): GameState => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 2, pace: 'short', generatorVersion: 4 });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 2, pace: 'short', generatorVersion: 4 , rulesVersion: 68 /* the first roster, so the campaign also seals under the older rules this file reads */ });
   for (const faction of state.factions) faction.treasury = 200;
   return state;
 };

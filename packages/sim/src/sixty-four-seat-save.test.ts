@@ -5,7 +5,7 @@ import { createGame, deserializeGame, serializeGame, serializeGameForVersion, st
 describe('rules32 saves at the supported 64-seat bound', () => {
   it.each([
     { factionCount: 64, cityStateCount: 0 },
-    { factionCount: 40, cityStateCount: 24 },
+    { factionCount: 40, cityStateCount: 24, rulesVersion: 68 as const /* the first roster, so the campaign also seals under the older rules this file reads */ },
   ])('roundtrips generated $factionCount realms and $cityStateCount city-states with all per-realm registers', options => {
     const game = createGame({ seed: 20260925, size: 'standard', generatorVersion: 8, ...options });
     expect(game.factions).toHaveLength(64);

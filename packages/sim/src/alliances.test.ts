@@ -8,7 +8,7 @@ import { ALLIANCE_OFFER_TURNS, alliesOf, validateAlliances } from './alliances';
 import { warPair } from './warfare';
 
 const scene = (): GameState => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 , rulesVersion: 68 /* the first roster, so the campaign also seals under the older rules this file reads */ });
   for (const faction of state.factions) faction.treasury = 200;
   return state;
 };
@@ -190,6 +190,6 @@ describe('alliances (rules 50)', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.alliances.calls).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 68 });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 69 });
   });
 });

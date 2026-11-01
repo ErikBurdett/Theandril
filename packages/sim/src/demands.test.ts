@@ -10,7 +10,7 @@ import { armyStrength } from './army-composition';
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
 /** A realm, a city-state, and the realm's company standing at the city-state's gate. */
 const atTheGate = (strong: boolean) => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 , rulesVersion: 68 /* the first roster, so the campaign also seals under the older rules this file reads */ });
   for (const faction of state.factions) faction.treasury = 200;
   const realm = state.factions.find(faction => !faction.id.startsWith('citystate.'))!.id, city = state.factions.find(faction => faction.id.startsWith('citystate.'))!.id;
   // Every seat founds its hearth from its caravan on turn 1; the city-state's goes up first here.
@@ -90,6 +90,6 @@ describe('rules 61: tribute demands of city-states', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.demands).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 68 });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 69 });
   });
 });

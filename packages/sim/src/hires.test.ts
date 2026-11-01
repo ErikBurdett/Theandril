@@ -4,13 +4,13 @@ import { CONTENT_HASH } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { withRules } from './rules';
-import { serializeGameForVersion } from './save';
+import { PRE_CITY_STATES_II_CONTENT_HASH, serializeGameForVersion } from './save';
 import { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, hireBlocker, hirePriceOf, validateHires } from './hires';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
 /** A realm, a city-state, and the realm's company standing at the city-state's gate. */
 const atTheGate = () => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 , rulesVersion: 68 /* the first roster, so the campaign also seals under the older rules this file reads */ });
   for (const faction of state.factions) faction.treasury = 200;
   const realm = state.factions.find(faction => !faction.id.startsWith('citystate.'))!.id, city = state.factions.find(faction => faction.id.startsWith('citystate.'))!.id;
   const caravan = Object.values(state.armies).find(army => army.factionId === city && army.formations.some(item => item.unitId === 'unit.colonist'))!;
@@ -71,12 +71,12 @@ describe('rules 68: companies hired from city-states', () => {
       expect(getObservation(state, realm).hires).toBeUndefined();
     });
     const sealed = serializeGameForVersion(state, 67);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 67, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 67, contentHash: PRE_CITY_STATES_II_CONTENT_HASH });
     expect(JSON.parse(sealed).state.hires).toBeUndefined();
     const loaded = deserializeGame(sealed);
     expect(loaded.hires).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 68, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 69, contentHash: CONTENT_HASH });
     issue(state, { type: 'hireCompany', factionId: realm, cityStateId: city, armyId });
     expect(() => serializeGameForVersion(state, 67)).toThrow('hired companies unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId })).toMatchObject({ ok: true });

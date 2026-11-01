@@ -796,7 +796,7 @@ function App() {
     for (const query of peaceQueries.current.values()) query.reject(new Error('Review peace terms again after returning to this campaign.'));
     peaceQueries.current.clear();
     if (worker.current) { previousWorker.current = worker.current; worker.current = undefined; }
-    setGenerating(true); send({ type: 'new', seed: value, size, mode: newMode, pace, factionCount: count, cityStateCount: Math.max(0, Math.min(24, Number(cityStateCount) || 0)), factionDefinitionId, layout });
+    setGenerating(true); send({ type: 'new', seed: value, size, mode: newMode, pace, factionCount: count, cityStateCount: Math.max(0, Math.min(48, Number(cityStateCount) || 0)), factionDefinitionId, layout });
   };
   const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
@@ -985,7 +985,7 @@ function App() {
           <p id="world-seed-help" className="field-help">Leave blank for a fresh random world. Enter a seed to revisit a world; its seed is shown above the map.</p>
           <label>World size<select value={size} onChange={event => changeWorldSize(event.target.value as MapSize)}>{WORLD_SIZES.map(([value, label]) => { const { width, height } = mapDimensions(value, GENERATOR_VERSION); return <option key={value} value={value}>{label} · {(width * height).toLocaleString('en-US')} hexes · {RECOMMENDED_FACTION_COUNTS[value]} realms</option>; })}</select></label>
           <label>Faction count<input type="number" min={2} max={42} step={1} required value={factionCount} aria-describedby="faction-density-help" onChange={event => setFactionCount(event.target.value)}/></label>
-          <label>City-states<input type="number" min={0} max={24} step={1} required value={cityStateCount} aria-describedby="city-state-help" onChange={event => setCityStateCount(event.target.value)}/></label>
+          <label>City-states<input type="number" min={0} max={48} step={1} required value={cityStateCount} aria-describedby="city-state-help" onChange={event => setCityStateCount(event.target.value)}/></label>
           <p id="city-state-help" className="field-help" data-testid="city-state-help">Independent single-city powers that settle the land between realms and can be conquered like any neighbour. Recommended here: {RECOMMENDED_CITY_STATES[size]}. They borrow a culture's art under their own banner colour.</p>
           <p id="faction-density-help" className="field-help" data-testid="faction-density-help">Recommended for this size: {RECOMMENDED_FACTION_COUNTS[size]} realms. Changing world size resets this recommendation; you can override it. {FACTIONS.length} introductory faction templates are authored. Additional seats are generated variants, not additional authored nations. Extreme crowding is not balanced.</p>
           <label>Map type<select value={layout} aria-describedby="map-type-help" onChange={event => setLayout(event.target.value as WorldLayout)}>{MAP_TYPES.map(type => <option key={type.id} value={type.id}>{type.name}</option>)}</select></label>

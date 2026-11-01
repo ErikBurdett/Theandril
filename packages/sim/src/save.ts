@@ -13,7 +13,7 @@ import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
 import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
-import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, hearthEventsForRules, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, hearthEventsForRules, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema, CITY_STATES } from '@theandril/content';
 import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand } from './simulation';
@@ -47,7 +47,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 68;
+export const SAVE_VERSION = 69;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -105,6 +105,8 @@ export const PRE_OFFICES_CONTENT_HASH = '7bcec806';
 export const PRE_EVENTS_IV_CONTENT_HASH = 'cf5b6321';
 /** The rules 66 pack, three rites, before rules 67 added the ember host. */
 export const PRE_SUMMONING_CONTENT_HASH = 'e291469e';
+/** The rules 67 and 68 pack, twenty-four city-states, before rules 69 added the second roster. */
+export const PRE_CITY_STATES_II_CONTENT_HASH = '1bd6624e';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -324,11 +326,13 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(68), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(69), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
+/** Rules 69 changes no canonical field; a v68 envelope differs only in its version and the pack it was sealed under. */
+const saveV68Schema = saveSchema.extend({ version: z.literal(68) }).strict();
 /** v65 through v67 envelopes carry the rules 65 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 68 records. */
 type Through67 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV67Schema> };
 const saveV67Schema = saveSchema.extend({ version: z.literal(67), state: stateV67Schema }).strict();
@@ -647,6 +651,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 19) assertNoUnification(state);
   if (version < 50) assertNoAlliances(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
+  if (version < 69) assertNoSecondRoster(state);
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
@@ -728,6 +733,11 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+/** Rules 69 seats the second roster; a campaign holding one of its city-states cannot be sealed under earlier rules. */
+function assertNoSecondRoster(state: GameState): void {
+  const second = new Set(CITY_STATES.filter(item => item.sinceRules).map(item => item.id));
+  if (state.factions.some(faction => second.has(faction.id))) throw new Error('This campaign seats city-states unavailable in historical rules.');
+}
 function assertNoFleetProvisions(state: GameState): void {
   if (Object.values(state.armies).some(army => army.provisions !== undefined)) throw new Error('This campaign has fleet provisions unavailable in historical rules.');
 }
@@ -785,10 +795,12 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
+  if (version < 69) assertNoSecondRoster(state);
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 67) return CONTENT_HASH; // rules 68 changed no content
+  if (version >= 69) return CONTENT_HASH;
+  if (version >= 67) return PRE_CITY_STATES_II_CONTENT_HASH; // rules 68 changed no content
   if (version >= 66) return PRE_SUMMONING_CONTENT_HASH;
   if (version >= 65) return PRE_EVENTS_IV_CONTENT_HASH;
   if (version >= 64) return PRE_OFFICES_CONTENT_HASH;
@@ -1260,6 +1272,13 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 68) {
+    const sealed = saveV68Schema.parse(raw);
+    assert(sealed.contentHash === PRE_CITY_STATES_II_CONTENT_HASH, 'v68 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v68 snapshot checksum does not match its contents');
+    // Rules 69 adds city-states to the content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   const prior = parseSaveThrough67(raw);
   const state = { ...prior.state, hires: emptyHires() };
   return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
@@ -1268,7 +1287,7 @@ function parseSaveThrough67(raw: unknown): Through67 {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === 67) {
     const sealed = saveV67Schema.parse(raw);
-    assert(sealed.contentHash === CONTENT_HASH, 'v67 content hash is not a recognized compatible pack');
+    assert(sealed.contentHash === PRE_CITY_STATES_II_CONTENT_HASH, 'v67 content hash is not a recognized compatible pack');
     assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v67 snapshot checksum does not match its contents');
     // Rules 68 adds the hires as a new register; the state continues unchanged under the same pack.
     return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };

@@ -10,7 +10,7 @@ import { createDevelopmentState, developmentCommandSchema, chooseDevelopment, ge
 import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, settlementCivicUpkeep, getGrowthObservation } from './growth-economy';
 import { z } from 'zod';
 import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
-import { BUILDINGS, CITY_STATES, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, variantFactionColor, variantFactionName, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
+import { BUILDINGS, CITY_STATES, cityStatesForRules, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, variantFactionColor, variantFactionName, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
 import { GENERATOR_VERSION, MAP_TYPES, SeededRandom, generateWorld, isPassable, naturalFeatures, neighbors, type WorldLayout } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
@@ -28,7 +28,7 @@ import { advanceCharters, charterCommandSchemas, observeCharters, setCharter } f
 import { advancePostings, musterNewArmy, observePostings, postingCommandSchemas, setMuster, setPosting } from './postings';
 import { advanceSupply, observeSupply, observedSuppliedCells, suppliedCells, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
 import { abandonDepot, advanceDepots, buildDepot, depotAbandonSchemas, depotCommandSchemas, DEPOT_COIN, depotUpkeep } from './depots';
-import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
+import { CURRENT_RULES, LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
 import { MAX_EVENTS, MAX_FACTIONS } from './save';
 import { isCityState } from './seats';
@@ -198,7 +198,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68)]).default(40),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31), z.literal(32), z.literal(33), z.literal(34), z.literal(35), z.literal(36), z.literal(37), z.literal(38), z.literal(39), z.literal(40), z.literal(41), z.literal(42), z.literal(43), z.literal(44), z.literal(45), z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(50), z.literal(51), z.literal(52), z.literal(53), z.literal(54), z.literal(55), z.literal(56), z.literal(57), z.literal(58), z.literal(59), z.literal(60), z.literal(61), z.literal(62), z.literal(63), z.literal(64), z.literal(65), z.literal(66), z.literal(67), z.literal(68), z.literal(69)]).default(CURRENT_RULES),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -215,6 +215,8 @@ export function createGame(options: NewGameOptions): GameState {
   if (checked.rulesVersion < 21 && checked.factionCount > 48) throw new Error('Historical rules seat at most 48 realms.');
   if (checked.rulesVersion < 21 && checked.cityStateCount > 0) throw new Error('City-states require rules 21.');
   if (checked.factionCount + checked.cityStateCount > MAX_FACTIONS) throw new Error(`A campaign seats at most ${MAX_FACTIONS} realms and city-states.`);
+  // Rules 69 doubles the roster; a campaign under older rules draws from the first twenty-four, as it always did.
+  if (checked.cityStateCount > cityStatesForRules(checked.rulesVersion).length) throw new Error(`These rules seat at most ${cityStatesForRules(checked.rulesVersion).length} city-states.`);
   // Physical generation never implicitly changes the roster used by a saved origin.
   const catalog = factionRoster(checked.rosterVersion);
   if (checked.factionDefinitionId) {
@@ -236,7 +238,7 @@ export function createGame(options: NewGameOptions): GameState {
   });
   // City-states are independent single-city powers. They borrow a culture's art
   // and roster; their seat carries their own name, colour and lore.
-  const pool = [...CITY_STATES];
+  const pool = [...cityStatesForRules(checked.rulesVersion)];
   const picker = new SeededRandom(checked.seed ^ 0x43495459);
   const cityStates = Array.from({ length: checked.cityStateCount }, () => pool.splice(picker.nextInt(pool.length), 1)[0]!)
     .sort((a, b) => a.id < b.id ? -1 : 1)

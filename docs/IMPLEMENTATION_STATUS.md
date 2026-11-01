@@ -1,5 +1,22 @@
 # Theandril implementation status
 
+## The second city-state roster (rules/save 69) — 2026-11-01
+
+M5's and M8's roster, forty-eight independent powers. Twenty-four more
+city-states, one for every culture, each with its own name, banner colour,
+motto, history and trade good, sealed from rules 69; the first twenty-four
+are untouched and hash as they always did. A campaign draws its city-states
+from the roster its rules know, so every older seed seats what it seated
+before; the setup seats up to forty-eight within the sixty-four-seat limit;
+a campaign seating the second roster cannot be sealed under earlier rules.
+Content only; save 69. Headline pacing **380 / 296 / 197**, the other seeds
+344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201: every course identical to rules 68 because the measured campaigns seat no city-states. Verification:
+content, sim and journey tests; unit 2,370 / 304 files, campaigns 57, lint,
+typecheck, build, the city-states II, hires and tribute journeys and the
+chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-city-states-ii/README.md),
+[ADR0100](architecture/0100-city-states-ii.md).
+
 ## Companies hired from city-states (rules/save 68) — 2026-11-01
 
 M5's contracts, first company for hire. `hireCompany` lets a realm's land

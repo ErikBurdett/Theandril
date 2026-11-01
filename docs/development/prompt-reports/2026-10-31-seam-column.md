@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host and hired companies
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies and the second city-state roster
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -228,6 +228,11 @@
   ([publication packet](../2026-11-01-publication-hires/README.md)).
   Evidence packet [docs/development/2026-11-01-hires/](../2026-11-01-hires/README.md);
   roadmap library 137 delivered.
+- The second city-state roster, rules/save 69 ([ADR 0100](../../architecture/0100-city-states-ii.md)):
+  twenty-four more city-states, forty-eight in all, drawn by the rules a
+  campaign knows so older seeds seat what they seated before. Evidence
+  packet [docs/development/2026-11-01-city-states-ii/](../2026-11-01-city-states-ii/README.md);
+  roadmap library 138 delivered.
 
 ## Verified
 
@@ -303,6 +308,10 @@ warding journeys and the chronicles journey (pin 56 unmoved); headline
 Hires: unit 2,368 / 303 files, campaigns 57, build, the hires and tribute journeys
 and the chronicles journey (pin 56 unmoved); headline **380 / 296 / 197**,
 the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201.
+City-states II: unit 2,370 / 304 files, campaigns 57, build, the city-states II,
+hires and tribute journeys and the chronicles journey (pin 56 unmoved);
+headline **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies
+327 / 476 / 301 / 201.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -360,6 +369,8 @@ first on 379.
   fills offices but never resigns one.
 - A hired company is one kind at one price; no contracts outlast the sale
   and no mercenary bands walk the map.
+- Forty-eight city-states of one kind; clans, pirates, cults and nomads
+  remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).
