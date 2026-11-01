@@ -1,43 +1,9 @@
 
  RUN  v4.1.11 /home/telephoneheater/Work/Theandril
 
- ❯ |unit| packages/sim/src/hires.test.ts (2 tests | 1 failed) 134ms
-     × sells a company at the gate for the city’s price, raises it beside the buyer with no movement, remembers the sale, quotes it, and is refused unpaid, at war or too soon 59ms
 
-⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
-
- FAIL  |unit| packages/sim/src/hires.test.ts > rules 68: companies hired from city-states > sells a company at the gate for the city’s price, raises it beside the buyer with no movement, remembers the sale, quotes it, and is refused unpaid, at war or too soon
-AssertionError: expected { quotes: [], hires: [], …(1) } to deeply equal { quotes: [], hires: [] }
-
-- Expected
-+ Received
-
-  {
-    "hires": [],
-+   "kinds": [
-+     {
-+       "cityStateId": "citystate.windlass_ledge",
-+       "description": "A camp of riders that sells mounted companies dear and pays three quarters of a tribute.",
-+       "kind": "camp",
-+       "name": "Nomad camp",
-+     },
-+   ],
-    "quotes": [],
-  }
-
- ❯ packages/sim/src/hires.test.ts:37:47
-     35|     const quote = () => getObservation(state, realm).hires!.quotes.fin…
-     36|     expect(quote()).toEqual({ cityStateId: city, armyId, coin: price, …
-     37|     expect(getObservation(state, city).hires).toEqual({ quotes: [], hi…
-       |                                               ^
-     38|     const realmCoin = state.factions.find(faction => faction.id === re…
-     39|     const before = new Set(Object.keys(state.armies));
-
-⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
-
-
- Test Files  1 failed | 309 passed (310)
-      Tests  1 failed | 2379 passed (2380)
-   Start at  02:02:09
-   Duration  26.76s (transform 30.73s, setup 0ms, import 179.60s, tests 336.71s, environment 29ms)
+ Test Files  310 passed (310)
+      Tests  2380 passed (2380)
+   Start at  02:03:38
+   Duration  27.58s (transform 33.05s, setup 0ms, import 190.37s, tests 342.08s, environment 31ms)
 

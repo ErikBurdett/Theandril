@@ -406,8 +406,8 @@ Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
-Kinds: UNIT_SHORT, CAMPAIGNS_SHORT, build, the hires and tribute journeys and
-the chronicles journey CHRONICLES_NOTE; PACING_SUMMARY
+Kinds: unit 2,380 / 310 files, campaigns 57, build, the hires and tribute journeys and
+the chronicles journey (pin 56 unmoved); Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds.
 
 ## Left open
 

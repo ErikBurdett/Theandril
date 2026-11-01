@@ -34,7 +34,8 @@ describe('rules 68: companies hired from city-states', () => {
     expect(hiredUnitOf(state, city)).toBe(kind.unitId);
     const quote = () => getObservation(state, realm).hires!.quotes.find(item => item.cityStateId === city && item.armyId === armyId)!;
     expect(quote()).toEqual({ cityStateId: city, armyId, coin: price, unitId: kind.unitId, blocker: null });
-    expect(getObservation(state, city).hires).toEqual({ quotes: [], hires: [] });
+    expect(getObservation(state, city).hires).toMatchObject({ quotes: [], hires: [] });
+    expect(getObservation(state, city).hires!.kinds).toEqual([{ cityStateId: city, kind: kind.id, name: kind.name, description: kind.description }]);
     const realmCoin = state.factions.find(faction => faction.id === realm)!.treasury, cityCoin = state.factions.find(faction => faction.id === city)!.treasury;
     const before = new Set(Object.keys(state.armies));
     const result = issue(state, { type: 'hireCompany', factionId: realm, cityStateId: city, armyId });

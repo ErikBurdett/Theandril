@@ -32,7 +32,7 @@ they pay is where a kind can first show.
 
 ## Consequences
 
-- PACING_SUMMARY The headline campaigns seat no city-states, so the kinds
+- Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds. The headline campaigns seat no city-states, so the kinds
   cannot move them.
 - A kind changes prices and companies only: no raids by a cove, no
   wandering camp, no clan feud. The wider relations of the roster remain

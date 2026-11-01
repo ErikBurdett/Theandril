@@ -9,9 +9,9 @@ the hire quote names the kind's company (line troops, oath guard, riders or
 skirmishers) at the kind's price, the hired company is raised of it, and
 the tribute a city pays is set by its kind; Realm affairs names the kind
 beside the badge. Content only; save 77 freezes the rules 74–76 pack.
-PACING_SUMMARY Verification: content, sim and journey tests; UNIT_SHORT,
-CAMPAIGNS_SHORT, lint, typecheck, build, the hires and tribute journeys and
-the chronicles journey CHRONICLES_NOTE.
+Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds. Verification: content, sim and journey tests; unit 2,380 / 310 files,
+campaigns 57, lint, typecheck, build, the hires and tribute journeys and
+the chronicles journey (pin 56 unmoved).
 [Evidence](development/2026-11-01-city-state-kinds/README.md),
 [ADR0109](architecture/0109-city-state-kinds.md).
 
