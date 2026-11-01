@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices and the fourth event catalogue
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue and the ember host
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -211,6 +211,13 @@
   ([publication packet](../2026-10-31-publication-hearth-events-iv/README.md)).
   Evidence packet [docs/development/2026-10-31-hearth-events-iv/](../2026-10-31-hearth-events-iv/README.md);
   roadmap library 135 delivered.
+- The ember host, rules/save 67 ([ADR 0098](../../architecture/0098-ember-host.md)):
+  the first summoning rite, a lodged Flame Waykeeper raising a company of
+  Oath guard from the hearth's seam at eight ashglass, at once; the AI
+  raises one at a besieged hearth once the standing rites are up and no
+  company of the realm stands within. Evidence
+  packet [docs/development/2026-10-31-ember-host/](../2026-10-31-ember-host/README.md);
+  roadmap library 136 delivered.
 
 ## Verified
 
@@ -280,6 +287,9 @@ journeys and the chronicles journey (pin 57 unmoved); headline
 Hearth events IV: unit 2,363 / 301 files, campaigns 57, build, the three hearth-event
 journeys and the chronicles journey (pin 57 → 56, attributed to the Council’s turn-40 draw); headline
 **380 / 296 / 199**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 440 / 301 / 201.
+Ember host: unit 2,365 / 301 files, campaigns 57, build, the ember host and seam
+warding journeys and the chronicles journey (pin 56 unmoved); headline
+**380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -328,8 +338,9 @@ first on 379.
 - The ferry fallback fires only in a proved-enclosed basin; a basin whose
   shores open later is not waited for.
 - Hearth events: ninety templates against one hundred and fifty.
-- Relics lead and nothing more; none is lost, stolen or traded. Rituals,
-  summons and a third magical path remain.
+- Relics lead and nothing more; none is lost, stolen or traded. One
+  summoning of one path exists; rituals beyond the four rites and a third
+  magical path remain.
 - A notable figure is a named, specialized appointment and nothing more;
   rulers, legitimacy and the wider political cast remain.
 - An office pays its hearth and keeps its holder, nothing more; the AI

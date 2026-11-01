@@ -11,7 +11,7 @@ export function StrategicRites({ view, character, busy, issue }: { view: Observa
     <p className="field-help">A lodged Waykeeper of the rite’s path performs it at a hearth whose borders hold a surveyed seam of that path, paying ashglass from the realm stockpile. A ward holds while the caster stays lodged there and the seam is held.</p>
     {wards.map(ward => <p key={ward.settlementId} data-testid={`ward-${ward.settlementId}`}><strong>{ward.riteName}</strong> stands over {ward.settlementName}: {ward.remainingTurns} {ward.remainingTurns === 1 ? 'turn' : 'turns'} remaining.</p>)}
     {rites.map(rite => <article className="character-mission" key={rite.riteId} data-testid={`rite-${rite.riteId}`}>
-      <h4>{rite.name}</h4><p>{rite.description}</p><p>{rite.ashglassCost} ashglass · {rite.durationTurns} turns{rite.settlementId ? ` · at ${view.settlements.find(town => town.id === rite.settlementId)?.name ?? rite.settlementId}` : ''}</p>
+      <h4>{rite.name}</h4><p>{rite.description}</p><p>{rite.ashglassCost} ashglass · {rite.durationTurns ? `${rite.durationTurns} turns` : 'at once'}{rite.settlementId ? ` · at ${view.settlements.find(town => town.id === rite.settlementId)?.name ?? rite.settlementId}` : ''}</p>
       {rite.blocker && <p className="character-blocker">{rite.blocker}</p>}
       <button className="primary wide" disabled={busy || !rite.canPerform} aria-label={`Perform ${rite.name}`} onClick={() => issue({ type: 'performRite', factionId: view.factionId, characterId: character.id, riteId: rite.riteId })}>Perform rite</button>
     </article>)}

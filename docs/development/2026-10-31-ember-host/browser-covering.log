@@ -1,0 +1,13 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/ember-host.spec.ts tests/gameplay/seam-warding.spec.ts --workers=2 --output=docs/development/2026-10-31-ember-host/browser-results
+
+
+Running 4 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/ember-host.spec.ts:14:1 › raise an ember host through a lodged Flame Waykeeper and find the company in the registry (5.4s)
+  ✓  2 [gameplay] › tests/gameplay/seam-warding.spec.ts:14:1 › ward a besieged hearth through its lodged Waykeeper and read the held walls (5.6s)
+  ✓  3 [gameplay] › tests/gameplay/seam-warding.spec.ts:63:1 › a besieger breaks the ward on its turn and the holder is jarred (2.9s)
+  ✓  4 [gameplay] › tests/gameplay/seam-warding.spec.ts:110:1 › kindle a besieged hearth from a Flame seam and read the burning column (3.2s)
+
+  4 passed (12.5s)

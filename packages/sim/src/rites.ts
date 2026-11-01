@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { STRATEGIC_RITES, type StrategicRiteDefinition } from '@theandril/content';
-import type { CommandResult, DomainEvent, GameState } from './types';
+import type { Army, CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
 import { arcaneSites, controllingSettlement, SITE_RESOURCE_ID } from './arcane-sites';
 import { resourceCostBlocker, spendResourceCosts } from './resources';
@@ -18,7 +18,7 @@ export const wardSchema = z.object({ settlementId: id, factionId: id, casterId: 
 export const wardStateSchema = z.array(wardSchema).max(MAX_WARDS);
 export type Ward = z.infer<typeof wardSchema>;
 export interface ObservedWard extends Ward { settlementName: string; riteName: string; remainingTurns: number }
-export interface RiteOption { characterId: string; riteId: string; name: string; description: string; ashglassCost: number; durationTurns: number; settlementId: string | null; canPerform: boolean; blocker: string | null }
+export interface RiteOption { characterId: string; riteId: string; name: string; description: string; kind: StrategicRiteDefinition['kind']; ashglassCost: number; durationTurns: number; settlementId: string | null; canPerform: boolean; blocker: string | null }
 export const riteCommandSchemas = [
   z.object({ type: z.literal('performRite'), factionId: id, characterId: id, riteId: id }).strict(),
 ] as const;
@@ -35,6 +35,9 @@ export const isKindled = (state: GameState, settlementId: string): boolean => ru
 export const KINDLING_BURN = 4;
 export const KINDLING_FLOOR = 0.2;
 const units = new Map(UNITS.map(item => [item.id, item]));
+/** Rules 67: the company an ember host raises, and what the campaign uses to raise it. */
+export const SUMMONED_UNIT_ID = 'unit.guard';
+export type ArmyRaiser = (state: GameState, factionId: string, cell: number, unitId: string) => Army;
 /** Burns every besieging company before kindled walls, never below a fifth of its ranks, and tells both realms. */
 export function burnBesiegers(state: GameState, events: DomainEvent[]): void {
   if (rulesVersion(state) < 42 || !state.wards.length) return;
@@ -95,17 +98,30 @@ export function riteObjection(state: GameState, factionId: string, characterId: 
   const settlementId = lodgedHearth(state, character);
   if (!settlementId) return 'The caster must be lodged in one of your hearths.';
   const town = state.settlements[settlementId]!;
-  if (town.occupationTurns) return 'An occupied hearth cannot be warded.';
+  if (town.occupationTurns) return rite.kind === 'summoning' ? 'An occupied hearth raises no host.' : 'An occupied hearth cannot be warded.';
   if (!holdsPathSeam(state, settlementId, factionId, rite.pathId)) return 'This hearth’s borders hold no surveyed seam of the rite’s path.';
-  if (wardOf(state, settlementId)) return 'This hearth is already warded.';
+  // Rules 67: a summoning is instant and binds nothing, so a warded hearth may still raise a host.
+  if (rite.kind !== 'summoning' && wardOf(state, settlementId)) return 'This hearth is already warded.';
   return resourceCostBlocker(state, factionId, { [SITE_RESOURCE_ID]: rite.ashglassCost });
 }
-export function performRite(state: GameState, factionId: string, characterId: string, riteId: string): CommandResult {
+export function performRite(state: GameState, factionId: string, characterId: string, riteId: string, raise?: ArmyRaiser): CommandResult {
   const objection = riteObjection(state, factionId, characterId, riteId);
   if (objection) return fail(objection);
   const rite = rites.get(riteId)!, character = state.characters[characterId]!;
   const settlementId = riteTarget(state, character, rite)!, town = state.settlements[settlementId]!;
+  if (rite.kind === 'summoning' && !raise) throw new Error('A summoning needs the campaign to raise its host.');
   spendResourceCosts(state, factionId, { [SITE_RESOURCE_ID]: rite.ashglassCost });
+  if (rite.kind === 'summoning') {
+    // The host stands at the hearth with no movement left this turn; from then on it is an ordinary company of the realm.
+    const army = raise!(state, factionId, town.cell, SUMMONED_UNIT_ID);
+    army.name = rite.name; army.movement = 0;
+    const unit = units.get(SUMMONED_UNIT_ID)?.name ?? SUMMONED_UNIT_ID;
+    const besieger = state.sieges[settlementId]?.factionId;
+    return { ok: true, events: [
+      { turn: state.turn, factionId, type: 'rite_performed', cell: town.cell, message: `${character.name} performed ${rite.name} at ${town.name} for ${rite.ashglassCost} ashglass: a company of ${unit} stands at the hearth.` },
+      ...(besieger ? [{ turn: state.turn, factionId: besieger, type: 'rite_performed', cell: town.cell, message: `A host has risen within ${town.name}: a company of ${unit} stands at the hearth.` }] : []),
+    ] };
+  }
   if (rite.kind === 'breaking') {
     // The ward ends at once and the caster who held it is jarred, so the walls cannot be re-warded until it recovers.
     const ward = wardOf(state, settlementId)!, holder = state.characters[ward.casterId];
@@ -150,7 +166,7 @@ export function observeRites(state: GameState, factionId: string): RiteOption[] 
   const casters = Object.values(state.characters).filter(item => item.factionId === factionId && !item.dead && item.definitionId === 'character.waykeeper').sort((a, b) => a.id < b.id ? -1 : 1);
   return casters.flatMap(character => availableRites(state).map(rite => {
     const blocker = riteObjection(state, factionId, character.id, rite.id);
-    return { characterId: character.id, riteId: rite.id, name: rite.name, description: rite.description, ashglassCost: rite.ashglassCost, durationTurns: rite.durationTurns, settlementId: riteTarget(state, character, rite), canPerform: blocker === null, blocker };
+    return { characterId: character.id, riteId: rite.id, name: rite.name, description: rite.description, kind: rite.kind, ashglassCost: rite.ashglassCost, durationTurns: rite.durationTurns, settlementId: riteTarget(state, character, rite), canPerform: blocker === null, blocker };
   }));
 }
 export const hasWards = (state: GameState): boolean => (state.wards?.length ?? 0) > 0;

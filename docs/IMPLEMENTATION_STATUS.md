@@ -1,5 +1,24 @@
 # Theandril implementation status
 
+## The ember host, a summoning rite (rules/save 67) — 2026-10-31
+
+M7's summons, first rite. A fourth strategic rite and a fourth rite kind:
+a Flame-gifted Waykeeper lodged in a hearth that holds a Flame seam calls a
+company of Oath guard up out of the seam-fire at eight ashglass. The host
+stands at the hearth at once with no movement this turn and is an ordinary
+company of the realm from then on; an occupied hearth raises nothing, a
+warded or kindled hearth still may. The campaign's own army raiser places
+the company; the character sheet quotes the rite "at once"; AI realms raise
+a host at a besieged hearth once the standing rites are up and no company
+of the realm stands within. No canonical
+field; save 67 freezes the rules 66 pack. Headline pacing
+**380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201:
+every headline course in band and the other seeds identical to rules 66, the two other Epic seeds just under the band as before. Verification: content, sim, AI, web and journey tests;
+unit 2,365 / 301 files, campaigns 57, lint, typecheck, build, the ember host and
+seam warding journeys and the chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-10-31-ember-host/README.md),
+[ADR0098](architecture/0098-ember-host.md).
+
 ## The fourth hearth-event catalogue (rules/save 66) — 2026-10-31
 
 M6's hearth events, fourth catalogue. Fifteen more templates across the

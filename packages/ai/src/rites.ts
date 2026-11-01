@@ -7,11 +7,16 @@ import type { AiPlan } from './diplomacy';
  * never guesses at ashglass, lodging, seams or degrees. */
 export function planRites(view: Observation): AiPlan | null {
   const contested = new Set(view.sieges.map(siege => siege.settlementId));
-  const option = (view.rites ?? []).find(rite => rite.canPerform && rite.settlementId && contested.has(rite.settlementId));
+  // Rules 67: a summoning is raised only where no company of the realm already stands, so a siege draws one host, not the stockpile.
+  const garrisoned = new Set(view.armies.filter(army => army.factionId === view.factionId).map(army => army.cell));
+  const option = (view.rites ?? []).find(rite => rite.canPerform && rite.settlementId && contested.has(rite.settlementId)
+    && (rite.kind !== 'summoning' || !garrisoned.has(view.settlements.find(town => town.id === rite.settlementId)?.cell ?? -1)));
   if (!option) return null;
   const hearth = view.settlements.find(town => town.id === option.settlementId);
   const own = hearth?.factionId === view.factionId;
   return { commands: [{ type: 'performRite', factionId: view.factionId, characterId: option.characterId, riteId: option.riteId }],
-    reasons: [own ? `${option.name} at ${hearth?.name ?? option.settlementId}: the hearth is besieged and the walls can be held for ${option.durationTurns} turns at ${option.ashglassCost} ashglass.`
+    reasons: [own && option.kind === 'summoning' ? `${option.name} at ${hearth?.name ?? option.settlementId}: the hearth is besieged with no company of the realm within, and a host can be raised for ${option.ashglassCost} ashglass.`
+      : own ? `${option.name} at ${hearth?.name ?? option.settlementId}: the hearth is besieged and the walls can be held for ${option.durationTurns} turns at ${option.ashglassCost} ashglass.`
       : `${option.name} against ${hearth?.name ?? option.settlementId}: the besieged walls are bound and the ward can be broken for ${option.ashglassCost} ashglass.`] };
+
 }

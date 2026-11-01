@@ -75,3 +75,35 @@ test('a Flame-only caster kindles its besieged hearth and a besieger that burns 
   expect(besieger.commands).toEqual([{ type: 'liftSiege', factionId: rival, settlementId: host.id }]);
   expect(besieger.reasons[0]).toContain('kindled');
 });
+
+test('a Flame caster at a besieged hearth kindles it first and raises an ember host only where no company of the realm stands, and nothing when the ashglass is short (rules 67)', () => {
+  const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  const caster = Object.values(state.characters).find(item => item.factionId === player && item.definitionId === 'character.waykeeper')!;
+  caster.aptitudes = { 'path.flame': 2 };
+  state.resources.stockpiles[player]!['resource.ashglass'] = 20;
+  const column = Object.values(state.armies).find(army => army.factionId === rival)!;
+  column.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  column.movement = 3; refreshAuthoredSight(state);
+  expect(applyCommand(state, { type: 'declareWar', factionId: rival, targetFactionId: player })).toMatchObject({ ok: true });
+  expect(applyCommand(state, { type: 'besiege', factionId: rival, armyId: column.id, settlementId: host.id })).toMatchObject({ ok: true });
+  // The standing rite comes first.
+  const first = planRites(getObservation(state, player))!;
+  expect(first.commands[0]).toMatchObject({ type: 'performRite', riteId: 'rite.seam_kindling' });
+  expect(applyCommand(state, first.commands[0]!)).toMatchObject({ ok: true });
+  // A company of the realm stands in the hearth: no host is raised beside it.
+  expect(getObservation(state, player).rites!.find(rite => rite.riteId === 'rite.ember_host')).toMatchObject({ kind: 'summoning', canPerform: true });
+  expect(planRites(getObservation(state, player))).toBeNull();
+  // The company marches out; the host is the rite left to perform.
+  const garrison = Object.values(state.armies).find(army => army.factionId === player && army.cell === host.cell)!;
+  garrison.cell = neighbors(host.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
+  refreshAuthoredSight(state);
+  const second = planRites(getObservation(state, player))!;
+  expect(second.commands[0]).toMatchObject({ type: 'performRite', factionId: player, characterId: caster.id, riteId: 'rite.ember_host' });
+  expect(second.reasons[0]).toContain('no company of the realm within');
+  const before = Object.keys(state.armies).length;
+  expect(applyCommand(state, second.commands[0]!)).toMatchObject({ ok: true });
+  expect(Object.keys(state.armies)).toHaveLength(before + 1);
+  // The host stands within, and six ashglass are left: nothing more is proposed.
+  expect(planRites(getObservation(state, player))).toBeNull();
+});

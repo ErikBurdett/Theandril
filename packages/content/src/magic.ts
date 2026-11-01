@@ -32,7 +32,7 @@ export const BATTLE_SPELLS: readonly BattleSpellDefinition[] = [
  * the national discovery and a personal path, and lasts a bounded term. */
 export const strategicRiteSchema = z.object({
   id, name: text, description: text, discoveryId: id, pathId: id, pathLevel: z.number().int().min(1).max(5),
-  kind: z.enum(['warding', 'breaking', 'kindling']), ashglassCost: z.number().int().min(1).max(100), durationTurns: z.number().int().min(0).max(60), sinceRules: z.number().int().min(40).max(99),
+  kind: z.enum(['warding', 'breaking', 'kindling', 'summoning']), ashglassCost: z.number().int().min(1).max(100), durationTurns: z.number().int().min(0).max(60), sinceRules: z.number().int().min(40).max(99),
 }).strict();
 export type StrategicRiteDefinition = z.infer<typeof strategicRiteSchema>;
 export const STRATEGIC_RITES: readonly StrategicRiteDefinition[] = [
@@ -42,6 +42,8 @@ export const STRATEGIC_RITES: readonly StrategicRiteDefinition[] = [
   { id: 'rite.seam_warding', name: 'Seam warding', description: 'A Rune-gifted Waykeeper lodged in a hearth whose borders hold a Rune seam binds the seam into its walls for ten turns, paying six ashglass. While the caster stays, siege works cannot wear the defenses down and sabotage fails. A lost seam, a caster who leaves or is wounded, or a hearth that changes hands ends the ward.', discoveryId: 'arcane.rune_binding', pathId: 'path.rune', pathLevel: 1, kind: 'warding', ashglassCost: 6, durationTurns: 10, sinceRules: 40 },
   // Rules 42: the Flame hearth rite. A besieging company burns while it stands before kindled walls; the walls themselves still wear down.
   { id: 'rite.seam_kindling', name: 'Seam kindling', description: 'A Flame-gifted Waykeeper lodged in a hearth that holds a Flame seam kindles it beneath the walls for ten turns at six ashglass. While the caster stays, each company besieging the hearth loses strength every turn, though the works still wear the walls. A lost seam, absent caster, lost hearth or Rune breaking ends it.', discoveryId: 'arcane.ember_projection', pathId: 'path.flame', pathLevel: 1, kind: 'kindling', ashglassCost: 6, durationTurns: 10, sinceRules: 42 },
+  // Rules 67: the Flame summoning. Instant, so it follows the standing rites in the order the AI tries them.
+  { id: 'rite.ember_host', name: 'Ember host', description: 'A Flame-gifted Waykeeper lodged in a hearth that holds a Flame seam calls a company of Oath guard out of the seam-fire for eight ashglass. The host stands at the hearth at once, with no movement this turn, and is an ordinary company from then on; an occupied hearth raises nothing. Needs Contained ember projection.', discoveryId: 'arcane.ember_projection', pathId: 'path.flame', pathLevel: 1, kind: 'summoning', ashglassCost: 8, durationTurns: 0, sinceRules: 67 },
 ];
 /** Rules 24: a culture trains its Waykeepers in its own tradition, so who can
  * reach a working — and what its theory costs — differs between realms. */
@@ -68,7 +70,7 @@ export function validateMagicContent(characterIds: ReadonlySet<string>, building
   const ids = [...discoveries, ...spells, ...rites, ...MAGIC_PATHS].map(item => item.id);
   if (new Set(ids).size !== ids.length) throw new Error('Duplicate magic content ID');
   for (const rite of rites) if (!discoveries.some(item => item.id === rite.discoveryId) || !MAGIC_PATHS.some(path => path.id === rite.pathId)) throw new Error('Strategic rite names an unknown discovery or path: ' + rite.id);
-  for (const rite of rites) if ((rite.kind !== 'breaking') !== (rite.durationTurns > 0)) throw new Error('A warding or kindling lasts a term and a breaking is instant: ' + rite.id);
+  for (const rite of rites) if ((rite.kind !== 'breaking' && rite.kind !== 'summoning') !== (rite.durationTurns > 0)) throw new Error('A warding or kindling lasts a term; a breaking or summoning is instant: ' + rite.id);
   for (const discovery of discoveries) {
     if (!buildingIds.has(discovery.requiredBuildingId) || new Set(discovery.spellIds).size !== discovery.spellIds.length) throw new Error('Invalid arcane research infrastructure or spell references');
     for (const spellId of discovery.spellIds) if (!spells.some(spell => spell.id === spellId && spell.discoveryId === discovery.id)) throw new Error('Unknown or mismatched arcane spell');

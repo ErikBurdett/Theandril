@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { checksum, STRATEGIC_RITES } from '@theandril/content';
+import { checksum, CONTENT_HASH, STRATEGIC_RITES } from '@theandril/content';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, KINDLING_BURN, serializeGame, serializeGameForVersion, stateHash, type GameState } from './index';
 import { rebuildIndexes } from './visibility';
+import { PRE_SUMMONING_CONTENT_HASH } from './save';
+import { SUMMONED_UNIT_ID } from './rites';
 import { isPassable, neighbors } from '@theandril/mapgen';
 
-const RITE = 'rite.seam_warding', BREAKING = 'rite.ward_breaking', KINDLING = 'rite.seam_kindling', ASHGLASS = 'resource.ashglass';
+const RITE = 'rite.seam_warding', BREAKING = 'rite.ward_breaking', KINDLING = 'rite.seam_kindling', SUMMONING = 'rite.ember_host', ASHGLASS = 'resource.ashglass';
 const casterOf = (state: GameState) => Object.values(state.characters).find(character => character.factionId === state.turnOwnerId && character.definitionId === 'character.waykeeper')!;
 const hostOf = (state: GameState) => Object.values(state.settlements).find(town => town.factionId === state.turnOwnerId)!;
 /** The brink fixture with ashglass drawn and a rival column camped at the host's gate. */
@@ -30,7 +32,7 @@ describe('seam warding (rules 40)', () => {
     const rite = STRATEGIC_RITES.find(item => item.id === RITE)!;
     const view = getObservation(state, player);
     expect(view.rites).toHaveLength(STRATEGIC_RITES.length);
-    expect(view.rites).toContainEqual({ characterId: caster.id, riteId: RITE, name: rite.name, description: rite.description, ashglassCost: 6, durationTurns: 10, settlementId: host.id, canPerform: true, blocker: null });
+    expect(view.rites).toContainEqual({ characterId: caster.id, riteId: RITE, name: rite.name, description: rite.description, kind: 'warding', ashglassCost: 6, durationTurns: 10, settlementId: host.id, canPerform: true, blocker: null });
     expect(view.wards).toEqual([]);
     expect(view.sieges[0]).toMatchObject({ settlementId: host.id, defenses: 30 });
     expect(view.sieges[0]!.warded).toBeUndefined();
@@ -173,6 +175,50 @@ describe('seam warding (rules 40)', () => {
     const older = JSON.parse(serializeGameForVersion(state, 41));
     expect(older.version).toBe(41); expect(older.contentHash).toBe('78df970c');
     expect(stateHash(deserializeGame(JSON.stringify(older)))).toBe(stateHash(state));
+  });
+
+  it('raises an ember host at a lodged Flame caster\u2019s hearth from its seam, instant and paid, beside a standing ward; refuses the occupied, the unheld and the unpaid; and stays out of rules 66 (rules 67)', () => {
+    const state = besieged(), player = state.turnOwnerId, rival = state.factions[1]!.id, caster = casterOf(state), host = hostOf(state);
+    caster.aptitudes = { 'path.flame': 2, 'path.rune': 1 };
+    const option = () => getObservation(state, player).rites!.find(rite => rite.riteId === SUMMONING)!;
+    expect(option()).toMatchObject({ settlementId: host.id, ashglassCost: 8, durationTurns: 0, canPerform: true, blocker: null });
+    expect(applyCommandForVersion(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: SUMMONING }, 66)).toMatchObject({ ok: false, error: 'Unknown strategic rite.' });
+    // A kindled hearth still raises a host: the summoning binds nothing.
+    expect(applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: KINDLING })).toMatchObject({ ok: true });
+    expect(option()).toMatchObject({ canPerform: true });
+    const before = new Set(Object.keys(state.armies));
+    const result = applyCommand(state, { type: 'performRite', factionId: player, characterId: caster.id, riteId: SUMMONING });
+    expect(result).toMatchObject({ ok: true });
+    expect(result.events.map(event => event.factionId).sort()).toEqual([player, rival].sort());
+    expect(result.events[0]!.message).toContain(`${caster.name} performed Ember host at ${host.name} for 8 ashglass: a company of Oath guard stands at the hearth.`);
+    const host_ = Object.values(state.armies).find(army => !before.has(army.id))!;
+    expect(host_).toMatchObject({ factionId: player, cell: host.cell, name: 'Ember host', movement: 0 });
+    expect(host_.formations).toHaveLength(1);
+    expect(host_.formations[0]).toMatchObject({ unitId: SUMMONED_UNIT_ID });
+    expect(state.resources.stockpiles[player]![ASHGLASS]).toBe(6);
+    expect(state.wards).toHaveLength(1);
+    expect(getObservation(state, player).armies.some(army => army.id === host_.id)).toBe(true);
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+    // Unpaid, occupied, unheld.
+    expect(option()).toMatchObject({ canPerform: false, blocker: 'Requires 8 Ashglass in the realm stockpile.' });
+    state.resources.stockpiles[player]![ASHGLASS] = 20;
+    host.occupationTurns = 1;
+    expect(option()).toMatchObject({ canPerform: false, blocker: 'An occupied hearth raises no host.' });
+    host.occupationTurns = 0;
+    const land = state.land.settlements[host.id]!, flame = getObservation(state, player).arcaneSites.find(site => site.pathId === 'path.flame')!;
+    const claimed = land.claimed; land.claimed = claimed.filter(cell => cell !== flame.cell);
+    expect(option()).toMatchObject({ canPerform: false, blocker: 'This hearth\u2019s borders hold no surveyed seam of the rite\u2019s path.' });
+    land.claimed = claimed;
+    // The host is an ordinary company: a rules 66 seal of the campaign without its ward carries it, and the ward gone, hashes alike.
+    state.wards = [];
+    const sealed = serializeGameForVersion(state, 66);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 66, contentHash: PRE_SUMMONING_CONTENT_HASH });
+    const older = deserializeGame(sealed);
+    expect(stateHash(older)).toBe(stateHash(state));
+    expect(older.armies[host_.id]).toMatchObject({ name: 'Ember host' });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 67, contentHash: CONTENT_HASH });
+    expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });
+    expect(state.armies[host_.id]!.movement).toBeGreaterThan(0);
   });
 
   it('refuses the unresearched, the ungifted, the unlodged, the unheld and the unpaid, and stays out of older rules', () => {

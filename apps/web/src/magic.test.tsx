@@ -26,6 +26,8 @@ describe('strategic rites (rules 40)', () => {
     expect(starved).toContain('Seam warding');
     expect(starved).toContain('6 ashglass · 10 turns · at ' + host.name);
     expect(starved).toContain('Requires 6 Ashglass in the realm stockpile.');
+    expect(starved).toContain('Ember host');
+    expect(starved).toContain('8 ashglass · at once · at ' + host.name);
     expect(starved).toContain('disabled=""');
     expect(stateHash(state)).toBe(before);
     const other = Object.values(state.characters).find(item => item.factionId === player && item.definitionId !== 'character.waykeeper');
