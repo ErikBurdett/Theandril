@@ -9,6 +9,9 @@ set them and reads an army carrying them as the line; a v75 envelope may
 not name them. Save 76; no new field, command or content. Headline pacing 329 / 301 / 219 and every other course identical to rules 75, since the AI keeps the line; the chronicle pin at 56 holds.
 Verification: sim tests; unit 2,380 / 310 files, campaigns 57, lint, typecheck,
 build, the deployment journey and the chronicles journey (pin 56 unmoved).
+Commit `df7458b` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-wings/README.md)).
 [Evidence](development/2026-11-01-wings/README.md),
 [ADR0108](architecture/0108-cavalry-wings.md).
 

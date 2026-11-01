@@ -290,8 +290,10 @@
   roadmap library 145 delivered.
 - Cavalry wings, rules/save 76 ([ADR 0108](../../architecture/0108-cavalry-wings.md)):
   a fifth deployment puts the mounted companies on the outer columns of
-  every rank. Evidence packet
-  [docs/development/2026-11-01-wings/](../2026-11-01-wings/README.md);
+  every rank. Commit `df7458b` is deployed: both workflows succeeded and the
+  live readback matched the build
+  ([publication packet](../2026-11-01-publication-wings/README.md)).
+  Evidence packet [docs/development/2026-11-01-wings/](../2026-11-01-wings/README.md);
   roadmap library 146 delivered.
 
 ## Verified
