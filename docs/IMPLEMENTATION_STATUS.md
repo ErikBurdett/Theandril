@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## The sixth hearth-event catalogue (rules/save 74) — 2026-11-01
+
+M6's hearth events, sixth catalogue. Fifteen more templates across the
+conditions and the ages — the salt road toll, the midwinter feast, the
+rubble market, the seal colony, the seam goes cold, the wounded column, the
+pilots' dispute, the ledger of the dead, the drill sergeant, a wedding of
+houses, the far survey, the first well, the glass scare, rival envoys and
+the counter-envoy's return — one a chain whose default hears nothing; one
+hundred and twenty in all, the rules 73 catalogue frozen. Content only; save
+74 upgrades v73 envelopes unchanged under the new pack and refuses a v73
+envelope naming a rules 74 template. Headline pacing **PACING_HEADLINE**,
+the other seeds PACING_SEEDS, proxies PACING_PROXIES: PACING_VERDICT.
+Verification: content tests, the sim version pins; UNIT_SHORT,
+CAMPAIGNS_SHORT, lint, typecheck, build, the five hearth-event journeys and
+the chronicles journey CHRONICLES_NOTE.
+[Evidence](development/2026-11-01-hearth-events-vi/README.md),
+[ADR0105](architecture/0105-hearth-events-vi.md).
+
 ## The fifth hearth-event catalogue (rules/save 73) — 2026-11-01
 
 M6's hearth events, fifth catalogue. Fifteen more templates across the
@@ -15,6 +33,9 @@ the other seeds 367 / 321, 290 / 266, 187 / 198, proxies 403 / 422 / 367 / 209: 
 Verification: content tests, the sim version pins; unit 2,377 / 308 files,
 campaigns 57, lint, typecheck, build, the four hearth-event journeys and
 the chronicles journey (pin 56 unmoved though the turn-40 draw differs).
+Commit `e18d7a1` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-hearth-events-v/README.md)).
 [Evidence](development/2026-11-01-hearth-events-v/README.md),
 [ADR0104](architecture/0104-hearth-events-v.md).
 

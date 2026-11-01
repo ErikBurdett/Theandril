@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps and the fifth event catalogue
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -260,9 +260,16 @@
   roadmap library 141 delivered.
 - The fifth hearth-event catalogue, rules/save 73 ([ADR 0104](../../architecture/0104-hearth-events-v.md)):
   fifteen more templates across the conditions and the ages, one hundred
-  and five in all, the rules 72 catalogue frozen. Evidence packet
-  [docs/development/2026-11-01-hearth-events-v/](../2026-11-01-hearth-events-v/README.md);
+  and five in all, the rules 72 catalogue frozen. Commit `e18d7a1` is
+  deployed: both workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-11-01-publication-hearth-events-v/README.md)).
+  Evidence packet [docs/development/2026-11-01-hearth-events-v/](../2026-11-01-hearth-events-v/README.md);
   roadmap library 142 delivered.
+- The sixth hearth-event catalogue, rules/save 74 ([ADR 0105](../../architecture/0105-hearth-events-vi.md)):
+  fifteen more templates across the conditions and the ages, one hundred
+  and twenty in all, the rules 73 catalogue frozen. Evidence packet
+  [docs/development/2026-11-01-hearth-events-vi/](../2026-11-01-hearth-events-vi/README.md);
+  roadmap library 143 delivered.
 
 ## Verified
 
@@ -354,6 +361,9 @@ alliances journeys and the chronicles journey (pin 56 unmoved); headline
 Hearth events V: unit 2,377 / 308 files, campaigns 57, build, the four hearth-event
 journeys and the chronicles journey (pin 56 unmoved though the turn-40 draw differs); headline
 **375 / 317 / 207**, the other seeds 367 / 321, 290 / 266, 187 / 198, proxies 403 / 422 / 367 / 209.
+Hearth events VI: UNIT_SHORT, CAMPAIGNS_SHORT, build, the five hearth-event
+journeys and the chronicles journey CHRONICLES_NOTE; headline
+**PACING_HEADLINE**, the other seeds PACING_SEEDS, proxies PACING_PROXIES.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -401,7 +411,7 @@ first on 379.
   remain.
 - The ferry fallback fires only in a proved-enclosed basin; a basin whose
   shores open later is not waited for.
-- Hearth events: one hundred and five templates against one hundred and
+- Hearth events: one hundred and twenty templates against one hundred and
   fifty.
 - Relics lead and nothing more; none is lost, stolen or traded. One
   summoning of one path exists; rituals beyond the four rites and a third
