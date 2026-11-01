@@ -41,6 +41,8 @@ export { landmarkAt, landmarks, landmarkYieldAt, LANDMARK_RULES, MAX_LANDMARKS, 
 export { clientGoodsOf, goodsPromised } from './clients';
 export { DEMAND_COOLDOWN_TURNS, DEMAND_STRENGTH_RATIO, demandBlocker, demandTribute, emptyDemands, garrisonStrengthAt, hasDemands, observeDemands, tributeOf, validateDemands } from './demands';
 export type { ObservedDemands, TributeDemand, TributeDemandQuote } from './demands';
+export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, emptyHires, hasHires, hireBlocker, hireCompany, hirePriceOf, observeHires, validateHires } from './hires';
+export type { HireQuote, HireRecord, ObservedHires } from './hires';
 export { advanceRelics, bestowBlocker, bestowRelic, emptyRelics, hasRelics, MAX_RELICS, observeRelics, relicLeadership, validateRelics } from './relics';
 export type { ObservedRelic, RelicRecord } from './relics';
 export type { ObservedClientGoods } from './diplomacy';

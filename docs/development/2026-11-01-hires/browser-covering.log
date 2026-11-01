@@ -1,0 +1,11 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/hires.spec.ts tests/gameplay/tribute.spec.ts --workers=2 --output=docs/development/2026-11-01-hires/browser-results
+
+
+Running 2 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/tribute.spec.ts:11:1 › press a city-state for tribute from Realm affairs and read the payment in the treasury and the journal (3.7s)
+  ✓  2 [gameplay] › tests/gameplay/hires.spec.ts:11:1 › hire a company from a city-state in Realm affairs and find it in the registry and the journal (4.0s)
+
+  2 passed (4.7s)

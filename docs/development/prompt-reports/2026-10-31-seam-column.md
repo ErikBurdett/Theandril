@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue and the ember host
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host and hired companies
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -220,6 +220,12 @@
   ([publication packet](../2026-10-31-publication-ember-host/README.md)).
   Evidence packet [docs/development/2026-10-31-ember-host/](../2026-10-31-ember-host/README.md);
   roadmap library 136 delivered.
+- Companies hired from city-states, rules/save 68 ([ADR 0099](../../architecture/0099-hired-companies.md)):
+  a company at a city-state's gate buys a company of Ash pike for a price
+  set by the city's size, once every ten turns; the AI hires at war when it
+  keeps a reserve. Evidence packet
+  [docs/development/2026-11-01-hires/](../2026-11-01-hires/README.md);
+  roadmap library 137 delivered.
 
 ## Verified
 
@@ -292,6 +298,9 @@ journeys and the chronicles journey (pin 57 → 56, attributed to the Council’
 Ember host: unit 2,365 / 301 files, campaigns 57, build, the ember host and seam
 warding journeys and the chronicles journey (pin 56 unmoved); headline
 **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201.
+Hires: unit 2,368 / 303 files, campaigns 57, build, the hires and tribute journeys
+and the chronicles journey (pin 56 unmoved); headline **380 / 296 / 197**,
+the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -347,6 +356,8 @@ first on 379.
   rulers, legitimacy and the wider political cast remain.
 - An office pays its hearth and keeps its holder, nothing more; the AI
   fills offices but never resigns one.
+- A hired company is one kind at one price; no contracts outlast the sale
+  and no mercenary bands walk the map.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

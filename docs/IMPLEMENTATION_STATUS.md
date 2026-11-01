@@ -1,5 +1,25 @@
 # Theandril implementation status
 
+## Companies hired from city-states (rules/save 68) — 2026-11-01
+
+M5's contracts, first company for hire. `hireCompany` lets a realm's land
+company standing beside a city-state's hearth, the two at peace and the
+hearth not besieged, buy a company of Ash pike for thirty coin and four per
+population; the coin goes to the city, the company is raised at the gate by
+the campaign's own army raiser with no movement this turn, the city sells
+to the same realm once every ten turns and thinks a little better of the
+buyer. The observation quotes every own company at a city-state gate in
+sight with the exact blocker; Realm affairs shows the quote and a Hire
+button beside the tribute demand; AI realms at war hire the cheapest open
+quote once a turn when they keep sixty coin after it. A new canonical
+register; save 68; the pack unchanged. Headline pacing
+**380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201:
+every course identical to rules 67, the headline in band and the two other Epic seeds just under it as before. Verification: sim, AI and journey tests; unit 2,368 / 303 files,
+campaigns 57, lint, typecheck, build, the hires and tribute journeys and
+the chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-hires/README.md),
+[ADR0099](architecture/0099-hired-companies.md).
+
 ## The ember host, a summoning rite (rules/save 67) — 2026-10-31
 
 M7's summons, first rite. A fourth strategic rite and a fourth rite kind:

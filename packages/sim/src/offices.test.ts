@@ -86,7 +86,7 @@ describe('rules 65: offices of the realm', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.offices).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 67, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 68, contentHash: CONTENT_HASH });
     issue(state, { type: 'holdOffice', factionId: player, officeId: roll, holderId: surveyor.id });
     expect(() => serializeGameForVersion(state, 64)).toThrow('offices unavailable');
     const whole = createGame({ seed: 20260905, size: 'standard', factionCount: 12 });
