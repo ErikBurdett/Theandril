@@ -67,7 +67,7 @@ describe('rules 51: landmarks', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 50, contentHash: PRE_LANDMARKS_CONTENT_HASH });
     const older = deserializeGame(sealed);
     expect(stateHash(older)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 79, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 80, contentHash: CONTENT_HASH });
     expect(observeLandmarks(older, player)).toEqual(observeLandmarks(state, player));
     // A worked landmark hex yields its kind on top of the ground.
     const site = landmarks(state.world)[0];

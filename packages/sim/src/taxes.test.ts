@@ -63,7 +63,7 @@ describe('rules 70: taxes', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.taxes).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 79, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 80, contentHash: CONTENT_HASH });
     issue(state, { type: 'setTaxRate', factionId: player, rate: 'heavy' });
     expect(() => serializeGameForVersion(state, 69)).toThrow('taxes unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });

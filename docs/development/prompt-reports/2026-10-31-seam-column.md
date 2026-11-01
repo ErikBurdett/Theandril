@@ -313,6 +313,11 @@
   [docs/development/2026-11-01-hearth-events-viii/](../2026-11-01-hearth-events-viii/README.md);
   roadmap library 149 delivered. Commit `6bc8fa7` is deployed and read back
   ([publication packet](../2026-11-01-publication-hearth-events-viii/README.md)).
+- Restoration, rules/save 80 ([ADR 0112](../../architecture/0112-restoration.md)):
+  a conquered hearth with no garrison returns to its founder when its
+  unrest reaches a hundred, the first rebellion. Evidence packet
+  [docs/development/2026-11-01-restoration/](../2026-11-01-restoration/README.md);
+  roadmap library 150 delivered.
 
 ## Verified
 
@@ -427,6 +432,9 @@ journeys and the chronicles journey (pin moved from 56 to 57, attributed); headl
 Hearth events VIII: unit 2,382 / 310 files, campaigns 57 (Long proxy bound re-derived), build, the seven hearth-event
 journeys and the chronicles journey (pin 57 unmoved though the turn-40 draw differs); headline
 384 / 291 / 205, all in band, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209 (the Long proxy bound re-derived to 450).
+Restoration: unit 2,383 / 310 files, campaigns 57, build, the restoration, unrest and
+conquest journeys and the chronicles journey (pin 57 unmoved); headline
+384 / 291 / 205, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
 
 ## Left open
 

@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## Restoration (rules/save 80) — 2026-11-01
+
+M5's politics, the first rebellion. A hearth held by a realm other than its
+founder, with no army standing in it, returns to its founder when its
+unrest reaches a hundred instead of rioting — the cession's transfer with
+the conquest's loss of lodged officers, ten devastation, the occupation and
+unrest cleared, both realms' journals recording it — while the founder
+still holds a hearth and the hearth is not the holder's capital; a garrison
+holds it and it riots as before; the condition panel names the founder a
+hearth may rise for. No field, command or content; save 80.
+Headline pacing 384 / 291 / 205 and every other course identical to rules 79, since no measured campaign reaches a hundred unrest in a garrisonless conquered hearth; the chronicle pin at 57 holds. Verification: sim and journey tests; unit 2,383 / 310 files,
+campaigns 57, lint, typecheck, build, the restoration, unrest and
+conquest journeys and the chronicles journey (pin 57 unmoved).
+[Evidence](development/2026-11-01-restoration/README.md),
+[ADR0112](architecture/0112-restoration.md).
+
 ## The eighth hearth-event catalogue (rules/save 79) — 2026-11-01
 
 M6's events, meeting the scope's one hundred and fifty. Fifteen more

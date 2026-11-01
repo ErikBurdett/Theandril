@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 80 adds restoration: a hearth held by a realm other than its founder, with no army standing in it, returns to its founder when its unrest reaches a hundred instead of rioting, keeping its people, buildings and land; a garrison holds it, and the hearth’s condition panel names the founder it may rise for. Headline pacing 384 / 291 / 205 and every other course identical to rules 79, since no measured campaign reaches a hundred unrest in a garrisonless conquered hearth; the chronicle pin at 57 holds.
+
 Rules/save 79 brings the eighth hearth-event catalogue: fifteen more templates across the conditions and the ages, one a chain whose default refuses a bidder’s bribe; one hundred and fifty in all, the scope’s count, the rules 78 catalogue frozen for older saves. Headline pacing 384 / 291 / 205: all three courses in band, the Epic course for the first time since rules 73; the other seeds 352 / 351, 289 / 282, 197 / 200 in band; proxies 368 / 407 / 382 / 209, the Long proxy’s bound re-derived from the tool (maximum 375 to 450) with the headline Long at 291; the chronicle pin at 57 holds.
 
 Rules/save 78 brings a seventh hearth-event catalogue: fifteen more templates across the conditions and the ages, one a chain whose default declines a bidder’s wager; one hundred and thirty-five in all, the rules 77 catalogue frozen for older saves. Headline pacing 339 / 281 / 213: the Epic course drifts ten turns back toward its band and stays under it, Long and Standard hold; the other seeds 355 / 338, 246 / 285, 194 / 199 and proxies 402 / 426 / 288 / 208 redraw within their bounds; the chronicle pin moves from 56 to 57 on the Reedbound Council’s turn-40 redraw.

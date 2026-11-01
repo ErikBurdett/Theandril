@@ -45,7 +45,7 @@ export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, cityStateKindOf, emptyHires, hasHir
 export type { HireQuote, HireRecord, ObservedHires } from './hires';
 export { TAX_COIN_PERCENT, TAX_DEVASTATION_DRIFT, emptyTaxes, hasTaxes, observeTaxes, setTaxRate, taxBlocker, taxRateOf, taxedCoin, validateTaxes } from './taxes';
 export type { ObservedTaxes, TaxRate, TaxRecord } from './taxes';
-export { UNREST_HALVING, UNREST_RIOT, RIOT_DEVASTATION, emptyUnrest, hasUnrest, observeUnrest, unrestOf, unrestPressures, validateUnrest } from './unrest';
+export { UNREST_HALVING, UNREST_RIOT, RIOT_DEVASTATION, emptyUnrest, hasUnrest, observeUnrest, restorationOf, unrestOf, unrestPressures, validateUnrest } from './unrest';
 export type { ObservedUnrest, UnrestRecord } from './unrest';
 export { MAP_SHARE_COOLDOWN_TURNS, emptyMapShares, hasMapShares, lastMapShare, mapShareBlocker, observeMapShares, shareMaps, validateMapShares } from './map-sharing';
 export type { MapShare, ObservedMapShare } from './map-sharing';
