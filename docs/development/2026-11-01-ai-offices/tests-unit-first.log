@@ -1,0 +1,48 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/updates/roadmap.test.ts (18 tests | 2 failed) 173ms
+     × records one bounded counterplay checkpoint and corrects posting targets without inflating feature counts 6ms
+     × records production lists as a bounded checkpoint while preserving manual correction and broader delegation acceptance 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/updates/roadmap.test.ts > the source-backed roadmap contract > records one bounded counterplay checkpoint and corrects posting targets without inflating feature counts
+AssertionError: expected 153 to be 154 // Object.is equality
+
+- Expected
++ Received
+
+- 154
++ 153
+
+ ❯ apps/web/src/updates/roadmap.test.ts:77:84
+     75|     expect(empire.delivered.join(' ')).toContain('preserving the order…
+     76|     expect(pacing.status).toBe('in-progress');
+     77|     expect(roadmapItems.reduce((count, item) => count + item.delivered…
+       |                                                                                    ^
+     78|     expect(roadmapItems.reduce((count, item) => count + item.remaining…
+     79|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unit| apps/web/src/updates/roadmap.test.ts > the source-backed roadmap contract > records production lists as a bounded checkpoint while preserving manual correction and broader delegation acceptance
+AssertionError: expected 153 to be 154 // Object.is equality
+
+- Expected
++ Received
+
+- 154
++ 153
+
+ ❯ apps/web/src/updates/roadmap.test.ts:202:84
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 313 passed (314)
+      Tests  2 failed | 2386 passed (2388)
+   Start at  03:27:30
+   Duration  28.17s (transform 33.31s, setup 0ms, import 190.60s, tests 345.96s, environment 31ms)
+

@@ -2,10 +2,13 @@ import type { GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 
 /** Rules 65: a vacant office of the realm goes to a living, unwounded
- * character of its role who sits in a hearth with no company to join this
- * turn, provided the realm keeps another living character of that role who
- * can still ride — an office never takes a realm's only marshal, surveyor,
- * engineer or Waykeeper off the road. One office a turn; nothing resigns. */
+ * character of its role who sits in a hearth, provided the realm keeps
+ * another living character of that role who can still ride — an office never
+ * takes a realm's only marshal, surveyor, engineer or Waykeeper off the road.
+ * A sitting character with a company to join this turn is left for the road
+ * unless another of the role already rides with a company or is away on a
+ * mission, which is what the appointment for the office (characters.ts)
+ * arranges. One office a turn; nothing resigns. */
 export function planOffices(view: Observation, busyCharacterIds: ReadonlySet<string> = new Set()): AiPlan | null {
   const offices = view.offices;
   if (!offices) return null;
@@ -14,8 +17,9 @@ export function planOffices(view: Observation, busyCharacterIds: ReadonlySet<str
   for (const office of offices.filter(office => office.holderCharacterId === null).sort((a, b) => a.officeId < b.officeId ? -1 : 1)) {
     const ofRole = living.filter(character => character.role === office.role && !holders.has(character.id));
     if (ofRole.length < 2) continue;
-    const holder = ofRole.filter(character => !character.woundedTurns && !character.mission && character.location?.kind === 'settlement' && !busyCharacterIds.has(character.id) && !character.assignmentOptions.some(option => option.canAssign))
-      .sort((a, b) => a.id < b.id ? -1 : 1)[0];
+    const riding = ofRole.some(character => character.location?.kind === 'army' || character.mission);
+    const holder = ofRole.filter(character => !character.woundedTurns && !character.mission && character.location?.kind === 'settlement' && !busyCharacterIds.has(character.id) && (riding || !character.assignmentOptions.some(option => option.canAssign)))
+      .sort((a, b) => (a.assignmentOptions.some(option => option.canAssign) ? 1 : 0) - (b.assignmentOptions.some(option => option.canAssign) ? 1 : 0) || (a.id < b.id ? -1 : 1))[0];
     if (!holder) continue;
     const town = view.settlements.find(item => holder.location?.kind === 'settlement' && item.id === holder.location.settlementId);
     const command: GameCommand = { type: 'holdOffice', factionId: view.factionId, officeId: office.officeId, holderId: holder.id };

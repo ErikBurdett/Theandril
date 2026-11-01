@@ -1,5 +1,19 @@
 # Theandril implementation status
 
+## AI offices — 2026-11-01
+
+M5's politics, the AI's first office. The character planner appoints a
+second surveyor to sit when the Keeper of the Roll is vacant, one surveyor
+already serves and the treasury holds two hundred coin; the office planner
+seats a sitting surveyor once another rides or is away on a mission, and
+still never seats a realm's only character of a role. AI only; no rule,
+save field or content change.
+Headline pacing 350 / 281 / 199, all three courses in band with the Epic course at the bottom of its band (384 / 291 / 205 before the planner); the other seeds 331 / 359, 288 / 284, 200 / 203, one Epic seed nineteen under; proxies 334 / 412 / 295 / 200 within their bounds; the chronicle pin at 57 holds. Verification: AI tests; unit 2,388 / 314 files, campaigns 57, lint,
+typecheck, build, the legitimacy and offices journeys and the chronicles
+journey (pin 57 unmoved; no office is reached in that short campaign, ten are held in a tiny Long probe).
+[Evidence](development/2026-11-01-ai-offices/README.md),
+[ADR0116](architecture/0116-ai-offices.md).
+
 ## Legitimacy (rules/save 82) — 2026-11-01
 
 M5's politics, the realm's standing read from the world. Every realm is
@@ -13,6 +27,9 @@ envelopes unchanged.
 Headline pacing 384 / 291 / 205 and both other seeds identical to rules 81; the Epic proxy moves from 368 to 388 within its bound as a realm on it reads weak legitimacy; the chronicle pin at 57 holds. Verification: sim and journey tests; unit 2,387 / 314 files,
 campaigns 57, lint, typecheck, build, the legitimacy, taxes and unrest
 journeys and the chronicles journey (pin 57 unmoved).
+Commit `62f736e` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-legitimacy/README.md)).
 [Evidence](development/2026-11-01-legitimacy/README.md),
 [ADR0115](architecture/0115-legitimacy.md).
 

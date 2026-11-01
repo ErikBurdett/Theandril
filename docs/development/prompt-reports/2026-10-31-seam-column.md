@@ -336,7 +336,13 @@
   weighing on every hearth's unrest when weak or strong, read in Realm
   affairs. Evidence packet
   [docs/development/2026-11-01-legitimacy/](../2026-11-01-legitimacy/README.md);
-  roadmap library 153 delivered.
+  roadmap library 153 delivered. Commit `62f736e` is deployed and read back
+  ([publication packet](../2026-11-01-publication-legitimacy/README.md)).
+- AI offices ([ADR 0116](../../architecture/0116-ai-offices.md)): AI realms
+  appoint a second surveyor to sit as Keeper of the Roll and seat it once
+  the first rides; AI only. Evidence packet
+  [docs/development/2026-11-01-ai-offices/](../2026-11-01-ai-offices/README.md);
+  roadmap library 154 delivered.
 
 ## Verified
 
@@ -463,6 +469,9 @@ seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
 Legitimacy: unit 2,387 / 314 files, campaigns 57, build, the legitimacy, taxes and unrest
 journeys and the chronicles journey (pin 57 unmoved); headline 384 / 291 / 205,
 the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 388 / 407 / 382 / 209.
+AI offices: unit 2,388 / 314 files, campaigns 57, build, the legitimacy and offices journeys
+and the chronicles journey (pin 57 unmoved; no office is reached in that short campaign, ten are held in a tiny Long probe); headline 350 / 281 / 199, the
+other seeds 331 / 359, 288 / 284, 200 / 203, proxies 334 / 412 / 295 / 200.
 
 ## Left open
 

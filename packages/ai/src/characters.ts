@@ -11,6 +11,8 @@ const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id >
 export const isWaykeeperBattleArmy = (army: ArmyView): boolean => army.domain === 'land' && !army.carrierId && army.canAttack && !army.canFound && army.formations.length >= 4;
 
 /** Sparse functional planner: eligibility comes from sim, priority only from observed facts. */
+/** Rules 65: the coin a realm keeps before it appoints a second surveyor to sit in an office. */
+export const OFFICE_HOLDER_TREASURY = 200;
 export function planCharacters(view: Observation, coinBudget: number, reservedArmyIds: ReadonlySet<string> = heldDelegatedArmyIds(view)): CharacterPlan {
   const commands: GameCommand[] = [], reasons: string[] = [];
   const heldArmyIds = new Set([...reservedArmyIds, ...view.characters.flatMap(character => character.mission ? [character.mission.armyId] : [])]);
@@ -107,7 +109,9 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
   const counts = new Map(['marshal', 'surveyor', 'engineer', 'waykeeper'].map(role => [role, living.filter(character => character.role === role).length]));
   const fieldArmies = own.filter(army => useful(army) && army.formations.length >= 2);
   const needsCaster = view.wars.length > 0 && fieldArmies.some(isWaykeeperBattleArmy) && view.arcaneResearch.choices.some(choice => choice.canResearch || choice.researched);
-  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster || wardens ? 1 : studiesCaster ? (casterStudies ? 1 : Math.min(2, (counts.get('waykeeper') ?? 0) + 1)) : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
+  // Rules 65 and 82: a second surveyor sits as Keeper of the Roll when the office is vacant and the purse allows; the first stays on the road.
+  const officeSeat = (view.offices ?? []).find(office => office.role === 'surveyor' && office.holderCharacterId === null) && (counts.get('surveyor') ?? 0) >= 1 && view.treasury >= OFFICE_HOLDER_TREASURY;
+  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', officeSeat ? 2 : 1], ['waykeeper', needsCaster || wardens ? 1 : studiesCaster ? (casterStudies ? 1 : Math.min(2, (counts.get('waykeeper') ?? 0) + 1)) : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
   const rolePriority = ['marshal', 'waykeeper', 'engineer', 'surveyor'];
   const opportunities = view.characterRecruitment.filter(option => option.canRecruit && option.coinCost <= budget && (counts.get(option.role) ?? 0) < (desired.get(option.role) ?? 0))
     .sort((a, b) => rolePriority.indexOf(a.role) - rolePriority.indexOf(b.role) || (a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0));
@@ -127,6 +131,13 @@ export function planCharacters(view: Observation, coinBudget: number, reservedAr
       commands.push({ type: 'recruitCharacter', factionId: view.factionId, settlementId: option.settlementId, definitionId: option.definitionId });
       budget -= option.coinCost;
       reasons.push(`Appoint ${option.name} at ${town.name} to study the realm's seams toward a sealed working; pay ${option.coinCost} coin and ${option.upkeep} recurring upkeep.`);
+      break;
+    }
+    if (option.role === 'surveyor' && officeSeat) {
+      // Appointed to sit, not to ride: the office planner seats the one with no company to join.
+      commands.push({ type: 'recruitCharacter', factionId: view.factionId, settlementId: option.settlementId, definitionId: option.definitionId });
+      budget -= option.coinCost;
+      reasons.push(`Appoint ${option.name} at ${town.name} to sit as Keeper of the Roll; pay ${option.coinCost} coin and ${option.upkeep} recurring upkeep.`);
       break;
     }
     const candidate = own.filter(army => army.cell === town.cell && army.domain === 'land' && useful(army) && (option.role !== 'waykeeper' || isWaykeeperBattleArmy(army)) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
