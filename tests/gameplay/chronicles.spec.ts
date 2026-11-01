@@ -52,9 +52,11 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   // Toll Wars bring their own event to every realm on turn 12 and it ends on 56, attributed in
   // docs/development/2026-10-31-crisis-events/chronicle-expectation.md; under rules 57 the second
   // landmark catalogue re-places this map's landmarks and a hearth works a different hex from turn 23,
-  // so it ends on 54, attributed in docs/development/2026-10-31-landmarks-ii/chronicle-expectation.md).
+  // so it ends on 54, attributed in docs/development/2026-10-31-landmarks-ii/chronicle-expectation.md;
+  // the rules 62 catalogue lands the Reedbound Council's turn-40 draw on another template and it ends on
+  // 53, attributed in docs/development/2026-10-31-hearth-events-iii/chronicle-expectation.md).
   // Genuine historical archive seals remain separately tested.
-  expect(victory?.turn).toBe(54);
+  expect(victory?.turn).toBe(53);
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });

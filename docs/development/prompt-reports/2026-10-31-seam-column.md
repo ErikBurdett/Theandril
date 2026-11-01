@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands and the held ferry
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry and the third event catalogue
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -171,6 +171,11 @@
   Evidence packet
   [docs/development/2026-10-31-ferry-ashore/](../2026-10-31-ferry-ashore/README.md);
   roadmap library 130 delivered.
+- The third hearth-event catalogue, rules/save 62 ([ADR 0093](../../architecture/0093-hearth-events-iii.md)):
+  fifteen more templates, seventy-five in all; every headline course of
+  every seed in band. Evidence packet
+  [docs/development/2026-10-31-hearth-events-iii/](../2026-10-31-hearth-events-iii/README.md);
+  roadmap library 131 delivered.
 
 ## Verified
 
@@ -225,7 +230,10 @@ demands: unit 2,354, campaigns 57, build, two journeys (one new) and the
 chronicles journey; every pacing figure identical; two paid and four refused
 demands on the Epic headline with six city-states seated. Ferry ashore:
 unit 2,355, campaigns 57, build, the chronicles journey; every pacing figure
-identical.
+identical. Hearth events III: unit 2,355, campaigns 57, build, two journeys
+(one new) and the chronicles journey (pin 54 → 53, attributed); headline
+**386 / 305 / 214**, the other seeds 390 / 362, 295 / 282, 183 / 202, proxies
+336 / 440 / 289 / 197.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -273,6 +281,7 @@ first on 379.
   remain.
 - The ferry fallback fires only in a proved-enclosed basin; a basin whose
   shores open later is not waited for.
+- Hearth events: seventy-five templates against one hundred and fifty.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

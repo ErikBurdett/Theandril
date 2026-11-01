@@ -44,7 +44,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 61;
+export const SAVE_VERSION = 62;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -90,6 +90,8 @@ export const PRE_LANDMARKS_II_CONTENT_HASH = '7cad9f6e';
 export const PRE_REGIONAL_CRISES_CONTENT_HASH = '0eed2d1a';
 /** The rules 59 pack, before rules 60 added the city-states' trade goods. */
 export const PRE_TRADE_GOODS_CONTENT_HASH = 'b48e6615';
+/** The rules 60–61 pack, before rules 62 added the third hearth-event catalogue. */
+export const PRE_EVENTS_III_CONTENT_HASH = 'acd39799';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -301,10 +303,12 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(61), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(62), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
+/** Rules 62 changes no canonical field; a v61 envelope differs only in its version and the pack it was sealed under. */
+const saveV61Schema = saveSchema.extend({ version: z.literal(61) }).strict();
 type Through60 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV60Schema> };
 const saveV60Schema = saveSchema.extend({ version: z.literal(60), state: stateV60Schema }).strict();
 const saveV59Schema = saveSchema.extend({ version: z.literal(59), state: stateV60Schema }).strict();
@@ -737,7 +741,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 60) return CONTENT_HASH; // rules 61 changed no content
+  if (version >= 62) return CONTENT_HASH;
+  if (version >= 60) return PRE_EVENTS_III_CONTENT_HASH; // rules 61 changed no content
   if (version >= 59) return PRE_TRADE_GOODS_CONTENT_HASH;
   if (version >= 57) return PRE_REGIONAL_CRISES_CONTENT_HASH; // rules 58 changed no content
   if (version >= 54) return PRE_LANDMARKS_II_CONTENT_HASH; // rules 55 and 56 changed no content
@@ -1197,6 +1202,14 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 61) {
+    const sealed = saveV61Schema.parse(raw);
+    assert(sealed.contentHash === PRE_EVENTS_III_CONTENT_HASH, 'v61 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v61 snapshot checksum does not match its contents');
+    assert(sealed.state.hearthEvents.pending.every(pending => hearthEventsForRules(61).some(item => item.id === pending.templateId)), 'v61 envelope names a hearth event of later rules');
+    // Rules 62 adds hearth events to the content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   const prior = parseSaveThrough60(raw);
   const state = { ...prior.state, demands: emptyDemands() };
   return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
@@ -1205,10 +1218,10 @@ function parseSaveThrough60(raw: unknown): Through60 {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === 60) {
     const sealed = saveV60Schema.parse(raw);
-    assert(sealed.contentHash === CONTENT_HASH, 'v60 content hash is not a recognized compatible pack');
+    assert(sealed.contentHash === PRE_EVENTS_III_CONTENT_HASH, 'v60 content hash is not a recognized compatible pack');
     assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v60 snapshot checksum does not match its contents');
-    // Rules 61 adds the tribute demands as a new register; the state continues unchanged under the same pack.
-    return { ...sealed, version: SAVE_VERSION };
+    // Rules 61 adds the tribute demands as a new register; rules 62 re-seals under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
   }
   if (version === 59) {
     const sealed = saveV59Schema.parse(raw);

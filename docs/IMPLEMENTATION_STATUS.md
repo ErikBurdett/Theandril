@@ -1,5 +1,20 @@
 # Theandril implementation status
 
+## The third hearth-event catalogue (rules/save 62) — 2026-10-31
+
+M6 content. Fifteen more templates across the conditions and the ages, one
+a chain whose default keeps out of it; seventy-five in all, the rules 61
+catalogue frozen; save 62 upgrades v61 envelopes unchanged under the new
+pack. Headline pacing **386 / 305 / 214**, the other seeds 390 / 362,
+295 / 282, 183 / 202, proxies 336 / 440 / 289 / 197: every headline course
+of every seed in band. The chronicle pin moves 54 → 53, attributed (a draw
+of the larger catalogue lands on another template); the hearth-event cadence
+test now counts only drawn offers. Verification: content and sim tests;
+unit 2,355 / 296 files, campaigns 57, lint, typecheck, build, two covering
+journeys and the chronicles journey.
+[Evidence](development/2026-10-31-hearth-events-iii/README.md),
+[ADR0093](architecture/0093-hearth-events-iii.md).
+
 ## A held ferry puts its passengers ashore — 2026-10-31
 
 AI only. A ferry carrying a founder in a basin the sea knowledge proves

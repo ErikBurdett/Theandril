@@ -10,11 +10,11 @@ import { armyStrength } from './army-composition';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); return result; };
 /** Plays whole rounds until the realm is offered an event, within a bound. */
-/** Ends rounds until the realm is offered an event; with `ordinary`, a crisis's own event (rules 54) is answered with its first choice and the wait goes on for a drawn one. */
-function untilOffered(state: GameState, factionId: string, rounds = 80, ordinary = false): void {
+/** Ends rounds until the realm is offered an event; with `withinRules`, a crisis's own event (rules 54) or a template of later rules is answered with its first choice and the wait goes on for one those rules know. */
+function untilOffered(state: GameState, factionId: string, rounds = 80, withinRules?: number): void {
   for (let round = 0; round < rounds; round++) {
     const pending = state.hearthEvents.pending.find(item => item.factionId === factionId);
-    if (pending && !(ordinary && pending.id.endsWith('.crisis'))) return;
+    if (pending && !(withinRules !== undefined && (pending.id.endsWith('.crisis') || (HEARTH_EVENTS.find(item => item.id === pending.templateId)?.sinceRules ?? 0) > withinRules))) return;
     if (pending) issue(state, { type: 'resolveHearthEvent', factionId, eventId: pending.id, choiceId: HEARTH_EVENTS.find(item => item.id === pending.templateId)!.choices[0]!.id });
     for (let seat = 0; seat < state.factions.length; seat++) issue(state, { type: 'endTurn', factionId: state.turnOwnerId });
   }
@@ -30,7 +30,8 @@ describe('rules 46: hearth events', () => {
       for (let round = 0; round < 40; round++) {
         for (let seat = 0; seat < state.factions.length; seat++) {
           const result = issue(state, { type: 'endTurn', factionId: state.turnOwnerId });
-          log.push(...result.events.filter(event => event.type === 'hearth_event_offered').map(event => `${event.turn}:${event.factionId}:${event.message.slice(0, 24)}`));
+          // A drawn offer reads "<event> at <hearth>: …"; a chain's follow-up and a crisis's own event are given, not drawn, and name what they follow.
+          log.push(...result.events.filter(event => event.type === 'hearth_event_offered').map(event => `${event.turn}:${event.factionId}:${/, (following|with) /.test(event.message.split(': ')[0] ?? '') ? 'given' : 'drawn'}:${event.message.slice(0, 24)}`));
         }
       }
       return log;
@@ -42,7 +43,7 @@ describe('rules 46: hearth events', () => {
     expect(stateHash(first)).toBe(stateHash(second));
     // Each realm draws at most once every interval, and holds at most one event.
     const byFaction = new Map<string, number[]>();
-    for (const entry of a) { const [turn, factionId] = entry.split(':'); byFaction.set(factionId!, [...(byFaction.get(factionId!) ?? []), Number(turn)]); }
+    for (const entry of a) { const [turn, factionId, how] = entry.split(':'); if (how === 'drawn') byFaction.set(factionId!, [...(byFaction.get(factionId!) ?? []), Number(turn)]); }
     for (const turns of byFaction.values()) for (let i = 1; i < turns.length; i++) expect(turns[i]! - turns[i - 1]!).toBeGreaterThanOrEqual(HEARTH_EVENT_INTERVAL);
     const historical = attunementCampaign();
     withRules(historical, 45, () => {
@@ -89,7 +90,7 @@ describe('rules 46: hearth events', () => {
     expect(applyCommand(state, { type: 'resolveHearthEvent', factionId: player, eventId: pending.id, choiceId: choice.id })).toMatchObject({ ok: false });
     // An event left unanswered takes its first choice when its term ends.
     const lapsing = attunementCampaign(), owner = lapsing.turnOwnerId;
-    untilOffered(lapsing, owner, 80, true);
+    untilOffered(lapsing, owner, 120, 47);
     const late = lapsing.hearthEvents.pending.find(item => item.factionId === owner)!;
     const lateTemplate = HEARTH_EVENTS.find(item => item.id === late.templateId)!, lateTown = lapsing.settlements[late.settlementId]!, lateFaction = lapsing.factions.find(item => item.id === owner)!;
     const expected = { food: Math.max(0, lateTown.food + lateTemplate.choices[0]!.effects.food), coin: lateFaction.treasury + lateTemplate.choices[0]!.effects.coin };
@@ -165,7 +166,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 61, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 62, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -220,7 +221,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 61, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 62, contentHash: CONTENT_HASH });
     view = getObservation(loaded, player);
     expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
     // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
@@ -282,7 +283,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 47, contentHash: PRE_CHAINS_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 61, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 62, contentHash: CONTENT_HASH });
     // A pending event that lies ahead without an event it follows is refused by validation.
     const corrupt = deserializeGame(serializeGame(state));
     corrupt.hearthEvents.pending = [{ id: 'event.999.1', factionId: player, settlementId: host.id, templateId: 'event.kiln_fire', turn: corrupt.turn + 3, expiresTurn: corrupt.turn + 3 + HEARTH_EVENT_ANSWER_TURNS }];

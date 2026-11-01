@@ -29,7 +29,7 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54), z.literal(57), z.literal(59)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54), z.literal(57), z.literal(59), z.literal(62)]),
   /** Rules 49: drawn only once the world has reached this age. */
   epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
   /** Rules 54: drawn only while this crisis stands. */
@@ -430,7 +430,100 @@ const EIGHTH_BATCH: readonly HearthEventDefinition[] = [
       { id: 'bar_the_doors', label: 'Bar the doors', description: 'Keep the price and the doors; the crowd breaks something else.', effects: effects({ coin: 10, devastation: 5 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH, ...SEVENTH_BATCH, ...EIGHTH_BATCH];
+/** Rules 62: fifteen more, one a chain, across the conditions and the ages. */
+const NINTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.lantern_festival', name: 'The lantern festival', condition: 'any', weight: 2, sinceRules: 62,
+    text: 'The lanes of {hearth} ask for oil to light every door on the night of the Ashfall’s turning, as the old towns did.',
+    choices: [
+      { id: 'light_the_lanes', label: 'Light the lanes', description: 'Pay for the oil; the night is remembered and the stories told at every door are written down.', effects: effects({ coin: -10, knowledge: 10 }) },
+      { id: 'keep_the_oil', label: 'Keep the oil', description: 'Oil is dear; the lanes stay dark and the treasury keeps its coin.', effects: effects({ coin: 5 }) },
+    ] },
+  { id: 'event.widows_toll', name: 'The widows’ toll', condition: 'wartime', weight: 3, sinceRules: 62,
+    text: 'The widows of the fallen stand at the granary door of {hearth} with their children and ask for bread.',
+    choices: [
+      { id: 'feed_them', label: 'Feed them', description: 'Open the granary to every widow; the lanes are mended by hands that have reason to.', effects: effects({ food: -8, devastation: -3 }) },
+      { id: 'turn_them_to_the_mills', label: 'Turn them to the mills', description: 'Set them to work for their bread; the mills turn, and the lanes resent it.', effects: effects({ coin: 10, devastation: 3 }) },
+    ] },
+  { id: 'event.harbor_masters_offer', name: 'A harbor-master’s offer', condition: 'harbor', weight: 2, sinceRules: 62,
+    text: 'A harbor-master from beyond the sea offers to run the quay of {hearth} for a cut of what passes over it.',
+    choices: [
+      { id: 'take_the_offer', label: 'Take the offer', description: 'Let the foreigner run the quay; the coin comes in and the clerks learn less of what passes.', effects: effects({ coin: 20, knowledge: -5 }) },
+      { id: 'keep_the_quay', label: 'Keep the quay', description: 'The quay is the hearth’s; pay its own master a little more.', effects: effects({ coin: -5 }) },
+    ] },
+  { id: 'event.lost_ledger', name: 'The lost ledger', condition: 'archive', weight: 2, sinceRules: 62,
+    text: 'The clerks of {hearth} have found an old tax roll behind a shelf, naming dues nobody has paid in a generation.',
+    choices: [
+      { id: 'enforce_the_roll', label: 'Enforce the roll', description: 'Collect the old dues; the coin comes in and the lanes remember who kept the roll.', effects: effects({ coin: 25, devastation: 2 }) },
+      { id: 'burn_the_roll', label: 'Burn the roll', description: 'Let the old dues go; the clerks copy what the roll says of the hearth’s founding first.', effects: effects({ knowledge: 15 }) },
+    ] },
+  { id: 'event.muster_day', name: 'Muster day', condition: 'garrisoned', weight: 2, sinceRules: 62,
+    text: 'The companies quartered at {hearth} ask for a day of games before the campaigning season.',
+    choices: [
+      { id: 'hold_the_games', label: 'Hold the games', description: 'Pay for the games; the companies come back to the drill ground with their strength up.', effects: effects({ coin: -10, garrison: 8 }) },
+      { id: 'keep_them_at_drill', label: 'Keep them at drill', description: 'No games; the drill goes on and the stores feed it.', effects: effects({ food: -3, garrison: 3 }) },
+    ] },
+  { id: 'event.long_peace', name: 'The long peace', condition: 'peace', epoch: 'epoch.roads', weight: 2, sinceRules: 62,
+    text: 'The smiths of {hearth} ask leave to beat the spare spearheads into ploughshares, since no war has come up the roads.',
+    choices: [
+      { id: 'let_them', label: 'Let them', description: 'Ploughshares it is; the fields gain and the companies at the hearth lose their spare iron.', effects: effects({ food: 10, garrison: -6 }) },
+      { id: 'forbid_it', label: 'Forbid it', description: 'The spears stay spears; pay the smiths for their idle day.', effects: effects({ coin: -5 }) },
+    ] },
+  { id: 'event.far_cousins', name: 'Far cousins', condition: 'wide', weight: 2, sinceRules: 62,
+    text: 'Kin from the far hearths of the realm have come to {hearth} asking for land of their own.',
+    choices: [
+      { id: 'grant_them_land', label: 'Grant them land', description: 'Give them a quarter and feed them until the first harvest.', effects: effects({ population: 1, food: -8 }) },
+      { id: 'send_them_home', label: 'Send them home', description: 'Pay their road home; the hearth keeps its land.', effects: effects({ coin: 8 }) },
+    ] },
+  { id: 'event.first_harvest', name: 'The first harvest', condition: 'young', weight: 3, sinceRules: 62,
+    text: 'The first crop of {hearth} is in, and the hearth asks what is to be done with it.',
+    choices: [
+      { id: 'share_it_out', label: 'Share it out', description: 'Every household takes its share; the stores fill.', effects: effects({ food: 12 }) },
+      { id: 'sell_it', label: 'Sell it on the road', description: 'Sell the crop to the carters and keep the seed; the stores stay thin.', effects: effects({ coin: 20, food: -4 }) },
+    ] },
+  { id: 'event.cistern_silts', name: 'The cistern silts', condition: 'populous', weight: 2, sinceRules: 62,
+    text: 'The great cistern of {hearth} is silting, and the water comes up brown.',
+    choices: [
+      { id: 'dredge_it', label: 'Dredge it', description: 'Pay the dredgers; the water runs clear again.', effects: effects({ coin: -15 }) },
+      { id: 'ration_the_water', label: 'Ration the water', description: 'Measure the water out; the stores are short and the lanes grumble.', effects: effects({ food: -6, devastation: 2 }) },
+    ] },
+  { id: 'event.foundling', name: 'A foundling at the gate', condition: 'any', weight: 2, sinceRules: 62,
+    text: 'A child has been left at the gate of {hearth} with a token nobody can read.',
+    choices: [
+      { id: 'take_the_child_in', label: 'Take the child in', description: 'Raise the child at the hearth’s cost; the token goes to the clerks.', effects: effects({ coin: -5, knowledge: 5 }) },
+      { id: 'send_to_the_hospice', label: 'Send the child to the hospice', description: 'Pay the hospice to raise the child; the lanes think better of the hearth.', effects: effects({ coin: -10, devastation: -1 }) },
+    ] },
+  { id: 'event.glass_pedlar', name: 'A glass pedlar', condition: 'seam', epoch: 'epoch.seams', weight: 2, sinceRules: 62,
+    text: 'A pedlar at {hearth} opens a pack of ashglass shards he swears came from the seam, and asks a price.',
+    choices: [
+      { id: 'buy_the_shards', label: 'Buy the shards', description: 'Pay his price; the shards are what he says.', effects: effects({ coin: -20, ashglass: 4 }) },
+      { id: 'charge_him_a_stall', label: 'Charge him a stall', description: 'Let him sell to who he likes for a fee.', effects: effects({ coin: 5 }) },
+    ] },
+  { id: 'event.rumours_of_the_bid', name: 'Rumours of the bid', condition: 'any', epoch: 'epoch.bids', weight: 2, sinceRules: 62,
+    text: 'The merchants of {hearth} are laying wagers on which realm’s bid will carry, and ask whether the hearth will stake with them.',
+    choices: [
+      { id: 'keep_out_of_it', label: 'Keep out of it', description: 'Wagers are for merchants; the hearth takes a fee from the table.', effects: effects({ coin: 5 }) },
+      { id: 'stake_the_treasury', label: 'Stake the treasury', description: 'Put thirty coin on the hearth’s own judgement; the wager comes due in a few turns.', effects: effects({ coin: -30 }), followUp: follow('event.the_wager_comes_due', 4) },
+    ] },
+  { id: 'event.the_wager_comes_due', name: 'The wager comes due', condition: 'chained', weight: 1, sinceRules: 62,
+    text: 'The merchants of {hearth} have settled the wager, and the hearth’s stake has come back with more.',
+    choices: [
+      { id: 'collect', label: 'Collect', description: 'Take the winnings and close the table.', effects: effects({ coin: 50 }) },
+      { id: 'let_it_ride', label: 'Let it ride', description: 'Leave the stake on the table and buy the merchants’ news with the rest.', effects: effects({ coin: -20, knowledge: 20 }) },
+    ] },
+  { id: 'event.tide_flats', name: 'The tide flats', condition: 'coastal', weight: 2, sinceRules: 62,
+    text: 'A spring tide has left the flats below {hearth} bare and covered in shellfish.',
+    choices: [
+      { id: 'gather_them', label: 'Gather them', description: 'Turn out the hearth to the flats before the tide returns.', effects: effects({ food: 10, coin: 5 }) },
+      { id: 'leave_them', label: 'Leave them to the birds', description: 'The clerks count the birds that come instead.', effects: effects({ knowledge: 5 }) },
+    ] },
+  { id: 'event.old_walls_fall', name: 'The old walls fall', condition: 'devastated', weight: 3, sinceRules: 62,
+    text: 'A stretch of the old wall of {hearth} has come down in the night across two lanes.',
+    choices: [
+      { id: 'rebuild_the_wall', label: 'Rebuild the wall', description: 'Pay the masons to raise it again and clear the lanes.', effects: effects({ coin: -25, devastation: -8 }) },
+      { id: 'clear_the_rubble', label: 'Clear the rubble and sell the stone', description: 'The lanes are cleared and the dressed stone sold; the gap stays.', effects: effects({ coin: 10, devastation: -2 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH, ...SEVENTH_BATCH, ...EIGHTH_BATCH, ...NINTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);

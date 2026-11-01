@@ -34,3 +34,28 @@ test('answer a hearth event from Realm affairs and read its effect in the treasu
   await expect(journal).toContainText('sell the surplus');
   expect(errors).toEqual([]);
 });
+
+/** Rules 62: a template of the third catalogue is answered the same way. */
+test('answer a rules 62 hearth event from Realm affairs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = attunementCampaign(), player = state.turnOwnerId;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  state.factions.find(item => item.id === player)!.treasury = 100;
+  state.hearthEvents.pending = [{ id: `event.${state.turn}.1`, factionId: player, settlementId: host.id, templateId: 'event.lost_ledger', turn: state.turn, expiresTurn: state.turn + 5 }];
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'lost-ledger.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  const affairs = await openRealmAffairs(page);
+  const panel = affairs.getByTestId('hearth-events');
+  await expect(panel).toContainText('The lost ledger');
+  await expect(panel).toContainText(`The clerks of ${host.name} have found an old tax roll`);
+  await panel.getByRole('button', { name: `Enforce the roll: The lost ledger at ${host.name}` }).click();
+  await expect(panel).toHaveCount(0);
+  await expect(page.getByText(/\b125\b.*coin|coin.*\b125\b/).first()).toBeVisible();
+  const journal = await openCampaignJournal(page);
+  await expect(journal).toContainText('The lost ledger at');
+  await expect(journal).toContainText('enforce the roll');
+  expect(errors).toEqual([]);
+});

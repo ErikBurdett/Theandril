@@ -180,7 +180,6 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(() => validateCrisisContent([{ ...CRISES[0]!, scope: 'region' }])).toThrow('names its radius');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, scope: 'region', radius: 10 }])).toThrow('rules 59 or later');
   expect(hearthEventsForRules(58)).toHaveLength(57);
-  expect(HEARTH_EVENTS).toHaveLength(60);
   // Rules 59 content, before rules 60 added the city-states' trade goods.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(59), true, ATTUNEMENT_VICTORY, hearthEventsForRules(59), EPOCHS, landmarkKindsForRules(59), crisesForRules(59), false)).toBe('b48e6615');
   expect(CONTENT_HASH).not.toBe('b48e6615');
@@ -189,6 +188,13 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(() => validateCityStateTradeContent([CITY_STATE_TRADE[0]!, CITY_STATE_TRADE[0]!])).toThrow('Duplicate city-state trade');
   expect(() => validateCityStateTradeContent([{ ...CITY_STATE_TRADE[0]!, resourceId: 'resource.nowhere' }])).toThrow('names a resource of the catalogue');
   expect(() => validateCityStateTradeContent(CITY_STATE_TRADE.slice(1))).toThrow('Every city-state trades in a good');
+  // Rules 60 and 61 content, sixty events, before rules 62 added fifteen more.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(61), true, ATTUNEMENT_VICTORY, hearthEventsForRules(61), EPOCHS, landmarkKindsForRules(61), crisesForRules(61), CITY_STATE_TRADE)).toBe('acd39799');
+  expect(CONTENT_HASH).not.toBe('acd39799');
+  expect(hearthEventsForRules(61)).toHaveLength(60);
+  expect(hearthEventsForRules(62)).toHaveLength(75);
+  expect(hearthEventsForRules(62).filter(event => event.sinceRules === 62 && event.condition === 'chained')).toHaveLength(1);
+  expect(HEARTH_EVENTS).toHaveLength(75);
   expect(() => validateCrisisContent()).not.toThrow();
   expect(() => validateCrisisContent([CRISES[0]!, CRISES[0]!])).toThrow('Duplicate crisis ID');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, epoch: 'epoch.fracture' }])).toThrow('first age brings no crisis');
