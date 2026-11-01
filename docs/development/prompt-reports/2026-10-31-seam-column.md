@@ -182,8 +182,10 @@
 - Relics of the old places, rules/save 63 ([ADR 0094](../../architecture/0094-relics.md)):
   one relic for every landmark kind, brought up by the first hearth to work
   the landmark's hex, bestowed on a character whose company gains its
-  leadership; the AI bestows on its strongest company's rider. Evidence
-  packet [docs/development/2026-10-31-relics/](../2026-10-31-relics/README.md);
+  leadership; the AI bestows on its strongest company's rider. Commit
+  `5c78283` is deployed: both workflows succeeded and the live readback
+  matched the build ([publication packet](../2026-10-31-publication-relics/README.md)).
+  Evidence packet [docs/development/2026-10-31-relics/](../2026-10-31-relics/README.md);
   roadmap library 132 delivered.
 
 ## Verified

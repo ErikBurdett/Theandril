@@ -18,7 +18,9 @@ seeds 390 / 365, 304 / 282, 189 / 202, proxies 336 / 440 / 290 / 197: every
 headline course in band. A relic has no effect beyond leadership and cannot
 be lost or stolen. Verification: content, sim, AI and journey tests; unit
 2,358 / 298 files, campaigns 57, lint, typecheck, build, the characters and
-relics journeys and the chronicles journey.
+relics journeys and the chronicles journey. Commit `5c78283` is deployed:
+both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-relics/README.md)).
 [Evidence](development/2026-10-31-relics/README.md),
 [ADR0094](architecture/0094-relics.md).
 
