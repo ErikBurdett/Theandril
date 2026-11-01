@@ -17,7 +17,9 @@ on Long twelve and eight. Headline pacing **418 / 295 / 211**, the other
 seeds 347 / 305, 296 / 246, 209 / 185, proxies 353 / 468 / 323 / 204; the
 chronicle pin at 56 holds. Verification: sim and journey tests; unit
 2,348 / 294 files, campaigns 57, lint, typecheck, build, three covering
-journeys and the chronicles journey.
+journeys and the chronicles journey. Commit `000bc04` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-allied-peace/README.md)).
 [Evidence](development/2026-10-31-allied-peace/README.md),
 [ADR0086](architecture/0086-allied-peace.md).
 

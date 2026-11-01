@@ -113,7 +113,10 @@
 - Allied peace, rules/save 56 ([ADR 0086](../../architecture/0086-allied-peace.md)):
   the call an ally answers is kept while the war lasts, and its partner's
   peace with the attacker ends the ally's war under the same truce; an
-  ally's own peace releases its call. Evidence packet
+  ally's own peace releases its call. Commit `000bc04` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-allied-peace/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-allied-peace/](../2026-10-31-allied-peace/README.md);
   roadmap library 124 delivered.
 
