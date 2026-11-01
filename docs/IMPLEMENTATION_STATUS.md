@@ -10,7 +10,9 @@ defaults stand; Reduce motion turns off every animation and transition
 through a data attribute whatever the system preference says. Web client
 only: no rules, save, content or AI change, so no pacing or chronicle run.
 Verification: unit 2,378 / 309 files, lint, typecheck, build, the durable-settings and
-campaign-menu journeys.
+campaign-menu journeys. Commit `f384c93` is deployed: both workflows
+succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-durable-settings/README.md)).
 [Evidence](development/2026-11-01-durable-settings/README.md),
 [ADR0106](architecture/0106-durable-settings.md).
 

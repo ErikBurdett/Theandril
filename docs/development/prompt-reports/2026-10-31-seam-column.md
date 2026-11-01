@@ -275,8 +275,10 @@
 - Durable client settings ([ADR 0106](../../architecture/0106-durable-settings.md)):
   the text scale and a Reduce motion choice survive a reload through the
   browser's storage, with an unreadable store reported; web client only.
-  Evidence packet
-  [docs/development/2026-11-01-durable-settings/](../2026-11-01-durable-settings/README.md);
+  Commit `f384c93` is deployed: both workflows succeeded and the live
+  readback matched the build
+  ([publication packet](../2026-11-01-publication-durable-settings/README.md)).
+  Evidence packet [docs/development/2026-11-01-durable-settings/](../2026-11-01-durable-settings/README.md);
   roadmap library 144 delivered.
 
 ## Verified
