@@ -1,0 +1,13 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/durable-settings.spec.ts tests/gameplay/campaign-menu.spec.ts --workers=2 --output=docs/development/2026-11-01-durable-settings/browser-results
+
+
+Running 4 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/durable-settings.spec.ts:9:1 › text scale and reduced motion persist across a reload and an unreadable store reports itself (3.8s)
+  ✓  2 [gameplay] › tests/gameplay/campaign-menu.spec.ts:110:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (5.2s)
+  ✓  3 [gameplay] › tests/gameplay/campaign-menu.spec.ts:166:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign (3.9s)
+  ✓  4 [gameplay] › tests/gameplay/campaign-menu.spec.ts:246:1 › new campaign generation can be cancelled without losing the existing worker or campaign (3.3s)
+
+  4 passed (13.2s)

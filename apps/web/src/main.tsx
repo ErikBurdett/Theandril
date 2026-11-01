@@ -48,6 +48,7 @@ import { FactionOverviewControl } from './faction-overview-control';
 import { unpackCells } from './cell-transfer';
 import { WatchFogRequests, type WatchFogApi } from './watch-fog';
 import { actionCandidates, actionGroups, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, SHORTCUT_STORAGE_KEY, type ActionCause, type ActionKind, type Direction, type ShortcutBindings } from './next-action';
+import { loadSettings, saveSettings, SETTINGS_STORAGE_KEY, type ClientSettings, type TextScale } from './settings';
 import { CapturePanel, SiegeLedger } from './siege';
 import './style.css';
 import './campaign-records.css';
@@ -171,7 +172,16 @@ function App() {
     if (selection.armyId) setRegistry('armies');
     else if (selection.settlementId) setRegistry('settlements');
   }, [selection.armyId, selection.settlementId]);
-  const [textScale, setTextScale] = useState('1');
+  // Durable settings: read once from the browser's storage, written on every change; the campaign never sees them.
+  const [initialSettings] = useState(() => loadSettings(() => localStorage.getItem(SETTINGS_STORAGE_KEY)));
+  const [textScale, setTextScale] = useState<TextScale>(initialSettings.settings.textScale);
+  const [reduceMotion, setReduceMotion] = useState(initialSettings.settings.reduceMotion);
+  const [settingsError, setSettingsError] = useState(initialSettings.error);
+  const changeSettings = (next: Partial<ClientSettings>) => {
+    const settings: ClientSettings = { textScale, reduceMotion, ...next };
+    setTextScale(settings.textScale); setReduceMotion(settings.reduceMotion);
+    setSettingsError(saveSettings(settings, text => localStorage.setItem(SETTINGS_STORAGE_KEY, text)));
+  };
   const [initialShortcuts] = useState(() => loadShortcuts(() => localStorage.getItem(SHORTCUT_STORAGE_KEY)));
   const [turnKey, setTurnKey] = useState(initialShortcuts.bindings.turn);
   const [armyKey, setArmyKey] = useState(initialShortcuts.bindings.army);
@@ -965,7 +975,7 @@ function App() {
   ] : [{ id: 'hex', label: 'Hex', render: () => panes.location }] : [];
   if (observation) popupTabs.push({ id: 'diplomacy', label: observation.diplomacy.offers.length ? `Diplomacy (${observation.diplomacy.offers.length})` : 'Diplomacy', render: () => <FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/> });
 
-  return <div className={`application${observation && !showSetup ? ' campaign-session' : ''}`} style={{ '--text-scale': textScale } as React.CSSProperties}>
+  return <div className={`application${observation && !showSetup ? ' campaign-session' : ''}`} style={{ '--text-scale': textScale } as React.CSSProperties} data-reduce-motion={reduceMotion ? 'true' : undefined}>
     <input className="file-input" ref={fileInput} type="file" aria-label="Import save file" accept=".theandril,application/gzip" onChange={event => { void importFile(event.target.files?.[0]); event.target.value = ''; }} />
     <div className="campaign-topbar">
     <header className="masthead"><div className="wordmark"><Crest/><div><span className="eyebrow">{observation?.epoch?.name ?? 'The age of fracture'}</span>{observation?.crisis && <small className="masthead-crisis" data-testid="masthead-crisis" title={observation.crisis.description}>{observation.crisis.name} · {observation.crisis.turnsLeft} turn{observation.crisis.turnsLeft === 1 ? '' : 's'}</small>}<h1>Theandril</h1></div></div>{observation && <><div className="hud-realm"><span className="eyebrow">Your realm</span><strong>{realmName}</strong></div><div className="resources"><div><small>TREASURY</small><strong>{observation.treasury}<span> coin</span></strong></div><div><small>KNOWLEDGE</small><strong>{observation.knowledge}</strong></div><div><small>HEARTHS</small><strong>{ownSettlements.length}</strong></div></div></>}</header>
@@ -975,7 +985,7 @@ function App() {
       <span className="archive-note">{campaign.coverage === 'complete' ? 'Recording the full campaign' : 'Partial archive · earlier history unavailable'}</span>
       {observation.victory && <button onClick={openChronicles}>Campaign chronicles</button>}
     </nav>}
-    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content"><a className="developer-updates-link" href={publicAssetUrl('/updates/')} target="_blank" rel="noopener noreferrer" aria-label="Developer updates (opens in a new tab)">Developer updates <span aria-hidden="true">↗</span></a>{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setSeed(''); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => setTextScale(event.target.value)}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
+    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content"><a className="developer-updates-link" href={publicAssetUrl('/updates/')} target="_blank" rel="noopener noreferrer" aria-label="Developer updates (opens in a new tab)">Developer updates <span aria-hidden="true">↗</span></a>{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setSeed(''); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => changeSettings({ textScale: event.target.value as TextScale })}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label className="settings-toggle"><input type="checkbox" checked={reduceMotion} onChange={event => changeSettings({ reduceMotion: event.target.checked })}/>Reduce motion</label>{settingsError && <p className="field-help" role="status" data-testid="settings-error">{settingsError}</p>}<label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
     </div>
     {!observation || showSetup ? <main className="landing">
       <div className="opening"><span className="eyebrow">Keep the hearth. Keep the oath.</span><h2>From the ashes,<br/>a new dominion.</h2><p>The old roads end in wilderness. Lead your chosen people beyond their last milestones: chart the forests, raise a settlement, and give your people a future.</p><div className="opening-rule"/><p className="subtle">Found a hearth. Work its land.<br/>Send wayfinders into the unknown.</p><p><a className="developer-updates-link" href={publicAssetUrl('/updates/')} target="_blank" rel="noopener noreferrer" aria-label="Developer updates (opens in a new tab)">Developer updates <span aria-hidden="true">↗</span></a></p></div>

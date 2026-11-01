@@ -9,7 +9,7 @@ unreadable or refusing store is reported in Campaign & settings and the
 defaults stand; Reduce motion turns off every animation and transition
 through a data attribute whatever the system preference says. Web client
 only: no rules, save, content or AI change, so no pacing or chronicle run.
-Verification: UNIT_SHORT, lint, typecheck, build, the durable-settings and
+Verification: unit 2,378 / 309 files, lint, typecheck, build, the durable-settings and
 campaign-menu journeys.
 [Evidence](development/2026-11-01-durable-settings/README.md),
 [ADR0106](architecture/0106-durable-settings.md).

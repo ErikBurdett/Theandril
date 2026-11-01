@@ -207,7 +207,8 @@ test('narrow touch settings scroll within their top-bar overlay and return to th
     await summary(page).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('top-campaign-menu-narrow-before-settle.png') });
     const geometry = await settledMenuGeometry(page);
-    expect(geometry.controls).toHaveLength(11);
+    // Twelve settled controls since the durable settings added the Reduce motion checkbox beside the text scale.
+    expect(geometry.controls).toHaveLength(12);
     expect(geometry.controls.filter(control => control.name === 'Map click menus')).toHaveLength(1);
     expect(geometry.controls.every(control => control.insideMenu)).toBe(true);
     expect(geometry.map.y).toBeGreaterThanOrEqual(geometry.summary.bottom - 1);

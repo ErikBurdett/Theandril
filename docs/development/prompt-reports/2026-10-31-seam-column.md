@@ -281,7 +281,7 @@
 
 ## Verified
 
-Durable settings: UNIT_SHORT, build, the durable-settings and campaign-menu
+Durable settings: unit 2,378 / 309 files, build, the durable-settings and campaign-menu
 journeys; no pacing or chronicle run (web client only).
 
 Typecheck, lint, unit 2,321 / 285 files, campaigns 57, build, three covering
