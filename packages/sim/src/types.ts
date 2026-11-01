@@ -165,6 +165,8 @@ export interface Ruin {
   founderFactionId: string;
   razedByFactionId: string;
   turn: number;
+  /** Rules 81: the realm that took the ruins' one salvage. */
+  salvagedByFactionId?: string;
 }
 
 export interface FactionState {

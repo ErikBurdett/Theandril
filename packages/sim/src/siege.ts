@@ -57,6 +57,8 @@ export function assertNoSubjectRule(state: GameState): void {
 }
 export const ruinSchema = z.object({
   id, name: z.string().min(1).max(40), cell: bounded(349_999), founderFactionId: id, razedByFactionId: id, turn: bounded(1_000_000).min(1),
+  /** Rules 81: the realm that took the ruins' one salvage. */
+  salvagedByFactionId: id.optional(),
 }).strict();
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const orderedSieges = (state: GameState) => Object.values(state.sieges).sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0);

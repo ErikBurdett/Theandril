@@ -47,6 +47,7 @@ export { TAX_COIN_PERCENT, TAX_DEVASTATION_DRIFT, emptyTaxes, hasTaxes, observeT
 export type { ObservedTaxes, TaxRate, TaxRecord } from './taxes';
 export { UNREST_HALVING, UNREST_RIOT, RIOT_DEVASTATION, emptyUnrest, founderToRiseFor, hasUnrest, observeUnrest, restorationOf, unrestOf, unrestPressures, validateUnrest } from './unrest';
 export type { ObservedUnrest, UnrestRecord } from './unrest';
+export { SALVAGE_COIN, SALVAGE_KNOWLEDGE, hasSalvage } from './salvage';
 export { MAP_SHARE_COOLDOWN_TURNS, emptyMapShares, hasMapShares, lastMapShare, mapShareBlocker, observeMapShares, shareMaps, validateMapShares } from './map-sharing';
 export type { MapShare, ObservedMapShare } from './map-sharing';
 export { DEPLOYMENTS, DEPLOYMENT_NAMES, DEPLOYMENT_TEXT, arrangedFormations, deploymentBlocker, deploymentOf, frontRank, hasDeployments, setDeployment, validateDeployments } from './deployment';

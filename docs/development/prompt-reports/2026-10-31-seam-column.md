@@ -325,6 +325,11 @@
   [docs/development/2026-11-01-ai-garrisons/](../2026-11-01-ai-garrisons/README.md);
   roadmap library 151 delivered. Commit `dcd73dc` is deployed and read back
   ([publication packet](../2026-11-01-publication-ai-garrisons/README.md)).
+- Salvage from the ruins, rules/save 81 ([ADR 0114](../../architecture/0114-salvage.md)):
+  the ruins of a razed hearth hold one salvage, taken by the realm whose
+  company stands on them and read in the hex inspector. Evidence packet
+  [docs/development/2026-11-01-salvage/](../2026-11-01-salvage/README.md);
+  roadmap library 152 delivered.
 
 ## Verified
 
@@ -445,6 +450,9 @@ conquest journeys and the chronicles journey (pin 57 unmoved); headline
 AI garrisons: unit 2,384 / 311 files, campaigns 57, build, the restoration and unrest
 journeys and the chronicles journey (pin 57 unmoved); headline
 384 / 291 / 205, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
+Salvage: unit 2,386 / 313 files, campaigns 57, build, the salvage and conquest journeys and
+the chronicles journey (pin 57 unmoved); headline 384 / 291 / 205, the other
+seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
 
 ## Left open
 

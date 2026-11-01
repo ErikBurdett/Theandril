@@ -1,5 +1,20 @@
 # Theandril implementation status
 
+## Salvage from the ruins (rules/save 81) — 2026-11-01
+
+M8's ruins, their first reward. The ruins of a razed hearth hold one
+salvage: at the turn's end, after the sieges, the realm whose land company
+stands on them takes twenty coin and ten knowledge, the ruin records who
+took it, the journal records the taking and the hex inspector reads
+whether the salvage is untouched or who took it; a free AI land company
+within six hexes walks for untouched ruins. One optional field on the ruin;
+save 81 loads v80 envelopes with none and refuses one naming salvage.
+Headline pacing 384 / 291 / 205 and every other course identical to rules 80, since no measured campaign razes a hearth; the chronicle pin at 57 holds. Verification: sim, AI and journey tests; unit 2,386 / 313 files,
+campaigns 57, lint, typecheck, build, the salvage and conquest journeys
+and the chronicles journey (pin 57 unmoved).
+[Evidence](development/2026-11-01-salvage/README.md),
+[ADR0114](architecture/0114-salvage.md).
+
 ## AI garrisons against restoration — 2026-11-01
 
 M5's politics, the AI's answer to the first rebellion. The holder's

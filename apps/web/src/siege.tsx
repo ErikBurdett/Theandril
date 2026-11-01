@@ -89,5 +89,5 @@ export function CapturePanel({ view, busy, issue }: { view: Observation; busy: b
 export function RuinInspection({ view, cell }: { view: Observation; cell: number | undefined }) {
   const ruin = view.ruins.find(ruin => ruin.cell === cell);
   if (!ruin) return null;
-  return <section className="ruin-inspection" data-testid="ruin-inspection"><h3>Ruins of {ruin.name}</h3><p className="field-help">Razed on turn {ruin.turn}. Move a hearth caravan onto this hex and found a new settlement to resettle the site.</p></section>;
+  return <section className="ruin-inspection" data-testid="ruin-inspection"><h3>Ruins of {ruin.name}</h3><p className="field-help" data-testid="ruin-salvage">{ruin.salvagedByFactionId ? `Salvaged by ${view.factions.find(item => item.id === ruin.salvagedByFactionId)?.name ?? 'another realm'}.` : 'The salvage is untouched: at the turn\u2019s end the realm whose company stands here takes 20 coin and 10 knowledge, once.'}</p><p className="field-help">Razed on turn {ruin.turn}. Move a hearth caravan onto this hex and found a new settlement to resettle the site.</p></section>;
 }

@@ -24,6 +24,8 @@ import { planDemand } from './demands';
 import { planHire } from './hires';
 import { planTaxes } from './taxes';
 import { planGarrisons } from './garrisons';
+/** Rules 81: how far a free land company walks for untouched ruins. */
+export const SALVAGE_REACH = 6;
 import { planRelics } from './relics';
 import { planOffices } from './offices';
 import { planPatrol } from './patrols';
@@ -429,6 +431,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     // the force it feeds, but it is never worth marching for and never outranks
     // engaging an enemy army, so it is weighted below the ordinary approach.
     const raidCells = military ? view.depots.filter(depot => wars.has(depot.factionId) && hexDistance(army.cell, depot.cell, view.width) <= 3).map(depot => depot.cell).slice(0, 16) : [];
+    // Rules 81: untouched ruins in reach are picked over; never worth more than an enemy depot or a visible enemy.
+    const salvageCells = !army.canFound ? view.ruins.filter(ruin => !ruin.salvagedByFactionId && hexDistance(army.cell, ruin.cell, view.width) <= SALVAGE_REACH).map(ruin => ruin.cell).slice(0, 8) : [];
     // The seam objective draws every field army within range of it to the
     // column's rally hex. The company at the rally leads the column: it closes
     // on the hearth holding the seam once that is in sight and otherwise holds
@@ -449,12 +453,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       const approach = seamTarget !== undefined ? -hexDistance(cell, seamTarget, view.width) * 500
         : invading ? Math.max(...nearbyObjectives.map(town => (priority(town) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
         : raidCells.length ? -Math.min(...raidCells.map(post => hexDistance(cell, post, view.width))) * 80
+        : salvageCells.length && !(military && approachCells.length) ? -Math.min(...salvageCells.map(ruin => hexDistance(cell, ruin, view.width))) * 300
           : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
       const danger = nearbyThreat.reduce((sum, enemy) => sum + Math.max(0, 5 - hexDistance(cell, enemy.cell, view.width)) * 1200, 0);
       return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? view.growth ? settlementSiteValue(view, cell) : distance * 100
         : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
     };
-    const strategic = army.canFound || nearbyContacts.length > 0 || raidCells.length > 0 || seamTarget !== undefined || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
+    const strategic = army.canFound || nearbyContacts.length > 0 || raidCells.length > 0 || salvageCells.length > 0 || seamTarget !== undefined || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
     const distantContact = !strategic && sparseContactNeeded(view) && army.id === explorerId && view.factions.length === 1;
     // One scout broadens the contact search while ordinary field armies retain
     // local exploration. Only new sight earns the public inward bearing: zero

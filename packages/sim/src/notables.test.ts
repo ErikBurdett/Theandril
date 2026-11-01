@@ -53,7 +53,7 @@ describe('rules 64: notable characters', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 63, contentHash: PRE_NOTABLES_CONTENT_HASH });
     const older = deserializeGame(sealed);
     expect(stateHash(older)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 80, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 81, contentHash: CONTENT_HASH });
     // A v63 envelope cannot name a figure.
     const forged = JSON.parse(sealed) as { state: { characters: { notableId?: string }[] } };
     forged.state.characters[0]!.notableId = figure.id;
