@@ -41,7 +41,7 @@ export { landmarkAt, landmarks, landmarkYieldAt, LANDMARK_RULES, MAX_LANDMARKS, 
 export { clientGoodsOf, goodsPromised } from './clients';
 export { DEMAND_COOLDOWN_TURNS, DEMAND_STRENGTH_RATIO, demandBlocker, demandTribute, emptyDemands, garrisonStrengthAt, hasDemands, observeDemands, tributeOf, validateDemands } from './demands';
 export type { ObservedDemands, TributeDemand, TributeDemandQuote } from './demands';
-export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, emptyHires, hasHires, hireBlocker, hireCompany, hirePriceOf, observeHires, validateHires } from './hires';
+export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, cityStateKindOf, emptyHires, hasHires, hireBlocker, hireCompany, hiredUnitOf, hirePriceOf, observeHires, validateHires } from './hires';
 export type { HireQuote, HireRecord, ObservedHires } from './hires';
 export { TAX_COIN_PERCENT, TAX_DEVASTATION_DRIFT, emptyTaxes, hasTaxes, observeTaxes, setTaxRate, taxBlocker, taxRateOf, taxedCoin, validateTaxes } from './taxes';
 export type { ObservedTaxes, TaxRate, TaxRecord } from './taxes';

@@ -74,7 +74,7 @@ describe('rules 71: unrest in the hearths', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.unrest).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
     state.unrest = [{ settlementId: town.id, level: 3 }];
     expect(() => serializeGameForVersion(state, 70)).toThrow('unrest unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });

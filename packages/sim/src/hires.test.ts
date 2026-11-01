@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { neighbors, isPassable } from '@theandril/mapgen';
-import { CONTENT_HASH } from '@theandril/content';
+import { cityStateKindFor, CONTENT_HASH } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { withRules } from './rules';
 import { PRE_CITY_STATES_II_CONTENT_HASH, serializeGameForVersion } from './save';
-import { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, hireBlocker, hirePriceOf, validateHires } from './hires';
+import { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, hireBlocker, hiredUnitOf, hirePriceOf, validateHires } from './hires';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
 /** A realm, a city-state, and the realm's company standing at the city-state's gate. */
@@ -28,20 +28,26 @@ describe('rules 68: companies hired from city-states', () => {
   it('sells a company at the gate for the city’s price, raises it beside the buyer with no movement, remembers the sale, quotes it, and is refused unpaid, at war or too soon', () => {
     const { state, realm, city, hearth, armyId, gate } = atTheGate();
     const price = hirePriceOf(state, city), cityName = state.factions.find(faction => faction.id === city)!.name;
-    expect(price).toBe(30 + 4 * hearth.population);
+    // Rules 77: the price and the company follow the city-state's kind.
+    const kind = cityStateKindFor(city)!;
+    expect(price).toBe(Math.floor((30 + 4 * hearth.population) * kind.hirePercent / 100));
+    expect(hiredUnitOf(state, city)).toBe(kind.unitId);
     const quote = () => getObservation(state, realm).hires!.quotes.find(item => item.cityStateId === city && item.armyId === armyId)!;
-    expect(quote()).toEqual({ cityStateId: city, armyId, coin: price, blocker: null });
+    expect(quote()).toEqual({ cityStateId: city, armyId, coin: price, unitId: kind.unitId, blocker: null });
     expect(getObservation(state, city).hires).toEqual({ quotes: [], hires: [] });
     const realmCoin = state.factions.find(faction => faction.id === realm)!.treasury, cityCoin = state.factions.find(faction => faction.id === city)!.treasury;
     const before = new Set(Object.keys(state.armies));
     const result = issue(state, { type: 'hireCompany', factionId: realm, cityStateId: city, armyId });
+    const hired = Object.values(state.armies).find(army => !before.has(army.id))!;
     expect(result.events.map(event => event.factionId).sort()).toEqual([realm, city].sort());
     expect(result.events[0]!.message).toContain(`${cityName} sells`);
-    expect(result.events[0]!.message).toContain(`for ${price} coin; Hired pikes of ${cityName} stands at the gate beside Buying company.`);
-    const hired = Object.values(state.armies).find(army => !before.has(army.id))!;
-    expect(hired).toMatchObject({ factionId: realm, cell: gate, name: `Hired pikes of ${cityName}`, movement: 0 });
+    expect(result.events[0]!.message).toContain(`for ${price} coin; ${hired.name} stands at the gate beside Buying company.`);
+    expect(hired).toMatchObject({ factionId: realm, cell: gate, movement: 0 });
+    expect(hired.name).toContain(`of ${cityName}`);
     expect(hired.formations).toHaveLength(1);
-    expect(hired.formations[0]).toMatchObject({ unitId: HIRED_UNIT_ID });
+    expect(hired.formations[0]).toMatchObject({ unitId: kind.unitId });
+    expect(getObservation(state, realm).hires!.kinds).toContainEqual({ cityStateId: city, kind: kind.id, name: kind.name, description: kind.description });
+    withRules(state, 76, () => { expect(hiredUnitOf(state, city)).toBe(HIRED_UNIT_ID); expect(hirePriceOf(state, city)).toBe(30 + 4 * hearth.population); expect(getObservation(state, realm).hires!.kinds).toBeUndefined(); });
     expect(state.factions.find(faction => faction.id === realm)!.treasury).toBe(realmCoin - price);
     expect(state.factions.find(faction => faction.id === city)!.treasury).toBe(cityCoin + price);
     expect(state.hires).toEqual([{ factionId: realm, cityStateId: city, armyId: hired.id, turn: state.turn, coin: price }]);
@@ -76,7 +82,7 @@ describe('rules 68: companies hired from city-states', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.hires).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
     issue(state, { type: 'hireCompany', factionId: realm, cityStateId: city, armyId });
     expect(() => serializeGameForVersion(state, 67)).toThrow('hired companies unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId })).toMatchObject({ ok: true });

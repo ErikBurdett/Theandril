@@ -1,5 +1,20 @@
 # Theandril implementation status
 
+## Four kinds of city-state (rules/save 77) — 2026-11-01
+
+M5's roster, first distinct relations. A content table gives every one of
+the forty-eight city-states a kind by its culture — fourteen market towns,
+fourteen clanholds, ten nomad camps, ten pirate coves — and from rules 77
+the hire quote names the kind's company (line troops, oath guard, riders or
+skirmishers) at the kind's price, the hired company is raised of it, and
+the tribute a city pays is set by its kind; Realm affairs names the kind
+beside the badge. Content only; save 77 freezes the rules 74–76 pack.
+PACING_SUMMARY Verification: content, sim and journey tests; UNIT_SHORT,
+CAMPAIGNS_SHORT, lint, typecheck, build, the hires and tribute journeys and
+the chronicles journey CHRONICLES_NOTE.
+[Evidence](development/2026-11-01-city-state-kinds/README.md),
+[ADR0109](architecture/0109-city-state-kinds.md).
+
 ## Cavalry wings (rules/save 76) — 2026-11-01
 
 M4's deployment, a fifth doctrine. The wings fill each rank with the

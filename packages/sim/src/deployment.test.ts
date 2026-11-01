@@ -6,7 +6,7 @@ import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { rebuildIndexes } from './visibility';
 import { withRules } from './rules';
-import { serializeGameForVersion } from './save';
+import { PRE_KINDS_CONTENT_HASH, serializeGameForVersion } from './save';
 import { arrangedFormations, deploymentBlocker, deploymentOf, frontRank, validateDeployments } from './deployment';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
@@ -83,11 +83,11 @@ describe('rules 75: army deployment', () => {
       expect(getObservation(state, player).armies.find(item => item.id === army.id)!.doctrine).toBe('line');
     });
     const sealed = serializeGameForVersion(state, 74);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 74, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 74, contentHash: PRE_KINDS_CONTENT_HASH });
     expect(JSON.parse(sealed).state.armies.every((item: { deployment?: string }) => item.deployment === undefined)).toBe(true);
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
     issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'shieldwall' });
     expect(() => serializeGameForVersion(state, 74)).toThrow('deployments unavailable');
     // A v74 envelope naming a doctrine is refused.

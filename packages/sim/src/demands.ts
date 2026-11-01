@@ -8,6 +8,7 @@ import { atWar } from './warfare';
 import { relation } from './diplomacy';
 import { armyStrength } from './army-composition';
 import { indexes } from './visibility';
+import { cityStateKindOf } from './hires';
 
 /** Rules 61: a realm may press a city-state for tribute without war. A land
  * company standing beside the city-state's hearth demands coin; if it
@@ -50,7 +51,8 @@ export function garrisonStrengthAt(state: GameState, cityStateId: string): numbe
 export function tributeOf(state: GameState, cityStateId: string): number {
   const hearth = hearthOf(state, cityStateId), city = state.factions.find(faction => faction.id === cityStateId);
   if (!hearth || !city) return 0;
-  return Math.max(0, Math.min(city.treasury, 20 + 8 * hearth.population));
+  // Rules 77: the city-state's kind sets what it pays.
+  return Math.max(0, Math.min(city.treasury, Math.floor((20 + 8 * hearth.population) * (cityStateKindOf(state, cityStateId)?.tributePercent ?? 100) / 100)));
 }
 const lastDemand = (state: GameState, factionId: string, cityStateId: string): TributeDemand | undefined => [...state.demands].reverse().find(item => item.factionId === factionId && item.cityStateId === cityStateId);
 /** Why the realm's company cannot press the city-state now, or null. */

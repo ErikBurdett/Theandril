@@ -51,7 +51,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 76;
+export const SAVE_VERSION = 77;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -115,6 +115,8 @@ export const PRE_CITY_STATES_II_CONTENT_HASH = '1bd6624e';
 export const PRE_EVENTS_V_CONTENT_HASH = 'd1205eae';
 /** The rules 73 pack, one hundred and five hearth events, before rules 74 added fifteen more. */
 export const PRE_EVENTS_VI_CONTENT_HASH = '4c666e0d';
+/** The rules 74 through 76 pack, before rules 77 added the city-state kinds. */
+export const PRE_KINDS_CONTENT_HASH = '56bc355d';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -346,13 +348,14 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(76), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(77), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
 /** v72 through v74 envelopes carry the rules 72 state and differ in their version and the pack they were sealed under; no army of them carries a doctrine. */
-/** Rules 76 adds a doctrine value only; a v75 envelope differs in its version and may not name the wings. */
+/** Rules 76 adds a doctrine value only; a v75 envelope differs in its version and may not name the wings. Rules 77 changes content only; a v76 envelope differs in its version and the pack it was sealed under. */
+const saveV76Schema = saveSchema.extend({ version: z.literal(76) }).strict();
 const saveV75Schema = saveSchema.extend({ version: z.literal(75) }).strict();
 type Through74 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV74Schema> };
 const saveV74Schema = saveSchema.extend({ version: z.literal(74), state: stateV74Schema }).strict();
@@ -850,7 +853,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 74) return CONTENT_HASH; // rules 75 and 76 changed no content
+  if (version >= 77) return CONTENT_HASH;
+  if (version >= 74) return PRE_KINDS_CONTENT_HASH; // rules 75 and 76 changed no content
   if (version >= 73) return PRE_EVENTS_VI_CONTENT_HASH;
   if (version >= 69) return PRE_EVENTS_V_CONTENT_HASH; // rules 70 through 72 changed no content
   if (version >= 67) return PRE_CITY_STATES_II_CONTENT_HASH; // rules 68 changed no content
@@ -1331,9 +1335,16 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 76) {
+    const sealed = saveV76Schema.parse(raw);
+    assert(sealed.contentHash === PRE_KINDS_CONTENT_HASH, 'v76 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v76 snapshot checksum does not match its contents');
+    // Rules 77 adds content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 75) {
     const sealed = saveV75Schema.parse(raw);
-    assert(sealed.contentHash === CONTENT_HASH, 'v75 content hash is not a recognized compatible pack');
+    assert(sealed.contentHash === PRE_KINDS_CONTENT_HASH, 'v75 content hash is not a recognized compatible pack');
     assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v75 snapshot checksum does not match its contents');
     assert(sealed.state.armies.every(army => army.deployment !== 'wings'), 'v75 envelope names a doctrine of later rules');
     // Rules 76 adds a doctrine value only; the state continues unchanged under the same pack.
@@ -1345,7 +1356,7 @@ function parseSaveThrough74(raw: unknown): Through74 {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === 74) {
     const sealed = saveV74Schema.parse(raw);
-    assert(sealed.contentHash === CONTENT_HASH, 'v74 content hash is not a recognized compatible pack');
+    assert(sealed.contentHash === PRE_KINDS_CONTENT_HASH, 'v74 content hash is not a recognized compatible pack');
     assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v74 snapshot checksum does not match its contents');
     // Rules 75 lets an army carry a doctrine; a v74 army carries none and continues unchanged under the same pack.
     return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };

@@ -15,6 +15,8 @@ test('a realm short of coin presses the city-state its company stands beside, a 
   const founded = applyCommand(state, { type: 'found', factionId: city, armyId: caravan.id, name: 'Gate City' });
   if (!founded.ok) throw new Error(founded.error);
   const hearth = Object.values(state.settlements).find(town => town.factionId === city)!;
+  // Rules 77: a clanhold pays half and a camp three quarters; three more households keep the quote above the AI's minimum whatever the kind drawn.
+  hearth.population = 4;
   const gate = neighbors(hearth.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell] ?? 0) && Object.values(state.armies).every(army => army.cell !== cell))!;
   const id = `army.${state.nextId++}`;
   state.armies[id] = { id, factionId: realm, name: 'Pressing company', cell: gate, movement: 1, formations: [0, 1, 2].map(() => ({ ...createArmyFormation(id, 'unit.heavy_infantry'), id: `formation.${state.nextId++}` })) };

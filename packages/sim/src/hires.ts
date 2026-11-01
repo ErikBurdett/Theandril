@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { neighbors } from '@theandril/mapgen';
-import { UNITS } from '@theandril/content';
+import { cityStateKindFor, UNITS, type CityStateKindDefinition } from '@theandril/content';
 import type { Army, CommandResult, GameState } from './types';
 import { rulesVersion } from './rules';
 import { isCityState } from './seats';
@@ -23,8 +23,9 @@ export const MAX_HIRES = 256;
 export const hireSchema = z.object({ factionId: id, cityStateId: id, armyId: id, turn, coin: z.number().int().min(0).max(1_000_000) }).strict();
 export const hireStateSchema = z.array(hireSchema).max(MAX_HIRES);
 export type HireRecord = z.infer<typeof hireSchema>;
-export interface HireQuote { cityStateId: string; armyId: string; coin: number; blocker: string | null }
-export interface ObservedHires { quotes: HireQuote[]; hires: HireRecord[] }
+export interface HireQuote { cityStateId: string; armyId: string; coin: number; unitId: string; blocker: string | null }
+export interface ObservedCityStateKind { cityStateId: string; kind: CityStateKindDefinition['id']; name: string; description: string }
+export interface ObservedHires { quotes: HireQuote[]; hires: HireRecord[]; /** Rules 77: the kind of every city-state in sight. */ kinds?: ObservedCityStateKind[] }
 export type HireRaiser = (state: GameState, factionId: string, cell: number, unitId: string) => Army;
 export const hireCommandSchemas = [
   z.object({ type: z.literal('hireCompany'), factionId: id, cityStateId: id, armyId: id }).strict(),
@@ -39,10 +40,15 @@ export function assertNoHires(state: GameState): void {
 }
 const hearthOf = (state: GameState, cityStateId: string) => Object.values(state.settlements).find(town => town.factionId === cityStateId);
 const landCompany = (army: GameState['armies'][string]): boolean => army.formations.length > 0 && army.formations.every(item => units.get(item.unitId)?.movementDomain !== 'naval' && !units.get(item.unitId)?.canFound);
-/** What a city-state asks for a company: a sum set by its size. */
+/** Rules 77: the kind of a city-state, or none under earlier rules. */
+export const cityStateKindOf = (state: GameState, cityStateId: string): CityStateKindDefinition | undefined => rulesVersion(state) >= 77 ? cityStateKindFor(cityStateId, rulesVersion(state)) : undefined;
+/** The company a city-state sells: its kind's, or line troops. */
+export const hiredUnitOf = (state: GameState, cityStateId: string): string => cityStateKindOf(state, cityStateId)?.unitId ?? HIRED_UNIT_ID;
+/** What a city-state asks for a company: a sum set by its size, and from rules 77 by its kind. */
 export function hirePriceOf(state: GameState, cityStateId: string): number {
   const hearth = hearthOf(state, cityStateId);
-  return hearth ? 30 + 4 * hearth.population : 0;
+  if (!hearth) return 0;
+  return Math.floor((30 + 4 * hearth.population) * (cityStateKindOf(state, cityStateId)?.hirePercent ?? 100) / 100);
 }
 const lastHire = (state: GameState, factionId: string, cityStateId: string): HireRecord | undefined => [...state.hires].reverse().find(item => item.factionId === factionId && item.cityStateId === cityStateId);
 /** Why the realm's company cannot hire from the city-state now, or null. */
@@ -70,12 +76,12 @@ export function hireCompany(state: GameState, factionId: string, cityStateId: st
   const army = state.armies[armyId]!, realm = state.factions.find(faction => faction.id === factionId)!, city = state.factions.find(faction => faction.id === cityStateId)!;
   const coin = hirePriceOf(state, cityStateId);
   realm.treasury -= coin; city.treasury += coin;
-  const hired = raise(state, factionId, army.cell, HIRED_UNIT_ID);
-  hired.name = `Hired pikes of ${city.name}`; hired.movement = 0;
+  const unitId = hiredUnitOf(state, cityStateId), hired = raise(state, factionId, army.cell, unitId);
+  hired.name = `Hired ${unitId === 'unit.cavalry' ? 'riders' : unitId === 'unit.guard' ? 'guard' : unitId === 'unit.skirmisher' ? 'skirmishers' : 'pikes'} of ${city.name}`; hired.movement = 0;
   const memory = relation(state, factionId, cityStateId);
   memory.trust = Math.min(100, memory.trust + 5);
   state.hires = [...state.hires, { factionId, cityStateId, armyId: hired.id, turn: state.turn, coin }].slice(-MAX_HIRES);
-  const unit = units.get(HIRED_UNIT_ID)?.name ?? HIRED_UNIT_ID;
+  const unit = units.get(unitId)?.name ?? unitId;
   const message = `${city.name} sells ${realm.name} a company of ${unit} for ${coin} coin; ${hired.name} stands at the gate beside ${army.name}.`;
   return { ok: true, events: [factionId, cityStateId].map(item => ({ turn: state.turn, factionId: item, type: 'company_hired', cell: army.cell, message })) };
 }
@@ -90,11 +96,12 @@ export function observeHires(state: GameState, factionId: string): ObservedHires
       if (!hearth || !visible?.has(hearth.cell)) continue;
       const beside = new Set(neighbors(hearth.cell, state.world.width, state.world.height));
       for (const army of Object.values(state.armies).filter(army => army.factionId === factionId && beside.has(army.cell) && landCompany(army) && !state.transports[army.id]).sort((a, b) => a.id < b.id ? -1 : 1)) {
-        quotes.push({ cityStateId: city.id, armyId: army.id, coin: hirePriceOf(state, city.id), blocker: hireBlocker(state, factionId, city.id, army.id) });
+        quotes.push({ cityStateId: city.id, armyId: army.id, coin: hirePriceOf(state, city.id), unitId: hiredUnitOf(state, city.id), blocker: hireBlocker(state, factionId, city.id, army.id) });
       }
     }
   }
-  return { quotes, hires: state.hires.filter(item => item.factionId === factionId || item.cityStateId === factionId).map(item => ({ ...item })) };
+  const kinds = rulesVersion(state) >= 77 ? state.factions.filter(faction => isCityState(faction.id)).flatMap(city => { const hearth = hearthOf(state, city.id), kind = cityStateKindOf(state, city.id); return kind && (city.id === factionId || (hearth && indexes(state).visible.get(factionId)?.has(hearth.cell))) ? [{ cityStateId: city.id, kind: kind.id, name: kind.name, description: kind.description }] : []; }) : undefined;
+  return { quotes, hires: state.hires.filter(item => item.factionId === factionId || item.cityStateId === factionId).map(item => ({ ...item })), ...(kinds ? { kinds } : {}) };
 }
 export function validateHires(state: GameState): void {
   const assert = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: hired company ' + message); };

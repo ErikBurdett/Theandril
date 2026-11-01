@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 77 gives every city-state a kind: market towns sell line troops at the going rate and pay tribute in full, clanholds sell their oath guard dear and pay little, nomad camps sell riders dearer still and pay three quarters, pirate coves sell skirmishers cheap and pay a quarter more; Realm affairs names the kind beside the city-state and the hire quote names the company. PACING_SUMMARY
+
 Rules/save 76 adds cavalry wings, a fifth deployment: the mounted companies take the outer columns of every rank and the foot the centre. Headline pacing 329 / 301 / 219 and every other course identical to rules 75, since the AI keeps the line; the chronicle pin at 56 holds.
 
 Rules/save 75 lets a land army choose how it draws up for battle: the line, a shield wall with the best-armored formations in front, pikes forward or a skirmish with the ranged companies in front, chosen in the army’s composition panel with its front rank quoted and the journal recording the choice. Battles without a doctrined army draw up exactly as before. Headline pacing 329 / 301 / 219, with the two other seeds at 355 / 383, 286 / 315, 194 / 204, every course identical to rules 74 since the AI keeps the line; the headline Epic drift recorded with the sixth catalogue stands.

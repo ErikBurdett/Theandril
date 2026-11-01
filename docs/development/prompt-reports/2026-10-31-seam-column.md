@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues, durable settings, army deployment and cavalry wings
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues, durable settings, army deployment, cavalry wings and city-state kinds
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -295,6 +295,11 @@
   ([publication packet](../2026-11-01-publication-wings/README.md)).
   Evidence packet [docs/development/2026-11-01-wings/](../2026-11-01-wings/README.md);
   roadmap library 146 delivered.
+- Four kinds of city-state, rules/save 77 ([ADR 0109](../../architecture/0109-city-state-kinds.md)):
+  market towns, clanholds, nomad camps and pirate coves, each selling its
+  own company at its own price and paying tribute by its kind. Evidence
+  packet [docs/development/2026-11-01-city-state-kinds/](../2026-11-01-city-state-kinds/README.md);
+  roadmap library 147 delivered.
 
 ## Verified
 
@@ -401,6 +406,9 @@ Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
 
+Kinds: UNIT_SHORT, CAMPAIGNS_SHORT, build, the hires and tribute journeys and
+the chronicles journey CHRONICLES_NOTE; PACING_SUMMARY
+
 ## Left open
 
 - A warden for every seam hearth (rites 40–42) is not built; the watch does
@@ -448,8 +456,10 @@ first on 379.
   fifty.
 - Two client settings are durable; fog colours, non-colour cues and
   keyboard workflows beyond the shortcuts remain.
-- A deployment orders the ranks only; column choice, per-formation
-  placement and a reserve line remain, and the AI keeps the line.
+- A deployment orders the ranks only; per-formation placement and a
+  reserve line remain, and the AI keeps the line.
+- A city-state's kind changes prices and companies only; raids, wandering
+  camps and clan feuds remain.
 - Headline Epic pacing under rules 74 sits at 329, under its band, while both
   other Epic seeds are in band; recorded as a drift of one course with the
   neutralised-effects and valuation evidence in the sixth catalogue's packet.
