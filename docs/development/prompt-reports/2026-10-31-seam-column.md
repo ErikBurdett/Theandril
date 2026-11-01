@@ -122,7 +122,10 @@
 - The second landmark catalogue and its events, rules/save 57
   ([ADR 0087](../../architecture/0087-landmarks-ii.md)): twelve more kinds
   placed from the seed for the campaign's rules, six more events of the old
-  places. Evidence packet
+  places. Commit `128fd07` is deployed: both workflows succeeded and the live
+  readback matched the build
+  ([publication packet](../2026-10-31-publication-landmarks-ii/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-landmarks-ii/](../2026-10-31-landmarks-ii/README.md);
   roadmap library 125 delivered.
 

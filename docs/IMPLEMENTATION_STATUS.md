@@ -14,7 +14,9 @@ course inside its band. The re-placed landmarks of the tiny maps move the
 chronicle journey's pin (attributed) and the enclosed-basin ferry scenario
 to seed 55. Verification: content and sim tests; unit 2,348 / 294 files,
 campaigns 57, lint, typecheck, build, three covering journeys and the
-chronicles journey.
+chronicles journey. Commit `128fd07` is deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-10-31-publication-landmarks-ii/README.md)).
 [Evidence](development/2026-10-31-landmarks-ii/README.md),
 [ADR0087](architecture/0087-landmarks-ii.md).
 
