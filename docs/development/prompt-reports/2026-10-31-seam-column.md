@@ -444,7 +444,11 @@ first on 379.
 - Headline Epic pacing under rules 74 sits at 329, under its band, while both
   other Epic seeds are in band; recorded as a drift of one course with the
   neutralised-effects and valuation evidence in the sixth catalogue's packet.
-  A re-pricing of the Epic pace with the pack frozen is the owner's call.
+  A nine-seed survey under rules 75 runs 325 to 488 turns, median 355,
+  three in band, four under by 8 to 25 and two over by 32 and 88
+  ([survey](../2026-11-01-epic-pacing-survey/README.md)): the spread is
+  wider than the band. A re-pricing of the Epic pace with the pack frozen
+  is the owner's call.
 - Relics lead and nothing more; none is lost, stolen or traded. One
   summoning of one path exists; rituals beyond the four rites and a third
   magical path remain.

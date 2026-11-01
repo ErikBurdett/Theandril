@@ -1,5 +1,16 @@
 # Theandril implementation status
 
+## Epic headline pacing survey — 2026-11-01
+
+A measurement only. The Epic headline campaign under rules 75 across nine
+seeds runs 325, 329, 341, 342, 355, 383, 397, 432 and 488 turns (median 355,
+mean 377): three in the 350–400 band, four under by 8 to 25, two over by 32
+and 88. The headline seed's 329 sits in the lower cluster, not alone. The
+spread is wider than the band; whether the Epic pace is re-priced with the
+pack frozen is the owner's decision, and until then the headline seed is
+reported against the band as it stands.
+[Evidence](development/2026-11-01-epic-pacing-survey/README.md).
+
 ## Army deployment (rules/save 75) — 2026-11-01
 
 M4's editable deployment, first doctrines. `setDeployment` sets a land
