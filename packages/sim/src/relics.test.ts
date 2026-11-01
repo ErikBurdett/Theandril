@@ -99,7 +99,7 @@ describe('rules 63: relics of the old places', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.relics).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 75, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
     expect(relicDefinition(relicOfLandmarkKind(site.kindId)!.id)).toBeDefined();
     const whole = createGame({ seed: 20260905, size: 'standard', factionCount: 12 });
     expect(whole.relics).toEqual([]);

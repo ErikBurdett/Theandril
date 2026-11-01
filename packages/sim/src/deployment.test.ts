@@ -7,7 +7,7 @@ import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { rebuildIndexes } from './visibility';
 import { withRules } from './rules';
 import { serializeGameForVersion } from './save';
-import { arrangedFormations, deploymentBlocker, frontRank, validateDeployments } from './deployment';
+import { arrangedFormations, deploymentBlocker, deploymentOf, frontRank, validateDeployments } from './deployment';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
 /** The player's column with a scout, a cohort, pikes and outriders, and a rival company beside it. */
@@ -42,6 +42,20 @@ describe('rules 75: army deployment', () => {
     expect(arrangedFormations(state, army)[0]!.unitId).toBe('unit.spearman');
     issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'skirmish' });
     expect(arrangedFormations(state, army)[0]!.unitId).toBe('unit.scout');
+    // Rules 76: cavalry wings put the mounted on the outer columns of each rank and the foot in the centre.
+    issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'wings' });
+    const wings = arrangedFormations(state, army).map(item => unitOf(state, army.id, item.id));
+    expect(wings[0]).toBe('unit.cavalry');
+    expect(wings.slice(1).every(id => id !== 'unit.cavalry')).toBe(true);
+    expect(frontRank(state, army)[0]).toBe('Charter outriders');
+    withRules(state, 75, () => { expect(deploymentOf(state, army)).toBe('line'); expect(applyCommand(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'wings' }).error).toContain('Cavalry wings are not part of these rules'); });
+    expect(() => serializeGameForVersion(state, 75)).toThrow('cavalry wings unavailable');
+    const noWings = structuredClone(state); noWings.armies[army.id]!.deployment = 'shieldwall';
+    expect(JSON.parse(serializeGameForVersion(noWings, 75))).toMatchObject({ version: 75 });
+    const forgedWings = JSON.parse(serializeGameForVersion(noWings, 75)) as { state: { armies: { id: string; deployment?: string }[] } };
+    forgedWings.state.armies.find(item => item.id === army.id)!.deployment = 'wings';
+    expect(() => deserializeGame(JSON.stringify(forgedWings))).toThrow();
+    issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'skirmish' });
     expect(() => validateDeployments(state)).not.toThrow();
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
     expect(deserializeGame(serializeGame(state)).armies[army.id]!.deployment).toBe('skirmish');
@@ -73,7 +87,7 @@ describe('rules 75: army deployment', () => {
     expect(JSON.parse(sealed).state.armies.every((item: { deployment?: string }) => item.deployment === undefined)).toBe(true);
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 75, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
     issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'shieldwall' });
     expect(() => serializeGameForVersion(state, 74)).toThrow('deployments unavailable');
     // A v74 envelope naming a doctrine is refused.

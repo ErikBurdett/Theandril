@@ -39,7 +39,7 @@ import { assertNoHires, emptyHires, hireStateSchema, validateHires } from './hir
 import { assertNoTaxes, emptyTaxes, taxStateSchema, validateTaxes } from './taxes';
 import { assertNoUnrest, emptyUnrest, unrestStateSchema, validateUnrest } from './unrest';
 import { assertNoMapShares, emptyMapShares, mapShareStateSchema, validateMapShares } from './map-sharing';
-import { assertNoDeployments, validateDeployments } from './deployment';
+import { assertNoDeployments, assertNoWings, validateDeployments } from './deployment';
 import { assertNoAttunement, createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema, victoryV38Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -51,7 +51,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, characterV63Schema, assertNoNotables, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 75;
+export const SAVE_VERSION = 76;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -152,7 +152,7 @@ export const armyFormationSchema = z.object({ id, unitId: id, strength: integer.
 const armyV7Schema = z.object({ id, factionId: id, name, cell, movement: integer, formations: z.array(armyFormationSchema).min(1).max(12) }).strict();
 const armySchema = armyV7Schema.extend({ formations: z.array(armyFormationSchema).min(1).max(20) }).strict();
 /** Rules 75: a land army may carry its deployment doctrine; envelopes before it carry none. */
-const armyCurrentSchema = armyV7Schema.extend({ formations: z.array(armyFormationSchema).min(1).max(20), provisions: z.number().int().min(0).max(8).optional(), deployment: z.enum(['shieldwall', 'pikes', 'skirmish']).optional() }).strict()
+const armyCurrentSchema = armyV7Schema.extend({ formations: z.array(armyFormationSchema).min(1).max(20), provisions: z.number().int().min(0).max(8).optional(), deployment: z.enum(['shieldwall', 'pikes', 'skirmish', 'wings']).optional() }).strict()
   .refine(army => army.provisions === undefined || armyDomain(army) === 'naval', 'Only a fleet can carry provisions.')
   .refine(army => army.deployment === undefined || armyDomain(army) === 'land', 'Only a land army keeps a deployment.');
 /** Omitted stores preserve old save bytes and mean a newly provisioned fleet. */
@@ -346,12 +346,14 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(75), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(76), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
 /** v56 through v60 envelopes carry the rules 56 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 61 records. */
 /** v61 and v62 envelopes carry the rules 61 state and differ in their version and the pack they were sealed under; the wrapper below adds what rules 63 records. */
 /** v72 through v74 envelopes carry the rules 72 state and differ in their version and the pack they were sealed under; no army of them carries a doctrine. */
+/** Rules 76 adds a doctrine value only; a v75 envelope differs in its version and may not name the wings. */
+const saveV75Schema = saveSchema.extend({ version: z.literal(75) }).strict();
 type Through74 = Omit<z.infer<typeof saveSchema>, 'state'> & { state: z.infer<typeof stateV74Schema> };
 const saveV74Schema = saveSchema.extend({ version: z.literal(74), state: stateV74Schema }).strict();
 const saveV73Schema = saveSchema.extend({ version: z.literal(73), state: stateV74Schema }).strict();
@@ -690,6 +692,7 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
   if (version < 19) assertNoUnification(state);
   if (version < 50) assertNoAlliances(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
+  if (version < 76) assertNoWings(state);
   if (version < 75) assertNoDeployments(state);
   if (version < 72) assertNoMapShares(state);
   if (version < 71) assertNoUnrest(state);
@@ -838,6 +841,7 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
+  if (version < 76) assertNoWings(state);
   if (version < 75) assertNoDeployments(state);
   if (version < 72) assertNoMapShares(state);
   if (version < 71) assertNoUnrest(state);
@@ -846,7 +850,7 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 68) assertNoHires(state);
   if (version < 65) assertNoOffices(state);
   if (version < 64) assertNoNotables(state);
-  if (version >= 74) return CONTENT_HASH; // rules 75 changed no content
+  if (version >= 74) return CONTENT_HASH; // rules 75 and 76 changed no content
   if (version >= 73) return PRE_EVENTS_VI_CONTENT_HASH;
   if (version >= 69) return PRE_EVENTS_V_CONTENT_HASH; // rules 70 through 72 changed no content
   if (version >= 67) return PRE_CITY_STATES_II_CONTENT_HASH; // rules 68 changed no content
@@ -1327,6 +1331,14 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 75) {
+    const sealed = saveV75Schema.parse(raw);
+    assert(sealed.contentHash === CONTENT_HASH, 'v75 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v75 snapshot checksum does not match its contents');
+    assert(sealed.state.armies.every(army => army.deployment !== 'wings'), 'v75 envelope names a doctrine of later rules');
+    // Rules 76 adds a doctrine value only; the state continues unchanged under the same pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   return parseSaveThrough74(raw);
 }
 function parseSaveThrough74(raw: unknown): Through74 {

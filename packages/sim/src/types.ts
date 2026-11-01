@@ -52,7 +52,7 @@ export interface Army {
   id: string;
   factionId: string;
   /** Rules 75: how the army draws up for battle; absent for the line. */
-  deployment?: 'shieldwall' | 'pikes' | 'skirmish';
+  deployment?: 'shieldwall' | 'pikes' | 'skirmish' | 'wings';
   name: string;
   cell: number;
   movement: number;
@@ -73,7 +73,7 @@ export interface BattleDefense {
 export interface ArmyView extends Army, NavalArmyView {
   battleDefense?: BattleDefense;
   /** Rules 75: the doctrine the army draws up by and the unit names of its front rank. */
-  doctrine: 'line' | 'shieldwall' | 'pikes' | 'skirmish';
+  doctrine: 'line' | 'shieldwall' | 'pikes' | 'skirmish' | 'wings';
   frontRank: string[];
   formationCapacity: number;
   overCommand: boolean;
@@ -241,7 +241,7 @@ export type GameCommand =
   | { type: 'hireCompany'; factionId: string; cityStateId: string; armyId: string }
   | { type: 'setTaxRate'; factionId: string; rate: 'lean' | 'steady' | 'heavy' }
   | { type: 'shareMaps'; factionId: string; allyId: string }
-  | { type: 'setDeployment'; factionId: string; armyId: string; deployment: 'line' | 'shieldwall' | 'pikes' | 'skirmish' }
+  | { type: 'setDeployment'; factionId: string; armyId: string; deployment: 'line' | 'shieldwall' | 'pikes' | 'skirmish' | 'wings' }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }

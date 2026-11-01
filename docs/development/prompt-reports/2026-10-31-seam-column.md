@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues, durable settings and army deployment
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues, durable settings, army deployment and cavalry wings
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -288,6 +288,11 @@
   ([publication packet](../2026-11-01-publication-deployment/README.md)).
   Evidence packet [docs/development/2026-11-01-deployment/](../2026-11-01-deployment/README.md);
   roadmap library 145 delivered.
+- Cavalry wings, rules/save 76 ([ADR 0108](../../architecture/0108-cavalry-wings.md)):
+  a fifth deployment puts the mounted companies on the outer columns of
+  every rank. Evidence packet
+  [docs/development/2026-11-01-wings/](../2026-11-01-wings/README.md);
+  roadmap library 146 delivered.
 
 ## Verified
 
@@ -296,6 +301,8 @@ journeys; no pacing or chronicle run (web client only).
 Deployment: unit 2,380 / 310 files, campaigns 57, build, the deployment and
 battlefield journeys and the chronicles journey (pin 56 unmoved); headline
 **329 / 301 / 219**, the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209.
+Wings: unit 2,380 / 310 files, campaigns 57, build, the deployment journey and the
+chronicles journey (pin 56 unmoved); Headline pacing 329 / 301 / 219 and every other course identical to rules 75, since the AI keeps the line; the chronicle pin at 56 holds.
 
 Typecheck, lint, unit 2,321 / 285 files, campaigns 57, build, three covering
 gameplay journeys (6 of 6) and the `@scale` chronicles journey alone (1 of 1).

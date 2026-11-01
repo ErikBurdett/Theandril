@@ -61,7 +61,7 @@ describe('rules 72: allies share their maps', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.mapShares).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 75, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 76, contentHash: CONTENT_HASH });
     issue(state, { type: 'shareMaps', factionId: a, allyId: b });
     expect(() => serializeGameForVersion(state, 71)).toThrow('shared maps unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: a })).toMatchObject({ ok: true });

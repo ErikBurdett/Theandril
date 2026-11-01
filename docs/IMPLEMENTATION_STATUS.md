@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Cavalry wings (rules/save 76) — 2026-11-01
+
+M4's deployment, a fifth doctrine. The wings fill each rank with the
+mounted companies (movement four or more, no reach) in the outer columns
+and the foot in the centre, stable by id; a campaign under rules 75 cannot
+set them and reads an army carrying them as the line; a v75 envelope may
+not name them. Save 76; no new field, command or content. Headline pacing 329 / 301 / 219 and every other course identical to rules 75, since the AI keeps the line; the chronicle pin at 56 holds.
+Verification: sim tests; unit 2,380 / 310 files, campaigns 57, lint, typecheck,
+build, the deployment journey and the chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-wings/README.md),
+[ADR0108](architecture/0108-cavalry-wings.md).
+
 ## Epic headline pacing survey — 2026-11-01
 
 A measurement only. The Epic headline campaign under rules 75 across nine
