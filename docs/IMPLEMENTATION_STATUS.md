@@ -1,5 +1,19 @@
 # Theandril implementation status
 
+## Durable client settings — 2026-11-01
+
+M3's durable settings, first record. The text scale and a new Reduce motion
+choice are kept in the browser's own storage (`theandril.settings.v1`),
+read once through a validating loader and written on every change; an
+unreadable or refusing store is reported in Campaign & settings and the
+defaults stand; Reduce motion turns off every animation and transition
+through a data attribute whatever the system preference says. Web client
+only: no rules, save, content or AI change, so no pacing or chronicle run.
+Verification: UNIT_SHORT, lint, typecheck, build, the durable-settings and
+campaign-menu journeys.
+[Evidence](development/2026-11-01-durable-settings/README.md),
+[ADR0106](architecture/0106-durable-settings.md).
+
 ## The sixth hearth-event catalogue (rules/save 74) — 2026-11-01
 
 M6's hearth events, sixth catalogue. Fifteen more templates across the
@@ -15,6 +29,9 @@ the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209: 
 Verification: content tests, the sim version pins; unit 2,377 / 308 files,
 campaigns 57, lint, typecheck, build, the five hearth-event journeys and
 the chronicles journey (pin 56 unmoved though the turn-40 draw differs).
+Commit `0ee6ed2` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-hearth-events-vi/README.md)).
 [Evidence](development/2026-11-01-hearth-events-vi/README.md),
 [ADR0105](architecture/0105-hearth-events-vi.md).
 

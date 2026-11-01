@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest, shared maps, the fifth and sixth event catalogues and durable settings
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -267,11 +267,22 @@
   roadmap library 142 delivered.
 - The sixth hearth-event catalogue, rules/save 74 ([ADR 0105](../../architecture/0105-hearth-events-vi.md)):
   fifteen more templates across the conditions and the ages, one hundred
-  and twenty in all, the rules 73 catalogue frozen. Evidence packet
-  [docs/development/2026-11-01-hearth-events-vi/](../2026-11-01-hearth-events-vi/README.md);
+  and twenty in all, the rules 73 catalogue frozen. Commit `0ee6ed2` is
+  deployed: both workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-11-01-publication-hearth-events-vi/README.md)).
+  Evidence packet [docs/development/2026-11-01-hearth-events-vi/](../2026-11-01-hearth-events-vi/README.md);
   roadmap library 143 delivered.
+- Durable client settings ([ADR 0106](../../architecture/0106-durable-settings.md)):
+  the text scale and a Reduce motion choice survive a reload through the
+  browser's storage, with an unreadable store reported; web client only.
+  Evidence packet
+  [docs/development/2026-11-01-durable-settings/](../2026-11-01-durable-settings/README.md);
+  roadmap library 144 delivered.
 
 ## Verified
+
+Durable settings: UNIT_SHORT, build, the durable-settings and campaign-menu
+journeys; no pacing or chronicle run (web client only).
 
 Typecheck, lint, unit 2,321 / 285 files, campaigns 57, build, three covering
 gameplay journeys (6 of 6) and the `@scale` chronicles journey alone (1 of 1).
@@ -413,6 +424,8 @@ first on 379.
   shores open later is not waited for.
 - Hearth events: one hundred and twenty templates against one hundred and
   fifty.
+- Two client settings are durable; fog colours, non-colour cues and
+  keyboard workflows beyond the shortcuts remain.
 - Headline Epic pacing under rules 74 sits at 329, under its band, while both
   other Epic seeds are in band; recorded as a drift of one course with the
   neutralised-effects and valuation evidence in the sixth catalogue's packet.
