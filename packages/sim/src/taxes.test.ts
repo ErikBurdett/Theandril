@@ -3,7 +3,7 @@ import { CONTENT_HASH } from '@theandril/content';
 import { applyCommand, deserializeGame, getObservation, serializeGame, settlementYields, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { serializeGameForVersion } from './save';
+import { PRE_EVENTS_V_CONTENT_HASH, serializeGameForVersion } from './save';
 import { TAX_COIN_PERCENT, taxBlocker, taxedCoin, taxRateOf, validateTaxes } from './taxes';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
@@ -58,12 +58,12 @@ describe('rules 70: taxes', () => {
       expect(taxedCoin(state, player, 100)).toBe(100);
     });
     const sealed = serializeGameForVersion(state, 69);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 69, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 69, contentHash: PRE_EVENTS_V_CONTENT_HASH });
     expect(JSON.parse(sealed).state.taxes).toBeUndefined();
     const loaded = deserializeGame(sealed);
     expect(loaded.taxes).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     issue(state, { type: 'setTaxRate', factionId: player, rate: 'heavy' });
     expect(() => serializeGameForVersion(state, 69)).toThrow('taxes unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });

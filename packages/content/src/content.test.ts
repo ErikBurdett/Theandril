@@ -205,7 +205,11 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(hearthEventsForRules(66)).toHaveLength(90);
   expect(hearthEventsForRules(66).filter(event => event.sinceRules === 66 && event.condition === 'chained')).toHaveLength(1);
   expect(hearthEventsForRules(66).filter(event => event.sinceRules === 66).every(event => !event.choices[0]!.followUp)).toBe(true);
-  expect(HEARTH_EVENTS).toHaveLength(90);
+  expect(hearthEventsForRules(72)).toHaveLength(90);
+  expect(hearthEventsForRules(73)).toHaveLength(105);
+  expect(hearthEventsForRules(73).filter(event => event.sinceRules === 73 && event.condition === 'chained')).toHaveLength(1);
+  expect(hearthEventsForRules(73).filter(event => event.sinceRules === 73).every(event => !event.choices[0]!.followUp)).toBe(true);
+  expect(HEARTH_EVENTS).toHaveLength(105);
   // Rules 62 content, before rules 63 added the relics.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(62), magicPackForRules(62), true, ATTUNEMENT_VICTORY, hearthEventsForRules(62), EPOCHS, landmarkKindsForRules(62), crisesForRules(62), cityStateTradeForRules(62), false, false, false)).toBe('85443208');
   expect(CONTENT_HASH).not.toBe('85443208');
@@ -239,6 +243,9 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   // Rules 67 and 68 content, twenty-four city-states, before rules 69 added the second roster.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(68), magicPackForRules(68), true, ATTUNEMENT_VICTORY, hearthEventsForRules(68), EPOCHS, landmarkKindsForRules(68), crisesForRules(68), cityStateTradeForRules(68), RELICS, NOTABLE_CHARACTERS, OFFICES)).toBe('1bd6624e');
   expect(CONTENT_HASH).not.toBe('1bd6624e');
+  // Rules 69 through 72 content, ninety events and forty-eight city-states, before rules 73 added fifteen more events.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(72), magicPackForRules(72), true, ATTUNEMENT_VICTORY, hearthEventsForRules(72), EPOCHS, landmarkKindsForRules(72), crisesForRules(72), cityStateTradeForRules(72), RELICS, NOTABLE_CHARACTERS, OFFICES)).toBe('d1205eae');
+  expect(CONTENT_HASH).not.toBe('d1205eae');
   // Rules 65 content, seventy-five events, before rules 66 added fifteen more.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, cityStatesForRules(65), magicPackForRules(65), true, ATTUNEMENT_VICTORY, hearthEventsForRules(65), EPOCHS, landmarkKindsForRules(65), crisesForRules(65), cityStateTradeForRules(65), RELICS, NOTABLE_CHARACTERS, OFFICES)).toBe('cf5b6321');
   expect(CONTENT_HASH).not.toBe('cf5b6321');

@@ -1,0 +1,75 @@
+factionCount 4 rules72 turn 56 prosperity | rules73 turn 56 prosperity
+first divergence at command index 535 of 916 910
+64: 40 faction.reedbound_council {"type":"resolveHearthEvent","factionId":"faction.reedbound_council","eventId":"event.40.2","choiceId":"repair_the_walls"} ok
+    40 faction.cinder_march {"type":"research","factionId":"faction.cinder_march","technologyId":"technology.surveyed_estates"} ok
+    40 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1145} ok
+    40 faction.cinder_march {"type":"moveTo","factionId":"faction.cinder_march","armyId":"army.71","target":1281} ok
+65: 40 faction.reedbound_council {"type":"resolveHearthEvent","factionId":"faction.reedbound_council","eventId":"event.40.2","choiceId":"raise_the_levees"} ok
+    40 faction.cinder_march {"type":"research","factionId":"faction.cinder_march","technologyId":"technology.surveyed_estates"} ok
+    40 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1145} ok
+    40 faction.cinder_march {"type":"moveTo","factionId":"faction.cinder_march","armyId":"army.71","target":1281} ok
+--- character commands before the divergence (rules 65)
+15 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.surveyor"} ok
+16 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.surveyor"} ok
+16 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.16","armyId":"army.15"} ok
+17 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.surveyor"} ok
+17 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.18","armyId":"army.17"} ok
+17 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":318} ok
+18 faction.reedbound_council {"type":"assignCharacter","factionId":"faction.reedbound_council","characterId":"character.22","armyId":"army.19"} ok
+18 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1101} ok
+19 faction.ashen_compact {"type":"recruitCharacter","factionId":"faction.ashen_compact","settlementId":"settlement.9","definitionId":"character.surveyor"} ok
+19 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1218} ok
+20 faction.ashen_compact {"type":"assignCharacter","factionId":"faction.ashen_compact","characterId":"character.29","armyId":"army.28"} ok
+20 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.marshal"} ok
+21 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":722} ok
+21 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.37","armyId":"army.15"} ok
+22 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.marshal"} ok
+23 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.41","armyId":"army.17"} ok
+24 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":928} ok
+25 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.engineer"} ok
+26 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.50","armyId":"army.17"} ok
+29 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":785} ok
+29 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":268} ok
+30 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1027} ok
+32 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":218} ok
+34 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1147} ok
+35 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":218} ok
+37 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1145} ok
+--- character commands before the divergence (rules 64)
+15 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.surveyor"} ok
+16 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.surveyor"} ok
+16 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.16","armyId":"army.15"} ok
+17 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.surveyor"} ok
+17 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.18","armyId":"army.17"} ok
+17 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":318} ok
+18 faction.reedbound_council {"type":"assignCharacter","factionId":"faction.reedbound_council","characterId":"character.22","armyId":"army.19"} ok
+18 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1101} ok
+19 faction.ashen_compact {"type":"recruitCharacter","factionId":"faction.ashen_compact","settlementId":"settlement.9","definitionId":"character.surveyor"} ok
+19 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1218} ok
+20 faction.ashen_compact {"type":"assignCharacter","factionId":"faction.ashen_compact","characterId":"character.29","armyId":"army.28"} ok
+20 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.marshal"} ok
+21 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":722} ok
+21 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.37","armyId":"army.15"} ok
+22 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.marshal"} ok
+23 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.41","armyId":"army.17"} ok
+24 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":928} ok
+25 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.engineer"} ok
+26 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.50","armyId":"army.17"} ok
+29 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":785} ok
+29 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":268} ok
+30 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1027} ok
+32 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":218} ok
+34 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1147} ok
+35 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":218} ok
+37 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1145} ok
+offices held under rules 65: 0 | under rules 64: 0
+--- rules 65 reasons around turn 40
+40 faction.ashen_compact :: Charter transport: return through charted water to harbor supply (3 provision turns; 3-turn route). | Deepwake warship: patrol and chart permitted coastal water. | Hearth 2 improves worked land with Terraced fields for 32 coin. | army.79 holds its recruitment point for a mixed formation column. | army.85 advances toward its visible objective using its available movement budget.
+40 faction.reedbound_council :: The river rising at Hearth 3: raise the levees (-25 coin). | Research Surveyed estates for the economy and the settlement sites currently observed; spend 60 knowledge. | Hearth caravan: gather at the observed embarkation shore. | Charter transport: meet the waiting land expedition at its shore. | Deepwake warship: return through charted water to harbor supply (4 provision turns; 3-turn route). | Concentrate Oath guard with Cinder plate cohort: 2 formations in one field army. | army.78 advances toward its visible objective using its available movement budget. | a
+40 faction.cinder_march :: Muster day at Hearth 2: hold the games (-10 coin, +8 garrison strength). | Research Surveyed estates for the economy and the settlement sites currently observed; spend 60 knowledge. | Kesta Coalridge commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 7 hexes without revealing hidden armies. | Charter transport: sail the known water route toward a viable landing. | army.24 advances toward its visible objective using its available movement budget. | army.6 explores new ground using its available movement budget. | army.88 advances toward
+40 faction.glass_tide :: Navel Saltcharter commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 7 hexes without revealing hidden armies. | army.34 advances toward its visible objective using its available movement budget. | army.8 explores new ground using its available movement budget.
+--- rules 64 reasons around turn 40
+40 faction.ashen_compact :: Charter transport: return through charted water to harbor supply (3 provision turns; 3-turn route). | Deepwake warship: patrol and chart permitted coastal water. | Hearth 2 improves worked land with Terraced fields for 32 coin. | army.79 holds its recruitment point for a mixed formation column. | army.85 advances toward its visible objective using its available movement budget.
+40 faction.reedbound_council :: A quiet season at Hearth 3: repair the walls (-10 devastation). | Research Surveyed estates for the economy and the settlement sites currently observed; spend 60 knowledge. | Hearth caravan: gather at the observed embarkation shore. | Charter transport: meet the waiting land expedition at its shore. | Deepwake warship: return through charted water to harbor supply (4 provision turns; 3-turn route). | Concentrate Oath guard with Cinder plate cohort: 2 formations in one field army. | army.78 advances toward its visible objective using its available movement budget
+40 faction.cinder_march :: Rumours of glass at Hearth 2: send surveyors (-20 coin, +15 knowledge). | Research Surveyed estates for the economy and the settlement sites currently observed; spend 60 knowledge. | Kesta Coalridge commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 7 hexes without revealing hidden armies. | Charter transport: sail the known water route toward a viable landing. | army.24 advances toward its visible objective using its available movement budget. | army.6 explores new ground using its available movement budget. | army.88 advances toward 
+40 faction.glass_tide :: Navel Saltcharter commits 4 coin and 2 stationary turns to Survey the frontier: Chart terrain within 7 hexes without revealing hidden armies. | army.34 advances toward its visible objective using its available movement budget. | army.8 explores new ground using its available movement budget.

@@ -107,7 +107,9 @@ describe('rules 46: hearth events', () => {
     expect(lapsed[0]).toContain(lateTemplate.choices[0]!.label.toLowerCase());
     expect(upkeepFree.settlements[late.settlementId]!.food).toBe(expected.food);
     expect(upkeepFree.factions.find(item => item.id === owner)!.treasury).toBe(Math.max(0, expected.coin));
-    expect(upkeepFree.hearthEvents.pending).toEqual([]);
+    // The lapsed event is gone; the same turn may draw a fresh one for a hearth, as the catalogue and the seed decide.
+    expect(upkeepFree.hearthEvents.pending.find(item => item.id === late.id)).toBeUndefined();
+    expect(upkeepFree.hearthEvents.pending.every(item => item.turn === upkeepFree.turn)).toBe(true);
   });
 
   it('evaluates conditions from canonical state and offers nothing at a besieged or occupied hearth', () => {
@@ -166,7 +168,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -221,7 +223,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     view = getObservation(loaded, player);
     expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
     // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
@@ -283,7 +285,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 47, contentHash: PRE_CHAINS_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     // A pending event that lies ahead without an event it follows is refused by validation.
     const corrupt = deserializeGame(serializeGame(state));
     corrupt.hearthEvents.pending = [{ id: 'event.999.1', factionId: player, settlementId: host.id, templateId: 'event.kiln_fire', turn: corrupt.turn + 3, expiresTurn: corrupt.turn + 3 + HEARTH_EVENT_ANSWER_TURNS }];

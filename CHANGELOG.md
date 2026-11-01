@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 73 brings fifteen more hearth events — the horse fair, the night watch, the scorched orchards, driftwood hulls, the seam chanters, the levy called, fire on the quay, a visiting chronicler, the barracks brawl, the roads reopened, a distant kin’s summons, the stockade, the bidder’s envoy and the envoy’s return, the ash moths — one hundred and five in all, with the rules 72 catalogue frozen so older saves keep the fortunes they were sealed with. Headline pacing 375 / 317 / 207, with the two other seeds at 367 / 321, 290 / 266, 187 / 198, every headline course in band, Epic seed 20260906 back in band at 367 and seed 20260907 at 321 under it.
+
 Rules/save 72 lets allies share their maps from Realm affairs: each ally learns every hex the other has explored, once every twenty turns for the pair, the journal recording what each learned; AI allies accept a player’s sharing but do not share on their own yet. Headline pacing 388 / 296 / 198, with the two other seeds at 339 / 344, 283 / 286, 191 / 196, every course identical to rules 71 since the AI does not share maps.
 
 Rules/save 71 brings unrest to the hearths: heavy taxes, occupation and deep devastation raise a hearth’s unrest each turn and lean taxes ease it; at fifty the hearth’s industry is halved and at a hundred it riots, a household leaving and the lanes scarred, the journal recording it; the hearth’s condition panel shows the level and its pressures, and AI realms stop pressing restless lanes and ease them when they can afford to. Headline pacing 388 / 296 / 198, with the two other seeds at 339 / 344, 283 / 286, 191 / 196, every headline course in band and identical to rules 70, the two other Epic seeds just under it.

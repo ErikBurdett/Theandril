@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## The fifth hearth-event catalogue (rules/save 73) — 2026-11-01
+
+M6's hearth events, fifth catalogue. Fifteen more templates across the
+conditions and the ages — the horse fair, the night watch, the scorched
+orchards, driftwood hulls, the seam chanters, the levy called, fire on the
+quay, a visiting chronicler, the barracks brawl, the roads reopened, a
+distant kin's summons, the stockade, the bidder's envoy and the envoy's
+return, the ash moths — one a chain whose default turns the envoy away; one
+hundred and five in all, the rules 72 catalogue frozen. Content only; save
+73 upgrades v72 envelopes unchanged under the new pack and refuses a v72
+envelope naming a rules 73 template. Headline pacing **375 / 317 / 207**,
+the other seeds 367 / 321, 290 / 266, 187 / 198, proxies 403 / 422 / 367 / 209: every headline course in band, Epic seed 20260906 back in band at 367 and seed 20260907 at 321 under it.
+Verification: content tests, the sim version pins; unit 2,377 / 308 files,
+campaigns 57, lint, typecheck, build, the four hearth-event journeys and
+the chronicles journey (pin 56 unmoved though the turn-40 draw differs).
+[Evidence](development/2026-11-01-hearth-events-v/README.md),
+[ADR0104](architecture/0104-hearth-events-v.md).
+
 ## Allies share their maps (rules/save 72) — 2026-11-01
 
 M1's negotiated terms, map sharing. `shareMaps` gives each of two allies

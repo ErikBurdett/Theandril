@@ -3,7 +3,7 @@ import { CONTENT_HASH } from '@theandril/content';
 import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { serializeGameForVersion } from './save';
+import { PRE_EVENTS_V_CONTENT_HASH, serializeGameForVersion } from './save';
 import { MAP_SHARE_COOLDOWN_TURNS, mapShareBlocker, validateMapShares } from './map-sharing';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
@@ -56,12 +56,12 @@ describe('rules 72: allies share their maps', () => {
       expect(getObservation(state, a).mapShares).toBeUndefined();
     });
     const sealed = serializeGameForVersion(state, 71);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 71, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 71, contentHash: PRE_EVENTS_V_CONTENT_HASH });
     expect(JSON.parse(sealed).state.mapShares).toBeUndefined();
     const loaded = deserializeGame(sealed);
     expect(loaded.mapShares).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     issue(state, { type: 'shareMaps', factionId: a, allyId: b });
     expect(() => serializeGameForVersion(state, 71)).toThrow('shared maps unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: a })).toMatchObject({ ok: true });

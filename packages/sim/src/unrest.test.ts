@@ -3,7 +3,7 @@ import { CONTENT_HASH } from '@theandril/content';
 import { applyCommand, deserializeGame, getObservation, serializeGame, settlementYields, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { serializeGameForVersion } from './save';
+import { PRE_EVENTS_V_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceUnrest, RIOT_DEVASTATION, UNREST_HALVING, UNREST_RIOT, unrestOf, unrestPressures, validateUnrest } from './unrest';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; };
@@ -69,12 +69,12 @@ describe('rules 71: unrest in the hearths', () => {
       issue(state, { type: 'setTaxRate', factionId: player, rate: 'steady' });
     });
     const sealed = serializeGameForVersion(state, 70);
-    expect(JSON.parse(sealed)).toMatchObject({ version: 70, contentHash: CONTENT_HASH });
+    expect(JSON.parse(sealed)).toMatchObject({ version: 70, contentHash: PRE_EVENTS_V_CONTENT_HASH });
     expect(JSON.parse(sealed).state.unrest).toBeUndefined();
     const loaded = deserializeGame(sealed);
     expect(loaded.unrest).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 72, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 73, contentHash: CONTENT_HASH });
     state.unrest = [{ settlementId: town.id, level: 3 }];
     expect(() => serializeGameForVersion(state, 70)).toThrow('unrest unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: player })).toMatchObject({ ok: true });

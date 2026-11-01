@@ -1,0 +1,13 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/hearth-events.spec.ts --workers=2 --output=docs/development/2026-11-01-hearth-events-v/browser-results
+
+
+Running 4 tests using 1 worker
+
+  ✓  1 [gameplay] › tests/gameplay/hearth-events.spec.ts:10:1 › answer a hearth event from Realm affairs and read its effect in the treasury and the journal (3.8s)
+  ✓  2 [gameplay] › tests/gameplay/hearth-events.spec.ts:39:1 › answer a rules 62 hearth event from Realm affairs (3.4s)
+  ✓  3 [gameplay] › tests/gameplay/hearth-events.spec.ts:63:1 › answer a rules 66 hearth event from Realm affairs (3.5s)
+  ✓  4 [gameplay] › tests/gameplay/hearth-events.spec.ts:87:1 › answer a rules 73 hearth event from Realm affairs (3.4s)
+
+  4 passed (15.1s)
