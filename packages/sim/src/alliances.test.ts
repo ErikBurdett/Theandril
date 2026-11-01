@@ -190,6 +190,6 @@ describe('alliances (rules 50)', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.alliances.calls).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 58 });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 59 });
   });
 });

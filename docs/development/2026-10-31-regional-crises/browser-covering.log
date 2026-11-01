@@ -1,0 +1,14 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/crises.spec.ts tests/gameplay/hearth-events.spec.ts --workers=2 --output=docs/development/2026-10-31-regional-crises/browser-results
+
+
+Running 5 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/hearth-events.spec.ts:10:1 › answer a hearth event from Realm affairs and read its effect in the treasury and the journal (3.6s)
+  ✓  2 [gameplay] › tests/gameplay/crises.spec.ts:13:1 › read the standing crisis and shelter the hearths from Realm affairs (3.7s)
+  ✓  3 [gameplay] › tests/gameplay/crises.spec.ts:44:1 › answer an event of the standing crisis from Realm affairs (3.0s)
+  ✓  4 [gameplay] › tests/gameplay/crises.spec.ts:74:1 › read the migration a crisis leaves behind (2.7s)
+  ✓  5 [gameplay] › tests/gameplay/crises.spec.ts:108:1 › read a regional crisis and its reach in Realm affairs (2.3s)
+
+  5 passed (12.5s)

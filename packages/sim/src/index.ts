@@ -39,7 +39,7 @@ export { ALLIANCE_OFFER_TURNS, allianceAcceptanceBlocker, allianceBetween, allia
 export type { Alliance, AllianceOffer, AllianceState, ObservedAllianceOffer, ObservedAlliances } from './alliances';
 export { landmarkAt, landmarks, landmarkYieldAt, LANDMARK_RULES, MAX_LANDMARKS, observeLandmarks } from './landmarks';
 export type { Landmark, ObservedLandmark } from './landmarks';
-export { advanceCrises, beginCrises, blightWords, emptyCrises, hasCrises, MAX_PAST_CRISES, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, shelterCost, shelterFromCrisis, validateCrises } from './crises';
+export { advanceCrises, affectedHearths, beginCrises, blightWords, crisisReaches, emptyCrises, hasCrises, hasRegionalCrisis, MAX_PAST_CRISES, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, shelterCost, shelterFromCrisis, validateCrises } from './crises';
 export type { ActiveCrisis, CrisisState, ObservedCrisis, PastCrisis } from './crises';
 export type { ObservedEpoch } from './epochs';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';

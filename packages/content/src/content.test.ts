@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { ATTUNEMENT_VICTORY, CRISES, validateCrisisContent, EPOCHS, validateEpochContent, LANDMARK_KINDS, landmarkKindsForRules, validateLandmarkContent, HEARTH_EVENTS, hearthEventsForRules, validateHearthEventContent, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, SCHEMA44_ATTUNEMENT_VICTORY, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
+import { ATTUNEMENT_VICTORY, CRISES, crisesForRules, validateCrisisContent, EPOCHS, validateEpochContent, LANDMARK_KINDS, landmarkKindsForRules, validateLandmarkContent, HEARTH_EVENTS, hearthEventsForRules, validateHearthEventContent, SCHEMA43_ATTUNEMENT_VICTORY, SCHEMA43_CAMPAIGN_PACES, SCHEMA44_ATTUNEMENT_VICTORY, BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, SCHEMA21_CAMPAIGN_PACES, magicPackForRules, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
   expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
@@ -170,30 +170,40 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   // Rules 52 content, forty-five events and the landmarks, before rules 53 added the crises; the current pack seals six crises.
   expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(52), true, ATTUNEMENT_VICTORY, hearthEventsForRules(52), EPOCHS, landmarkKindsForRules(52), false)).toBe('d76aa9bb');
   expect(CONTENT_HASH).not.toBe('d76aa9bb');
-  expect(CRISES).toHaveLength(6);
+  // Rules 57 and 58 content, before rules 59 added the regional crises and their events.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(58), true, ATTUNEMENT_VICTORY, hearthEventsForRules(58), EPOCHS, landmarkKindsForRules(58), crisesForRules(58))).toBe('0eed2d1a');
+  expect(CONTENT_HASH).not.toBe('0eed2d1a');
+  expect(crisesForRules(58)).toHaveLength(6);
+  expect(CRISES).toHaveLength(9);
+  expect(CRISES.filter(crisis => crisis.scope === 'region').map(crisis => crisis.epoch)).toEqual(['epoch.roads', 'epoch.seams', 'epoch.bids']);
+  expect(() => validateCrisisContent([{ ...CRISES[0]!, radius: 10 }])).toThrow('names its radius');
+  expect(() => validateCrisisContent([{ ...CRISES[0]!, scope: 'region' }])).toThrow('names its radius');
+  expect(() => validateCrisisContent([{ ...CRISES[0]!, scope: 'region', radius: 10 }])).toThrow('rules 59 or later');
+  expect(hearthEventsForRules(58)).toHaveLength(57);
+  expect(HEARTH_EVENTS).toHaveLength(60);
   expect(() => validateCrisisContent()).not.toThrow();
   expect(() => validateCrisisContent([CRISES[0]!, CRISES[0]!])).toThrow('Duplicate crisis ID');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, epoch: 'epoch.fracture' }])).toThrow('first age brings no crisis');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, blight: { food: 0, coin: 0, knowledge: 0, devastation: 0 } }])).toThrow('takes something');
   expect(() => validateCrisisContent(CRISES.filter(crisis => crisis.epoch !== 'epoch.bids'))).toThrow('Every age after the first has a crisis');
   // Rules 53 content, forty-five events and the crises, before rules 54 added the crisis events; the current pack seals fifty-one.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(53), true, ATTUNEMENT_VICTORY, hearthEventsForRules(53), EPOCHS, landmarkKindsForRules(53), CRISES)).toBe('d50775cf');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(53), true, ATTUNEMENT_VICTORY, hearthEventsForRules(53), EPOCHS, landmarkKindsForRules(53), crisesForRules(53))).toBe('d50775cf');
   expect(CONTENT_HASH).not.toBe('d50775cf');
   expect(hearthEventsForRules(53)).toHaveLength(45);
   expect(hearthEventsForRules(54)).toHaveLength(51);
   expect(hearthEventsForRules(54).filter(event => event.crisis)).toHaveLength(6);
-  expect(CRISES.every(crisis => hearthEventsForRules(54).some(event => event.crisis === crisis.id && event.condition === 'crisis'))).toBe(true);
+  expect(crisesForRules(54).every(crisis => hearthEventsForRules(54).some(event => event.crisis === crisis.id && event.condition === 'crisis'))).toBe(true);
+  expect(CRISES.every(crisis => HEARTH_EVENTS.some(event => event.crisis === crisis.id && event.condition === 'crisis'))).toBe(true);
   expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 54, condition: 'crisis' }])).toThrow('names its crisis');
   expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, crisis: 'crisis.grey_winter' }])).toThrow('names no crisis');
   expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 54, condition: 'crisis', crisis: 'crisis.nowhere' }])).toThrow('names a crisis of the catalogue');
   // Rules 54 through 56 content, fifty-one events and twelve landmarks, before rules 57 added twelve more landmarks and six more events.
-  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(56), true, ATTUNEMENT_VICTORY, hearthEventsForRules(56), EPOCHS, landmarkKindsForRules(56), CRISES)).toBe('7cad9f6e');
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(56), true, ATTUNEMENT_VICTORY, hearthEventsForRules(56), EPOCHS, landmarkKindsForRules(56), crisesForRules(56))).toBe('7cad9f6e');
   expect(CONTENT_HASH).not.toBe('7cad9f6e');
   expect(landmarkKindsForRules(56)).toHaveLength(12);
   expect(LANDMARK_KINDS).toHaveLength(24);
   expect(hearthEventsForRules(56)).toHaveLength(51);
   expect(hearthEventsForRules(57).filter(event => event.condition === 'landmark')).toHaveLength(10);
-  expect(HEARTH_EVENTS).toHaveLength(57);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
   expect(hearthEventsForRules(47)).toHaveLength(24);

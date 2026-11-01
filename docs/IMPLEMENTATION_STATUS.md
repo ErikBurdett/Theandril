@@ -1,5 +1,25 @@
 # Theandril implementation status
 
+## Regional crises (rules/save 59) — 2026-10-31
+
+M6's regional crises. One regional crisis per later age — the Valley Blight,
+the Glass Storm, the Bread Riots — joins the age's pool from rules 59,
+centred as it begins on one of the world's hearths drawn from the seed, and
+reaching only the hearths within its radius: the toll, the shelter quote and
+its blocker, the crisis's event and the migration it leaves fall on those
+alone, and the observation and the Realm affairs card carry the centre, the
+radius, the hearth it is centred on and the realm's reached hearths. The AI
+counts only reached hearths at risk. The standing crisis gains an optional
+centre; a regional crisis is refused under earlier rules and older envelopes
+load unchanged; three more crisis events, sixty templates. Headline pacing
+**395 / 302 / 203**, the other seeds 338 / 338, 268 / 287, 185 / 199, proxies
+307 / 431 / 302 / 181: every headline course in band; the Epic headline
+draws two regional crises. Verification: content, sim, AI and journey
+tests; unit 2,350 / 294 files, campaigns 57, lint, typecheck, build, two
+covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-regional-crises/README.md),
+[ADR0089](architecture/0089-regional-crises.md).
+
 ## A patron stands for its client (rules/save 58) — 2026-10-31
 
 Gate G's guarantee, through the patronage bond. A war declared on a client

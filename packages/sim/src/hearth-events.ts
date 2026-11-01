@@ -157,14 +157,14 @@ function settle(state: GameState, pending: PendingHearthEvent, template: HearthE
  * answering an event is not offered it, and the offer does not reset the
  * realm's ordinary cadence. The id carries a suffix so it never reuses the
  * id of a draw answered earlier in the same turn. */
-export function offerCrisisEvents(state: GameState, crisisId: string, crisisName: string, events: DomainEvent[]): void {
+export function offerCrisisEvents(state: GameState, crisisId: string, crisisName: string, events: DomainEvent[], reaches: (town: GameState['settlements'][string]) => boolean = () => true): void {
   if (rulesVersion(state) < 54 || state.victory) return;
   const template = templates(state).find(item => item.condition === 'crisis' && item.crisis === crisisId);
   if (!template) return;
   const offered = new Set(state.hearthEvents.pending.map(item => item.factionId));
   state.factions.map((faction, seat) => ({ faction, seat })).sort((a, b) => byId(a.faction, b.faction)).forEach(({ faction, seat }) => {
     if (offered.has(faction.id) || state.hearthEvents.pending.length >= MAX_PENDING_HEARTH_EVENTS) return;
-    const town = eligibleHearths(state, faction.id)[0];
+    const town = eligibleHearths(state, faction.id).find(reaches);
     if (!town) return;
     const pending: PendingHearthEvent = { id: `event.${state.turn}.${seat + 1}.crisis`, factionId: faction.id, settlementId: town.id, templateId: template.id, turn: state.turn, expiresTurn: state.turn + HEARTH_EVENT_ANSWER_TURNS };
     state.hearthEvents.pending = [...state.hearthEvents.pending, pending].sort(byId);

@@ -17,7 +17,9 @@ export const crisisBlightSchema = z.object({ food: toll, coin: toll, knowledge: 
 export type CrisisBlight = z.infer<typeof crisisBlightSchema>;
 export const crisisSchema = z.object({
   id, name, description: text, epoch: z.string().regex(/^epoch\.[a-z_]+$/), turns: z.number().int().min(4).max(40),
-  blight: crisisBlightSchema, shelterCoinPerHearth: z.number().int().min(1).max(200), shelter: text, sinceRules: z.literal(53),
+  blight: crisisBlightSchema, shelterCoinPerHearth: z.number().int().min(1).max(200), shelter: text, sinceRules: z.union([z.literal(53), z.literal(59)]),
+  /** Rules 59: a regional crisis strikes only the hearths within `radius` hexes of a centre drawn from the seed among the world's hearths; a crisis without a scope is world-wide. */
+  scope: z.literal('region').optional(), radius: z.number().int().min(6).max(24).optional(),
 }).strict();
 export type CrisisDefinition = z.infer<typeof crisisSchema>;
 const blight = (changes: Partial<CrisisBlight>): CrisisBlight => ({ food: 0, coin: 0, knowledge: 0, devastation: 0, ...changes });
@@ -46,8 +48,19 @@ export const CRISES: readonly CrisisDefinition[] = [
   { id: 'crisis.long_dark', name: 'The Long Dark', epoch: 'epoch.bids', turns: 5, sinceRules: 53,
     description: 'Ash on the wind blots the sun for a season; the fields yield and rot in the same week.',
     blight: blight({ food: 3 }), shelterCoinPerHearth: 15, shelter: 'Bring the harvest under cover and salt what can be salted; the stores hold.' },
+  // Rules 59: one regional crisis for each age, striking the hearths around one of the world's hearths.
+  { id: 'crisis.valley_blight', name: 'The Valley Blight', epoch: 'epoch.roads', turns: 6, sinceRules: 59, scope: 'region', radius: 10,
+    description: 'A blight in the grain of one valley, carried from field to field on the carts; every hearth around it eats into its seed.',
+    blight: blight({ food: 3 }), shelterCoinPerHearth: 12, shelter: 'Burn the blighted fields and buy clean seed from beyond the valley; the stores hold.' },
+  { id: 'crisis.glass_storm', name: 'The Glass Storm', epoch: 'epoch.seams', turns: 4, sinceRules: 59, scope: 'region', radius: 10,
+    description: 'A wind off the Ashfall glass that cuts like thrown knives; every roof and wall in its path is scored.',
+    blight: blight({ devastation: 2 }), shelterCoinPerHearth: 10, shelter: 'Shutter every hearth in the storm’s path and pay the roofers in advance; the walls stand.' },
+  { id: 'crisis.bread_riots', name: 'The Bread Riots', epoch: 'epoch.bids', turns: 5, sinceRules: 59, scope: 'region', radius: 12,
+    description: 'The price of bread in one market breaks the peace of every hearth that buys there; the granaries are stormed by night.',
+    blight: blight({ coin: 5 }), shelterCoinPerHearth: 16, shelter: 'Open the granaries at the old price from the treasury; the riots have nothing to feed on.' },
 ];
 export const crisesForRules = (version: number): readonly CrisisDefinition[] => CRISES.filter(crisis => crisis.sinceRules <= version);
+export const crisisIsRegional = (crisis: CrisisDefinition): boolean => crisis.scope === 'region';
 export const crisisDefinition = (crisisId: string): CrisisDefinition | undefined => CRISES.find(crisis => crisis.id === crisisId);
 export const CRISIS_BLIGHT_KEYS = ['food', 'coin', 'knowledge', 'devastation'] as const;
 
@@ -59,6 +72,8 @@ export function validateCrisisContent(crises = CRISES): void {
     if (!EPOCHS.some(epoch => epoch.id === crisis.epoch)) throw new Error('A crisis names an age of the catalogue: ' + crisis.id);
     if (crisis.epoch === EPOCHS[0]!.id) throw new Error('The first age brings no crisis: ' + crisis.id);
     if (CRISIS_BLIGHT_KEYS.every(key => !crisis.blight[key])) throw new Error('A crisis takes something: ' + crisis.id);
+    if ((crisis.scope === 'region') !== (crisis.radius !== undefined)) throw new Error('A regional crisis names its radius, and only a regional crisis does: ' + crisis.id);
+    if (crisis.scope === 'region' && crisis.sinceRules < 59) throw new Error('A regional crisis belongs to rules 59 or later: ' + crisis.id);
   }
   for (const epoch of EPOCHS.slice(1)) if (!crises.some(crisis => crisis.epoch === epoch.id)) throw new Error('Every age after the first has a crisis: ' + epoch.id);
 }

@@ -29,7 +29,7 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54), z.literal(57)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54), z.literal(57), z.literal(59)]),
   /** Rules 49: drawn only once the world has reached this age. */
   epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
   /** Rules 54: drawn only while this crisis stands. */
@@ -409,7 +409,28 @@ const SEVENTH_BATCH: readonly HearthEventDefinition[] = [
       { id: 'let_it_burn', label: 'Let it burn to the stones', description: 'Stone does not burn; the grass does, and the ash feeds next year’s crop.', effects: effects({ food: 8, devastation: 4 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH, ...SEVENTH_BATCH];
+/** Rules 59: the events of the regional crises. */
+const EIGHTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.seed_from_the_next_valley', name: 'Seed from the next valley', condition: 'crisis', crisis: 'crisis.valley_blight', weight: 5, sinceRules: 59,
+    text: 'Carters from beyond the blight offer {hearth} clean seed at twice the price, and the reeves ask whether to pay it or sow what the hearth has.',
+    choices: [
+      { id: 'pay_for_clean_seed', label: 'Pay for clean seed', description: 'Pay the carters’ price and sow clean; the fields come through.', effects: effects({ coin: -20, food: 8 }) },
+      { id: 'sow_what_we_have', label: 'Sow what we have', description: 'Sow the hearth’s own seed and hope the blight has passed it by.', effects: effects({ food: -6, coin: 5 }) },
+    ] },
+  { id: 'event.glass_in_the_thatch', name: 'Glass in the thatch', condition: 'crisis', crisis: 'crisis.glass_storm', weight: 5, sinceRules: 59,
+    text: 'The storm has left the roofs of {hearth} full of glass, and the thatchers will not go up until they are paid double.',
+    choices: [
+      { id: 'pay_the_thatchers', label: 'Pay the thatchers', description: 'Pay double and have the roofs cleared before the rain.', effects: effects({ coin: -15, devastation: -3 }) },
+      { id: 'clear_it_ourselves', label: 'Clear it ourselves', description: 'Send the hearth’s own people up; some come down cut.', effects: effects({ population: -1, coin: 5 }) },
+    ] },
+  { id: 'event.the_granary_doors', name: 'The granary doors', condition: 'crisis', crisis: 'crisis.bread_riots', weight: 5, sinceRules: 59,
+    text: 'A crowd stands at the granary doors of {hearth} with the price chalked on a board, and the keeper asks whether to open them.',
+    choices: [
+      { id: 'open_the_doors', label: 'Open the doors', description: 'Sell at the chalked price and bear the loss; the crowd goes home fed.', effects: effects({ food: -10, coin: -10 }) },
+      { id: 'bar_the_doors', label: 'Bar the doors', description: 'Keep the price and the doors; the crowd breaks something else.', effects: effects({ coin: 10, devastation: 5 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH, ...SEVENTH_BATCH, ...EIGHTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);

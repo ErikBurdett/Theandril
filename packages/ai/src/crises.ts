@@ -14,7 +14,8 @@ export function remainingToll(view: Observation): number {
   const perHearth = crisis.blight.coin + crisis.blight.knowledge * 1.5 + crisis.blight.food * 1.5 + crisis.blight.devastation * 2;
   // Rules 55: a hearth of three or more with a known sheltered hearth of another realm within range may lose a household when the crisis passes; people are valued as the hearth events value them. Only hearths in sight or memory count: nothing is guessed about shelter the realm cannot see.
   const havens = view.settlements.filter(town => town.factionId !== view.factionId && crisis.shelteredRealms?.includes(town.factionId));
-  const exposed = havens.length ? view.settlements.filter(town => town.factionId === view.factionId && town.population >= MIGRATION_MIN_POPULATION && havens.some(haven => hexDistance(town.cell, haven.cell, view.width) <= MIGRATION_RANGE)).length : 0;
+  // Rules 59: only hearths the crisis reaches can lose a household to it.
+  const exposed = havens.length ? view.settlements.filter(town => town.factionId === view.factionId && (!crisis.affectedHearthIds || crisis.affectedHearthIds.includes(town.id)) && town.population >= MIGRATION_MIN_POPULATION && havens.some(haven => hexDistance(town.cell, haven.cell, view.width) <= MIGRATION_RANGE)).length : 0;
   return perHearth * crisis.hearths * crisis.turnsLeft + exposed * 25;
 }
 export function planCrisis(view: Observation): CrisisPlan | null {

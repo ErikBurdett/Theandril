@@ -50,4 +50,7 @@ test('a realm shelters its hearths when the toll still to come outweighs the pri
   expect(remainingToll({ ...populous, crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'] } })).toBe(remainingToll(populous));
   expect(remainingToll({ ...withHaven, crisis: { ...crisis, shelteredRealms: [player] } })).toBe(remainingToll(populous));
   expect(remainingToll({ ...withHaven, settlements: withHaven.settlements.map(town => town.id === 'settlement.haven' ? { ...town, cell: home.cell + 30 * view.width } : town), crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'] } })).toBe(remainingToll(populous));
+  // Rules 59: a hearth the crisis does not reach cannot lose a household to it.
+  expect(remainingToll({ ...withHaven, crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'], affectedHearthIds: [] } })).toBe(remainingToll(populous));
+  expect(remainingToll({ ...withHaven, crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'], affectedHearthIds: [home.id] } })).toBe(remainingToll(populous) + 25);
 });

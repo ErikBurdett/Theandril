@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue and the patron's guarantee
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee and regional crises
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -135,6 +135,12 @@
   matched the build ([publication packet](../2026-10-31-publication-guarantee/README.md)).
   Evidence packet [docs/development/2026-10-31-guarantee/](../2026-10-31-guarantee/README.md);
   roadmap library 126 delivered.
+- Regional crises, rules/save 59 ([ADR 0089](../../architecture/0089-regional-crises.md)):
+  one regional crisis per later age, centred on a hearth drawn from the seed
+  and reaching only the hearths within its radius for the toll, the quote,
+  the event and the migration. Evidence packet
+  [docs/development/2026-10-31-regional-crises/](../2026-10-31-regional-crises/README.md);
+  roadmap library 127 delivered.
 
 ## Verified
 
@@ -178,7 +184,10 @@ and the chronicles journey (pin attributed); headline **382 / 329 / 195**, the
 other seeds 366 / 322, 299 / 251, 215 / 179, proxies 366 / 439 / 302 / 203. Guarantee: unit 2,349, campaigns 57, build,
 four journeys (one new) and the chronicles journey; headline **411 / 336 / 209**,
 the other seeds 351 / 313, 285 / 246, 218 / 175, proxies 358 / 451 / 302 / 204,
-eighteen guarantees answered on the Epic headline.
+eighteen guarantees answered on the Epic headline. Regional crises: unit
+2,350, campaigns 57, build, two journeys (one new) and the chronicles
+journey; headline **395 / 302 / 203**, the other seeds 338 / 338, 268 / 287,
+185 / 199, proxies 307 / 431 / 302 / 181, every headline course in band.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -217,6 +226,8 @@ first on 379.
   content changes what its tiny map yields; it is seed-specific by nature.
 - Guarantee: a patron is called whatever its strength or distance; passage
   rights and joint war aims remain.
+- Regional crises are centred on hearths only, with fixed radii; collapse
+  remains.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

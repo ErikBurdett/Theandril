@@ -102,3 +102,25 @@ test('read the migration a crisis leaves behind', async ({ page }) => {
   await page.screenshot({ path: test.info().outputPath('crisis-migration-journal.png') });
   expect(errors).toEqual([]);
 });
+
+/** Rules 59: a regional crisis names its centre and radius, and the card says
+ * how many of the realm's hearths lie within it. */
+test('read a regional crisis and its reach in Realm affairs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = attunementCampaign(), player = state.turnOwnerId;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  state.crises.active = { id: `crisis.${state.turn}.1`, crisisId: 'crisis.valley_blight', startedTurn: state.turn, endsTurn: state.turn + 6, sheltered: [], center: host.cell };
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'valley-blight.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  const affairs = await openRealmAffairs(page);
+  const card = affairs.getByTestId('crisis');
+  await expect(card).toContainText('The Valley Blight');
+  await expect(card).toContainText(`Every unsheltered hearth within 10 hexes of ${host.name} loses 3 food each turn`);
+  await expect(card.getByTestId('crisis-reach')).toContainText('1 of your hearths lies within it.');
+  await expect(card.getByRole('button', { name: 'Shelter the hearths from The Valley Blight' })).toContainText('for 12 coin');
+  await page.screenshot({ path: test.info().outputPath('regional-crisis.png') });
+  expect(errors).toEqual([]);
+});

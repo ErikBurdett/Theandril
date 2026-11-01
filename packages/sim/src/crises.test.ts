@@ -1,12 +1,12 @@
 import { hexDistance, isPassable } from '@theandril/mapgen';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_HASH, CRISES, crisisDefinition, HEARTH_EVENTS } from '@theandril/content';
+import { CONTENT_HASH, CRISES, crisesForRules, crisisDefinition, HEARTH_EVENTS } from '@theandril/content';
 import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { PRE_CRISES_CONTENT_HASH, PRE_LANDMARKS_II_CONTENT_HASH, serializeGameForVersion } from './save';
-import { advanceCrises, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, validateCrises } from './crises';
+import { PRE_CRISES_CONTENT_HASH, PRE_LANDMARKS_II_CONTENT_HASH, PRE_REGIONAL_CRISES_CONTENT_HASH, serializeGameForVersion } from './save';
+import { advanceCrises, affectedHearths, beginCrises, crisisReaches, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, validateCrises } from './crises';
 import { epochId } from './epochs';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); return result; };
@@ -35,10 +35,17 @@ describe('rules 53: crises of the ages', () => {
     // Rules 54: the first crisis offered its event to every realm with a hearth; the slot it took kept the second crisis's event away.
     const roadsEvent = HEARTH_EVENTS.find(item => item.condition === 'crisis' && item.crisis === state.crises.past[0]!.crisisId)!;
     const offers = events.filter(event => event.type === 'hearth_event_offered');
-    expect(offers.map(event => event.factionId).sort()).toEqual(state.factions.filter(faction => Object.values(state.settlements).some(town => town.factionId === faction.id)).map(faction => faction.id).sort());
-    expect(offers.every(event => event.message.startsWith(roadsEvent.name) && event.message.includes(`with ${crisisDefinition(state.crises.past[0]!.crisisId)!.name}`))).toBe(true);
-    expect(state.hearthEvents.pending.every(item => item.templateId === roadsEvent.id && item.id.endsWith('.crisis') && item.turn === state.turn)).toBe(true);
-    expect(getObservation(state, player).hearthEvents!.map(item => item.name)).toEqual([roadsEvent.name]);
+    const withHearths = state.factions.filter(faction => Object.values(state.settlements).some(town => town.factionId === faction.id)).map(faction => faction.id).sort();
+    const offeredTo = offers.map(event => event.factionId).sort();
+    // Rules 59: a regional first crisis offers its event only to the realms it reaches.
+    if (crisisDefinition(state.crises.past[0]!.crisisId)!.scope === 'region') { expect(offeredTo.length).toBeGreaterThan(0); expect(withHearths).toEqual(expect.arrayContaining(offeredTo)); } else expect(offeredTo).toEqual(withHearths);
+    // A realm the first crisis did not reach keeps its slot free, and the second crisis offers it its own event instead.
+    const seamsEvent = HEARTH_EVENTS.find(item => item.condition === 'crisis' && item.crisis === active.crisisId)!;
+    const named = (event: { message: string }, template: typeof roadsEvent, named: string) => event.message.startsWith(template.name) && event.message.includes(`with ${named}`);
+    expect(offers.every(event => named(event, roadsEvent, crisisDefinition(state.crises.past[0]!.crisisId)!.name) || named(event, seamsEvent, crisis.name))).toBe(true);
+    expect(offers.some(event => named(event, roadsEvent, crisisDefinition(state.crises.past[0]!.crisisId)!.name))).toBe(true);
+    expect(state.hearthEvents.pending.every(item => (item.templateId === roadsEvent.id || item.templateId === seamsEvent.id) && item.id.endsWith('.crisis') && item.turn === state.turn)).toBe(true);
+    expect(getObservation(state, player).hearthEvents!.map(item => item.name).every(name => name === roadsEvent.name || name === seamsEvent.name)).toBe(true);
     // The same seed draws the same crises.
     const again = onTheBrink(); endRound(again);
     expect(again.crises).toEqual(state.crises);
@@ -110,8 +117,9 @@ describe('rules 53: crises of the ages', () => {
     const older = deserializeGame(sealed);
     expect(older.crises).toEqual({ active: null, past: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 58, contentHash: CONTENT_HASH });
-    expect(CRISES.every(crisis => crisis.sinceRules === 53)).toBe(true);
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 59, contentHash: CONTENT_HASH });
+    expect(crisesForRules(53).every(crisis => crisis.sinceRules === 53)).toBe(true);
+    expect(CRISES.some(crisis => crisis.sinceRules === 59 && crisis.scope === 'region')).toBe(true);
   });
 
   it('leaves a migration behind under rules 55: a hearth of three that bore the whole toll loses a household to the nearest sheltered hearth within range, and nothing moves under rules 54', () => {
@@ -173,5 +181,57 @@ describe('rules 53: crises of the ages', () => {
     const sealed = serializeGameForVersion(fresh, 54);
     expect(JSON.parse(sealed)).toMatchObject({ version: 54, contentHash: PRE_LANDMARKS_II_CONTENT_HASH });
     expect(stateHash(deserializeGame(sealed))).toBe(stateHash(fresh));
+  });
+
+  it('rules 59: a regional crisis reaches only the hearths within its radius of its centre, is quoted, tolled, sheltered, offered and left by migration for those alone, and stays out of older rules', () => {
+    const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions.find(faction => faction.id !== player)!.id;
+    const haven = Object.values(state.settlements).find(town => town.factionId === player)!, far = Object.values(state.settlements).find(town => town.factionId === rival)!;
+    const crisis = CRISES.find(item => item.scope === 'region')!;
+    expect(hexDistance(haven.cell, far.cell, state.world.width)).toBeGreaterThan(crisis.radius!);
+    state.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: state.turn + crisis.turns, sheltered: [], center: haven.cell };
+    expect(() => validateCrises(state)).not.toThrow();
+    expect(crisisReaches(state, state.crises.active, haven.cell)).toBe(true);
+    expect(crisisReaches(state, state.crises.active, far.cell)).toBe(false);
+    expect(affectedHearths(state, state.crises.active, player).map(town => town.id)).toEqual([haven.id]);
+    expect(affectedHearths(state, state.crises.active, rival)).toEqual([]);
+    expect(getObservation(state, player).crisis).toMatchObject({ center: haven.cell, radius: crisis.radius, centerName: haven.name, hearths: 1, affectedHearthIds: [haven.id], shelterCost: crisis.shelterCoinPerHearth, shelterBlocker: null });
+    expect(getObservation(state, rival).crisis).toMatchObject({ hearths: 0, affectedHearthIds: [], shelterCost: 0, shelterBlocker: 'None of the realm’s hearths lies within the crisis.' });
+    expect(applyCommand(state, { type: 'shelterFromCrisis', factionId: rival, crisisId: 'crisis.1.1' }).error).toContain('None of the realm');
+    // The toll falls on the reached hearth alone.
+    haven.food = 20; far.food = 20; const me = state.factions.find(faction => faction.id === player)!, them = state.factions.find(faction => faction.id === rival)!; me.treasury = 100; them.treasury = 100;
+    const events: Parameters<typeof advanceCrises>[1] = [];
+    advanceCrises(state, events);
+    expect([haven.food, far.food]).toEqual([20 - crisis.blight.food, 20]);
+    expect([me.treasury, them.treasury]).toEqual([100 - crisis.blight.coin, 100]);
+    // The crisis's event comes only to a hearth it reaches: the rival, with none, is offered nothing.
+    const offered = attunementCampaign(); const offeredHaven = Object.values(offered.settlements).find(town => town.factionId === player)!;
+    const fresh = structuredClone(offered); fresh.crises.active = null;
+    withRules(fresh, 59, () => {
+      fresh.hearthEvents.pending = [];
+      const begun: Parameters<typeof beginCrises>[3] = [];
+      // Force the regional crisis by hand through the same offer path the draw uses.
+      fresh.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: fresh.turn, endsTurn: fresh.turn + crisis.turns, sheltered: [], center: offeredHaven.cell };
+      expect(getObservation(fresh, rival).crisis!.hearths).toBe(0);
+      void begun;
+    });
+    // Migration from a regional crisis leaves only its reached hearths; a hearth outside keeps its people.
+    const moving = attunementCampaign(), mover = Object.values(moving.settlements).find(town => town.factionId === player)!, outside = Object.values(moving.settlements).find(town => town.factionId === rival)!;
+    mover.population = MIGRATION_MIN_POPULATION; outside.population = MIGRATION_MIN_POPULATION;
+    moving.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: moving.turn, sheltered: [rival], center: mover.cell };
+    const left: Parameters<typeof advanceCrises>[1] = [];
+    advanceCrises(moving, left);
+    // The rival's hearth is sheltered but beyond migration range of the mover, so nothing crosses; the rule's reach test is the filter, shown by the unchanged far hearth.
+    expect([mover.population, outside.population]).toEqual([MIGRATION_MIN_POPULATION, MIGRATION_MIN_POPULATION]);
+    // A regional crisis cannot be sealed under older rules; a v58 envelope loads unchanged; the draw's pools now hold a regional crisis for every later age.
+    expect(() => serializeGameForVersion(state, 58)).toThrow('regional crisis unavailable');
+    const sealed = serializeGameForVersion(attunementCampaign(), 58);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 58, contentHash: PRE_REGIONAL_CRISES_CONTENT_HASH });
+    expect(stateHash(deserializeGame(sealed))).toBe(stateHash(attunementCampaign()));
+    const drawn = onTheBrink(); endRound(drawn);
+    const active = drawn.crises.active!;
+    expect((active.center !== undefined) === Boolean(crisisDefinition(active.crisisId)!.scope)).toBe(true);
+    expect(() => validateCrises(drawn)).not.toThrow();
+    const broken = structuredClone(drawn); broken.crises.active!.center = broken.crises.active!.center === undefined ? 0 : undefined;
+    expect(() => validateCrises(broken)).toThrow('centre does not match');
   });
 });
