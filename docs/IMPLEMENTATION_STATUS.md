@@ -18,7 +18,9 @@ first AI valuation made every realm shelter every crisis (no crossing, Epic
 451) and a first implementation left a hearth working more land than it had
 people; both were corrected before shipping. Verification: sim, AI and
 journey tests; unit 2,347 / 294 files, campaigns 57, lint, typecheck, build,
-two covering journeys and the chronicles journey.
+two covering journeys and the chronicles journey. Commit `afb4b63` is
+deployed: both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-crisis-migration/README.md)).
 [Evidence](development/2026-10-31-crisis-migration/README.md),
 [ADR0085](architecture/0085-crisis-migration.md).
 

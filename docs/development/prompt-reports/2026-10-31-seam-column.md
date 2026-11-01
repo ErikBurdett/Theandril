@@ -104,7 +104,10 @@
   when a crisis passes, a hearth of three or more that bore the whole toll
   loses a household to the nearest sheltered hearth of another realm within
   twelve hexes; a first AI valuation made every realm shelter and was
-  narrowed to what the realm can see. Evidence packet
+  narrowed to what the realm can see. Commit `afb4b63` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-crisis-migration/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-crisis-migration/](../2026-10-31-crisis-migration/README.md);
   roadmap library 123 delivered.
 
