@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## A held ferry puts its passengers ashore — 2026-10-31
+
+AI only. A ferry carrying a founder in a basin the sea knowledge proves
+enclosed, with no viable shore of its own and the landing route and the
+charting both failed, puts its passengers ashore on the best beach of the
+basin they may land on, and the caravan goes on by land; the hold for an
+uncharted sea stands as it was. On the tiny map of seed 74, where the
+enclosed-basin scenario's first caravan sat loaded from turn 20 to the end,
+it is ashore within six turns; the crossing scenario keeps every assertion
+on seed 83, where a landing is viable at once. Every pacing figure is
+identical to rules 61 and the Epic headline makes thirty-three ordinary
+landings with no ferry held. Verification: unit 2,355 / 296 files,
+campaigns 57, lint, typecheck, build, the chronicles journey.
+[Evidence](development/2026-10-31-ferry-ashore/README.md),
+[ADR0092](architecture/0092-ferry-ashore.md).
+
 ## Pressing a city-state for tribute (rules/save 61) — 2026-10-31
 
 M5's first hostile interaction without war. A land company of a realm

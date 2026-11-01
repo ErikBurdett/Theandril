@@ -577,6 +577,17 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
       }
       if (move(fleet, destination, 'sail the known water route toward a viable landing')) continue;
       if (move(fleet, explore(fleet), 'chart water while seeking a safe landing')) continue;
+      // A proved, fully charted basin with no landing of its own has nowhere for the ferry to go:
+      // its passengers are put ashore on any beach of that basin they may land on, and the caravan
+      // walks on to found by land. Unknown boundaries never authorize this; only a proved basin does.
+      if (enclosed && !viableShores.length && passenger) {
+        const beach = passenger.disembarkOptions.filter(option => option.canDisembark && isPassable(cells.get(option.cell)?.terrain ?? 0) && !occupied.has(option.cell))
+          .sort((a, b) => landingScore(b.cell) - landingScore(a.cell) || a.cell - b.cell)[0];
+        if (beach) {
+          commands.push({ type: 'disembarkArmy', factionId, armyId: passenger.id, target: beach.cell }); heldArmyIds.add(fleet.id); heldArmyIds.add(passenger.id);
+          reasons.push(`${fleet.name} puts ${passenger.name} ashore: its basin is proved enclosed with no landing of its own, and the road goes on by land.`); continue;
+        }
+      }
       // A failed bounded frontier search is not evidence that no overseas land exists.
       // In particular, do not unload/reboard at home while waiting for Ocean navigation.
       if (reasons.length < 20) reasons.push(`${fleet.name} holds its passengers while no currently charted expedition step is available${fleet.canEnterDeepWater ? '' : '; deep-water access may still require research'}.`);

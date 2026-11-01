@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+An AI ferry carrying a caravan in a basin proved enclosed, with no landing of its own and nothing left to chart, now puts its passengers ashore on the best beach of that basin and lets the caravan go on by land, instead of holding them for the rest of the campaign; the hold for an uncharted sea is unchanged. No campaign on the headline seeds is affected.
+
 Rules/save 61 lets a company at a city-state’s gate press it for tribute without war: if the company outweighs the garrison on the walls by half again, the city pays what it can of a sum set by its size, and if not the demand is refused; either way the city remembers, and the same realm cannot press it again for twenty turns. Realm affairs quotes the sum on the city-state’s row and the journal records the payment or the refusal; AI realms short of coin press the city their company stands beside, and a pressed city-state refuses that realm’s patronage for forty turns. Every pacing figure is unchanged on the headline; with six city-states seated, two demands are paid and four refused on the Epic course.
 
 Rules/save 60 makes every city-state a trade community: each of the twenty-four trades in one good of its country — iron from Bellowstead’s kilns, salt from Dunwell’s cisterns, horses from Grasshalt, ashglass from Cullethaven — and a patron receives it into its stockpile with every tribute its client city-state pays; the bond says so as it is sworn, and Realm affairs names the goods beside each client. AI realms court first the city-state whose good they hold least of. The headline campaigns seat no city-states and every pacing figure is unchanged; with six seated, thirty such bonds are sworn on the Epic headline course.

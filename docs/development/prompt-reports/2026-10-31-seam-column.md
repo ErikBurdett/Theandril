@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods and tribute demands
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands and the held ferry
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -160,6 +160,12 @@
   Evidence packet
   [docs/development/2026-10-31-tribute-demands/](../2026-10-31-tribute-demands/README.md);
   roadmap library 129 delivered.
+- A held ferry puts its passengers ashore ([ADR 0092](../../architecture/0092-ferry-ashore.md)):
+  an AI ferry in a proved-enclosed basin with no landing of its own lands
+  its caravan instead of holding it for the campaign; the crossing scenario
+  moves to seed 83 with every assertion kept. Evidence packet
+  [docs/development/2026-10-31-ferry-ashore/](../2026-10-31-ferry-ashore/README.md);
+  roadmap library 130 delivered.
 
 ## Verified
 
@@ -212,7 +218,9 @@ the chronicles journey; every pacing figure identical to rules 59; thirty
 bonds with city-states on the Epic headline with six seated. Tribute
 demands: unit 2,354, campaigns 57, build, two journeys (one new) and the
 chronicles journey; every pacing figure identical; two paid and four refused
-demands on the Epic headline with six city-states seated.
+demands on the Epic headline with six city-states seated. Ferry ashore:
+unit 2,355, campaigns 57, build, the chronicles journey; every pacing figure
+identical.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -258,6 +266,8 @@ first on 379.
 - Tribute demands: the walls are only the companies on the hearth, and a
   refused demand costs nothing but trust; mercenary contracts and raiding
   remain.
+- The ferry fallback fires only in a proved-enclosed basin; a basin whose
+  shores open later is not waited for.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

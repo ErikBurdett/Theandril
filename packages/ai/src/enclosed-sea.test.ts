@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, isLake, isPassable, neighbors } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState, type Observation } from '@theandril/sim';
-import { planTurn } from './index';
+import { planTurn, planTurnWithReasons } from './index';
 
 /** Independent test-only observed connectivity: no canonical terrain is supplied to AI. */
 function knownComponent(view: Observation, origin: number, water: boolean): Set<number> {
@@ -25,10 +25,11 @@ function knownComponent(view: Observation, origin: number, water: boolean): Set<
 test('Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay', () => {
   // Genuine generated resources and fog, not a funded/naval fixture. This is an
   // enclosed-sea crossing on the home landmass, explicitly not overseas proof.
-  // The seed is chosen for the crossing it shows and moves when the world's content changes what the
-  // realm's land yields: seed 74 under rules 56, seed 55 from rules 57 (the second landmark catalogue
-  // re-placed the landmarks of this tiny map); see docs/development/2026-10-31-landmarks-ii/README.md.
-  const state = createGame({ seed: 55, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
+  // The seed is chosen for the crossing it shows and moves when the world's content or the AI changes
+  // what the realm does: seed 74 under rules 56, seed 55 from rules 57, and seed 83 once a ferry in a
+  // proved-enclosed basin with no landing of its own puts its passengers ashore instead of waiting for
+  // one (docs/development/2026-10-31-ferry-ashore/README.md); on seed 83 the landing is viable at once.
+  const state = createGame({ seed: 83, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
   const initialSave = serializeGame(state), factionId = state.turnOwnerId;
   const prices = new Map([...BUILDINGS, ...UNITS].map(item => [item.id, item.coinCost]));
   const records: { command: GameCommand; result: ReturnType<typeof applyCommand> }[] = [];
@@ -110,3 +111,29 @@ test('Mire Courts earn a same-landmass inland ferry colony, with a saved voyage 
   expect(serializeGame(replay)).toBe(serializeGame(state));
   expect(stateHash(replay)).toBe(stateHash(state));
 });
+
+/** The pond of seed 74: a proved-enclosed basin whose every shore lies inside the realm's own
+ * settlement spacing. Before this fix the loaded ferry held its passenger there for the rest of
+ * the campaign (docs/development/2026-10-31-landmark-events/README.md); now it puts the caravan
+ * ashore and the road goes on by land. */
+test('a ferry in a proved-enclosed basin with no landing of its own puts its passengers ashore instead of holding them', () => {
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
+  const factionId = state.turnOwnerId;
+  let cargoId: string | undefined, ashore: { turn: number; reason: string } | undefined, embarkedTurn = -1;
+  for (let round = 0; round < 60 && !ashore; round++) {
+    const plan = planTurnWithReasons(getObservation(state, factionId));
+    for (const command of plan.commands) {
+      if (command.type === 'embarkArmy' && !cargoId) { cargoId = command.armyId; embarkedTurn = state.turn; }
+      if (command.type === 'disembarkArmy' && command.armyId === cargoId) ashore = { turn: state.turn, reason: plan.reasons.find(reason => reason.includes('proved enclosed')) ?? '' };
+      const result = applyCommand(state, command);
+      expect(result.ok, `Turn ${state.turn}: ${JSON.stringify(command)}: ${result.error}`).toBe(true);
+    }
+    expect(applyCommand(state, { type: 'endTurn', factionId }).ok).toBe(true);
+  }
+  expect(cargoId).toBeDefined();
+  expect(ashore).toBeDefined();
+  expect(ashore!.reason).toContain('proved enclosed with no landing of its own');
+  expect(ashore!.turn - embarkedTurn).toBeLessThanOrEqual(6);
+  expect(state.transports[cargoId!]).toBeUndefined();
+});
+
