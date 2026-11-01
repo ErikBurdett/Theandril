@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { applyCommand, createGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
+import { cityStateTradeFor, resourceById } from '@theandril/content';
 import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
 import { openCampaignJournal, openRealmAffairs } from './ui-navigation';
 
@@ -36,5 +37,28 @@ test('read the guarantee a patron owes its client in Realm affairs and the journ
   await page.screenshot({ path: test.info().outputPath('guarantee-affairs.png') });
   const journal = await openCampaignJournal(page);
   await expect(journal).toContainText(`${names[player]} enters the war against ${names[attacker]} for its client ${names[client]}`);
+  expect(errors).toEqual([]);
+});
+
+/** Rules 60: a client city-state's trade good is named in the patron's oath line. */
+test('read the goods a client city-state sends in Realm affairs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4, cityStateCount: 1, pace: 'short', generatorVersion: 4 });
+  for (const faction of state.factions) faction.treasury = 200;
+  const player = state.turnOwnerId, city = state.factions.find(faction => faction.id.startsWith('citystate.'))!.id;
+  contact(state, city, player);
+  issue(state, { type: 'proposeClient', factionId: player, targetFactionId: city, terms: { giftCoin: 40, tributeCoin: 6, termTurns: 12 } });
+  issue(state, { type: 'respondClient', factionId: city, offerId: state.diplomacy.clientOffers[0]!.id, accept: true });
+  const goods = cityStateTradeFor(city)!, good = resourceById.get(goods.resourceId)!.name;
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'trade-goods.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  const affairs = await openRealmAffairs(page);
+  await expect(affairs.getByTestId('patronage')).toContainText(`(sends ${goods.amount} ${good} each turn)`);
+  await page.screenshot({ path: test.info().outputPath('trade-goods.png') });
+  const journal = await openCampaignJournal(page);
+  await expect(journal).toContainText(`sends ${goods.amount} ${good} each turn the tribute is paid`);
   expect(errors).toEqual([]);
 });

@@ -3,6 +3,8 @@ import type { CommandResult, DomainEvent, GameState } from './types';
 import { atWar, warPair } from './warfare';
 import { rulesVersion } from './rules';
 import { allianceBetween } from './alliances';
+import { cityStateTradeFor, resourceById } from '@theandril/content';
+import { isCityState } from './seats';
 
 /** Rules 22: a realm may take another realm as its client. The patron pays a
  * subsidy once; the client pays tribute every turn for an agreed term and keeps
@@ -106,7 +108,7 @@ export function respondClient(state: GameState, factionId: string, offerId: stri
   client.treasury += offer.terms.giftCoin;
   state.diplomacy.clients.push({ id: `bond.${state.nextId++}`, patronId: offer.patronId, clientId: offer.clientId, startedTurn: state.turn, expiresTurn: state.turn + offer.terms.termTurns, terms: { ...offer.terms }, missedTribute: 0 });
   state.diplomacy.clients.sort(byId);
-  return { ok: true, events: pairEvents(state, offer.patronId, offer.clientId, 'client_accepted', `${client.name} answers to ${patron.name} until turn ${state.turn + offer.terms.termTurns}. ${offer.terms.giftCoin} coin changed hands; ${offer.terms.tributeCoin} coin tribute is due each turn.`) };
+  return { ok: true, events: [...pairEvents(state, offer.patronId, offer.clientId, 'client_accepted', `${client.name} answers to ${patron.name} until turn ${state.turn + offer.terms.termTurns}. ${offer.terms.giftCoin} coin changed hands; ${offer.terms.tributeCoin} coin tribute is due each turn.`), ...goodsPromised(state, offer.patronId, offer.clientId)] };
 }
 
 /** Rules 39: why a fallen realm cannot be made a subject today, in the order a capturer meets them. */
@@ -131,7 +133,7 @@ export function imposeClient(state: GameState, patronId: string, clientId: strin
   state.diplomacy.clients.push({ id: `bond.${state.nextId++}`, patronId, clientId, startedTurn: state.turn, expiresTurn: state.turn + terms.termTurns, terms: { ...terms }, missedTribute: 0 });
   state.diplomacy.clients.sort(byId);
   const patron = state.factions.find(faction => faction.id === patronId), client = state.factions.find(faction => faction.id === clientId);
-  return pairEvents(state, patronId, clientId, 'client_accepted', `${client?.name ?? clientId} answers to ${patron?.name ?? patronId} as a subject until turn ${state.turn + terms.termTurns}. ${terms.tributeCoin} coin tribute is due each turn; its hearths stand behind the patron's unification bid.`);
+  return [...pairEvents(state, patronId, clientId, 'client_accepted', `${client?.name ?? clientId} answers to ${patron?.name ?? patronId} as a subject until turn ${state.turn + terms.termTurns}. ${terms.tributeCoin} coin tribute is due each turn; its hearths stand behind the patron's unification bid.`), ...goodsPromised(state, patronId, clientId)];
 }
 
 export function releaseClient(state: GameState, factionId: string, clientId: string): CommandResult {
@@ -178,6 +180,7 @@ export function advanceClients(state: GameState): DomainEvent[] {
       client.treasury -= bond.terms.tributeCoin;
       patron.treasury += bond.terms.tributeCoin;
       bond.missedTribute = 0;
+      deliverGoods(state, bond.patronId, bond.clientId);
       return true;
     }
     bond.missedTribute += 1;
@@ -193,6 +196,21 @@ export function advanceClients(state: GameState): DomainEvent[] {
   return events;
 }
 
+/** Rules 60: a client city-state sends its good to the patron's stockpile each turn the tribute is paid. */
+export const clientGoodsOf = (state: GameState, clientId: string) => rulesVersion(state) >= 60 && isCityState(clientId) ? cityStateTradeFor(clientId, rulesVersion(state)) : undefined;
+function deliverGoods(state: GameState, patronId: string, clientId: string): void {
+  const goods = clientGoodsOf(state, clientId);
+  if (!goods) return;
+  const stock = state.resources.stockpiles[patronId] ?? (state.resources.stockpiles[patronId] = {});
+  stock[goods.resourceId] = Math.min(Number.MAX_SAFE_INTEGER, (stock[goods.resourceId] ?? 0) + goods.amount);
+}
+/** The goods a new bond promises, said once as it is sworn. */
+export function goodsPromised(state: GameState, patronId: string, clientId: string): DomainEvent[] {
+  const goods = clientGoodsOf(state, clientId);
+  if (!goods) return [];
+  const name = resourceById.get(goods.resourceId)?.name ?? goods.resourceId, client = state.factions.find(faction => faction.id === clientId)?.name ?? clientId;
+  return [patronId, clientId].map(factionId => ({ turn: state.turn, factionId, type: 'client_goods_promised', message: `${client} sends ${goods.amount} ${name} each turn the tribute is paid, as a city of its trade.` }));
+}
 export function validateClients(state: GameState): void {
   const assert = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: patronage ' + message); };
   const factions = new Set(state.factions.map(faction => faction.id));

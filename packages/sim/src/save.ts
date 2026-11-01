@@ -43,7 +43,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 59;
+export const SAVE_VERSION = 60;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -87,6 +87,8 @@ export const PRE_CRISIS_EVENTS_CONTENT_HASH = 'd50775cf';
 export const PRE_LANDMARKS_II_CONTENT_HASH = '7cad9f6e';
 /** The rules 57–58 pack, before rules 59 added the regional crises and their events. */
 export const PRE_REGIONAL_CRISES_CONTENT_HASH = '0eed2d1a';
+/** The rules 59 pack, before rules 60 added the city-states' trade goods. */
+export const PRE_TRADE_GOODS_CONTENT_HASH = 'b48e6615';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -296,10 +298,11 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders(state.factions) });
-const saveSchema = z.object({ version: z.literal(59), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(60), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 /** v50 through v52 envelopes carry the rules 50 state and differ only in their version and the pack they were sealed under; the wrapper below adds what rules 53 records. */
 /** v53 through v55 envelopes carry the rules 53 state and differ only in their version and, for v53, the pack it was sealed under; the wrapper below adds what rules 56 records. */
-/** Rules 57 through 59 add no required field; v56 through v58 envelopes differ in their version and the pack they were sealed under. */
+/** Rules 57 through 60 add no required field; v56 through v59 envelopes differ in their version and the pack they were sealed under. */
+const saveV59Schema = saveSchema.extend({ version: z.literal(59) }).strict();
 const saveV58Schema = saveSchema.extend({ version: z.literal(58) }).strict();
 const saveV57Schema = saveSchema.extend({ version: z.literal(57) }).strict();
 const saveV56Schema = saveSchema.extend({ version: z.literal(56) }).strict();
@@ -726,7 +729,8 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
   if (version < 20) assertHistoricalSieges(state);
   if (version < 46) assertNoHearthEvents(state); else if (version < SAVE_VERSION) assertHearthEventsWithin(state, version);
   if (version < 39) assertNoArcaneSearches(state);
-  if (version >= 59) return CONTENT_HASH;
+  if (version >= 60) return CONTENT_HASH;
+  if (version >= 59) return PRE_TRADE_GOODS_CONTENT_HASH;
   if (version >= 57) return PRE_REGIONAL_CRISES_CONTENT_HASH; // rules 58 changed no content
   if (version >= 54) return PRE_LANDMARKS_II_CONTENT_HASH; // rules 55 and 56 changed no content
   if (version >= 53) return PRE_CRISIS_EVENTS_CONTENT_HASH;
@@ -1183,6 +1187,13 @@ function parseSaveThrough45(raw: unknown): Through45 {
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
   if (version === SAVE_VERSION) return saveSchema.parse(raw);
+  if (version === 59) {
+    const sealed = saveV59Schema.parse(raw);
+    assert(sealed.contentHash === PRE_TRADE_GOODS_CONTENT_HASH, 'v59 content hash is not a recognized compatible pack');
+    assert(sealed.stateChecksum === checksum(JSON.stringify(sealed.state)), 'v59 snapshot checksum does not match its contents');
+    // Rules 60 adds the city-states' trade goods to the content only; the state continues unchanged under the new pack.
+    return { ...sealed, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 58) {
     const sealed = saveV58Schema.parse(raw);
     assert(sealed.contentHash === PRE_REGIONAL_CRISES_CONTENT_HASH, 'v58 content hash is not a recognized compatible pack');

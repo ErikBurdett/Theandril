@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee and regional crises
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises and city-state goods
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -144,6 +144,11 @@
   Evidence packet
   [docs/development/2026-10-31-regional-crises/](../2026-10-31-regional-crises/README.md);
   roadmap library 127 delivered.
+- The goods a client city-state sends, rules/save 60 ([ADR 0090](../../architecture/0090-city-state-trade.md)):
+  every city-state trades in one good, delivered to its patron with each
+  paid tribute and named in Realm affairs; the AI courts the good it lacks.
+  Evidence packet [docs/development/2026-10-31-trade-goods/](../2026-10-31-trade-goods/README.md);
+  roadmap library 128 delivered.
 
 ## Verified
 
@@ -191,6 +196,9 @@ eighteen guarantees answered on the Epic headline. Regional crises: unit
 2,350, campaigns 57, build, two journeys (one new) and the chronicles
 journey; headline **395 / 302 / 203**, the other seeds 338 / 338, 268 / 287,
 185 / 199, proxies 307 / 431 / 302 / 181, every headline course in band.
+City-state goods: unit 2,351, campaigns 57, build, two journeys (one new) and
+the chronicles journey; every pacing figure identical to rules 59; thirty
+bonds with city-states on the Epic headline with six seated.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -231,6 +239,8 @@ first on 379.
   rights and joint war aims remain.
 - Regional crises are centred on hearths only, with fixed radii; collapse
   remains.
+- City-state goods: a flat amount per paid tribute; no market, no price, no
+  trade between realms; the wider roster of independent powers remains.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

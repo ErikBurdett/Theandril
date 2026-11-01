@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { clientGoodsOf } from './clients';
+import { resourceById } from '@theandril/content';
 import type { CommandResult, DomainEvent, GameState, Observation } from './types';
 import { getObservation } from './simulation';
 import { atWar, warPair } from './warfare';
@@ -42,7 +44,9 @@ export type PeaceTreaty = z.infer<typeof treatySchema>;
 export type DiplomaticRelation = z.infer<typeof relationSchema>;
 export type DiplomacyState = z.infer<typeof diplomacyStateSchema>;
 export type ObservedPeaceOffer = PeaceOffer & { acceptanceBlocker: string | null };
-export type DiplomacyObservation = Omit<DiplomacyState, 'offers' | 'clientOffers'> & { offers: ObservedPeaceOffer[]; clientOffers: ObservedClientOffer[] };
+/** Rules 60: the goods a client city-state sends its patron each turn, named for both parties. */
+export interface ObservedClientGoods { clientId: string; patronId: string; resourceId: string; name: string; amount: number }
+export type DiplomacyObservation = Omit<DiplomacyState, 'offers' | 'clientOffers'> & { offers: ObservedPeaceOffer[]; clientOffers: ObservedClientOffer[]; clientGoods?: ObservedClientGoods[] };
 export interface PeaceAssessment { band: 'likely' | 'uncertain' | 'unlikely'; reasons: string[]; objections: string[] }
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const same = (pair: [string, string], a: string, b: string): boolean => pair.includes(a) && pair.includes(b);
@@ -192,6 +196,7 @@ export function getDiplomacyObservation(state: GameState, factionId: string): Di
     offers: state.diplomacy.offers.filter(offer => offer.proposerId === factionId || offer.recipientId === factionId).map(offer => ({ ...offer, terms: { ...offer.terms }, acceptanceBlocker: paymentObjection(state, offer) })),
     treaties: state.diplomacy.treaties.filter(treaty => treaty.parties.includes(factionId)).map(treaty => ({ ...treaty, parties: [...treaty.parties], terms: { ...treaty.terms } })),
     relations: state.diplomacy.relations.filter(memory => memory.parties.includes(factionId)).map(memory => ({ ...memory, parties: [...memory.parties] })),
+    ...(rulesVersion(state) >= 60 ? { clientGoods: state.diplomacy.clients.filter(bond => bond.patronId === factionId || bond.clientId === factionId).flatMap(bond => { const goods = clientGoodsOf(state, bond.clientId); return goods ? [{ clientId: bond.clientId, patronId: bond.patronId, resourceId: goods.resourceId, name: resourceById.get(goods.resourceId)?.name ?? goods.resourceId, amount: goods.amount }] : []; }) } : {}),
   };
 }
 

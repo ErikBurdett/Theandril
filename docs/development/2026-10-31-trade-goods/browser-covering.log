@@ -1,0 +1,16 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/guarantee.spec.ts tests/gameplay/diplomacy.spec.ts --workers=2 --output=docs/development/2026-10-31-trade-goods/browser-results
+
+
+Running 7 tests using 2 workers
+
+  ✓  2 [gameplay] › tests/gameplay/guarantee.spec.ts:16:1 › read the guarantee a patron owes its client in Realm affairs and the journal (4.2s)
+  ✓  3 [gameplay] › tests/gameplay/guarantee.spec.ts:44:1 › read the goods a client city-state sends in Realm affairs (2.7s)
+  ✓  1 [gameplay] › tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (6.9s)
+  ✓  4 [gameplay] › tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.7s)
+  ✓  5 [gameplay] › tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.7s)
+  ✓  6 [gameplay] › tests/gameplay/diplomacy.spec.ts:85:1 › a realm offers patronage, sees the oath it made and can release it (2.0s)
+  ✓  7 [gameplay] › tests/gameplay/diplomacy.spec.ts:108:1 › an accepted oath is visible to both realms, refuses war and survives a save (3.1s)
+
+  7 passed (16.2s)

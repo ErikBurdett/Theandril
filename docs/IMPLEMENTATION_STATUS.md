@@ -1,5 +1,26 @@
 # Theandril implementation status
 
+## The goods a client city-state sends (rules/save 60) — 2026-10-31
+
+M5's first trade benefit. A table of twenty-four trades gives every
+city-state one good of its country; each turn a client city-state pays its
+tribute, the good goes to the patron's stockpile, and a missed tribute sends
+nothing. The swearing of the bond, by acceptance or under a subject rule,
+says what will come; the observation lists the goods between a realm and
+its clients or patron and the patron's oath line in Realm affairs names
+them. AI realms court first the city-state whose good they hold fewer than
+six of. Content only, sealed from rules 60; v59 envelopes load unchanged.
+The headline campaigns seat no city-states, so every pacing figure is
+identical to rules 59 (**395 / 302 / 203**; 338 / 338, 268 / 287, 185 / 199;
+proxies 307 / 431 / 302 / 181); with six city-states seated on the Epic
+headline seed thirty such bonds are sworn and the course ends on 391. A good
+is a flat amount, not a share of the city-state's works; no market, no
+price, no trade between realms. Verification: content, sim and journey
+tests; unit 2,351 / 294 files, campaigns 57, lint, typecheck, build, two
+covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-trade-goods/README.md),
+[ADR0090](architecture/0090-city-state-trade.md).
+
 ## Regional crises (rules/save 59) — 2026-10-31
 
 M6's regional crises. One regional crisis per later age — the Valley Blight,

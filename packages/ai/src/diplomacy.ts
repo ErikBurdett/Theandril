@@ -1,4 +1,5 @@
 import { evaluatePeaceOffer, isCityState, type GameCommand, type Observation } from '@theandril/sim';
+import { cityStateTradeFor } from '@theandril/content';
 import { UNIFICATION_VICTORY } from '@theandril/content';
 import { reviewProjectCounterplay } from './project-counterplay';
 import { seamPursued, type SeamObjective } from './arcane';
@@ -182,9 +183,11 @@ export function proposePatronage(view: Observation): AiPlan | null {
   const claimed = new Set(view.diplomacy.clients.flatMap(bond => [bond.patronId, bond.clientId]));
   // Rules 50: an ally is an equal, never a client.
   const allied = new Set((view.alliances?.pacts ?? []).filter(pact => pact.parties.includes(factionId)).flatMap(pact => pact.parties));
+  // Rules 60: a city-state whose good the realm holds little of is courted first; nothing is guessed beyond the quoted trade and the realm's own stockpile.
+  const wanted = (id: string): number => { const trade = view.diplomacy.clientGoods === undefined ? undefined : cityStateTradeFor(id); if (!trade) return 0; const stock = view.resources?.stockpiles.find(item => item.resourceId === trade.resourceId); return (stock?.amount ?? 0) < 6 ? 1 : 0; };
   const candidate = view.factions.map(faction => faction.id)
     .filter(id => id !== factionId && !pending.has(id) && !claimed.has(id) && !allied.has(id) && !view.wars.includes(id) && hearths(view, id) > 0 && hearths(view, id) < own)
-    .sort((a, b) => (isCityState(b) ? 1 : 0) - (isCityState(a) ? 1 : 0) || hearths(view, a) - hearths(view, b) || (a < b ? -1 : 1))[0];
+    .sort((a, b) => (isCityState(b) ? 1 : 0) - (isCityState(a) ? 1 : 0) || wanted(b) - wanted(a) || hearths(view, a) - hearths(view, b) || (a < b ? -1 : 1))[0];
   if (!candidate) return null;
   return {
     commands: [{ type: 'proposeClient', factionId, targetFactionId: candidate, terms: { giftCoin: gift, tributeCoin: tribute, termTurns: 20 } }],

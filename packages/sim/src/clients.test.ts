@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, type GameCommand, type GameState } from './index';
 import { recordWar } from './diplomacy';
+import { cityStateTradeFor } from '@theandril/content';
+import { advanceClients } from './clients';
 import { withRules } from './rules';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { unificationCampaign } from '../../test-fixtures/src/victory-fixture';
@@ -167,6 +169,42 @@ describe('patronage between realms (rules 22)', () => {
       const quiet = issue(older.state, { type: 'declareWar', factionId: older.attacker, targetFactionId: older.client });
       expect(quiet.events.filter(event => event.type.startsWith('patronage_'))).toEqual([]);
       expect(older.state.wars.some(pair => pair.includes(older.patron) && pair.includes(older.attacker))).toBe(false);
+    });
+  });
+
+  it('rules 60: a client city-state sends its good to the patron each turn the tribute is paid, a realm client sends none, and nothing comes under older rules', () => {
+    const state = scene(), patron = state.factions.find(faction => !faction.id.startsWith('citystate.'))!.id, city = state.factions.find(faction => faction.id.startsWith('citystate.'))!.id;
+    const goods = cityStateTradeFor(city)!;
+    issue(state, { type: 'proposeClient', factionId: patron, targetFactionId: city, terms });
+    const sworn = issue(state, { type: 'respondClient', factionId: city, offerId: offerId(state), accept: true });
+    expect(sworn.events.filter(event => event.type === 'client_goods_promised').map(event => event.factionId).sort()).toEqual([patron, city].sort());
+    expect(sworn.events.find(event => event.type === 'client_goods_promised')!.message).toContain(`sends ${goods.amount}`);
+    expect(getObservation(state, patron).diplomacy.clientGoods).toEqual([{ clientId: city, patronId: patron, resourceId: goods.resourceId, name: expect.any(String), amount: goods.amount }]);
+    expect(getObservation(state, state.factions.find(faction => faction.id !== patron && !faction.id.startsWith('citystate.'))!.id).diplomacy.clientGoods).toEqual([]);
+    // The tribute turn alone delivers exactly the good; the realm's own works are not in it.
+    const before = state.resources.stockpiles[patron]?.[goods.resourceId] ?? 0;
+    advanceClients(state);
+    expect(state.resources.stockpiles[patron]![goods.resourceId]).toBe(before + goods.amount);
+    // A missed tribute sends nothing.
+    state.factions.find(faction => faction.id === city)!.treasury = 0;
+    advanceClients(state);
+    expect(state.resources.stockpiles[patron]![goods.resourceId]).toBe(before + goods.amount);
+    // A realm client trades nothing.
+    const realm = scene(), [a, b] = realm.factions.filter(faction => !faction.id.startsWith('citystate.')).map(faction => faction.id) as [string, string];
+    issue(realm, { type: 'proposeClient', factionId: a, targetFactionId: b, terms });
+    const plain = issue(realm, { type: 'respondClient', factionId: b, offerId: offerId(realm), accept: true });
+    expect(plain.events.filter(event => event.type === 'client_goods_promised')).toEqual([]);
+    expect(getObservation(realm, a).diplomacy.clientGoods).toEqual([]);
+    // Nothing under rules 59.
+    const older = scene(), olderPatron = older.factions.find(faction => !faction.id.startsWith('citystate.'))!.id, olderCity = older.factions.find(faction => faction.id.startsWith('citystate.'))!.id;
+    withRules(older, 59, () => {
+      issue(older, { type: 'proposeClient', factionId: olderPatron, targetFactionId: olderCity, terms });
+      const quiet = issue(older, { type: 'respondClient', factionId: olderCity, offerId: offerId(older), accept: true });
+      expect(quiet.events.filter(event => event.type === 'client_goods_promised')).toEqual([]);
+      expect(getObservation(older, olderPatron).diplomacy.clientGoods).toBeUndefined();
+      const was = older.resources.stockpiles[olderPatron]?.[goods.resourceId] ?? 0;
+      advanceClients(older);
+      expect(older.resources.stockpiles[olderPatron]?.[goods.resourceId] ?? 0).toBe(was);
     });
   });
 });
