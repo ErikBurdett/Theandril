@@ -76,7 +76,7 @@ describe('rules 68: companies hired from city-states', () => {
     const loaded = deserializeGame(sealed);
     expect(loaded.hires).toEqual([]);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 69, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 70, contentHash: CONTENT_HASH });
     issue(state, { type: 'hireCompany', factionId: realm, cityStateId: city, armyId });
     expect(() => serializeGameForVersion(state, 67)).toThrow('hired companies unavailable');
     expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId })).toMatchObject({ ok: true });

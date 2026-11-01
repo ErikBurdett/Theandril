@@ -28,6 +28,7 @@ import type { ObservedDemands, TributeDemand } from './demands';
 import type { ObservedRelic, RelicRecord } from './relics';
 import type { ObservedOffice, OfficeRecord } from './offices';
 import type { HireRecord, ObservedHires } from './hires';
+import type { ObservedTaxes, TaxRecord } from './taxes';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -231,6 +232,7 @@ export type GameCommand =
   | { type: 'holdOffice'; factionId: string; officeId: string; holderId: string }
   | { type: 'resignOffice'; factionId: string; officeId: string }
   | { type: 'hireCompany'; factionId: string; cityStateId: string; armyId: string }
+  | { type: 'setTaxRate'; factionId: string; rate: 'lean' | 'steady' | 'heavy' }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -317,6 +319,8 @@ export interface GameState {
   offices: OfficeRecord[];
   /** Rules 68: the companies realms have hired from city-states, in order. */
   hires: HireRecord[];
+  /** Rules 70: the realms whose taxes depart from steady, by realm. */
+  taxes: TaxRecord[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -397,6 +401,8 @@ export interface Observation {
   offices?: ObservedOffice[];
   /** Rules 68: the realm's hire quotes at city-state gates and the hires it made or sold; absent under historical rules. */
   hires?: ObservedHires;
+  /** Rules 70: the realm's tax rate and what it does; absent under historical rules. */
+  tax?: ObservedTaxes;
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

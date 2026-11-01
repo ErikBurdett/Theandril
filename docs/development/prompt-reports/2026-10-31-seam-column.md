@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies and the second city-state roster
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster and taxes
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -235,6 +235,12 @@
   matched the build ([publication packet](../2026-11-01-publication-city-states-ii/README.md)).
   Evidence packet [docs/development/2026-11-01-city-states-ii/](../2026-11-01-city-states-ii/README.md);
   roadmap library 138 delivered.
+- Taxes, rules/save 70 ([ADR 0101](../../architecture/0101-taxes.md)): a realm
+  sets lean, steady or heavy taxes, trading every hearth's coin against the
+  mending of its lanes; the AI sets heavy taxes when short and lean ones
+  when rich with scarred hearths. Evidence packet
+  [docs/development/2026-11-01-taxes/](../2026-11-01-taxes/README.md);
+  roadmap library 139 delivered.
 
 ## Verified
 
@@ -314,6 +320,9 @@ City-states II: unit 2,370 / 304 files, campaigns 57, build, the city-states II,
 hires and tribute journeys and the chronicles journey (pin 56 unmoved);
 headline **380 / 296 / 197**, the other seeds 344 / 336, 276 / 266, 190 / 191, proxies
 327 / 476 / 301 / 201.
+Taxes: unit 2,373 / 306 files, campaigns 57, build, the taxes and tribute journeys and
+the chronicles journey (pin 56 unmoved); headline **388 / 296 / 198**, the
+other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -373,6 +382,8 @@ first on 379.
   and no mercenary bands walk the map.
 - Forty-eight city-states of one kind; clans, pirates, cults and nomads
   remain.
+- Taxes touch coin and devastation only; trade routes, processing and
+  the wider economic policy remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

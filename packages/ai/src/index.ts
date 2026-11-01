@@ -22,6 +22,7 @@ import { planHearthEvents } from './hearth-events';
 import { planCrisis } from './crises';
 import { planDemand } from './demands';
 import { planHire } from './hires';
+import { planTaxes } from './taxes';
 import { planRelics } from './relics';
 import { planOffices } from './offices';
 import { planPatrol } from './patrols';
@@ -125,6 +126,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const demand = minor ? null : planDemand(view, theater.heldArmyIds);
   // Rules 68: a realm at war with coin to spare hires a company at a city-state's gate.
   const hire = minor ? null : planHire(view, theater.heldArmyIds);
+  // Rules 70: taxes follow the treasury and the lanes.
+  const taxes = minor ? null : planTaxes(view);
   // Rules 63: a relic waiting in the hearth goes to the character with the strongest company.
   const relics = planRelics(view);
   const courting = minor ? null : proposeAlliance(view);
@@ -145,8 +148,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(demand?.commands ?? []), ...(hire?.commands ?? []), ...(relics?.commands ?? []), ...(courting?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...(shelter?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(demand?.reasons ?? []), ...(hire?.reasons ?? []), ...(relics?.reasons ?? []), ...(courting?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(demand?.commands ?? []), ...(hire?.commands ?? []), ...(taxes?.commands ?? []), ...(relics?.commands ?? []), ...(courting?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...(shelter?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(demand?.reasons ?? []), ...(hire?.reasons ?? []), ...(taxes?.reasons ?? []), ...(relics?.reasons ?? []), ...(courting?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

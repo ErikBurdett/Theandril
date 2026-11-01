@@ -43,6 +43,8 @@ export { DEMAND_COOLDOWN_TURNS, DEMAND_STRENGTH_RATIO, demandBlocker, demandTrib
 export type { ObservedDemands, TributeDemand, TributeDemandQuote } from './demands';
 export { HIRE_COOLDOWN_TURNS, HIRED_UNIT_ID, emptyHires, hasHires, hireBlocker, hireCompany, hirePriceOf, observeHires, validateHires } from './hires';
 export type { HireQuote, HireRecord, ObservedHires } from './hires';
+export { TAX_COIN_PERCENT, TAX_DEVASTATION_DRIFT, emptyTaxes, hasTaxes, observeTaxes, setTaxRate, taxBlocker, taxRateOf, taxedCoin, validateTaxes } from './taxes';
+export type { ObservedTaxes, TaxRate, TaxRecord } from './taxes';
 export { advanceRelics, bestowBlocker, bestowRelic, emptyRelics, hasRelics, MAX_RELICS, observeRelics, relicLeadership, validateRelics } from './relics';
 export type { ObservedRelic, RelicRecord } from './relics';
 export type { ObservedClientGoods } from './diplomacy';

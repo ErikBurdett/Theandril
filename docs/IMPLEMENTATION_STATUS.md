@@ -1,5 +1,23 @@
 # Theandril implementation status
 
+## Taxes (rules/save 70) — 2026-11-01
+
+M4's economic policy, first lever. `setTaxRate` sets a realm's taxes lean,
+steady or heavy: lean takes three quarters of every hearth's coin, applied
+last in the hearth's yield sum, and mends its lanes two points faster each
+unbesieged turn; heavy takes a quarter more and wears them by two; steady
+takes what it always took; city-states keep steady taxes. The observation
+carries the rate and its sentence; Realm affairs shows it with three buttons;
+AI realms set heavy taxes when the turn runs short under sixty coin, lean
+ones at four hundred coin ahead with a scarred hearth, steady otherwise. A
+new canonical register; save 70; the pack unchanged. Headline pacing
+**388 / 296 / 198**, the other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207:
+every headline course in band and the two other Epic seeds just under it, risen from 344 / 336. Verification: sim, AI and journey tests; unit 2,373 / 306 files,
+campaigns 57, lint, typecheck, build, the taxes and tribute journeys and
+the chronicles journey (pin 56 unmoved).
+[Evidence](development/2026-11-01-taxes/README.md),
+[ADR0101](architecture/0101-taxes.md).
+
 ## The second city-state roster (rules/save 69) — 2026-11-01
 
 M5's and M8's roster, forty-eight independent powers. Twenty-four more

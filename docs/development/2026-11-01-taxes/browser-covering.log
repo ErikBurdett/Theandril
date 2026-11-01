@@ -1,0 +1,11 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/taxes.spec.ts tests/gameplay/tribute.spec.ts --workers=2 --output=docs/development/2026-11-01-taxes/browser-results
+
+
+Running 2 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/taxes.spec.ts:9:1 › set heavy taxes from Realm affairs and read the change in the journal (4.8s)
+  ✓  2 [gameplay] › tests/gameplay/tribute.spec.ts:11:1 › press a city-state for tribute from Realm affairs and read the payment in the treasury and the journal (5.2s)
+
+  2 passed (6.2s)
