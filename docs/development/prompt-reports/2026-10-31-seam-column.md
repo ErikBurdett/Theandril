@@ -323,7 +323,8 @@
   an AI realm keeps or sends a company into a conquered hearth whose lanes
   may rise for its founder; AI and observation only. Evidence packet
   [docs/development/2026-11-01-ai-garrisons/](../2026-11-01-ai-garrisons/README.md);
-  roadmap library 151 delivered.
+  roadmap library 151 delivered. Commit `dcd73dc` is deployed and read back
+  ([publication packet](../2026-11-01-publication-ai-garrisons/README.md)).
 
 ## Verified
 

@@ -13,6 +13,9 @@ or content change.
 Headline pacing 384 / 291 / 205 and every other course identical to the restoration slice, since no measured AI realm holds a conquered hearth whose lanes rise; the chronicle pin at 57 holds. Verification: AI and sim tests; unit 2,384 / 311 files, campaigns 57,
 lint, typecheck, build, the restoration and unrest journeys and the
 chronicles journey (pin 57 unmoved).
+Commit `dcd73dc` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-ai-garrisons/README.md)).
 [Evidence](development/2026-11-01-ai-garrisons/README.md),
 [ADR0113](architecture/0113-ai-garrisons.md).
 
