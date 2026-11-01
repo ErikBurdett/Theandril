@@ -305,7 +305,8 @@
   fifteen more templates across the conditions and the ages, one hundred
   and thirty-five in all. Evidence packet
   [docs/development/2026-11-01-hearth-events-vii/](../2026-11-01-hearth-events-vii/README.md);
-  roadmap library 148 delivered.
+  roadmap library 148 delivered. Commit `51484d9` is deployed and read back
+  ([publication packet](../2026-11-01-publication-hearth-events-vii/README.md)).
 
 ## Verified
 
