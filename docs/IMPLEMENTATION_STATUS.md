@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## The migration a crisis leaves behind (rules/save 55) — 2026-10-31
+
+M6's migration. When a crisis passes, every hearth of three or more people
+whose realm did not shelter loses one household to the nearest hearth of a
+realm that did, within twelve hexes; the hearth works one hex fewer and both
+realms read the crossing. A hearth of two keeps its people, and a hearth
+with no sheltered neighbour in range keeps them too. The sheltered realms
+are public in the observation from rules 55; the Realm affairs card says
+what the crisis's passing will take; the AI counts a household at risk only
+for a hearth with a known sheltered hearth of another realm in range. No
+canonical field and no content change; a v54 envelope loads unchanged. On
+the Epic headline eight households cross and on the Long seven, and every
+end turn is identical to rules 54: headline **408 / 275 / 215**, the other
+seeds 344 / 313, 308 / 246, 211 / 176, proxies 353 / 448 / 323 / 204. A
+first AI valuation made every realm shelter every crisis (no crossing, Epic
+451) and a first implementation left a hearth working more land than it had
+people; both were corrected before shipping. Verification: sim, AI and
+journey tests; unit 2,347 / 294 files, campaigns 57, lint, typecheck, build,
+two covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-crisis-migration/README.md),
+[ADR0085](architecture/0085-crisis-migration.md).
+
 ## The crises' own events (rules/save 54) — 2026-10-31
 
 Each crisis comes to the hearth as a story. Six templates with the `crisis`

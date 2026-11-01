@@ -1,4 +1,5 @@
-import type { GameCommand, Observation } from '@theandril/sim';
+import { MIGRATION_MIN_POPULATION, MIGRATION_RANGE, type GameCommand, type Observation } from '@theandril/sim';
+import { hexDistance } from '@theandril/mapgen';
 import type { AiPlan } from './diplomacy';
 
 /** Rules 53: a realm shelters its hearths from the standing crisis when the
@@ -11,7 +12,10 @@ export function remainingToll(view: Observation): number {
   const crisis = view.crisis;
   if (!crisis) return 0;
   const perHearth = crisis.blight.coin + crisis.blight.knowledge * 1.5 + crisis.blight.food * 1.5 + crisis.blight.devastation * 2;
-  return perHearth * crisis.hearths * crisis.turnsLeft;
+  // Rules 55: a hearth of three or more with a known sheltered hearth of another realm within range may lose a household when the crisis passes; people are valued as the hearth events value them. Only hearths in sight or memory count: nothing is guessed about shelter the realm cannot see.
+  const havens = view.settlements.filter(town => town.factionId !== view.factionId && crisis.shelteredRealms?.includes(town.factionId));
+  const exposed = havens.length ? view.settlements.filter(town => town.factionId === view.factionId && town.population >= MIGRATION_MIN_POPULATION && havens.some(haven => hexDistance(town.cell, haven.cell, view.width) <= MIGRATION_RANGE)).length : 0;
+  return perHearth * crisis.hearths * crisis.turnsLeft + exposed * 25;
 }
 export function planCrisis(view: Observation): CrisisPlan | null {
   const crisis = view.crisis;

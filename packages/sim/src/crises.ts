@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { CRISIS_BLIGHT_KEYS, crisesForRules, crisisDefinition, EPOCHS, type CrisisBlight, type CrisisDefinition } from '@theandril/content';
-import { SeededRandom } from '@theandril/mapgen';
+import { hexDistance, SeededRandom } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
 import { offerCrisisEvents } from './hearth-events';
@@ -14,6 +14,9 @@ import { offerCrisisEvents } from './hearth-events';
 const id = z.string().min(1).max(100);
 const turn = z.number().int().min(1).max(1_000_030);
 export const MAX_PAST_CRISES = 16;
+/** Rules 55: when a crisis passes, every hearth of at least this many people that bore the whole toll loses one household to the nearest sheltered hearth within this many hexes. */
+export const MIGRATION_MIN_POPULATION = 3;
+export const MIGRATION_RANGE = 12;
 export const activeCrisisSchema = z.object({ id, crisisId: id, startedTurn: turn, endsTurn: turn, sheltered: z.array(id).max(64) }).strict();
 export const pastCrisisSchema = z.object({ id, crisisId: id, startedTurn: turn, endedTurn: turn }).strict();
 export const crisisStateSchema = z.object({ active: activeCrisisSchema.nullable(), past: z.array(pastCrisisSchema).max(MAX_PAST_CRISES) }).strict();
@@ -24,6 +27,8 @@ export interface ObservedCrisis {
   id: string; crisisId: string; name: string; description: string; startedTurn: number; endsTurn: number; turnsLeft: number;
   /** What each unsheltered hearth loses every turn. */
   blight: CrisisBlight; hearths: number; sheltered: boolean; shelterCost: number; shelterBlocker: string | null; shelter: string;
+  /** Rules 55: the realms that have sheltered, public like the crisis itself; the migration at the crisis's end goes to their hearths. */
+  shelteredRealms?: string[];
 }
 export const crisisCommandSchemas = [
   z.object({ type: z.literal('shelterFromCrisis'), factionId: id, crisisId: id }).strict(),
@@ -92,6 +97,30 @@ function endCrisis(state: GameState, events: DomainEvent[], because: string): vo
   state.crises.past = [...state.crises.past, { id: active.id, crisisId: active.crisisId, startedTurn: active.startedTurn, endedTurn: state.turn }].slice(-MAX_PAST_CRISES);
   state.crises.active = null;
   for (const faction of state.factions) events.push({ turn: state.turn, factionId: faction.id, type: 'crisis_ended', message: `${crisis?.name ?? active.crisisId} passes: ${because}.` });
+  if (rulesVersion(state) >= 55) migrateAfterCrisis(state, active, crisis?.name ?? active.crisisId, events);
+}
+/** Rules 55: the migration a crisis leaves behind. Every hearth of at least three people whose realm bore the whole toll loses one household to the nearest hearth of a realm that sheltered, within twelve hexes (ties by id); hearths with no such neighbour keep their people. Both realms read the crossing. */
+function migrateAfterCrisis(state: GameState, active: ActiveCrisis, crisisName: string, events: DomainEvent[]): void {
+  if (!active.sheltered.length) return;
+  const sheltered = new Set(active.sheltered);
+  const towns = Object.values(state.settlements).sort((a, b) => byId(a.id, b.id));
+  const havens = towns.filter(town => sheltered.has(town.factionId));
+  if (!havens.length) return;
+  const width = state.world.width;
+  for (const town of towns) {
+    if (sheltered.has(town.factionId) || town.population < MIGRATION_MIN_POPULATION) continue;
+    const haven = havens.map(item => ({ item, distance: hexDistance(town.cell, item.cell, width) })).filter(entry => entry.distance <= MIGRATION_RANGE)
+      .sort((a, b) => a.distance - b.distance || byId(a.item.id, b.item.id))[0]?.item;
+    if (!haven) continue;
+    town.population -= 1;
+    haven.population += 1;
+    // A hearth works no more land than it has people; the household that left worked last.
+    const land = state.land.settlements[town.id];
+    if (land && land.worked.length > town.population) land.worked = land.worked.slice(0, town.population);
+    const from = state.factions.find(item => item.id === town.factionId)?.name ?? town.factionId, to = state.factions.find(item => item.id === haven.factionId)?.name ?? haven.factionId;
+    events.push({ turn: state.turn, factionId: town.factionId, type: 'crisis_migration', cell: town.cell, message: `A household leaves ${town.name} for ${haven.name} of ${to}, which was sheltered from ${crisisName}.` });
+    events.push({ turn: state.turn, factionId: haven.factionId, type: 'crisis_migration', cell: haven.cell, message: `A household comes to ${haven.name} from ${town.name} of ${from}, which bore the whole of ${crisisName}.` });
+  }
 }
 /** The turn's toll on every unsheltered hearth, then the end of a crisis whose term is up. */
 export function advanceCrises(state: GameState, events: DomainEvent[]): void {
@@ -122,6 +151,7 @@ export function observeCrisis(state: GameState, factionId: string): ObservedCris
     id: active.id, crisisId: crisis.id, name: crisis.name, description: crisis.description, startedTurn: active.startedTurn, endsTurn: active.endsTurn,
     turnsLeft: Math.max(0, active.endsTurn - state.turn), blight: { ...crisis.blight }, hearths: hearthsOf(state, factionId).length,
     sheltered: active.sheltered.includes(factionId), shelterCost: shelterCost(state, crisis, factionId), shelterBlocker: shelterBlocker(state, factionId), shelter: crisis.shelter,
+    ...(rulesVersion(state) >= 55 ? { shelteredRealms: [...active.sheltered] } : {}),
   };
 }
 export function validateCrises(state: GameState): void {

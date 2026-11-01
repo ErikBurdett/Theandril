@@ -1,10 +1,12 @@
+import { hexDistance, isPassable } from '@theandril/mapgen';
+import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { describe, expect, it } from 'vitest';
 import { CONTENT_HASH, CRISES, crisisDefinition, HEARTH_EVENTS } from '@theandril/content';
-import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
+import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
 import { PRE_CRISES_CONTENT_HASH, serializeGameForVersion } from './save';
-import { advanceCrises, observeCrisis, shelterBlocker, validateCrises } from './crises';
+import { advanceCrises, MIGRATION_MIN_POPULATION, MIGRATION_RANGE, observeCrisis, shelterBlocker, validateCrises } from './crises';
 import { epochId } from './epochs';
 
 const issue = (state: GameState, command: GameCommand) => { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); return result; };
@@ -108,7 +110,68 @@ describe('rules 53: crises of the ages', () => {
     const older = deserializeGame(sealed);
     expect(older.crises).toEqual({ active: null, past: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 54, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 55, contentHash: CONTENT_HASH });
     expect(CRISES.every(crisis => crisis.sinceRules === 53)).toBe(true);
+  });
+
+  it('leaves a migration behind under rules 55: a hearth of three that bore the whole toll loses a household to the nearest sheltered hearth within range, and nothing moves under rules 54', () => {
+    const settle = (): { state: GameState; player: string; rival: string; haven: GameState['settlements'][string]; near: GameState['settlements'][string]; far: GameState['settlements'][string] } => {
+      const state = attunementCampaign(), player = state.turnOwnerId, rival = state.factions.find(faction => faction.id !== player)!.id;
+      const haven = Object.values(state.settlements).find(town => town.factionId === player)!, far = Object.values(state.settlements).find(town => town.factionId === rival)!;
+      // The rival founds a hearth within migration range of the player's; its capital lies beyond it.
+      const cell = state.world.terrain.findIndex((terrain, index) => isPassable(terrain) && state.world.waterDepth[index] === 0 && hexDistance(index, haven.cell, state.world.width) === 5
+        && Object.values(state.settlements).every(town => hexDistance(town.cell, index, state.world.width) > 3));
+      expect(cell).toBeGreaterThan(0);
+      const id = 'army.rival_caravan';
+      state.armies[id] = { id, factionId: rival, name: 'Reed caravan', cell, movement: 3, formations: [createArmyFormation(id, 'unit.colonist')] };
+      state.factions.find(faction => faction.id === rival)!.treasury = 500;
+      refreshAuthoredSight(state);
+      expect(applyCommand(state, { type: 'found', factionId: rival, armyId: id, name: 'Reed Reach' })).toMatchObject({ ok: true });
+      const near = Object.values(state.settlements).find(town => town.name === 'Reed Reach')!;
+      expect(hexDistance(near.cell, haven.cell, state.world.width)).toBeLessThanOrEqual(MIGRATION_RANGE);
+      expect(hexDistance(far.cell, haven.cell, state.world.width)).toBeGreaterThan(MIGRATION_RANGE);
+      for (const town of [haven, near, far]) town.population = MIGRATION_MIN_POPULATION;
+      return { state, player, rival, haven, near, far };
+    };
+    const crisis = CRISES[0]!;
+    const { state, player, rival, haven, near, far } = settle();
+    state.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: state.turn, sheltered: [player] };
+    expect(getObservation(state, player).crisis).toMatchObject({ shelteredRealms: [player], sheltered: true });
+    expect(getObservation(state, rival).crisis).toMatchObject({ shelteredRealms: [player], sheltered: false });
+    const events: Parameters<typeof advanceCrises>[1] = [];
+    advanceCrises(state, events);
+    expect(state.crises.active).toBeNull();
+    const crossings = events.filter(event => event.type === 'crisis_migration');
+    expect(crossings.map(event => event.factionId).sort()).toEqual([player, rival].sort());
+    expect([near.population, far.population, haven.population]).toEqual([MIGRATION_MIN_POPULATION - 1, MIGRATION_MIN_POPULATION, MIGRATION_MIN_POPULATION + 1]);
+    expect(crossings.find(event => event.factionId === player)!.message).toBe(`A household comes to ${haven.name} from ${near.name} of ${state.factions.find(faction => faction.id === rival)!.name}, which bore the whole of ${crisis.name}.`);
+    expect(crossings.find(event => event.factionId === rival)!.message).toContain(`A household leaves ${near.name} for ${haven.name}`);
+    // A hearth of two keeps its people; no realm sheltered, nothing moves; nothing under rules 54.
+    const small = settle();
+    small.near.population = MIGRATION_MIN_POPULATION - 1;
+    small.state.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: small.state.turn, sheltered: [small.player] };
+    const kept: Parameters<typeof advanceCrises>[1] = [];
+    advanceCrises(small.state, kept);
+    expect(kept.filter(event => event.type === 'crisis_migration')).toEqual([]);
+    expect([small.near.population, small.haven.population]).toEqual([MIGRATION_MIN_POPULATION - 1, MIGRATION_MIN_POPULATION]);
+    const unsheltered = settle();
+    unsheltered.state.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: unsheltered.state.turn, sheltered: [] };
+    const quiet: Parameters<typeof advanceCrises>[1] = [];
+    advanceCrises(unsheltered.state, quiet);
+    expect(quiet.filter(event => event.type === 'crisis_migration')).toEqual([]);
+    const older = settle();
+    withRules(older.state, 54, () => {
+      older.state.crises.active = { id: 'crisis.1.1', crisisId: crisis.id, startedTurn: 1, endsTurn: older.state.turn, sheltered: [older.player] };
+      expect(getObservation(older.state, older.player).crisis!.shelteredRealms).toBeUndefined();
+      const none: Parameters<typeof advanceCrises>[1] = [];
+      advanceCrises(older.state, none);
+      expect(none.filter(event => event.type === 'crisis_migration')).toEqual([]);
+      expect([older.near.population, older.haven.population]).toEqual([MIGRATION_MIN_POPULATION, MIGRATION_MIN_POPULATION]);
+    });
+    // A v54 envelope loads unchanged under rules 55 and seals back.
+    const fresh = attunementCampaign();
+    const sealed = serializeGameForVersion(fresh, 54);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 54, contentHash: CONTENT_HASH });
+    expect(stateHash(deserializeGame(sealed))).toBe(stateHash(fresh));
   });
 });

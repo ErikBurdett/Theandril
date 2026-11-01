@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises and crisis events
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events and migration
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -100,6 +100,13 @@
   Evidence packet
   [docs/development/2026-10-31-crisis-events/](../2026-10-31-crisis-events/README.md);
   roadmap library 122 delivered.
+- The migration a crisis leaves behind, rules/save 55 ([ADR 0085](../../architecture/0085-crisis-migration.md)):
+  when a crisis passes, a hearth of three or more that bore the whole toll
+  loses a household to the nearest sheltered hearth of another realm within
+  twelve hexes; a first AI valuation made every realm shelter and was
+  narrowed to what the realm can see. Evidence packet
+  [docs/development/2026-10-31-crisis-migration/](../2026-10-31-crisis-migration/README.md);
+  roadmap library 123 delivered.
 
 ## Verified
 
@@ -131,7 +138,10 @@ and the chronicles journey (pin 55 → 53, attributed); headline
 442 / 371 / 298 / 213. Crisis events: unit 2,346, campaigns 57, build, two
 journeys (one new) and the chronicles journey (pin 53 → 56, attributed);
 headline **408 / 275 / 215**, the other seeds 344 / 313, 308 / 246,
-211 / 176, proxies 353 / 448 / 323 / 204.
+211 / 176, proxies 353 / 448 / 323 / 204. Migration: unit 2,347, campaigns
+57, build, two journeys (one new) and the chronicles journey; every pacing
+figure identical to rules 54, eight and seven households crossing on the
+Epic and Long headline.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -162,6 +172,8 @@ first on 379.
 - Crisis events: one per crisis, offered once; a realm already answering an
   event misses it. The Epic headline course sits at 408 with the other Epic
   seeds below band and the Long courses under target.
+- Migration: only at a crisis's end, only to another realm's sheltered
+  hearth within twelve hexes; collapse and regional crises remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

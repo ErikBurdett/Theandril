@@ -40,4 +40,14 @@ test('a realm shelters its hearths when the toll still to come outweighs the pri
   expect(planCrisis({ ...view, treasury: crisis.shelterCost - 1, crisis: { ...crisis, shelterBlocker: 'Requires more coin.' } })).toBeNull();
   expect(planCrisis({ ...view, crisis: { ...crisis, sheltered: true, shelterBlocker: 'The realm’s hearths are already sheltered.' } })).toBeNull();
   expect(planCrisis({ ...view, crisis: undefined })).toBeNull();
+  // Rules 55: once another realm has sheltered, the households a crisis's end would take are counted into the toll.
+  const populous = { ...view, settlements: view.settlements.map(town => town.factionId === player ? { ...town, population: 3 } : town) };
+  const home = populous.settlements.find(town => town.factionId === player)!;
+  const haven = { ...home, id: 'settlement.haven', name: 'Haven', factionId: 'faction.elsewhere', cell: home.cell + 3 };
+  const withHaven = { ...populous, settlements: [...populous.settlements, haven] };
+  expect(remainingToll({ ...withHaven, crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'] } })).toBe(remainingToll(populous) + 25);
+  // No known sheltered hearth within range, or the only sheltered realm is this one: no household is at risk.
+  expect(remainingToll({ ...populous, crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'] } })).toBe(remainingToll(populous));
+  expect(remainingToll({ ...withHaven, crisis: { ...crisis, shelteredRealms: [player] } })).toBe(remainingToll(populous));
+  expect(remainingToll({ ...withHaven, settlements: withHaven.settlements.map(town => town.id === 'settlement.haven' ? { ...town, cell: home.cell + 30 * view.width } : town), crisis: { ...crisis, shelteredRealms: ['faction.elsewhere'] } })).toBe(remainingToll(populous));
 });
