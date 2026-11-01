@@ -20,7 +20,9 @@ Every pacing figure is identical to rules 60 (**395 / 302 / 203**;
 city-states seated the Epic course sees two demands paid and four refused.
 Verification: sim, AI and journey tests; unit 2,354 / 296 files, campaigns
 57, lint, typecheck, build, two covering journeys and the chronicles
-journey.
+journey. Commit `2b56ba2` is deployed: both workflows succeeded and the live
+readback matched the build
+([publication packet](development/2026-10-31-publication-tribute-demands/README.md)).
 [Evidence](development/2026-10-31-tribute-demands/README.md),
 [ADR0091](architecture/0091-tribute-demands.md).
 

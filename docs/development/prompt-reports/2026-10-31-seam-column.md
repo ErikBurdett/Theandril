@@ -154,7 +154,10 @@
 - Pressing a city-state for tribute, rules/save 61 ([ADR 0091](../../architecture/0091-tribute-demands.md)):
   a company at a city-state's gate demands tribute without war, paid when it
   outweighs the walls' garrison and refused when not, remembered either way;
-  the AI presses when short of coin. Evidence packet
+  the AI presses when short of coin. Commit `2b56ba2` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-tribute-demands/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-tribute-demands/](../2026-10-31-tribute-demands/README.md);
   roadmap library 129 delivered.
 
