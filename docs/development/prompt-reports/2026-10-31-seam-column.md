@@ -138,7 +138,10 @@
 - Regional crises, rules/save 59 ([ADR 0089](../../architecture/0089-regional-crises.md)):
   one regional crisis per later age, centred on a hearth drawn from the seed
   and reaching only the hearths within its radius for the toll, the quote,
-  the event and the migration. Evidence packet
+  the event and the migration. Commit `5a8c587` is deployed: both workflows
+  succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-regional-crises/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-regional-crises/](../2026-10-31-regional-crises/README.md);
   roadmap library 127 delivered.
 

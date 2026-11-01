@@ -16,7 +16,9 @@ load unchanged; three more crisis events, sixty templates. Headline pacing
 307 / 431 / 302 / 181: every headline course in band; the Epic headline
 draws two regional crises. Verification: content, sim, AI and journey
 tests; unit 2,350 / 294 files, campaigns 57, lint, typecheck, build, two
-covering journeys and the chronicles journey.
+covering journeys and the chronicles journey. Commit `5a8c587` is deployed:
+both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-10-31-publication-regional-crises/README.md)).
 [Evidence](development/2026-10-31-regional-crises/README.md),
 [ADR0089](architecture/0089-regional-crises.md).
 
