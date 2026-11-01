@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes and unrest
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue, relics, notable characters, offices, the fourth event catalogue, the ember host, hired companies, the second city-state roster, taxes, unrest and shared maps
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -246,9 +246,16 @@
 - Unrest in the hearths, rules/save 71 ([ADR 0102](../../architecture/0102-unrest.md)):
   heavy taxes, occupation and deep scars raise a hearth's unrest, lean taxes
   ease it; at fifty the industry halves and at a hundred the hearth riots;
-  the AI stops pressing restless lanes. Evidence packet
-  [docs/development/2026-11-01-unrest/](../2026-11-01-unrest/README.md);
+  the AI stops pressing restless lanes. Commit `5375229` is deployed: both
+  workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-11-01-publication-unrest/README.md)).
+  Evidence packet [docs/development/2026-11-01-unrest/](../2026-11-01-unrest/README.md);
   roadmap library 140 delivered.
+- Allies share their maps, rules/save 72 ([ADR 0103](../../architecture/0103-map-sharing.md)):
+  each ally learns every hex the other has explored, once every twenty
+  turns for the pair; the AI shares when it may. Evidence packet
+  [docs/development/2026-11-01-map-sharing/](../2026-11-01-map-sharing/README.md);
+  roadmap library 141 delivered.
 
 ## Verified
 
@@ -334,6 +341,9 @@ other seeds 345 / 344, 309 / 286, 191 / 196, proxies 370 / 478 / 293 / 207.
 Unrest: unit 2,375 / 307 files, campaigns 57, build, the unrest, taxes and conquest
 journeys and the chronicles journey (pin 56 unmoved); headline
 **388 / 296 / 198**, the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207.
+Shared maps: UNIT_SHORT, CAMPAIGNS_SHORT, build, the map-sharing and
+alliances journeys and the chronicles journey CHRONICLES_NOTE; headline
+**PACING_HEADLINE**, the other seeds PACING_SEEDS, proxies PACING_PROXIES.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -397,6 +407,8 @@ first on 379.
   the wider economic policy remain.
 - Unrest knows three pressures and two consequences; legitimacy, secession
   and rebels on the map remain.
+- Shared maps are the whole explored set between allies; joint war aims
+  and the wider negotiated terms remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

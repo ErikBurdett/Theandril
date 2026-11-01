@@ -1,5 +1,22 @@
 # Theandril implementation status
 
+## Allies share their maps (rules/save 72) — 2026-11-01
+
+M1's negotiated terms, map sharing. `shareMaps` gives each of two allies
+every hex the other has explored — remembered ground, not present sight —
+once every twenty turns for the pair, one record per pair. The observation
+lists each ally with whether maps can be shared, when they last were and
+the blocker; Realm affairs shows a Share maps button under the alliance;
+the journal records what each ally learned; AI allies share with the first
+ally they may, once a turn. A new canonical register; save 72; the pack
+unchanged. Headline pacing **PACING_HEADLINE**, the other seeds
+PACING_SEEDS, proxies PACING_PROXIES: PACING_VERDICT. Verification: sim,
+AI and journey tests; UNIT_SHORT, CAMPAIGNS_SHORT, lint, typecheck, build,
+the map-sharing and alliances journeys and the chronicles journey
+CHRONICLES_NOTE.
+[Evidence](development/2026-11-01-map-sharing/README.md),
+[ADR0103](architecture/0103-map-sharing.md).
+
 ## Unrest in the hearths (rules/save 71) — 2026-11-01
 
 M5's cultural unrest, first measure. Each unbesieged turn a hearth's unrest
@@ -14,7 +31,9 @@ register; save 71; the pack unchanged. Headline pacing **388 / 296 / 198**,
 the other seeds 339 / 344, 283 / 286, 191 / 196, proxies 370 / 478 / 305 / 207: every headline course in band and identical to rules 70, the two other Epic seeds just under it.
 Verification: sim, AI and journey tests; unit 2,375 / 307 files, campaigns 57, lint,
 typecheck, build, the unrest, taxes and conquest journeys and the chronicles
-journey (pin 56 unmoved).
+journey (pin 56 unmoved). Commit `5375229` is deployed: both workflows
+succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-unrest/README.md)).
 [Evidence](development/2026-11-01-unrest/README.md),
 [ADR0102](architecture/0102-unrest.md).
 
