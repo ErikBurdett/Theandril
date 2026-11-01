@@ -301,6 +301,11 @@
   packet [docs/development/2026-11-01-city-state-kinds/](../2026-11-01-city-state-kinds/README.md);
   roadmap library 147 delivered. Commit `5b15480` is deployed and read back
   ([publication packet](../2026-11-01-publication-city-state-kinds/README.md)).
+- The seventh hearth-event catalogue, rules/save 78 ([ADR 0110](../../architecture/0110-hearth-events-vii.md)):
+  fifteen more templates across the conditions and the ages, one hundred
+  and thirty-five in all. Evidence packet
+  [docs/development/2026-11-01-hearth-events-vii/](../2026-11-01-hearth-events-vii/README.md);
+  roadmap library 148 delivered.
 
 ## Verified
 
@@ -409,6 +414,9 @@ first on 379.
 
 Kinds: unit 2,380 / 310 files, campaigns 57, build, the hires and tribute journeys and
 the chronicles journey (pin 56 unmoved); Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds.
+Hearth events VII: unit 2,381 / 310 files, campaigns 57, build, the six hearth-event
+journeys and the chronicles journey (pin moved from 56 to 57, attributed); headline
+339 / 281 / 213, the other seeds 355 / 338, 246 / 285, 194 / 199, proxies 402 / 426 / 288 / 208.
 
 ## Left open
 

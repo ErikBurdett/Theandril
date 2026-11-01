@@ -3,7 +3,7 @@ import { CONTENT_HASH, HEARTH_EVENTS, HEARTH_EVENT_ANSWER_TURNS, HEARTH_EVENT_IN
 import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
-import { PRE_CHAINS_CONTENT_HASH, PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, serializeGameForVersion } from './save';
+import { PRE_CHAINS_CONTENT_HASH, PRE_EVENTS_CONTENT_HASH, PRE_EVENTS_II_CONTENT_HASH, PRE_EVENTS_VII_CONTENT_HASH, serializeGameForVersion } from './save';
 import { advanceHearthEvents, hearthEventConditionHolds, observeHearthEvents, resolveHearthEvent, validateHearthEvents } from './hearth-events';
 import { landmarks } from './landmarks';
 import { armyStrength } from './army-composition';
@@ -168,7 +168,7 @@ describe('rules 46: hearth events', () => {
     expect(upgraded.hearthEvents).toEqual({ pending: [], recent: [] });
     expect(stateHash(upgraded)).toBe(stateHash(fresh));
     expect(stateHashForVersion(upgraded, 45)).toBe(stateHashForVersion(fresh, 45));
-    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(upgraded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
     // A corrupt register is refused: two events for one realm, or a hearth the realm does not hold.
     const corrupt = deserializeGame(serializeGame(state));
     const pending = corrupt.hearthEvents.pending[0]!;
@@ -223,7 +223,7 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 46, contentHash: PRE_EVENTS_II_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
     view = getObservation(loaded, player);
     expect(view.hearthEvents![0]!.name).toBe('A kiln fire');
     // Under rules 46 the second catalogue is never drawn: every offer over a long run names a first-batch template.
@@ -285,10 +285,33 @@ describe('rules 46: hearth events', () => {
     expect(JSON.parse(sealed)).toMatchObject({ version: 47, contentHash: PRE_CHAINS_CONTENT_HASH });
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
     // A pending event that lies ahead without an event it follows is refused by validation.
     const corrupt = deserializeGame(serializeGame(state));
     corrupt.hearthEvents.pending = [{ id: 'event.999.1', factionId: player, settlementId: host.id, templateId: 'event.kiln_fire', turn: corrupt.turn + 3, expiresTurn: corrupt.turn + 3 + HEARTH_EVENT_ANSWER_TURNS }];
     expect(() => validateHearthEvents(corrupt)).toThrow('lies ahead');
+  });
+
+  it('rules 78: the seventh catalogue seals only under rules 78, a v77 envelope loads unchanged under the new pack and may not name a rules 78 template', () => {
+    const state = attunementCampaign(), player = state.turnOwnerId;
+    const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+    expect(HEARTH_EVENTS.filter(event => event.sinceRules === 78)).toHaveLength(15);
+    const sealed = serializeGameForVersion(state, 77);
+    expect(JSON.parse(sealed)).toMatchObject({ version: 77, contentHash: PRE_EVENTS_VII_CONTENT_HASH });
+    const loaded = deserializeGame(sealed);
+    expect(stateHash(loaded)).toBe(stateHash(state));
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
+    // A campaign holding a rules 78 event cannot be sealed under rules 77, and a v77 envelope naming one is refused.
+    state.hearthEvents.pending = [{ id: `event.${state.turn}.1`, factionId: player, settlementId: host.id, templateId: 'event.far_tithe', turn: state.turn, expiresTurn: state.turn + HEARTH_EVENT_ANSWER_TURNS }];
+    expect(() => validateHearthEvents(state)).not.toThrow();
+    withRules(state, 77, () => expect(() => validateHearthEvents(state)).toThrow('names an unknown event'));
+    expect(() => serializeGameForVersion(state, 77)).toThrow();
+    const forged = JSON.parse(sealed) as { state: { hearthEvents: { pending: unknown[] } } };
+    forged.state.hearthEvents.pending = state.hearthEvents.pending;
+    expect(() => deserializeGame(JSON.stringify(forged))).toThrow();
+    // The realm answers the new template with exactly its quoted effect.
+    const treasury = state.factions.find(item => item.id === player)!.treasury;
+    issue(state, { type: 'resolveHearthEvent', factionId: player, eventId: state.hearthEvents.pending[0]!.id, choiceId: 'accept_the_tithe' });
+    expect(state.factions.find(item => item.id === player)!.treasury).toBe(treasury + 7);
   });
 });

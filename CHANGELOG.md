@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 78 brings a seventh hearth-event catalogue: fifteen more templates across the conditions and the ages, one a chain whose default declines a bidder’s wager; one hundred and thirty-five in all, the rules 77 catalogue frozen for older saves. Headline pacing 339 / 281 / 213: the Epic course drifts ten turns back toward its band and stays under it, Long and Standard hold; the other seeds 355 / 338, 246 / 285, 194 / 199 and proxies 402 / 426 / 288 / 208 redraw within their bounds; the chronicle pin moves from 56 to 57 on the Reedbound Council’s turn-40 redraw.
+
 Rules/save 77 gives every city-state a kind: market towns sell line troops at the going rate and pay tribute in full, clanholds sell their oath guard dear and pay little, nomad camps sell riders dearer still and pay three quarters, pirate coves sell skirmishers cheap and pay a quarter more; Realm affairs names the kind beside the city-state and the hire quote names the company. Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds.
 
 Rules/save 76 adds cavalry wings, a fifth deployment: the mounted companies take the outer columns of every rank and the foot the centre. Headline pacing 329 / 301 / 219 and every other course identical to rules 75, since the AI keeps the line; the chronicle pin at 56 holds.

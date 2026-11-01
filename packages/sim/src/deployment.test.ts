@@ -87,7 +87,7 @@ describe('rules 75: army deployment', () => {
     expect(JSON.parse(sealed).state.armies.every((item: { deployment?: string }) => item.deployment === undefined)).toBe(true);
     const loaded = deserializeGame(sealed);
     expect(stateHash(loaded)).toBe(stateHash(state));
-    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 77, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(loaded))).toMatchObject({ version: 78, contentHash: CONTENT_HASH });
     issue(state, { type: 'setDeployment', factionId: player, armyId: army.id, deployment: 'shieldwall' });
     expect(() => serializeGameForVersion(state, 74)).toThrow('deployments unavailable');
     // A v74 envelope naming a doctrine is refused.

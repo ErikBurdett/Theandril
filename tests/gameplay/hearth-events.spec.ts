@@ -131,3 +131,27 @@ test('answer a rules 74 hearth event from Realm affairs', async ({ page }) => {
   await expect(journal).toContainText('set a toll');
   expect(errors).toEqual([]);
 });
+
+test('answer a rules 78 hearth event from Realm affairs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  const state = attunementCampaign(), player = state.turnOwnerId;
+  const host = Object.values(state.settlements).find(town => town.factionId === player)!;
+  state.factions.find(item => item.id === player)!.treasury = 100;
+  state.hearthEvents.pending = [{ id: `event.${state.turn}.1`, factionId: player, settlementId: host.id, templateId: 'event.far_tithe', turn: state.turn, expiresTurn: state.turn + 5 }];
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  await page.locator('input[type=file]').setInputFiles({ name: 'far-tithe.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  const affairs = await openRealmAffairs(page);
+  const panel = affairs.getByTestId('hearth-events');
+  await expect(panel).toContainText('The far tithe');
+  await expect(panel).toContainText(`send their tithe to ${host.name}`);
+  await panel.getByRole('button', { name: `Accept the tithe: The far tithe at ${host.name}` }).click();
+  await expect(panel).toHaveCount(0);
+  await expect(page.getByText(/\b107\b.*coin|coin.*\b107\b/).first()).toBeVisible();
+  const journal = await openCampaignJournal(page);
+  await expect(journal).toContainText('The far tithe at');
+  await expect(journal).toContainText('accept the tithe');
+  expect(errors).toEqual([]);
+});

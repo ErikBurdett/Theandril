@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## The seventh hearth-event catalogue (rules/save 78) — 2026-11-01
+
+M6's events, within fifteen of the scope's one hundred and fifty. Fifteen
+more templates across the conditions and the ages — the hearth census, the
+ale shortage, squatters in the ruins, the kelp harvest, fumes from the seam,
+the smiths pressed, the harbor light, the borrowed books, the garrison
+wedding, the market charter (Roads), the far tithe, the first orchard, the
+glass tithe (Seams), the bidder's wager (Bids) and the wager settled — one
+hundred and thirty-five in all; content only, save 78 freezes the rules 77
+pack and a v77 envelope may not name a rules 78 template.
+Headline pacing 339 / 281 / 213: the Epic course drifts ten turns back toward its band and stays under it, Long and Standard hold; the other seeds 355 / 338, 246 / 285, 194 / 199 and proxies 402 / 426 / 288 / 208 redraw within their bounds; the chronicle pin moves from 56 to 57 on the Reedbound Council’s turn-40 redraw. Verification: content, sim and journey tests; unit 2,381 / 310 files,
+campaigns 57, lint, typecheck, build, the six hearth-event journeys and
+the chronicles journey (pin moved from 56 to 57, attributed).
+[Evidence](development/2026-11-01-hearth-events-vii/README.md),
+[ADR0110](architecture/0110-hearth-events-vii.md).
+
 ## Four kinds of city-state (rules/save 77) — 2026-11-01
 
 M5's roster, first distinct relations. A content table gives every one of

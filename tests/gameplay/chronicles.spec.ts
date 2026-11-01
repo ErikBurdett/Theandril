@@ -58,9 +58,11 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   // rules 64 the realms' first officers are their cultures' notable figures and it ends on 57,
   // attributed in docs/development/2026-10-31-notables/chronicle-expectation.md; the rules 66
   // catalogue lands the Reedbound Council's turn-40 draw on another template and it ends on 56,
-  // attributed in docs/development/2026-10-31-hearth-events-iv/chronicle-expectation.md).
+  // attributed in docs/development/2026-10-31-hearth-events-iv/chronicle-expectation.md; the rules 78
+  // catalogue lands the same turn-40 draw on The long peace and it ends on 57, attributed in
+  // docs/development/2026-11-01-hearth-events-vii/chronicle-expectation.md).
   // Genuine historical archive seals remain separately tested.
-  expect(victory?.turn).toBe(56);
+  expect(victory?.turn).toBe(57);
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });
