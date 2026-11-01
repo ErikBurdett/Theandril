@@ -348,6 +348,8 @@
   the refused survey orders of the headline campaigns are gone; a survey is
   issued before any march of its batch. AI only, no roadmap change. Evidence
   packet [docs/development/2026-11-01-ai-surveys-first/](../2026-11-01-ai-surveys-first/README.md).
+  Commit `07c58b6` is deployed and read back
+  ([publication packet](../2026-11-01-publication-ai-surveys-first/README.md)).
 
 ## Verified
 

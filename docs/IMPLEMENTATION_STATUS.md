@@ -12,6 +12,9 @@ journey (pin 57 unmoved). The characters-tree journey had failed since rules 64
 (its veteran became the culture's notable) and now takes the second marshal;
 the headline Epic course's two turns over its nominal band are recorded, not
 re-priced.
+Commit `07c58b6` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-ai-surveys-first/README.md)).
 [Evidence](development/2026-11-01-ai-surveys-first/README.md),
 [ADR0117](architecture/0117-ai-surveys-first.md).
 
