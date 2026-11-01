@@ -24,6 +24,9 @@ waits for the quoted founding fee. Crises are world-wide and identical for
 every realm; no regional crisis, migration or collapse. Verification: new
 content, sim, AI and journey tests; unit 2,346 / 294 files, campaigns 57,
 lint, typecheck, build, four covering journeys and the chronicles journey.
+Commit `4e5623b` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-10-31-publication-crises/README.md)).
 [Evidence](development/2026-10-31-crises/README.md),
 [ADR0083](architecture/0083-crises.md).
 

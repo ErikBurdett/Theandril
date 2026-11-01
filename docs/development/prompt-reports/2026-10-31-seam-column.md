@@ -85,7 +85,10 @@
   a toll of every unsheltered hearth each turn, shelter once for a price,
   the AI sheltering when the toll outweighs it; terms and prices set from
   measurement after the first design moved the Epic headline to 429. A
-  seam-expedition caravan now waits for the founding fee. Evidence packet
+  seam-expedition caravan now waits for the founding fee. Commit `4e5623b` is
+  deployed: both workflows succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-crises/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-crises/](../2026-10-31-crises/README.md);
   roadmap library 121 delivered.
 
