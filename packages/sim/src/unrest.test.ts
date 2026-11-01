@@ -95,7 +95,7 @@ describe('rules 71: unrest in the hearths', () => {
     // The garrison holds the hearth: it riots as any hearth does and stays the holder's.
     state.unrest = [{ settlementId: townId, level: UNREST_RIOT - 1 }];
     expect(restorationOf(state, town)).toBeNull();
-    expect(getObservation(state, player).unrest!.find(item => item.settlementId === townId)!.rising).toBeUndefined();
+    expect(getObservation(state, player).unrest!.find(item => item.settlementId === townId)).toMatchObject({ rising: 'Reedbound Council', garrisoned: true });
     const events: Parameters<typeof advanceUnrest>[2] = [];
     advanceUnrest(state, town, events);
     expect(events[0]).toMatchObject({ type: 'riot', factionId: player });
@@ -106,7 +106,7 @@ describe('rules 71: unrest in the hearths', () => {
     issue(state, { type: 'moveTo', factionId: player, armyId, target: away });
     expect(indexes(state).armies.get(town.cell)?.size ?? 0).toBe(0);
     expect(restorationOf(state, town)?.id).toBe(rival);
-    expect(getObservation(state, player).unrest!.find(item => item.settlementId === townId)).toMatchObject({ rising: 'Reedbound Council' });
+    expect(getObservation(state, player).unrest!.find(item => item.settlementId === townId)).toMatchObject({ rising: 'Reedbound Council', garrisoned: false });
     expect(getObservation(state, rival).unrest!.every(item => item.settlementId !== townId)).toBe(true);
     // The holder's capital never rises, and a founder with no hearth left has nothing to rise for.
     const capital = state.land.capitals[player] ?? null; state.land.capitals[player] = townId;

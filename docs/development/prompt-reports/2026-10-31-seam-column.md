@@ -319,6 +319,11 @@
   [docs/development/2026-11-01-restoration/](../2026-11-01-restoration/README.md);
   roadmap library 150 delivered. Commit `1ce53d2` is deployed and read back
   ([publication packet](../2026-11-01-publication-restoration/README.md)).
+- AI garrisons against restoration ([ADR 0113](../../architecture/0113-ai-garrisons.md)):
+  an AI realm keeps or sends a company into a conquered hearth whose lanes
+  may rise for its founder; AI and observation only. Evidence packet
+  [docs/development/2026-11-01-ai-garrisons/](../2026-11-01-ai-garrisons/README.md);
+  roadmap library 151 delivered.
 
 ## Verified
 
@@ -435,6 +440,9 @@ journeys and the chronicles journey (pin 57 unmoved though the turn-40 draw diff
 384 / 291 / 205, all in band, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209 (the Long proxy bound re-derived to 450).
 Restoration: unit 2,383 / 310 files, campaigns 57, build, the restoration, unrest and
 conquest journeys and the chronicles journey (pin 57 unmoved); headline
+384 / 291 / 205, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
+AI garrisons: unit 2,384 / 311 files, campaigns 57, build, the restoration and unrest
+journeys and the chronicles journey (pin 57 unmoved); headline
 384 / 291 / 205, the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 368 / 407 / 382 / 209.
 
 ## Left open

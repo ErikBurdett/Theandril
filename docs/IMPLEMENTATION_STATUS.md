@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## AI garrisons against restoration — 2026-11-01
+
+M5's politics, the AI's answer to the first rebellion. The holder's
+observation names the founder a conquered hearth's lanes may rise for
+whether or not an army stands in it, and says whether it is garrisoned;
+from fifty unrest an AI realm keeps a land company standing in such a
+hearth and, when none stands there, sends the nearest free land company in
+by a queued road, two orders a turn; the condition panel reads *may rise
+for* or *garrisoned against*. AI and observation only; no rule, save field
+or content change.
+Headline pacing 384 / 291 / 205 and every other course identical to the restoration slice, since no measured AI realm holds a conquered hearth whose lanes rise; the chronicle pin at 57 holds. Verification: AI and sim tests; unit 2,384 / 311 files, campaigns 57,
+lint, typecheck, build, the restoration and unrest journeys and the
+chronicles journey (pin 57 unmoved).
+[Evidence](development/2026-11-01-ai-garrisons/README.md),
+[ADR0113](architecture/0113-ai-garrisons.md).
+
 ## Restoration (rules/save 80) — 2026-11-01
 
 M5's politics, the first rebellion. A hearth held by a realm other than its

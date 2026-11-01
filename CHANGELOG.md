@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+AI realms now garrison a conquered hearth whose lanes may rise for its founder: from fifty unrest a company standing in it is kept there and, when none stands there, the nearest free company is sent in; the hearth’s condition panel reads whether it is garrisoned against the founder or may rise. AI and observation only; no rule or save change. Headline pacing 384 / 291 / 205 and every other course identical to the restoration slice, since no measured AI realm holds a conquered hearth whose lanes rise; the chronicle pin at 57 holds.
+
 Rules/save 80 adds restoration: a hearth held by a realm other than its founder, with no army standing in it, returns to its founder when its unrest reaches a hundred instead of rioting, keeping its people, buildings and land; a garrison holds it, and the hearth’s condition panel names the founder it may rise for. Headline pacing 384 / 291 / 205 and every other course identical to rules 79, since no measured campaign reaches a hundred unrest in a garrisonless conquered hearth; the chronicle pin at 57 holds.
 
 Rules/save 79 brings the eighth hearth-event catalogue: fifteen more templates across the conditions and the ages, one a chain whose default refuses a bidder’s bribe; one hundred and fifty in all, the scope’s count, the rules 78 catalogue frozen for older saves. Headline pacing 384 / 291 / 205: all three courses in band, the Epic course for the first time since rules 73; the other seeds 352 / 351, 289 / 282, 197 / 200 in band; proxies 368 / 407 / 382 / 209, the Long proxy’s bound re-derived from the tool (maximum 375 to 450) with the headline Long at 291; the chronicle pin at 57 holds.

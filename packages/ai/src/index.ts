@@ -23,6 +23,7 @@ import { planCrisis } from './crises';
 import { planDemand } from './demands';
 import { planHire } from './hires';
 import { planTaxes } from './taxes';
+import { planGarrisons } from './garrisons';
 import { planRelics } from './relics';
 import { planOffices } from './offices';
 import { planPatrol } from './patrols';
@@ -118,6 +119,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   for (const id of advancement.heldArmyIds) theater.heldArmyIds.add(id);
   const wardenReturn = planWardenReturn(view);
   for (const id of wardenReturn.heldArmyIds) theater.heldArmyIds.add(id);
+  // Rules 80: a conquered hearth whose lanes may rise for its founder keeps or gets a garrison.
+  const garrisons = minor ? null : planGarrisons(view, theater.heldArmyIds);
+  for (const id of garrisons?.heldArmyIds ?? []) theater.heldArmyIds.add(id);
   const patrol = planPatrol(view, theater.heldArmyIds);
   for (const id of patrol.heldArmyIds) theater.heldArmyIds.add(id);
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
@@ -148,8 +152,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
   const depot = planDepot(view, new Set([...theater.heldArmyIds, ...surveyed]));
   const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
-  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(demand?.commands ?? []), ...(hire?.commands ?? []), ...(taxes?.commands ?? []), ...(relics?.commands ?? []), ...(courting?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
-  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...(shelter?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(demand?.reasons ?? []), ...(hire?.reasons ?? []), ...(taxes?.reasons ?? []), ...(relics?.reasons ?? []), ...(courting?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
+  const plans: GameCommand[] = [...advancement.commands, ...wardenReturn.commands, ...(garrisons?.commands ?? []), ...(supplyPurchase?.commands ?? []), ...theater.commands, ...patrol.commands, ...(patronage?.commands ?? []), ...(demand?.commands ?? []), ...(hire?.commands ?? []), ...(taxes?.commands ?? []), ...(relics?.commands ?? []), ...(courting?.commands ?? []), ...(survey?.commands ?? []), ...(glassApproach?.commands ?? []), ...(expedition?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...(hearthAnswers?.reasons ?? []), ...(shelter?.reasons ?? []), ...advancement.reasons, ...wardenReturn.reasons, ...(garrisons?.reasons ?? []), ...(supplyPurchase?.reasons ?? []), ...theater.reasons, ...patrol.reasons, ...(patronage?.reasons ?? []), ...(demand?.reasons ?? []), ...(hire?.reasons ?? []), ...(taxes?.reasons ?? []), ...(relics?.reasons ?? []), ...(courting?.reasons ?? []), ...(survey?.reasons ?? []), ...(glassApproach?.reasons ?? []), ...(expedition?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

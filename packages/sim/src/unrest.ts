@@ -27,7 +27,7 @@ const id = z.string().min(1).max(100);
 export const unrestRecordSchema = z.object({ settlementId: id, level: z.number().int().min(1).max(100) }).strict();
 export const unrestStateSchema = z.array(unrestRecordSchema).max(8192);
 export type UnrestRecord = z.infer<typeof unrestRecordSchema>;
-export interface ObservedUnrest { settlementId: string; level: number; pressures: string[]; halved: boolean; rising?: string }
+export interface ObservedUnrest { settlementId: string; level: number; pressures: string[]; halved: boolean; rising?: string; garrisoned?: boolean }
 export const UNREST_HALVING = 50;
 export const UNREST_RIOT = 100;
 export const RIOT_DEVASTATION = 10;
@@ -51,14 +51,20 @@ export function unrestPressures(state: GameState, town: Settlement): { change: n
   else if (rate === 'lean') { change -= 2; pressures.push('lean taxes ease the lanes'); }
   return { change, pressures };
 }
-/** Rules 80: the founder a hearth would return to if it riots now, or null while it is the founder's, the founder is gone, it is the holder's capital or an army stands in it. */
-export function restorationOf(state: GameState, town: Settlement): GameState['factions'][number] | null {
+/** Rules 80: the founder a hearth's lanes may rise for, or null while it is the founder's, the founder holds no hearth or it is the holder's capital. */
+export function founderToRiseFor(state: GameState, town: Settlement): GameState['factions'][number] | null {
   if (rulesVersion(state) < 80 || town.founderFactionId === town.factionId) return null;
   const founder = state.factions.find(faction => faction.id === town.founderFactionId);
   if (!founder || !Object.values(state.settlements).some(other => other.factionId === founder.id)) return null;
   if (state.land.capitals[town.factionId] === town.id) return null;
-  if (indexes(state).armies.get(town.cell)?.size) return null;
   return founder;
+}
+/** Whether an army stands in the hearth; a garrison holds it through a riot. */
+export const garrisoned = (state: GameState, town: Settlement): boolean => Boolean(indexes(state).armies.get(town.cell)?.size);
+/** The founder a hearth would return to if it riots now, or null while an army stands in it. */
+export function restorationOf(state: GameState, town: Settlement): GameState['factions'][number] | null {
+  const founder = founderToRiseFor(state, town);
+  return founder && !garrisoned(state, town) ? founder : null;
 }
 /** The hearth returns to its founder: the cession's transfer with a conquest's loss of lodged officers. */
 function restore(state: GameState, town: Settlement, founder: GameState['factions'][number], events: DomainEvent[]): void {
@@ -103,7 +109,7 @@ export function advanceUnrest(state: GameState, town: Settlement, events: Domain
 }
 export function observeUnrest(state: GameState, factionId: string): ObservedUnrest[] | undefined {
   if (rulesVersion(state) < 71) return undefined;
-  return Object.values(state.settlements).filter(town => town.factionId === factionId).sort((a, b) => a.id < b.id ? -1 : 1).map(town => { const founder = restorationOf(state, town); return { settlementId: town.id, level: unrestOf(state, town.id), pressures: unrestPressures(state, town).pressures, halved: unrestHalvesIndustry(state, town.id), ...(founder ? { rising: founder.name } : {}) }; });
+  return Object.values(state.settlements).filter(town => town.factionId === factionId).sort((a, b) => a.id < b.id ? -1 : 1).map(town => { const founder = founderToRiseFor(state, town); return { settlementId: town.id, level: unrestOf(state, town.id), pressures: unrestPressures(state, town).pressures, halved: unrestHalvesIndustry(state, town.id), ...(founder ? { rising: founder.name, garrisoned: garrisoned(state, town) } : {}) }; });
 }
 export function validateUnrest(state: GameState): void {
   const assert = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: unrest ' + message); };
