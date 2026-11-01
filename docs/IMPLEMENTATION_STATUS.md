@@ -13,7 +13,9 @@ Content only; save 69. Headline pacing **380 / 296 / 197**, the other seeds
 344 / 336, 276 / 266, 190 / 191, proxies 327 / 476 / 301 / 201: every course identical to rules 68 because the measured campaigns seat no city-states. Verification:
 content, sim and journey tests; unit 2,370 / 304 files, campaigns 57, lint,
 typecheck, build, the city-states II, hires and tribute journeys and the
-chronicles journey (pin 56 unmoved).
+chronicles journey (pin 56 unmoved). Commit `9bb719b` is deployed: both
+workflows succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-city-states-ii/README.md)).
 [Evidence](development/2026-11-01-city-states-ii/README.md),
 [ADR0100](architecture/0100-city-states-ii.md).
 

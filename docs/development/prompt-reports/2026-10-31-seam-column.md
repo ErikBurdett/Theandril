@@ -230,8 +230,10 @@
   roadmap library 137 delivered.
 - The second city-state roster, rules/save 69 ([ADR 0100](../../architecture/0100-city-states-ii.md)):
   twenty-four more city-states, forty-eight in all, drawn by the rules a
-  campaign knows so older seeds seat what they seated before. Evidence
-  packet [docs/development/2026-11-01-city-states-ii/](../2026-11-01-city-states-ii/README.md);
+  campaign knows so older seeds seat what they seated before. Commit
+  `9bb719b` is deployed: both workflows succeeded and the live readback
+  matched the build ([publication packet](../2026-11-01-publication-city-states-ii/README.md)).
+  Evidence packet [docs/development/2026-11-01-city-states-ii/](../2026-11-01-city-states-ii/README.md);
   roadmap library 138 delivered.
 
 ## Verified
