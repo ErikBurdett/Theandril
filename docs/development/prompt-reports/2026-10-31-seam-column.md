@@ -163,7 +163,12 @@
 - A held ferry puts its passengers ashore ([ADR 0092](../../architecture/0092-ferry-ashore.md)):
   an AI ferry in a proved-enclosed basin with no landing of its own lands
   its caravan instead of holding it for the campaign; the crossing scenario
-  moves to seed 83 with every assertion kept. Evidence packet
+  moves to seed 83 with every assertion kept. Commit `dc548dd` and its roadmap
+  correction `a0e97a7` (the bullet had landed in the item's remaining list and
+  the roadmap test caught it after the push) are deployed: both workflows
+  succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-ferry-ashore/README.md)).
+  Evidence packet
   [docs/development/2026-10-31-ferry-ashore/](../2026-10-31-ferry-ashore/README.md);
   roadmap library 130 delivered.
 

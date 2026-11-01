@@ -12,7 +12,10 @@ it is ashore within six turns; the crossing scenario keeps every assertion
 on seed 83, where a landing is viable at once. Every pacing figure is
 identical to rules 61 and the Epic headline makes thirty-three ordinary
 landings with no ferry held. Verification: unit 2,355 / 296 files,
-campaigns 57, lint, typecheck, build, the chronicles journey.
+campaigns 57, lint, typecheck, build, the chronicles journey. Commits `dc548dd`
+and its roadmap correction `a0e97a7` are deployed: both workflows succeeded
+and the live readback matched the build
+([publication packet](development/2026-10-31-publication-ferry-ashore/README.md)).
 [Evidence](development/2026-10-31-ferry-ashore/README.md),
 [ADR0092](architecture/0092-ferry-ashore.md).
 
