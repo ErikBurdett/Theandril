@@ -15,6 +15,9 @@ the other seeds 344 / 336, 276 / 266, 190 / 191, proxies 327 / 440 / 301 / 201: 
 Verification: content tests, the sim version pins; unit 2,363 / 301 files,
 campaigns 57, lint, typecheck, build, the three hearth-event journeys
 and the chronicles journey (pin 57 → 56, attributed to the Council’s turn-40 draw).
+Commit `9a54302` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-10-31-publication-hearth-events-iv/README.md)).
 [Evidence](development/2026-10-31-hearth-events-iv/README.md),
 [ADR0097](architecture/0097-hearth-events-iv.md).
 

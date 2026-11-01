@@ -206,8 +206,10 @@
   roadmap library 134 delivered.
 - The fourth hearth-event catalogue, rules/save 66 ([ADR 0097](../../architecture/0097-hearth-events-iv.md)):
   fifteen more templates across the conditions and the ages, ninety in all,
-  the rules 65 catalogue frozen. Evidence packet
-  [docs/development/2026-10-31-hearth-events-iv/](../2026-10-31-hearth-events-iv/README.md);
+  the rules 65 catalogue frozen. Commit `9a54302` is deployed: both workflows
+  succeeded and the live readback matched the build
+  ([publication packet](../2026-10-31-publication-hearth-events-iv/README.md)).
+  Evidence packet [docs/development/2026-10-31-hearth-events-iv/](../2026-10-31-hearth-events-iv/README.md);
   roadmap library 135 delivered.
 
 ## Verified
