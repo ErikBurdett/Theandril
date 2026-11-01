@@ -1,5 +1,27 @@
 # Theandril implementation status
 
+## Relics of the old places (rules/save 63) — 2026-10-31
+
+M7's artifice and M8's relics. Twenty-four authored relics, one for every
+landmark kind, each with a story and a small leadership bonus. At each
+turn's end the first hearth of any realm to work a landmark's hex brings up
+its relic, once, into a new canonical register; `bestowRelic` gives it to a
+living character of the realm or takes it back, and the company the bearer
+rides with gains the relic's attack and armor beside the bearer's own
+leadership, the bonus frozen in the battle snapshot so a sealed record is
+checked without the living relics. The observation lists the realm's relics
+with their bearers; the character sheet shows what a character bears and
+what waits in the hearth; AI realms bestow a waiting relic on the character
+riding with their strongest company. Save 63 appends the register; older
+envelopes load with none. Headline pacing **376 / 316 / 213**, the other
+seeds 390 / 365, 304 / 282, 189 / 202, proxies 336 / 440 / 290 / 197: every
+headline course in band. A relic has no effect beyond leadership and cannot
+be lost or stolen. Verification: content, sim, AI and journey tests; unit
+2,358 / 298 files, campaigns 57, lint, typecheck, build, the characters and
+relics journeys and the chronicles journey.
+[Evidence](development/2026-10-31-relics/README.md),
+[ADR0094](architecture/0094-relics.md).
+
 ## The third hearth-event catalogue (rules/save 62) — 2026-10-31
 
 M6 content. Fifteen more templates across the conditions and the ages, one

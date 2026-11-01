@@ -1,0 +1,16 @@
+
+> theandril@0.1.0 measure:pacing /home/telephoneheater/Work/Theandril
+> tsx scripts/measure-pacing.ts headline standard long --json=docs/development/2026-10-31-relics/pacing-after.json
+
+headline (epic, standard, 12 realms, seed 20260905, rules current) — target 350–400 turns
+  refused at turn 68: {"type":"startCharacterMission","factionId":"faction.iron_covenant","characterId":"character.76","missionId":"mission.survey","targetCell":6144}: This survey area is already explored.
+  turn 376 · prosperity · 172 depots · 1 refused orders · 4 automatic refusals · 40s
+  REFUSED ORDERS: the planner asked for something the rules do not allow.
+headline-long (long, standard, 12 realms, seed 20260905, rules current) — target about 300 turns
+  refused at turn 68: {"type":"startCharacterMission","factionId":"faction.iron_covenant","characterId":"character.76","missionId":"mission.survey","targetCell":6144}: This survey area is already explored.
+  turn 316 · prosperity · 155 depots · 1 refused orders · 145 automatic refusals · 30s
+  REFUSED ORDERS: the planner asked for something the rules do not allow.
+headline-standard (standard, standard, 12 realms, seed 20260905, rules current) — target about 200 turns
+  refused at turn 68: {"type":"startCharacterMission","factionId":"faction.iron_covenant","characterId":"character.76","missionId":"mission.survey","targetCell":5471}: This survey area is already explored.
+  turn 213 · prosperity · 93 depots · 1 refused orders · 4 automatic refusals · 17s
+  REFUSED ORDERS: the planner asked for something the rules do not allow.

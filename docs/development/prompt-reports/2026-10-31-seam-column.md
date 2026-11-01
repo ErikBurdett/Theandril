@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry and the third event catalogue
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises, crisis events, migration, allied peace, the second landmark catalogue, the patron's guarantee, regional crises, city-state goods, tribute demands, the held ferry, the third event catalogue and relics
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -179,6 +179,12 @@
   Evidence packet
   [docs/development/2026-10-31-hearth-events-iii/](../2026-10-31-hearth-events-iii/README.md);
   roadmap library 131 delivered.
+- Relics of the old places, rules/save 63 ([ADR 0094](../../architecture/0094-relics.md)):
+  one relic for every landmark kind, brought up by the first hearth to work
+  the landmark's hex, bestowed on a character whose company gains its
+  leadership; the AI bestows on its strongest company's rider. Evidence
+  packet [docs/development/2026-10-31-relics/](../2026-10-31-relics/README.md);
+  roadmap library 132 delivered.
 
 ## Verified
 
@@ -236,7 +242,9 @@ unit 2,355, campaigns 57, build, the chronicles journey; every pacing figure
 identical. Hearth events III: unit 2,355, campaigns 57, build, two journeys
 (one new) and the chronicles journey (pin 54 → 53, attributed); headline
 **386 / 305 / 214**, the other seeds 390 / 362, 295 / 282, 183 / 202, proxies
-336 / 440 / 289 / 197.
+336 / 440 / 289 / 197. Relics: unit 2,358, campaigns 57, build, the characters
+and relics journeys and the chronicles journey; headline **376 / 316 / 213**,
+the other seeds 390 / 365, 304 / 282, 189 / 202, proxies 336 / 440 / 290 / 197.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -285,6 +293,8 @@ first on 379.
 - The ferry fallback fires only in a proved-enclosed basin; a basin whose
   shores open later is not waited for.
 - Hearth events: seventy-five templates against one hundred and fifty.
+- Relics lead and nothing more; none is lost, stolen or traded. Rituals,
+  summons and a third magical path remain.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

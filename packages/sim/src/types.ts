@@ -25,6 +25,7 @@ import type { AllianceState, ObservedAlliances } from './alliances';
 import type { ObservedLandmark } from './landmarks';
 import type { CrisisState, ObservedCrisis } from './crises';
 import type { ObservedDemands, TributeDemand } from './demands';
+import type { ObservedRelic, RelicRecord } from './relics';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -224,6 +225,7 @@ export type GameCommand =
   | { type: 'accelerateRoad'; factionId: string; settlementId: string }
   | { type: 'shelterFromCrisis'; factionId: string; crisisId: string }
   | { type: 'demandTribute'; factionId: string; cityStateId: string; armyId: string }
+  | { type: 'bestowRelic'; factionId: string; relicId: string; bearerId: string | null }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -304,6 +306,8 @@ export interface GameState {
   crises: CrisisState;
   /** Rules 61: the tribute demands realms have made of city-states, in order. */
   demands: TributeDemand[];
+  /** Rules 63: the relics brought up from the old places, by landmark, with their bearers. */
+  relics: RelicRecord[];
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -378,6 +382,8 @@ export interface Observation {
   crisis?: ObservedCrisis;
   /** Rules 61: the realm's tribute quotes at city-state gates and the demands it made or was made of; absent under historical rules. */
   tribute?: ObservedDemands;
+  /** Rules 63: the realm's relics with their bearers; absent under historical rules. */
+  relics?: ObservedRelic[];
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

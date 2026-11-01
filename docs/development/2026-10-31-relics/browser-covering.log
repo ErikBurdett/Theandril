@@ -1,0 +1,15 @@
+
+> theandril@0.1.0 test:gameplay /home/telephoneheater/Work/Theandril
+> playwright test --project=gameplay tests/gameplay/relics.spec.ts tests/gameplay/characters.spec.ts --workers=2 --output=docs/development/2026-10-31-relics/browser-results
+
+
+Running 6 tests using 2 workers
+
+  ✓  1 [gameplay] › tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (4.5s)
+  ✓  2 [gameplay] › tests/gameplay/relics.spec.ts:23:1 › bestow a relic on a character from the character sheet (4.6s)
+  ✓  3 [gameplay] › tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (8.6s)
+  ✓  4 [gameplay] › tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (7.8s)
+  ✓  5 [gameplay] › tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (8.7s)
+  ✓  6 [gameplay] › tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (14.1s)
+
+  6 passed (44.7s)

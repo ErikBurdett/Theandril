@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+Rules/save 63 brings relics of the old places: every landmark kind keeps one — the Witness Step, the Causeway Stone, the First Firebrick, the Boundary Stone, the Warden Glass, the Wreck Figurehead and eighteen more — brought up once by the first hearth to work the landmark’s hex and bestowed from the character sheet on a character of the realm, whose company gains the relic’s attack or armor beside their own leadership; the journal records the finding and the bestowal, and AI realms bestow a waiting relic on the character riding with their strongest company. Headline pacing 376 / 316 / 213, with the two other seeds at 390 / 365, 304 / 282 and 189 / 202, every course in band.
+
 Rules/save 62 brings fifteen more hearth events — the lantern festival, the widows’ toll, a harbor-master’s offer, the lost ledger, muster day, the long peace, far cousins, the first harvest, the cistern silts, a foundling at the gate, a glass pedlar, rumours of the bid and the wager that comes due, the tide flats, the old walls fall — seventy-five in all, the rules 61 catalogue frozen for older campaigns. Headline pacing 386 / 305 / 214, with the two other seeds at 390 / 362, 295 / 282 and 183 / 202: every headline course of every seed in band.
 
 An AI ferry carrying a caravan in a basin proved enclosed, with no landing of its own and nothing left to chart, now puts its passengers ashore on the best beach of that basin and lets the caravan go on by land, instead of holding them for the rest of the campaign; the hold for an uncharted sea is unchanged. No campaign on the headline seeds is affected.

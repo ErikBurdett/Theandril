@@ -102,6 +102,7 @@ function CharacterSheet({ character, view, busy, initialArmyId, issue, locate }:
     {!character.dead && <StrategicRites view={view} character={character} busy={busy} issue={issue}/>}
     {character.mission && <ActiveMission character={character} busy={busy} factionId={view.factionId} issue={issue}/>}
     <CharacterSkills character={character} factionId={view.factionId} busy={busy || character.dead} issue={issue}/>
+    <RelicKeeping view={view} character={character} busy={busy} issue={issue}/>
     {!character.dead && <>
       <h4>Army attachment</h4><p className="field-help">Appointments and transfers normally require the same hex. Officers can board an adjacent owned fleet from a harbor when the listed permission allows it, spending fleet movement. An army or fleet has one marshal and up to two agents. Review the destination and any restriction before changing an assignment.</p>
       <div className="character-actions">
@@ -129,4 +130,19 @@ export function CommanderBattleControls({ view, busy, issue, controls = true }: 
     const ability = view.commanderAbilities.find(option => option.characterId === commander.characterId && option.abilityId === 'ability.rally');
     return <article key={commander.characterId}><p><strong>{commander.name}</strong> · {commander.factionId === view.factionId ? 'Your commander' : 'Opposing commander'} · {commander.armyId}</p><p>Battle leadership: +{commander.leadership.attack} attack · +{commander.leadership.armor} armor.{commander.woundedTurns ? ' Wounds suppress this commander’s contribution.' : ''}</p>{ability && <><p>{ability.effectText}</p>{ability.blocker && <p className="character-blocker">{ability.blocker}</p>}{controls && <button className="primary" disabled={busy || !ability.canUse} aria-label={`Rally the line (${commander.characterId})`} onClick={() => issue({ type: 'useCommanderAbility', factionId: view.factionId, characterId: commander.characterId, abilityId: 'ability.rally' })}>{ability.used ? 'Rally already used' : 'Rally the line'}</button>}</>}</article>;
   })}<p>These values were committed when the battle began. Autoresolve uses the same commander effects and Rally rules.</p></section>;
+}
+
+/** Rules 63: the relics a character bears and the ones waiting in the hearth; bestowing and taking back are ordinary commands. */
+export function RelicKeeping({ view, character, busy, issue }: { view: Observation; character: Observation['characters'][number]; busy: boolean; issue: Issue }) {
+  const relics = view.relics;
+  if (!relics || !relics.length) return null;
+  const borne = relics.filter(item => item.holderCharacterId === character.id), waiting = relics.filter(item => item.holderCharacterId === null);
+  return <section className="character-relics" aria-label="Relics" data-testid="character-relics">
+    <h4>Relics</h4>
+    {borne.map(item => <p key={item.id} data-testid={`relic-borne-${item.id}`}><strong>{item.name}</strong> from {item.landmarkName}: {item.description} {item.leadership.attack ? `+${item.leadership.attack} attack ` : ''}{item.leadership.armor ? `+${item.leadership.armor} armor ` : ''}for the company they ride with.
+      {!character.dead && <button disabled={busy} aria-label={`Take back ${item.name}`} onClick={() => issue({ type: 'bestowRelic', factionId: view.factionId, relicId: item.id, bearerId: null })}>Take it back</button>}</p>)}
+    {!character.dead && waiting.map(item => <p key={item.id} className="field-help" data-testid={`relic-waiting-${item.id}`}>{item.name} waits in the hearth, from {item.landmarkName}.
+      <button disabled={busy} aria-label={`Bestow ${item.name} on ${character.name}`} onClick={() => issue({ type: 'bestowRelic', factionId: view.factionId, relicId: item.id, bearerId: character.id })}>Bestow on {character.name}</button></p>)}
+    {!borne.length && !waiting.length && <p className="field-help">Every relic of the realm is borne by someone else.</p>}
+  </section>;
 }

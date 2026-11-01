@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { relicLeadership } from './relics';
 import { observeLandCell } from './territory';
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, characterName, CHARACTER_SKILLS, COMMANDER_ABILITIES, UNITS } from '@theandril/content';
 import { neighbors, SeededRandom } from '@theandril/mapgen';
@@ -41,7 +42,8 @@ export interface CommanderAbilityOption { characterId: string; armyId: string; a
 const leadershipSchema = z.object({ attack: bounded(20), armor: bounded(20) }).strict();
 export const legacyCharacterBattleSnapshotSchema = z.object({ characterId: id, armyId: id, factionId: id, name, definitionId: id, skillId: id.nullable(), experience: bounded(1_000_000), woundedTurns: bounded(20), leadership: leadershipSchema, rallyRestore: bounded(100) }).strict();
 export const schema13CharacterBattleSnapshotSchema = legacyCharacterBattleSnapshotSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
-export const characterBattleSnapshotSchema = schema13CharacterBattleSnapshotSchema.extend({ aptitudes: personalAptitudesSchema.optional(), spellIds: z.array(id).max(8).optional() }).strict();
+/** Rules 63: the leadership the relics a character bore into the battle add, frozen with the snapshot. */
+export const characterBattleSnapshotSchema = schema13CharacterBattleSnapshotSchema.extend({ aptitudes: personalAptitudesSchema.optional(), spellIds: z.array(id).max(8).optional(), relicLeadership: leadershipSchema.optional() }).strict();
 export type CharacterBattleSnapshot = z.infer<typeof characterBattleSnapshotSchema>;
 export const characterAftermathSchema = z.object({ characterId: id, name, outcome: z.enum(['survived', 'wounded', 'dead']), experience: bounded(1_000_000), woundedTurns: bounded(20) }).strict();
 export type CharacterAftermath = z.infer<typeof characterAftermathSchema>;
@@ -399,11 +401,13 @@ export function characterLeadership(character: Pick<Character, 'definitionId' | 
   return { attack: (definition?.leadership.attack ?? 0) + skill.attack, armor: (definition?.leadership.armor ?? 0) + skill.armor };
 }
 export function armyCharacterLeadership(state: GameState, armyId: string): { attack: number; armor: number } {
-  return charactersForArmy(state, armyId).reduce((sum, character) => { const effect = characterLeadership(character, rulesVersion(state)); return { attack: sum.attack + effect.attack, armor: sum.armor + effect.armor }; }, { attack: 0, armor: 0 });
+  // Rules 63: a relic borne by a character leads the company it rides with a little better.
+  return charactersForArmy(state, armyId).reduce((sum, character) => { const effect = characterLeadership(character, rulesVersion(state)), relic = relicLeadership(state, character.id); return { attack: sum.attack + effect.attack + relic.attack, armor: sum.armor + effect.armor + relic.armor }; }, { attack: 0, armor: 0 });
 }
 export function snapshotArmyCharacters(state: GameState, armies: Army[]): CharacterBattleSnapshot[] {
   return armies.flatMap(army => charactersForArmy(state, army.id).map(character => ({ characterId: character.id, armyId: army.id, factionId: character.factionId, name: character.name, definitionId: character.definitionId, skillId: character.skillId, learnedSkillIds: rulesVersion(state) >= 8 ? [...character.learnedSkillIds] : [], experience: character.experience, woundedTurns: character.woundedTurns, leadership: characterLeadership(character, rulesVersion(state)), rallyRestore: role(character) === 'marshal' && !character.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(character, rulesVersion(state)).rallyBonus : 0,
     ...(rulesVersion(state) >= 14 && character.aptitudes ? { aptitudes: { ...character.aptitudes }, spellIds: characterSpellIds(character.aptitudes, state.arcaneResearch[character.factionId] ?? []) } : {}),
+    ...(rulesVersion(state) >= 63 && (relicLeadership(state, character.id).attack || relicLeadership(state, character.id).armor) ? { relicLeadership: relicLeadership(state, character.id) } : {}),
   }))).sort((a, b) => a.characterId < b.characterId ? -1 : 1);
 }
 export function finishBattleCharacters(state: GameState, battle: CampaignBattle, events: DomainEvent[]): void {
