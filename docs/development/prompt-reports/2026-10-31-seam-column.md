@@ -299,7 +299,8 @@
   market towns, clanholds, nomad camps and pirate coves, each selling its
   own company at its own price and paying tribute by its kind. Evidence
   packet [docs/development/2026-11-01-city-state-kinds/](../2026-11-01-city-state-kinds/README.md);
-  roadmap library 147 delivered.
+  roadmap library 147 delivered. Commit `5b15480` is deployed and read back
+  ([publication packet](../2026-11-01-publication-city-state-kinds/README.md)).
 
 ## Verified
 

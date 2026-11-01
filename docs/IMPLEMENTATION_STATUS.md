@@ -12,6 +12,9 @@ beside the badge. Content only; save 77 freezes the rules 74–76 pack.
 Headline pacing 329 / 301 / 219 and every other course identical to rules 76; the chronicle pin at 56 holds. Verification: content, sim and journey tests; unit 2,380 / 310 files,
 campaigns 57, lint, typecheck, build, the hires and tribute journeys and
 the chronicles journey (pin 56 unmoved).
+Commit `5b15480` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-city-state-kinds/README.md)).
 [Evidence](development/2026-11-01-city-state-kinds/README.md),
 [ADR0109](architecture/0109-city-state-kinds.md).
 
