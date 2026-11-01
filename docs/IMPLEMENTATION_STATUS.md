@@ -1,5 +1,28 @@
 # Theandril implementation status
 
+## Notable characters (rules/save 64) — 2026-10-31
+
+M8's authored figures and a first piece of M5's wider cast. Twenty-four
+notable characters, one for every culture, each a marshal, surveyor or
+engineer with a story and one of the role's exclusive root specializations.
+Under rules 64 the first appointment of a culture's notable role, in the
+whole campaign, is that figure: their name, the specialization already
+theirs at rank 2, their story on the character sheet, the journal noting
+the name was known; every later appointment of the role is an ordinary one
+from the roll. One optional canonical field on a character; save 64; a v63
+envelope cannot carry it and a campaign with a figure cannot be sealed
+under earlier rules; the validator refuses a figure of another culture or
+role, a renamed figure or two of the same. Headline pacing
+**380 / 305 / 207**, the other seeds 306 / 349, 256 / 326, 192 / 218, proxies 307 / 467 / 290 / 189:
+every headline course in band, the two other Epic seeds under it (they held 390 / 365 under rules 63) and recorded as drift to watch — the free root specialization of each realm’s first figure is the first suspect if a later slice moves the headline. The character scenarios that test promotion from a blank
+specialization appoint under rules 63 and say so. Verification: content,
+sim and journey tests; unit 2,360 / 299 files, campaigns 57, lint,
+typecheck, build, the characters and notables journeys and the chronicles
+journey (pin 53 → 57, attributed to the Reedbound Council’s figure widening
+its turn-19 survey).
+[Evidence](development/2026-10-31-notables/README.md),
+[ADR0095](architecture/0095-notable-characters.md).
+
 ## Relics of the old places (rules/save 63) — 2026-10-31
 
 M7's artifice and M8's relics. Twenty-four authored relics, one for every

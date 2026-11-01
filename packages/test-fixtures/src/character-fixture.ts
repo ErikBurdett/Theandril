@@ -1,5 +1,5 @@
 import { neighbors, isPassable } from '@theandril/mapgen';
-import { applyCommand, createArmyFormation, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 import { borderBattleCampaign } from './combat-fixture';
 import { refreshAuthoredSight } from './authored-land';
 
@@ -70,7 +70,8 @@ export function characterBattleCampaign(): GameState {
   // Rebuild spatial/fog indexes before issuing normal appointment/assignment commands.
   refreshAuthoredSight(state);
   state = deserializeGame(serializeGame(state));
-  issue(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: home.id, definitionId: 'character.marshal' });
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  { const appointed = applyCommandForVersion(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: home.id, definitionId: 'character.marshal' }, 63); if (!appointed.ok) throw new Error(appointed.error); }
   const marshal = Object.values(state.characters).find(character => character.definitionId === 'character.marshal');
   if (!marshal) throw new Error('Character fixture did not appoint its marshal.');
   issue(state, { type: 'assignCharacter', factionId: state.turnOwnerId, characterId: marshal.id, armyId: player.id });

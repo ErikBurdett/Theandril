@@ -96,8 +96,12 @@ describe('versioned faction rosters and paid new-culture campaigns', () => {
     expect(applyCommand(game, { type: 'found', factionId: game.turnOwnerId, armyId: 'army.1', name: 'Shuttered welcome' }).ok).toBe(true);
     const settlementId = Object.keys(game.settlements)[0]!, serial = game.nextId, beforeCoin = game.factions[0]!.treasury;
     expect(applyCommand(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId, definitionId: 'character.marshal' }).ok).toBe(true);
-    expect(game.characters[`character.${serial}`]!.name).toBe(characterName('faction.vesper_court', serial));
+    // Rules 64: the Court's first marshal is its notable figure; the next is named from the culture's roll as before.
+    expect(game.characters[`character.${serial}`]!).toMatchObject({ name: 'Vesper Duskpress', notableId: 'notable.vesper_duskpress' });
     expect(game.factions[0]!.treasury).toBeLessThan(beforeCoin);
+    game.factions[0]!.treasury += 500; // Authored coin for a second appointment; the price itself is checked above.
+    expect(applyCommand(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId, definitionId: 'character.marshal' }).ok).toBe(true);
+    expect(game.characters[`character.${serial + 1}`]!.name).toBe(characterName('faction.vesper_court', serial + 1));
     expect(serializeGame(deserializeGame(serializeGame(game)))).toBe(serializeGame(game));
     const many = createGame({ seed: 74, size: 'tiny', factionCount: 48 });
     expect(new Set(many.factions.map(faction => faction.id)).size).toBe(48);

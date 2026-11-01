@@ -183,7 +183,7 @@ export const roadmapItems: RoadmapItem[] = [
   {
     id: 'characters-and-politics', stage: 'current-work', status: 'in-progress', title: 'Connect characters to the politics of a realm',
     summary: 'Named marshals, witnesses, engineers and Waykeepers have real assignments and consequences. The wider political cast is still missing.',
-    delivered: ['Officer skills, paid survey/refit/sabotage missions, wounds, deaths and saved testimony are playable.'],
+    delivered: ['Officer skills, paid survey/refit/sabotage missions, wounds, deaths and saved testimony are playable.', 'Every culture has a notable figure of the age (rules/save 64) who answers the realm’s first appointment of their role, named, with their specialization already theirs and their story on the character sheet; later appointments of the role are ordinary.'],
     remaining: ['Build on client relationships and delegation to add rulers, offices, legitimacy, loyalty, faction-appropriate succession, cultural unrest and internal-interest consequences at strategic scope.', 'Complete diplomacy/espionage/counterintelligence, scholarly and governor roles with paid risks, AI use and saved character events.', 'Verify deaths, reassignment, capture, rebellion and secession without invalid ownership or hidden-information leaks; connect political consequences to later world crises.'],
     gates: ['B', 'C', 'J'], evidence: [statusEvidence, scopeEvidence],
   },

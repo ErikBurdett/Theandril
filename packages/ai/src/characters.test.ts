@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { CHARACTER_FIXTURE, characterCampaign } from '../../test-fixtures/src/character-fixture';
 import { planCharacters } from './characters';
 import { planTurn } from './index';
@@ -56,7 +56,8 @@ test('zero discretionary budget never fabricates appointments or paid missions',
 });
 test('AI follows acquired prerequisites and prefers battlecraft for a small army without guessing eligibility', () => {
   const state = characterCampaign();
-  issue(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: CHARACTER_FIXTURE.homeId, definitionId: 'character.marshal' });
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  expect(applyCommandForVersion(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: CHARACTER_FIXTURE.homeId, definitionId: 'character.marshal' }, 63).ok).toBe(true);
   const marshal = Object.values(state.characters)[0]!;
   issue(state, { type: 'assignCharacter', factionId: state.turnOwnerId, characterId: marshal.id, armyId: CHARACTER_FIXTURE.armyId });
   marshal.experience = 100;

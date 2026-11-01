@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { relicLeadership } from './relics';
 import { observeLandCell } from './territory';
-import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, characterName, CHARACTER_SKILLS, COMMANDER_ABILITIES, UNITS } from '@theandril/content';
+import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, characterName, CHARACTER_SKILLS, COMMANDER_ABILITIES, notableCharacter, notableCharactersForRules, UNITS } from '@theandril/content';
 import { neighbors, SeededRandom } from '@theandril/mapgen';
 import type { Army, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
 import { cellsWithin, indexes } from './visibility';
@@ -23,7 +23,9 @@ export const legacyCharacterSchema = z.object({
   mission: characterMissionSchema.nullable(),
 }).strict();
 export const schema13CharacterSchema = legacyCharacterSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
-export const characterSchema = schema13CharacterSchema.extend({ aptitudes: personalAptitudesSchema.optional() }).strict();
+export const characterV63Schema = schema13CharacterSchema.extend({ aptitudes: personalAptitudesSchema.optional() }).strict();
+/** Rules 64: a character appointed as a culture's notable figure carries that figure's id. */
+export const characterSchema = schema13CharacterSchema.extend({ aptitudes: personalAptitudesSchema.optional(), notableId: id.optional() }).strict();
 export type Character = z.infer<typeof characterSchema>;
 export type CharacterRole = 'marshal' | 'surveyor' | 'engineer' | 'waykeeper';
 export type CharacterStatus = 'ready' | 'mission' | 'wounded' | 'dead';
@@ -31,6 +33,8 @@ export interface CharacterSummary { id: string; name: string; definitionId: stri
 export interface CharacterMissionOption { missionId: string; name: string; description: string; duration: number; coinCost: number; risk: 'low' | 'exposed' | 'dangerous'; riskText: string; effectText: string; targetCell?: number; settlementId?: string; canStart: boolean; blocker: string | null }
 export interface CharacterView extends Character, CharacterSummary {
   spellIds?: string[];
+  /** Rules 64: the figure of the age this character is, with their story. */
+  notable?: { id: string; lore: string };
   cell: number | null;
   assignmentOptions: { armyId: string; label: string; canAssign: boolean; blocker: string | null }[];
   unassignmentOptions: { settlementId: string; label: string; canUnassign: boolean; blocker: string | null }[];
@@ -233,10 +237,15 @@ export function recruitCharacter(state: GameState, factionId: string, settlement
   const error = recruitmentObjection(state, factionId, settlementId, definitionId); if (error) return fail(error);
   const faction = treasury(state, factionId)!; const definition = definitions.get(definitionId)!; const next = state.nextId;
   const character: Character = { id: `character.${next}`, factionId, definitionId, name: characterName(faction.definitionId, next), experience: 0, skillId: null, learnedSkillIds: [], woundedTurns: 0, dead: false, location: { kind: 'settlement', settlementId }, mission: null };
+  // Rules 64: the first appointment of a culture's notable role, in the whole campaign, is that figure — named, with their specialization already theirs. Dead or alive, a figure answers once.
+  if (rulesVersion(state) >= 64) {
+    const figure = notableCharactersForRules(rulesVersion(state)).find(item => item.factionId === faction.definitionId && item.definitionId === definitionId);
+    if (figure && !Object.values(state.characters).some(item => item.notableId === figure.id)) { character.name = figure.name; character.notableId = figure.id; character.skillId = figure.skillId; }
+  }
   // Rules 24: a Waykeeper is trained in the tradition of the culture that appoints them.
   if (definition.role === 'waykeeper') character.aptitudes = { ...(rulesVersion(state) >= 24 ? factionAptitudes(faction.definitionId) : WAYKEEPER_APTITUDES) };
   faction.treasury -= definition.coinCost; state.nextId++; state.characters[character.id] = character; rebuildCharacterIndexes(state);
-  return { ok: true, events: [notice(state, character, 'character_recruited', `${character.name} was appointed ${definition.name} for ${definition.coinCost} coin.`)] };
+  return { ok: true, events: [notice(state, character, 'character_recruited', `${character.name}${character.notableId ? ', whose name is known beyond the realm,' : ''} was appointed ${definition.name} for ${definition.coinCost} coin.`)] };
 }
 export function assignCharacter(state: GameState, factionId: string, characterId: string, armyId: string): CommandResult {
   const character = state.characters[characterId]; const error = assignmentObjection(state, factionId, character, armyId); if (error || !character) return fail(error ?? 'Unknown character.');
@@ -485,7 +494,7 @@ export function getCharacterObservation(state: GameState, factionId: string): { 
         return { missionId, name: mission.name, description: mission.description, duration: mission.duration, coinCost: mission.coinCost, risk: failureChance ? 'dangerous' as const : 'exposed' as const, riskText: failureChance ? `The operation may fail and wound its agent for ${mission.woundTurns} turns. Combat or displacement interrupts it without refund.` : 'The army must remain in position; combat or displacement interrupts the mission without refund.', effectText, ...(cell === null ? {} : { targetCell: cell }), ...(settlementId ? { settlementId } : {}), canStart: blocker === null, blocker };
       });
     });
-    return { ...character, ...(character.aptitudes ? { aptitudes: { ...character.aptitudes }, spellIds: characterSpellIds(character.aptitudes, state.arcaneResearch[factionId] ?? []) } : {}), location: character.location ? { ...character.location } : null, mission: character.mission ? { ...character.mission } : null, ...summary(character), cell,
+    return { ...character, ...(character.aptitudes ? { aptitudes: { ...character.aptitudes }, spellIds: characterSpellIds(character.aptitudes, state.arcaneResearch[factionId] ?? []) } : {}), ...(character.notableId && notableCharacter(character.notableId) ? { notable: { id: character.notableId, lore: notableCharacter(character.notableId)!.lore } } : {}), location: character.location ? { ...character.location } : null, mission: character.mission ? { ...character.mission } : null, ...summary(character), cell,
       assignmentOptions: coLocated.map(army => { const blocker = assignmentObjection(state, factionId, character, army.id); return { armyId: army.id, label: army.name, canAssign: blocker === null, blocker }; }),
       unassignmentOptions: receivingTowns.map(town => { const blocker = unassignmentObjection(state, factionId, character, town.id); return { settlementId: town.id, label: town.name, canUnassign: blocker === null, blocker }; }),
       missions: missionOptions,
@@ -513,13 +522,22 @@ export function validateCharacterTraining(character: { definitionId: string; ski
 }
 
 /** Strict cross-reference validation before indexes are trusted or anything is repaired. */
+/** Historical rules name no notable figure; a campaign that appointed one cannot be sealed under them. */
+export function assertNoNotables(state: GameState): void {
+  if (Object.values(state.characters).some(item => item.notableId !== undefined)) throw new Error('This campaign has notable characters unavailable in historical rules.');
+}
 export function validateCharacters(state: GameState): void {
   const require = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: ' + message); };
-  const missionIds = new Set<string>(); const assigned = new Map<string, Character[]>(); const living = new Map<string, number>(); const dead = new Map<string, number>();
+  const missionIds = new Set<string>(); const assigned = new Map<string, Character[]>(); const living = new Map<string, number>(); const dead = new Map<string, number>(); const notables = new Set<string>();
   for (const [id, character] of Object.entries(state.characters)) {
     require(id === character.id && /^character\.[1-9][0-9]*$/.test(id) && serial(id) < state.nextId, 'invalid character identity');
     const definition = definitions.get(character.definitionId); require(definition && state.factions.some(item => item.id === character.factionId), 'invalid character definition or owner');
     validateCharacterTraining(character, rulesVersion(state));
+    if (character.notableId !== undefined) {
+      const figure = notableCharacter(character.notableId);
+      require(rulesVersion(state) >= 64 && figure && figure.definitionId === character.definitionId && figure.factionId === state.factions.find(item => item.id === character.factionId)?.definitionId && character.name === figure.name && !notables.has(character.notableId), 'invalid notable character');
+      notables.add(character.notableId);
+    }
     require(character.name.trim() === character.name && [...character.name].every(char => char.charCodeAt(0) >= 32 && char !== '<' && char !== '>'), 'invalid character name');
     const count = character.dead ? dead : living; count.set(character.factionId, (count.get(character.factionId) ?? 0) + 1);
     if (character.dead) { require(character.location === null && character.mission === null && character.woundedTurns === 0, 'dead character cannot remain assigned or active'); continue; }

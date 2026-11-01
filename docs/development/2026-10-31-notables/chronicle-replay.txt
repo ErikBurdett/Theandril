@@ -1,0 +1,50 @@
+factionCount 4 rules63 turn 53 prosperity | rules64 turn 57 prosperity
+first divergence at command index 236 of 845 953
+63: 22 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.27","target":1163} ok
+    22 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.4","target":592} ok
+    22 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.marshal"} ok
+    22 faction.cinder_march {"type":"attack","factionId":"faction.cinder_march","armyId":"army.24","targetArmyId":"army.8"} ok
+64: 22 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.27","target":1114} ok
+    22 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.4","target":592} ok
+    22 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.marshal"} ok
+    22 faction.cinder_march {"type":"attack","factionId":"faction.cinder_march","armyId":"army.24","targetArmyId":"army.8"} ok
+--- character commands before the divergence (rules 64)
+15 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.surveyor"} ok
+16 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.surveyor"} ok
+16 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.16","armyId":"army.15"} ok
+17 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.surveyor"} ok
+17 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.18","armyId":"army.17"} ok
+17 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":318} ok
+18 faction.reedbound_council {"type":"assignCharacter","factionId":"faction.reedbound_council","characterId":"character.22","armyId":"army.19"} ok
+18 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1101} ok
+19 faction.ashen_compact {"type":"recruitCharacter","factionId":"faction.ashen_compact","settlementId":"settlement.9","definitionId":"character.surveyor"} ok
+19 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1218} ok
+20 faction.ashen_compact {"type":"assignCharacter","factionId":"faction.ashen_compact","characterId":"character.29","armyId":"army.28"} ok
+20 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.marshal"} ok
+21 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":722} ok
+21 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.37","armyId":"army.15"} ok
+--- character commands before the divergence (rules 63)
+15 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.surveyor"} ok
+16 faction.cinder_march {"type":"recruitCharacter","factionId":"faction.cinder_march","settlementId":"settlement.11","definitionId":"character.surveyor"} ok
+16 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.16","armyId":"army.15"} ok
+17 faction.reedbound_council {"type":"recruitCharacter","factionId":"faction.reedbound_council","settlementId":"settlement.10","definitionId":"character.surveyor"} ok
+17 faction.cinder_march {"type":"assignCharacter","factionId":"faction.cinder_march","characterId":"character.18","armyId":"army.17"} ok
+17 faction.glass_tide {"type":"startCharacterMission","factionId":"faction.glass_tide","characterId":"character.16","missionId":"mission.survey","targetCell":318} ok
+18 faction.reedbound_council {"type":"assignCharacter","factionId":"faction.reedbound_council","characterId":"character.22","armyId":"army.19"} ok
+18 faction.cinder_march {"type":"startCharacterMission","factionId":"faction.cinder_march","characterId":"character.18","missionId":"mission.survey","targetCell":1101} ok
+19 faction.ashen_compact {"type":"recruitCharacter","factionId":"faction.ashen_compact","settlementId":"settlement.9","definitionId":"character.surveyor"} ok
+19 faction.reedbound_council {"type":"startCharacterMission","factionId":"faction.reedbound_council","characterId":"character.22","missionId":"mission.survey","targetCell":1218} ok
+20 faction.ashen_compact {"type":"assignCharacter","factionId":"faction.ashen_compact","characterId":"character.29","armyId":"army.28"} ok
+20 faction.glass_tide {"type":"recruitCharacter","factionId":"faction.glass_tide","settlementId":"settlement.12","definitionId":"character.marshal"} ok
+21 faction.ashen_compact {"type":"startCharacterMission","factionId":"faction.ashen_compact","characterId":"character.29","missionId":"mission.survey","targetCell":722} ok
+21 faction.glass_tide {"type":"assignCharacter","factionId":"faction.glass_tide","characterId":"character.37","armyId":"army.15"} ok
+--- rules 64 reasons around turn 22
+22 faction.ashen_compact :: army.2 advances toward its visible objective using its available movement budget.
+22 faction.reedbound_council :: Fund unit.transport at settlement.10 for a bounded coastal expedition (24 coin). | army.19 advances toward its visible objective using its available movement budget. | army.27 advances toward its visible objective using its available movement budget. | army.4 explores new ground using its available movement budget.
+22 faction.cinder_march :: Appoint Hearth marshal at Hearth 1 for the waiting Oath guard; pay 32 coin and 2 recurring upkeep.
+22 faction.glass_tide :: Research Seasonal stewardship for the economy and the settlement sites currently observed; spend 36 knowledge. | army.15 holds its recruitment point for a mixed formation column. | army.34 advances toward its visible objective using its available movement budget.
+--- rules 63 reasons around turn 22
+22 faction.ashen_compact :: army.2 advances toward its visible objective using its available movement budget.
+22 faction.reedbound_council :: Fund unit.transport at settlement.10 for a bounded coastal expedition (24 coin). | army.19 advances toward its visible objective using its available movement budget. | army.27 advances toward its visible objective using its available movement budget. | army.4 explores new ground using its available movement budget.
+22 faction.cinder_march :: Appoint Hearth marshal at Hearth 1 for the waiting Oath guard; pay 32 coin and 2 recurring upkeep.
+22 faction.glass_tide :: Research Seasonal stewardship for the economy and the settlement sites currently observed; spend 36 knowledge. | army.15 holds its recruitment point for a mixed formation column. | army.34 advances toward its visible objective using its available movement budget.

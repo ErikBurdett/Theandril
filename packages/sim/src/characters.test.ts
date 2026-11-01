@@ -21,7 +21,8 @@ const reject = (state: GameState, command: unknown) => { const before = stateHas
 const restore = (state: GameState) => { const reloaded = deserializeGame(serializeGame(state)); expect(stateHash(reloaded)).toBe(stateHash(state)); return reloaded; };
 function appoint(state: GameState, definitionId: string, factionId = player, settlementId = 'settlement.5'): Character {
   const id = `character.${state.nextId}`;
-  issue(state, { type: 'recruitCharacter', factionId, settlementId, definitionId });
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  const appointed = applyCommandForVersion(state, { type: 'recruitCharacter', factionId, settlementId, definitionId }, 63); expect(appointed, `recruitCharacter: ${appointed.error ?? ''}`).toMatchObject({ ok: true });
   return state.characters[id]!;
 }
 function attach(state: GameState, definitionId: string, armyId = 'army.2'): Character {

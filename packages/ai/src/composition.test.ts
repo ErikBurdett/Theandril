@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
-import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { characterCampaign } from '../../test-fixtures/src/character-fixture';
@@ -45,7 +45,8 @@ test.each([16, 20])('AI concentrates %i real formations under the eligible comma
   let state = characterCampaign();
   const factionId = state.turnOwnerId, home = state.settlements['settlement.5']!;
   const issue = (command: GameCommand): void => { const result = applyCommand(state, command); expect(result.ok, JSON.stringify(command) + ': ' + result.error).toBe(true); };
-  issue({ type: 'recruitCharacter', factionId, settlementId: home.id, definitionId: 'character.marshal' });
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  expect(applyCommandForVersion(state, { type: 'recruitCharacter', factionId, settlementId: home.id, definitionId: 'character.marshal' }, 63).ok).toBe(true);
   const marshal = Object.values(state.characters)[0]!;
   issue({ type: 'assignCharacter', factionId, characterId: marshal.id, armyId: 'army.2' });
   if (capacity === 20) {

@@ -2,13 +2,14 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, CHARACTER_SKILLS } from '@theandril/content';
-import { applyCommand, getObservation, stateHash } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, getObservation, stateHash } from '@theandril/sim';
 import { characterCampaign, CHARACTER_FIXTURE } from '../../../packages/test-fixtures/src/character-fixture';
 import { CharacterSkills, skillStatus } from './character-skills';
 
 function appointed(definitionId = 'character.marshal', experience = 72) {
   const game = characterCampaign();
-  expect(applyCommand(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId: CHARACTER_FIXTURE.homeId, definitionId }).ok).toBe(true);
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  expect(applyCommandForVersion(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId: CHARACTER_FIXTURE.homeId, definitionId }, 63).ok).toBe(true);
   const character = Object.values(game.characters)[0]!;
   character.experience = experience; // Explicit earned-XP scenario, not a browser mutation.
   return { game, character };

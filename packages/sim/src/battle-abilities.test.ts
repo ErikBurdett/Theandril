@@ -97,7 +97,8 @@ test('both sides automatically Rally and use enabled sources through the same ma
   game.factions.find(item => item.id === enemy)!.treasury = 200;
   relocateArmy(game, army, town.cell);
   const marshalId = `character.${game.nextId}`;
-  issue(game, { type: 'recruitCharacter', factionId: enemy, settlementId: town.id, definitionId: 'character.marshal' });
+  // Rules 64 would make this first appointment the culture's notable figure, already specialized; an ordinary officer is appointed under rules 63 so the scenario keeps a blank specialization (notables.test.ts covers the figures).
+  expect(applyCommandForVersion(game, { type: 'recruitCharacter', factionId: enemy, settlementId: town.id, definitionId: 'character.marshal' }, 63).ok).toBe(true);
   issue(game, { type: 'assignCharacter', factionId: enemy, characterId: marshalId, armyId: army.id });
   relocateArmy(game, army, original);
   for (const host of Object.values(game.armies)) for (const formation of host.formations) formation.morale = 30;
