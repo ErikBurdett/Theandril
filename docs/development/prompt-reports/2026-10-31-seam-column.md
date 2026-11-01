@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events and crises
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events, crises and crisis events
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -91,6 +91,12 @@
   Evidence packet
   [docs/development/2026-10-31-crises/](../2026-10-31-crises/README.md);
   roadmap library 121 delivered.
+- The crises' own events, rules/save 54 ([ADR 0084](../../architecture/0084-crisis-events.md)):
+  one hearth event per crisis, offered to every realm with a free slot as
+  the crisis comes and never drawn; a drawn version was measured inert and
+  replaced; the AI's shelter is issued first in its batch. Evidence packet
+  [docs/development/2026-10-31-crisis-events/](../2026-10-31-crisis-events/README.md);
+  roadmap library 122 delivered.
 
 ## Verified
 
@@ -119,7 +125,10 @@ the chronicles journey; headline **394 / 356 / 216**, the other seeds
 Crises: unit 2,346 / 294 files, campaigns 57, build, four journeys (one new)
 and the chronicles journey (pin 55 → 53, attributed); headline
 **366 / 304 / 220**, the other seeds 367 / 385, 315 / 312, 208 / 190, proxies
-442 / 371 / 298 / 213.
+442 / 371 / 298 / 213. Crisis events: unit 2,346, campaigns 57, build, two
+journeys (one new) and the chronicles journey (pin 53 → 56, attributed);
+headline **408 / 275 / 215**, the other seeds 344 / 313, 308 / 246,
+211 / 176, proxies 353 / 448 / 323 / 204.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -147,6 +156,9 @@ first on 379.
   migration, collapse or crisis event at a hearth; two per age. The
   enclosed-basin ferry scenario (seed 74) is sensitive to the crisis of the
   Age of Roads.
+- Crisis events: one per crisis, offered once; a realm already answering an
+  event misses it. The Epic headline course sits at 408 with the other Epic
+  seeds below band and the Long courses under target.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

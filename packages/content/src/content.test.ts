@@ -177,7 +177,17 @@ test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves s
   expect(() => validateCrisisContent([{ ...CRISES[0]!, epoch: 'epoch.fracture' }])).toThrow('first age brings no crisis');
   expect(() => validateCrisisContent([{ ...CRISES[0]!, blight: { food: 0, coin: 0, knowledge: 0, devastation: 0 } }])).toThrow('takes something');
   expect(() => validateCrisisContent(CRISES.filter(crisis => crisis.epoch !== 'epoch.bids'))).toThrow('Every age after the first has a crisis');
-  expect(HEARTH_EVENTS).toHaveLength(45);
+  // Rules 53 content, forty-five events and the crises, before rules 54 added the crisis events; the current pack seals fifty-one.
+  expect(contentPackHash(CAMPAIGN_PACES, undefined, true, magicPackForRules(53), true, ATTUNEMENT_VICTORY, hearthEventsForRules(53), EPOCHS, LANDMARK_KINDS, CRISES)).toBe('d50775cf');
+  expect(CONTENT_HASH).not.toBe('d50775cf');
+  expect(hearthEventsForRules(53)).toHaveLength(45);
+  expect(hearthEventsForRules(54)).toHaveLength(51);
+  expect(hearthEventsForRules(54).filter(event => event.crisis)).toHaveLength(6);
+  expect(CRISES.every(crisis => hearthEventsForRules(54).some(event => event.crisis === crisis.id && event.condition === 'crisis'))).toBe(true);
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 54, condition: 'crisis' }])).toThrow('names its crisis');
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, crisis: 'crisis.grey_winter' }])).toThrow('names no crisis');
+  expect(() => validateHearthEventContent([{ ...HEARTH_EVENTS[0]!, sinceRules: 54, condition: 'crisis', crisis: 'crisis.nowhere' }])).toThrow('names a crisis of the catalogue');
+  expect(HEARTH_EVENTS).toHaveLength(51);
   expect(hearthEventsForRules(45)).toEqual([]);
   expect(hearthEventsForRules(46)).toHaveLength(8);
   expect(hearthEventsForRules(47)).toHaveLength(24);

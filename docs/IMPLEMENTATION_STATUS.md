@@ -1,5 +1,29 @@
 # Theandril implementation status
 
+## The crises' own events (rules/save 54) — 2026-10-31
+
+Each crisis comes to the hearth as a story. Six templates with the `crisis`
+condition, one per crisis, are never drawn: as the crisis begins it offers
+its event to every realm whose event slot is free, at the realm's first
+eligible hearth, with the crisis named in the offer and the usual five-turn
+answer; a realm already answering an event misses it and the offer does not
+reset the ordinary cadence. Fifty-one templates in all; save 54 upgrades v53
+envelopes unchanged. The AI issues its shelter first in the batch, which
+closed a refused shelter found on seed 20260907. A first version that let
+the events be drawn during the crisis window was measured (no event ever
+offered on either headline course; the draws inside the windows re-rolled;
+Epic headline 423) and replaced. Headline pacing **408 / 275 / 215**, all
+Attunement; the other seeds 344 / 313, 308 / 246, 211 / 176; proxies
+353 / 448 / 323 / 204. The Epic headline course sits eight turns above its
+band with the other Epic seeds below it and the Long courses under their
+target: recorded as the spread of a world that changes, judged on the
+three-seed matrix. The chronicle journey's pin moves 53 → 56, attributed.
+Verification: content, sim, AI and journey tests; unit 2,346 / 294 files,
+campaigns 57, lint, typecheck, build, two covering journeys and the
+chronicles journey.
+[Evidence](development/2026-10-31-crisis-events/README.md),
+[ADR0084](architecture/0084-crisis-events.md).
+
 ## Crises of the ages (rules/save 53) — 2026-10-31
 
 M6's crises. As the world enters an age after the first, one of that age's

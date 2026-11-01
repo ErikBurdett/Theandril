@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CONTENT_HASH, CRISES, crisisDefinition } from '@theandril/content';
+import { CONTENT_HASH, CRISES, crisisDefinition, HEARTH_EVENTS } from '@theandril/content';
 import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from './index';
 import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { withRules } from './rules';
@@ -30,13 +30,22 @@ describe('rules 53: crises of the ages', () => {
     expect(state.crises.past).toHaveLength(1);
     expect(crisisDefinition(state.crises.past[0]!.crisisId)!.epoch).toBe('epoch.roads');
     expect(begun.at(-1)!.message).toContain(crisis.name);
+    // Rules 54: the first crisis offered its event to every realm with a hearth; the slot it took kept the second crisis's event away.
+    const roadsEvent = HEARTH_EVENTS.find(item => item.condition === 'crisis' && item.crisis === state.crises.past[0]!.crisisId)!;
+    const offers = events.filter(event => event.type === 'hearth_event_offered');
+    expect(offers.map(event => event.factionId).sort()).toEqual(state.factions.filter(faction => Object.values(state.settlements).some(town => town.factionId === faction.id)).map(faction => faction.id).sort());
+    expect(offers.every(event => event.message.startsWith(roadsEvent.name) && event.message.includes(`with ${crisisDefinition(state.crises.past[0]!.crisisId)!.name}`))).toBe(true);
+    expect(state.hearthEvents.pending.every(item => item.templateId === roadsEvent.id && item.id.endsWith('.crisis') && item.turn === state.turn)).toBe(true);
+    expect(getObservation(state, player).hearthEvents!.map(item => item.name)).toEqual([roadsEvent.name]);
     // The same seed draws the same crises.
     const again = onTheBrink(); endRound(again);
     expect(again.crises).toEqual(state.crises);
     const hearths = Object.values(state.settlements).filter(town => town.factionId === player).length;
     expect(getObservation(state, player).crisis).toMatchObject({ id: active.id, crisisId: crisis.id, name: crisis.name, turnsLeft: crisis.turns, hearths, sheltered: false, shelterCost: crisis.shelterCoinPerHearth * hearths });
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
-    expect(() => serializeGameForVersion(state, 52)).toThrow('crises unavailable');
+    expect(() => serializeGameForVersion(state, 52)).toThrow('unavailable in historical rules');
+    const answered = structuredClone(state); answered.hearthEvents.pending = [];
+    expect(() => serializeGameForVersion(answered, 52)).toThrow('crises unavailable');
     expect(() => validateCrises(state)).not.toThrow();
     const broken = structuredClone(state); broken.crises.active!.crisisId = 'crisis.nowhere';
     expect(() => validateCrises(broken)).toThrow('unknown crisis');
@@ -99,7 +108,7 @@ describe('rules 53: crises of the ages', () => {
     const older = deserializeGame(sealed);
     expect(older.crises).toEqual({ active: null, past: [] });
     expect(stateHash(older)).toBe(stateHash(fresh));
-    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 53, contentHash: CONTENT_HASH });
+    expect(JSON.parse(serializeGame(older))).toMatchObject({ version: 54, contentHash: CONTENT_HASH });
     expect(CRISES.every(crisis => crisis.sinceRules === 53)).toBe(true);
   });
 });

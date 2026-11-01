@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { CRISES } from './crises';
 import { EPOCHS, epochIndexOf } from './epochs';
 
 /** Rules 46: hearth events. Every so many turns a realm's hearth meets a
@@ -15,8 +16,8 @@ const name = z.string().min(1).max(60);
 const text = z.string().min(1).max(400);
 const small = z.number().int().min(-40).max(40);
 const coin = z.number().int().min(-200).max(200);
-/** `chained` events are never drawn: they are reached only as another event's follow-up. Rules 52: `landmark` holds at a hearth whose borders hold a landmark. */
-export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young', 'chained', 'landmark']);
+/** `chained` events are never drawn: they are reached only as another event's follow-up. Rules 52: `landmark` holds at a hearth whose borders hold a landmark. Rules 54: `crisis` events are never drawn: the crisis they name offers them as it comes. */
+export const hearthEventConditionSchema = z.enum(['any', 'populous', 'devastated', 'coastal', 'seam', 'wartime', 'harbor', 'archive', 'garrisoned', 'peace', 'wide', 'young', 'chained', 'landmark', 'crisis']);
 export type HearthEventCondition = z.infer<typeof hearthEventConditionSchema>;
 /** Rules 47 adds ashglass (the realm's stockpile) and garrison (the strength of the realm's companies at the hearth); rules 46 templates carry neither key, so their seal is unchanged. */
 export const hearthEventEffectsSchema = z.object({ food: small, coin, knowledge: coin, population: z.number().int().min(-2).max(2), devastation: small,
@@ -28,9 +29,11 @@ export type HearthEventFollowUp = z.infer<typeof hearthEventFollowUpSchema>;
 export const hearthEventChoiceSchema = z.object({ id: choiceId, label: name, description: text, effects: hearthEventEffectsSchema, followUp: hearthEventFollowUpSchema.optional() }).strict();
 export const hearthEventSchema = z.object({
   id, name, text, condition: hearthEventConditionSchema, weight: z.number().int().min(1).max(10),
-  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52)]),
+  choices: z.array(hearthEventChoiceSchema).min(2).max(3), sinceRules: z.union([z.literal(46), z.literal(47), z.literal(48), z.literal(49), z.literal(52), z.literal(54)]),
   /** Rules 49: drawn only once the world has reached this age. */
   epoch: z.string().regex(/^epoch\.[a-z_]+$/).optional(),
+  /** Rules 54: drawn only while this crisis stands. */
+  crisis: z.string().regex(/^crisis\.[a-z_]+$/).optional(),
 }).strict();
 export type HearthEventChoiceDefinition = z.infer<typeof hearthEventChoiceSchema>;
 export type HearthEventDefinition = z.infer<typeof hearthEventSchema>;
@@ -328,7 +331,46 @@ const FIFTH_BATCH: readonly HearthEventDefinition[] = [
       { id: 'keep_it_within_the_walls', label: 'Keep it within the walls', description: 'Hold the festival in the square as every year; the place stays quiet.', effects: effects({ coin: 5 }) },
     ] },
 ];
-export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH];
+/** Rules 54: one event of each crisis, offered to every realm with a free event slot as the crisis comes. */
+const SIXTH_BATCH: readonly HearthEventDefinition[] = [
+  { id: 'event.last_of_the_grain', name: 'The last of the grain', condition: 'crisis', crisis: 'crisis.grey_winter', weight: 5, sinceRules: 54,
+    text: 'The stores of {hearth} are down to the seed grain, and the millers ask whether they are to grind it.',
+    choices: [
+      { id: 'grind_the_seed', label: 'Grind the seed grain', description: 'Feed the hearth through the winter on next year’s seed.', effects: effects({ food: 15 }) },
+      { id: 'buy_from_the_roads', label: 'Buy grain on the roads', description: 'Pay the carters’ winter price and keep the seed for the spring.', effects: effects({ coin: -15, food: 5 }) },
+    ] },
+  { id: 'event.toll_at_our_gate', name: 'A toll at our own gate', condition: 'crisis', crisis: 'crisis.toll_wars', weight: 5, sinceRules: 54,
+    text: 'The road wardens have set a toll bar at the gate of {hearth} itself and will not lift it for the hearth’s own carts.',
+    choices: [
+      { id: 'pay_the_wardens', label: 'Pay the wardens', description: 'Pay the bar down and keep the carts moving.', effects: effects({ coin: -15 }) },
+      { id: 'bar_the_gate', label: 'Bar the gate to them', description: 'Shut the gate on the wardens; the hearth keeps its coin, and the carts stop until they go.', effects: effects({ coin: 10, devastation: 4 }) },
+    ] },
+  { id: 'event.clerks_fall_sick', name: 'The clerks fall sick', condition: 'crisis', crisis: 'crisis.glass_fever', weight: 5, sinceRules: 54,
+    text: 'The fever has reached the clerks of {hearth}; half the ledgers lie open and no one is well enough to close them.',
+    choices: [
+      { id: 'close_the_rooms', label: 'Close the rooms', description: 'Send the clerks home and pay them to stay there; the work waits.', effects: effects({ coin: -10, knowledge: -10 }) },
+      { id: 'keep_them_at_it', label: 'Keep them at it', description: 'The ledgers are closed and the fever takes who it takes.', effects: effects({ knowledge: 20, population: -1 }) },
+    ] },
+  { id: 'event.cistern_cracks', name: 'The cistern cracks', condition: 'crisis', crisis: 'crisis.tremors', weight: 5, sinceRules: 54,
+    text: 'A night tremor has cracked the great cistern of {hearth}, and the water is running into the lanes.',
+    choices: [
+      { id: 'rebuild_the_cistern', label: 'Rebuild the cistern', description: 'Pay the masons to rebuild it on sounder ground; the lanes are mended with it.', effects: effects({ coin: -25, devastation: -5 }) },
+      { id: 'patch_it', label: 'Patch it', description: 'Stop the crack with clay and hope; the lanes stay wet and the stores stay short.', effects: effects({ food: -5, devastation: 5 }) },
+    ] },
+  { id: 'event.run_on_the_market', name: 'A run on the market', condition: 'crisis', crisis: 'crisis.fever_of_the_end', weight: 5, sinceRules: 54,
+    text: 'The merchants of {hearth} are calling in every debt at once, and the market square is a shouting match.',
+    choices: [
+      { id: 'guarantee_the_market', label: 'Guarantee the market', description: 'Stand behind the merchants’ debts from the treasury; the square settles.', effects: effects({ coin: -30 }) },
+      { id: 'let_it_run', label: 'Let it run', description: 'Take the hearth’s due from the wreck and let the merchants settle their own.', effects: effects({ coin: 20, devastation: 5 }) },
+    ] },
+  { id: 'event.ash_in_the_fields', name: 'Ash in the fields', condition: 'crisis', crisis: 'crisis.long_dark', weight: 5, sinceRules: 54,
+    text: 'Ash is lying on the standing crop of {hearth}, and the reeves ask whether to bring it in green or leave it to the dark.',
+    choices: [
+      { id: 'bring_it_in', label: 'Bring it in early', description: 'Pay every hand in the hearth to cut the crop green and under cover.', effects: effects({ food: 10, coin: -10 }) },
+      { id: 'leave_it_standing', label: 'Leave it standing', description: 'Let it stand; what the dark spares is sold as fodder.', effects: effects({ food: -8, coin: 5 }) },
+    ] },
+];
+export const HEARTH_EVENTS: readonly HearthEventDefinition[] = [...FIRST_BATCH, ...SECOND_BATCH, ...THIRD_BATCH, ...FOURTH_BATCH, ...FIFTH_BATCH, ...SIXTH_BATCH];
 export const hearthEventTemplate = (templateId: string): HearthEventDefinition | undefined => HEARTH_EVENTS.find(item => item.id === templateId);
 /** Rules-aware catalog: historical campaigns offer no events. */
 export const hearthEventsForRules = (version: number): readonly HearthEventDefinition[] => HEARTH_EVENTS.filter(event => event.sinceRules <= version);
@@ -357,6 +399,9 @@ export function validateHearthEventContent(events = HEARTH_EVENTS): void {
     if (event.epoch === EPOCHS[0]!.id) throw new Error('The first age gates nothing: ' + event.id);
     if (event.condition === 'chained' && event.sinceRules < 48) throw new Error('A chained event belongs to rules 48 or later: ' + event.id);
     if (event.condition === 'landmark' && event.sinceRules < 52) throw new Error('A landmark event belongs to rules 52 or later: ' + event.id);
+    if (event.crisis && event.sinceRules < 54) throw new Error('An event before rules 54 names no crisis: ' + event.id);
+    if ((event.condition === 'crisis') !== Boolean(event.crisis)) throw new Error('A crisis event names its crisis, and only a crisis event does: ' + event.id);
+    if (event.crisis && !CRISES.some(crisis => crisis.id === event.crisis)) throw new Error('An event names a crisis of the catalogue: ' + event.id);
     for (const choice of event.choices) if (choice.followUp) {
       const next = events.find(item => item.id === choice.followUp!.templateId);
       if (!next || next.id === event.id) throw new Error('A follow-up names another event of the catalogue: ' + event.id);

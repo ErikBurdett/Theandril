@@ -77,6 +77,8 @@ export function hearthEventConditionHolds(state: GameState, template: HearthEven
     case 'wide': return Object.values(state.settlements).filter(item => item.factionId === town.factionId).length >= 4;
     case 'young': return town.population <= 2;
     case 'chained': return false;
+    // Rules 54: a crisis event is never drawn; the crisis offers it as it comes.
+    case 'crisis': return false;
     // Rules 52: the hearth's own borders hold a landmark; no survey is needed to know one.
     case 'landmark': return landmarks(state.world).some(site => state.land.settlements[settlementId]?.claimed.includes(site.cell));
   }
@@ -148,6 +150,26 @@ function settle(state: GameState, pending: PendingHearthEvent, template: HearthE
   const offerTurn = state.turn + choice.followUp.afterTurns;
   state.hearthEvents.pending = [...state.hearthEvents.pending, { id: `event.${offerTurn}.${seatOf(state, pending.factionId) + 1}`, factionId: pending.factionId, settlementId: pending.settlementId, templateId: next.id, turn: offerTurn, expiresTurn: offerTurn + HEARTH_EVENT_ANSWER_TURNS, chainedFrom: template.id }].sort(byId);
   return ` What follows comes in ${choice.followUp.afterTurns} turn${choice.followUp.afterTurns === 1 ? '' : 's'}.`;
+}
+
+/** Rules 54: the crisis that begins offers its event to every realm whose event
+ * slot is free, at its first eligible hearth in id order; a realm already
+ * answering an event is not offered it, and the offer does not reset the
+ * realm's ordinary cadence. The id carries a suffix so it never reuses the
+ * id of a draw answered earlier in the same turn. */
+export function offerCrisisEvents(state: GameState, crisisId: string, crisisName: string, events: DomainEvent[]): void {
+  if (rulesVersion(state) < 54 || state.victory) return;
+  const template = templates(state).find(item => item.condition === 'crisis' && item.crisis === crisisId);
+  if (!template) return;
+  const offered = new Set(state.hearthEvents.pending.map(item => item.factionId));
+  state.factions.map((faction, seat) => ({ faction, seat })).sort((a, b) => byId(a.faction, b.faction)).forEach(({ faction, seat }) => {
+    if (offered.has(faction.id) || state.hearthEvents.pending.length >= MAX_PENDING_HEARTH_EVENTS) return;
+    const town = eligibleHearths(state, faction.id)[0];
+    if (!town) return;
+    const pending: PendingHearthEvent = { id: `event.${state.turn}.${seat + 1}.crisis`, factionId: faction.id, settlementId: town.id, templateId: template.id, turn: state.turn, expiresTurn: state.turn + HEARTH_EVENT_ANSWER_TURNS };
+    state.hearthEvents.pending = [...state.hearthEvents.pending, pending].sort(byId);
+    events.push({ turn: state.turn, factionId: faction.id, type: 'hearth_event_offered', cell: town.cell, message: `${template.name} at ${town.name}, with ${crisisName}: ${storyText(template, town.name)} Answer it by turn ${pending.expiresTurn}.` });
+  });
 }
 
 /** Lapsed events take their first choice; then each realm without an event may be offered one. Bounded by realms and their hearths, never by tiles. */

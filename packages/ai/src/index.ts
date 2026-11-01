@@ -49,7 +49,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // before the rest of the turn is planned, so that coin is still there at the end.
   const hearthAnswers = planHearthEvents(view);
   if (hearthAnswers) view = { ...view, treasury: Math.max(0, view.treasury - hearthAnswers.coinSpent), knowledge: Math.max(0, view.knowledge - hearthAnswers.knowledgeSpent) };
-  // Rules 53: shelter from the standing crisis is bought before anything else is planned, off the same purse.
+  // Rules 53: shelter from the standing crisis is bought before anything else is planned, off the same purse,
+  // and issued first in the batch so no quoted order can spend the coin it was planned on.
   const shelter = planCrisis(view);
   if (shelter) view = { ...view, treasury: Math.max(0, view.treasury - shelter.coinSpent) };
   // The seam of the missing path, the last gap before the working, is one
@@ -445,5 +446,5 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (reasons.length < 16) reasons.push(`${army.id} ${strategic ? 'advances toward its visible objective' : 'explores new ground'} using its available movement budget.`);
     }
   }
-  return { commands: [...plans, ...(hearthAnswers?.commands ?? []), ...(shelter?.commands ?? [])], reasons };
+  return { commands: [...(shelter?.commands ?? []), ...plans, ...(hearthAnswers?.commands ?? [])], reasons };
 }

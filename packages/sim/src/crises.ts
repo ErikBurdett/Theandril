@@ -3,6 +3,7 @@ import { CRISIS_BLIGHT_KEYS, crisesForRules, crisisDefinition, EPOCHS, type Cris
 import { SeededRandom } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
+import { offerCrisisEvents } from './hearth-events';
 
 /** Rules 53: crises of the ages. When the world enters an age after the
  * first, one of the age's crises is drawn from the campaign seed and the age's
@@ -80,6 +81,8 @@ export function beginCrises(state: GameState, previousIndex: number, reachedInde
     const crisis = pool[picker.nextInt(pool.length)]!;
     state.crises.active = { id: `crisis.${state.turn}.${index}`, crisisId: crisis.id, startedTurn: state.turn, endsTurn: state.turn + crisis.turns, sheltered: [] };
     for (const faction of state.factions) events.push({ turn: state.turn, factionId: faction.id, type: 'crisis_begun', message: `${crisis.name} comes with ${age.name.toLowerCase()}: ${crisis.description} Every unsheltered hearth loses ${blightWords(crisis.blight)} each turn until turn ${state.crises.active.endsTurn}; sheltering costs ${crisis.shelterCoinPerHearth} coin a hearth.` });
+    // Rules 54: the crisis brings its event to every realm with a free slot.
+    offerCrisisEvents(state, crisis.id, crisis.name, events);
   }
 }
 function endCrisis(state: GameState, events: DomainEvent[], because: string): void {

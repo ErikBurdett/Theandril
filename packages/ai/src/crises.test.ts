@@ -30,7 +30,7 @@ test('a realm shelters its hearths when the toll still to come outweighs the pri
   expect(plan.reasons[0]).toContain(crisis.name);
   // The whole turn carries the shelter, and it is legal.
   const turn = planTurnWithReasons(view);
-  expect(turn.commands).toContainEqual(plan.commands[0]);
+  expect(turn.commands[0]).toEqual(plan.commands[0]); // first in the batch: nothing can spend its coin first
   const copy = structuredClone(state);
   expect(applyCommand(copy, plan.commands[0]!).ok).toBe(true);
   // The catalogue's own quote on this fixture: the price is below the toll of a realm with the coin.
