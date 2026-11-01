@@ -23,6 +23,7 @@ import type { HearthEventState, ObservedHearthEvent } from './hearth-events';
 import type { ObservedEpoch } from './epochs';
 import type { AllianceState, ObservedAlliances } from './alliances';
 import type { ObservedLandmark } from './landmarks';
+import type { CrisisState, ObservedCrisis } from './crises';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -220,6 +221,7 @@ export type GameCommand =
   | { type: 'setBattleAbilityAuto'; factionId: string; battleId: string; sourceId: string; abilityId: string; automatic: boolean }
   | { type: 'useBattleAbility'; factionId: string; battleId: string; sourceId: string; abilityId: string; targetId?: string }
   | { type: 'accelerateRoad'; factionId: string; settlementId: string }
+  | { type: 'shelterFromCrisis'; factionId: string; crisisId: string }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -296,6 +298,8 @@ export interface GameState {
   hearthEvents: HearthEventState;
   /** Rules 50: defensive pacts between realms and the offers of them. */
   alliances: AllianceState;
+  /** Rules 53: the standing crisis of the age and the crises past. */
+  crises: CrisisState;
   roads: RoadState;
   /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
   charters: Charter[];
@@ -366,6 +370,8 @@ export interface Observation {
   alliances?: ObservedAlliances;
   /** Rules 51: every landmark on explored ground; absent under historical rules. */
   landmarks?: ObservedLandmark[];
+  /** Rules 53: the crisis that stands, with the realm's own shelter quote; absent while none stands or under historical rules. */
+  crisis?: ObservedCrisis;
   arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;

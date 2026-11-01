@@ -1,0 +1,21 @@
+Crisis strength variants, measured with crisis-variant-probe.ts before the shipped terms and prices were chosen
+(transcribed from the runs; each line is one headline campaign of the named variant).
+
+Design as first built: terms 10 / 10 / 12 / 8 / 10 / 10 turns, shelter 20 / 25 / 30 / 30 / 35 / 30 coin a hearth
+  pnpm measure:pacing headline standard long         -> 429 / 305 / 223   (Epic above its band)
+  seeds 20260906 / 20260907                          -> Epic 337 / 432, Long 265 / 297, Standard 175 / 207
+  proxies                                            -> 410 / 346 / 350 / 232
+  crisis-probe epic 20260905: Toll Wars 26-36, Tremors 42-50, Fever of the End 369-379; first bid on 369
+
+  variant no-devastation (Tremors take 1 coin instead) epic 20260905 -> 407, first bid 347
+  variant half-tolls (food/coin/knowledge halved, Tremors 4 turns)   epic 20260905 -> 409, first bid 349
+  variant short-terms (every term halved)             epic 20260905 -> 374 (Attunement), first bid 338
+  variant short-terms                                 epic 20260906 -> 326, epic 20260907 -> 405
+  variant short-terms                                 long 20260905 -> 301, standard 20260905 -> 205
+  (at the short terms no price was below the toll the AI values, so no realm sheltered)
+
+Shipped: terms 5 / 5 / 6 / 4 / 5 / 5 turns, shelter 10 / 10 / 18 / 6 / 14 / 15 coin a hearth
+  pnpm measure:pacing headline standard long         -> 366 / 304 / 220   (pacing-after.log)
+  seeds 20260906 / 20260907                          -> Epic 367 / 385, Long 315 / 312, Standard 208 / 190   (pacing-seeds.log)
+  proxies                                            -> 442 / 371 / 298 / 213   (pacing-proxies.log)
+  crisis-probe epic 20260905: Toll Wars 26-31, Tremors 47-51, Fever of the End 306-311; ten realms shelter, 21 shelters in all; first bid on 306

@@ -198,8 +198,11 @@ export function planSeamExpedition(view: Observation, heldArmyIds: ReadonlySet<s
   const caravans = view.armies.filter(army => army.factionId === factionId && army.canFound && army.domain !== 'naval' && !army.carrierId && !heldArmyIds.has(army.id) && !army.commandBlocker)
     .sort((a, b) => hexDistance(a.cell, target.site, view.width) - hexDistance(b.cell, target.site, view.width) || (a.id < b.id ? -1 : 1));
   const found = (army: typeof caravans[number]): SeamExpedition => {
+    // The founding fee is quoted; a caravan on the site waits for it rather than ask for a hearth the purse cannot pay.
+    const fee = view.growth?.founding.coinCost ?? 0;
+    if (view.treasury < fee) return { commands: [], reasons: [`${army.name} stands beside the ${label} and waits for the founding fee: ${fee} coin against ${view.treasury} in the treasury.`], heldArmyIds: new Set([army.id]), coinSpent: 0, queuedColonist: false };
     const name = hearthName(view);
-    return { commands: [{ type: 'found', factionId, armyId: army.id, name }], reasons: [`Found ${name} with ${army.name} beside the ${label}: its borders hold the seam, and the realm ${lack}.`], heldArmyIds: new Set([army.id]), coinSpent: view.growth?.founding.coinCost ?? 0, queuedColonist: false };
+    return { commands: [{ type: 'found', factionId, armyId: army.id, name }], reasons: [`Found ${name} with ${army.name} beside the ${label}: its borders hold the seam, and the realm ${lack}.`], heldArmyIds: new Set([army.id]), coinSpent: fee, queuedColonist: false };
   };
   const bound = caravans.find(army => routes.get(army.id)?.waypoints.at(-1) === target.site);
   if (bound) {

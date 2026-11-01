@@ -278,6 +278,13 @@ test('a realm settles beside a seam it found beyond its borders: a free caravan 
     for (const command of planTurnWithReasons(getObservation(state, player)).commands) {
       if (!('armyId' in command) || command.armyId !== id) continue;
       expect(['queueMovement', 'found']).toContain(command.type);
+      if (command.type === 'found') {
+        // On the site with a short purse, the caravan waits for the founding fee instead of asking for a refused hearth.
+        const short = planSeamExpedition({ ...getObservation(state, player), treasury: 0 })!;
+        expect(short.commands).toEqual([]);
+        expect(short.reasons[0]).toContain('waits for the founding fee');
+        expect([...short.heldArmyIds]).toEqual([id]);
+      }
       const result = applyCommand(state, command);
       expect(result.ok, result.ok ? '' : result.error).toBe(true);
       if (command.type === 'found') founded = command.name;

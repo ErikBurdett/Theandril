@@ -1,0 +1,20 @@
+factionCount 4 rules52 turn 55 prosperity | rules53 turn 53 prosperity
+first divergence at command index 98 of 850 693
+52: 12 faction.reedbound_council {"type":"develop","factionId":"faction.reedbound_council","scope":"hearth","entityId":"settlement.10","nodeId":"hearth.common_store"} ok
+    12 faction.reedbound_council {"type":"setWorkedTiles","factionId":"faction.reedbound_council","settlementId":"settlement.10","cells":[1121,1122,1217,1267]} ok
+    12 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.4","target":777} ok
+    12 faction.cinder_march {"type":"queue","factionId":"faction.cinder_march","settlementId":"settlement.11","itemId":"unit.colonist"} ok
+53: 12 faction.ashen_compact {"type":"shelterFromCrisis","factionId":"faction.ashen_compact","crisisId":"crisis.12.1"} ok
+    12 faction.reedbound_council {"type":"setWorkedTiles","factionId":"faction.reedbound_council","settlementId":"settlement.10","cells":[1121,1122,1217,1267]} ok
+    12 faction.reedbound_council {"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.4","target":777} ok
+    12 faction.reedbound_council {"type":"shelterFromCrisis","factionId":"faction.reedbound_council","crisisId":"crisis.12.1"} ok
+--- rules 53 reasons around turn 12
+12 faction.ashen_compact :: Shelter the realm's 1 hearth from The Toll Wars for 10 coin: the toll still to come over 5 turns is worth about 15. | Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.2 explores new ground using its available movement budget.
+12 faction.reedbound_council :: Shelter the realm's 1 hearth from The Toll Wars for 10 coin: the toll still to come over 5 turns is worth about 15. | Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.4 explores new ground using its available movement budget.
+12 faction.cinder_march :: Shelter the realm's 1 hearth from The Toll Wars for 10 coin: the toll still to come over 5 turns is worth about 15. | Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.6 explores new ground using its available movement budget.
+12 faction.glass_tide :: Shelter the realm's 1 hearth from The Toll Wars for 10 coin: the toll still to come over 5 turns is worth about 15. | Retain 28 coin toward a caravan, its 11-coin founding fee and the next hearth’s running costs; fund basic buildings while saving. | army.8 explores new ground using its available movement budget.
+--- rules 52 reasons around turn 12
+12 faction.ashen_compact :: Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.2 explores new ground using its available movement budget.
+12 faction.reedbound_council :: Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.4 explores new ground using its available movement budget.
+12 faction.cinder_march :: Save knowledge for Coastal navigation: 22/30; an observed maritime expedition needs this next link. | army.6 explores new ground using its available movement budget.
+12 faction.glass_tide :: Retain 38 coin toward a caravan, its 11-coin founding fee and the next hearth’s running costs; fund basic buildings while saving. | army.8 explores new ground using its available movement budget.

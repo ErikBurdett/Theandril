@@ -1,4 +1,4 @@
-# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks and landmark events
+# Prompt report — 2026-10-31: AI seam column, seam hearth watch, rules 45, hearth events, chains, ages, alliances, landmarks, landmark events and crises
 
 **Prompt:** "okay, continue closing the gap towards 1.0".
 
@@ -80,6 +80,14 @@
   Evidence packet
   [docs/development/2026-10-31-landmark-events/](../2026-10-31-landmark-events/README.md);
   roadmap library 120 delivered.
+- Crises of the ages, rules/save 53 ([ADR 0083](../../architecture/0083-crises.md)):
+  one of each later age's two crises drawn from the seed as the age begins,
+  a toll of every unsheltered hearth each turn, shelter once for a price,
+  the AI sheltering when the toll outweighs it; terms and prices set from
+  measurement after the first design moved the Epic headline to 429. A
+  seam-expedition caravan now waits for the founding fee. Evidence packet
+  [docs/development/2026-10-31-crises/](../2026-10-31-crises/README.md);
+  roadmap library 121 delivered.
 
 ## Verified
 
@@ -105,6 +113,10 @@ new) and the chronicles journey; headline **413 / 320 / 216**, the other seeds
 Landmark events: unit 2,342, campaigns 57, build, three journeys (one new) and
 the chronicles journey; headline **394 / 356 / 216**, the other seeds
 381 / 332, 260 / 284, 197 / 201, proxies 326 / 420 / 300 / 189.
+Crises: unit 2,346 / 294 files, campaigns 57, build, four journeys (one new)
+and the chronicles journey (pin 55 → 53, attributed); headline
+**366 / 304 / 220**, the other seeds 367 / 385, 315 / 312, 208 / 190, proxies
+442 / 371 / 298 / 213.
 Epic replay: Glass Tide retakes the seam hearth on turn 246, holds
 it to 373, seals the working on about 353, and Saltwind's Prosperity completes
 first on 379.
@@ -128,6 +140,10 @@ first on 379.
   seek landmarks, and paid AI claims of any hex are almost absent from
   measured play, which also bounds the seam claim planner. The Long headline
   course moves 320 → 356 by re-rolled draws alone.
+- Crises: world-wide and identical for every realm; no regional crisis,
+  migration, collapse or crisis event at a hearth; two per age. The
+  enclosed-basin ferry scenario (seed 74) is sensitive to the crisis of the
+  Age of Roads.
   Commit `91172b7` (rules 49) is deployed: both workflows succeeded and the
   live readback matched the build
   ([publication packet](../2026-10-31-publication-epochs/README.md)).

@@ -1,5 +1,32 @@
 # Theandril implementation status
 
+## Crises of the ages (rules/save 53) — 2026-10-31
+
+M6's crises. As the world enters an age after the first, one of that age's
+two crises is drawn from the campaign seed and the age's index, announced to
+every realm, and stands for its term (four to six turns), taking a toll of
+every unsheltered hearth each turn — stored food or devastation at the
+hearth, coin or knowledge off the realm per hearth. A realm shelters its
+hearths once by command for a price per hearth, quoted with its blocker; the
+toll then passes them by. The standing crisis and the crises past are a new
+canonical register appended last from save 53; older envelopes load with
+none and a campaign that has had a crisis is refused under earlier rules.
+The masthead names the crisis and its turns left, Realm affairs carries the
+card and the shelter, the journal records it all. AI realms shelter when the
+toll still to come outweighs the price and the purse can pay. Terms and
+prices were set from measurement: the first design (ten-to-twelve-turn
+terms) ended the Epic headline on 429; halved terms and shelter priced at
+about two-thirds of the toll end it on **366 / 304 / 220**, the other seeds
+367 / 385, 315 / 312, 208 / 190, every course in band; proxies
+442 / 371 / 298 / 213. The chronicle journey's pin moves 55 → 53, attributed
+(two realms shelter on turn 12). A seam-expedition caravan on its site now
+waits for the quoted founding fee. Crises are world-wide and identical for
+every realm; no regional crisis, migration or collapse. Verification: new
+content, sim, AI and journey tests; unit 2,346 / 294 files, campaigns 57,
+lint, typecheck, build, four covering journeys and the chronicles journey.
+[Evidence](development/2026-10-31-crises/README.md),
+[ADR0083](architecture/0083-crises.md).
+
 ## Landmark events (rules/save 52) — 2026-10-31
 
 The landmarks' first interaction. A `landmark` condition holds at a hearth

@@ -39,6 +39,8 @@ export { ALLIANCE_OFFER_TURNS, allianceAcceptanceBlocker, allianceBetween, allia
 export type { Alliance, AllianceOffer, AllianceState, ObservedAllianceOffer, ObservedAlliances } from './alliances';
 export { landmarkAt, landmarks, landmarkYieldAt, MAX_LANDMARKS, observeLandmarks } from './landmarks';
 export type { Landmark, ObservedLandmark } from './landmarks';
+export { advanceCrises, beginCrises, blightWords, emptyCrises, hasCrises, MAX_PAST_CRISES, observeCrisis, shelterBlocker, shelterCost, shelterFromCrisis, validateCrises } from './crises';
+export type { ActiveCrisis, CrisisState, ObservedCrisis, PastCrisis } from './crises';
 export type { ObservedEpoch } from './epochs';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';

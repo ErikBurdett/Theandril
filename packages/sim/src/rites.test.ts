@@ -166,7 +166,9 @@ describe('seam warding (rules 40)', () => {
     const breaker = Object.values(state.characters).find(item => item.factionId === rival && item.definitionId === 'character.waykeeper')!;
     expect(applyCommand(state, { type: 'performRite', factionId: rival, characterId: breaker.id, riteId: BREAKING })).toMatchObject({ ok: true });
     expect(state.wards).toEqual([]);
-    // A rules-41 reading is identical and a v41 envelope migrates unchanged.
+    // A rules-41 reading is identical and a v41 envelope migrates unchanged. The crisis
+    // register (rules 53) is cleared first, as a v41 campaign carries none.
+    state.crises = { active: null, past: [] };
     expect(stateHash(deserializeGame(serializeGameForVersion(state, 41)))).toBe(stateHash(state));
     const older = JSON.parse(serializeGameForVersion(state, 41));
     expect(older.version).toBe(41); expect(older.contentHash).toBe('78df970c');
