@@ -311,7 +311,8 @@
   fifteen more templates across the conditions and the ages, one hundred
   and fifty in all, the scope's count met. Evidence packet
   [docs/development/2026-11-01-hearth-events-viii/](../2026-11-01-hearth-events-viii/README.md);
-  roadmap library 149 delivered.
+  roadmap library 149 delivered. Commit `6bc8fa7` is deployed and read back
+  ([publication packet](../2026-11-01-publication-hearth-events-viii/README.md)).
 
 ## Verified
 

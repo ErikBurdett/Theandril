@@ -13,6 +13,9 @@ envelope may not name a rules 79 template.
 Headline pacing 384 / 291 / 205: all three courses in band, the Epic course for the first time since rules 73; the other seeds 352 / 351, 289 / 282, 197 / 200 in band; proxies 368 / 407 / 382 / 209, the Long proxy’s bound re-derived from the tool (maximum 375 to 450) with the headline Long at 291; the chronicle pin at 57 holds. Verification: content, sim and journey tests; unit 2,382 / 310 files,
 campaigns 57 (Long proxy bound re-derived), lint, typecheck, build, the seven hearth-event journeys and
 the chronicles journey (pin 57 unmoved though the turn-40 draw differs).
+Commit `6bc8fa7` is deployed: both workflows succeeded and the live readback
+matched the build
+([publication packet](development/2026-11-01-publication-hearth-events-viii/README.md)).
 [Evidence](development/2026-11-01-hearth-events-viii/README.md),
 [ADR0111](architecture/0111-hearth-events-viii.md).
 
