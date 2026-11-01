@@ -13,7 +13,9 @@ field on the army; save 75; the pack unchanged. Headline pacing
 **329 / 301 / 219**, the other seeds 355 / 383, 286 / 315, 194 / 204, proxies 379 / 461 / 353 / 209:
 every course identical to rules 74 since the AI keeps the line; the headline Epic drift recorded with the sixth catalogue stands. Verification: sim and journey tests; unit 2,380 / 310 files,
 campaigns 57, lint, typecheck, build, the deployment and battlefield
-journeys and the chronicles journey (pin 56 unmoved).
+journeys and the chronicles journey (pin 56 unmoved). Commit `00ef0a3` is
+deployed: both workflows succeeded and the live readback matched the build
+([publication packet](development/2026-11-01-publication-deployment/README.md)).
 [Evidence](development/2026-11-01-deployment/README.md),
 [ADR0107](architecture/0107-deployment.md).
 

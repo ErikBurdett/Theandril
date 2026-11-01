@@ -283,8 +283,10 @@
 - Army deployment, rules/save 75 ([ADR 0107](../../architecture/0107-deployment.md)):
   a land army draws up as the line, a shield wall, pikes forward or a
   skirmish, chosen in its composition panel; battles without a doctrined
-  army are unchanged. Evidence packet
-  [docs/development/2026-11-01-deployment/](../2026-11-01-deployment/README.md);
+  army are unchanged. Commit `00ef0a3` is deployed: both workflows succeeded
+  and the live readback matched the build
+  ([publication packet](../2026-11-01-publication-deployment/README.md)).
+  Evidence packet [docs/development/2026-11-01-deployment/](../2026-11-01-deployment/README.md);
   roadmap library 145 delivered.
 
 ## Verified

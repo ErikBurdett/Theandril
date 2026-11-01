@@ -46,6 +46,12 @@ refinement again and one of its own that keeps a doctrine to land armies.
 The test fixtures gave the column more movement than its cohort allows,
 which the save validator refused; they march at the cohort's pace now.
 
+## Evidence refreshed alongside
+
+The battlefield journey rewrites its two performance snapshots under
+`docs/performance/slice0035-cast-*.json` on every run; this run's frame
+timings went into the commit with the slice.
+
 ## Known limits
 
 - A doctrine orders the ranks only: no column choice, no per-formation
