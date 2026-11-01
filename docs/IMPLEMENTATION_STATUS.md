@@ -1,5 +1,20 @@
 # Theandril implementation status
 
+## AI surveys before the march — 2026-11-01
+
+M0's findings: the refused survey orders. The AI's batch now issues every
+survey mission, with the assignment that carries its surveyor, before any
+other order but a crisis shelter, so a march of the same batch cannot chart
+the surveyed ground first. AI only; no rule, save field or content change.
+Every measured course issues 0 refused orders; headline pacing 402 / 307 / 199, the Epic course two turns over its nominal band on the redraw (recorded, not re-priced), the other seeds 331 / 359, 288 / 284, 200 / 203 and proxies 334 / 423 / 295 / 200 within their bounds; the chronicle pin at 57 holds. Verification: AI tests; unit 2,389 / 314 files, campaigns 57, lint,
+typecheck, build, the characters and characters-tree journeys and the chronicles
+journey (pin 57 unmoved). The characters-tree journey had failed since rules 64
+(its veteran became the culture's notable) and now takes the second marshal;
+the headline Epic course's two turns over its nominal band are recorded, not
+re-priced.
+[Evidence](development/2026-11-01-ai-surveys-first/README.md),
+[ADR0117](architecture/0117-ai-surveys-first.md).
+
 ## AI offices — 2026-11-01
 
 M5's politics, the AI's first office. The character planner appoints a

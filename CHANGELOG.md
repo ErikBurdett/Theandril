@@ -2,6 +2,8 @@
 
 ## 0.1.0 — unreleased
 
+AI realms issue their survey missions before any march of the same turn, so a march no longer charts the surveyed ground first and the survey is no longer refused. AI only. Every measured course issues 0 refused orders; headline pacing 402 / 307 / 199, the Epic course two turns over its nominal band on the redraw (recorded, not re-priced), the other seeds 331 / 359, 288 / 284, 200 / 203 and proxies 334 / 423 / 295 / 200 within their bounds; the chronicle pin at 57 holds.
+
 AI realms now hold an office: when the Keeper of the Roll is vacant, a surveyor already serves and the treasury holds two hundred coin, a second surveyor is appointed to sit, and the office planner seats a sitting surveyor once another rides. AI only; no rule or save change. Headline pacing 350 / 281 / 199, all three courses in band with the Epic course at the bottom of its band (384 / 291 / 205 before the planner); the other seeds 331 / 359, 288 / 284, 200 / 203, one Epic seed nineteen under; proxies 334 / 412 / 295 / 200 within their bounds; the chronicle pin at 57 holds.
 
 Rules/save 82 reads each realm’s legitimacy from facts of the world: settled at two, an office held or a client answering adds one, a seat of another realm’s founding, more conquered hearths than founded or a patron takes one; weak legitimacy raises every hearth’s unrest one more each turn and strong legitimacy eases it, and Realm affairs reads the level with its reasons. No save field. Headline pacing 384 / 291 / 205 and both other seeds identical to rules 81; the Epic proxy moves from 368 to 388 within its bound as a realm on it reads weak legitimacy; the chronicle pin at 57 holds.

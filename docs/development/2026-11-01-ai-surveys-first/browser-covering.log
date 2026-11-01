@@ -1,0 +1,12 @@
+
+Running 7 tests using 2 workers
+
+  ✓  2 [gameplay] › tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (2.7s)
+  ✓  1 [gameplay] › tests/gameplay/characters-tree.spec.ts:29:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects (5.7s)
+  ✓  4 [gameplay] › tests/gameplay/characters-tree.spec.ts:82:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit (2.9s)
+  ✓  3 [gameplay] › tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (9.8s)
+  ✓  5 [gameplay] › tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (7.5s)
+  ✓  6 [gameplay] › tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (9.5s)
+  ✓  7 [gameplay] › tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (14.7s)
+
+  7 passed (45.3s)

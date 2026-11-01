@@ -344,6 +344,10 @@
   [docs/development/2026-11-01-ai-offices/](../2026-11-01-ai-offices/README.md);
   roadmap library 154 delivered. Commit `bd0fc2a` is deployed and read back
   ([publication packet](../2026-11-01-publication-ai-offices/README.md)).
+- AI surveys before the march ([ADR 0117](../../architecture/0117-ai-surveys-first.md)):
+  the refused survey orders of the headline campaigns are gone; a survey is
+  issued before any march of its batch. AI only, no roadmap change. Evidence
+  packet [docs/development/2026-11-01-ai-surveys-first/](../2026-11-01-ai-surveys-first/README.md).
 
 ## Verified
 
@@ -473,6 +477,9 @@ the other seeds 352 / 351, 289 / 282, 197 / 200, proxies 388 / 407 / 382 / 209.
 AI offices: unit 2,388 / 314 files, campaigns 57, build, the legitimacy and offices journeys
 and the chronicles journey (pin 57 unmoved; no office is reached in that short campaign, ten are held in a tiny Long probe); headline 350 / 281 / 199, the
 other seeds 331 / 359, 288 / 284, 200 / 203, proxies 334 / 412 / 295 / 200.
+AI surveys first: unit 2,389 / 314 files, campaigns 57, build and the chronicles journey
+(pin 57 unmoved); headline 402 / 307 / 199, the other seeds 331 / 359, 288 / 284, 200 / 203,
+proxies 334 / 423 / 295 / 200; no course refuses an order any more.
 
 ## Left open
 

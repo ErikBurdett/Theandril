@@ -5,9 +5,13 @@ import { characterCampaign, CHARACTER_FIXTURE as C } from '../../packages/test-f
 
 async function preparedOfficer(page: Page, definitionId: string, experience: number) {
   let game = characterCampaign();
-  const recruited = applyCommand(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId: C.homeId, definitionId });
-  if (!recruited.ok) throw new Error(recruited.error);
-  const character = Object.values(game.characters)[0]!;
+  // Rules 64: a culture's first officer of a role is its notable figure and starts with a
+  // specialization, which would exclude half the tree; the veteran is the second appointment.
+  for (let appointment = 0; appointment < 2; appointment++) {
+    const recruited = applyCommand(game, { type: 'recruitCharacter', factionId: game.turnOwnerId, settlementId: C.homeId, definitionId });
+    if (!recruited.ok) throw new Error(recruited.error);
+  }
+  const character = Object.values(game.characters).find(item => item.notableId === undefined && item.skillId === null)!;
   character.experience = experience; // Authored veteran readiness; all tree purchases are actual UI commands.
   game = deserializeGame(serializeGame(game));
   await page.goto('/');

@@ -1,0 +1,103 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |campaigns| packages/ai/src/overseas-generated.test.ts (3 tests | 2 failed) 1107ms
+   × generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands 482ms
+   × generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands 280ms
+ ❯ |campaigns| packages/ai/src/progression.test.ts (10 tests | 1 failed) 6379ms
+   × generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation 1161ms
+ ❯ |campaigns| tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 13564ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 11576ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |campaigns| tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "24: {\"type\":\"develop\",\"factionId\":\"faction.reedbound_council\",\"scope\":\"formation\",\"entityId\":\"formation.19\",\"nodeId\":\"training.field_habits\"}: Finish or cancel the army’s active field mission before training.",
++ ]
+
+ ❯ tests/headless/chronicle-victory.test.ts:46:18
+     44|     if (game.turn === (pace === 'short' ? 10 : 200)) resumed = deseria…
+     45|   }
+     46|   expect(errors).toEqual([]);
+       |                  ^
+     47|   expect(game.victory?.path).toBe('prosperity');
+     48|   if (pace === 'epic') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |campaigns| packages/ai/src/overseas-generated.test.ts > generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands
+AssertionError: Turn 25: {"type":"develop","factionId":"faction.ashen_compact","scope":"formation","entityId":"formation.14","nodeId":"training.field_habits"}: Finish or cancel the army’s active field mission before training.
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ submit scripts/benchmark-overseas-ai.ts:47:12
+     45|     const cell = 'armyId' in command ? game.armies[command.armyId]?.ce…
+     46|     const result = applyCommand(game, command);
+     47|     assert.ok(result.ok, `Turn ${game.turn}: ${JSON.stringify(command)…
+       |            ^
+     48|     records.push({ command: structuredClone(command), result: structur…
+     49|     counts[command.type] = (counts[command.type] ?? 0) + 1;
+ ❯ runOverseasCampaign scripts/benchmark-overseas-ai.ts:71:9
+ ❯ packages/ai/src/overseas-generated.test.ts:11:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |campaigns| packages/ai/src/overseas-generated.test.ts > generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands
+AssertionError: Turn 24: {"type":"develop","factionId":"faction.cinder_march","scope":"formation","entityId":"formation.18","nodeId":"training.field_habits"}: Finish or cancel the army’s active field mission before training.
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ submit scripts/benchmark-overseas-ai.ts:47:12
+     45|     const cell = 'armyId' in command ? game.armies[command.armyId]?.ce…
+     46|     const result = applyCommand(game, command);
+     47|     assert.ok(result.ok, `Turn ${game.turn}: ${JSON.stringify(command)…
+       |            ^
+     48|     records.push({ command: structuredClone(command), result: structur…
+     49|     counts[command.type] = (counts[command.type] ?? 0) + 1;
+ ❯ runOverseasCampaign scripts/benchmark-overseas-ai.ts:71:9
+ ❯ packages/ai/src/overseas-generated.test.ts:11:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |campaigns| packages/ai/src/progression.test.ts > generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation
+AssertionError: {"type":"buildDepot","factionId":"faction.reedbound_council","armyId":"army.67"}: This company has already spent its movement this turn.: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ issue packages/ai/src/progression.test.ts:10:68
+      8| function issue(state: GameState, command: GameCommand): void {
+      9|   const result = applyCommand(state, command);
+     10|   expect(result.ok, JSON.stringify(command) + ': ' + result.error).toB…
+       |                                                                    ^
+     11| }
+     12|
+ ❯ apply packages/ai/src/progression.test.ts:129:5
+ ❯ packages/ai/src/progression.test.ts:136:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  3 failed | 7 passed (10)
+      Tests  4 failed | 53 passed (57)
+   Start at  03:40:41
+   Duration  14.53s (transform 5.39s, setup 0ms, import 7.99s, tests 71.17s, environment 1ms)
+

@@ -1,8 +1,9 @@
 import { expect, test } from 'vitest';
 import { applyCommand, applyCommandForVersion, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { CHARACTER_FIXTURE, characterCampaign } from '../../test-fixtures/src/character-fixture';
+import { attunementCampaign } from '../../test-fixtures/src/victory-fixture';
 import { planCharacters } from './characters';
-import { planTurn } from './index';
+import { planTurn, surveysBeforeMarches } from './index';
 import { characterLeadership } from '../../sim/src/characters';
 
 function issue(state: GameState, command: GameCommand): void {
@@ -113,4 +114,35 @@ test('full AI trains an experienced company before starting the same army’s pa
   expect(state.development.formations[formationId]).toEqual({ experience: 0, nodeIds: ['training.field_habits'] });
   expect(state.characters[engineer.id]!.mission?.definitionId).toBe('mission.refit');
   expect(stateHash(mirror)).toBe(stateHash(state));
+});
+
+test('a survey and the assignment that carries its surveyor are issued before any march, so a march cannot chart the surveyed ground first, and the ordering keeps every other order in place', () => {
+  // A synthetic batch: the carrier's training and depot stood after the first march and are hoisted before the survey; nothing else moves.
+  const synthetic = surveysBeforeMarches({ characters: [{ id: 'char.1', location: { kind: 'army', armyId: 'army.9' } }], armies: [{ id: 'army.9', formations: [{ id: 'formation.9' }] }] } as unknown as Parameters<typeof surveysBeforeMarches>[0], [
+    { type: 'research', factionId: 'f', technologyId: 't' }, { type: 'queueMovement', factionId: 'f', armyId: 'army.2', target: 5 }, { type: 'develop', factionId: 'f', scope: 'formation', entityId: 'formation.9', nodeId: 'n' },
+    { type: 'startCharacterMission', factionId: 'f', characterId: 'char.1', missionId: 'mission.survey' }, { type: 'buildDepot', factionId: 'f', armyId: 'army.9' }, { type: 'moveTo', factionId: 'f', armyId: 'army.3', target: 7 },
+  ] as GameCommand[]);
+  expect(synthetic.map(command => command.type)).toEqual(['research', 'develop', 'buildDepot', 'startCharacterMission', 'queueMovement', 'moveTo']);
+  const state = attunementCampaign(), player = state.turnOwnerId;
+  state.factions.find(item => item.id === player)!.treasury = 5000;
+  const town = Object.values(state.settlements).find(item => item.factionId === player)!;
+  const before = new Set(Object.keys(state.characters));
+  issue(state, { type: 'recruitCharacter', factionId: player, settlementId: town.id, definitionId: 'character.surveyor' });
+  const surveyor = Object.values(state.characters).find(item => !before.has(item.id))!;
+  issue(state, { type: 'assignCharacter', factionId: player, characterId: surveyor.id, armyId: Object.values(state.armies).find(army => army.factionId === player)!.id });
+  let surveys = 0;
+  for (let round = 0; round < 8 && !state.victory; round++) {
+    const commands = planTurn(getObservation(state, player));
+    const survey = commands.findIndex(command => command.type === 'startCharacterMission' && command.missionId === 'mission.survey');
+    if (survey >= 0) {
+      surveys++;
+      // Before every march of the batch; the orders that stand before it never move a company.
+      expect(commands.slice(0, survey).every(command => command.type !== 'moveTo' && command.type !== 'queueMovement')).toBe(true);
+      const firstMarch = commands.findIndex(command => command.type === 'moveTo' || command.type === 'queueMovement');
+      if (firstMarch >= 0) expect(survey).toBeLessThan(firstMarch);
+    }
+    for (const command of commands) issue(state, command);
+    if (!state.victory) issue(state, { type: 'endTurn', factionId: player });
+  }
+  expect(surveys).toBeGreaterThan(0);
 });

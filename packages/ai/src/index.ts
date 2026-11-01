@@ -41,6 +41,30 @@ export function planTurn(view: Observation): GameCommand[] {
   return planTurnWithReasons(view).commands;
 }
 
+/** A survey is quoted on the carrier's present ground; a march ordered earlier in the same
+ * batch may chart that ground first and the simulation then refuses the survey. Each survey,
+ * with the assignment that puts its surveyor on the carrier, is issued just before the batch's
+ * first march; the carrier's own orders that stood after that march — its training, its glass
+ * search, its depot — are issued before the survey too, since the survey spends the carrier's
+ * turn. Everything else keeps its order. */
+export function surveysBeforeMarches(view: Observation, plans: readonly GameCommand[]): GameCommand[] {
+  const surveys = plans.filter(command => command.type === 'startCharacterMission' && command.missionId === 'mission.survey');
+  const firstMarch = plans.findIndex(command => command.type === 'moveTo' || command.type === 'queueMovement');
+  if (!surveys.length || firstMarch < 0) return [...plans];
+  const surveyors = new Set(surveys.map(command => (command as { characterId: string }).characterId));
+  const assignments = plans.filter(command => command.type === 'assignCharacter' && surveyors.has(command.characterId));
+  const carriers = new Set<string>();
+  for (const command of assignments) carriers.add((command as { armyId: string }).armyId);
+  for (const character of view.characters) if (surveyors.has(character.id) && character.location?.kind === 'army') carriers.add(character.location.armyId);
+  const carrierFormations = new Set(view.armies.filter(army => carriers.has(army.id)).flatMap(army => army.formations.map(formation => formation.id)));
+  const carrierOrder = (command: GameCommand): boolean => command.type !== 'moveTo' && command.type !== 'queueMovement'
+    && (('armyId' in command && typeof command.armyId === 'string' && carriers.has(command.armyId)) || (command.type === 'develop' && command.scope === 'formation' && carrierFormations.has(command.entityId)));
+  const block = new Set<GameCommand>([...assignments, ...surveys]);
+  const before = plans.slice(0, firstMarch).filter(command => !block.has(command));
+  const after = plans.slice(firstMarch).filter(command => !block.has(command));
+  const hoisted = after.filter(carrierOrder);
+  return [...before, ...hoisted, ...assignments, ...surveys, ...after.filter(command => !carrierOrder(command))];
+}
 export function planTurnWithReasons(view: Observation): AiPlan {
   if (view.victory) return { commands: [], reasons: ['The campaign has ended; no further orders are proposed.'] };
   if (view.battle) return { commands: [{ type: 'autoResolveBattle', factionId: view.factionId }], reasons: ['Resolve the current battle through shared tactical rules.'] };
@@ -473,5 +497,5 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (reasons.length < 16) reasons.push(`${army.id} ${strategic ? 'advances toward its visible objective' : 'explores new ground'} using its available movement budget.`);
     }
   }
-  return { commands: [...(shelter?.commands ?? []), ...plans, ...(hearthAnswers?.commands ?? [])], reasons };
+  return { commands: [...(shelter?.commands ?? []), ...surveysBeforeMarches(view, plans), ...(hearthAnswers?.commands ?? [])], reasons };
 }
